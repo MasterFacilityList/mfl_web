@@ -1,0 +1,239 @@
+/**
+ * These are the variables used throughout the application. This is where
+ * overwrites that are not specific to components should be maintained.
+ */
+
+/**
+ * -------------------------------------------------------------------------
+ * TYPOGRAPHY RELATED
+ * -------------------------------------------------------------------------
+ */
+
+//Fonts that could be used
+@sansFontFamily: 'Roboto', sans-serif;
+@sansAclonia: 'Aclonia', serif;
+
+
+@fa-font-path: "../assets";
+
+@font-size-base: 14px;
+
+//** Unit-less `line-height` for use in components like buttons.
+@line-height-base:        1.428571429; // 20/14
+//** Computed "line-height" (`font-size` * `line-height`) for use with `margin`, `padding`, etc.
+@line-height-computed:    floor((@font-size-base * @line-height-base)); // ~20px
+
+
+/**
+* -------------------------------------------------------------------------
+* COLORS
+* -------------------------------------------------------------------------
+*/
+
+@white: #FFF;
+@orange: orange;
+@grey: #bfbfbf;
+@gray: #bfbfbf;
+@gray-light: #d9d9d9;
+@darkgrey: #8b8b8b;
+@link-blue: #78a7ff;
+@slade-darkblue: #34495E;
+@slade-darkerblue: #2c3e50;
+@moh-color: #5694f7;
+@moh-color-hover: #898989;
+
+// Brand colors for use accross the project
+@brand-primary:         #428bca;
+@brand-success:         #5cb85c;
+@brand-info:            #5bc0de;
+@brand-warning:         #f0ad4e;
+@brand-danger:          #d9534f;
+
+/**
+* -------------------------------------------------------------------------
+* Sidebar assignment of colors
+* -------------------------------------------------------------------------
+*/
+@sidebar-tab-color: #333;
+@sidebarlink-color: @darkgrey;
+@sidebar-color: #333;
+
+//header assignment of colors
+@header-color: #0089ff;
+@header-font: @sansAclonia;
+
+/**
+* -------------------------------------------------------------------------
+* Button assignment of colors
+* -------------------------------------------------------------------------
+*/
+@btn-clear-background: @white;
+
+//variables for custom wells
+@well-bg: @white;
+
+/**
+* -------------------------------------------------------------------------
+* Form states and alerts
+* -------------------------------------------------------------------------
+*/
+
+// Define colors for form feedback states and, by default, alerts
+
+@state-success-text:             #3c763d;
+@state-success-bg:               #dff0d8;
+@state-success-border:           darken(spin(@state-success-bg, -10), 5%);
+
+@state-info-text:                #31708f;
+@state-info-bg:                  #d9edf7;
+@state-info-border:              darken(spin(@state-info-bg, -10), 7%);
+
+@state-warning-text:             #8a6d3b;
+@state-warning-bg:               #fcf8e3;
+@state-warning-border:           darken(spin(@state-warning-bg, -10), 5%);
+
+@state-danger-text:              #a94442;
+@state-danger-bg:                #f2dede;
+@state-danger-border:            darken(spin(@state-danger-bg, -10), 5%);
+
+
+/**
+* -------------------------------------------------------------------------
+* COMPONENTS (Variables used in components i.e doc-containers)
+* -------------------------------------------------------------------------
+*/
+
+//Define common padding and border radius sizes and more
+@border-radius-base:        4px;
+@border-radius-large:       6px;
+@border-radius-small:       3px;
+
+/**
+* -------------------------------------------------------------------------
+* doc-containerS
+* -------------------------------------------------------------------------
+*/
+
+@doc-container-bg:                    #fff;
+@doc-container-body-padding:          15px;
+@doc-container-border-radius:         @border-radius-base;
+
+//** Border color for elements within doc-containers
+@doc-container-inner-border:          #ddd;
+@doc-container-footer-bg:             #f5f5f5;
+
+@doc-container-default-text:          @darkgrey;
+@doc-container-default-border:        #ddd;
+@doc-container-default-heading-bg:    #f5f5f5;
+
+@doc-container-primary-text:          #fff;
+@doc-container-primary-border:        @brand-primary;
+@doc-container-primary-heading-bg:    @brand-primary;
+
+@doc-container-success-text:          @state-success-text;
+@doc-container-success-border:        @state-success-border;
+@doc-container-success-heading-bg:    @state-success-bg;
+
+@doc-container-info-text:             @state-info-text;
+@doc-container-info-border:           @state-info-border;
+@doc-container-info-heading-bg:       @state-info-bg;
+
+@doc-container-warning-text:          @state-warning-text;
+@doc-container-warning-border:        @state-warning-border;
+@doc-container-warning-heading-bg:    @state-warning-bg;
+
+@doc-container-danger-text:           @state-danger-text;
+@doc-container-danger-border:         @state-danger-border;
+@doc-container-danger-heading-bg:     @state-danger-bg;
+
+//** Vars for styling docs in doc-container-body
+@doc-rows-margin-top: 5px;
+@doc-columns-margin-bottom: 10px;
+@doc-inputs-padding-right: 10px;
+@doc-inputs-padding-left: 10px;
+
+/**
+* -------------------------------------------------------------------------
+* card-containers
+* -------------------------------------------------------------------------
+*/
+
+@card-container-bg:     @white;
+@card-container-border-radius:         0px;
+@card-container-default-text:          @darkgrey;
+@card-container-default-border:        #ddd;
+@card-container-default-heading-bg:    #f5f5f5;
+
+@card-container-primary-text:          #fff;
+@card-container-primary-border:        @brand-primary;
+@card-container-primary-heading-bg:    @brand-primary;
+
+@card-container-success-text:          @state-success-text;
+@card-container-success-border:        @state-success-border;
+@card-container-success-heading-bg:    @state-success-bg;
+
+@card-container-info-text:             @state-info-text;
+@card-container-info-border:           @state-info-border;
+@card-container-info-heading-bg:       @state-info-bg;
+
+@card-container-warning-text:          @state-warning-text;
+@card-container-warning-border:        @state-warning-border;
+@card-container-warning-heading-bg:    @state-warning-bg;
+
+@card-container-danger-text:           @state-danger-text;
+@card-container-danger-border:         @state-danger-border;
+@card-container-danger-heading-bg:     @state-danger-bg;
+
+//** Vars for styling cards in card-container-body
+@card-rows-margin-top: 5px;
+@card-columns-margin-bottom: 10px;
+@card-inputs-padding-right: 10px;
+@card-inputs-padding-left: 10px;
+@card-style-cols: 10px;
+
+@card-border-bottom : red;
+
+/**
+* -------------------------------------------------------------------------
+* tabs variables
+* -------------------------------------------------------------------------
+*/
+
+@nav-tabs-border-color: @white;
+@nav-tabs-link-hover-border-color: @white;
+@nav-tabs-border-color: @white;
+@nav-tabs-active-link-hover-bg: @white;
+@nav-tabs-link-color: #60ceff;
+@nav-tabs-active-link-hover-color: #000;
+@nav-tabs-active-link-hover-border-color: #f0f0f0;
+
+
+
+// Extra small screen / phone
+// Note: Deprecated @screen-xs and @screen-phone as of v3.0.1
+@screen-xs:                  480px;
+@screen-xs-min:              @screen-xs;
+@screen-phone:               @screen-xs-min;
+
+// Small screen / tablet
+// Note: Deprecated @screen-sm and @screen-tablet as of v3.0.1
+@screen-sm:                  768px;
+@screen-sm-min:              @screen-sm;
+@screen-tablet:              @screen-sm-min;
+
+// Medium screen / desktop
+// Note: Deprecated @screen-md and @screen-desktop as of v3.0.1
+@screen-md:                  992px;
+@screen-md-min:              @screen-md;
+@screen-desktop:             @screen-md-min;
+
+// Large screen / wide desktop
+// Note: Deprecated @screen-lg and @screen-lg-desktop as of v3.0.1
+@screen-lg:                  1200px;
+@screen-lg-min:              @screen-lg;
+@screen-lg-desktop:          @screen-lg-min;
+
+// So media queries don't overlap when required, provide a maximum
+@screen-xs-max:              (@screen-sm-min - 1);
+@screen-sm-max:              (@screen-md-min - 1);
+@screen-md-max:              (@screen-lg-min - 1);
