@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html ng-app="mflApp">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+     <title> Slade360 Wellness</title>
+
+    <!-- compiled CSS --><% styles.forEach( function ( file ) { %>
+    <link rel="stylesheet" type="text/css" href="<%= file %>" /><% }); %>
+  </head>
+  <body>
+          <nav class="navbar navbar-default">
+              <div class="container-fluid">
+                <div class="navbar-header">
+                  <a class="navbar-brand" href="#">
+                    MFL
+                  </a>
+                </div>
+              </div>
+            </nav>
+        <!--End of header-->
+        <div ui-view="main"></div>
+        <footer>
+            <p> &copy; Copyright 2015 by <a href="index.html#">Savannah Informatics Limited</a> All Rights Reserved. </p>
+        </footer>
+    <!-- compiled JavaScript -->
+    <% scripts.forEach( function ( file ) { %>
+    <script type="text/javascript" src="<%= file %>"></script><% }); %>
+  </body>
+</html>

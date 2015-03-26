@@ -1,0 +1,33 @@
+{
+    "bitwise": true,
+    "node": true,
+    "esnext": true,
+    "curly": true,
+    "smarttabs": true,
+    "eqeqeq": true,
+    "latedef": true,
+    "noempty": true,
+    "indent": 4,
+    "quotmark": "double",
+    "unused": true,
+    "maxlen": 100,
+    "eqnull": true,
+    "globals": {
+        "jQuery": true,
+        "angular": true,
+        "beforeEach": true,
+        "afterEach": true,
+        "describe": true,
+        "expect": true,
+        "inject": true,
+        "it": true,
+        "browser": true,
+        "protractor": true,
+        "by": true,
+        "module":true,
+        "$": true,
+        "_": true,
+        "window": true,
+        "spyOn": true
+    }
+}
