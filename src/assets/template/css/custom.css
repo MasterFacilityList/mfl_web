@@ -3,6 +3,14 @@
   background-color: #30709B;
 
 }
+.navbar-default .navbar-brand {
+  color: #fff;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+  color: #fff;
+  background-color: transparent;
+}
 
 .navbar-default .navbar-brand {
   color: #fff;
