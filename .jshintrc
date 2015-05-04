@@ -22,6 +22,7 @@
         "inject": true,
         "it": true,
         "browser": true,
+        "localStorage":true,
         "protractor": true,
         "by": true,
         "module":true,

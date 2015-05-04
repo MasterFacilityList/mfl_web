@@ -11,7 +11,14 @@ angular.module("mfl.home.routes", [])
                         templateUrl: "home/tpls/main.tpl.html"
                     }
                 },
-                data : { pageTitle: "Home" }
+                data:{
+                    pageTitle: "MFL Home"
+                }
             });
         $urlRouterProvider.otherwise("/home");
-    }]);
+    }])
+    .run([ "$rootScope", "$state", "$stateParams",
+        function ($rootScope, $state, $stateParams) {
+            $rootScope.$state = $state;
+            $rootScope.$stateParams = $stateParams;
+        }]);

@@ -1,0 +1,27 @@
+.main-9 {
+   .animated;
+    z-index:10;
+}
+
+.main-page{
+    .animated;
+    z-index: 20;
+}
+
+.main-3 {
+    .animated;
+    z-index:10;
+}
+
+.main-page.ng-enter {
+    .main-9{ .fadeInDown; }
+    .main-3 { .fadeInDown; }
+    .main-page {
+            .fadeInUp;
+     }
+}
+
+.main-page.ng-leave {
+    .main-9{ .fadeOutUp; }
+    .main-3{ .fadeOutUp; }
+}

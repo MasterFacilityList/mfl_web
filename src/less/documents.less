@@ -1,0 +1,254 @@
+//
+// doc-containers less
+// Inspired by bootstrap doc-containers
+// --------------------------------------------------
+
+// Base class
+.doc-container {
+  margin-bottom: @line-height-computed;
+  background-color: @doc-container-bg;
+  border: 1px solid transparent;
+  border-radius: @doc-container-border-radius;
+  .box-shadow(0 1px 1px rgba(0,0,0,.05));
+
+  //Actual document styling
+  .doc-style-cols(@doc-columns-margin-bottom);
+  .doc-style-rows(@doc-rows-margin-top);
+}
+
+// Optional heading
+.doc-container-heading {
+  padding: 10px 15px;
+  border-bottom: 1px solid transparent;
+  .border-top-radius((@doc-container-border-radius - 1));
+
+  & > .dropdown .dropdown-toggle {
+    color: inherit;
+  }
+  & > .row {
+    margin: 0;
+
+    > div[class|='col'] {
+      margin-bottom: 0;
+    }
+  }
+
+  .action-btns {
+    float: left !important;
+
+    & > .action-btn {
+      font-size: 14px;
+      text-decoration: none;
+      padding: 2px 5px;
+    }
+  }
+
+  .process-btns {
+    float: right !important;
+  }
+}
+
+// Within heading, strip any `h*` tag of its default margins for spacing.
+.doc-container-title {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: ceil((@font-size-base * 1.125));
+  color: inherit;
+
+  > a {
+    color: inherit;
+  }
+}
+
+
+
+// doc-container contents
+.doc-container-body {
+  padding: @doc-container-body-padding;
+  &:extend(.clearfix all);
+}
+
+// Optional footer (stays gray in every modifier class)
+.doc-container-footer {
+  padding: 10px 15px;
+  background-color: @doc-container-footer-bg;
+  border-top: 1px solid @doc-container-inner-border;
+  .border-bottom-radius((@doc-container-border-radius - 1));
+}
+
+
+// List groups in doc-containers
+//
+// By default, space out list group content from doc-container headings to account for
+// any kind of custom content between the two.
+
+.doc-container {
+  > .list-group {
+    margin-bottom: 0;
+
+    .list-group-item {
+      border-width: 1px 0;
+      border-radius: 0;
+    }
+
+    // Add border top radius for first one
+    &:first-child {
+      .list-group-item:first-child {
+        border-top: 0;
+        .border-top-radius((@doc-container-border-radius - 1));
+      }
+    }
+    // Add border bottom radius for last one
+    &:last-child {
+      .list-group-item:last-child {
+        border-bottom: 0;
+        .border-bottom-radius((@doc-container-border-radius - 1));
+      }
+    }
+  }
+}
+// Collapse space between when there's no additional content.
+.doc-container-heading + .list-group {
+  .list-group-item:first-child {
+    border-top-width: 0;
+  }
+}
+
+
+// Tables in doc-containers
+//
+// Place a non-bordered `.table` within a doc-container (not within a `.doc-container-body`) and
+// watch it go full width.
+
+.doc-container {
+  > .table,
+  > .table-responsive > .table {
+    margin-bottom: 0;
+  }
+  // Add border top radius for first one
+  > .table:first-child,
+  > .table-responsive:first-child > .table:first-child {
+    .border-top-radius((@doc-container-border-radius - 1));
+
+    > thead:first-child,
+    > tbody:first-child {
+      > tr:first-child {
+        td:first-child,
+        th:first-child {
+          border-top-left-radius: (@doc-container-border-radius - 1);
+        }
+        td:last-child,
+        th:last-child {
+          border-top-right-radius: (@doc-container-border-radius - 1);
+        }
+      }
+    }
+  }
+  // Add border bottom radius for last one
+  > .table:last-child,
+  > .table-responsive:last-child > .table:last-child {
+    .border-bottom-radius((@doc-container-border-radius - 1));
+
+    > tbody:last-child,
+    > tfoot:last-child {
+      > tr:last-child {
+        td:first-child,
+        th:first-child {
+          border-bottom-left-radius: (@doc-container-border-radius - 1);
+        }
+        td:last-child,
+        th:last-child {
+          border-bottom-right-radius: (@doc-container-border-radius - 1);
+        }
+      }
+    }
+  }
+  > .doc-container-body + .table,
+  > .doc-container-body + .table-responsive {
+    border-top: 1px solid @table-border-color;
+  }
+  > .table > tbody:first-child > tr:first-child th,
+  > .table > tbody:first-child > tr:first-child td {
+    border-top: 0;
+  }
+  > .table-bordered,
+  > .table-responsive > .table-bordered {
+    border: 0;
+    > thead,
+    > tbody,
+    > tfoot {
+      > tr {
+        > th:first-child,
+        > td:first-child {
+          border-left: 0;
+        }
+        > th:last-child,
+        > td:last-child {
+          border-right: 0;
+        }
+      }
+    }
+    > thead,
+    > tbody {
+      > tr:first-child {
+        > td,
+        > th {
+          border-bottom: 0;
+        }
+      }
+    }
+    > tbody,
+    > tfoot {
+      > tr:last-child {
+        > td,
+        > th {
+          border-bottom: 0;
+        }
+      }
+    }
+  }
+  > .table-responsive {
+    border: 0;
+    margin-bottom: 0;
+  }
+}
+
+// Contextual variations
+.doc-container-default {
+  .doc-container-variant(@doc-container-default-border; @doc-container-default-text; @doc-container-default-heading-bg; @doc-container-default-border);
+}
+.doc-container-primary {
+  .doc-container-variant(@doc-container-primary-border; @doc-container-primary-text; @doc-container-primary-heading-bg; @doc-container-primary-border);
+}
+.doc-container-success {
+  .doc-container-variant(@doc-container-success-border; @doc-container-success-text; @doc-container-success-heading-bg; @doc-container-success-border);
+}
+.doc-container-info {
+  .doc-container-variant(@doc-container-info-border; @doc-container-info-text; @doc-container-info-heading-bg; @doc-container-info-border);
+}
+.doc-container-warning {
+  .doc-container-variant(@doc-container-warning-border; @doc-container-warning-text; @doc-container-warning-heading-bg; @doc-container-warning-border);
+}
+.doc-container-danger {
+  .doc-container-variant(@doc-container-danger-border; @doc-container-danger-text; @doc-container-danger-heading-bg; @doc-container-danger-border);
+}
+
+
+
+.doc-header {
+
+}
+.doc-body {
+
+}
+.doc-footer {
+
+}
+
+//document hr separator styling
+hr.doc-separator {
+  margin-top: 7px;
+  margin-bottom: 7px;
+  border: 0;
+  border-top: 1px solid #eeeeee;
+}

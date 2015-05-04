@@ -1,2 +1,2 @@
-# mfl_web
-This will host the web application of the Master Facility List
+# mfl_admin_web
+This is the front-end of mfl public side 

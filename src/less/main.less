@@ -1,5 +1,16 @@
+/**
+ * This is the main application stylesheet. It should include or import all
+ * stylesheets used throughout the application as this is the only stylesheet in
+ * the Grunt configuration that is automatically processed.
+ */
 
 
+/**
+ * First, we include the Twitter Bootstrap LESS files. Only the ones used in the
+ * project should be imported as the rest are just wasting space.
+ */
+ /*Adds angular toastr css file*/
+@import (less)'../../vendor/angular-toastr/dist/angular-toastr.css';
 /*Adds bootstrap less files*/
 @import '../../vendor/bootstrap/less/bootstrap.less';
 
@@ -12,8 +23,21 @@
  */
 
 // Core variables and mixins
-@import "variables.less";
+@import 'variables.less';
+@import 'mixins.less';
 
+//Sil-grid css
+@import (css) '../assets/css/sil_grid_loader.css';
+
+   /*contains the thematic css*/
+@import  (css) '../assets/css/style.css';
+@import  (css) '../assets/css/global.css';
+@import  (css) '../assets/css/blues.css';
+@import  (css) '../assets/css/theme-responsive.css';
+@import  (css) '../assets/css/main.css';
+@import (css) '../assets/css/theme.css';
+@import 'basic.less';   // contains basic css classes for minor adjustments
+@import 'theme.less';   //imports all the less files used for the theme
 
 /**
  * Typography
@@ -38,7 +62,8 @@ html, body{
   font-family: 'Lato', sans-serif;
   font-weight: 500;
   font-size: 12px;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
+  background-color: #F6F4F4;
 }
  h1, h2, h3, h4, h5, h6{
   font-family: 'Lato Light', sans-serif;
@@ -76,12 +101,29 @@ h2 {
 }
 
 
+/**
+ * Header
+*/
+.slade-lightblue{
+    color: #82CAFF;
+}
+
+.page-wrap {
+//  min-height: 100%;
+//  /* equal to footer height */
+//  margin-bottom: 90px;
+}
+
+.page-wrap:after {
+//  content: "";
+//  display: block;
+}
 
 footer {
   position: relative;
   height: 50px;
   padding: 10px 20px;
-  background-color: #434343;
+  background-color: #0089FF;
   color: #bdc3c7;
   z-index: 1000;
 }

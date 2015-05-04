@@ -1,0 +1,200 @@
+.form-control {
+  display: block;
+  width: 100%;
+  height: @input-height-base; // Make inputs at least the height of their button counterpart (base line-height + padding + border)
+  padding: @padding-base-vertical @padding-base-horizontal;
+  font-size: @font-size-base;
+  line-height: @line-height-base;
+  color: @input-color;
+  background-color: @input-bg;
+  background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
+  border: 1px solid @input-border;
+  border-radius: @input-border-radius;
+  .box-shadow(inset 0 1px 1px rgba(0,0,0,.075));
+  .transition(~"border-color ease-in-out .15s, box-shadow ease-in-out .15s");
+}
+
+legend, label {
+color: #000;
+}
+
+.form-control {
+    font-size: 13px;
+    color: #394264;
+    border-color: #E0E4E8;
+    border-radius: 3px;
+    box-shadow: none
+}
+.input-sm,
+.input-group-addon.input-sm {
+    font-size: 11px;
+    /*border-radius: 3px*/
+}
+.input-lg,
+.input-group-addon.input-lg {
+    font-size: 16px;
+    /*border-radius: 4px*/
+}
+.form-control:focus {
+    border-color: #82CAFF;
+    box-shadow: rgba(0, 0, 0, .05) 0 1px 1px
+}
+.form-control:-moz-placeholder {
+    color: #95a5a6
+}
+.form-control::-moz-placeholder {
+    color: #95a5a6;
+    opacity: 1
+}
+.form-control:-ms-input-placeholder {
+    color: #95a5a6
+}
+.form-control::-webkit-input-placeholder {
+    color: #95a5a6
+}
+.form-control[disabled],
+.form-control[readonly],
+fieldset[disabled] .form-control {
+    background-color: #ecf0f1
+}
+.has-warning .help-block,
+.has-warning .control-label,
+.has-warning .radio,
+.has-warning .checkbox,
+.has-warning .radio-inline,
+.has-warning .checkbox-inline {
+    color: #FAA732
+}
+.has-warning .form-control {
+    border-color: #FAA732;
+    box-shadow: rgba(0, 0, 0, .05) 0 1px 1px
+}
+.has-warning .form-control:focus {
+    border-color: #CF8B29;
+    box-shadow: rgba(0, 0, 0, .05) 0 1px 1px
+}
+.has-warning .input-group-addon {
+    color: #FAA732;
+    background-color: #fcf8e3;
+    border-color: #FAA732
+}
+.has-error .help-block,
+.has-error .control-label,
+.has-error .radio,
+.has-error .checkbox,
+.has-error .radio-inline,
+.has-error .checkbox-inline {
+    color: #DA4F49
+}
+.has-error .form-control {
+    border-color: #DA4F49;
+    box-shadow: rgba(0, 0, 0, .05) 0 1px 1px
+}
+.has-error .form-control:focus {
+    border-color: #AF403B;
+    box-shadow: rgba(0, 0, 0, .05) 0 1px 1px
+}
+.has-error .input-group-addon {
+    color: #DA4F49;
+    background-color: #f2dede;
+    border-color: #DA4F49
+}
+.has-success .help-block,
+.has-success .control-label,
+.has-success .radio,
+.has-success .checkbox,
+.has-success .radio-inline,
+.has-success .checkbox-inline {
+    color: #5BB75B
+}
+.has-success .form-control {
+    border-color: #5BB75B;
+    box-shadow: rgba(0, 0, 0, .05) 0 1px 1px
+}
+.has-success .form-control:focus {
+    border-color: #468C46;
+    box-shadow: rgba(0, 0, 0, .05) 0 1px 1px
+}
+.has-success .input-group-addon {
+    color: #5BB75B;
+    background-color: #dff0d8;
+    border-color: #5BB75B
+}
+.input-group-btn>.btn {
+    padding: 7px 12px
+}
+.input-group-btn>.fileinput {
+    margin-bottom: 0
+}
+.input-group-btn>.btn:not(.btn-default) {
+    border-color: rgba(0, 0, 0, .1)
+}
+.input-group-addon {
+    background-color: #ecf0f1;
+    border-color: #E0E4E8;
+    color: #394264;
+    font-size: 13px;
+    padding: 7px 12px
+}
+.input-group-addon>.nice-checkbox,
+.input-group-addon>.nice-radio {
+    padding-top: 0;
+    top: -5px;
+    left: 2px
+}
+.input-group.input-group-in {
+    border: 1px solid #E0E4E8;
+    background-color: #fff;
+    /*border-radius: 3px;*/
+    -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s
+}
+.input-group-in.focus {
+    border-color: #82CAFF;
+    box-shadow: rgba(0, 0, 0, .05) 0 1px 1px
+}
+.input-group.input-group-in>.input-group-btn>.btn,
+.input-group.input-group-in>.input-group-addon,
+.input-group.input-group-in>.twitter-typeahead>.form-control,
+.input-group.input-group-in>.form-control {
+    border: 0;
+    background-color: transparent
+}
+.input-group.input-group-in>.twitter-typeahead>.form-control,
+.input-group.input-group-in>.form-control {
+    padding-right: 0;
+    padding-left: 0
+}
+.input-group.input-group-in>.twitter-typeahead:first-child>.form-control,
+.input-group.input-group-in>.form-control:first-child {
+    padding-right: 0;
+    padding-left: 12px
+}
+.input-group.input-group-in>.twitter-typeahead:last-child>.form-control,
+.input-group.input-group-in>.form-control:last-child {
+    padding-right: 12px;
+    padding-left: 0
+}
+.input-group.input-group-in>.form-control:focus,
+.input-group.input-group-in>.form-control[disabled],
+.input-group.input-group-in>.form-control[readonly],
+.input-group.input-group-in>fieldset[disabled] .form-control,
+.input-group.input-group-in>.twitter-typeahead>.form-control:focus,
+.input-group.input-group-in>.twitter-typeahead>.form-control[disabled],
+.input-group.input-group-in>.twitter-typeahead>.form-control[readonly] {
+    border: 0!important;
+    background-color: transparent;
+    box-shadow: none
+}
+.input-group.input-group-in>.input-group-btn>.btn {
+    color: #394264
+}
+.input-group.input-group-in>.input-group-btn>.btn:hover,
+.input-group.input-group-in>.input-group-btn>.btn:focus,
+.input-group.input-group-in>.input-group-btn>.btn:active,
+.input-group.input-group-in>.input-group-btn>.btn.active,
+.input-group.input-group-in>.input-group-btn>.btn.open {
+    background-color: transparent;
+    border: 0;
+    color: inherit
+}

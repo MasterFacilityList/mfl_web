@@ -1,0 +1,95 @@
+//
+//
+//@import 'animate.less';
+//
+//@darkGray: #393b40;
+//
+////MIXINS
+//.transition(@transition) {
+//  -webkit-transition: @transition;
+//     -moz-transition: @transition;
+//       -o-transition: @transition;
+//          transition: @transition;
+//}
+//.backface {
+//  -webkit-backface-visibility: hidden;
+//  -moz-backface-visibility: hidden;
+//  backface-visibility: hidden;
+//}
+//
+//.translate3d(@x, @y, @z) {
+//  .backface;
+//  -webkit-transform: translate3d(@x, @y, @z);
+//     -moz-transform: translate3d(@x, @y, @z);
+//       -o-transform: translate3d(@x, @y, @z);
+//          transform: translate3d(@x, @y, @z);
+//}
+//
+///*html {
+//  width: 100%;
+//    height: 100%;
+//    overflow: hidden;
+//}*/
+//
+//.login-container{
+//  position: absolute;
+//    height: 100%;
+//    width: 100%;
+//    background-color:white;
+//
+//  .login-box {
+//    .animated;
+//    z-index: 20;
+//    width: 250px;
+//    height: 350px;
+//    background-color: @darkGray;
+//    color: white;
+//    padding:50px;
+//    margin:auto;
+//    
+//    position: absolute;
+//      top: 0px; left: 0; bottom: 75px; right: 0;
+//  }
+//}
+//
+//.tempAbs {
+//  //mixin to temporarily make this position absolute  
+//  //so it doesn't conflict with other divs
+//  
+//}
+//
+////GLOBAL TRANSITION CLASS
+//#main-view {
+//    .transition(all 0.1s); //if using child trasition animations, they should all be under this time value, keyframe animations are differen
+//}
+//
+//#headerdesc {
+//   .animated;
+//    z-index:10;
+//}
+//
+//#contentMain {
+//  position: absolute;
+//   width:100%;
+//  .animated;
+//  z-index:10;
+//
+//}
+//
+//#main-view.ng-enter {
+//    .transition(all 1s); //if using child trasition animations, they should all be under this time value, keyframe animations are differen
+//    #headerdesc{ .tempAbs;.fadeInDown; }
+//    #contentMain{ .fadeInUp; }
+//    .login-box {
+//        .fadeInUp;
+//    }
+//}
+//
+////#main-view.ng-leave {
+////    .transition(all 0.01s);
+////    #headerdesc{ .tempAbs;.fadeOutUp; }
+////    #contentMain{ .fadeOutDown; }
+////    .login-box {
+////          .fadeOutDown;
+////      }
+////}
