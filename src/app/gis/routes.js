@@ -8,11 +8,11 @@ angular.module("mfl.gis.routes", [])
                 views: {
                     "main": {
                         controller: "mfl.gis.controllers.gis",
-                        templateUrl: "gis/tpls/main.tpl.html"
+                        templateUrl: "gis/tpls/index.tpl.html"
                     }
                 },
                 data:{
-                    pageTitle: "GIS"
+                    pageTitle: "MFL GIS"
                 }
             });
     }]);

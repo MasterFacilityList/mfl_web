@@ -86,7 +86,7 @@ module.exports = {
 
     connect : {
         options: {
-            port: 8062,
+            port: 8063,
             hostname: "*",
             keepalive: true
         },

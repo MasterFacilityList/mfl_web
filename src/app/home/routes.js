@@ -12,7 +12,7 @@ angular.module("mfl.home.routes", [])
                     }
                 },
                 data:{
-                    pageTitle: "Home"
+                    pageTitle: "MFL Home"
                 }
             });
         $urlRouterProvider.otherwise("/home");
