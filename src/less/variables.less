@@ -10,6 +10,7 @@
  */
 
 //Fonts that could be used
+@latoLight: 'Lato Light', sans-serif;
 @sansFontFamily: 'Roboto', sans-serif;
 @sansAclonia: 'Aclonia', serif;
 
@@ -17,6 +18,12 @@
 @fa-font-path: "../assets";
 
 @font-size-base: 14px;
+
+@font-face {
+  font-family: 'Lato Light';
+  src: url('fonts/latolight.woff2') format('truetype');
+  font-weight: 500;
+}
 
 //** Unit-less `line-height` for use in components like buttons.
 @line-height-base:        1.428571429; // 20/14
@@ -41,6 +48,7 @@
 @slade-darkerblue: #2c3e50;
 @moh-color: #5694f7;
 @moh-color-hover: #898989;
+@black: #000000;
 
 // Brand colors for use accross the project
 @brand-primary:         #428bca;
@@ -60,7 +68,7 @@
 
 //header assignment of colors
 @header-color: #0089ff;
-@header-font: @sansAclonia;
+@header-font: @latoLight;
 
 /**
 * -------------------------------------------------------------------------
@@ -157,6 +165,7 @@
 * card-containers
 * -------------------------------------------------------------------------
 */
+@content-card-border-radius:           1px;
 
 @card-container-bg:     @white;
 @card-container-border-radius:         0px;

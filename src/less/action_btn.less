@@ -1,0 +1,191 @@
+.action-btn {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 7px;
+    font-size: 16px;
+    line-height: 1.42857143;
+    border-radius: 50%;
+    box-shadow: 0px 2px 7px 0 rgba(0, 0, 0, 0.26);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.action-btn:focus,
+.action-btn:active:focus,
+.action-btn.active:focus {
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+.action-btn:hover,
+.action-btn:focus {
+  color: #333333;
+  text-decoration: none;
+  box-shadow: 0px 2px 7px 0 rgba(0, 0, 0, 0.86);
+}
+.action-btn-md {
+  font-size: 22px;
+  padding: 5px 11px 5px 11px;
+}
+
+
+.action-btn-grid {
+  font-size: 18px;
+  padding: 5px 9px 5px 9px;
+}
+.action-btn-primary {
+  color: #ffffff;
+  /*background-color: rgba(0, 0, 255, 0.6);*/
+  background-color: #2196F3;
+  border-color: #357ebd;
+}
+.action-btn-primary:hover,
+.action-btn-primary:focus,
+.action-btn-primary:active,
+.action-btn-primary.active{
+  color: #ffffff;
+  /*background-color: rgba(0, 0, 255, 0.8);*/
+  background-color: darken(#2196F3, 5%);
+  border-color: #285e8e;
+}
+
+/* button warm*/
+.action-btn-warning {
+  color: #ffffff;
+  padding: 5px 8px 5px 10px;
+  /*background-color: rgba(0, 0, 255, 0.6);*/
+  background-color: #FFD700;
+  border-color: #FFD700;
+}
+.action-btn-warning:hover,
+.action-btn-warning:focus,
+.action-btn-warning:active,
+.action-btn-warning.active{
+  color: #ffffff;
+  /*background-color: rgba(0, 0, 255, 0.8);*/
+  background-color: darken(#FFD700, 5%);
+  border-color: #DAA520;
+}
+
+
+.action-btn-success {
+  padding: 5px 9px 5px 9px;
+  color: #ffffff;
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+}
+.action-btn-success:hover,
+.action-btn-success:focus,
+.action-btn-success:active,
+.action-btn-success.active{
+  color: #ffffff;
+  background-color: #47a447;
+  border-color: #398439;
+}
+
+.action-btn-md .action-btn-success {
+  padding: 5px 7px 5px 7px;
+}
+
+.action-btn-danger {
+  color: #ffffff;
+  padding:5px 11px 5px 11px;
+  background-color: #d9534f;
+  border-color: #d43f3a;
+}
+.action-btn-danger:hover,
+.action-btn-danger:focus,
+.action-btn-danger:active,
+.action-btn-danger.active{
+  color: #ffffff;
+  background-color: #d2322d;
+  border-color: #ac2925;
+}
+.action-btn-danger:active,
+.action-btn-danger.active {
+  background-image: none;
+}
+.action-btn-info {
+  padding:3px 9px 7px 9px;
+  color: #ffffff;
+  background-color: #5bc0de;
+  border-color: #46b8da;
+}
+.action-btn-info:hover,
+.action-btn-info:focus,
+.action-btn-info:active,
+.action-btn-info.active {
+  color: #ffffff;
+  background-color: #39b3d7;
+  border-color: #269abc;
+}
+.action-btn-info:active,
+.action-btn-info.active {
+  background-image: none;
+}
+
+.action-btn-warm {
+  color: #ffffff;
+  padding:5px 11px 5px 11px;
+  background-color: #ff1493;
+  /*bright pink #f433ff*/
+  border-color: #ff1494;
+}
+.action-btn-warm:hover,
+.action-btn-warm:focus,
+.action-btn-warm:active,
+.action-btn-warm.active{
+  color: #ffffff;
+  background-color: darken(#ff1493, 5%);
+  border-color: #ff00ff;
+}
+.action-btn-warm:active,
+.action-btn-warm.active {
+  background-image: none;
+}
+
+/*Material ripple effect =============*/
+/*.action-btn:after{
+    content: "";
+    background: rgba(255,255,255,0.3);
+    display: block;
+    position: absolute;
+    border-radius: 50%;
+    padding-top: 240%;
+    padding-left: 240%;
+    margin-top: -120%;
+    margin-left: -120%;
+    opacity: 0;
+    transition: all 1s;
+}
+.action-btn:active:after {
+    padding-top: 0;
+    padding-left: 0;
+    margin-top: 0;
+    margin-left: 0;
+    opacity: 1;
+    transition: 0s;
+}
+*/
+.action-container {
+  display: inline-block;
+}
+
+.action-container .action-btn {
+  margin-left: 5px;
+}
+.is-select > input[type="checkbox"] {
+  border-radius: 0;
+}
+.grid-input-checkbox {
+  border : 2px solid #ddd;
+  border-radius: 0;
+}

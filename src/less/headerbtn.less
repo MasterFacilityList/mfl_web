@@ -1,0 +1,108 @@
+/*THESE CLASSES ARE FOR CATEGORIES LISTING PAGE*/
+.theme-container{
+    background-color: #fff;
+    border: 1px solid #ededed;
+}
+.cat-container-main{
+    background-color: @moh-color;
+    border: 1px solid #ededed;
+    margin-bottom: 5px;
+}
+.cat-container-disabled{
+    background-color: @nice-grey;
+    color: @white;
+    border: 1px solid whitesmoke;
+    padding: 10px;
+    margin-bottom: 5px;
+}
+.cat-container-disabled.active{
+    background-color: @nice-grey;
+    color: @white;
+    border: 1px solid whitesmoke;
+    padding: 10px;
+    margin-bottom: 5px;
+}
+.cat-container-disabled > a{
+    border: 1px solid @nice-grey;
+    display: block;
+    cursor: pointer;
+    color: #000;
+    padding: 5px;
+    text-align: center;
+}
+.cat-container-disabled >a:hover, .cat-container-disabled >a:focus{
+    background-color: darken(@darkgrey, 20%);
+}
+.cat-container-main >a{
+    padding: 10px;
+    color: #fff;
+    display: block;
+    cursor: pointer;
+}
+.cat-container-main >a:hover,.cat-container-main >a:focus,.cat-container-main >a:active{
+    color: @white;
+    background-color: darken(@moh-color, 20%);
+    text-decoration: none;
+}
+/*THESE CATEGORIES ARE CLASSES USED WHILE CATEGORIES ARE ON THE SIDE PAGE*/
+
+.cat-container-side >a{
+    padding: 10px;
+    color: #000;
+    margin-bottom: 5px;
+    background-color: #fff;
+    border: 1px solid #ededed;
+    display: block;
+    cursor: pointer;
+}
+.cat-container-side >a:hover, .cat-container-side >a:focus, .cat-container-side >a.active{
+    padding: 10px;
+    color: #fff;
+    text-decoration: none;
+    margin-bottom: 5px;
+    background-color: @moh-color;
+}
+
+/*THESE CLASSES THAT ARE USED WHEN USED AS BREADCRUMBS*/
+.cat-container{
+    text-decoration: none;
+    background-color: #fff;
+    font-size: 12px;
+    color: #000;
+    overflow-wrap: break-word;
+    list-style-type: none;
+}
+.cat-container > a {
+    border: 1px solid #d6d6d6;
+    display: block;
+    cursor: pointer;
+    color: #000;
+    padding: 5px;
+    text-align: center;
+}
+
+.cat-container.active{
+    background-color: darken(@moh-color, 20%);
+}
+
+.cat-container > a:hover,{
+    display: block;
+    text-decoration: none;
+    padding: 5px;
+    cursor: pointer;
+    color: @white;
+    background-color: darken(@moh-color, 20%);
+}
+ .cat-container > a.active {
+        color: @white;
+}
+
+a.cat-link{
+    text-decoration: none;
+    display: block;
+}
+a.cat-link:hover{
+    text-decoration: none;
+    display: block;
+    background-color: #fafafa;
+}

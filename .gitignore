@@ -8,8 +8,4 @@ vendor/
 coverage/
 *.pyo
 *.pyc
-coverage
-
-# IDE
-.idea/
-
+.coverage

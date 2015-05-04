@@ -1,0 +1,58 @@
+.form-tab {
+    padding: 0px;
+    margin-left: -22px;
+    margin-right: -22px;
+}
+.form-tab > li{
+    display: inline-block;
+    background-color: @card-container-bg;
+    border-radius: none;
+    color: #000;
+    padding: 0px;
+}
+
+.form-tab > li > a {
+    display: inline-block;
+    border-radius:none;
+    padding: 4px 0 4px 0;
+    margin-right:-2px;
+    width: 100%;
+    text-align: center;
+     color: #2196F3;
+    font-size: 16px;
+    border: 1px solid #f0f0f0;
+    -webkit-transition: background-color 70ms ease-out 70ms;
+    -moz-transition: background-color 70ms ease-out 70ms;
+    -o-transition: background-color 70ms ease-out 70ms;
+    transition: background-color 70ms ease-out 70ms;
+     -webkit-transition: border-bottom 70ms ease-out 70ms;
+    -moz-transition: border-bottom 70ms ease-out 70ms;
+    -o-transition: border-bottom 70ms ease-out 70ms;
+    transition: border-bottom 70ms ease-out 70ms;
+}
+.form-tab > li.active > a , .form-tab > li.active > a:hover{
+    color: darken(#2196F3, 8%);
+    background-color: #FFFFFF;
+    font-weight: 400;
+    cursor: pointer;
+    border: transparent;
+    box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.36);
+    border-bottom: 1px solid #2196F3;
+    text-decoration: none;
+}
+
+
+.form-tab > li > a:hover, .form-tab > li > a:focus, .form-tab > li > a.active {
+    background-color: #FFFFFF;
+    color: darken(#2196F3, 8%);
+    font-weight: 400;
+    border: transparent;
+    box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.36);
+    border-bottom: 1px solid #82CAFF;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.filer-select {
+    font-size: 16px;
+}

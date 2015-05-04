@@ -1,0 +1,192 @@
+/*HEADER NAV STARTS HERE*/
+.lato {
+    font-family: Lato Light, sanserif;
+    font-weight: 500;
+    font-size: 17px;
+}
+
+.header-logo{
+    height:50px;
+}
+
+.headerbtn {
+    padding: 0px;
+    margin-bottom: 5px;
+    display: block;
+    background-color: rgba(192, 192, 192, 0.2);
+}
+
+.headerbtn > a {
+    padding: 1px 1px 1px 18px;
+    /*background-color: rgba(192, 192, 192, 0.7);*/
+    color: #fff;
+    display: block;
+    cursor: pointer;
+    -webkit-transition: background-color 50ms ease-out 50ms;
+    -moz-transition: background-color 50ms ease-out 50ms;
+    -o-transition: background-color 50ms ease-out 50ms;
+    transition: background-color 50ms ease-out 50ms;
+}
+
+.headerbtn > a > h3 > i {
+    display: none;
+}
+
+.headerbtn >a:hover,.headerbtn >a:focus,.headerbtn >a.active{
+    color: blue;
+    font-weight: 900;
+    background-color: rgba(128, 128, 128, 0.8);
+    border-left: 4px solid rgba(192, 192, 192, 0.9);
+    text-decoration: none;
+}
+
+.headerbtn >a:hover > h3 > i,.headerbtn >a:focus > h3 > i,.headerbtn >a.active > h3 > i{
+    display: inline;
+}
+
+.reg-header {
+    background-color: rgb(236, 240, 241, 0.8);
+    height: 80px;
+    margin-bottom: 20px;
+}
+
+.reg-container {
+    background-color: #F6F4F4;
+}
+
+.gym-lady{
+    background: url(../assets/img/stab-ball.png);
+    background-color: #F6F4F4;
+    /*background-position: center right;*/
+    margin: 0 auto;
+    min-height: 500px;
+    background-position: center center;
+    background-size: cover;
+}
+.bg-reg {
+    background-color: rgba(0, 0, 0, 0.2);
+    min-height: 500px;
+}
+
+.small-headerbtn {
+    padding: 0px;
+    margin-bottom: 5px;
+    display: block;
+    background-color: rgba(192, 192, 192, 0.3);
+}
+.small-headerbtn > a {
+    padding: 5px;
+    color: #fff;
+    display: block;
+    border-bottom: 5px solid transparent;
+    cursor: pointer;
+    -webkit-transition: background-color 50ms ease-out 50ms;
+    -moz-transition: background-color 50ms ease-out 50ms;
+    -o-transition: background-color 50ms ease-out 50ms;
+    transition: background-color 50ms ease-out 50ms;
+}
+
+.small-headerbtn >a:hover,.small-headerbtn >a:focus,.small-headerbtn >a.active{
+    color: @white;
+    background-color: rgba(128, 128, 128, 0.6);
+    border-bottom: 5px solid rgba(192, 192, 192, 0.9);
+    text-decoration: none;
+    /*box-shadow: 1px 1px 1px lighten(@moh-color, 30%);*/
+}
+
+.small-header-font {
+  @media (max-width: @screen-xs-max) {
+
+    body, input{
+        font-size:11px;
+    }
+
+    h3{
+        font-size:20px;
+    }
+
+    h4{
+        font-size: 18px;
+    }
+    .lato{
+        font-size: 16px;
+    } 
+    a{
+        font-size: 10px;
+    }
+  }
+}
+
+.smaller-header-font {
+    @media (min-width: @screen-sm-min) {
+        body{
+            font-size:9px;
+        }
+    }
+}
+
+.sign-in{
+    @media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+        body {
+            font-size:12px;
+        }
+
+        div{
+            font-size:12px;
+            /*width: 150px;*/
+        }
+    }
+}
+
+.signin-btn {
+    background:rgba(192, 192, 192, 0.2); 
+    font-family:Lato, sanserif;
+    font-size: 20px;
+}
+.login-form{
+    border:2px solid red;
+    background-color:#ffffff; 
+    width:355px; 
+    left:-338px;
+    font-weight: 300;
+}
+
+.smaller-login-form {
+    @media (min-width: @screen-lg-min) {
+        .login-form {
+            border:2px solid red;
+            background-color:#ffffff; 
+            width:390px; 
+            left:-375px;
+            font-weight: 300;
+        }
+    }
+
+    @media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+        .login-form {
+            width:380px;
+            left: -300px;
+        }
+    }
+
+    @media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+        .login-form {
+            width: 335px;
+            left: -280px;
+        }
+    }
+
+    @media (min-width: @screen-xs-min) and (max-width: @screen-xs-max) {
+        .login-form {
+            width: 270px;
+            left: -295px;
+        }
+    }
+
+    @media (max-width: 386px) {
+        .login-form {
+            width: 250px;
+            left: -235px;
+        }
+    }
+}

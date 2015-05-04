@@ -1,0 +1,76 @@
+@media (max-width: 1023px) {
+    .translate-left {
+        margin-right: 0;
+        -webkit-transform: translateX(-300px);
+        transform: translateX(-300px)
+    }
+}
+@media (max-width: 801px) {
+    .header {
+        border-bottom: 1px solid rgba(255, 255, 255, .1)
+    }
+    .side-left {
+        position: relative;
+        top: auto;
+        bottom: auto;
+        display: block;
+        width: 100%;
+        border-top: 1px solid rgba(0, 0, 0, .25)
+    }
+    .sidebar {
+        width: 100%;
+        margin: 0 auto;
+        text-align: center
+    }
+    .sidebar:after {
+        content: '';
+        display: table;
+        clear: both
+    }
+    .sidebar>li {
+        display: inline-block;
+        margin-right: -4px;
+        padding-bottom: 8px;
+        width: 86px;
+        border-top: 0;
+        border-bottom: 0
+    }
+    .sidebar>li.active:after, .sidebar>li.active:before {
+        display: none
+    }
+    .sidebar-child, .sidebar-child-inline {
+        top: 100%;
+        left: 0;
+        border: 1px solid #E0E4E8;
+        border-top: 0
+    }
+    .sidebar-child-inline li {
+        display: block;
+        margin: 0;
+        margin-bottom: 10px
+    }
+    .sidebar-child-inline li.divider {
+        width: 100%;
+        height: 1px
+    }
+    .content {
+        margin-left: 0
+    }
+    .content.content-sm {
+        margin-right: 0
+    }
+    .content>.content-body {
+        min-height: 200px
+    }
+}
+@media (max-width: 480px) {
+    .header form.form-inline {
+        display: none
+    }
+    .header-brand h1, .header-brand h2, .header-brand h3, .header-brand h4, .header-brand h5, .header-brand h6 {
+        font-size: 2em
+    }
+    .header-profile .profile-username {
+        display: none
+    }
+}

@@ -1,0 +1,90 @@
+/*
+* Slade-accounting Mixins
+* --------------------------------------------------
+*/
+
+/*
+* ---------------------------------------------------
+* DOCUMENTS
+* --------------------------------------------------
+*/
+.doc-container-variant(@border; @heading-text-color; @heading-bg-color; @heading-border) {
+  border-color: @border;
+
+  & > .doc-container-heading {
+    color: @heading-text-color;
+    background-color: @heading-bg-color;
+    border-color: @heading-border;
+
+    + .doc-container-collapse .doc-container-body {
+      border-top-color: @border;
+    }
+  }
+  & > .doc-container-footer {
+    + .doc-container-collapse .doc-container-body {
+      border-bottom-color: @border;
+    }
+  }
+}
+
+//style all rows in doc-container-body
+.doc-style-rows(@row-margin-top) {
+  .row {
+    margin-top: @row-margin-top;
+  }
+}
+
+//style all columns(col-*) within that element i.e doc-container-body
+.doc-style-cols(@col-margin-bottom) {
+  & .row > div[class|='col'] {
+    margin-bottom: @col-margin-bottom;
+    padding-right: 8px;
+    padding-left: 7px;
+  }
+}
+
+/*
+* ----------------------------------------------------------------------
+* CSS3 PROPERTIES
+* ----------------------------------------------------------------------
+*/
+
+// Single side border-radius
+.border-top-radius(@radius) {
+  border-top-right-radius: @radius;
+   border-top-left-radius: @radius;
+}
+.border-right-radius(@radius) {
+  border-bottom-right-radius: @radius;
+     border-top-right-radius: @radius;
+}
+.border-bottom-radius(@radius) {
+  border-bottom-right-radius: @radius;
+   border-bottom-left-radius: @radius;
+}
+.border-left-radius(@radius) {
+  border-bottom-left-radius: @radius;
+     border-top-left-radius: @radius;
+}
+
+/*
+* Drop shadows
+* ----------------------------------------------------
+*/
+
+.box-shadow(@shadow) {
+  -webkit-box-shadow: @shadow; // iOS <4.3 & Android <4.1
+          box-shadow: @shadow;
+}
+
+
+.wrapper {
+  .make-row();
+}
+.content-main {
+  .make-lg-column(8);
+}
+.content-secondary {
+  .make-lg-column(3);
+  .make-lg-column-offset(1);
+}

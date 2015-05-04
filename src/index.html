@@ -1,26 +1,44 @@
 <!DOCTYPE html>
-<html ng-app="mflApp">
+<html ng-app="mflwebApp">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-     <title> Master Facility List</title>
+     <title ng-bind="$state.current.data.pageTitle"></title>
 
     <!-- compiled CSS --><% styles.forEach( function ( file ) { %>
     <link rel="stylesheet" type="text/css" href="<%= file %>" /><% }); %>
   </head>
   <body>
-          <nav class="navbar navbar-default">
-              <div class="container-fluid">
-                <div class="navbar-header">
-                  <a class="navbar-brand" href="#">
-                    eHealth-Kenya Facilities
-                  </a>
-                </div>
-              </div>
-            </nav>
+<header class="header text-white">
+   <!--Header brand-->
+    <div class="header-brand width-35p">
+        <a ui-sref="home.join" class="logo"><span class="text-warning">e</span>-Health Kenya Facilities</a> 
+    </div>
+   <!--End of Header brand-->
+    <!--Header profile-->
+    <div class="header-profile">
+          <div class="profile-nav">
+            <a href="">
+              <span class="profile-username">Advanced Search</span>
+            </a>
+          </div>
+          <div class="profile-nav">
+            <a href="" class="dropdown-toggle" data-toggle="dropdown">
+              <span class="profile-username">Sign Up</span>
+              <span class="fa fa-sign-in"></span>
+            </a>
+            <ul class="dropdown-menu animated flipInX pull-right" role="menu">
+              <li><a href="#/profile"><i class="fa fa-cog"></i> Profile</a></li>
+              <li><a href="" ng-click="logout()"><i class="fa fa-sign-out"></i> Log Out</a></li>
+              <li><a href="" ng-click="logout()"><i class="fa fa-sign-in"></i>Sign Up </a></li>
+            </ul>
+          </div>
+    </div>
+   <!--End of Header profile-->
+</header>
         <!--End of header-->
-        <div ui-view="main"></div>
-        <footer>
-            <p> &copy; Copyright 2015 by <a href="index.html#">Savannah Informatics Limited</a> All Rights Reserved. </p>
+        <div ui-view="main" class="content"></div>
+        <footer ng-controller="timeController">
+            <p class="text-center"> &copy; Copyright {{ time | date:'yyyy' }} by <a href="index.html#">Savannah Informatics Limited</a> All Rights Reserved. </p>
         </footer>
     <!-- compiled JavaScript -->
     <% scripts.forEach( function ( file ) { %>
