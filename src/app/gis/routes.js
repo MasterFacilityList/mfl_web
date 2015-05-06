@@ -12,7 +12,19 @@ angular.module("mfl.gis.routes", [])
                     }
                 },
                 data:{
-                    pageTitle: "MFL GIS"
+                    pageTitle: "MFL Country"
+                }
+            })
+            .state("gis.county", {
+                url: "/county",
+                views: {
+                    "main@gis": {
+                        controller: "mfl.gis.controllers.gis.county",
+                        templateUrl: "gis/tpls/county-map.tpl.html"
+                    }
+                },
+                data:{
+                    pageTitle: "MFL County"
                 }
             });
     }]);

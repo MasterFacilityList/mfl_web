@@ -1,0 +1,13 @@
+<div class="content-body">
+<!-- /-End of action area -->
+    <div id="map">
+        <openlayers ol-center="KEN" ol-defaults="defaults" custom-layers="true" height="70vh">
+            <ol-layer ol-layer-properties="layer" ng-repeat="layer in layers"></ol-layer>
+<!--            <ol-layer ol-layer-properties="osm"></ol-layer>-->
+        </openlayers>
+    <!--<button class="btn btn-primary" ng-click="centerJSON('NYAM')">Center to Kenya</button>-->
+        <h3>Mouse over this county:{{ mouseMoveCounty }}</h3>
+        <h3>Mouse clicked this county: {{ mouseClickCounty }}</h3>
+    </div>
+    {{country}}
+</div>

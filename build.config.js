@@ -20,16 +20,16 @@ module.exports = {
      * app"s unit tests.
      */
     app_files: {
-        js: [ "src/**/*.js", "!src/**/*.spec.js", "!src/assets/**/*.js" ],
-        jsunit: [ "src/**/*.spec.js" ],
+        js: ["src/**/*.js", "!src/**/*.spec.js", "!src/assets/**/*.js"],
+        jsunit: ["src/**/*.spec.js"],
 
-        coffee: [ "src/**/*.coffee", "!src/**/*.spec.coffee" ],
-        coffeeunit: [ "src/**/*.spec.coffee" ],
+        coffee: ["src/**/*.coffee", "!src/**/*.spec.coffee"],
+        coffeeunit: ["src/**/*.spec.coffee"],
 
-        atpl: [ "src/app/**/*.tpl.html" ],
-        ctpl: [ "src/common/**/*.tpl.html" ],
+        atpl: ["src/app/**/*.tpl.html"],
+        ctpl: ["src/common/**/*.tpl.html"],
 
-        html: [ "src/index.html" ],
+        html: ["src/index.html"],
         less: "src/less/main.less"
     },
 
@@ -65,6 +65,7 @@ module.exports = {
             "vendor/jquery/dist/jquery.js",
             "vendor/toastr/toastr.js",
             "vendor/underscore/underscore.js",
+            "vendor/openlayers3/build/ol.js",
             "vendor/bootstrap/dist/js/bootstrap.js",
             "vendor/angular/angular.js",
             "vendor/angular-animate/angular-animate.js",
@@ -73,6 +74,8 @@ module.exports = {
             "vendor/angular-bootstrap/ui-bootstrap.js",
             "vendor/angular-bootstrap/ui-bootstrap-tpls.js",
             "vendor/angular-ui-router/release/angular-ui-router.js",
+            "vendor/angular-sanitize/angular-sanitize.js",
+            "vendor/angular-openlayers-directive/dist/angular-openlayers-directive.js",
             "libs/api_wrapper.js",
             "libs/sil_grid_tpls.js",
             "libs/sil_grid.js"
@@ -84,7 +87,7 @@ module.exports = {
         ]
     },
 
-    connect : {
+    connect: {
         options: {
             port: 8063,
             hostname: "*",
