@@ -211,5 +211,5 @@ WHERE THE AWESOMENESS BEGINS
                 },
                 selectedConst: {}
             });
-        });2
+        });
     }]);
