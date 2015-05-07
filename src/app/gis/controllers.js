@@ -1,181 +1,215 @@
 "use strict";
 angular
-    .module("mfl.gis.controllers", ["openlayers-directive",
-        "mfl.gis.countries.wrapper","mfl.gis.counties.wrapper",
-        "mfl.gis.interceptors"])
-    .controller("mfl.gis.controllers.gis", ["$scope", "olData",
-        "gisCountriesApi","$http","olHelpers",
-        function ($scope, olData, countriesApi, $http, olHelpers) {
-        var extent, gis_counties;
+    .module("mfl.gis.controllers", ["leaflet-directive",
+        "mfl.gis.countries.wrapper","mfl.gis.counties.wrapper","mfl.gis.consts.wrapper",
+        "mfl.gis.interceptors", "mfl.counties.wrapper"])
+    .controller("mfl.gis.controllers.gis", ["$scope",
+        "gisCountriesApi","$http","$state","$stateParams",
+        function ($scope, countiesApi, $http, $state, $stateParams) {
         // Get the counties data from a JSON
         $http.get("assets/counties.json").success(function (data) {
             // Put the counties on an associative array
+//            console.log(status);
             $scope.counties = {};
             for (var i = 0; i < data.length; i++) {
                 var county = data[i];
                 $scope.counties[county.name] = county;
             }
         });
-        $http.get("/assets/counties.all.geo.json",{
-            cache:true
-        })
-            .success(function (response) {
-            gis_counties = response;
+        angular.extend($scope, {
+            KEN: {
+                lat: 0.53,
+                lng: 37.85,
+                zoom: 6
+            }
+        });
+/*
+WHERE THE AWESOMENESS BEGINS
+*/
+        $http.get("http://localhost/api/gis/county_boundaries/?format=json&page_size=47",
+                  {cache: "true"})
+            .success(function (data){
             angular.extend($scope, {
-                    layers: [{
-                            name: "counties_fill",
-                            source: {
-                                type: "JSON",
-                                url: "/assets/counties.all.geo.json"
-                            },
-                            style: getStyle,
-                            index: 0
-                        }
-                    ],
-                        defaults: {
-                            events: {
-                                layers: ["mousemove", "click"]
-                            }
-                        }
-                    });
-            console.dir(response);
-        });
-        var getColor = function(county_code) {
-            console.log(county_code);
-            if (!county_code) {
-                return "#80ff00";
-            }
-            var colors = [ "rgba(0, 102, 153, 0.59)", "#336666", "#003366", "#3399CC", "#6699CC" ];
-            var index = county_code % colors.length ;
-            return colors[index];
-        };
-        var getStyle = function(feature) {
-            var style = olHelpers.createStyle({
-                fill: {
-                    color: getColor(feature.n.code),
-                    opacity: 0.4
+                geojson: {
+                    data: data,
+                    style: {
+                        fillColor: "green",
+                        weight: 2,
+                        opacity: 1,
+                        color: "white",
+                        dashArray: "3",
+                        fillOpacity: 0.7
+                    }
                 },
-                stroke: {
-                    color: "red",
-                    width: 3
-                }
+                selectedCountry: {}
             });
-            return [ style ];
-        };
-//        console.log($http);
-        countriesApi.api
-            .get("b992e9c4-15fb-4039-85d2-86829e21ebed")
-            .success(function (data) {
-                $scope.country = data;
-                angular.extend($scope, {
-                    KEN: {
-                        lat: data.properties.latitude,
-                        lon: data.properties.longitude,
-                        zoom: 6
-                    }
-                });
-            })
-            .error(function (error) {
-                console.log(error);
-            });
-        $scope.$on("openlayers.layers.counties_fill.mousemove", function (event, feature) {
-                $scope.$apply(function ($scope) {
-                    if (feature) {
-                        $scope.mouseMoveCounty = feature.n.name;
-                    }
-                });
-            });
-
-        $scope.$on("openlayers.layers.counties_stroke.click", function (event, feature) {
-                $scope.$apply(function ($scope) {
-                    if (feature) {
-                        console.dir(feature);
-                        $scope.mouseClickCounty = feature.n.name;
-                    }
-                });
-            });
-        $scope.centerJSON = function (name) {
-                olData.getMap().then(function (map) {
-                    var layers = map.getLayers();
-                    layers.forEach(function (layer) {
-                        if (layer.get("name") === "KEN" && "KEN" === name) {
-                            extent = layer.getSource().getExtent();
-                            map.getView().fitExtent(extent, map.getSize());
-                        }
-                    });
-                });
-            };
-    }])
-    .controller("mfl.gis.controllers.gis.county", ["$scope", "olData",
-        "gisCountiesApi","$http",
-        function ($scope, olData, countiesApi, $http) {
-        // Get the counties data from a JSON
-        $http.get("assets/counties.json").success(function (data) {
-            // Put the counties on an associative array
-            $scope.counties = {};
-            for (var i = 0; i < data.length; i++) {
-                var county = data[i];
-                $scope.counties[county.name] = county;
-            }
         });
+        $scope.$on("leafletDirectiveMap.geojsonMouseover", function(ev, feature, leafletEvent) {
+            countyMouseover(feature, leafletEvent);
+        });
+        $scope.$on("leafletDirectiveMap.geojsonClick", function(ev, featureSelected, leafletEvent) {
+            countyClick(featureSelected, leafletEvent);
+        });
+        function countyClick(county) {
+            $scope.countyClicked = county;
+            $stateParams.county_id = county.id;
+            $state.go("gis_county",{county_id : county.id});
+        }
+            
+        // Mouse over function, called from the Leaflet Map Events
+        function countyMouseover(feature) {
+            $scope.hoveredCounty = feature;
+        }
+    }])
+    .controller("mfl.gis.controllers.gis_county", ["$scope",
+        "countiesApi","$http","$state","$stateParams",
+        function ($scope, countiesApi, $http,$state,$stateParams) {
+        // Get the counties data from a JSON
         countiesApi.api
-            .get("b992e9c4-15fb-4039-85d2-86829e21ebed")
+            .get($stateParams.county_id)
             .success(function (data) {
                 $scope.country = data;
                 angular.extend($scope, {
-                    KEN: {
+                    county: {
                         lat: data.properties.latitude,
                         lon: data.properties.longitude,
                         zoom: 6
-                    },
-                    layers: [{
-                            name: "counties_fill",
-                            source: {
-                                type: "GeoJSON",
-                                url: "assets/counties.all.geo.json"
-                            },
-                            style: {
-                                fill: {
-                                    color: "rgba(242, 255, 92, 0.43)"
-                                }
-                            }
-                        },{
-                            name: "counties_stroke",
-                            source: {
-                                type: "GeoJSON",
-                                url: "assets/counties.all.geo.json"
-                            },
-                            style: {
-                                stroke: {
-                                    color: "red",
-                                    width: 3
-                                }
-                            }
-                        }
-                    ],
-                        defaults: {
-                            events: {
-                                layers: ["mousemove", "click"]
-                            }
-                        }
-                    });
-                $scope.$on("openlayers.layers.counties_fill.mousemove", function (event, feature) {
-                    $scope.$apply(function ($scope) {
-                        if (feature) {
-                            $scope.mouseMoveCounty = feature.n.name;
-                        }
-                    });
-                });
-
-                $scope.$on("openlayers.layers.counties_stroke.click", function (event, feature) {
-                    $scope.$apply(function ($scope) {
-                        if (feature) {
-                            $scope.mouseClickCounty = feature.n.name;
-                        }
-                    });
+                    }
                 });
             })
             .error(function (error) {
                 console.log(error);
             });
+        $http.get("http://localhost/api/gis/constituency_boundaries/?county="+
+                  $stateParams.county_id+
+                  "format=json",
+                  {cache: "true"})
+            .success(function (data){
+            angular.extend($scope, {
+                geojson: {
+                    data: data,
+                    style: {
+                        fillColor: "orange",
+                        weight: 2,
+                        opacity: 1,
+                        color: "white",
+                        dashArray: "3",
+                        fillOpacity: 0.7
+                    }
+                },
+                selectedConst: {}
+            });
+        });
+        $scope.$on("leafletDirectiveMap.geojsonMouseover", function(ev, feature, leafletEvent) {
+            constMouseover(feature, leafletEvent);
+        });
+        $scope.$on("leafletDirectiveMap.geojsonClick", function(ev, featureSelected, leafletEvent) {
+            constClick(featureSelected, leafletEvent);
+        });
+        function constClick(constituency) {
+            $scope.clickedConst = constituency;
+            $stateParams.constituency_id = constituency.id;
+            $state.go("gis.county.constituency",{constituency_id : constituency.id});
+        }
+            
+        // Mouse over function, called from the Leaflet Map Events
+        function constMouseover(feature) {
+            $scope.hoveredConst = feature;
+        }
+    }])
+    .controller("mfl.gis.controllers.gis_const", ["$scope",
+        "constituenciesApi","$http","$state","$stateParams",
+        function ($scope, constsApi, $http,$state,$stateParams) {
+        // Get the counties data from a JSON
+        constsApi.api
+            .get($stateParams.county_id)
+            .success(function (data) {
+                $scope.country = data;
+                angular.extend($scope, {
+                    county: {
+                        lat: data.properties.latitude,
+                        lon: data.properties.longitude,
+                        zoom: 6
+                    }
+                });
+            })
+            .error(function (error) {
+                console.log(error);
+            });
+        $http.get("http://localhost/api/gis/ward_boundaries/?county="+
+                  $stateParams.county_id+
+                  "format=json",
+                  {cache: "true"})
+            .success(function (data){
+            angular.extend($scope, {
+                geojson: {
+                    data: data,
+                    style: {
+                        fillColor: "orange",
+                        weight: 2,
+                        opacity: 1,
+                        color: "white",
+                        dashArray: "3",
+                        fillOpacity: 0.7
+                    }
+                },
+                selectedConst: {}
+            });
+        });
+        $scope.$on("leafletDirectiveMap.geojsonMouseover", function(ev, feature, leafletEvent) {
+            constMouseover(feature, leafletEvent);
+        });
+        $scope.$on("leafletDirectiveMap.geojsonClick", function(ev, featureSelected, leafletEvent) {
+            constClick(featureSelected, leafletEvent);
+        });
+        function constClick(ward) {
+            $scope.clickedConst = ward;
+            $stateParams.ward_id = ward.id;
+            $state.go("gis_ward",{ward_id : ward.id});
+        }
+            
+        // Mouse over function, called from the Leaflet Map Events
+        function constMouseover(feature) {
+            $scope.hoveredConst = feature;
+        }
+    }])
+    .controller("mfl.gis.controllers.gis_ward", ["$scope",
+        "wardsApi","$http","$state","$stateParams",
+        function ($scope, wardsApi, $http,$state,$stateParams) {
+        // Get the counties data from a JSON
+        wardsApi.api
+            .get($stateParams.ward_id)
+            .success(function (data) {
+                $scope.country = data;
+                angular.extend($scope, {
+                    county: {
+                        lat: data.properties.latitude,
+                        lon: data.properties.longitude,
+                        zoom: 6
+                    }
+                });
+            })
+            .error(function (error) {
+                console.log(error);
+            });
+        $http.get("http://localhost/api/gis/ward_boundaries/?ward="+
+                  $stateParams.ward_id+
+                  "format=json",
+                  {cache: "true"})
+            .success(function (data){
+            angular.extend($scope, {
+                geojson: {
+                    data: data,
+                    style: {
+                        fillColor: "orange",
+                        weight: 2,
+                        opacity: 1,
+                        color: "white",
+                        dashArray: "3",
+                        fillOpacity: 0.7
+                    }
+                },
+                selectedConst: {}
+            });
+        });2
     }]);

@@ -1,12 +1,21 @@
 <div class="content-body">
 <!-- /-End of action area -->
+<!--
     <div id="map">
         <openlayers ol-center="KEN" ol-defaults="defaults" custom-layers="true" height="70vh">
             <ol-layer ol-layer-properties="layer" ng-repeat="layer in layers"></ol-layer>
             <ol-layer ol-layer-properties="osm"></ol-layer>
         </openlayers>
-<!--    <button class="btn btn-primary" ng-click="centerJSON('KEN')">Center to Kenya</button>-->
         <p>Mouse over this county:{{ mouseMoveCounty }}</p>
         <p>Mouse clicked this county: {{ mouseClickCounty }}</p>
     </div>
+    <div>
+-->
+    <div>
+        <leaflet center="KEN" width="100%" geojson="geojson" events="events" height="480px"></leaflet>
+    </div>
+    <p>County Hovered: {{hoveredCounty.properties.name}}</p>
+    <p>County Hovered: {{hoveredCounty.id}}</p>
+    <p>County Clicked: {{clickedCounty.properties.name}}</p>
+    <p></p>
 </div>

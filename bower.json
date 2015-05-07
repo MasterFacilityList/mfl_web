@@ -16,7 +16,8 @@
     "angular-animate": "",
     "fontawesome": "~4.3.0",
     "angular-toastr": "~0.5.2",
-    "angular-openlayers-directive": "~0.0.5"
+    "angular-openlayers-directive": "~0.0.5",
+    "angular-leaflet-directive": "~0.7.15"
   },
   "resolutions": {
     "angular": "1.3.15"

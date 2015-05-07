@@ -12,19 +12,41 @@ angular.module("mfl.gis.routes", [])
                     }
                 },
                 data:{
-                    pageTitle: "MFL Country"
+                    pageTitle: "MFL KENYA"
                 }
             })
-            .state("gis.county", {
-                url: "/county",
+            .state("gis_county", {
+                url: "/county/:county_id",
                 views: {
-                    "main@gis": {
-                        controller: "mfl.gis.controllers.gis.county",
+                    "main": {
+                        controller: "mfl.gis.controllers.gis_county",
                         templateUrl: "gis/tpls/county-map.tpl.html"
                     }
                 },
                 data:{
                     pageTitle: "MFL County"
+                }
+            }).state("gis_contituency", {
+                url: "/constituency/:constituency_id",
+                views: {
+                    "main": {
+                        controller: "mfl.gis.controllers.gis_const",
+                        templateUrl: "gis/tpls/const-map.tpl.html"
+                    }
+                },
+                data:{
+                    pageTitle: "MFL Constituency"
+                }
+            }).state("gis_ward", {
+                url: "/ward/:ward_id",
+                views: {
+                    "main": {
+                        controller: "mfl.gis.controllers.gis_ward",
+                        templateUrl: "gis/tpls/ward-map.tpl.html"
+                    }
+                },
+                data:{
+                    pageTitle: "MFL Ward"
                 }
             });
     }]);

@@ -66,6 +66,7 @@ module.exports = {
             "vendor/toastr/toastr.js",
             "vendor/underscore/underscore.js",
             "vendor/openlayers3/build/ol.js",
+            "vendor/leaflet/dist/leaflet.js",
             "vendor/bootstrap/dist/js/bootstrap.js",
             "vendor/angular/angular.js",
             "vendor/angular-animate/angular-animate.js",
@@ -75,7 +76,8 @@ module.exports = {
             "vendor/angular-bootstrap/ui-bootstrap-tpls.js",
             "vendor/angular-ui-router/release/angular-ui-router.js",
             "vendor/angular-sanitize/angular-sanitize.js",
-            "vendor/angular-openlayers-directive/dist/angular-openlayers-directive.js",
+            "vendor/angular-openlayers-directive/dist/angular-openlayers-directive_dev_mapped.js",
+            "vendor/angular-leaflet-directive/dist/angular-leaflet-directive.js",
             "libs/api_wrapper.js",
             "libs/sil_grid_tpls.js",
             "libs/sil_grid.js"

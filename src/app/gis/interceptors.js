@@ -10,6 +10,10 @@ angular
 //                        console.log(response);
                         response.data = response.data.results;
                     }
+                    if (response.config.url.startsWith(server_url +
+                               "api/gis/constituency_boundaries/")) {
+                        response.data = response.data.results;
+                    }
                     return response;
                 },
                 "responseError": function(rejection){
