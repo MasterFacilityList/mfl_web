@@ -1,6 +1,6 @@
 module.exports = function ( karma ) {
   karma.set({
-    /** 
+    /**
      * From where to look for files, starting with the location of this file.
      */
     basePath: '../',
@@ -11,22 +11,42 @@ module.exports = function ( karma ) {
     files: [
       <% scripts.forEach( function ( file ) { %>'<%= file %>',
       <% }); %>
-      'src/**/*.js',
-      'src/**/*.coffee',
+      'src/**/*.js'
     ],
     exclude: [
       'src/assets/**/*.js'
     ],
-    frameworks: [ 'jasmine' ],
-    plugins: [ 'karma-jasmine', 'karma-firefox-launcher', 'karma-coffee-preprocessor' ],
+    frameworks: [
+        'jasmine'
+    ],
+    plugins: [
+        'karma-jasmine',
+        'karma-firefox-launcher',
+        'karma-phantomjs-launcher',
+        'karma-coverage',
+        'karma-threshold-reporter',
+        'karma-coffee-preprocessor',
+        'karma-mocha-reporter'
+    ],
     preprocessors: {
-      '**/*.coffee': 'coffee',
+        '**/*.coffee': 'coffee',
+        'src/app/**/*.js': ['coverage']
     },
 
     /**
      * How to report, by default.
      */
-    reporters: 'dots',
+    reporters: [
+        'progress',
+        'coverage',
+        'threshold',
+        'mocha'
+    ],
+
+            // reporter options
+    mochaReporter: {
+      output: 'autowatch'
+    },
 
     /**
      * On which port should the browser connect, on which port is the test runner
@@ -36,7 +56,7 @@ module.exports = function ( karma ) {
     runnerPort: 9100,
     urlRoot: '/',
 
-    /** 
+    /**
      * Disable file watching by default.
      */
     autoWatch: false,
@@ -56,7 +76,29 @@ module.exports = function ( karma ) {
      */
     browsers: [
       'Firefox'
-    ]
+    ],
+
+    coverageReporter: {
+        dir: 'coverage/',
+        reporters: [
+            {
+                type: 'html',
+                subdir: 'html/'
+            },
+            {
+                type: 'text'
+            },
+            {
+                type: 'text-summary'
+            }
+        ]
+    },
+
+    thresholdReporter: {
+        statements: 100,
+        branches: 100,
+        lines: 100,
+        functions: 100
+    },
   });
 };
-

@@ -1,21 +1,12 @@
+<contentheader></contentheader>
 <div class="content-body">
-<!-- /-End of action area -->
-<!--
-    <div id="map">
-        <openlayers ol-center="KEN" ol-defaults="defaults" custom-layers="true" height="70vh">
-            <ol-layer ol-layer-properties="layer" ng-repeat="layer in layers"></ol-layer>
-            <ol-layer ol-layer-properties="osm"></ol-layer>
-        </openlayers>
-        <p>Mouse over this county:{{ mouseMoveCounty }}</p>
-        <p>Mouse clicked this county: {{ mouseClickCounty }}</p>
-    </div>
-    <div>
--->
-    <div>
+    <div class="margin-b-10">
         <leaflet center="KEN" width="100%" geojson="geojson" events="events" height="480px"></leaflet>
     </div>
-    <p>County Hovered: {{hoveredCounty.properties.name}}</p>
-    <p>County Hovered: {{hoveredCounty.id}}</p>
-    <p>County Clicked: {{clickedCounty.properties.name}}</p>
-    <p></p>
+    <h3>COUNTY INFORMATION</h3>
+    <div class="content-card">
+        <h4>County Hovered: {{hoveredCounty.properties.name}}</h4>
+        <p>Number of Facilities: {{hoveredCounty.properties.facility_count}}</p>
+        <p>Facility Density per Kilometer squared: {{hoveredCounty.properties.density}}</p>
+    </div>
 </div>

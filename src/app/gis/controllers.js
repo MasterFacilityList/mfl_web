@@ -6,10 +6,34 @@ angular
     .controller("mfl.gis.controllers.gis", ["$scope",
         "gisCountriesApi","$http","$state","$stateParams",
         function ($scope, countiesApi, $http, $state, $stateParams) {
+        $scope.tooltip = {
+            "title": "",
+            "checked": false
+        };
+        $scope.path = [
+            {
+                name: "GIS",
+                route: "gis"
+            }
+        ];
+        $scope.title = [
+            {
+                icon: "fa-marker",
+                name: "Geographic Discovery"
+            }
+        ];
+        $scope.action = [
+            {
+                func : "onclick=window.history.back()",
+                class: "action-btn action-btn-primary action-btn-md",
+                color: "blue",
+                tipmsg: "Go back",
+                icon: "fa-arrow-left"
+            }
+        ];
         // Get the counties data from a JSON
         $http.get("assets/counties.json").success(function (data) {
             // Put the counties on an associative array
-//            console.log(status);
             $scope.counties = {};
             for (var i = 0; i < data.length; i++) {
                 var county = data[i];
@@ -82,7 +106,7 @@ WHERE THE AWESOMENESS BEGINS
             });
         $http.get("http://localhost/api/gis/constituency_boundaries/?county="+
                   $stateParams.county_id+
-                  "format=json",
+                  "&format=json",
                   {cache: "true"})
             .success(function (data){
             angular.extend($scope, {

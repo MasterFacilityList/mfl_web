@@ -5,6 +5,10 @@ angular.module("mfl.common.directives")
     return {
         restrict:"E",
         replace:true,
-        templateUrl: "common/tpls/contentheader.tpl.html"
+        template: "<div class='content-header'>"+
+    "<actionbar action='action'></actionbar>"+
+    "<h2 class='content-title'>"+
+    "<sil-cont-title title='title'></sil-cont-title></h2>"+
+    "<breadcrumbs path='path'></breadcrumbs></div>"
     };
 }]);

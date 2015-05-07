@@ -8,7 +8,7 @@ angular.module("mflwebApp", [
     "ui.router",
     //our stuff
     "templates-app",
-//    "templates-common",
+    "templates-common",
     "mfl.home",
     "mfl.gis",
     "ngSanitize"
