@@ -1,27 +1,35 @@
-angular
+(function (angular) {
+    "use strict";
+    angular
+    
     .module("mfl.gis.interceptors", [])
 
-// register the interceptor as a service
-    .factory("gisInterceptor", ["$q", "SERVER_URL", function ($q, server_url) {
-        return {
-                "response": function(response){
-//                    console.log(response);
-                    if (response.config.url.startsWith(server_url + "api/gis/county_boundaries/")) {
-//                        console.log(response);
-                        response.data = response.data.results;
+    // register the interceptor as a service
+    .factory("mfl.gis.interceptors.gis_boundaries",
+        ["$q", "SERVER_URL", "GIS_URLS",
+        function ($q, server_url, gis_urls) {
+            return {
+                    "response": function(response) {
+                        for (var i = 0; i < gis_urls.length; i++) {
+                            if (response.config.url.startsWith(server_url + gis_urls[i])) {
+                                response.data = response.data.results;
+                                break;
+                            }
+                        }
+                        return response;
                     }
-                    if (response.config.url.startsWith(server_url +
-                               "api/gis/constituency_boundaries/")) {
-                        response.data = response.data.results;
-                    }
-                    return response;
-                },
-                "responseError": function(rejection){
-                    return $q.reject(rejection);
-                }
-            };
-    }])
+                };
+        }
+    ])
 
     .config(["$httpProvider", function($httpProvider) {
-    $httpProvider.interceptors.push("gisInterceptor");
-}]);
+        $httpProvider.interceptors.push("mfl.gis.interceptors.gis_boundaries");
+    }])
+    
+    .constant("GIS_URLS", [
+        "api/gis/county_boundaries/",
+        "api/gis/constituency_boundaries/",
+        "api/gis/ward_boundaries/"
+    ]);
+
+})(angular);

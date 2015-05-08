@@ -38,16 +38,16 @@ angular.module("mflAppConfig", ["ngCookies",
                     facilities : ["mfl.facilities.wrapper",
                         "facilitiesApi"],
                     chul: ["mfl.chul.wrapper", "chulApi"],
-                    officers: ["mfl.officers.wrapper", "officersApi"],
-                    counties: ["mfl.counties.wrapper", "countiesApi"],
-                    constituencies: ["mfl.constituencies.wrapper", "constituenciesApi"],
-                    wards: ["mfl.wards.wrapper", "wardsApi"],
-                    towns: ["mfl.towns.wrapper", "townsApi"],
+                    officers: ["mfl.adminunits.wrapper", "officersApi"],
+                    counties: ["mfl.adminunits.wrapper", "countiesApi"],
+                    constituencies: ["mfl.adminunits.wrapper", "constituenciesApi"],
+                    wards: ["mfl.adminunits.wrapper", "wardsApi"],
+                    towns: ["mfl.adminunits.wrapper", "townsApi"],
                     owners: ["mfl.facilities.wrapper", "ownersApi"],
-                    gis_countries:["mfl.gis.countries.wrapper", "gisCountriesApi"],
-                    gis_counties:["mfl.gis.counties.wrapper", "gisCountiesApi"],
-                    gis_conts:["mfl.gis.consts.wrapper", "gisContssApi"],
-                    gis_wards:["mfl.gis.wards.wrapper", "gisWardsApi"]
+                    gis_countries:["mfl.gis.wrapper", "gisCountriesApi"],
+                    gis_counties:["mfl.gis.wrapper", "gisCountiesApi"],
+                    gis_conts:["mfl.gis.wrapper", "gisConstsApi"],
+                    gis_wards:["mfl.gis.wrapper", "gisWardsApi"]
                 };
             silGridConfig.appConfig = "mflAppConfig";
         }]);

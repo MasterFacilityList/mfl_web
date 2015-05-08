@@ -3,8 +3,9 @@
 angular.module("mfl.common", [
     "ui.router",
     "mfl.common.providers",
+    "mfl.common.controllers",
     "mfl.common.services",
     "mfl.common.directives",
-    "mfl.gis.countries.wrapper",
-    "mfl.common.controllers"
+    "mfl.gis.wrapper",
+    "mfl.adminunits.wrapper"
 ]);

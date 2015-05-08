@@ -1,8 +1,8 @@
 "use strict";
 angular
     .module("mfl.gis.controllers", ["leaflet-directive",
-        "mfl.gis.countries.wrapper","mfl.gis.counties.wrapper","mfl.gis.consts.wrapper",
-        "mfl.gis.interceptors", "mfl.counties.wrapper"])
+        "mfl.gis.wrapper","mfl.adminunits.wrapper","mfl.gis.interceptors"])
+
     .controller("mfl.gis.controllers.gis", ["$scope",
         "gisCountriesApi","$http","$state","$stateParams",
         function ($scope, countiesApi, $http, $state, $stateParams) {
@@ -18,7 +18,7 @@ angular
         ];
         $scope.title = [
             {
-                icon: "fa-marker",
+                icon: "fa-map-marker",
                 name: "Geographic Discovery"
             }
         ];
@@ -31,15 +31,23 @@ angular
                 icon: "fa-arrow-left"
             }
         ];
-        // Get the counties data from a JSON
-        $http.get("assets/counties.json").success(function (data) {
-            // Put the counties on an associative array
-            $scope.counties = {};
-            for (var i = 0; i < data.length; i++) {
-                var county = data[i];
-                $scope.counties[county.name] = county;
-            }
-        });
+
+        $scope.filters = {
+            format: "json",
+            page_size: 50
+        };
+        countiesApi.api
+            .list($scope.filters)
+            .success(function (data){
+                $scope.counties = {};
+                for (var i = 0; i < data.results.length; i++) {
+                    var county = data[i];
+                    $scope.counties[county.name] = county;
+                }
+            })
+            .error(function(error){
+                console.log(error);
+            });
         angular.extend($scope, {
             KEN: {
                 lat: 0.53,
@@ -86,8 +94,8 @@ WHERE THE AWESOMENESS BEGINS
         }
     }])
     .controller("mfl.gis.controllers.gis_county", ["$scope",
-        "countiesApi","$http","$state","$stateParams",
-        function ($scope, countiesApi, $http,$state,$stateParams) {
+        "countiesApi","admin_unitsApi","$http","$state","$stateParams",
+        function ($scope, countiesApi, admin_unitsApi, $http,$state,$stateParams) {
         // Get the counties data from a JSON
         countiesApi.api
             .get($stateParams.county_id)

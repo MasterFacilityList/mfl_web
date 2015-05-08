@@ -1,8 +1,10 @@
+"use strict";
+
 (function(angular){
-    angular.module("mfl.adminunits.wrapper", ["sil.api.wrapper"])
-    .provider("countiesApi", function(){
+    angular.module("mfl.gis.wrapper", ["sil.api.wrapper"])
+    .provider("gisCountriesApi", function(){
         var self = this;
-        self.baseUrl = "api/common/counties/";
+        self.baseUrl = "api/gis/country_borders/";
         this.$get = ["api", function(api){
             return {
                 baseUrl: self.baseUrl,
@@ -10,9 +12,9 @@
             };
         }];
     })
-    .provider("constsApi", function(){
+    .provider("gisCountiesApi", function(){
         var self = this;
-        self.baseUrl = "api/common/constituencies/";
+        self.baseUrl = "api/gis/county_boundaries/";
         this.$get = ["api", function(api){
             return {
                 baseUrl: self.baseUrl,
@@ -20,9 +22,9 @@
             };
         }];
     })
-    .provider("wardsApi", function(){
+    .provider("gisConstsApi", function(){
         var self = this;
-        self.baseUrl = "api/common/wards/";
+        self.baseUrl = "api/gis/constituency_boundaries/";
         this.$get = ["api", function(api){
             return {
                 baseUrl: self.baseUrl,
@@ -30,9 +32,9 @@
             };
         }];
     })
-    .provider("townsApi", function(){
+    .provider("gisWardsApi", function(){
         var self = this;
-        self.baseUrl = "api/common/towns/";
+        self.baseUrl = "api/gis/ward_boundaries/";
         this.$get = ["api", function(api){
             return {
                 baseUrl: self.baseUrl,
