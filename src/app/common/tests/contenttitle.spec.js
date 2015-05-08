@@ -57,7 +57,6 @@ describe("Directives: Test the Content Title directive", function() {
         $scope.$digest();
         //the jQLite wrapper provided by angular can only find elements by tag name. 
         var $links = $element.find("i");
-        console.log($links[0]);
         expect($links.length).toEqual(title.length);
         //Testing the genarated link names
 

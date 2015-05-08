@@ -12,9 +12,4 @@ angular.module("mflwebApp", [
     "mfl.home",
     "mfl.gis",
     "ngSanitize"
-])
-
-/*Simple controller to maintain time as shown on the page footer*/
-.controller("timeController", ["$scope", function ($scope) {
-    $scope.time = Date.now();
-}]);
+]);
