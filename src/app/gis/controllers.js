@@ -39,14 +39,7 @@ angular
         countiesApi.api
             .list($scope.filters)
             .success(function (data){
-                $scope.counties = {};
-                for (var i = 0; i < data.results.length; i++) {
-                    var county = data[i];
-                    $scope.counties[county.name] = county;
-                }
-            })
-            .error(function(error){
-                console.log(error);
+                $scope.counties = data;
             });
         angular.extend($scope, {
             KEN: {
@@ -83,7 +76,6 @@ WHERE THE AWESOMENESS BEGINS
             countyClick(featureSelected, leafletEvent);
         });
         function countyClick(county) {
-            $scope.countyClicked = county;
             $stateParams.county_id = county.id;
             $state.go("gis_county",{county_id : county.id});
         }
@@ -92,156 +84,4 @@ WHERE THE AWESOMENESS BEGINS
         function countyMouseover(feature) {
             $scope.hoveredCounty = feature;
         }
-    }])
-    .controller("mfl.gis.controllers.gis_county", ["$scope",
-        "countiesApi","admin_unitsApi","$http","$state","$stateParams",
-        function ($scope, countiesApi, admin_unitsApi, $http,$state,$stateParams) {
-        // Get the counties data from a JSON
-        countiesApi.api
-            .get($stateParams.county_id)
-            .success(function (data) {
-                $scope.country = data;
-                angular.extend($scope, {
-                    county: {
-                        lat: data.properties.latitude,
-                        lon: data.properties.longitude,
-                        zoom: 6
-                    }
-                });
-            })
-            .error(function (error) {
-                console.log(error);
-            });
-        $http.get("http://localhost/api/gis/constituency_boundaries/?county="+
-                  $stateParams.county_id+
-                  "&format=json",
-                  {cache: "true"})
-            .success(function (data){
-            angular.extend($scope, {
-                geojson: {
-                    data: data,
-                    style: {
-                        fillColor: "orange",
-                        weight: 2,
-                        opacity: 1,
-                        color: "white",
-                        dashArray: "3",
-                        fillOpacity: 0.7
-                    }
-                },
-                selectedConst: {}
-            });
-        });
-        $scope.$on("leafletDirectiveMap.geojsonMouseover", function(ev, feature, leafletEvent) {
-            constMouseover(feature, leafletEvent);
-        });
-        $scope.$on("leafletDirectiveMap.geojsonClick", function(ev, featureSelected, leafletEvent) {
-            constClick(featureSelected, leafletEvent);
-        });
-        function constClick(constituency) {
-            $scope.clickedConst = constituency;
-            $stateParams.constituency_id = constituency.id;
-            $state.go("gis.county.constituency",{constituency_id : constituency.id});
-        }
-            
-        // Mouse over function, called from the Leaflet Map Events
-        function constMouseover(feature) {
-            $scope.hoveredConst = feature;
-        }
-    }])
-    .controller("mfl.gis.controllers.gis_const", ["$scope",
-        "constituenciesApi","$http","$state","$stateParams",
-        function ($scope, constsApi, $http,$state,$stateParams) {
-        // Get the counties data from a JSON
-        constsApi.api
-            .get($stateParams.county_id)
-            .success(function (data) {
-                $scope.country = data;
-                angular.extend($scope, {
-                    county: {
-                        lat: data.properties.latitude,
-                        lon: data.properties.longitude,
-                        zoom: 6
-                    }
-                });
-            })
-            .error(function (error) {
-                console.log(error);
-            });
-        $http.get("http://localhost/api/gis/ward_boundaries/?county="+
-                  $stateParams.county_id+
-                  "format=json",
-                  {cache: "true"})
-            .success(function (data){
-            angular.extend($scope, {
-                geojson: {
-                    data: data,
-                    style: {
-                        fillColor: "orange",
-                        weight: 2,
-                        opacity: 1,
-                        color: "white",
-                        dashArray: "3",
-                        fillOpacity: 0.7
-                    }
-                },
-                selectedConst: {}
-            });
-        });
-        $scope.$on("leafletDirectiveMap.geojsonMouseover", function(ev, feature, leafletEvent) {
-            constMouseover(feature, leafletEvent);
-        });
-        $scope.$on("leafletDirectiveMap.geojsonClick", function(ev, featureSelected, leafletEvent) {
-            constClick(featureSelected, leafletEvent);
-        });
-        function constClick(ward) {
-            $scope.clickedConst = ward;
-            $stateParams.ward_id = ward.id;
-            $state.go("gis_ward",{ward_id : ward.id});
-        }
-            
-        // Mouse over function, called from the Leaflet Map Events
-        function constMouseover(feature) {
-            $scope.hoveredConst = feature;
-        }
-    }])
-    .controller("mfl.gis.controllers.gis_ward", ["$scope",
-        "wardsApi","$http","$state","$stateParams",
-        function ($scope, wardsApi, $http,$state,$stateParams) {
-        // Get the counties data from a JSON
-        wardsApi.api
-            .get($stateParams.ward_id)
-            .success(function (data) {
-                $scope.country = data;
-                angular.extend($scope, {
-                    county: {
-                        lat: data.properties.latitude,
-                        lon: data.properties.longitude,
-                        zoom: 6
-                    }
-                });
-            })
-            .error(function (error) {
-                console.log(error);
-            });
-        $http.get("http://localhost/api/gis/ward_boundaries/?ward="+
-                  $stateParams.ward_id+
-                  "format=json",
-                  {cache: "true"})
-            .success(function (data){
-            angular.extend($scope, {
-                geojson: {
-                    data: data,
-                    style: {
-                        fillColor: "orange",
-                        weight: 2,
-                        opacity: 1,
-                        color: "white",
-                        dashArray: "3",
-                        fillOpacity: 0.7
-                    }
-                },
-                selectedConst: {}
-            });
-        });
     }]);

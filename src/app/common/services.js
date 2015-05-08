@@ -12,16 +12,6 @@ angular.module("mfl.common.services", [])
         this.removeItem = function (key) {
             localStorage.removeItem(key);
         };
-        this.dumpScope = function (scope, location) {
-            var dump = {
-                location : location,
-                scope : (_.isUndefined(scope.data) || _.isNull(scope.data)) ? {} : scope.data
-            };
-            this.setItem("dump", dump);
-        };
-        this.loadScope = function () {
-            this.getItem("dump");
-        };
         this.clear = function () {
             localStorage.clear();
         };

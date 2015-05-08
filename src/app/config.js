@@ -7,17 +7,7 @@ angular.module("mflAppConfig", ["ngCookies",
             "Content-Type":"application/json",
             "Accept" : "application/json, */*"
         };
-        //$httpProvider.interceptors.push("sessionInjector");
-        /*$httpProvider.interceptors.push(""sessionInjector"");
-        $httpProvider.interceptors.push("api.http.interceptor");
-        $httpProvider.interceptors.push("api.connection.interceptor");*/
-
     }])
-
-    //beginning of configuring interceptor
-    .config(function($httpProvider) {
-        $httpProvider.interceptors.push("myCSRF");
-    })
 
     .run(["$http","$cookies", function ($http, $cookies) {
         // apparently the angular doesn"t do CSRF headers using
