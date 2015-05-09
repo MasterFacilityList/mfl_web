@@ -1,6 +1,6 @@
 "use strict";
 angular.module("mflAppConfig", ["ngCookies",
-    "sil.grid", "mfl.settings", "mfl.common.providers"])
+    "sil.grid", "mfl.settings"])
     .config(["$httpProvider",function ($httpProvider) {
         $httpProvider.defaults.withCredentials = true;
         $httpProvider.defaults.headers.common = {

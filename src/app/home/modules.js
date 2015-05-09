@@ -4,5 +4,7 @@ angular.module("mfl.home", [
     "ui.router",
     //out stuff
     "mfl.home.controllers",
-    "mfl.home.routes"
+    "mfl.home.routes",
+    "mfl.common.controllers"
+    
 ]);

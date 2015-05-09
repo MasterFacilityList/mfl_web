@@ -37,8 +37,8 @@
 </header>
         <!--End of header-->
         <div ui-view="main" class="content"></div>
-        <footer ng-module="mfl.common.controllers">
-            <p ng-controller="mfl.common.controllers" class="text-center"> &copy; Copyright {{ time | date:'yyyy' }} by <a href="index.html#">Savannah Informatics Limited</a> All Rights Reserved. </p>
+        <footer>
+            <p class="text-center"> &copy; Copyright <span ui-view="footer"></span> by <a href="index.html#">Savannah Informatics Limited</a> All Rights Reserved. </p>
         </footer>
     <!-- compiled JavaScript -->
     <% scripts.forEach( function ( file ) { %>
