@@ -1,23 +1,13 @@
 "use strict";
 angular.module("mflAppConfig", ["ngCookies",
-    "sil.grid", "mfl.settings", "mfl.common.providers"])
+    "sil.grid", "mfl.settings"])
     .config(["$httpProvider",function ($httpProvider) {
         $httpProvider.defaults.withCredentials = true;
         $httpProvider.defaults.headers.common = {
             "Content-Type":"application/json",
             "Accept" : "application/json, */*"
         };
-        //$httpProvider.interceptors.push("sessionInjector");
-        /*$httpProvider.interceptors.push(""sessionInjector"");
-        $httpProvider.interceptors.push("api.http.interceptor");
-        $httpProvider.interceptors.push("api.connection.interceptor");*/
-
     }])
-
-    //beginning of configuring interceptor
-    .config(function($httpProvider) {
-        $httpProvider.interceptors.push("myCSRF");
-    })
 
     .run(["$http","$cookies", function ($http, $cookies) {
         // apparently the angular doesn"t do CSRF headers using
@@ -38,12 +28,16 @@ angular.module("mflAppConfig", ["ngCookies",
                     facilities : ["mfl.facilities.wrapper",
                         "facilitiesApi"],
                     chul: ["mfl.chul.wrapper", "chulApi"],
-                    officers: ["mfl.officers.wrapper", "officersApi"],
-                    counties: ["mfl.counties.wrapper", "countiesApi"],
-                    constituencies: ["mfl.constituencies.wrapper", "constituenciesApi"],
-                    wards: ["mfl.wards.wrapper", "wardsApi"],
-                    towns: ["mfl.towns.wrapper", "townsApi"],
-                    owners: ["mfl.facilities.wrapper", "ownersApi"]
+                    officers: ["mfl.adminunits.wrapper", "officersApi"],
+                    counties: ["mfl.adminunits.wrapper", "countiesApi"],
+                    constituencies: ["mfl.adminunits.wrapper", "constituenciesApi"],
+                    wards: ["mfl.adminunits.wrapper", "wardsApi"],
+                    towns: ["mfl.adminunits.wrapper", "townsApi"],
+                    owners: ["mfl.facilities.wrapper", "ownersApi"],
+                    gis_countries:["mfl.gis.wrapper", "gisCountriesApi"],
+                    gis_counties:["mfl.gis.wrapper", "gisCountiesApi"],
+                    gis_conts:["mfl.gis.wrapper", "gisConstsApi"],
+                    gis_wards:["mfl.gis.wrapper", "gisWardsApi"]
                 };
             silGridConfig.appConfig = "mflAppConfig";
         }]);

@@ -4,5 +4,7 @@ angular.module("mfl.gis", [
     "ui.router",
     //out stuff
     "mfl.gis.controllers",
-    "mfl.gis.routes"
+    "mfl.common.controllers",
+    "mfl.gis.routes",
+    "mfl.common.directives"
 ]);
