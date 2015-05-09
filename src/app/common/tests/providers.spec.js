@@ -18,14 +18,12 @@ describe("Test requests provider", function () {
         expect(angular.isFunction(requests.callApi)).toBe(true);
         expect(angular.isFunction(requests.makeParams)).toBe(true);
     });
-
     //test makeUrl
     it("should make an expected url", function () {
         var test_url = "/test/url/";
         var result = requests.makeUrl(test_url);
         expect(result).toBe(url + test_url);
     });
-
     //test callApi
     it("should throw if method is not supported", function () {
         var method = "KILL";

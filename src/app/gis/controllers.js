@@ -4,8 +4,8 @@ angular
         "mfl.gis.wrapper","mfl.adminunits.wrapper","mfl.gis.interceptors"])
 
     .controller("mfl.gis.controllers.gis", ["$scope",
-        "gisCountriesApi","$http","$state","$stateParams",
-        function ($scope, countiesApi, $http, $state, $stateParams) {
+        "countiesApi","$http",
+        function ($scope, countiesApi, $http) {
         $scope.tooltip = {
             "title": "",
             "checked": false
@@ -69,19 +69,4 @@ WHERE THE AWESOMENESS BEGINS
                 selectedCountry: {}
             });
         });
-        $scope.$on("leafletDirectiveMap.geojsonMouseover", function(ev, feature, leafletEvent) {
-            countyMouseover(feature, leafletEvent);
-        });
-        $scope.$on("leafletDirectiveMap.geojsonClick", function(ev, featureSelected, leafletEvent) {
-            countyClick(featureSelected, leafletEvent);
-        });
-        function countyClick(county) {
-            $stateParams.county_id = county.id;
-            $state.go("gis_county",{county_id : county.id});
-        }
-            
-        // Mouse over function, called from the Leaflet Map Events
-        function countyMouseover(feature) {
-            $scope.hoveredCounty = feature;
-        }
     }]);

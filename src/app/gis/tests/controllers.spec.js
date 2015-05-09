@@ -31,12 +31,16 @@ describe("Tests for GIS controllers:", function () {
                 };
             }]);
     });
-    it("should expect countiesApi to load list", inject(["$httpBackend",function ($httpBackend) {
+    it("should expect countiesApi & gisCountiesApi to load list",
+            inject(["$httpBackend",function ($httpBackend) {
         controller("mfl.gis.controllers.gis");
-        var counties = "";
+        var data = "";
         $httpBackend.expectGET(
-        SERVER_URL + "api/common/counties/?format=json&page_size=50")
-            .respond(200, counties);
-        expect(scope.counties).toBe(counties);
+        SERVER_URL + "api/common/counties/")
+            .respond(200, data);
+        $httpBackend.expectGET(
+        SERVER_URL + "api/gis/county_boundaries/?format=json&page_size=47")
+            .respond(200, data);
+        $httpBackend.flush();
     }]));
 });

@@ -35,7 +35,6 @@
                 it ("should detect all responded requests", function () {
                     inject(["mfl.gis.interceptors.gis_boundaries", function (gis) {
                         var p = gis.response.data;
-                        console.log(p);
                         expect(p).toEqual(gis.response.data);
                     }]);
                 });
@@ -49,7 +48,6 @@
                             data: payload
                         };
                         var p = gis.response(response);
-                        console.log(p);
                         expect(p.data).toEqual(payload.results);
                     }]);
                 });
@@ -63,7 +61,6 @@
                             data: payload
                         };
                         var p = gis.response(response);
-                        console.log(p);
                         expect(p.data).toEqual(payload);
                     }]);
                 });
