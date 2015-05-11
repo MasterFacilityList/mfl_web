@@ -77,14 +77,19 @@ module.exports = {
             "vendor/angular-ui-router/release/angular-ui-router.js",
             "vendor/angular-sanitize/angular-sanitize.js",
             "vendor/angular-leaflet-directive/dist/angular-leaflet-directive.js",
+            "vendor/stacktrace-js/dist/stacktrace.js",
             "libs/api_wrapper.js",
-            "libs/sil_grid_tpls.js",
-            "libs/sil_grid.js"
+            "libs/sil_grid/sil_grid_tpls.js",
+            "libs/sil_grid/sil_grid.js",
+            "libs/sil_error_handler/error_handler.js"
         ],
         css: [
         ],
         assets: [
             "vendor/fontawesome/fonts/*"
+        ],
+        imgs: [
+            "libs/sil_grid/img/*"
         ]
     },
 
