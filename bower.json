@@ -1,6 +1,6 @@
 {
   "name": "mfl-public-frontend",
-  "version": "0.0.1",
+  "version": "0.0.1a1",
   "devDependencies": {
     "angular-mocks": ""
   },
