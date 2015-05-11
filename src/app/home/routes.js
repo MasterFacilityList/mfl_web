@@ -14,6 +14,10 @@ angular.module("mfl.home.routes", [])
                         controller: "mfl.home.controllers.home",
                         templateUrl: "home/tpls/main.tpl.html"
                     },
+                    "main-view@home": {
+                        controller: "mfl.home.controllers.home",
+                        templateUrl: "home/tpls/main_landing.tpl.html"
+                    },
                     "footer": {
                         controller: "mfl.common.controllers.time",
                         templateUrl: "common/tpls/time.tpl.html"
@@ -21,6 +25,15 @@ angular.module("mfl.home.routes", [])
                 },
                 data:{
                     pageTitle: "MFL Home"
+                }
+            })
+            .state("home.search_results", {
+                url: "/searchresults/:result",
+                views: {
+                    "main-view@home": {
+                        controller: "mfl.home.controllers.search_results",
+                        templateUrl: "home/tpls/search_results.tpl.html"
+                    }
                 }
             });
         $urlRouterProvider.otherwise("/home");

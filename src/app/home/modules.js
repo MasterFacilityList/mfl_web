@@ -6,5 +6,4 @@ angular.module("mfl.home", [
     "mfl.home.controllers",
     "mfl.home.routes",
     "mfl.common.controllers"
-
 ]);

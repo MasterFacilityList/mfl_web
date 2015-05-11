@@ -6,12 +6,16 @@
    <!--End of Header brand-->
    <!-- Beginning of search  -->
    <div class="header-search col-lg-7 col-md-7 col-sm-7 col-xs-7">
-      <div class="group margin-t-10">
-          <input type="search" class="main-search" ng-model="search.query" required>
-          <span class="highlight"></span>
-          <span class="bar"></span>
-          <label><i class="fa fa-search"></i>&nbsp;Search facilities...</label>
-      </div>
+
+      <form role="form" ng-submit="search(search.query)">
+        <div class="group margin-t-10">
+            <input type="search" class="main-search" ng-model="search.query" required>
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label><i class="fa fa-search"></i>&nbsp;Search facilities...</label>
+        </div>
+      </form>
+
    </div>
    <!-- End of search -->
     <!--Header profile-->
