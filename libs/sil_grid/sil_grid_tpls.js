@@ -1,7 +1,6 @@
 (function(angular){
     var pagination_tpl = "sil.grid.pagination.tpl.html";
     var search_tpl = "sil.grid.search.tpl.html";
-    var bp_filter_tpl = "sil_grid_bpfilter.tpl.html";
     angular.module(pagination_tpl, []).run(["$templateCache",
     function($templateCache){
         $templateCache.put("sil.grid.pagination.tpl.html",
@@ -36,17 +35,5 @@
         );
     }]);
 
-    angular.module(bp_filter_tpl, []).run(["$templateCache",
-    function($templateCache) {
-      $templateCache.put("sil_grid_bpfilter.tpl.html",
-        "<div class=\"input-group input-group-in\" style=\"width: 100%;\">\n" +
-        "<select class=\"form-control\" ng-model=\"silGrid.bpId\" name=\"bp\" required>\n" +
-        "<option value=\"\" >- Select {{bp_type}} -</option>\n" +
-        "<option ng-repeat=\"bp in sil_bps\" value=\"{{bp.sladeCode}}\">\n" +
-        "{{bp.name}}</option></select>\n" +
-        "</div>\n" +
-        "");
-    }]);
-
-    angular.module("sil.grid.tpls", [pagination_tpl, search_tpl, bp_filter_tpl]);
+    angular.module("sil.grid.tpls", [pagination_tpl, search_tpl]);
 })(angular);

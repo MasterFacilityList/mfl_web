@@ -1,6 +1,11 @@
-"use strict";
-angular.module("mflAppConfig", ["ngCookies",
-    "sil.grid", "mfl.settings"])
+(function (angular) {
+    "use strict";
+    angular.module("mflAppConfig", [
+        "ngCookies",
+        "sil.grid",
+        "mfl.settings"
+    ])
+
     .config(["$httpProvider",function ($httpProvider) {
         $httpProvider.defaults.withCredentials = true;
         $httpProvider.defaults.headers.common = {
@@ -41,3 +46,4 @@ angular.module("mflAppConfig", ["ngCookies",
                 };
             silGridConfig.appConfig = "mflAppConfig";
         }]);
+})(angular);
