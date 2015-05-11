@@ -126,7 +126,7 @@ angular
             county: {
                 lat: 0.53,
                 lng: 37.858,
-                zoom: 3
+                zoom: 6
             }
         });
         if ($stateParams.c) {
@@ -134,7 +134,6 @@ angular
             $scope.county.lat = parseFloat(split_coords[0], 10);
             $scope.county.lng = parseFloat(split_coords[1], 10);
             $scope.county.zoom = parseInt(split_coords[2], 10);
-            
         }
         $http.get("http://localhost/api/gis/"+
                   "constituency_boundaries/?id="+

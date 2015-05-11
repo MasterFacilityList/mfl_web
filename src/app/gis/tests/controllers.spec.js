@@ -22,6 +22,7 @@ describe("Tests for GIS controllers:", function () {
                 countiesApi = countiesApi;
                 $stateParams.county_id = 4;
                 $stateParams.const_boundaries = "4,1.3,2,41";
+                $stateParams.c = "13:12:8";
                 constsApi = constsApi;
                 data = {
                     $scope : scope,
@@ -88,16 +89,38 @@ describe("Tests for GIS controllers:", function () {
             }
         };
         var second_call = scope.$on.calls[1];
-
         expect(second_call.args[0]).toEqual("leafletDirectiveMap.geojsonClick");
         expect(angular.isFunction(second_call.args[1])).toBe(true);
-
         var listener = second_call.args[1];
-        
         listener(null, county);
         expect($state.go).toHaveBeenCalledWith("gis_county",{county_id: "",
                                                const_boundaries: "a,b",c:"13:12:8"});
         
+    }]));
+
+    it("should define centerUrl parameters given $stateParams", inject(["$stateParams",
+        function ($stateParams){
+        controller("mfl.gis.controllers.gis_county");
+        var split_coords = $stateParams.c.split(":");
+        expect(parseFloat(split_coords[0], 10)).toBe(13);
+        expect(parseFloat(split_coords[1], 10)).toBe(12);
+        expect(parseFloat(split_coords[2], 10)).toBe(8);
+    }]));
+
+    it("should default to scope defined center when no centerUrl is defined",
+       inject(["$stateParams",
+        function ($stateParams){
+        var county = {
+            lat : 0.53,
+            lng: 37.858,
+            zoom: 6
+        };
+        $stateParams.c = undefined;
+        controller("mfl.gis.controllers.gis_county");
+        expect($stateParams.c).toBe(undefined);
+        expect(scope.county.lat).toBe(county.lat);
+        expect(scope.county.lng).toBe(county.lng);
+        expect(scope.county.zoom).toBe(county.zoom);
     }]));
 
     it("should expect gisCountiesApi & gisConstsApi to load list",
@@ -109,8 +132,4 @@ describe("Tests for GIS controllers:", function () {
             .respond(200, data);
         $httpBackend.flush();
     }]));
-    it("should expect define behavior for $stateParams.c if undefined",
-            function () {
-            
-    });
 });
