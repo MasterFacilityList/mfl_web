@@ -1,12 +1,7 @@
 <contentheader></contentheader>
 <div class="content-body pad-10">
     <div class="margin-b-10">
-        <leaflet center="KEN" width="100%" geojson="geojson" events="events" height="480px"></leaflet>
+        <leaflet center="county" url-center-hash="yes" width="100%" defaults="defaults" geojson="geojson" events="events" height="480px"></leaflet>
     </div>
     <h3>CONSTITUENCY INFORMATION</h3>
-    <div class="content-card">
-        <h4><strong>Constituency Hovered: <span class="text-info">{{hoveredConst.properties.name}}</span></strong></h4>
-        <p><strong>Number of Facilities: <span class="text-info">{{hoveredConst.properties.facility_count}}</span></strong></p>
-        <p><strong>Facilities per &#13218; <span class="text-info">{{hoveredConst.properties.density}}</span></strong></p>
-    </div>
 </div>

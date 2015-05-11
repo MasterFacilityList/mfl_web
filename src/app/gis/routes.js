@@ -20,7 +20,7 @@ angular.module("mfl.gis.routes", [])
                 }
             })
             .state("gis_county", {
-                url: "/county/:county_id",
+                url: "/county/:county_id/:const_boundaries?c",
                 views: {
                     "main": {
                         controller: "mfl.gis.controllers.gis_county",
