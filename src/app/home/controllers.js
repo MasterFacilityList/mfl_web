@@ -4,6 +4,10 @@ angular.module("mfl.home.controllers", ["mfl.facilities.wrapper"])
     .controller("mfl.home.controllers.home", ["$scope",
         "facilitiesApi",function ($scope, facilitiesApi) {
         $scope.test="home";
+        $scope.tooltip = {
+            "title": "",
+            "checked": false
+        };
         $scope.pubed_fac = [];
         $scope.latest_fac = {
             page_size : 10
@@ -11,7 +15,7 @@ angular.module("mfl.home.controllers", ["mfl.facilities.wrapper"])
         facilitiesApi.api.filter($scope.latest_fac)
             .success(function (facilities) {
                 $scope.new_facilities = _.where(facilities.results, {"is_published" : true});
-                for(var i=0; i < 4; ++i) {
+                for(var i=0; i < 6; ++i) {
                     $scope.pubed_fac.push($scope.new_facilities[i]);
                 }
             })
@@ -46,6 +50,24 @@ angular.module("mfl.home.controllers", ["mfl.facilities.wrapper"])
                 })
                 .error(function (e) {
                     console.log(e.error);
+                });
+        }
+    ])
+
+    .controller("mfl.home.controllers.facility_details", ["$scope",
+        "facilitiesApi", "$state",
+        function ($scope, facilitiesApi, $state) {
+            $scope.test = "facility";
+            $scope.tooltip = {
+                "title": "",
+                "checked": false
+            };
+            facilitiesApi.api.get($state.params.fac_id)
+                .success(function (one_fac) {
+                    $scope.oneFacility = one_fac;
+                })
+                .error(function (e) {
+                    console.log(e);
                 });
         }
     ]);

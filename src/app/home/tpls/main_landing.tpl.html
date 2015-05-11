@@ -1,57 +1,67 @@
-<div class="col-lg-12">
-    <div class="row content-card landing-img">
-        <div class="bg-overlay">
+<div class="content-container margin-b-20 margin-t--27">
+    <div class="content-card landing-img">
+        <div class="row  bg-overlay margin-h-5">
 
         </div>
 
     </div>
-    <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 content-card">
-        <!-- <div class="col-lg-12 col-md-12 ">
-            <div class="col-lg-2 pull-right">
-                start
+</div>
+<div>
+    <div class="col-lg-12 margin-b-20">
+        <div class="col-lg-12 col-md-12 content-card margin-t-20">
+            <div class="col-lg-8 col-md-8">
+                <h2 class="">
+                    Find facilities near you <span class="muted">using our geolocator</span>
+                </h2>
+                <p class="lead">
+                    Using our geolocator that has mapped health facilities onto their designated physical locations on the Kenyan map will provide quick means of locating them.
+                </p>
+                <a ui-sref="gis" class="counter-primary" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Find facility">
+                    Find facility <i class="fa fa-map-marker"></i>
+                </a>
             </div>
-            <hr style="border: 1px solid #f0f0f0;">
-            <div class="col-lg-2 pull-center">
-                medium
+            <div class="col-lg-4 col-md-4 pull-right" style="border: 1px solid #00">
+                <span class="col-lg-12" style="border 1px #F0F0F0;">
+                    <i class="fa fa-map-marker fa-2x"></i>
+                </span>
             </div>
-            <hr style="border: 1px solid #f0f0f0;">
-            <div class="col-lg-2 pull-left">
-                end
-            </div>
-        </div> -->
-        <h3 class="featurette-heading">
-            Find facilities near you <span class="muted">using geolocator</span>
-        </h3>
-        <div class="col-lg-4 col-md-4 pull-right" style="border: 1px solid #00">
-            <i class="fa fa-map-marker fa-2x"></i>
         </div>
     </div>
-    <div class="col-md-8 col-md-offset-2" ng-repeat="fac in pubed_fac" style="cursor: pointer;">
-        <a ui-sref="facilities.details({fac_id : fac.id})" class="text-decoration: none">
-            <div class="card-panel">
-                <div class="content-heading">
-                    <h4>
-                        <span style="border-right: 1px solid #ddd;">{{fac.code}}&nbsp;</span>&nbsp; {{fac.name}}
-                        <span class="pull-right">
-                            {{fac.facility_type_name}}
-                        </span>
-                    </h4>
-                </div>
-                <div class="panel-body">
-                    <h4>
-                        <label class="control-label">Owned by:</label>
-                         {{fac.owner_name}}
-                        <span class="pull-right">
-                            <label class="control-label"> Constituency:  </label> {{fac.constituency}}
-                        </span>
-                    </h4>
-                    <h4>
-                        <label><i class="fa fa-map-marker"></i> Location: </label>
-                        {{fac.location_desc}}
-                    </h4>
-                </div>
+
+    <div class="row ">
+        <div class="col-lg-12">
+            <div class="col-lg-6" ng-repeat="fac in pubed_fac" style="cursor: pointer;">
+                <a ui-sref="home.facility_details({fac_id : fac.id})" class="text-decoration: none">
+                    <div class="card-panel">
+                        <div class="content-heading">
+                            <h4>
+                                <span class="pull-left" style="border-right: 1px solid #ddd;">{{fac.code}}&nbsp;</span>&nbsp; {{fac.name}}
+                                <span class="pull-right">
+                                    {{fac.facility_type_name}}
+                                </span>
+                            </h4>
+                        </div>
+                        <div class="panel-body">
+                            <h4>
+                                <span class="pull-left">
+                                    <label class="control-label"><i class="fa fa-user-secret"></i> Owner :</label>
+                                     {{fac.owner_name}}
+                                 </span>
+                            </h4>
+                            <br>
+                            <h4>
+                                <span class="pull-left">
+                                <label><i class="fa fa-map-marker"></i> County : </label> {{fac.county}}
+                                </span>
+                                <span class="pull-right">
+                                    <label class="control-label"> Constituency :  </label> {{fac.constituency}}
+                                </span>
+                            </h4>
+                        </div>
+                    </div>
+                </a>
             </div>
-        </a>
+        </div>
     </div>
-    <br ng-if="!(($index + 1) % 4)" />
+    <!-- <br ng-if="!(($index + 1) % 4)" /> -->
 </div>

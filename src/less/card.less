@@ -22,11 +22,28 @@
     margin-bottom: 20px;
     box-shadow:  0 1px 1px rgba(0, 0, 0, 0.12), 0 2px 0 1px rgba(0, 0, 0, 0.07), 2px 1px 1px rgba(0, 0, 0, 0.10), 0px 1px 0 rgba(0, 0, 0, 0.12);
 }
+.card-panel:hover, .card-panel:focus{
+  box-shadow:  0 1px 1px rgba(0, 0, 0, 0.22), 0 2px 0 1px rgba(0, 0, 0, 0.17), 2px 1px 1px rgba(0, 0, 0, 0.20), 0px 1px 0 rgba(0, 0, 0, 0.22);
+}
+.card-panel > a{
+  margin: 0;
+  text-decoration: none;
+}
+.card-panel >a:hover, .card-panel >a:focus {
+  text-decoration : none;
+}
 .content-heading {
     color: #fff;
     background-color: #2196F3;
     padding: 10px 4px 10px 4px;
 }
+
+.card-panel:hover  > .content-heading:hover, .card-panel:hover .content-heading:focus  {
+    color: #fff;
+    background-color: darken(#2196F3, 5%);
+    padding: 10px 4px 10px 4px;
+}
+
 .card-heading-active{
     color: #fff;
     background-color: #4caf50;

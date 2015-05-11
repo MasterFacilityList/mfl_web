@@ -35,6 +35,15 @@ angular.module("mfl.home.routes", [])
                         templateUrl: "home/tpls/search_results.tpl.html"
                     }
                 }
+            })
+            .state("home.facility_details", {
+                url : "/facility/:fac_id",
+                views: {
+                    "main-view@home": {
+                        controller: "mfl.home.controllers.facility_details",
+                        templateUrl: "home/tpls/facility_details.tpl.html"
+                    }
+                }
             });
         $urlRouterProvider.otherwise("/home");
     }])

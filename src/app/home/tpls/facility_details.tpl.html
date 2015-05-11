@@ -1,0 +1,75 @@
+<div class="row">
+    <div class="col-lg-12 margin-b-20">
+        <span class="pull-right">
+            <button class="action-btn action-btn-md action-btn-primary" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Print facility details">
+                <i class="fa fa-print"></i>
+            </button>
+            <button class="action-btn action-btn-md action-btn-primary" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Rate facility">
+                <i class="fa fa-star-half-empty"></i>
+            </button>
+        </span>
+    </div>
+    <div class="col-lg-12">
+        <div class="card-panel">
+            <div class="content-heading">
+                <h4>
+                    <span style="border-right: 1px solid #ddd;">{{oneFacility.code}}&nbsp;</span>&nbsp; {{oneFacility.name}}
+                    <span class="pull-right">
+                        {{oneFacility.facility_type_name}}
+                    </span>
+                </h4>
+            </div>
+            <div class="panel-body">
+                <h4><b><i class="fa fa-user-secret"></i>  Ownership status</b></h4>
+                <h4>
+                    <span class="pull-left">
+                        <label>Owner category: </label>
+                        {{oneFacility.owner_type_name}}
+                    </span>
+                    <span class="pull-right">
+                        <label> Owner: </label>
+                        {{oneFacility.owner_name}}
+                    </span>
+                </h4>
+                <br>
+                <hr style="1px solid #F0F0F0;">
+                <h4><b> <i class="fa fa-map-marker"></i> Location </b></h4>
+                <h4>
+                    <span class="pull-left">
+                        <label>County: </label>
+                        {{oneFacility.county}}
+                    </span>
+                    <span class="pull-right">
+                        <label>Constituency: </label>
+                        {{oneFacility.constituency}}
+                    </span>
+                </h4>
+                <br>
+                <h4 class="text-left">
+                    <span class="pull-left margin-t-10">
+                        <label class="">Location description </label>
+                        <p style="font-size: 16px;">{{oneFacility.location_desc}}</p>
+                    </span>
+                </h4>
+            </div>
+        </div>
+        <div class="content-card">
+            <h4><b> <i class="fa fa-exchange"></i> Services</b></h4>
+            <h4>
+                <span class="pull-left">
+                    <label>Beds : </label>
+                    {{oneFacility.number_of_beds}}
+                </span>
+                <span class="pull-right">
+                    <label>Cots :</label>
+                    {{oneFacility.number_of_cots}}
+                </span>
+            </h4>
+            <br>
+            <hr style="1px solid #F0F0F0;">
+            <h4>
+                Services offered placed here
+            </h4>
+        </div>
+    </div>
+</div>
