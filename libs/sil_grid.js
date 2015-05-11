@@ -1,10 +1,8 @@
 "use strict";
 (function(angular, _){
-    var BP_FILTER_TEMPLATE = "sil_grid_bpfilter.tpl.html";
     var PAGINATION_TPL = "sil.grid.pagination.tpl.html";
     var SEARCH_TPL = "sil.grid.search.tpl.html";
     angular.module("sil.grid",[
-            BP_FILTER_TEMPLATE,
             PAGINATION_TPL,
             SEARCH_TPL,
             "ui.bootstrap"
@@ -22,16 +20,11 @@
         **/
         this.apiMaps = {};
         this.appConfig = "providerConfig";
-        this.bp = {
-            bpType: "PAYER",
-            filterKey: "payer"
-        };
         this.itemsPerPage = 25;
         this.$get = [function(){
             return {
                 apiMaps: this.apiMaps,
                 appConfig: this.appConfig,
-                bp: this.bp,
                 itemsPerPage: this.itemsPerPage
             };
         }];
@@ -247,44 +240,5 @@
         };
 
     })
-    .controller("silGridBpFilterController", ["$rootScope", "$scope",
-            "businessPartnerApi","silGridConfig",
-            function($rootScope,$scope, bpApi, silGridConfig){
-                $scope.bp_type = silGridConfig.bp.bpType;
-                if(_.isUndefined($rootScope.sil_bps)){
-                    bpApi.api.filter({bp_type:$scope.bp_type}).success(function(data){
-                        $rootScope.sil_bps = data.results;
-                        $scope.sil_bps = $rootScope.sil_bps;
-                    }).error(function(error){
-                        $scope.alert = {
-                            title: "Error",
-                            type:"danger",
-                            msg: error.error.$$unwrapTrustedValue()
-                        };
-                    });
-                }else{
-                    $scope.sil_bps = $rootScope.sil_bps;
-                }
-            }])
-    .directive("silGridBpFilter", ["silGridConfig", function(silGridConfig){
-        return {
-            require: "^silGrid",
-            restrict: "E",
-            replace: false,
-            templateUrl: BP_FILTER_TEMPLATE,
-            controller: "silGridBpFilterController",
-            link: function(scope,elem, attrs, gridCtrl){
-                scope.silGrid = {bpId:""};
-                scope.$watch("silGrid.bpId", function(bpId){
-                    if(_.isUndefined(bpId)){
-                        gridCtrl.removeFilter(silGridConfig.bp.filterKey);
-                    }else{
-                        gridCtrl.addFilter(silGridConfig.bp.filterKey, bpId);
-                    }
-
-                });
-            }
-        };
-    }])
     ;
 })(angular, _);
