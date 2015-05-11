@@ -6,6 +6,4 @@ node_modules/
 vendor/
 .idea/
 coverage/
-*.pyo
-*.pyc
 .coverage
