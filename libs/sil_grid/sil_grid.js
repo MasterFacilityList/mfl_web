@@ -1,10 +1,8 @@
 "use strict";
 (function(angular, _){
-    var BP_FILTER_TEMPLATE = "sil_grid_bpfilter.tpl.html";
     var PAGINATION_TPL = "sil.grid.pagination.tpl.html";
     var SEARCH_TPL = "sil.grid.search.tpl.html";
     angular.module("sil.grid",[
-            BP_FILTER_TEMPLATE,
             PAGINATION_TPL,
             SEARCH_TPL,
             "ui.bootstrap"
@@ -22,10 +20,6 @@
         **/
         this.apiMaps = {};
         this.appConfig = "providerConfig";
-        this.bp = {
-            bpType: "PAYER",
-            filterKey: "payer"
-        };
         this.itemsPerPage = 25;
         this.$get = [function(){
             return {
@@ -52,7 +46,8 @@
                 gridFor: "@",
                 data: "@",
                 error: "=",
-                actions: "="
+                actions: "=",
+                apiKey: "@"
             },
             replace: false,
             templateUrl:function(elem, attrs){
@@ -68,7 +63,12 @@
                 var api_conf = apiMaps[$scope.gridFor];
                 var api = angular.injector(
                     ["ng",silGridConfig.appConfig, api_conf[0]]).get(api_conf[1]);
-                self.api = api;
+
+                if(!_.isUndefined($scope.apiKey)) {
+                        self.api = api[$scope.apiKey];
+                }else{
+                    self.api = api.api;
+                }
                 self.setLoading = function(start){
                     if(start){
                         $scope.$emit("silGrid.loader.start");
@@ -77,15 +77,12 @@
                     }
                 };
                 self.getData = function(){
-                    // self.setLoading(true);
+                    self.setLoading(true);
                     var promise;
                     if(_.isUndefined($scope.filters)){
-                        if(_.has($scope.filters, "page")){
-                            delete $scope.filters.page;
-                        }
-                        promise = api.api.list();
+                        promise = self.api.list();
                     }else{
-                        promise = api.api.filter($scope.filters);
+                        promise = self.api.filter($scope.filters);
                     }
                     promise.success(self.setData).error(self.setError);
                 };
@@ -105,7 +102,7 @@
                     return {
                         title: "Error",
                         type:"danger",
-                        msg: error.error.$$unwrapTrustedValue()
+                        msg: error.error
                     };
                 };
                 self.setError = function(error){
@@ -113,10 +110,18 @@
                     $scope.error = self.showError(error);
                     $scope.$apply();
                 };
+
+                var initFilters = function(){
+                    if(_.isUndefined($scope.filters)){
+                        $scope.filters = {};
+                    }
+                };
                 self.addFilter = function(name, value){
+                    initFilters();
                     $scope.filters[name] = value;
                     if(_.has($scope.filters, "page")){
                         $scope.dump = {page: $scope.filters.page};
+                        $scope["q_dump"+name] = {page: $scope.filters.page};
                         delete $scope.filters.page;
                     }
                     self.getData();
@@ -125,7 +130,12 @@
                     if(_.has($scope.filters, name)){
                         delete $scope.filters[name];
                         if(_.has($scope.dump, "page")){
-                            $scope.filters.page = $scope.dump.page;
+                            if(name === "q_dump"+name){
+                                $scope.filters.page = $scope["q_dump"+name].page;
+                            }else{
+                                $scope.filters.page = $scope.dump.page;
+                            }
+
                         }
                         self.getData();
                     }
@@ -146,8 +156,6 @@
                                 else{
                                     $scope.pagination.prev_page = p[1];
                                 }
-                            }else{
-                                $scope.filters[p[0]] = p[1];
                             }
                         });
                     };
@@ -173,17 +181,19 @@
                     if(_.isUndefined($scope.filters)){
                         $scope.filters = {};
                     }
-                    console.log($scope.filters);
                     $scope.filters.page = page_count;
                     $scope.getData();
                 };
             },
             link: function(scope){
                 scope.$watch("filters", function(filters){
-                    if(_.has(filters, "page")){
+                    if(_.has(filters, "page")||
+                       _.has(filters, "ordering")||_.has(filters, "search")){
+
                         delete filters.page;
+                    }else{
+                        scope.getData();
                     }
-                    scope.getData();
                 });
                 $rootScope.$on("silGrid.data.refresh", function(event){
                     event.stopPropagation();
@@ -194,7 +204,6 @@
                 });
                 var modal;
                 $rootScope.$on("silGrid.loader.start", function(event){
-                    console.log("loader started");
                     modal = $modal.open(
                         {
                             template:"<div>"+
@@ -214,11 +223,7 @@
                 });
 
                 $rootScope.$on("silGrid.loader.stop", function(event){
-                    console.log("loader stoppped");
-                    if(!_.isUndefined(modal)){
-                        modal.close();
-                        modal.dismiss();
-                    }
+                    modal.close();
                     event.stopPropagation();
                 });
 
@@ -235,11 +240,9 @@
                 scope.silGridSearch = function(clear){
                     if(clear){
                         scope.silGrid.searchQuery = "";
-                        gridCtrl.getData();
+                        gridCtrl.removeFilter("search");
                     }else{
-                        gridCtrl.setLoading(true);
-                        gridCtrl.api.search(scope.silGrid.searchQuery).
-                        success(gridCtrl.setData).error(gridCtrl.setError);
+                         gridCtrl.addFilter("search", scope.silGrid.searchQuery);
                     }
 
                 };
@@ -247,41 +250,49 @@
         };
 
     })
-    .controller("silGridBpFilterController", ["$rootScope", "$scope",
-            "businessPartnerApi","silGridConfig",
-            function($rootScope,$scope, bpApi, silGridConfig){
-                $scope.bp_type = silGridConfig.bp.bpType;
-                if(_.isUndefined($rootScope.sil_bps)){
-                    bpApi.api.filter({bp_type:$scope.bp_type}).success(function(data){
-                        $rootScope.sil_bps = data.results;
-                        $scope.sil_bps = $rootScope.sil_bps;
-                    }).error(function(error){
-                        $scope.alert = {
-                            title: "Error",
-                            type:"danger",
-                            msg: error.error.$$unwrapTrustedValue()
-                        };
-                    });
-                }else{
-                    $scope.sil_bps = $rootScope.sil_bps;
-                }
-            }])
-    .directive("silGridBpFilter", ["silGridConfig", function(silGridConfig){
+    .directive("silGridSort",["$rootScope", function($rootScope){
         return {
+            restrict : "A",
             require: "^silGrid",
-            restrict: "E",
-            replace: false,
-            templateUrl: BP_FILTER_TEMPLATE,
-            controller: "silGridBpFilterController",
-            link: function(scope,elem, attrs, gridCtrl){
-                scope.silGrid = {bpId:""};
-                scope.$watch("silGrid.bpId", function(bpId){
-                    if(_.isUndefined(bpId)){
-                        gridCtrl.removeFilter(silGridConfig.bp.filterKey);
+            scope: {
+                field: "@"
+            },
+            link: function($scope, elem, attrs, gridCtrl){
+                elem.addClass("sil-orderable");
+                if(_.isUndefined($rootScope.sil_orderings)){
+                    $rootScope.sil_orderings  = {};
+                }
+                elem.on("click", function(){
+                    if(elem.hasClass("sil-orderable")){
+                        // assume default ordering is asceding
+                        elem.removeClass("sil-orderable");
+                        elem.addClass("sil-orderable-desc");
+                        //order desc
+                        $rootScope.sil_orderings[$scope.field] = "desc";
                     }else{
-                        gridCtrl.addFilter(silGridConfig.bp.filterKey, bpId);
+                        //if ordered asc, order desc
+                        if(elem.hasClass("sil-orderable-desc")){
+                            elem.removeClass("sil-orderable-desc");
+                            elem.addClass("sil-orderable-asc");
+                            // order asc
+                            $rootScope.sil_orderings[$scope.field] = "asc";
+                        }else{
+                            elem.removeClass("sil-orderable-asc");
+                            elem.addClass("sil-orderable-desc");
+                            //order desc
+                            $rootScope.sil_orderings[$scope.field] = "desc";
+                        }
                     }
-
+                    var orderKeys="";
+                    _.each(_.keys($rootScope.sil_orderings), function(key, index){
+                        var sortkey = $rootScope.sil_orderings[key] === "asc"?key: "-"+key;
+                        if(index===0){
+                            orderKeys = sortkey;
+                        }else{
+                            orderKeys += ","+sortkey;
+                        }
+                    });
+                    gridCtrl.addFilter("ordering", orderKeys);
                 });
             }
         };
