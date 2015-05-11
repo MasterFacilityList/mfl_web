@@ -1,0 +1,37 @@
+<header class="header text-white">
+   <!--Header brand-->
+    <div class="header-brand width-35p">
+        <a ui-sref="home.join" class="logo"><span class="text-warning">e</span>-Health Kenya Facilities</a>
+    </div>
+   <!--End of Header brand-->
+   <!-- Beginning of search  -->
+   <div class="header-search col-lg-7 col-md-7 col-sm-7 col-xs-7">
+      <div class="group margin-t-10">
+          <input type="search" class="main-search" ng-model="search.query" required>
+          <span class="highlight"></span>
+          <span class="bar"></span>
+          <label><i class="fa fa-search"></i>&nbsp;Search facilities...</label>
+      </div>
+   </div>
+   <!-- End of search -->
+    <!--Header profile-->
+    <div class="header-profile">
+          <div class="profile-nav">
+            <a href="">
+              <span class="profile-username">Advanced Search</span>
+            </a>
+          </div>
+          <div class="profile-nav">
+            <a href="" class="dropdown-toggle" data-toggle="dropdown">
+              <span class="profile-username">Sign Up</span>
+              <span class="fa fa-sign-in"></span>
+            </a>
+            <ul class="dropdown-menu animated flipInX pull-right" role="menu">
+              <li><a href="#/profile"><i class="fa fa-cog"></i> Profile</a></li>
+              <li><a href="" ng-click="logout()"><i class="fa fa-sign-out"></i> Log Out</a></li>
+              <li><a href="" ng-click="logout()"><i class="fa fa-sign-in"></i>Sign Up </a></li>
+            </ul>
+          </div>
+    </div>
+   <!--End of Header profile-->
+</header>

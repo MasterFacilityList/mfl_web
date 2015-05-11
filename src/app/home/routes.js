@@ -6,6 +6,10 @@ angular.module("mfl.home.routes", [])
             .state("home", {
                 url: "/home",
                 views: {
+                    "header" : {
+                        controller: "mfl.home.controllers.header",
+                        templateUrl : "home/tpls/header.tpl.html"
+                    },
                     "main": {
                         controller: "mfl.home.controllers.home",
                         templateUrl: "home/tpls/main.tpl.html"
