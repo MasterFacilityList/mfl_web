@@ -9,16 +9,15 @@
             </h2>
         </div>
         <div class="col-lg-8 col-lg-offset-2 search-card text-center" style="border: 1px solid #000;">
-            <form role="form" name="search-form">
+            <form role="form" name="search-form" ng-submit="search(search.query)">
                 <div class="col-md-12 input-group">
-                    <span class="search-addon input-group-addon" id="sizing-addon1">
-                        <i class="fa fa-search"></i>
-                    </span>
                     <input type="search" ng-model="search.query" placeholder="Search facilities...">
                     <span class="bar"></span>
                     <span class="highlight"></span>
-                    <span class="search-addon-btn input-group-addon" id="sizing-addon1">
-                        <i class="fa fa-navicon"></i>
+                    <span class="search-addon-btn input-group-addon" id="sizing-addon1" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Search facility">
+                        <button type="submit" class="search-btn">
+                            <i class="fa fa-search"></i>
+                        </button>
                     </span>
                 </div>
             </form>

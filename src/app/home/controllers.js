@@ -1,22 +1,21 @@
 "use strict";
 angular.module("mfl.home.controllers", ["mfl.facilities.wrapper"])
 
-    .controller("mfl.home.controllers.home", ["$scope",
-        function ($scope) {
+    .controller("mfl.home.controllers.home", ["$scope", "$state",
+        function ($scope, $state) {
         $scope.test="home";
         $scope.tooltip = {
             "title": "",
             "checked": false
         };
+        $scope.search = function (query) {
+            $state.go("search_results", {result: query});
+        };
     }])
 
     .controller("mfl.home.controllers.header", ["$scope",
-        "$state",
-        function ($scope, $state) {
+        function ($scope) {
             $scope.test = "Search";
-            $scope.search = function (query) {
-                $state.go("home.search_results", {result: query});
-            };
         }
     ])
 
@@ -26,6 +25,10 @@ angular.module("mfl.home.controllers", ["mfl.facilities.wrapper"])
             $scope.test = "search results";
             $scope.search = {
                 search : $state.params.result
+            };
+            $scope.tooltip = {
+                "title": "",
+                "checked": false
             };
             $scope.query = $state.params.result;
             //doing the search query

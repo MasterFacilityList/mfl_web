@@ -27,21 +27,37 @@ angular.module("mfl.home.routes", [])
                     pageTitle: "MFL Home"
                 }
             })
-            .state("home.search_results", {
+            .state("search_results", {
                 url: "/searchresults/:result",
                 views: {
-                    "main-view@home": {
+                    "header" : {
+                        controller: "mfl.home.controllers.header",
+                        templateUrl : "home/tpls/header.tpl.html"
+                    },
+                    "main": {
                         controller: "mfl.home.controllers.search_results",
                         templateUrl: "home/tpls/search_results.tpl.html"
+                    },
+                    "footer": {
+                        controller: "mfl.common.controllers.time",
+                        templateUrl: "common/tpls/time.tpl.html"
                     }
                 }
             })
-            .state("home.facility_details", {
+            .state("facility_details", {
                 url : "/facility/:fac_id",
                 views: {
-                    "main-view@home": {
+                    "header" : {
+                        controller: "mfl.home.controllers.header",
+                        templateUrl : "home/tpls/header.tpl.html"
+                    },
+                    "main": {
                         controller: "mfl.home.controllers.facility_details",
                         templateUrl: "home/tpls/facility_details.tpl.html"
+                    },
+                    "footer": {
+                        controller: "mfl.common.controllers.time",
+                        templateUrl: "common/tpls/time.tpl.html"
                     }
                 }
             });

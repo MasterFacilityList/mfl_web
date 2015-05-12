@@ -4,44 +4,84 @@
             Showing results for <span class="text-danger">{{query}}</span>
         </p>
     </div>
-    <div class="row">
-        <div class="col-lg-5">
-            <div class="col-lg-12 col-md-12 content-card">
-                <h4>Advanced search</h4>
-                <form role="form">
+    <div class="col-lg-12 margin-b-20">
+            <div class="col-lg-4">
+                <div class="col-lg-12 col-md-12 content-card">
+                    <h4>Advanced search</h4>
+                    <form role="form">
 
-                </form>
+                    </form>
+                </div>
             </div>
-        </div>
-        <div class="col-lg-7 pull-right search-results" >
-            <div class="col-md-12" ng-repeat="fac in query_results" style="cursor: pointer;">
-                <a ui-sref="home.facility_details({fac_id : fac.id})" class="text-decoration: none">
-                    <div class="card-panel">
-                        <div class="content-heading">
-                            <h4>
-                                <span style="border-right: 1px solid #ddd;">{{fac.code}}&nbsp;</span>&nbsp; {{fac.name}}
-                                <span class="pull-right">
+            <div class="col-lg-8 search-results" >
+                <div class="col-md-12 content-card" ng-repeat="fac in query_results" style="cursor: pointer">
+                    <a href>
+                        <div class="col-lg-1">
+                            <span class="pull-left search-icon search-icon-md"
+                            data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Click to view on map">
+                                <i class="fa fa-map-marker"></i>
+                            </span>
+                        </div>
+                    </a>
+                    <a ui-sref="facility_details({fac_id : fac.id})" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Click to view facility details">
+                        <div class="col-lg-11">
+                            <h5 class="fw-700 fs-16" style="color: rgba(0,0,0, 0.9);">
+                                <span class="pull-left">
+                                    {{fac.code}} | {{fac.name}}
+                                </span>
+                                <span class="pull-right label label-primary ">
                                     {{fac.facility_type_name}}
                                 </span>
-                            </h4>
-                        </div>
-                        <div class="panel-body">
-                            <h4>
-                                <label class="control-label">Owned by:</label>
-                                 {{fac.owner_name}}
-                                <span class="pull-right">
-                                    <label class="control-label"> Constituency:  </label> {{fac.constituency}}
+
+                            </h5>
+                            <br>
+                            <p class="margin-t-10 fw-500" style="color:#000;">
+                                <span class="pull-left fs-14">
+                                     {{fac.constituency}} CONSTITUENCY
                                 </span>
-                            </h4>
-                            <hr style="border: 1px solid #F0F0F0;">
-                            <h4>
-                                <label><i class="fa fa-map-marker"></i> Location </label>
-                                <p style="font-size: 16px">{{fac.location_desc}}</p>
-                            </h4>
+                                <span class="pull-right" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Facility owner">
+                                    <i class="fa fa-user-secret"></i> {{fac.owner_name}}
+                                </span>
+                            </p>
+                            <!-- <h5>
+                                <span class="pull-left">
+                                    <span>
+                                        <a ui-sref="gis.facility({fac_id: fac.id})"><i class="fa fa-map-marker"></i></a>
+                                    </span>
+                                </span>
+                            </h5> -->
                         </div>
-                    </div>
-                </a>
+                    </a>
+                </div>
+
+                <!-- <div class="col-md-12" ng-repeat="fac in query_results" style="cursor: pointer;">
+                    <a ui-sref="home.facility_details({fac_id : fac.id})" class="text-decoration: none">
+                        <div class="card-panel">
+                            <div class="content-heading">
+                                <h4>
+                                    <span style="border-right: 1px solid #ddd;">{{fac.code}}&nbsp;</span>&nbsp; {{fac.name}}
+                                    <span class="pull-right">
+                                        {{fac.facility_type_name}}
+                                    </span>
+                                </h4>
+                            </div>
+                            <div class="panel-body">
+                                <h4>
+                                    <label class="control-label">Owned by:</label>
+                                     {{fac.owner_name}}
+                                    <span class="pull-right">
+                                        <label class="control-label"> Constituency:  </label> {{fac.constituency}}
+                                    </span>
+                                </h4>
+                                <hr style="border: 1px solid #F0F0F0;">
+                                <h4>
+                                    <label><i class="fa fa-map-marker"></i> Location </label>
+                                    <p style="font-size: 16px">{{fac.location_desc}}</p>
+                                </h4>
+                            </div>
+                        </div>
+                    </a>
+                </div> -->
             </div>
-        </div>
     </div>
 </div>
