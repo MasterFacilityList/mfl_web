@@ -18,7 +18,8 @@
     "angular-toastr": "~0.5.2",
     "angular-openlayers-directive": "~0.0.5",
     "angular-leaflet-directive": "~0.7.15",
-    "stacktrace-js": "~0.6.4"
+    "stacktrace-js": "~0.6.4",
+    "angular-ui-select": "~0.11.2"
   },
   "resolutions": {
     "angular": "1.3.15"

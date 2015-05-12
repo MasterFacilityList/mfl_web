@@ -11,13 +11,13 @@
 <header class="header text-white">
    <!--Header brand-->
     <div class="header-brand width-35p">
-        <a ui-sref="home.join" class="logo"><span class="text-warning">e</span>-Health Kenya Facilities</a> 
+        <a ui-sref="home.join" class="logo"><span class="text-warning">e</span>-Health Kenya Facilities</a>
     </div>
    <!--End of Header brand-->
     <!--Header profile-->
     <div class="header-profile">
           <div class="profile-nav">
-            <a href="">
+            <a ui-sref="filtering">
               <span class="profile-username">Advanced Search</span>
             </a>
           </div>
@@ -36,7 +36,8 @@
    <!--End of Header profile-->
 </header>
         <!--End of header-->
-        <div ui-view="main" class="content"></div>
+        <div ui-view="main" class="content">
+        </div>
         <footer>
             <p class="text-center"> &copy; Copyright <span ui-view="footer"></span> by <a href="index.html#">Savannah Informatics Limited</a> All Rights Reserved. </p>
         </footer>

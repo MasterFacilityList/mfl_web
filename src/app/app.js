@@ -7,11 +7,14 @@
         "ngCookies",
         "mflAppConfig",
         "ui.router",
+        "ui.select",
 
         "templates-app",
         "templates-common",
         "mfl.home",
-        "mfl.gis",
-        "ngSanitize"
+        "mfl.common",
+        "ngSanitize",
+        "mfl.filtering",
+        "mfl.settings"
     ]);
 })(angular);
