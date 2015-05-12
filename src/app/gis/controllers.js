@@ -1,11 +1,11 @@
 "use strict";
 angular
     .module("mfl.gis.controllers", ["leaflet-directive",
-        "mfl.gis.wrapper","mfl.adminunits.wrapper","mfl.gis.interceptors"])
-
+        "mfl.gis.wrapper","mfl.adminunits.wrapper","mfl.gis.interceptors","mfl.gis.services"])
     .controller("mfl.gis.controllers.gis", ["$scope","leafletData",
         "countiesApi","$http","$stateParams","$state","SERVER_URL",
-        function ($scope,leafletData, countiesApi, $http, $stateParams, $state, SERVER_URL) {
+        function ($scope,leafletData, countiesApi, $http, $stateParams,
+                   $state,SERVER_URL) {
         $scope.tooltip = {
             "title": "",
             "checked": false
@@ -83,8 +83,9 @@ angular
         });
     }])
     .controller("mfl.gis.controllers.gis_county", ["$scope","leafletData",
-        "gisCountiesApi","$http","$state","$stateParams","SERVER_URL",
-        function ($scope, leafletData, gisCountiesApi, $http, $state, $stateParams,SERVER_URL) {
+        "gisCountiesApi","$http","$state","$stateParams","SERVER_URL","mfl.gis.services.gis",
+        function ($scope, leafletData, gisCountiesApi, $http, $state, $stateParams,SERVER_URL,
+                  gisService) {
         $scope.tooltip = {
             "title": "",
             "checked": false
@@ -117,7 +118,6 @@ angular
         $scope.filters = {
             id : $stateParams.county_id
         };
-            
         angular.extend($scope, {
             defaults: {
                 scrollWheelZoom: false,
@@ -141,6 +141,16 @@ angular
                   "&format=json",
                   {cache: "true"})
             .success(function (data){
+            gisService.getPoints(data)
+                .success(function (data){
+                    gisService.getExps(data)
+                    .success(function (data){
+                        var bounds = [data[0],data[1]];
+                        angular.extend($scope, {
+                            bounds : bounds
+                        });
+                    });
+                });
             angular.extend($scope, {
                 geojson: {
                     data: data,
@@ -318,7 +328,7 @@ angular
                     enable: [],
                     logic: "emit"
                 }
-            },
+            }
         });
         if ($stateParams.c) {
             var split_coords = $stateParams.c.split(":");
@@ -354,18 +364,9 @@ angular
                   {cache: "true"})
             .success(function (data){
             angular.extend($scope, {
-                geojson: {
-                    data: data,
-                    style: {
-                        fillColor: "#00ceff",
-                        weight: 2,
-                        opacity: 1,
-                        color: "white",
-                        dashArray: "3",
-                        fillOpacity: 0.7
-                    }
-                },
-                selectedWard: {}
+                markers: {
+                    data: data
+                }
             });
         });
         $scope.$on("leafletDirectiveMap.geojsonMouseover", function(ev, ward) {
