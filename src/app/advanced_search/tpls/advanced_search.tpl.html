@@ -1,0 +1,180 @@
+<div class="row">
+    <div class="col-lg-12" ng-hide="search_results">
+        <div class="col-lg-12 margin-t-10 margin-b-10">
+            <h3 class="text-left">
+                Showing results for <span class="text-danger">{{query}}
+
+                <span class="pull-right">
+                    <button class="action-btn action-btn-md action-btn-info" onclick="window.history.back()">
+                        <i class="fa fa-arrow-left"></i>
+                    </button>
+                </span>
+            </h3>
+        </div>
+    </div>
+    <div class="col-lg-12 margin-t-20 search-loader" ng-show="search_results" style="text-align: center">
+        <img src="assets/img/477.GIF">
+    </div>
+    <div class="col-lg-12 margin-b-20">
+            <div class="col-lg-4" ng-hide="search_results">
+                <div class="col-lg-12 col-md-12 content-card">
+                    <h4>Advanced search</h4>
+                    <form role="form" class="form-horizontal form-bordered" name="mfl.filters.form">
+                    <div class="form-group">
+                        <div class="input-group input-group-in">
+                            <span class="input-group-addon text-silver">Name: </span>
+                            <input ng-model="filter.name" name="name" type="text" class="form-control"  autocomplete="off">
+                        </div>
+                        <div class="input-group input-group-in">
+                            <span class="input-group-addon text-silver">Description: </span>
+                            <input ng-model="filter.description" name="description" type="text" class="form-control"  autocomplete="off">
+                        </div>
+
+                        <div class="input-group input-group-in">
+                            <span class="input-group-addon text-silver">County: </span>
+                            <ui-select ng-model="filter.county" name="county" theme="select2">
+                                 <ui-select-match placeholder="Select / Search..">
+                                        {{$select.selected.name}}
+                                </ui-select-match>
+                                <ui-select-choices repeat="county in filter_data.counties| propsFilter: {name: $select.search}">
+                                    <div ng-bind-html="county.name| highlight: $select.search"></div>
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+
+                        <div class="input-group input-group-in">
+                            <span class="input-group-addon text-silver">Constituency: </span>
+                            <ui-select name="constituency" ng-model="filter.constituency" ng-disabled="disabled.consts" theme="select2">
+                                 <ui-select-match placeholder="Select / Search..">
+                                        {{$select.selected.name}}
+                                </ui-select-match>
+                                <ui-select-choices repeat="consti in filter_data.consts| propsFilter: {name: $select.search}">
+                                    <div ng-bind-html="consti.name| highlight: $select.search"></div>
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+
+                        <div class="input-group input-group-in">
+                            <span class="input-group-addon text-silver">Ward: </span>
+                            <ui-select name="ward" ng-model="filter.ward"ng-disabled="disabled.wards"  theme="select2">
+                                 <ui-select-match placeholder="Select / Search..">
+                                        {{$select.selected.name}}
+                                </ui-select-match>
+                                <ui-select-choices repeat="ward in filter_data.wards | propsFilter: {name: $select.search}">
+                                    <div ng-bind-html="ward.name| highlight: $select.search"></div>
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                        <div class="input-group input-group-in">
+                            <span class="input-group-addon text-silver">Operation Status: </span>
+                            <ui-select name="operation_status" ng-model="filter.operation_status" theme="select2">
+                                 <ui-select-match placeholder="Select / Search..">
+                                        {{$select.selected.name}}
+                                </ui-select-match>
+                                <ui-select-choices repeat="status in filter_data.operation_status | propsFilter: {name: $select.search}">
+                                    <div ng-bind-html="status.name| highlight: $select.search"></div>
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+
+                        <div class="input-group input-group-in">
+                            <span class="input-group-addon text-silver">Facility Type: </span>
+                            <ui-select name="facility_type" ng-model="filter.facility_type" theme="select2">
+                                 <ui-select-match placeholder="Select / Search..">
+                                        {{$select.selected.name}}
+                                </ui-select-match>
+                                <ui-select-choices repeat="typ in filter_data.facility_types | propsFilter: {name: $select.search}">
+                                    <div ng-bind-html="typ.name| highlight: $select.search"></div>
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+
+                        <div class="input-group input-group-in">
+                            <span class="input-group-addon text-silver">Number of Beds: </span>
+                            <input name="number_of_beds" ng-model="filter.number_of_beds" id="beds" type="text" data-input="tags" class="form-control"  autocomplete="off">
+
+                        </div>
+
+                        <div class="input-group input-group-in">
+                            <span class="input-group-addon text-silver">Number of Cots: </span>
+                            <input name="number_of_cots" ng-model="filter.number_of_cots" type="number" class="form-control"  autocomplete="off">
+                        </div>
+
+                        <div class="input-group input-group-in">
+                            <span class="input-group-addon text-silver">Open Whole Day: </span>
+                            <input name="open_whole_day" ng-model="filter.open_whole_day" type="checkbox" class="form-control" >
+                        </div>
+
+                        <div class="input-group input-group-in">
+                            <span class="input-group-addon text-silver">Is Classified: </span>
+                            <input name="is_classified" ng-model="filter.is_classified" type="checkbox" class="form-control">
+                        </div>
+
+                        <div class="input-group input-group-in">
+                            <span class="input-group-addon text-silver">Is Published: </span>
+                            <input name="is_published" ng-model="filter.is_published" type="checkbox" class="form-control">
+                        </div>
+
+                        <div class="input-group input-group-in">
+                            <span class="input-group-addon text-silver">Is Regulated: </span>
+                            <input name="is_regulated" ng-model="filter.is_regulated" type="checkbox" class="form-control" >
+                        </div>
+
+                        <div class="input-group input-group-in">
+                            <span class="input-group-addon text-silver">Is Active: </span>
+                            <input name="is_active" ng-model="filter.is_active" type="checkbox" class="form-control" >
+                        </div>
+
+                    </div>
+                    <div>
+                        <button class="btn btn-primary" ng-click="filterFacility(mfl.filters.form)">Filter </button>
+                    </div>
+                 </form>
+                </div>
+            </div>
+            <div class="col-lg-8 search-results" >
+                <div class="col-lg-12" ng-if="err !== ''">
+                    <div class="alert alert-danger">
+                        {{err}}
+                    </div>
+                </div>
+                <div class="col-lg-12 content-card" ng-show="no_result">
+                    <p class="lead">
+                        Oops sorry no matches were found for the query <span class="text-danger">{{query}}</span>. try the advanced search
+                    </p>
+                </div>
+                <div class="col-md-12 content-card" ng-repeat="fac in query_results" style="cursor: pointer">
+                    <a href>
+                        <div class="col-lg-1">
+                            <span class="pull-left search-icon search-icon-md"
+                            data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Click to view on map">
+                                <i class="fa fa-map-marker"></i>
+                            </span>
+                        </div>
+                    </a>
+                    <a ui-sref="facility_details({fac_id : fac.id})" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Click to view facility details">
+                        <div class="col-lg-11">
+                            <h5 class="fw-700 fs-16" style="color: rgba(0,0,0, 0.9);">
+                                <span class="pull-left">
+                                    {{fac.code}} | {{fac.name}}
+                                </span>
+                                <span class="pull-right label label-primary ">
+                                    {{fac.facility_type_name}}
+                                </span>
+
+                            </h5>
+                            <br>
+                            <p class="margin-t-10 fw-500" style="color:#000;">
+                                <span class="pull-left fs-14">
+                                     {{fac.constituency}} CONSTITUENCY
+                                </span>
+                                <span class="pull-right" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Facility owner">
+                                    <i class="fa fa-user-secret"></i> {{fac.owner_name}}
+                                </span>
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+    </div>
+</div>
