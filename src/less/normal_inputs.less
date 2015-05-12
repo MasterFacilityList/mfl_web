@@ -83,13 +83,14 @@ input[type=search],
 input[type=password],
 select,
 textarea {
-    font-size: 16px;
+    font-size: 18px;
     padding: 10px 10px 10px 5px;
-    background-color: #0089ff;
+    background-color: #fff;
     display: block;
-    width: 90%;
+    width: 100%;
     border: none;
-    border-bottom: 1px solid #fff;
+    border-bottom: 1px solid #ddd;
+    border-right: 1px solid #ddd
 }
 
 input[type=text]:focus,
@@ -126,9 +127,10 @@ select:focus ~ label,
 select:valid ~ label,
 textarea:focus ~ label,
 textarea:valid ~ label {
-    top: -10px;
+    /*top: -10px;
     font-size: 14px;
-    color: #fff;
+    color: #fff;*/
+    display: none;
 }
 /* BOTTOM BARS ================================= */
 

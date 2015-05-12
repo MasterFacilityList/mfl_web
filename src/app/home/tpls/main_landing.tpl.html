@@ -1,6 +1,5 @@
-<div class="content-container margin-b-20 margin-t--27">
-    <div class="content-card landing-img">
-        <div class="row  bg-overlay margin-h-5">
+<div class="container-fluid bg-overlay">
+    <div class="row   margin-h-5">
         <div class="col-lg-12">
             <h1 class="text-center margin-t-50 fw-900" style="color: #fff;">
                 Welcome to Kenya's Master Facilities List
@@ -9,65 +8,20 @@
                 <img src="../assets/img/kenya-coat-of-arms.png">
             </h2>
         </div>
+        <div class="col-lg-8 col-lg-offset-2 search-card text-center" style="border: 1px solid #000;">
+            <form role="form" name="search-form">
+                <div class="col-md-12 input-group">
+                    <span class="search-addon input-group-addon" id="sizing-addon1">
+                        <i class="fa fa-search"></i>
+                    </span>
+                    <input type="search" ng-model="search.query" placeholder="Search facilities...">
+                    <span class="bar"></span>
+                    <span class="highlight"></span>
+                    <span class="search-addon-btn input-group-addon" id="sizing-addon1">
+                        <i class="fa fa-navicon"></i>
+                    </span>
+                </div>
+            </form>
         </div>
     </div>
-</div>
-<div>
-    <div class="col-lg-12 margin-b-20">
-        <div class="col-lg-12 col-md-12 content-card margin-t-20">
-            <div class="col-lg-8 col-md-8">
-                <h2 class="">
-                    Find facilities near you <span class="muted">using our geolocator</span>
-                </h2>
-                <p class="lead">
-                    Using our geolocator that has mapped health facilities onto their designated physical locations on the Kenyan map will provide quick means of locating them.
-                </p>
-                <a ui-sref="gis" class="login-btn login-btn-primary" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Find facility">
-                    Find <i class="fa fa-map-marker"></i>
-                </a>
-            </div>
-            <div class="kenya-map col-lg-4 col-md-4 pull-right" style=" padding: 10px;">
-                <a ui-sref="gis">
-                    <img src="../assets/img/kenya22s.gif" class="text-center pull-right" width="70%">
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <div class="row ">
-        <div class="col-lg-12">
-            <div class="col-lg-6" ng-repeat="fac in pubed_fac" style="cursor: pointer;">
-                <a ui-sref="home.facility_details({fac_id : fac.id})" class="text-decoration: none">
-                    <div class="card-panel">
-                        <div class="content-heading">
-                            <h4>
-                                <span class="pull-left" style="border-right: 1px solid #ddd;">{{fac.code}}&nbsp;</span>&nbsp; {{fac.name}}
-                                <span class="pull-right">
-                                    {{fac.facility_type_name}}
-                                </span>
-                            </h4>
-                        </div>
-                        <div class="panel-body">
-                            <h4>
-                                <span class="pull-left">
-                                    <label class="control-label"><i class="fa fa-user-secret"></i> Owner :</label>
-                                     {{fac.owner_name}}
-                                 </span>
-                            </h4>
-                            <br>
-                            <h4>
-                                <span class="pull-left">
-                                <label><i class="fa fa-map-marker"></i> County : </label> {{fac.county}}
-                                </span>
-                                <span class="pull-right">
-                                    <label class="control-label"> Constituency :  </label> {{fac.constituency}}
-                                </span>
-                            </h4>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
-    <!-- <br ng-if="!(($index + 1) % 4)" /> -->
 </div>

@@ -2,26 +2,12 @@
 angular.module("mfl.home.controllers", ["mfl.facilities.wrapper"])
 
     .controller("mfl.home.controllers.home", ["$scope",
-        "facilitiesApi",function ($scope, facilitiesApi) {
+        function ($scope) {
         $scope.test="home";
         $scope.tooltip = {
             "title": "",
             "checked": false
         };
-        $scope.pubed_fac = [];
-        $scope.latest_fac = {
-            page_size : 10
-        };
-        facilitiesApi.api.filter($scope.latest_fac)
-            .success(function (facilities) {
-                $scope.new_facilities = _.where(facilities.results, {"is_published" : true});
-                for(var i=0; i < 6; ++i) {
-                    $scope.pubed_fac.push($scope.new_facilities[i]);
-                }
-            })
-            .error(function (e) {
-                console.log(e);
-            });
     }])
 
     .controller("mfl.home.controllers.header", ["$scope",
