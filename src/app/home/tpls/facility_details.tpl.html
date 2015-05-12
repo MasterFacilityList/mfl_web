@@ -32,27 +32,52 @@
             <hr style="border: 1px solid #F0F0F0;">
             <br>
             <h4>
+                <div class="pull-right">
+                    <p ><b class="fs-16">Status:</b>
+                    <span class="fs-16 label label-warning">
+                        {{oneFacility.regulary_status_name}}
+                    </span></p>
+                </div>
                 <span class="pull-left">
-                    {{regulary_status_name}}
-                </span>
-                <span class="pull-right">
+                    <label>Type: </label>
                     {{oneFacility.facility_type_name}}
                 </span>
             </h4>
+            <br>
+            <hr style="border: 1px solid #F0F0F0;">
+            <h4 class="text-blue"><i class="fa fa-exchange"></i> Services</h4>
+            <div class="col-lg-9" ng-repeat="service in oneFacility.facility_services">
+                <p><i class="fa fa-long-arrow-right"></i>
+                {{service.name}}  </p>
+            </div>
         </div>
 
         </div>
         <!-- Extra details displayed not important to the facilities -->
         <div class="col-lg-3 pull-right">
-            <h4 class="page-title fs-20 text-blue">Ownership status</h4>
+            <h4 class="fs-20 text-blue">
+                <i style="border: 1px solid #fff; border-radius : 50%;" class="fa fa-user-secret fa-1x"></i>
+                Ownership status
+            </h4>
             <hr style="border : 1px solid #ddd;">
             <h4>
-                <span class="pull-left text-center">
-                    <i style="border: 1px solid #fff; border-radius : 50%;" class="fa fa-user-secret fa-2x"></i>
-                </span>
                 <span class="pad-t-5">
-                    <h5 class="fs-16">{{oneFacility.owner_name}}</h5>
-                    <h5 class="fs-14">{{oneFacility.owner_type_name}}</h5>
+                    <h5 class="fs-16"><label>Owner: </label> {{oneFacility.owner_name}}</h5>
+                    <h5 class="fs-14"><label>Category: </label> {{oneFacility.owner_type_name}}</h5>
+                </span>
+            </h4>
+            <br><br>
+            <h4 class="fs-20 text-blue">
+                <i style="border: 1px solid #fff; border-radius : 50%;" class="fa fa-phone fa-1x"></i>
+                Contacts
+            </h4>
+            <hr style="border : 1px solid #ddd;">
+            <h4>
+                <span ng-repeat="cont in oneFacility.facility_contacts" class="margin-b-10 fs-16">
+                    <label>
+                        {{cont.contact_type_name}} :
+                    </label>
+                    {{cont.contact}}
                 </span>
             </h4>
         </div>

@@ -35,7 +35,7 @@ angular.module("mfl.home.controllers", ["mfl.facilities.wrapper"])
             $scope.query = $state.params.result;
             $scope.err = "";
             //doing the search query
-            facilitiesApi.facilities.api.filter($scope.search)
+            facilitiesApi.facilities.filter($scope.search)
                 .success(function (query_rslt) {
                     $scope.search_results = false;
                     $scope.query_results = query_rslt.results;
@@ -60,7 +60,7 @@ angular.module("mfl.home.controllers", ["mfl.facilities.wrapper"])
                 "title": "",
                 "checked": false
             };
-            facilitiesApi.facilities.api.get($state.params.fac_id)
+            facilitiesApi.facilities.get($state.params.fac_id)
                 .success(function (one_fac) {
                     $scope.oneFacility = one_fac;
                 })
