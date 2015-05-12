@@ -308,7 +308,17 @@ angular
                 lat: 0.53,
                 lng: 37.858,
                 zoom: 6
-            }
+            },
+            events: {
+                map: {
+                    enable: ["moveend", "popupopen"],
+                    logic: "emit"
+                },
+                marker: {
+                    enable: [],
+                    logic: "emit"
+                }
+            },
         });
         if ($stateParams.c) {
             var split_coords = $stateParams.c.split(":");
@@ -318,6 +328,27 @@ angular
         }
         $http.get(SERVER_URL+ "api/gis/"+
                   "ward_boundaries/?id="+
+                  $stateParams.ward_id +
+                  "&format=json",
+                  {cache: "true"})
+            .success(function (data){
+            angular.extend($scope, {
+                geojson: {
+                    data: data,
+                    style: {
+                        fillColor: "#00ceff",
+                        weight: 2,
+                        opacity: 1,
+                        color: "white",
+                        dashArray: "3",
+                        fillOpacity: 0.7
+                    }
+                },
+                selectedWard: {}
+            });
+        });
+        $http.get(SERVER_URL+ "api/facilities/"+
+                  "facilities/?id="+
                   $stateParams.ward_id +
                   "&format=json",
                   {cache: "true"})
