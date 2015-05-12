@@ -30,15 +30,24 @@ angular.module("mfl.home.controllers", ["mfl.facilities.wrapper"])
                 "title": "",
                 "checked": false
             };
+            $scope.search_results = true;
+            $scope.no_result = false;
             $scope.query = $state.params.result;
+            $scope.err = "";
             //doing the search query
-            facilitiesApi.api.filter($scope.search)
+            facilitiesApi.facilities.api.filter($scope.search)
                 .success(function (query_rslt) {
+                    $scope.search_results = false;
                     $scope.query_results = query_rslt.results;
                     console.log($scope.query_results);
+                    if($scope.query_results.length === 0) {
+                        $scope.no_result = true;
+                    }
                 })
                 .error(function (e) {
                     console.log(e.error);
+                    $scope.err = e.error;
+                    $scope.search_results = false;
                 });
         }
     ])
@@ -51,7 +60,7 @@ angular.module("mfl.home.controllers", ["mfl.facilities.wrapper"])
                 "title": "",
                 "checked": false
             };
-            facilitiesApi.api.get($state.params.fac_id)
+            facilitiesApi.facilities.api.get($state.params.fac_id)
                 .success(function (one_fac) {
                     $scope.oneFacility = one_fac;
                 })
