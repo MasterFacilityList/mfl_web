@@ -22,6 +22,7 @@ describe("Tests for GIS controllers:", function () {
                 countiesApi = countiesApi;
                 $stateParams.county_id = 4;
                 $stateParams.const_boundaries = "4,1.3,2,41";
+                $stateParams.ward_boundaries = "4,2,41";
                 $stateParams.c = "13:12:8";
                 constsApi = constsApi;
                 data = {
@@ -123,12 +124,30 @@ describe("Tests for GIS controllers:", function () {
         expect(scope.county.zoom).toBe(county.zoom);
     }]));
 
-    it("should expect gisCountiesApi & gisConstsApi to load list",
+    it("should expect gisCountiesApi & gisConstsApi to load data",
             inject(["$httpBackend",function ($httpBackend) {
         controller("mfl.gis.controllers.gis_county");
         var data = "";
         $httpBackend.expectGET(
         SERVER_URL + "api/gis/constituency_boundaries/?id=4,1.3,2,41&format=json")
+            .respond(200, data);
+        $httpBackend.flush();
+    }]));
+    it("should expect gisWardsApi to load data",
+            inject(["$httpBackend",function ($httpBackend) {
+        controller("mfl.gis.controllers.gis_const");
+        var data = "";
+        $httpBackend.expectGET(
+        SERVER_URL + "api/gis/ward_boundaries/?id=4,2,41&format=json")
+            .respond(200, data);
+        $httpBackend.flush();
+    }]));
+    it("should expect gisWardsApi to load data",
+            inject(["$httpBackend",function ($httpBackend) {
+        controller("mfl.gis.controllers.gis_ward");
+        var data = "";
+        $httpBackend.expectGET(
+        SERVER_URL + "api/gis/ward_boundaries/?id=4&format=json")
             .respond(200, data);
         $httpBackend.flush();
     }]));

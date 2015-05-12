@@ -34,8 +34,8 @@ angular.module("mfl.gis.routes", [])
                 data:{
                     pageTitle: "MFL County"
                 }
-            }).state("gis_contituency", {
-                url: "/constituency/:constituency_id",
+            }).state("gis_const", {
+                url: "/constituency/:const_id/:ward_boundaries?c",
                 views: {
                     "main": {
                         controller: "mfl.gis.controllers.gis_const",
@@ -50,7 +50,7 @@ angular.module("mfl.gis.routes", [])
                     pageTitle: "MFL Constituency"
                 }
             }).state("gis_ward", {
-                url: "/ward/:ward_id",
+                url: "/ward/:ward_id?c",
                 views: {
                     "main": {
                         controller: "mfl.gis.controllers.gis_ward",

@@ -1,1 +1,12 @@
-CONSTITUENCY
+<contentheader></contentheader>
+<div class="content-body pad-10">
+    <div class="margin-b-10">
+        <leaflet center="constituency" url-center-hash="yes" width="100%" defaults="defaults" geojson="geojson" events="events" height="480px"></leaflet>
+    </div>
+    <h3>WARD INFORMATION</h3>
+    <div class="content-card">
+        <h4><strong>County Hovered: <span class="text-info">{{hoveredWard.properties.name}}</span></strong></h4>
+        <p><strong>Number of Facilities: <span class="text-info">{{hoveredWard.properties.facility_count}}</span></strong></p>
+        <p><strong>Facilities per &#13218; <span class="text-info">{{hoveredWard.properties.density}}</span></strong></p>
+    </div>
+</div>
