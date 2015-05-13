@@ -1,4 +1,7 @@
-angular.module("sil.grid.pagination.tpl.html", []).run(["$templateCache",
+(function(angular){
+    var pagination_tpl = "sil.grid.pagination.tpl.html";
+    var search_tpl = "sil.grid.search.tpl.html";
+    angular.module(pagination_tpl, []).run(["$templateCache",
     function($templateCache){
         $templateCache.put("sil.grid.pagination.tpl.html",
             "<ul class=\"pager\" ng-if=\"pagination.active\">\n" +
@@ -13,10 +16,9 @@ angular.module("sil.grid.pagination.tpl.html", []).run(["$templateCache",
             "</li>\n" +
             "</ul>\n"
         );
-    }
-]);
-
-angular.module("sil.grid.search.tpl.html", []).run(["$templateCache", function($templateCache){
+        }
+    ]);
+    angular.module(search_tpl, []).run(["$templateCache", function($templateCache){
     $templateCache.put("sil.grid.search.tpl.html",
         "<div class=\"input-group input-group-in\">\n" +
         "<input type=\"text\" class=\"form-control helper-inline\" \n"+
@@ -30,19 +32,8 @@ angular.module("sil.grid.search.tpl.html", []).run(["$templateCache", function($
         "</button>\n" +
         "</span>\n" +
         "</div>\n"
-    );
-}]);
+        );
+    }]);
 
-
-angular.module("sil_grid_bpfilter.tpl.html", []).run(["$templateCache",
-    function($templateCache) {
-      $templateCache.put("sil_grid_bpfilter.tpl.html",
-        "<div class=\"input-group input-group-in\" style=\"width: 100%;\">\n" +
-        "<select class=\"form-control\" ng-model=\"silGrid.bpId\" name=\"bp\" required>\n" +
-        "<option value=\"\" >- Select {{bp_type}} -</option>\n" +
-        "<option ng-repeat=\"bp in sil_bps\" value=\"{{bp.sladeCode}}\">\n" +
-        "{{bp.name}}</option></select>\n" +
-        "</div>\n" +
-        "");
-}]);
-
+    angular.module("sil.grid.tpls", [pagination_tpl, search_tpl]);
+})(angular);

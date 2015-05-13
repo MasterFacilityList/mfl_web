@@ -80,21 +80,27 @@ module.exports = {
             "vendor/typeahead.js/dist/typeahead.bundle.js",
             "vendor/typeahead.js/dist/typeahead.jquery.js",
             "vendor/angular-leaflet-directive/dist/angular-leaflet-directive.js",
+            "vendor/stacktrace-js/dist/stacktrace.js",
+            "vendor/angular-ui-select/dist/select.js",
             "libs/api_wrapper.js",
-            "libs/sil_grid_tpls.js",
-            "libs/sil_grid.js",
-            "libs/sil_typeahead_service/src/sil-typeahead.js"
+            "libs/sil_typeahead_service/src/sil-typeahead.js",
+            "libs/sil_grid/sil_grid_tpls.js",
+            "libs/sil_grid/sil_grid.js",
+            "libs/sil_error_handler/error_handler.js"
         ],
         css: [
         ],
         assets: [
             "vendor/fontawesome/fonts/*"
+        ],
+        imgs: [
+            "libs/sil_grid/img/*"
         ]
     },
 
     connect: {
         options: {
-            port: 8063,
+            port: 8062,
             hostname: "*",
             keepalive: true
         },

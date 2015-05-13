@@ -1,2 +1,2 @@
-# mfl_admin_web
-This is the front-end of mfl public side 
+# mfl_web
+This is the publicly accessible front-end the [Kenyan MFL](https://github.com/MasterFacilityList/mfl_api).

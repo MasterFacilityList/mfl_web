@@ -117,6 +117,13 @@ module.exports = function ( grunt ) {
                         cwd: ".",
                         expand: true,
                         flatten: true
+                    },
+                    {
+                        src: [ "<%= vendor_files.imgs %>" ],
+                        dest: "<%= build_dir %>/assets/img/",
+                        cwd: ".",
+                        expand: true,
+                        flatten: true
                     }
                 ]
             },
