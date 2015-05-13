@@ -1,7 +1,7 @@
 "use strict";
 angular
     .module("mfl.gis.controllers", ["leaflet-directive",
-        "mfl.gis.wrapper","mfl.adminunits.wrapper","mfl.gis.interceptors","mfl.gis.services"])
+        "mfl.gis.wrapper","mfl.adminunits.wrapper","mfl.gis.interceptors"])
     .controller("mfl.gis.controllers.gis", ["$scope","leafletData",
         "countiesApi","$http","$stateParams","$state","SERVER_URL",
         function ($scope,leafletData, countiesApi, $http, $stateParams,
