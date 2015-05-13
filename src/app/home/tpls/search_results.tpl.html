@@ -58,7 +58,7 @@
                             <h5>
                                 <span class="pull-left fs-16">
                                     <label>Status: </label>
-                                    <span class="text-blue fw-700">{{fac.regulary_status_name}}</span>
+                                    <span class="text-blue fw-700">{{fac.regulatory_status_name}}</span>
                                 </span>
                                 <span class="pull-right">
                                     <span class="fs-14 fw-600 label label-primary">{{fac.facility_type_name}}
@@ -67,7 +67,7 @@
                             </h5>
                             <br>
                             <h5 class="margin-t-10 fw-700" style="color:#000;">
-                                <span class="pull-left fs-14">
+                                <span class="pull-left fs-15">
                                      {{fac.county}} COUNTY
                                 </span>
                                 <span class="pull-right" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Facility owner">
@@ -76,8 +76,11 @@
                             </h5>
                             <br>
                             <p class="margin-b-30 margin-t-5">
-                                <span class="pull-left fs-12 fw-500">
+                                <span class="pull-left fs-14 fw-400">
                                  {{fac.constituency}} CONSTITUENCY
+                                </span>
+                                <span class="pull-right fs-13 fw-400">
+                                    {{fac.ward_name}} WARD
                                 </span>
                             </p>
                         </div>
