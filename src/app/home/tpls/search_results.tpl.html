@@ -1,19 +1,28 @@
 <div class="row">
     <div class="col-lg-12" ng-hide="search_results">
-        <div class="col-lg-12 margin-t-10 margin-b-10">
-            <h3 class="text-left">
+        <div class="col-lg-12 margin-t-20 margin-b-10">
+            <p class="lead text-left">
                 Showing results for <span class="text-danger">{{query}}
 
                 <span class="pull-right">
-                    <button class="action-btn action-btn-md action-btn-info" onclick="window.history.back()">
+                    <!-- <button class="login-btn login-btn-primary">
+                        Excel export <i class="fa fa-file-excel-o"></i>
+                    </button> -->
+                    <button class="action-btn action-btn-md action-btn-primary" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Excel export">
+                        <i class="fa fa-file-excel-o"></i>
+                    </button>
+                    <button class="action-btn action-btn-md action-btn-primary" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Print search results">
+                        <i class="fa fa-print"></i>
+                    </button>
+                    <button class="action-btn action-btn-md action-btn-primary" onclick="window.history.back()">
                         <i class="fa fa-arrow-left"></i>
                     </button>
                 </span>
-            </h3>
+            </p>
         </div>
     </div>
     <div class="col-lg-12 margin-t-20 search-loader" ng-show="search_results" style="text-align: center">
-        <img src="assets/img/477.GIF">
+        <img src="assets/img/301.GIF">
     </div>
     <div class="col-lg-12 margin-b-20">
             <div class="col-lg-4" ng-hide="search_results">
@@ -34,37 +43,42 @@
                         Oops sorry no matches were found for the query <span class="text-danger">{{query}}</span>. try the advanced search
                     </p>
                 </div>
-                <div class="col-md-12 content-card" ng-repeat="fac in query_results" style="cursor: pointer">
-                    <a href>
-                        <div class="col-lg-1">
-                            <span class="pull-left search-icon search-icon-md"
-                            data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Click to view on map">
-                                <i class="fa fa-map-marker"></i>
-                            </span>
-                        </div>
-                    </a>
-                    <a ui-sref="facility_details({fac_id : fac.id})" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Click to view facility details">
-                        <div class="col-lg-11">
-                            <h5 class="fw-700 fs-16" style="color: rgba(0,0,0, 0.9);">
-                                <span class="pull-left">
-                                    {{fac.code}} | {{fac.name}}
-                                </span>
-                                <span class="pull-right label label-primary ">
-                                    {{fac.facility_type_name}}
-                                </span>
-
-                            </h5>
+                <div class="col-md-12 results-card" ng-repeat="fac in query_results">
+                        <div class="col-lg-12">
+                            <a ui-sref="facility_details({fac_id : fac.id})" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Click to view facility details">
+                                <h5 class="search-resulthead">
+                                    <span class="fw-700 fs-18 pull-left" style="cursor: pointer">
+                                       <span class="fw-900 fs-20"> {{fac.code}} </span> | {{fac.name}}
+                                    </span>
+                                </h5>
+                                <br>
+                                <h5>
+                                    <span class="pull-left fs-16">
+                                        <label>Status: </label>
+                                        {{fac.regulary_status_name}}
+                                    </span>
+                                    <span class="pull-right">
+                                        <span class="fs-14 fw-400 label label-primary">{{fac.facility_type_name}}
+                                        </span>
+                                    </span>
+                                </h5>
+                            </a>
                             <br>
-                            <p class="margin-t-10 fw-500" style="color:#000;">
+                            <h5 class="margin-t-10 fw-700" style="color:#000;">
                                 <span class="pull-left fs-14">
-                                     {{fac.constituency}} CONSTITUENCY
+                                     {{fac.county}} COUNTY
                                 </span>
                                 <span class="pull-right" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Facility owner">
                                     <i class="fa fa-user-secret"></i> {{fac.owner_name}}
                                 </span>
+                            </h5>
+                            <br>
+                            <p class="margin-b-30 margin-t-5">
+                                <span class="pull-left fs-12 fw-500">
+                                 {{fac.constituency}} CONSTITUENCY
+                                </span>
                             </p>
                         </div>
-                    </a>
                 </div>
             </div>
     </div>
