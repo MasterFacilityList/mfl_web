@@ -47,6 +47,18 @@
                 self.data.counties = [];
             });
 
+            this.constituencies.filter(this.filter).success(function(data){
+                self.data.consts = data.results;
+            }).error(function(){
+                self.data.consts = [];
+            });
+
+            this.wards.filter(this.filter).success(function(data){
+                self.data.wards = data.results;
+            }).error(function(){
+                self.data.wards = [];
+            });
+
             return self.data;
         };
     }]);
