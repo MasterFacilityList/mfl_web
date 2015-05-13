@@ -18,9 +18,9 @@
         this.filter = {"page_size": 10000};
         this.getData = function(){
             this.facility_types.filter(this.filter).success(function(data){
-                self.data.facility_types = data.results;
+                self.data.facility_type = data.results;
             }).error(function(){
-                self.data.facility_types = [];
+                self.data.facility_type = [];
             });
 
             // this.officers.filter(this.filter).success(function(data){
@@ -42,23 +42,22 @@
             });
 
             this.counties.filter(this.filter).success(function(data){
-                self.data.counties = data.results;
+                self.data.county = data.results;
             }).error(function(){
-                self.data.counties = [];
+                self.data.county = [];
             });
 
             this.constituencies.filter(this.filter).success(function(data){
-                self.data.consts = data.results;
+                self.data.constituency = data.results;
             }).error(function(){
-                self.data.consts = [];
+                self.data.constituency = [];
             });
 
             this.wards.filter(this.filter).success(function(data){
-                self.data.wards = data.results;
+                self.data.ward = data.results;
             }).error(function(){
-                self.data.wards = [];
+                self.data.ward = [];
             });
-
             return self.data;
         };
     }]);

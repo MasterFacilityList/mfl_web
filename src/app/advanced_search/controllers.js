@@ -5,8 +5,8 @@
         "mfl.search.utils"
     ])
 
-    .controller("mfl.filtering.controller", ["$scope","$rootScope","filteringApi",
-                "mfl.search.filters.changes", function($scope, $rootScope,
+    .controller("mfl.filtering.controller", ["$scope","$rootScope","$stateParams", "filteringApi",
+                "mfl.search.filters.changes", function($scope, $rootScope,$stateParams,
                 filterApi, changedFilters){
         $scope.filter = {
             county: [],
@@ -22,13 +22,33 @@
             wards: true,
             consts: true
         };
+        var setFilters = function(){
+            _.each(_.keys($stateParams), function(key){
+                if(!_.isUndefined($stateParams[key])){
+                    if(_.contains(_.keys($scope.filter), key)){
+                        var res = _.findWhere($scope.filter[key], {id:$stateParams[key]});
+                        if(_.isEmpty(res)){
+                            console.log(res);
+                            // $scope.filter[key].push({id:$stateParams[key], name: "name"});
+                        }
+
+                    }else{
+                        $scope.filter[key] = $stateParams[key];
+                    }
+                }
+
+            });
+        };
         $scope.default_filter = {page_size: 2000};
         if(_.isUndefined($rootScope.mfl_filter_data)){
             $rootScope.mfl_filter_data = filterApi.getData();
             $scope.filter_data = $rootScope.mfl_filter_data;
+            setFilters();
         }else{
             $scope.filter_data = $rootScope.mfl_filter_data;
+            setFilters();
         }
+
 
         // var getChildren = function(api, key, filter){
         //     api.filter(
@@ -90,6 +110,8 @@
 
         $scope.filterFacility = function(frm){
             var changes= changedFilters.whatChanged(frm);
+            // _.extend(changes, constructParams($scope.filter));
+            changes = constructParams($scope.filter);
             if(!_.isEmpty(changes)){
                 // if(_.has(changes, "ward")){
                 //     changes.ward = changes.ward.id;

@@ -37,7 +37,7 @@
                                  <ui-select-match placeholder="Select County">
                                         {{$item.name}}
                                 </ui-select-match>
-                                <ui-select-choices repeat="county in filter_data.counties | propsFilter: {name: $select.search}">
+                                <ui-select-choices repeat="county in filter_data.county track by $index  | propsFilter: {name: $select.search} ">
                                     <div ng-bind-html="county.name| highlight: $select.search"></div>
                                 </ui-select-choices>
                             </ui-select>
@@ -51,7 +51,7 @@
                                  <ui-select-match placeholder="Select County">
                                         {{$item.name}}
                                 </ui-select-match>
-                                <ui-select-choices repeat="consti in filter_data.consts| propsFilter: {name: $select.search}">
+                                <ui-select-choices repeat="consti in filter_data.constituency track by $index| propsFilter: {name: $select.search}">
                                      <div ng-bind-html="consti.name| highlight: $select.search"></div>
                                 </ui-select-choices>
                             </ui-select>
@@ -64,7 +64,7 @@
                                  <ui-select-match placeholder="Select Ward">
                                         {{$item.name}}
                                 </ui-select-match>
-                                <ui-select-choices repeat="ward in filter_data.wards| propsFilter: {name: $select.search}">
+                                <ui-select-choices repeat="ward in filter_data.ward track by $index | propsFilter: {name: $select.search} ">
                                      <div ng-bind-html="ward.name| highlight: $select.search"></div>
                                 </ui-select-choices>
                             </ui-select>
@@ -77,7 +77,7 @@
                                  <ui-select-match placeholder="Select Operation Status">
                                         {{$item.name}}
                                 </ui-select-match>
-                                <ui-select-choices repeat="status in filter_data.operation_status | propsFilter: {name: $select.search}">
+                                <ui-select-choices repeat="status in filter_data.operation_status track by $index | propsFilter: {name: $select.search}">
                                     <div ng-bind-html="status.name| highlight: $select.search"></div>
                                 </ui-select-choices>
                             </ui-select>
@@ -90,7 +90,7 @@
                                  <ui-select-match placeholder="Select Operation Status">
                                         {{$item.name}}
                                 </ui-select-match>
-                                <ui-select-choices repeat="typ in filter_data.facility_types | propsFilter: {name: $select.search}">
+                                <ui-select-choices repeat="typ in filter_data.facility_type | propsFilter: {name: $select.search}">
                                     <div ng-bind-html="typ.name| highlight: $select.search"></div>
                                 </ui-select-choices>
                             </ui-select>
