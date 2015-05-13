@@ -5,5 +5,6 @@ angular.module("mfl.common", [
     "mfl.common.controllers",
     "mfl.common.directives",
     "mfl.gis.wrapper",
-    "mfl.adminunits.wrapper"
+    "mfl.adminunits.wrapper",
+    "mfl.common.providers"
 ]);
