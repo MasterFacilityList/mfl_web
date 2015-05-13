@@ -76,10 +76,14 @@ module.exports = {
             "vendor/angular-bootstrap/ui-bootstrap-tpls.js",
             "vendor/angular-ui-router/release/angular-ui-router.js",
             "vendor/angular-sanitize/angular-sanitize.js",
+            "vendor/typeahead.js/dist/bloodhound.js",
+            "vendor/typeahead.js/dist/typeahead.bundle.js",
+            "vendor/typeahead.js/dist/typeahead.jquery.js",
             "vendor/angular-leaflet-directive/dist/angular-leaflet-directive.js",
             "libs/api_wrapper.js",
             "libs/sil_grid_tpls.js",
-            "libs/sil_grid.js"
+            "libs/sil_grid.js",
+            "libs/sil_typeahead_service/src/sil-typeahead.js"
         ],
         css: [
         ],

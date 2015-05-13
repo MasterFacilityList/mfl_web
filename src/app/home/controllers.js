@@ -2,11 +2,16 @@
 angular.module("mfl.home.controllers", ["mfl.facilities.wrapper"])
 
     .controller("mfl.home.controllers.home", ["$scope", "$state",
-        function ($scope, $state) {
+        "searchService",
+        function ($scope, $state, searchService) {
         $scope.test="home";
         $scope.tooltip = {
             "title": "",
             "checked": false
+        };
+        $scope.typeaheadDocs = function () {
+            // TODO add debounce to reduce number of api calls
+            searchService.typeaheadDoctors("facilities");
         };
         $scope.search = function (query) {
             $state.go("search_results", {result: query});
