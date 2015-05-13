@@ -15,6 +15,7 @@
         "mfl.common",
         "ngSanitize",
         "mfl.filtering",
-        "mfl.settings"
+        "mfl.settings",
+        "mfl.gis"
     ]);
 })(angular);
