@@ -8,37 +8,50 @@
     <link rel="stylesheet" type="text/css" href="<%= file %>" /><% }); %>
   </head>
   <body>
-<header class="header text-white">
-   <!--Header brand-->
-    <div class="header-brand width-35p">
-        <a ui-sref="home.join" class="logo"><span class="text-warning">e</span>-Health Kenya Facilities</a> 
-    </div>
-   <!--End of Header brand-->
-    <!--Header profile-->
-    <div class="header-profile">
-          <div class="profile-nav">
-            <a href="">
-              <span class="profile-username">Advanced Search</span>
-            </a>
-          </div>
-          <div class="profile-nav">
-            <a href="" class="dropdown-toggle" data-toggle="dropdown">
-              <span class="profile-username">Sign Up</span>
-              <span class="fa fa-sign-in"></span>
-            </a>
-            <ul class="dropdown-menu animated flipInX pull-right" role="menu">
-              <li><a href="#/profile"><i class="fa fa-cog"></i> Profile</a></li>
-              <li><a href="" ng-click="logout()"><i class="fa fa-sign-out"></i> Log Out</a></li>
-              <li><a href="" ng-click="logout()"><i class="fa fa-sign-in"></i>Sign Up </a></li>
-            </ul>
-          </div>
-    </div>
-   <!--End of Header profile-->
-</header>
+      <div ui-view="header"></div>
         <!--End of header-->
-        <div ui-view="main" class="content"></div>
+        <div ui-view="main" class="content margin-t--27"></div>
         <footer>
-            <p class="text-center"> &copy; Copyright <span ui-view="footer"></span> by <a href="index.html#">Savannah Informatics Limited</a> All Rights Reserved. </p>
+            <div class="container">
+              <div class="row">
+                <ul class="list-unstyled">
+                  <li class="col-sm-12 col-xs-12">
+                    <h5 class="fs-18 fw-600" >Supported by: </h5>
+                  </li>
+                  <li class="col-sm-4 col-xs-6 text-center">
+                    <span style="border-radius: 50%;">
+                      <img src="assets/img/usaid.png">
+                    </span>
+                  </li>
+                  <li class="col-sm-4 col-xs-6 text-center">
+                    <span style="border-radius: 50%;">
+                      <img src="assets/img/download.jpg">
+                    </span>
+                  </li>
+                  <li class="col-sm-4 col-xs-6 text-right">
+                    <h4 class="fs-18 fw-800">
+                    <i class="fa fa-phone"></i> Contact our help desk
+                    </h4>
+                    <h5 class="fs-16 fw-600">
+                      Email: helpdesk@ehealth.or.ke
+                    </h5>
+                  </li>
+                  <li class="col-sm-12 col-xs-12">
+                    <p class="text-center margin-t-20">
+                      &copy; Copyright
+                      <span ui-view="footer"></span>
+                      by
+                      <a href="http://health.go.ke/" target="_blank">
+                        Ministry of Health
+                      </a> All Rights Reserved.Powered by
+                      <a href="http://savannahinformatics.com/" target="_blank">
+                        Savannah Informatics Limited
+                      </a>
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            </div>
         </footer>
     <!-- compiled JavaScript -->
     <% scripts.forEach( function ( file ) { %>

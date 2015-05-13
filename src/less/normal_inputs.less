@@ -83,13 +83,14 @@ input[type=search],
 input[type=password],
 select,
 textarea {
-    font-size: 16px;
+    font-size: 18px;
     padding: 10px 10px 10px 5px;
     background-color: #fff;
     display: block;
-    width: 90%;
+    width: 100%;
     border: none;
-    border-bottom: 1px solid #757575;
+    border-bottom: 1px solid #ddd;
+    border-right: 1px solid #ddd
 }
 
 input[type=text]:focus,
@@ -103,7 +104,7 @@ textarea:focus {
 /* LABEL ======================================= */
 
 .group label {
-    color: #999;
+    color: #fff;
     font-size: 16px;
     font-weight: normal;
     position: absolute;
@@ -126,9 +127,10 @@ select:focus ~ label,
 select:valid ~ label,
 textarea:focus ~ label,
 textarea:valid ~ label {
-    top: -10px;
+    /*top: -10px;
     font-size: 14px;
-    color: #2196F3;
+    color: #fff;*/
+    display: none;
 }
 /* BOTTOM BARS ================================= */
 
@@ -145,7 +147,7 @@ textarea:valid ~ label {
     width: 0;
     bottom: 1px;
     position: absolute;
-    background: #2196F3;
+    background: #fff;
     transition: 0.2s ease all;
 }
 
@@ -197,7 +199,7 @@ textarea:focus ~ .highlight {
 
 @keyframes inputHighlighter {
     from {
-        background: #2196F3;
+        background: #ddd;
     }
     to {
         width: 0;
@@ -220,9 +222,13 @@ textarea:focus ~ label,
 textarea:valid ~ label {
     top: -10px;
     font-size: 14px;
-    color: #2196F3;
+    color: #ddd;
 }
 /*Material ripple effect =============*/
+
+.btn {
+
+}
 
 .btn:after,
 .nav a:after {
@@ -240,4 +246,21 @@ textarea:valid ~ label {
     margin-left: 0;
     opacity: 1;
     transition: 0s;
+}
+
+/*Main header search input box*/
+.header-search {
+    position: relative;
+    margin-bottom: 0px;
+}
+.header-search > div > .group {
+    position: relative;
+    margin-bottom: 20px;
+}
+.header-search > div > .group > input[type=search] {
+    background-color: #2196F3;
+}
+
+.main-search {
+    background-color: #2196F3;
 }
