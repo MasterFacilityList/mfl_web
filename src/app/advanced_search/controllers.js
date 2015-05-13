@@ -17,6 +17,12 @@
             number_of_beds: [],
             number_of_cots: []
         };
+        $scope.query = $stateParams.search;
+        filterApi.facilities.filter({search: $stateParams.search}).success(function(data){
+            $scope.query_results = data.results;
+        }).error(function(err){
+            $scope.alert = err.error;
+        });
         $scope.numbers = _.range(2000);
         $scope.disabled = {
             wards: true,
@@ -43,10 +49,11 @@
         if(_.isUndefined($rootScope.mfl_filter_data)){
             $rootScope.mfl_filter_data = filterApi.getData();
             $scope.filter_data = $rootScope.mfl_filter_data;
-            setFilters();
+            // setFilters();
         }else{
             $scope.filter_data = $rootScope.mfl_filter_data;
-            setFilters();
+            // setFilters();
+            console.log(setFilters);
         }
 
 
@@ -111,7 +118,6 @@
         $scope.filterFacility = function(frm){
             var changes= changedFilters.whatChanged(frm);
             // _.extend(changes, constructParams($scope.filter));
-            changes = constructParams($scope.filter);
             if(!_.isEmpty(changes)){
                 // if(_.has(changes, "ward")){
                 //     changes.ward = changes.ward.id;
