@@ -83,9 +83,9 @@ module.exports = {
             "vendor/stacktrace-js/dist/stacktrace.js",
             "vendor/angular-ui-select/dist/select.js",
             "libs/api_wrapper.js",
-           "libs/sil_grid/sil_grid_tpls.js",
+            "libs/sil_grid/sil_grid_tpls.js",
             "libs/sil_grid/sil_grid.js",
-            "libs/sil_error_handler/error_handler.js"
+            "libs/sil_error_handler/error_handler.js",
             "libs/sil_typeahead_service/src/sil-typeahead.js"
         ],
         css: [
