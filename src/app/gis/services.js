@@ -26,12 +26,12 @@ angular.module("mfl.gis.services",[])
         // northwest (xMin, yMin) and southeast (xMax, yMax) coordinates.
         return bounds;
     };
-    this.getExps = function (bnds){
-        var s,w,n,e,sw = [s,w],ne = [n,e];
-        sw[0] = bnds.xMin[1] > bnds.yMin[1] ? bnds.xMin[1] : bnds.yMin[1];
-        sw[1] = bnds.yMin[0] > bnds.yMin[0] ? bnds.xMin[0] : bnds.yMin[0];
-        ne[0] = bnds.xMax[1] > bnds.yMax[1] ? bnds.xMax[1] : bnds.yMax[1];
-        ne[1] = bnds.yMax[0] > bnds.yMax[0] ? bnds.xMax[0] : bnds.yMax[0];
-        return [sw,ne];
-    };
+//    this.getExps = function (bnds){
+//        var s,w,n,e,sw = [s,w],ne = [n,e];
+//        sw[0] = bnds.xMin[1] > bnds.yMin[1] ? bnds.xMin[1] : bnds.yMin[1];
+//        sw[1] = bnds.yMin[0] > bnds.yMin[0] ? bnds.xMin[0] : bnds.yMin[0];
+//        ne[0] = bnds.xMax[1] > bnds.yMax[1] ? bnds.xMax[1] : bnds.yMax[1];
+//        ne[1] = bnds.yMax[0] > bnds.yMax[0] ? bnds.xMax[0] : bnds.yMax[0];
+//        return [sw,ne];
+//    };
 }]);

@@ -83,9 +83,8 @@ angular
         });
     }])
     .controller("mfl.gis.controllers.gis_county", ["$scope","leafletData",
-        "gisCountiesApi","$http","$state","$stateParams","SERVER_URL","mfl.gis.services.gis",
-        function ($scope, leafletData, gisCountiesApi, $http, $state, $stateParams,SERVER_URL,
-                  gisService) {
+        "gisCountiesApi","$http","$state","$stateParams","SERVER_URL",
+        function ($scope, leafletData, gisCountiesApi, $http, $state, $stateParams,SERVER_URL) {
         $scope.tooltip = {
             "title": "",
             "checked": false
@@ -141,16 +140,6 @@ angular
                   "&format=json",
                   {cache: "true"})
             .success(function (data){
-            gisService.getPoints(data)
-                .success(function (data){
-                    gisService.getExps(data)
-                    .success(function (data){
-                        var bounds = [data[0],data[1]];
-                        angular.extend($scope, {
-                            bounds : bounds
-                        });
-                    });
-                });
             angular.extend($scope, {
                 geojson: {
                     data: data,
@@ -356,28 +345,5 @@ angular
                 },
                 selectedWard: {}
             });
-        });
-        $http.get(SERVER_URL+ "api/facilities/"+
-                  "facilities/?id="+
-                  $stateParams.ward_id +
-                  "&format=json",
-                  {cache: "true"})
-            .success(function (data){
-            angular.extend($scope, {
-                markers: {
-                    data: data
-                }
-            });
-        });
-        $scope.$on("leafletDirectiveMap.geojsonMouseover", function(ev, ward) {
-            $scope.hoveredWard= ward;
-        });
-        $scope.$on("leafletDirectiveMap.geojsonClick", function(ev, ward) {
-            var boundary_ids = ward.properties.ward_boundary_ids.join(",");
-            $stateParams.ward_area = boundary_ids;
-            var center = ward.properties.center.coordinates[1]+":"+
-                ward.properties.center.coordinates[0]+":"+
-            $state.go("gis_const",{const_id:ward.id,
-                                    ward_boundaries : boundary_ids,c:center});
         });
     }]);
