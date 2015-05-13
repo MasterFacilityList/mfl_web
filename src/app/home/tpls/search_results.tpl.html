@@ -8,10 +8,10 @@
                     <!-- <button class="login-btn login-btn-primary">
                         Excel export <i class="fa fa-file-excel-o"></i>
                     </button> -->
-                    <button class="action-btn action-btn-md action-btn-primary" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Excel export">
+                    <a class="action-btn action-btn-md action-btn-primary" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Excel export" ng-click="excelExport()" target="download" download >
                         <i class="fa fa-file-excel-o"></i>
-                    </button>
-                    <button class="action-btn action-btn-md action-btn-primary" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Print search results">
+                    </a>
+                    <button class="action-btn action-btn-md action-btn-primary" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Print search results" >
                         <i class="fa fa-print"></i>
                     </button>
                     <button class="action-btn action-btn-md action-btn-primary" onclick="window.history.back()">
@@ -21,12 +21,12 @@
             </p>
         </div>
     </div>
-    <div class="col-lg-12 margin-t-20 search-loader" ng-show="search_results" style="text-align: center">
+    <div class="col-lg-12 margin-t-50 search-loader" ng-show="search_results" style="text-align: center">
         <img src="assets/img/301.GIF">
     </div>
     <div class="col-lg-12 margin-b-20">
             <div class="col-lg-4" ng-hide="search_results">
-                <div class="col-lg-12 col-md-12 content-card">
+                <div class="col-lg-12 col-md-12 content-card margin-t-15">
                     <h4>Advanced search</h4>
                     <form role="form">
                     </form>
@@ -43,6 +43,7 @@
                         Oops sorry no matches were found for the query <span class="text-danger">{{query}}</span>. try the advanced search
                     </p>
                 </div>
+                <span class="pull-left fs-14" ng-hide="search_results">Page (1/1)</span>
                 <div class="col-md-12 results-card" ng-repeat="fac in query_results">
                         <div class="col-lg-12">
                             <a ui-sref="facility_details({fac_id : fac.id})" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Click to view facility details">
@@ -51,18 +52,19 @@
                                        <span class="fw-900 fs-20"> {{fac.code}} </span> | {{fac.name}}
                                     </span>
                                 </h5>
-                                <br>
-                                <h5>
-                                    <span class="pull-left fs-16">
-                                        <label>Status: </label>
-                                        {{fac.regulary_status_name}}
-                                    </span>
-                                    <span class="pull-right">
-                                        <span class="fs-14 fw-400 label label-primary">{{fac.facility_type_name}}
-                                        </span>
-                                    </span>
-                                </h5>
+
                             </a>
+                            <br>
+                            <h5>
+                                <span class="pull-left fs-16">
+                                    <label>Status: </label>
+                                    <span class="text-blue fw-700">{{fac.regulary_status_name}}</span>
+                                </span>
+                                <span class="pull-right">
+                                    <span class="fs-14 fw-600 label label-primary">{{fac.facility_type_name}}
+                                    </span>
+                                </span>
+                            </h5>
                             <br>
                             <h5 class="margin-t-10 fw-700" style="color:#000;">
                                 <span class="pull-left fs-14">
@@ -80,6 +82,23 @@
                             </p>
                         </div>
                 </div>
+                <!-- ====Start of pagination -->
+                <nav class="col-md-12 col-xs-12" ng-hide="search_results">
+                  <ul class="pagination col-md-12 col-xs-12">
+                    <li class="col-md-3">
+                      <a class="login-btn login-btn-primary" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span> Prev
+                      </a>
+                    </li>
+                    <li class="col-md-6"></li>
+                    <li class="col-md-3">
+                      <a class="pull-right login-btn login-btn-primary" aria-label="Next" ng-disabled="page">
+                        Next <span aria-hidden="true">&raquo;</span>
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
+                <!-- ====end of pagination -->
             </div>
     </div>
 </div>

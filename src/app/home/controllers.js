@@ -20,8 +20,8 @@ angular.module("mfl.home.controllers", ["mfl.facilities.wrapper"])
     ])
 
     .controller("mfl.home.controllers.search_results", ["$scope",
-        "facilitiesApi", "$state",
-        function ($scope, facilitiesApi, $state) {
+        "facilitiesApi", "$state", "downloadApi",
+        function ($scope, facilitiesApi, $state, downloadApi) {
             $scope.test = "search results";
             $scope.search = {
                 search : $state.params.result
@@ -30,6 +30,7 @@ angular.module("mfl.home.controllers", ["mfl.facilities.wrapper"])
                 "title": "",
                 "checked": false
             };
+            $scope.page = true;
             $scope.search_results = true;
             $scope.no_result = false;
             $scope.query = $state.params.result;
@@ -49,6 +50,23 @@ angular.module("mfl.home.controllers", ["mfl.facilities.wrapper"])
                     $scope.err = e.error;
                     $scope.search_results = false;
                 });
+            //exporting to excel functionality
+            $scope.excelExport = function () {
+                console.log("Called");
+                $scope.excel_filters = {
+                    search : $state.params.result,
+                    format : "excel"
+                };
+                facilitiesApi.facilities.filter($scope.excel_filters)
+                    .success(function (data) {
+                        console.log(data, downloadApi);
+                        window.location.href =
+                        "http://localhost:8061/api/common/download/download/xlsx/";
+                    })
+                    .error(function (e) {
+                        console.log(e.error);
+                    });
+            };
         }
     ])
 

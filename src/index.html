@@ -12,7 +12,46 @@
         <!--End of header-->
         <div ui-view="main" class="content margin-t--27"></div>
         <footer>
-            <p class="text-center"> &copy; Copyright <span ui-view="footer"></span> by <a href="http://health.go.ke/" target="_blank">Ministry of Health</a> All Rights Reserved.Powered by <a href="http://savannahinformatics.com/" target="_blank">Savannah Informatics Limited</a> </p>
+            <div class="container">
+              <div class="row">
+                <ul class="list-unstyled">
+                  <li class="col-sm-12 col-xs-12">
+                    <h5 class="fs-18 fw-600" >Supported by: </h5>
+                  </li>
+                  <li class="col-sm-4 col-xs-6 text-center">
+                    <span style="border-radius: 50%;">
+                      <img src="assets/img/usaid.png">
+                    </span>
+                  </li>
+                  <li class="col-sm-4 col-xs-6 text-center">
+                    <span style="border-radius: 50%;">
+                      <img src="assets/img/download.jpg">
+                    </span>
+                  </li>
+                  <li class="col-sm-4 col-xs-6 text-right">
+                    <h4 class="fs-18 fw-800">
+                    <i class="fa fa-phone"></i> Contact our help desk
+                    </h4>
+                    <h5 class="fs-16 fw-600">
+                      Email: helpdesk@ehealth.or.ke
+                    </h5>
+                  </li>
+                  <li class="col-sm-12 col-xs-12">
+                    <p class="text-center margin-t-20">
+                      &copy; Copyright
+                      <span ui-view="footer"></span>
+                      by
+                      <a href="http://health.go.ke/" target="_blank">
+                        Ministry of Health
+                      </a> All Rights Reserved.Powered by
+                      <a href="http://savannahinformatics.com/" target="_blank">
+                        Savannah Informatics Limited
+                      </a>
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            </div>
         </footer>
     <!-- compiled JavaScript -->
     <% scripts.forEach( function ( file ) { %>
