@@ -17,11 +17,16 @@
             number_of_beds: [],
             number_of_cots: []
         };
+        $scope.search_results = true;
+        $scope.no_result = false;
         $scope.query = $stateParams.search;
         filterApi.facilities.filter({search: $stateParams.search}).success(function(data){
+            $scope.search_results = false;
             $scope.query_results = data.results;
         }).error(function(err){
             $scope.alert = err.error;
+            $scope.no_result = true;
+            $scope.search_results = false;
         });
         $scope.numbers = _.range(2000);
         $scope.disabled = {
@@ -116,6 +121,7 @@
         };
 
         $scope.filterFacility = function(frm){
+            $scope.search_results = true;
             var changes= changedFilters.whatChanged(frm);
             // _.extend(changes, constructParams($scope.filter));
             if(!_.isEmpty(changes)){
@@ -135,10 +141,15 @@
                 // }
                 changes = constructParams(changes);
                 filterApi.facilities.filter(changes).success(function(data){
+                    $scope.search_results = false;
                     $scope.query_results = data.results;
                 }).error(function(error){
+                    $scope.search_results = false;
                     $scope.alert = error.error;
+                    $scope.no_result = true;
                 });
+            }else{
+                $scope.search_results = false;
             }
         };
     }]);

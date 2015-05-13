@@ -21,11 +21,9 @@
             </p>
         </div>
     </div>
-    <div class="col-lg-12 margin-t-50 search-loader" ng-show="search_results" style="text-align: center">
-        <img src="assets/img/301.GIF">
-    </div>
+
     <div class="col-lg-12 margin-b-20">
-            <div class="col-lg-4" ng-hide="search_results">
+            <div class="col-lg-4">
                 <div class="col-lg-12 col-md-12 content-card">
                     <h4>Advanced search</h4>
                     <form role="form" class="form-horizontal form-bordered" name="mfl.filters.form">
@@ -168,7 +166,12 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-8 search-results" >
+
+            <div class="col-lg-8 search-results">
+                <div class="col-lg-12 margin-t-50 search-loader" ng-show="search_results" style="text-align: center">
+                        <img src="assets/img/301.GIF">
+             </div>
+             <div ng-hide="search_results">
                 <div class="col-lg-12" ng-if="err !== ''">
                     <div class="alert alert-danger">
                         {{err}}
@@ -238,6 +241,7 @@
                   </ul>
                 </nav>
                 <!-- ====end of pagination -->
+                </div>
             </div>
     </div>
 </div>
