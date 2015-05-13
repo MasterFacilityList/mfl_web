@@ -1,0 +1,39 @@
+{
+  "name": "sil-typeahead",
+  "version": "0.1.3",
+  "homepage": "https://github.com/savannahinformatics/sil-javascript-utils",
+  "authors": [
+    "James Macharia <james@savannahinformatics.com>"
+  ],
+  "description": "SIL plugguble typeahead service for snomed",
+  "main": "src/sil-typeahead.js",
+  "keywords": [
+    "sil-typeahead"
+  ],
+  "devDependencies": {
+    "angular": "~1.3.11",
+    "underscore": "~1.7.0",
+    "typeahead.js": "~0.10.2",
+    "angular-mocks": "~1.3.11",
+    "jasmine-jquery": "~2.0.7",
+    "jasmine-ajax": "~3.0.0",
+    "sil-api-wrapper": "http://bower.slade360.co.ke/getpackage/sil-api-wrapper__0.2.0.tar.gz"
+  },
+  "dependencies": {
+    "typeahead.js": "~0.10.5",
+    "sil-api-wrapper": "http://bower.slade360.co.ke/getpackage/sil-api-wrapper__0.2.0.tar.gz"
+  },
+  "resolutions": {
+    "angular": "1.3.11",
+    "jasmine-ajax": "~1.3.1"
+  },
+  "license": "Proprietary",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

@@ -66,9 +66,9 @@ module.exports = {
             "vendor/jquery/dist/jquery.js",
             "vendor/toastr/toastr.js",
             "vendor/underscore/underscore.js",
-            "vendor/leaflet/dist/leaflet.js",
             "vendor/bootstrap/dist/js/bootstrap.js",
             "vendor/angular/angular.js",
+            "vendor/leaflet/dist/leaflet-src.js",
             "vendor/angular-animate/angular-animate.js",
             "vendor/angular-cookies/angular-cookies.js",
             "vendor/angular-resource/angular-resource.js",
@@ -76,12 +76,17 @@ module.exports = {
             "vendor/angular-bootstrap/ui-bootstrap-tpls.js",
             "vendor/angular-ui-router/release/angular-ui-router.js",
             "vendor/angular-sanitize/angular-sanitize.js",
+            "vendor/typeahead.js/dist/bloodhound.js",
+            "vendor/typeahead.js/dist/typeahead.bundle.js",
+            "vendor/typeahead.js/dist/typeahead.jquery.js",
             "vendor/angular-leaflet-directive/dist/angular-leaflet-directive.js",
             "vendor/stacktrace-js/dist/stacktrace.js",
+            "vendor/angular-ui-select/dist/select.js",
             "libs/api_wrapper.js",
             "libs/sil_grid/sil_grid_tpls.js",
             "libs/sil_grid/sil_grid.js",
-            "libs/sil_error_handler/error_handler.js"
+            "libs/sil_error_handler/error_handler.js",
+            "libs/sil_typeahead_service/src/sil-typeahead.js"
         ],
         css: [
         ],
@@ -95,7 +100,7 @@ module.exports = {
 
     connect: {
         options: {
-            port: 8063,
+            port: 8062,
             hostname: "*",
             keepalive: true
         },

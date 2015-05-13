@@ -1,9 +1,22 @@
 <contentheader></contentheader>
 <div class="content-body pad-10">
     <div class="margin-b-10">
-        <leaflet center="KEN" width="100%" geojson="geojson" events="events" height="480px"></leaflet>
+        <leaflet center="KEN" defaults="defaults" width="100%" geojson="geojson" defaults="defaults" events="events" height="500px"></leaflet>
     </div>
     <h3>COUNTY INFORMATION</h3>
+    <h1>Map bounds example</h1>
+    <h2>South west</h2>
+    <form>
+        Lat : <input type="number" step="any" ng-model="bounds.southWest.lat" />
+        Lng : <input type="number" step="any" ng-model="bounds.southWest.lng" />
+    </form>
+
+    <h2>North east</h2>
+    <form>
+        Lat : <input type="number" step="any" ng-model="bounds.northEast.lat" />
+        Lng : <input type="number" step="any" ng-model="bounds.northEast.lng" />
+    </form>
+
     <div class="content-card">
         <h4><strong>County Hovered: <span class="text-info">{{hoveredCounty.properties.name}}</span></strong></h4>
         <p><strong>Number of Facilities: <span class="text-info">{{hoveredCounty.properties.facility_count}}</span></strong></p>
