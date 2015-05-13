@@ -10,8 +10,17 @@
                 filterApi, changedFilters){
         $scope.filter = {
             county: undefined,
-            constituency: undefined
+            constituency: undefined,
+            operation_status: [],
+            facility_type: [],
+            number_of_beds: [],
+            number_of_cots: []
         };
+        $scope.numbers = _.range(1000);
+        $scope.data = [
+            {name: "Testing", id: 3232},
+            {name: "Play", id: 32352}
+        ];
         $scope.disabled = {
             wards: true,
             consts: true
@@ -59,7 +68,32 @@
                         }
                     }
                 }
-                console.log(changes);
+                _.each(_.keys(changes), function(key){
+                    if(_.isArray(changes[key])){
+                        changes[key] = _.reduce(changes[key],
+                            function(memo, item){
+                                if(_.has(item, "id")){
+                                    return memo+item.id+",";
+                                }else{
+                                    return memo+item+",";
+                                }
+                            }, "");
+                    }
+                    if(_.has(changes[key], "id")){
+                        changes[key] = changes[key].id;
+                    }
+                    if(_.isEmpty(changes[key])){
+                        if(!_.contains([true, false], changes[key])){
+                            delete changes[key];
+                        }
+                    }
+                    try{
+                        if(changes[key][changes[key].length-1]===","){
+                            changes[key] = changes[key].substring(0, changes[key].length-1);
+                        }
+                    }catch(error){}
+
+                });
                 filterApi.facilities.filter(changes).success(function(data){
                     $scope.query_results = data.results;
                 }).error(function(error){

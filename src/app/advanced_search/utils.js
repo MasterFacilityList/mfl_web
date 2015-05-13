@@ -11,13 +11,11 @@
                     }
                     if (frm[f].$dirty === true) {
                         try{
-                            if(!_.isEmpty(frm[f].$modelValue)){
-                                vals[f] = frm[f].$modelValue.trim();
-                            }
+                            vals[f] = frm[f].$modelValue.trim();
+
                         }catch(err){
-                            if(!_.isEmpty(frm[f].$modelValue)){
-                                vals[f] = frm[f].$modelValue;
-                            }
+                            vals[f] = frm[f].$modelValue;
+
                         }
                     }
                 }

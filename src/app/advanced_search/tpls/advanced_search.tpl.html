@@ -65,11 +65,13 @@
                                 </ui-select-choices>
                             </ui-select>
                         </div>
-                        <div class="input-group input-group-in">
-                            <span class="input-group-addon text-silver">Operation Status: </span>
-                            <ui-select name="operation_status" ng-model="filter.operation_status" theme="select2">
-                                 <ui-select-match placeholder="Select / Search..">
-                                        {{$select.selected.name}}
+
+                        <div class="input-group ">
+                            <span class="">Operation Status: </span> <br/>
+                            <ui-select multiple ng-model="filter.operation_status"
+                            close-on-select="true" theme="select2" sortable="true" name="operation_status" style="width:350px;">
+                                 <ui-select-match placeholder="Select Operation Status">
+                                        {{$item.name}}
                                 </ui-select-match>
                                 <ui-select-choices repeat="status in filter_data.operation_status | propsFilter: {name: $select.search}">
                                     <div ng-bind-html="status.name| highlight: $select.search"></div>
@@ -77,11 +79,12 @@
                             </ui-select>
                         </div>
 
-                        <div class="input-group input-group-in">
-                            <span class="input-group-addon text-silver">Facility Type: </span>
-                            <ui-select name="facility_type" ng-model="filter.facility_type" theme="select2">
-                                 <ui-select-match placeholder="Select / Search..">
-                                        {{$select.selected.name}}
+                        <div class="input-group ">
+                            <span class="">Facility Type: </span> <br/>
+                            <ui-select multiple ng-model="filter.facility_type"
+                            close-on-select="true"  theme="select2" sortable="true" name="facility_type" style="width:350px;">
+                                 <ui-select-match placeholder="Select Operation Status">
+                                        {{$item.name}}
                                 </ui-select-match>
                                 <ui-select-choices repeat="typ in filter_data.facility_types | propsFilter: {name: $select.search}">
                                     <div ng-bind-html="typ.name| highlight: $select.search"></div>
@@ -89,15 +92,35 @@
                             </ui-select>
                         </div>
 
-                        <div class="input-group input-group-in">
-                            <span class="input-group-addon text-silver">Number of Beds: </span>
-                            <input name="number_of_beds" ng-model="filter.number_of_beds" id="beds" type="text" data-input="tags" class="form-control"  autocomplete="off">
+
+                        <div class="input-group">
+                            <span class="control-label">Number of Beds: </span><br/>
+
+                            <ui-select multiple name="number_of_beds" ng-model="filter.number_of_beds"
+                            close-on-select="true"  theme="select2" sortable="true"  style="width:350px;">
+                                 <ui-select-match placeholder="Beds Number">
+                                        {{$item}}
+                                </ui-select-match>
+                                <ui-select-choices repeat="number in numbers | filter: $select.search">
+                                    {{number}}
+                                </ui-select-choices>
+                            </ui-select>
 
                         </div>
 
-                        <div class="input-group input-group-in">
-                            <span class="input-group-addon text-silver">Number of Cots: </span>
-                            <input name="number_of_cots" ng-model="filter.number_of_cots" type="number" class="form-control"  autocomplete="off">
+                        <div class="input-group">
+                            <span class="control-label">Number of Cots: </span><br/>
+
+                            <ui-select multiple name="number_of_cots" ng-model="filter.number_of_cots"
+                            close-on-select="true"  theme="select2" sortable="true"  style="width:350px;">
+                                 <ui-select-match placeholder="Cots Number">
+                                        {{$item}}
+                                </ui-select-match>
+                                <ui-select-choices repeat="number in numbers | filter: $select.search">
+                                    {{number}}
+                                </ui-select-choices>
+                            </ui-select>
+
                         </div>
 
                         <div class="input-group input-group-in">
@@ -126,10 +149,10 @@
                         </div>
 
                     </div>
-                    <div>
+                 </form>
+                     <div>
                         <button class="btn btn-primary" ng-click="filterFacility(mfl.filters.form)">Filter </button>
                     </div>
-                 </form>
                 </div>
             </div>
             <div class="col-lg-8 search-results" >
