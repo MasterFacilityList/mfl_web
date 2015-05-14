@@ -11,10 +11,11 @@
                 <img src="../assets/img/kenya-coat-of-arms.png">
             </h2>
         </div>
+        <!-- <input class="facilities" ng-click="typeaheadFacilities()" ng-model="search.query" type="text" /> -->
         <div class="col-lg-8 col-lg-offset-2 search-card text-center" style="border: 1px solid #000;">
             <form role="form" name="search-form" ng-submit="search(search.query)">
                 <div class="col-md-12 input-group">
-                    <input type="search" class="facilities" ng-model="search.query" placeholder="Search facilities..." ng-click="typeaheadDocs()">
+                    <input type="text" class="facilities" ng-model="search.query" placeholder="Search facilities..." ng-click="typeaheadFacilities()" />
                     <span class="bar"></span>
                     <span class="highlight"></span>
                     <span class="search-addon-btn input-group-addon" id="sizing-addon1" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Search facility">

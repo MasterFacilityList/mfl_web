@@ -49,12 +49,16 @@ angular.module('sil-typeahead', ['sil.api.wrapper'])
                     queryTokenizer: Bloodhound.tokenizers.whitespace,
                     remote: {
                         url: search_url,
-                        filter: function (results) {
-                            if(results.hasOwnProperty("hits")){
-                                return (results.hits);
-                            }
-                            return results;
+                        wildcard: "%QUERY",
+                        transform: function (response) {
+                            return response.results;
                         }
+                        // filter: function (results) {
+                        //     if(results.hasOwnProperty("hits")){
+                        //         return (results.hits);
+                        //     }
+                        //     return results;
+                        // }
                     }
                 });
             }
@@ -81,78 +85,6 @@ angular.module('sil-typeahead', ['sil.api.wrapper'])
             getSelector : function (classname) {
                 return $('.' + classname + ':not(\'.tt-hint\'):not(\'.tt-input\')');
             }
-        };
-        /***
-         * Function to assemble the snomed search url
-         * Takes the following params
-         * @param searchType (@string two options <full or autocomplete>)
-         * @param shortcut (@string find the full list in the snomed Server docs)
-         * @param filters
-                - (@list of objects eg [{name:"parents",value: "233232,242423"}])
-                - the 'value' can contain a comma separated list of SCTIDs;
-
-         * @returns search query string
-         * It is up to the creator of the search query to config the
-         * search filters and pass them to the function
-         */
-        this.snomedQuery = function (searchType, shortcut, filters) {
-            var query;
-            var q = [];
-            //function to compile filters
-            function filtersPush(filters){
-                for (var index = 0; index < filters.length; index++) {
-                    var filter = filters[index];
-
-                    if (  _.isUndefined(filter) ||
-                          _.isUndefined(filter.name) ||
-                          _.isUndefined(filter.value)) {
-                        throw 'filter was incorrectly configured: ' + JSON.stringify(filter);
-                    }
-                    var query_param = filter.name + '=' + filter.value;
-                    q.push(query_param);
-                }
-            }
-            /**
-             * If searchType is autocomplete, the query will look like
-             * search/autocomplete/<theShortCut>/?query=<theQuery>
-             * e.g. search/autocomplete/disease/?query=malaria
-             * You can also choose to specify filters
-             * Filters should take the form
-             *      [{name: "parent", value: "123123"}]
-             * e.g search/autocomplete/disease/?query=malaria&parent=123123
-             */
-            if (searchType === 'autocomplete') {
-                var header = 'autocomplete/';
-
-                if (_.isUndefined(shortcut) || shortcut === '') {
-                    throw 'shortcut should be provided';
-                }
-                if(!_.isUndefined(filters) && filters !== ''){
-                    filtersPush(filters);
-                    var _qstr = '/?query=%QUERY';
-                    query = header + shortcut + _qstr + '&' + q.join('&');
-                }
-                if(_.isUndefined(filters) || filters === ''){
-                    query = header + shortcut + '/?query=%QUERY';
-                }
-            }
-            /**
-             * If searchType is autocomplete, the query will look like
-             * search/full/?query=<theQuery>&<filter>&<filter>
-             * Filters should take the form
-                - [{name: "parent", value: "123123"}]
-             * eg search/full/?query=heart&parent=123123
-             */
-
-            if (searchType === 'full') {
-                if (_.isUndefined(filters) || filters === '') {
-                    throw 'Filters not provided';
-                }
-                filtersPush(filters);
-                query = 'full/?query=%QUERY' + '&' + q.join('&');
-
-            }
-            return query;
         };
 
         /**

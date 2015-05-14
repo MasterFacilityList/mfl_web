@@ -9,9 +9,9 @@ angular.module("mfl.home.controllers", ["mfl.facilities.wrapper"])
             "title": "",
             "checked": false
         };
-        $scope.typeaheadDocs = function () {
+        $scope.typeaheadFacilities = function () {
             // TODO add debounce to reduce number of api calls
-            searchService.typeaheadDoctors("facilities");
+            searchService.typeaheadFacilities("facilities");
         };
         $scope.search = function (query) {
             $state.go("search_results", {result: query});
