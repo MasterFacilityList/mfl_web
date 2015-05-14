@@ -14,7 +14,8 @@ angular.module("mfl.home.controllers", ["mfl.facilities.wrapper"])
             searchService.typeaheadFacilities("facilities");
         };
         $scope.search = function (query) {
-            $state.go("search_results", {result: query});
+            $scope.loader = true;
+            $state.go("filtering", {search: query});
         };
     }])
 

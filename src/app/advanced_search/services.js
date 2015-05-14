@@ -2,6 +2,24 @@
 (function(angular){
     angular.module("mfl.filtering.services", ["sil.api.wrapper"])
 
+
+    .factory("mfl.filtering.data.controller", ["$q", "filteringApi", function($q, filterApi){
+        return function(){
+            var counties = filterApi.getData().county;
+            var consts = filterApi.getData().constituency;
+            var fType = filterApi.getData().facility_type;
+            var op = filterApi.getData().operation_status;
+            return $q.all([counties, consts, fType, op]).then(function(results){
+                return {
+                    county: results[0],
+                    constituency: results[1],
+                    facility_type: results[2],
+                    operation_status: results[3]
+                };
+            });
+        };
+    }])
+
     .service("filteringApi", ["api", function(api){
         this.facilities = api.setBaseUrl("api/facilities/facilities");
         this.constituencies = api.setBaseUrl("api/common/constituencies");
@@ -12,53 +30,15 @@
         this.owners = api.setBaseUrl("api/facilities/owners");
         this.officers = api.setBaseUrl("api/facilities/officers");
         this.facility_types = api.setBaseUrl("api/facilities/facility_types");
-        this.data = {};
-        var self = this;
 
         this.filter = {"page_size": 10000};
         this.getData = function(){
-            this.facility_types.filter(this.filter).success(function(data){
-                self.data.facility_type = data.results;
-            }).error(function(){
-                self.data.facility_type = [];
-            });
-
-            // this.officers.filter(this.filter).success(function(data){
-            //     self.data.officers = data.results;
-            // }).error(function(){
-            //     self.data.officers = [];
-            // });
-
-            // this.owners.filter(this.filter).success(function(data){
-            //     self.data.owners = data.results;
-            // }).error(function(){
-            //     self.data.owners = [];
-            // });
-
-            this.operation_status.filter(this.filter).success(function(data){
-                self.data.operation_status = data.results;
-            }).error(function(){
-                self.data.operation_status = [];
-            });
-
-            this.counties.filter(this.filter).success(function(data){
-                self.data.county = data.results;
-            }).error(function(){
-                self.data.county = [];
-            });
-
-            this.constituencies.filter(this.filter).success(function(data){
-                self.data.constituency = data.results;
-            }).error(function(){
-                self.data.constituency = [];
-            });
-
-            this.wards.filter(this.filter).success(function(data){
-                self.data.ward = data.results;
-            }).error(function(){
-                self.data.ward = [];
-            });
-            return self.data;
+            return {
+                county: this.counties.filter(this.filter),
+                constituency: this.constituencies.filter(this.filter),
+                facility_type: this.facility_types.filter(this.filter),
+                operation_status: this.operation_status.filter(this.filter)
+            };
         };
     }]);
 })(angular);
