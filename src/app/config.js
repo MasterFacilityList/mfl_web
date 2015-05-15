@@ -10,7 +10,7 @@
     .constant("SERVER_URL", "http://localhost/")
 
     .constant("CREDZ", {
-        "email": "",
+        "username": "",
         "password": "",
         "client_id": "",
         "client_secret": "",
@@ -44,21 +44,23 @@
         var token = auth.getToken();
         if (_.isNull(token)) {
             auth.fetchToken();
+        } else {
+            auth.setToken(token);
         }
     }])
 
     .config(["silGridConfigProvider", function(silGridConfig){
-            silGridConfig.apiMaps = {
-                    officers: ["mfl.adminunits.wrapper", "officersApi"],
-                    counties: ["mfl.adminunits.wrapper", "countiesApi"],
-                    constituencies: ["mfl.adminunits.wrapper", "constituenciesApi"],
-                    wards: ["mfl.adminunits.wrapper", "wardsApi"],
-                    towns: ["mfl.adminunits.wrapper", "townsApi"],
-                    gis_countries:["mfl.gis.wrapper", "gisCountriesApi"],
-                    gis_counties:["mfl.gis.wrapper", "gisCountiesApi"],
-                    gis_conts:["mfl.gis.wrapper", "gisConstsApi"],
-                    gis_wards:["mfl.gis.wrapper", "gisWardsApi"]
-                };
-            silGridConfig.appConfig = "mflAppConfig";
-        }]);
+        silGridConfig.apiMaps = {
+            officers: ["mfl.adminunits.wrapper", "officersApi"],
+            counties: ["mfl.adminunits.wrapper", "countiesApi"],
+            constituencies: ["mfl.adminunits.wrapper", "constituenciesApi"],
+            wards: ["mfl.adminunits.wrapper", "wardsApi"],
+            towns: ["mfl.adminunits.wrapper", "townsApi"],
+            gis_countries:["mfl.gis.wrapper", "gisCountriesApi"],
+            gis_counties:["mfl.gis.wrapper", "gisCountiesApi"],
+            gis_conts:["mfl.gis.wrapper", "gisConstsApi"],
+            gis_wards:["mfl.gis.wrapper", "gisWardsApi"]
+        };
+        silGridConfig.appConfig = "mflAppConfig";
+    }]);
 })(angular, _);
