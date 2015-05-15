@@ -1,11 +1,11 @@
 (function (angular) {
     "use strict";
- 
+
     describe("Test MFL GIS Interceptors :", function () {
         var rootScope, q, server_url;
- 
-        beforeEach(module("mfl.gis.interceptors","mfl.settings"));
- 
+
+        beforeEach(module("mfl.gis.interceptors", "mflAppConfig"));
+
         beforeEach(function () {
             inject(["$rootScope", "$q","SERVER_URL", function (rs,$q,url) {
                 rootScope = rs;
@@ -24,13 +24,13 @@
                     }
                 ]
             };
-            
+
             it("should define functions", function () {
                 inject(["mfl.gis.interceptors.gis_boundaries", function (gis) {
                     expect(angular.isFunction(gis.response)).toBeTruthy();
                 }]);
             });
- 
+
             describe("response :", function () {
                 it ("should detect all responded requests", function () {
                     inject(["mfl.gis.interceptors.gis_boundaries", function (gis) {
@@ -38,7 +38,7 @@
                         expect(p).toEqual(gis.response.data);
                     }]);
                 });
-                
+
                 it ("should transform gis response", function () {
                     inject(["mfl.gis.interceptors.gis_boundaries", function (gis) {
                         var response = {
@@ -51,7 +51,7 @@
                         expect(p.data).toEqual(payload.results);
                     }]);
                 });
-                
+
                 it ("should not transform non-gis response", function () {
                     inject(["mfl.gis.interceptors.gis_boundaries", function (gis) {
                         var response = {
