@@ -71,36 +71,12 @@
                                 extra-settings="dropDownSettings" translation-texts="selectTitles.facility_type"></div>
                            </div>
                        </div>
-
-
-                        <div class="input-group">
-                            <span class="control-label">Number of Beds: </span><br/>
-
-                            <ui-select multiple name="number_of_beds" ng-model="filter.number_of_beds"
-                            close-on-select="true"  theme="select2" sortable="true"  style="width:350px;">
-                                 <ui-select-match placeholder="Beds Number">
-                                        {{$item}}
-                                </ui-select-match>
-                                <ui-select-choices repeat="number in numbers | filter: $select.search">
-                                    {{number}}
-                                </ui-select-choices>
-                            </ui-select>
-
+                        <div class="form-group">
+                            <input placeholder="Number of Beds" ng-model="filter.number_of_beds" />
                         </div>
 
-                        <div class="input-group">
-                            <span class="control-label">Number of Cots: </span><br/>
-
-                            <ui-select multiple name="number_of_cots" ng-model="filter.number_of_cots"
-                            close-on-select="true"  theme="select2" sortable="true"  style="width:350px;">
-                                 <ui-select-match placeholder="Cots Number">
-                                        {{$item}}
-                                </ui-select-match>
-                                <ui-select-choices repeat="number in numbers | filter: $select.search">
-                                    {{number}}
-                                </ui-select-choices>
-                            </ui-select>
-
+                        <div class="form-group">
+                            <input placeholder="Nunber of cots" ng-model="filter.number_of_cots" />
                         </div>
 
                         <div class="input-group input-group-in">
