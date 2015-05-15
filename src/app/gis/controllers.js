@@ -1,7 +1,7 @@
 "use strict";
 angular
     .module("mfl.gis.controllers", ["leaflet-directive",
-        "mfl.gis.wrapper","mfl.adminunits.wrapper","mfl.gis.interceptors"])
+        "mfl.gis.wrapper","mfl.adminunits.wrapper"])
     .controller("mfl.gis.controllers.gis", ["$scope","leafletData",
         "countiesApi","$http","$stateParams","$state","SERVER_URL",
         function ($scope,leafletData, countiesApi, $http, $stateParams,
@@ -206,7 +206,7 @@ angular
         $scope.filters = {
             id : $stateParams.const_id
         };
-            
+
         angular.extend($scope, {
             defaults: {
                 scrollWheelZoom: false,
@@ -297,7 +297,7 @@ angular
         $scope.filters = {
             id : $stateParams.const_id
         };
-            
+
         angular.extend($scope, {
             defaults: {
                 scrollWheelZoom: false,

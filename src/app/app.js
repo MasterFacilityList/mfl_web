@@ -7,7 +7,8 @@
         "ngCookies",
         "mflAppConfig",
         "ui.router",
-        "ui.select",
+        "ngTagsInput",
+        "angularjs-dropdown-multiselect",
 
         "templates-app",
         "templates-common",
