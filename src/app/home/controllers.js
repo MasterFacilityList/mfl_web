@@ -11,7 +11,9 @@ angular.module("mfl.home.controllers", ["mfl.facilities.wrapper"])
         };
         $scope.typeaheadFacilities = function () {
             // TODO add debounce to reduce number of api calls
+            /*_.debounce(function () {*/
             searchService.typeaheadFacilities("facilities");
+            /*}, 500);*/
         };
         $scope.search = function (query) {
             $scope.loader = true;
