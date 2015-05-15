@@ -42,8 +42,7 @@
                             <input ng-model="filter.description" name="description" type="text"   autocomplete="off" placeholder="Description...">
                         </div>
 
-                         <div class="input-group ">
-                            <span class="">County: </span> <br/>
+                        <div class="group">
                             <ui-select multiple ng-model="filter.county"
                             close-on-select="true" theme="select2" sortable="true" name="county" style="width:350px;">
                                  <ui-select-match placeholder="Select County">
@@ -54,6 +53,19 @@
                                 </ui-select-choices>
                             </ui-select>
                         </div>
+
+                         <!-- <div class="input-group ">
+                            <span class="">County: </span> <br/>
+                            <ui-select multiple ng-model="filter.county"
+                            close-on-select="true" theme="select2" sortable="true" name="county" style="width:350px;">
+                                 <ui-select-match placeholder="Select County">
+                                        {{$item.name}}
+                                </ui-select-match>
+                                <ui-select-choices repeat="county in filter_data.county">
+                                    <div ng-bind-html="county.name| highlight: $select.search"></div>
+                                </ui-select-choices>
+                            </ui-select>
+                        </div> -->
 
 
                         <div class="input-group ">
@@ -139,35 +151,55 @@
 
                         </div>
 
-                        <div class="input-group input-group-in">
-                            <span class="input-group-addon text-silver">Open Whole Day: </span>
-                            <input name="open_whole_day" ng-model="filter.open_whole_day" type="checkbox" class="form-control" >
+                        <div class="checkbox-group margin-t-10">
+                            <input name="open_whole_day" ng-model="filter.open_whole_day" type="checkbox" id="open_whole_day">
+                            <label for="open_whole_day">
+                                <span class="check"></span>
+                                <span class="box"></span>
+                                 Open whole day
+                             </label>
                         </div>
 
-                        <div class="input-group input-group-in">
-                            <span class="input-group-addon text-silver">Is Classified: </span>
-                            <input name="is_classified" ng-model="filter.is_classified" type="checkbox" class="form-control">
+                        <div class="checkbox-group margin-t-10">
+                            <input name="is_classified" ng-model="filter.is_classified" type="checkbox" id="is_classified">
+                            <label for="is_classified">
+                                <span class="check"></span>
+                                <span class="box"></span>
+                                 Is classified
+                             </label>
                         </div>
 
-                        <div class="input-group input-group-in">
-                            <span class="input-group-addon text-silver">Is Published: </span>
-                            <input name="is_published" ng-model="filter.is_published" type="checkbox" class="form-control">
+                        <div class="checkbox-group margin-t-10">
+                            <input name="is_published" ng-model="filter.is_published" type="checkbox" id="is_published">
+                            <label for="is_published">
+                                <span class="check"></span>
+                                <span class="box"></span>
+                                 Is published
+                             </label>
                         </div>
 
-                        <div class="input-group input-group-in">
-                            <span class="input-group-addon text-silver">Is Regulated: </span>
-                            <input name="is_regulated" ng-model="filter.is_regulated" type="checkbox" class="form-control" >
+                        <div class="checkbox-group margin-t-10">
+                            <input name="is_regulated" ng-model="filter.is_regulated" type="checkbox" id="is_regulated">
+                            <label for="is_regulated">
+                                <span class="check"></span>
+                                <span class="box"></span>
+                                 Is Regulated
+                             </label>
                         </div>
 
-                        <div class="input-group input-group-in">
-                            <span class="input-group-addon text-silver">Is Active: </span>
-                            <input name="is_active" ng-model="filter.is_active" type="checkbox" class="form-control" >
+                        <div class="checkbox-group margin-t-10">
+                            <input name="is_active" ng-model="filter.is_active" type="checkbox" id="is_active">
+                            <label for="is_active">
+                                <span class="check"></span>
+                                <span class="box"></span>
+                                 Is Active
+                             </label>
                         </div>
 
                     </div>
                  </form>
                  <div>
-                    <button class="btn btn-primary" ng-click="filterFacility(mfl.filters.form)">Filter </button>
+                    <button class="login-btn login-btn-primary" ng-click="filterFacility(mfl.filters.form)"><i class="fa fa-filter"></i> Filter </button>
                 </div>
                 </div>
                 <!-- End of advanced filter form ======================-->

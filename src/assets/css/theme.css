@@ -3682,7 +3682,7 @@ body.expand-panel {
 .box {
     position: relative;
     margin-bottom: 15px;
-    padding: 15px;
+    padding: 10px;
     border: 1px solid #E0E4E8;
     background-image: none;
     border-radius: 4px
