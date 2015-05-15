@@ -24,7 +24,15 @@
             $scope.filter_data[key] = filteringData[key].data.results;
             $rootScope.mfl_filter_data = $scope.filter_data;
         });
-        if(_.isUndefined($stateParams.search)){
+        var removeEmptyFilters = function(filters){
+            _.each(_.keys(filters), function(key){
+                if(_.isUndefined(filters[key])){
+                    delete filters[key];
+                }
+            });
+            return filters;
+        };
+        if(_.isEmpty($stateParams)){
             filterApi.facilities.list().success(function(res){
                 $scope.search_results = false;
                 $scope.query_results = res.results;
@@ -38,7 +46,8 @@
             });
         }else{
             $scope.query = $stateParams.search;
-            filterApi.facilities.filter({search: $stateParams.search}).success(function(res){
+            var filters = removeEmptyFilters($stateParams);
+            filterApi.facilities.filter(filters).success(function(res){
                 $scope.search_results = false;
                 $scope.query_results = res.results;
                 if($scope.query_results.length === 0) {
@@ -156,6 +165,8 @@
                         delete changes.county;
                     }
                 }
+                changes.search = $stateParams.search;
+                changes = removeEmptyFilters(changes);
                 filterApi.facilities.filter(changes).success(function(data){
                     $scope.search_results = false;
                     $scope.query_results = data.results;

@@ -11,42 +11,66 @@
       <div ui-view="header"></div>
         <!--End of header-->
         <div ui-view="main" class="content margin-t--27"></div>
-        <footer>
-            <div class="container">
+        <footer class="footer">
+            <div class="container-fluid">
               <div class="row">
                 <ul class="list-unstyled">
-                  <li class="col-sm-12 col-xs-12">
+                  <li class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <h5 class="fs-18 fw-600" >Supported by: </h5>
                   </li>
-                  <li class="col-sm-3 col-xs-6 ">
+                  <li class="col-lg-3 col-md-3 col-sm-6 col-xs-6 ">
                     <a href="http://www.usaid.gov/"><span style="border-radius: 50%;">
                       <img src="assets/img/usaid.png">
                     </span></a>
                   </li>
-                  <li class="col-sm-3 col-xs-6 ">
+                  <li class="col-lg-3 col-md-3 col-sm-6 col-xs-6 ">
                     <a href="http://www.afyainfo.org/" target="_blank"><span style="border-radius: 50%;">
                       <img src="assets/img/download.jpg">
                     </span></a>
                   </li>
-                  <li class="col-sm-6 col-xs-12 text-left" style="border-left: 1px solid #ccc;">
-                    <div class="col-sm-12 col-xs-12 text-left">
+                  <li style="border-left: 1px solid #ccc;" class="col-lg-6 col-md-6 hidden-sm hidden-xs text-left" >
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-left">
                         <h5 class="fs-16 fw-600 text-white">
-                          <i class="fa fa-phone"></i> Helpdesk contact: helpdesk@ehealth.or.ke
+                          <i class="fa fa-envelope"></i> Helpdesk email: helpdesk@ehealth.or.ke
                         </h5>
                     </div>
-                    <div class="col-sm-12 col-xs-12">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                       <p class="text-left margin-t-20">
                       &copy; Copyright
                         <span ui-view="footer"></span>,
                         <a href="http://health.go.ke/" target="_blank">
                           Ministry of Health, Kenya
-                        </a> .Powered by
+                        </a>
+                        .Powered by
                         <a href="http://savannahinformatics.com/" target="_blank">
                           Savannah Informatics Limited
                         </a>
                       </p>
                     </div>
                   </li>
+                  <!-- Beginning of mobile view port -->
+                  <li  class="hidden-lg hidden-md col-sm-12 col-xs-12 text-left margin-t-20" >
+                      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-left">
+                          <h5 class="fs-16 fw-600 text-white">
+                            <i class="fa fa-envelope"></i> Helpdesk email: helpdesk@ehealth.or.ke
+                          </h5>
+                      </div>
+                      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <p class="text-left margin-t-20">
+                        &copy; Copyright
+                          <span ui-view="footer"></span>,
+                          <a href="http://health.go.ke/" target="_blank">
+                            Ministry of Health, Kenya
+                          </a>
+                          .Powered by
+                          <a href="http://savannahinformatics.com/" target="_blank">
+                            Savannah Informatics Limited
+                          </a>
+                        </p>
+                      </div>
+                    </li>
+
+                  <!-- End of mobile view port -->
                 </ul>
               </div>
             </div>

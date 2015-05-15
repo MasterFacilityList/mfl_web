@@ -30,13 +30,16 @@
                 <h4>Advanced search</h4>
                     <form role="form" class="form-horizontal form-bordered" name="mfl.filters.form">
                     <div class="form-group">
-                        <div class="input-group input-group-in">
-                            <span class="input-group-addon text-silver">Name: </span>
-                            <input ng-model="filter.name" name="name" type="text" class="form-control"  autocomplete="off">
+                        <!-- <div class="input-group input-group-in"> -->
+                        <div class="group">
+                            <!-- <span class="input-group-addon text-silver">Name: </span> -->
+                            <!-- <input ng-model="filter.name" name="name" type="text" class="form-control"  autocomplete="off"> -->
+
+                            <input ng-model="filter.name" name="name" type="text"   autocomplete="off" placeholder="Name..">
                         </div>
-                        <div class="input-group input-group-in">
-                            <span class="input-group-addon text-silver">Description: </span>
-                            <input ng-model="filter.description" name="description" type="text" class="form-control"  autocomplete="off">
+                        <div class="group">
+                            <!-- <span class="input-group-addon text-silver">Description: </span> -->
+                            <input ng-model="filter.description" name="description" type="text"   autocomplete="off" placeholder="Description...">
                         </div>
 
                          <div class="input-group ">
