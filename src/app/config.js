@@ -12,7 +12,7 @@
         function(SERVER_URL, apiConfig){
             apiConfig.SERVER_URL = SERVER_URL;
         }
-    ]);
+    ])
 
     .config(["$httpProvider",function ($httpProvider) {
         $httpProvider.defaults.withCredentials = true;

@@ -4,7 +4,7 @@
     describe("Test MFL GIS Interceptors :", function () {
         var rootScope, q, server_url;
 
-        beforeEach(module("mfl.gis.interceptors"));
+        beforeEach(module("mfl.gis.interceptors", "mflAppConfig"));
 
         beforeEach(function () {
             inject(["$rootScope", "$q","SERVER_URL", function (rs,$q,url) {

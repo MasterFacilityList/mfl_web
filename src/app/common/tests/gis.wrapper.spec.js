@@ -3,7 +3,7 @@
     describe("GIS County api Wrapper", function(){
         var httpBackend, gisCountriesApi,gisCountiesApi,gisConstsApi,gisWardsApi, SERVER_URL;
         beforeEach(function () {
-            module("mflwebApp","mfl.gis.wrapper");
+            module("mflwebApp", "mfl.gis.wrapper", "mflAppConfig");
 
             inject(["gisCountriesApi","gisCountiesApi","gisWardsApi","gisConstsApi",
                 function(gcountries,gcounties,gconsts,gwards){
