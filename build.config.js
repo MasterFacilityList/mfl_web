@@ -78,6 +78,7 @@ module.exports = {
             "vendor/angular-sanitize/angular-sanitize.js",
             "vendor/angular-leaflet-directive/dist/angular-leaflet-directive.js",
             "vendor/stacktrace-js/dist/stacktrace.js",
+            "vendor/moment/moment.js",
             "libs/api_wrapper.js",
             "libs/sil_grid/sil_grid_tpls.js",
             "libs/sil_grid/sil_grid.js",

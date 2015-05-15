@@ -3,7 +3,7 @@
 describe("Directives: Test the Content Title directive", function() {
     var $compile, $rootScope, title;
     //We"ll use this template for our tests
-    var directiveTpl = "<sil-cont-title title='title'></sil-cont-title>";
+    var directiveTpl = "<content-title title='title'></content-title>";
 
     beforeEach(function() {
         //Require the module our directive is attached to
@@ -36,7 +36,7 @@ describe("Directives: Test the Content Title directive", function() {
         //Actual test
         expect($element.hasClass("main-title")).toBeTruthy();
     });
-    
+
     it("should scope title to the directive title", function () {
         var $parent = $rootScope.$new();
         $parent.title = title;
@@ -55,7 +55,7 @@ describe("Directives: Test the Content Title directive", function() {
         var $element = $compile(directiveTpl)($scope);
         //We're outside of the angular $watch loop here, so we need to call $digest manually
         $scope.$digest();
-        //the jQLite wrapper provided by angular can only find elements by tag name. 
+        //the jQLite wrapper provided by angular can only find elements by tag name.
         var $links = $element.find("i");
         expect($links.length).toEqual(title.length);
         //Testing the genarated link names

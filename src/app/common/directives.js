@@ -51,12 +51,12 @@
             template: "<div class='content-header'>"+
         "<actionbar action='action'></actionbar>"+
         "<h2 class='content-title'>"+
-        "<sil-cont-title title='title'></sil-cont-title></h2>"+
+        "<content-title title='title'></content-title></h2>"+
         "<breadcrumbs path='path'></breadcrumbs></div>"
         };
     }])
 
-    .directive("silContTitle", ["$compile", function ($compile) {  //Generates title
+    .directive("contentTitle", ["$compile", function ($compile) {  //Generates title
         return {
             restrict: "E",
             replace: true,

@@ -1,12 +1,22 @@
-(function (angular) {
+(function (angular, _) {
     "use strict";
     angular.module("mflAppConfig", [
         "ngCookies",
         "sil.grid",
-        "sil.api.wrapper"
+        "sil.api.wrapper",
+        "mfl.auth"
     ])
 
     .constant("SERVER_URL", "http://localhost/")
+
+    .constant("CREDZ", {
+        "email": "",
+        "password": "",
+        "client_id": "",
+        "client_secret": "",
+        "token_url": ""
+    })
+
 
     .config(["SERVER_URL", "apiConfigProvider",
         function(SERVER_URL, apiConfig){
@@ -15,7 +25,7 @@
     ])
 
     .config(["$httpProvider",function ($httpProvider) {
-        $httpProvider.defaults.withCredentials = true;
+        $httpProvider.defaults.withCredentials = false;
         $httpProvider.defaults.headers.common = {
             "Content-Type":"application/json",
             "Accept" : "application/json, */*"
@@ -28,25 +38,22 @@
         var csrftoken = $cookies.csrftoken;
         var header_name = "X-CSRFToken";
         $http.defaults.headers.common[header_name] = csrftoken;
-        $.ajaxSetup({
-            xhrFields: {
-                withCredentials: true
-            }
-        });
+    }])
+
+    .run(["api.auth", function (auth) {
+        var token = auth.getToken();
+        if (_.isNull(token)) {
+            auth.fetchToken();
+        }
     }])
 
     .config(["silGridConfigProvider", function(silGridConfig){
             silGridConfig.apiMaps = {
-                    practitioners: ["mfl.practitioners.wrapper", "practitionersApi"],
-                    facilities : ["mfl.facilities.wrapper",
-                        "facilitiesApi"],
-                    chul: ["mfl.chul.wrapper", "chulApi"],
                     officers: ["mfl.adminunits.wrapper", "officersApi"],
                     counties: ["mfl.adminunits.wrapper", "countiesApi"],
                     constituencies: ["mfl.adminunits.wrapper", "constituenciesApi"],
                     wards: ["mfl.adminunits.wrapper", "wardsApi"],
                     towns: ["mfl.adminunits.wrapper", "townsApi"],
-                    owners: ["mfl.facilities.wrapper", "ownersApi"],
                     gis_countries:["mfl.gis.wrapper", "gisCountriesApi"],
                     gis_counties:["mfl.gis.wrapper", "gisCountiesApi"],
                     gis_conts:["mfl.gis.wrapper", "gisConstsApi"],
@@ -54,4 +61,4 @@
                 };
             silGridConfig.appConfig = "mflAppConfig";
         }]);
-})(angular);
+})(angular, _);
