@@ -11,7 +11,7 @@
             var token_timeout = 10 * 1000; // 10 seconds
             var request = null;
 
-            var setToken = function (token) {
+            var setXHRToken = function (token) {
                 var auth_token = token.token_type + " " + token.access_token;
                 $http.defaults.headers.common.Authorization = auth_token;
                 jQuery.ajaxSetup({
@@ -84,7 +84,7 @@
                 "getToken": getToken,
                 "fetchToken": fetchToken,
                 "refreshToken": refreshToken,
-                "setToken": setToken
+                "setXHRToken": setXHRToken
             };
         }
     ]);
