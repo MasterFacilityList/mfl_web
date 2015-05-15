@@ -35,11 +35,21 @@
                             <!-- <span class="input-group-addon text-silver">Name: </span> -->
                             <!-- <input ng-model="filter.name" name="name" type="text" class="form-control"  autocomplete="off"> -->
 
-                            <input ng-model="filter.name" name="name" type="text"   autocomplete="off" placeholder="Name..">
+                            <input type="text" ng-model="filter.name" name="name"   required>
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label>
+                                Name
+                            </label>
                         </div>
                         <div class="group">
                             <!-- <span class="input-group-addon text-silver">Description: </span> -->
-                            <input ng-model="filter.description" name="description" type="text"   autocomplete="off" placeholder="Description...">
+                            <input ng-model="filter.description" name="description" type="text" required>
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label>
+                                Description
+                            </label>
                         </div>
 
                         <div class="group">
