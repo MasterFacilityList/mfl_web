@@ -10,7 +10,112 @@
         function($scope, $rootScope, $stateParams,filterApi,
             facilitiesApi, downloadApi, changedFilters, filteringData){
         $scope.filter_data = {};
-        //declaring error handlers
+        var initFilterModel = function(){
+            $scope.filter = $stateParams;
+        };
+        initFilterModel();
+        $scope.filter = {
+            county: [],
+            constituency: [],
+            ward: [],
+            operation_status: [],
+            facility_type: [],
+            number_of_beds: [],
+            number_of_cots: []
+        };
+        $scope.numbers = _.range(2000);
+        $scope.disabled = {
+            ward: true,
+            consts: true
+        };
+        $scope.selectTitles = {
+            county:{
+                buttonDefaultText: "Select County"
+            },
+            constituency:{
+                buttonDefaultText: "Select Constituency"
+            },
+            ward: {
+                buttonDefaultText: "Select Ward"
+            },
+            operation_status: {
+                buttonDefaultText: "Select Operation Status"
+            },
+            facility_type: {
+                buttonDefaultText: "Select Facility Type"
+            }
+        };
+        $scope.selected = {
+            county: [],
+            constituency: []
+        };
+        $scope.default_filter = {page_size: 2000};
+        $scope.events = {
+            utils: (function(){
+                return{
+                    addSelected: function(key, value, label, filterKey,api){
+                        $scope.selected[key].push(value);
+                        $scope.selected[key] = _.uniq($scope.selected[key]);
+                        var filter = {};
+                        filter[filterKey]= $scope.selected[key].join(",");
+                        getChildren(
+                            api,
+                            label,
+                            filter
+                        );
+                    },
+                    removeSelected: function(key, value, label,filterKey, api){
+                        $scope.selected[key].pop(value);
+                        var fs = $scope.selected[key].join(",");
+                        var pass_filter = {};
+                        pass_filter[filterKey] = fs;
+                        var filter = _.isEmpty(fs)?{}:pass_filter;
+                        getChildren(
+                            api,
+                            label,filter);
+                    }
+                };
+            })(),
+            county: {
+                onItemSelect: function(item){
+                    $scope.events.utils.addSelected(
+                        "county", item.id, "constituency", "county",
+                        filterApi.constituencies);
+                },
+                onItemDeselect: function(item){
+                    $scope.events.utils.removeSelected(
+                        "county", item.id, "constituency", "county",
+                        filterApi.constituencies);
+                }
+            },
+            constituency: {
+                onItemSelect: function(item){
+                    $scope.events.utils.addSelected(
+                        "constituency", item.id, "ward", "constituency",
+                        filterApi.wards);
+                    $scope.disabled.ward = false;
+                },
+                onItemDeselect: function(item){
+                    $scope.events.utils.removeSelected(
+                        "constituency", item.id, "ward", "constituency",
+                        filterApi.wards);
+                    if( _.isEmpty($scope.filter_data.ward)){
+                        $scope.disabled.ward = true;
+                    }else{
+                        $scope.disabled.ward = false;
+                    }
+                }
+            }
+        };
+        $scope.dropDownSettings = {
+            displayProp: "name",
+            showCheckAll: false,
+            showUncheckAll: false,
+            closeOnSelect: true,
+            closeOnDeselect: true,
+            enableSearch: true,
+            smartButtonMaxItems: 5
+        };
         $scope.tooltip = {
             "title": "",
             "checked": false
@@ -19,9 +124,9 @@
         $scope.search_results = true;
         $scope.no_result = false;
         $scope.err = "";
-        //end of declaring error handlers
         _.each(["county", "operation_status", "constituency", "facility_type"], function(key){
             $scope.filter_data[key] = filteringData[key].data.results;
+            $scope.filter_data.ward = [];
             $rootScope.mfl_filter_data = $scope.filter_data;
         });
         var removeEmptyFilters = function(filters){
@@ -59,38 +164,6 @@
                 $scope.alert = err.error;
             });
         }
-        $scope.filter = {
-            county: [],
-            constituency: [],
-            ward: [],
-            operation_status: [],
-            facility_type: [],
-            number_of_beds: [],
-            number_of_cots: []
-        };
-        $scope.numbers = _.range(2000);
-        $scope.disabled = {
-            ward: true,
-            consts: true
-        };
-        // var setFilters = function(){
-        //     _.each(_.keys($stateParams), function(key){
-        //         if(!_.isUndefined($stateParams[key])){
-        //             if(_.contains(_.keys($scope.filter), key)){
-        //                 var res = _.findWhere($scope.filter[key], {id:$stateParams[key]});
-        //                 if(_.isEmpty(res)){
-        //                     console.log(res);
-        //                     // $scope.filter[key].push({id:$stateParams[key], name: "name"});
-        //                 }
-
-        //             }else{
-        //                 $scope.filter[key] = $stateParams[key];
-        //             }
-        //         }
-
-        //     });
-        // };
-
         var getChildren = function(api, key, filter){
             api.filter(
                 _.extend(filter, $scope.default_filter))
@@ -104,26 +177,8 @@
                     $scope.disabled[key] = true;
                 });
         };
-        $scope.$watch("filter.county", function(county){
-            if(!_.isUndefined(county)){
-                $scope.filter_data.constituency = [];
-                getChildren(
-                        filterApi.constituencies,
-                        "constituency",
-                        constructParams({county: county})
-                );
-            }
-        });
-
-        $scope.$watch("filter.constituency", function(constituency){
-            $scope.filter_data.ward = [];
-            if(!_.isEmpty(constituency)){
-                getChildren(filterApi.wards, "ward",
-                constructParams({constituency: constituency}));
-            }
-        });
-
-        var constructParams = function(changes){
+        var constructParams = function(items){
+            var changes = JSON.parse(JSON.stringify(items)); // deep clone
             _.each(_.keys(changes), function(key){
                 if(_.isArray(changes[key])){
                     changes[key] = _.reduce(changes[key],
@@ -152,11 +207,55 @@
             });
             return changes;
         };
+        // pre-select filters
+        var setFilters = function(){
+            _.each(_.keys($stateParams), function(key){
+                if(!_.isUndefined($stateParams[key])){
+                    if(_.contains(_.keys($scope.filter), key)){
+                        var res = _.findWhere($scope.filter[key], {id:$stateParams[key]});
+                        if(_.isEmpty(res)){
+                            $scope.filter[key].push({id:$stateParams[key]});
+                        }else{
+                            $scope.filter[key] = {id:$stateParams[key]};
+                        }
 
-        $scope.filterFacility = function(frm){
-            var changes= changedFilters.whatChanged(frm);
+                    }else{
+                        $scope.filter[key] = $stateParams[key];
+                    }
+                }
+
+            });
+            // child pre-select filters
+            _.each(_.keys($stateParams), function(key){
+                if(_.contains(["county", "constituency"], key)){
+                    if(!_.isUndefined($stateParams[key])){
+                        switch(key){
+                        case "county":
+                            getChildren(
+                                filterApi.constituencies,
+                                "constituency",
+                                {"county": $stateParams[key]});
+                            break;
+                        case "constituency":
+                            getChildren(
+                                    filterApi.wards,
+                                    "ward",
+                                    {"constituency": $stateParams[key]});
+                            break;
+                        }
+                    }
+                }
+            });
+            if(!_.isEmpty($scope.filter.ward)){
+                getChildren(filterApi.wards, "ward",
+                    {id: constructParams($scope.filter.ward).join(",")});
+            }
+        };
+        setFilters();
+
+        $scope.filterFacility = function(){
+            var changes= constructParams($scope.filter);
             if(!_.isEmpty(changes)){
-                changes = constructParams(changes);
                 if(_.has(changes, "ward")){
                     delete changes.county;
                     delete changes.constituency;

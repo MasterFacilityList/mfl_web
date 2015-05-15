@@ -38,75 +38,39 @@
                             <input ng-model="filter.name" name="name" type="text"   autocomplete="off" placeholder="Name..">
                         </div>
                         <div class="group">
-                            <!-- <span class="input-group-addon text-silver">Description: </span> -->
-                            <input ng-model="filter.description" name="description" type="text"   autocomplete="off" placeholder="Description...">
-                        </div>
-
                          <div class="input-group ">
-                            <span class="">County: </span> <br/>
-                            <ui-select multiple ng-model="filter.county"
-                            close-on-select="true" theme="select2" sortable="true" name="county" style="width:350px;">
-                                 <ui-select-match placeholder="Select County">
-                                        {{$item.name}}
-                                </ui-select-match>
-                                <ui-select-choices repeat="county in filter_data.county">
-                                    <div ng-bind-html="county.name| highlight: $select.search"></div>
-                                </ui-select-choices>
-                            </ui-select>
-                        </div>
+                            <div ng-dropdown-multiselect="" events="events.county"  options="filter_data.county" selected-model="filter.county"
+                            extra-settings="dropDownSettings" translation-texts="selectTitles.county"></div>
+                       </div>
+                       </div>
+                       <div class="group">
+                           <div class="input-group ">
+                                <div ng-dropdown-multiselect="" events="events.constituency"  options="filter_data.constituency" selected-model="filter.constituency"
+                                extra-settings="dropDownSettings" translation-texts="selectTitles.constituency"></div>
+                           </div>
+                       </div>
+
+                       <div class="group" ng-hide="disabled.ward">
+                           <div class="input-group ">
+                                <div ng-dropdown-multiselect=""  options="filter_data.ward" selected-model="filter.ward"
+                                extra-settings="dropDownSettings" translation-texts="selectTitles.ward"></div>
+                           </div>
+                       </div>
 
 
-                        <div class="input-group ">
-                            <span class="">Constituency:</span> <br/>
-                            <ui-select multiple name="constituency" ng-model="filter.constituency"
-                            close-on-select="true" theme="select2" sortable="true" style="width:350px;">
-                                 <ui-select-match placeholder="Select County">
-                                        {{$item.name}}
-                                </ui-select-match>
-                                <ui-select-choices repeat="consti in filter_data.constituency">
-                                     <div ng-bind-html="consti.name| highlight: $select.search"></div>
-                                </ui-select-choices>
-                            </ui-select>
-                        </div>
+                       <div class="group">
+                           <div class="input-group ">
+                                <div ng-dropdown-multiselect=""  options="filter_data.operation_status" selected-model="filter.operation_status"
+                                extra-settings="dropDownSettings" translation-texts="selectTitles.operation_status"></div>
+                           </div>
+                       </div>
 
-                        <div class="input-group" ng-hide="disabled.ward">
-                            <span class="">Ward:</span> <br/>
-                            <ui-select multiple name="ward" ng-model="filter.ward" ng-disabled="disabled.ward"
-                            close-on-select="true" theme="select2" sortable="true" style="width:350px;">
-                                 <ui-select-match placeholder="Select Ward">
-                                        {{$item.name}}
-                                </ui-select-match>
-                                <ui-select-choices repeat="ward in filter_data.ward track by $index | propsFilter: {name: $select.search} ">
-                                     <div ng-bind-html="ward.name| highlight: $select.search"></div>
-                                </ui-select-choices>
-                            </ui-select>
-                        </div>
-
-                        <div class="input-group">
-                            <span class="">Operation Status: </span> <br/>
-                            <ui-select multiple ng-model="filter.operation_status"
-                            close-on-select="true" theme="select2" sortable="true" name="operation_status" style="width:350px;">
-                                 <ui-select-match placeholder="Select Operation Status">
-                                        {{$item.name}}
-                                </ui-select-match>
-                                <ui-select-choices repeat="status in filter_data.operation_status track by $index | propsFilter: {name: $select.search}">
-                                    <div ng-bind-html="status.name| highlight: $select.search"></div>
-                                </ui-select-choices>
-                            </ui-select>
-                        </div>
-
-                        <div class="input-group ">
-                            <span class="">Facility Type: </span> <br/>
-                            <ui-select multiple ng-model="filter.facility_type"
-                            close-on-select="true"  theme="select2" sortable="true" name="facility_type" style="width:350px;">
-                                 <ui-select-match placeholder="Select Operation Status">
-                                        {{$item.name}}
-                                </ui-select-match>
-                                <ui-select-choices repeat="typ in filter_data.facility_type | propsFilter: {name: $select.search}">
-                                    <div ng-bind-html="typ.name| highlight: $select.search"></div>
-                                </ui-select-choices>
-                            </ui-select>
-                        </div>
+                       <div class="group">
+                           <div class="input-group ">
+                                <div ng-dropdown-multiselect=""  options="filter_data.facility_type" selected-model="filter.facility_type"
+                                extra-settings="dropDownSettings" translation-texts="selectTitles.facility_type"></div>
+                           </div>
+                       </div>
 
 
                         <div class="input-group">
@@ -167,7 +131,7 @@
                     </div>
                  </form>
                  <div>
-                    <button class="btn btn-primary" ng-click="filterFacility(mfl.filters.form)">Filter </button>
+                    <button class="btn btn-primary" ng-click="filterFacility()">Filter </button>
                 </div>
                 </div>
                 <!-- End of advanced filter form ======================-->
