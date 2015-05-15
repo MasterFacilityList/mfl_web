@@ -180,6 +180,25 @@
                 });
             }
         };
+        //declaring class variable
+        $scope.class = {
+            small : "menu",
+            large : "displaced"
+        };
+        //activates off-canvas classes
+        $scope.changeClass = function () {
+            console.log($scope.class);
+            if($scope.class.small === "menu" &&
+                $scope.class.large === "displaced") {
+                $scope.class.small = "menu-active";
+                $scope.class.large = "displaced-active";
+                console.log($scope.class);
+            }
+            else {
+                $scope.class.small = "menu";
+                $scope.class.large = "displaced";
+            }
+        };
         //exporting to excel functionality
         $scope.excelExport = function () {
             console.log("Called");
