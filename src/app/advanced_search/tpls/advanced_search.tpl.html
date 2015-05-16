@@ -1,9 +1,17 @@
 <div class="row">
     <div class="col-lg-12" ng-hide="search_results">
         <div class="col-lg-12 margin-t-20 margin-b-10">
-            <p class="lead text-left">
-                Showing results for <span class="text-danger">{{query}}
 
+            <p class="lead text-left">
+                <span class="fs-18 fw-700" style="font-family: Lato Light" ng-hide="no_search_query">
+                    <i class="fa fa-building"></i> Facilities
+                </span>
+                <span ng-show="no_search_query">
+                    Showing <span> <em>{{counter.hits}}</em></span> result(s) for
+                    <span class="text-danger">
+                        {{query}}
+                    </span>
+                </span>
                 <span class="pull-right">
                     <!-- <button class="login-btn login-btn-primary">
                         Excel export <i class="fa fa-file-excel-o"></i>
@@ -172,7 +180,7 @@
                         Oops sorry no matches were found for the query <span class="text-danger">{{query}}</span>. try the advanced search
                     </p>
                 </div>
-                <span class="pull-left fs-14" ng-hide="search_results">Page (1/1)</span>
+                <span class="pull-left fs-16 margin-b-5" ng-hide="search_results || no_result">{{pagination.current_page}} of {{pagination.page_count}}</span>
                 <div class="col-md-12 results-card" ng-repeat="fac in query_results">
                         <div class="col-lg-12">
                             <a ui-sref="facility_details({fac_id : fac.id})" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Click to view facility details">
@@ -215,16 +223,18 @@
                         </div>
                 </div>
                 <!-- ====Start of pagination -->
-                <nav class="col-md-12 col-xs-12" ng-hide="search_results">
-                  <ul class="pagination col-md-12 col-xs-12">
-                    <li class="col-md-3">
-                      <a class="login-btn login-btn-primary" aria-label="Previous">
+                <nav class="col-md-12 col-xs-12" >
+                  <ul class="pagination col-md-12 col-xs-12" >
+                    <li class="col-md-3" ng-if="pagination.prev">
+                      <a class="login-btn login-btn-primary" aria-label="Previous" ng-click="paginate(prev_page)">
                         <span aria-hidden="true">&laquo;</span> Prev
                       </a>
                     </li>
+                    <li class="col-md-3" ng-if="!pagination.prev">
+                    </li>
                     <li class="col-md-6"></li>
-                    <li class="col-md-3">
-                      <a class="pull-right login-btn login-btn-primary" aria-label="Next" ng-disabled="page">
+                    <li class="col-md-3" ng-if="pagination.next">
+                      <a class="pull-right login-btn login-btn-primary" aria-label="Next" ng-click="paginate(nxt_page)">
                         Next <span aria-hidden="true">&raquo;</span>
                       </a>
                     </li>
