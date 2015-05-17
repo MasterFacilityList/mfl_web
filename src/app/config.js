@@ -1,10 +1,10 @@
-(function (angular, _) {
+(function (angular) {
     "use strict";
     angular.module("mflAppConfig", [
+        "ui.router",
         "ngCookies",
         "sil.grid",
-        "sil.api.wrapper",
-        "mfl.auth"
+        "sil.api.wrapper"
     ])
 
     .constant("SERVER_URL", "http://localhost/")
@@ -14,9 +14,12 @@
         "password": "",
         "client_id": "",
         "client_secret": "",
-        "token_url": ""
+        "token_url": "http://localhost/oauth2/token/"
     })
 
+    .config(["$urlRouterProvider", function ($urlRouterProvider) {
+        $urlRouterProvider.otherwise("/home");
+    }])
 
     .config(["SERVER_URL", "apiConfigProvider",
         function(SERVER_URL, apiConfig){
@@ -40,15 +43,6 @@
         $http.defaults.headers.common[header_name] = csrftoken;
     }])
 
-    .run(["api.auth", function (auth) {
-        var token = auth.getToken();
-        if (_.isNull(token)) {
-            auth.fetchToken();
-        } else {
-            auth.setToken(token);
-        }
-    }])
-
     .config(["silGridConfigProvider", function(silGridConfig){
         silGridConfig.apiMaps = {
             officers: ["mfl.adminunits.wrapper", "officersApi"],
@@ -63,4 +57,4 @@
         };
         silGridConfig.appConfig = "mflAppConfig";
     }]);
-})(angular, _);
+})(angular);

@@ -87,6 +87,15 @@
                 "setXHRToken": setXHRToken
             };
         }
-    ]);
+    ])
+
+    .run(["api.auth", function (auth) {
+        var token = auth.getToken();
+        if (_.isNull(token)) {
+            auth.fetchToken();
+        } else {
+            auth.setXHRToken(token);
+        }
+    }]);
 
 })(angular, _, jQuery, moment);
