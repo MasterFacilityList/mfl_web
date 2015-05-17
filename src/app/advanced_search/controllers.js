@@ -198,9 +198,11 @@
             }
         };
         //end of setting pagination data
-
+        //variable that hides and shows paging spinner
+        $scope.page_spinner = true;
         //seting function to be called each time in order to set paginated
         $scope.getData = function (arg) {
+            $scope.page_spinner = false;
             if(!_.isNaN(arg)) {
                 $scope.paging = {
                     page : arg
@@ -209,6 +211,7 @@
                     .success(function (data) {
                         $scope.query_results = data.results;
                         $scope.setData(data);
+                        $scope.page_spinner = true;
                     })
                     .error(function (e) {
                         console.log(e.error);
