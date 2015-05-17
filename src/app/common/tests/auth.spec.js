@@ -212,5 +212,44 @@
 
         });
 
+        describe("Test mfl.auth.config run configuration", function () {
+            var run_fxn, auth_service;
+
+            beforeEach(function () {
+                run_fxn = angular.module("mfl.auth.config")._runBlocks[0][1];
+
+                auth_service = {
+                    fetchToken: angular.noop,
+                    setXHRToken: angular.noop,
+                    getToken: angular.noop
+                };
+            });
+
+            it("should fetch auth token if getToken is null", function () {
+                spyOn(auth_service, "getToken").andReturn(null);
+                spyOn(auth_service, "fetchToken");
+                spyOn(auth_service, "setXHRToken");
+
+                run_fxn(auth_service);
+
+                expect(auth_service.getToken).toHaveBeenCalled();
+                expect(auth_service.fetchToken).toHaveBeenCalled();
+                expect(auth_service.setXHRToken).not.toHaveBeenCalled();
+            });
+
+            it("should set auth token if getToken is not null", function () {
+                spyOn(auth_service, "getToken").andReturn(access_token);
+                spyOn(auth_service, "fetchToken");
+                spyOn(auth_service, "setXHRToken");
+
+                run_fxn(auth_service);
+
+                expect(auth_service.getToken).toHaveBeenCalled();
+                expect(auth_service.fetchToken).not.toHaveBeenCalled();
+                expect(auth_service.setXHRToken).toHaveBeenCalledWith(access_token);
+            });
+
+        });
+
     });
 })(angular, jQuery, moment);

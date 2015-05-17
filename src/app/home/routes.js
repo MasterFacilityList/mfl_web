@@ -1,7 +1,7 @@
 (function (angular) {
     "use strict";
 
-    angular.module("mfl.home.routes", [])
+    angular.module("mfl.home.routes", ["ui.router"])
 
     .config(["$stateProvider", function ($stateProvider) {
         $stateProvider
