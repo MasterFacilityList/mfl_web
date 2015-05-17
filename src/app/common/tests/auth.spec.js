@@ -56,8 +56,8 @@
             });
 
             it("should fetch a token from oauth2 provider and store it", function () {
-                inject(["$window", "$httpBackend", "SERVER_URL", "CREDZ", "api.auth",
-                    function ($window, $httpBackend, server_url, credz, auth) {
+                inject(["$window", "$httpBackend", "CREDZ", "api.auth",
+                    function ($window, $httpBackend, credz, auth) {
                         var payload =
                             "grant_type=" + "password" +
                             "&username=" + credz.username +
@@ -65,7 +65,7 @@
                             "&client_id=" + credz.client_id +
                             "&client_secret=" + credz.client_secret;
                         $httpBackend
-                            .expectPOST(server_url + "oauth2/token/", payload)
+                            .expectPOST(credz.token_url, payload)
                             .respond(200, access_token);
 
                         auth.fetchToken();
@@ -84,8 +84,8 @@
             });
 
             it("should allow another token request on failure", function () {
-                inject(["$window", "$httpBackend", "SERVER_URL", "CREDZ", "api.auth",
-                    function ($window, $httpBackend, server_url, credz, auth) {
+                inject(["$window", "$httpBackend", "CREDZ", "api.auth",
+                    function ($window, $httpBackend, credz, auth) {
                         var payload =
                             "grant_type=" + "password" +
                             "&username=" + credz.username +
@@ -93,7 +93,7 @@
                             "&client_id=" + credz.client_id +
                             "&client_secret=" + credz.client_secret;
                         $httpBackend
-                            .expectPOST(server_url + "oauth2/token/", payload)
+                            .expectPOST(credz.token_url, payload)
                             .respond(500);
 
                         var rq1 = auth.fetchToken();
@@ -120,8 +120,8 @@
             });
 
             it("should refresh a token from oauth2 provider and store new token", function () {
-                inject(["$window", "$httpBackend", "SERVER_URL", "CREDZ", "api.auth",
-                    function ($window, $httpBackend, server_url, credz, auth) {
+                inject(["$window", "$httpBackend", "CREDZ", "api.auth",
+                    function ($window, $httpBackend, credz, auth) {
                         window.localStorage.setItem(store_key, JSON.stringify(access_token));
 
                         var payload =
@@ -131,7 +131,7 @@
                             "&client_secret=" + credz.client_secret;
 
                         $httpBackend
-                            .expectPOST(server_url + "oauth2/token/", payload)
+                            .expectPOST(credz.token_url, payload)
                             .respond(200, refresh_token);
 
                         auth.refreshToken(access_token);
@@ -151,8 +151,8 @@
             });
 
             it("should set XHR authorization headers after fetching a token", function () {
-                inject(["$window", "$httpBackend", "$http", "SERVER_URL", "CREDZ", "api.auth",
-                    function ($window, $httpBackend, $http, server_url, credz, auth) {
+                inject(["$window", "$httpBackend", "$http", "CREDZ", "api.auth",
+                    function ($window, $httpBackend, $http, credz, auth) {
                         var payload =
                             "grant_type=" + "password" +
                             "&username=" + credz.username +
@@ -160,7 +160,7 @@
                             "&client_id=" + credz.client_id +
                             "&client_secret=" + credz.client_secret;
                         $httpBackend
-                            .expectPOST(server_url + "oauth2/token/", payload)
+                            .expectPOST(credz.token_url, payload)
                             .respond(200, access_token);
 
                         auth.fetchToken();
@@ -178,8 +178,8 @@
             });
 
             it("should set a token refresh timeout", function () {
-                inject(["$window", "$httpBackend", "$timeout", "SERVER_URL", "CREDZ", "api.auth",
-                    function ($window, $httpBackend, $timeout, server_url, credz, auth) {
+                inject(["$window", "$httpBackend", "$timeout", "CREDZ", "api.auth",
+                    function ($window, $httpBackend, $timeout, credz, auth) {
                         var payload =
                             "grant_type=" + "password" +
                             "&username=" + credz.username +
@@ -187,7 +187,7 @@
                             "&client_id=" + credz.client_id +
                             "&client_secret=" + credz.client_secret;
                         $httpBackend
-                            .expectPOST(server_url + "oauth2/token/", payload)
+                            .expectPOST(credz.token_url, payload)
                             .respond(200, access_token);
 
                         auth.fetchToken();
@@ -197,8 +197,14 @@
 
                         $httpBackend.resetExpectations();
 
+                        payload =
+                            "grant_type=" + "refresh_token" +
+                            "&refresh_token=" + access_token.refresh_token +
+                            "&client_id=" + credz.client_id +
+                            "&client_secret=" + credz.client_secret;
+
                         $httpBackend
-                            .expectPOST(server_url + "oauth2/token/", payload)
+                            .expectPOST(credz.token_url, payload)
                             .respond(200, refresh_token);
 
                         $timeout.flush();
@@ -209,7 +215,6 @@
                     }
                 ]);
             });
-
         });
 
         describe("Test mfl.auth.config run configuration", function () {

@@ -89,7 +89,8 @@
                 "getToken": getToken,
                 "fetchToken": fetchToken,
                 "refreshToken": refreshToken,
-                "setXHRToken": setXHRToken
+                "setXHRToken": setXHRToken,
+                "storeToken": storeToken
             };
         }
     ]);
