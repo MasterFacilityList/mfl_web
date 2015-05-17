@@ -1,7 +1,7 @@
 (function (angular, _, jQuery, moment) {
     "use strict";
 
-    angular.module("mfl.auth", [])
+    angular.module("mfl.auth.service", [])
 
     .service("api.auth",
         ["$window", "$http", "$timeout", "CREDZ",
@@ -22,7 +22,7 @@
             };
 
             var storeToken = function (token) {
-                setToken(token);
+                setXHRToken(token);
                 var till = moment().add(token.expires_in, "seconds");
                 token.expire_at = till;
                 storage.setItem(store_key, JSON.stringify(token));
@@ -30,6 +30,10 @@
                 $timeout(function () {
                     refreshToken(token);
                 }, (parseInt(token.expires_in, 10) * 1000) - token_timeout);
+                request = null;
+            };
+
+            var requestError = function () {
                 request = null;
             };
 
@@ -44,7 +48,7 @@
                     headers: {
                         "Content-Type": "application/x-www-form-urlencoded"
                     }
-                }).success(storeToken);
+                }).success(storeToken).error(requestError);
                 return request;
             };
 
@@ -75,6 +79,7 @@
                     if (moment(token.expire_at) > moment().add(token_timeout, "ms")) {
                         return token;
                     }
+                    storage.removeItem(store_key);
                 }
 
                 return null;
@@ -87,6 +92,11 @@
                 "setXHRToken": setXHRToken
             };
         }
+    ]);
+
+
+    angular.module("mfl.auth.config", [
+        "mfl.auth.service"
     ])
 
     .run(["api.auth", function (auth) {
@@ -97,5 +107,11 @@
             auth.setXHRToken(token);
         }
     }]);
+
+
+    angular.module("mfl.auth", [
+        "mfl.auth.service",
+        "mfl.auth.config"
+    ]);
 
 })(angular, _, jQuery, moment);
