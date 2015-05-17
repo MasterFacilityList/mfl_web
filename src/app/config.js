@@ -7,15 +7,9 @@
         "sil.api.wrapper"
     ])
 
-    .constant("SERVER_URL", "http://localhost/")
+    .constant("SERVER_URL", window.MFL_SETTINGS.SERVER_URL)
 
-    .constant("CREDZ", {
-        "username": "",
-        "password": "",
-        "client_id": "",
-        "client_secret": "",
-        "token_url": "http://localhost/oauth2/token/"
-    })
+    .constant("CREDZ", window.MFL_SETTINGS.CREDZ)
 
     .config(["$urlRouterProvider", function ($urlRouterProvider) {
         $urlRouterProvider.otherwise("/home");
