@@ -1,5 +1,7 @@
-"use strict";
-angular.module("mfl.gis.routes", [])
+(function (angular) {
+    "use strict";
+
+    angular.module("mfl.gis.routes", ["ui.router"])
 
     .config(["$stateProvider", function ($stateProvider) {
         $stateProvider
@@ -34,7 +36,7 @@ angular.module("mfl.gis.routes", [])
                 data:{
                     pageTitle: "MFL County"
                 }
-            }).state("gis_contituency", {
+            }).state("gis_constituency", {
                 url: "/constituency/:constituency_id",
                 views: {
                     "main": {
@@ -66,3 +68,5 @@ angular.module("mfl.gis.routes", [])
                 }
             });
     }]);
+
+})(angular);

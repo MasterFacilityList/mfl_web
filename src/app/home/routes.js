@@ -1,7 +1,9 @@
-"use strict";
-angular.module("mfl.home.routes", [])
+(function (angular) {
+    "use strict";
 
-    .config(["$stateProvider", "$urlRouterProvider", function ($stateProvider, $urlRouterProvider) {
+    angular.module("mfl.home.routes", ["ui.router"])
+
+    .config(["$stateProvider", function ($stateProvider) {
         $stateProvider
             .state("home", {
                 url: "/home",
@@ -19,10 +21,7 @@ angular.module("mfl.home.routes", [])
                     pageTitle: "MFL Home"
                 }
             });
-        $urlRouterProvider.otherwise("/home");
-    }])
-    .run([ "$rootScope", "$state", "$stateParams",
-        function ($rootScope, $state, $stateParams) {
-            $rootScope.$state = $state;
-            $rootScope.$stateParams = $stateParams;
-        }]);
+
+    }]);
+
+})(angular);

@@ -3,7 +3,7 @@
     describe("Admin Units tests suite", function(){
         var httpBackend, countiesApi,constsApi,wardsApi,townsApi, SERVER_URL;
         beforeEach(function(){
-            module("mflwebApp", "mfl.adminunits.wrapper", "mflAppConfig");
+            module("mfl.adminunits.wrapper", "mflAppConfig");
             inject(["countiesApi","constsApi","wardsApi","townsApi",
                 function(countsA,constsA,wardsA,townsA){
                 countiesApi = countsA;

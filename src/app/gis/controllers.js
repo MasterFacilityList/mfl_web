@@ -1,11 +1,15 @@
-"use strict";
-angular
-    .module("mfl.gis.controllers", ["leaflet-directive",
-        "mfl.gis.wrapper","mfl.adminunits.wrapper","mfl.gis.interceptors"])
+(function (angular) {
+    "use strict";
 
-    .controller("mfl.gis.controllers.gis", ["$scope",
-        "countiesApi","$http",
-        function ($scope, countiesApi, $http) {
+    angular.module("mfl.gis.controllers", [
+        "leaflet-directive",
+        "mfl.gis.wrapper",
+        "mfl.adminunits.wrapper",
+        "mfl.gis.interceptors"
+    ])
+
+    .controller("mfl.gis.controllers.gis", ["$scope", "countiesApi", "$http", "SERVER_URL",
+        function ($scope, countiesApi, $http, SERVER_URL) {
         $scope.tooltip = {
             "title": "",
             "checked": false
@@ -48,25 +52,27 @@ angular
                 zoom: 6
             }
         });
-/*
-WHERE THE AWESOMENESS BEGINS
-*/
-        $http.get("http://localhost/api/gis/county_boundaries/?format=json&page_size=47",
-                  {cache: "true"})
-            .success(function (data){
-            angular.extend($scope, {
-                geojson: {
-                    data: data,
-                    style: {
-                        fillColor: "green",
-                        weight: 2,
-                        opacity: 1,
-                        color: "white",
-                        dashArray: "3",
-                        fillOpacity: 0.7
-                    }
-                },
-                selectedCountry: {}
+
+        /*
+        WHERE THE AWESOMENESS BEGINS
+        */
+        var url = SERVER_URL + "api/gis/county_boundaries/?format=json&page_size=47";
+        $http.get(url, {cache: "true"})
+            .success(function (data) {
+                angular.extend($scope, {
+                    geojson: {
+                        data: data,
+                        style: {
+                            fillColor: "green",
+                            weight: 2,
+                            opacity: 1,
+                            color: "white",
+                            dashArray: "3",
+                            fillOpacity: 0.7
+                        }
+                    },
+                    selectedCountry: {}
+                });
             });
-        });
     }]);
+})(angular);
