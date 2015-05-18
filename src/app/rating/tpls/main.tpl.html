@@ -1,0 +1,168 @@
+<div class="row">
+    <div class="col-lg-12 margin-t-20 margin-b-20">
+        <div class="col-lg-12">
+            <span class="pull-left">
+                <button class="login-btn login-btn-primary">
+                    Rate facility <i class="fa fa-star-half-empty"></i>
+                </button>
+            </span>
+            <span class="pull-right">
+                <button class="action-btn action-btn-md action-btn-primary" onclick="window.history.back()" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Go back">
+                    <i class="fa fa-arrow-left"></i>
+                </button>
+            </span>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="col-lg-8 results-card margin-b-30">
+        <!-- Important data first displayed here -->
+        <div class="col-lg-12">
+            <h3 class="fw-700">
+                    <span class="fs-26">{{oneFacility.code}}</span> | {{oneFacility.name}}
+            </h3>
+            <hr style="border: 1px solid #F0F0F0;">
+            <br>
+            <h4 class="margin-t--27 fw-600">
+                <span class="pull-left">
+                    <label>Type: </label>
+                    {{oneFacility.facility_type_name}}
+                </span>
+            </h4>
+            <br>
+            <h4>
+                <div class="pull-left">
+                    <p ><b class="fs-16">Status:</b>
+                    <span class="fs-16 label label-warning">
+                        {{oneFacility.regulatory_status_name}}
+                    </span></p>
+                </div>
+                <span class="pull-right fs-16">
+                    <label>Open whole week </label>
+                    <span ng-show="oneFacility.open_whole_week" class="text-success">
+                        <i class="fa fa-check-circle-o fa-1x"></i>
+                    </span>
+                    <span ng-hide="oneFacility.open_whole_week" class="text-danger">
+                        <i class="fa fa-times-circle-o fa-1x"></i>
+                    </span>
+                </span>
+            </h4>
+            <br>
+            <h4 class="fs-16">
+                <span class="pull-right">
+                    <label>Open whole day </label>
+                    <span ng-show="oneFacility.open_whole_day" class="text-success">
+                        <i class="fa fa-check-circle-o fa-1x"></i>
+                    </span>
+                    <span ng-hide="oneFacility.open_whole_day" class="text-danger">
+                        <i class="fa fa-times-circle-o fa-1x"></i>
+                    </span>
+                </span>
+                <span class="pull-left">
+                    <label>Beds: </label>
+                    {{oneFacility.number_of_beds}}
+                </span>
+            </h4>
+            <br>
+            <h4 class="fs-16">
+                <span class="pull-left">
+                    <label>Cots: </label>
+                    {{oneFacility.number_of_cots}}
+                </span>
+            </h4>
+            <br>
+            <!-- Display location details  -->
+            <hr style="border: 1px solid #F0F0F0;">
+            <h4 class="text-blue fs-18 fw-700"> Location</h4>
+            <br>
+            <h4 class="margin-t--15 fs-16 fw-600">
+                <label>Town: </label>
+                {{oneFacility.facility_physical_address.town}}
+                <span class="pull-right">
+                    <label>Plot number: </label>
+                    {{oneFacility.facility_physical_address.plot_number}}
+                </span>
+            </h4>
+            <br>
+            <h4 class="margin-t--15 fs-16 fw-600">
+                <label>Close to: </label>
+                {{oneFacility.location_desc}}
+            </h4>
+            <!-- End of locatin displays -->
+            <br>
+            <hr style="border: 1px solid #F0F0F0;">
+            <h4 class="text-blue fs-18 fw-700 margin-t--15">Services</h4>
+            <div class="col-lg-12">
+                <table class="table fs-14">
+                    <thead>
+                        <th>#</th>
+                        <th>Category</th>
+                        <th>Name</th>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="service in oneFacility.facility_services">
+                            <td>{{$index + 1}}</td>
+                            <td>{{service.category_name}}</td>
+                            <td>{{service.name}}</td>
+                            <td>
+                                <!-- Testing rating directive -->
+                                <span ng-repeat="rating in ratings">
+                                <!-- {{rating.current}} out of{{rating.max}} -->
+                                <div star-rating rating-value="rating.current" max="rating.max" on-rating-selected="getSelectedRating(rating)"></div>
+                                </span>
+                                <!-- End of rating directive -->
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        </div>
+        <!-- Extra details displayed not important to the facilities -->
+        <div class="col-lg-3 pull-right results-card">
+            <h4 class="fs-18 text-blue fw-700">
+                <i style="border: 1px solid #fff; border-radius : 50%;" class="fa fa-user-secret fa-1x"></i>
+                Ownership status
+            </h4>
+            <h4 class="fw-500">
+                <span class="pad-t-5">
+                    <h5 class="fs-16 fw-600"><label>Owner: </label> {{oneFacility.owner_name}}</h5>
+                    <h5 class="fs-14 fw-500"><label>Category: </label> {{oneFacility.owner_type_name}}</h5>
+                </span>
+            </h4>
+            <br><br>
+            <hr class="margin-t--15" style="border : 1px solid #ddd;">
+            <h4 class="fs-18 margin-t--5 text-blue fw-700">
+                <i style="border: 1px solid #fff; border-radius : 50%;" class="fa fa-map-marker fa-1x"></i>
+                Physical location
+            </h4>
+            <h4 class="fw-500 ">
+                <span class="pad-t-5">
+                    <h5 class="fs-16 fw-600">{{oneFacility.county}} COUNTY</h5>
+                    <h5 class="fs-14 fw-600">{{oneFacility.constituency}} CONSTITUENCY</h5>
+                    <span class="fs-13 fw-600">{{oneFacility.ward_name}} WARD</span>
+                </span>
+            </h4>
+            <br><br>
+            <hr class="margin-t--15" style="border : 1px solid #ddd;">
+            <h4 class="fs-18 margin-t--5 text-blue fw-700">
+                <i style="border: 1px solid #fff; border-radius : 50%;" class="fa fa-phone fa-1x"></i>
+                Contacts
+            </h4>
+            <h4 ng-repeat="cont in oneFacility.facility_contacts" class="fw-500">
+                <span  class="margin-b-10 fs-16">
+                    <label>
+                        {{cont.contact_type_name}} :
+                    </label>
+                    {{cont.contact}}
+                </span>
+            </h4>
+            <br>
+            <h4 class="margin-t--15 fs-16">
+                <label>P.O.Box: </label>
+                {{oneFacility.facility_physical_address.postal_code}} - {{oneFacility.facility_physical_address.address}}
+            </h4>
+        </div>
+        <!-- End of displaying extra details  -->
+    </div>
+</div>

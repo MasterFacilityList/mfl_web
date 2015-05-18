@@ -8711,7 +8711,7 @@ textarea.single-editor {
 }
 .rating {
     unicode-bidi: bidi-override;
-    direction: rtl;
+    direction: ltr;
     font-size: 30px
 }
 .rating>span {

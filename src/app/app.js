@@ -8,11 +8,14 @@
         "ngSanitize",
         "mflAppConfig",
         "ui.router",
+        "ui.bootstrap",
+        "ui.bootstrap.tpls",
 
         "templates-app",
         "templates-common",
         "mfl.home",
         "mfl.gis",
-        "mfl.auth"
+        "mfl.auth",
+        "mfl.rating"
     ]);
 })(angular);
