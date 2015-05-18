@@ -10,18 +10,20 @@ angular.module("mfl.rating.controllers", [])
             facilitiesApi.facilities.get($scope.fac_id)
                 .success(function (data) {
                     console.log(data);
+
                     $scope.oneFacility = data;
+                    _.each($scope.oneFacility.facility_services,
+                        function (service) {
+                            service.ratings.push({
+                                current: 3,
+                                max: 5
+                            })
+                        }
+                    );
                 })
                 .error(function (e) {
                     console.log(e.error);
                 });
-
-            $scope.ratings = [
-                {
-                    current: 3,
-                    max: 5
-                }
-            ];
 
             $scope.getSelectedRating = function (rating) {
                 console.log(rating);
