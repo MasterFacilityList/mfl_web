@@ -5,10 +5,11 @@
 
     .factory("mfl.filtering.data.controller", ["$q", "filteringApi", function($q, filterApi){
         return function(){
-            var counties = filterApi.getData().county;
-            var consts = filterApi.getData().constituency;
-            var fType = filterApi.getData().facility_type;
-            var op = filterApi.getData().operation_status;
+            var filter = {"page_size": 200};
+            var counties = filterApi.counties.filter(filter);
+            var consts = filterApi.constituencies.filter(filter);
+            var fType = filterApi.facility_types.filter(filter);
+            var op = filterApi.operation_status.filter(filter);
             return $q.all([counties, consts, fType, op]).then(function(results){
                 return {
                     county: results[0],
@@ -30,15 +31,5 @@
         this.owners = api.setBaseUrl("api/facilities/owners");
         this.officers = api.setBaseUrl("api/facilities/officers");
         this.facility_types = api.setBaseUrl("api/facilities/facility_types");
-
-        this.filter = {"page_size": 10000};
-        this.getData = function(){
-            return {
-                county: this.counties.filter(this.filter),
-                constituency: this.constituencies.filter(this.filter),
-                facility_type: this.facility_types.filter(this.filter),
-                operation_status: this.operation_status.filter(this.filter)
-            };
-        };
     }]);
 })(angular);

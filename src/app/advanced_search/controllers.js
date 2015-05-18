@@ -2,17 +2,15 @@
 (function(angular){
     angular.module("mfl.filtering.controllers", [
         "mfl.filtering.services",
-        "mfl.search.utils",
         "mfl.settings"
     ])
     .controller("mfl.filtering.controller", ["$scope","$rootScope",
-        "$stateParams", "filteringApi", "facilitiesApi", "downloadApi",
-        "mfl.search.filters.changes","filteringData", "SERVER_URL",
+        "$stateParams", "filteringApi","filteringData", "SERVER_URL",
         "$window",
         function($scope, $rootScope, $stateParams,filterApi,
-            facilitiesApi, downloadApi, changedFilters, filteringData,
-            SERVER_URL, $window){
+            filteringData,SERVER_URL, $window){
         $scope.filter_data = {};
+        $scope.query_results = [];
         var initFilterModel = function(){
             $scope.filter = $stateParams;
         };
@@ -33,7 +31,6 @@
             number_of_beds: [],
             number_of_cots: []
         };
-        $scope.numbers = _.range(2000);
         $scope.disabled = {
             ward: true,
             consts: true
@@ -79,10 +76,9 @@
                         var fs = $scope.selected[key].join(",");
                         var pass_filter = {};
                         pass_filter[filterKey] = fs;
-                        var filter = _.isEmpty(fs)?{}:pass_filter;
                         getChildren(
                             api,
-                            label,filter);
+                            label,_.isEmpty(fs)?{}:pass_filter);
                     }
                 };
             })(),
@@ -109,11 +105,6 @@
                     $scope.events.utils.removeSelected(
                         "constituency", item.id, "ward", "constituency",
                         filterApi.wards);
-                    if( _.isEmpty($scope.filter_data.ward)){
-                        $scope.disabled.ward = true;
-                    }else{
-                        $scope.disabled.ward = false;
-                    }
                 }
             }
         };
@@ -134,107 +125,6 @@
         $scope.search_results = true;
         $scope.no_result = false;
         $scope.err = "";
-        //declaring items per page used for pagination
-        $scope.itemsPerPage = 50;
-        $scope.pagination = {
-            active : "",
-            page_count: "",
-            next: "",
-            prev: "",
-            current_page: ""
-        };
-        //creating pagination url_params
-        $scope.makeUrl = function (url, next) {
-            /*var params = url.substring(
-                url.indexOf("?")+1, url.length).split("&");
-            console.log(params, next);*/
-            var name = url.substring(url.indexOf("?")+1, url.indexOf("="));
-            var value = url.substring(url.indexOf("=")+1, url.length);
-            console.log(name, next);
-            return value;
-        };
-        //end of making url
-        //adding pagination function
-        $scope.addPagination = function (page_count, url_nxt, url_prev) {
-            $scope.pagination.active = true;
-            $scope.pagination.page_count = Math.ceil(
-                page_count/$scope.itemsPerPage);
-            //making url for pagination
-            console.log(url_nxt, url_prev);
-            if(!_.isNull(url_nxt)) {
-                $scope.pagination.next = true;
-                $scope.nxt_page = $scope.makeUrl(url_nxt, true);
-            }
-            else{
-                $scope.pagination.next = false;
-                $scope.pagination.current_page = $scope.pagination.page_count;
-            }
-            if(!_.isNull(url_prev)){
-                $scope.pagination.prev = true;
-                $scope.prev_page = $scope.makeUrl(url_prev, false);
-                var default_url = SERVER_URL + "api/facilities/facilities/";
-                if($scope.prev_page === default_url) {
-                    $scope.prev_page = 1;
-                }
-                console.log($scope.prev_page, default_url);
-            }else{
-                $scope.pagination.prev = false;
-                $scope.pagination.current_page = 1;
-                if(!_.isNaN($scope.pagination.current_page)) {
-                    $scope.pagination.current_page =
-                    parseInt($scope.pagination.current_page, 10);
-                }
-            }
-            if($scope.pagination.next){
-                $scope.pagination.current_page = $scope.pagination.next_page-1;
-            }
-        };
-        //end of adding addPagination
-        //setting pagination data
-        $scope.setData = function (head) {
-            if(_.has(head, "results")) {
-                $scope.query_results = head.results;
-                $scope.addPagination(head.count, head.next, head.previous);
-            }
-        };
-        //end of setting pagination data
-        //variable that hides and shows paging spinner
-        $scope.page_spinner = true;
-        //seting function to be called each time in order to set paginated
-        $scope.getData = function (arg) {
-            $scope.page_spinner = false;
-            if(!_.isNaN(arg)) {
-                $scope.paging = {
-                    page : arg
-                };
-                facilitiesApi.facilities.filter($scope.paging)
-                    .success(function (data) {
-                        $scope.query_results = data.results;
-                        $scope.setData(data);
-                        $scope.page_spinner = true;
-                    })
-                    .error(function (e) {
-                        console.log(e.error);
-                    });
-            }
-            else {
-                facilitiesApi.facilities.list()
-                    .success(function (data) {
-                        $scope.query_results = data.results;
-                        $scope.setData(data);
-                    })
-                    .error(function (e) {
-                        console.log(e.error);
-                    });
-            }
-        };
-        //end of getting paginated data
-
-        //begining of pagination function
-        $scope.paginate = function (page) {
-            $scope.getData(page);
-        };
-        //end of pagination function
         _.each(["county", "operation_status", "constituency", "facility_type"], function(key){
             $scope.filter_data[key] = filteringData[key].data.results;
             $scope.filter_data.ward = [];
@@ -248,15 +138,17 @@
             });
             return filters;
         };
-        //results of search archived here
+
+        var setNoResult = function(res){
+            if(res === 0) {
+                $scope.no_result = true;
+            }
+        };
         if(_.isEmpty($stateParams) || _.isUndefined($stateParams.search)){
             filterApi.facilities.list().success(function(res){
                 $scope.search_results = false;
                 $scope.query_results = res.results;
-                $scope.setData(res);
-                if($scope.query_results.length === 0) {
-                    $scope.no_result = true;
-                }
+                setNoResult($scope.query_results.length);
             }).error(function(err){
                 $scope.alert = err.error;
                 $scope.err = err.error;
@@ -267,16 +159,9 @@
             var filters = removeEmptyFilters($stateParams);
             filterApi.facilities.filter(filters).success(function(res){
                 $scope.search_results = false;
-                //implementing counting logic here
-                $scope.counter.hits = res.count;
-                //end of implementing counting logic here
                 $scope.query_results = res.results;
-                $scope.setData(res);
-                if($scope.query_results.length === 0) {
-                    $scope.no_result = true;
-                }
+                setNoResult($scope.query_results.length);
             }).error(function(err){
-                $scope.err = err.error;
                 $scope.search_results = false;
                 $scope.alert = err.error;
             });
@@ -325,21 +210,20 @@
             });
             return changes;
         };
+        var addFilter = function(key, value){
+            var vals = value.split(",");
+            if(_.isUndefined($scope.filter[key])){
+                $scope.filter[key] = [];
+            }
+            _.each(vals, function(val){
+                $scope.filter[key].push({id: val});
+            });
+        };
         // pre-select filters
         var setFilters = function(){
             _.each(_.keys($stateParams), function(key){
                 if(!_.isUndefined($stateParams[key])){
-                    if(_.contains(_.keys($scope.filter), key)){
-                        var res = _.findWhere($scope.filter[key], {id:$stateParams[key]});
-                        if(_.isEmpty(res)){
-                            $scope.filter[key].push({id:$stateParams[key]});
-                        }else{
-                            $scope.filter[key] = {id:$stateParams[key]};
-                        }
-
-                    }else{
-                        $scope.filter[key] = $stateParams[key];
-                    }
+                    addFilter(key, $stateParams[key]);
                 }
 
             });
@@ -371,8 +255,8 @@
         };
         setFilters();
 
-        $scope.filterFacility = function(){
-            var changes= constructParams($scope.filter);
+        $scope.filterFacility = function(filters){
+            var changes= constructParams(filters);
             if(!_.isEmpty(changes)){
                 if(_.has(changes, "ward")){
                     delete changes.county;
@@ -385,11 +269,16 @@
                 changes.search = $stateParams.search;
                 changes = removeEmptyFilters(changes);
                 filterApi.facilities.filter(changes).success(function(data){
-                    $scope.search_results = false;
-                    $scope.query_results = data.results;
-                    if($scope.query_results.length === 0) {
-                        $scope.no_result = true;
+                    if(_.has(filters, "format")){
+                        $window.location.href =
+                            SERVER_URL + "api/common/download/download/xlsx/";
+                        delete $scope.filter.format;
+                    }else{
+                        $scope.search_results = false;
+                        $scope.query_results = data.results;
+                        setNoResult($scope.query_results.length);
                     }
+
                 }).error(function(error){
                     $scope.alert = error.error;
                     $scope.err = error.error;
@@ -407,54 +296,12 @@
         }
         else{
             $scope.no_search_query = true;
-            console.log($scope.no_search_query);
         }
-        //activates off-canvas classes
-        $scope.changeClass = function () {
-            console.log($scope.class);
-            if($scope.class.small === "menu" &&
-                $scope.class.large === "displaced") {
-                $scope.class.small = "menu-active";
-                $scope.class.large = "displaced-active";
-                console.log($scope.class);
-            }
-            else {
-                $scope.class.small = "menu";
-                $scope.class.large = "displaced";
-            }
-        };
+
         //exporting to excel functionality
         $scope.excelExport = function () {
-            if(!_.isUndefined($stateParams.search)) {
-                $scope.excel_filters = {
-                    search : $stateParams.search,
-                    format : "excel"
-                };
-                facilitiesApi.facilities.filter($scope.excel_filters)
-                    .success(function (data) {
-                        console.log(data, downloadApi);
-                        $window.location.href =
-                        SERVER_URL + "api/common/download/download/xlsx/";
-                    })
-                    .error(function (e) {
-                        console.log(e.error);
-                    });
-            }
-            else {
-                $scope.excel_filters = {
-                    format : "excel"
-                };
-                facilitiesApi.facilities.list($scope.excel_filters)
-                    .success(function (data) {
-                        console.log(data, downloadApi);
-                        $window.location.href =
-                        SERVER_URL + "api/common/download/download/xlsx/";
-                    })
-                    .error(function (e) {
-                        console.log(e.error);
-                    });
-            }
-
+            $scope.filter.format = "excel";
+            $scope.filterFacility($scope.filter);
         };
     }]);
 })(angular);
