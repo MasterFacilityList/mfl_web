@@ -12,10 +12,13 @@ angular.module("mfl.rating.directives", [])
             },
             template: "<ul class='rating'>" +
                         "<li ng-repeat='star in stars' ng-class='star' " +
-                        "ng-click='toggle($index)'> " +
+                        "ng-click='toggle($index)' " +
+                        "ng-mouseover='hover($index)' " +
+                        "ng-mouseout='undo($index)'> " +
                         "\u2605 </li>" +
                         "</ul>",
             link: function (scope) {
+                var oldValue = scope.ratingValue;
 
                 var updateStars = function () {
                     scope.stars = [];
@@ -26,17 +29,24 @@ angular.module("mfl.rating.directives", [])
                     }
                 };
 
-                scope.toggle = function (index) {
+                scope.undo = function () {
+                    scope.ratingValue = oldValue;
+                };
+
+                scope.hover = function (index) {
                     scope.ratingValue = index + 1;
+                };
+
+                scope.toggle = function (index) {
+                    scope.hover(index);
+                    oldValue = index + 1;
                     scope.onRatingSelected({
                         rating: index + 1
                     });
                 };
 
-                scope.$watch("ratingValue", function (oldVal, newVal) {
-                    if (newVal) {
-                        updateStars();
-                    }
+                scope.$watch("ratingValue", function () {
+                    updateStars();
                 });
             }
         };

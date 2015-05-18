@@ -1,12 +1,10 @@
 <div class="row">
-    <div class="col-lg-12 margin-t-20 margin-b-20">
-        <div class="col-lg-12">
-            <span class="pull-left">
-                <button class="login-btn login-btn-primary">
-                    Rate facility <i class="fa fa-star-half-empty"></i>
-                </button>
-            </span>
+    <div class="col-lg-12 margin-t-20 margin-b-5">
+        <div class="col-sm-12 col-xs-12 hidden-lg hidden-md">
             <span class="pull-right">
+                <button class="action-btn action-btn-md action-btn-primary"  data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="print facility details">
+                    <i class="fa fa-print"></i>
+                </button>
                 <button class="action-btn action-btn-md action-btn-primary" onclick="window.history.back()" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Go back">
                     <i class="fa fa-arrow-left"></i>
                 </button>
@@ -68,6 +66,12 @@
                     <label>Cots: </label>
                     {{oneFacility.number_of_cots}}
                 </span>
+                <span class="pull-right">
+                    <label>Facilities' rating: </label>
+                    <span class="fw-600" style="color: #DAA520">
+                        {{oneFacility.average_rating}}
+                    </span>
+                </span>
             </h4>
             <br>
             <!-- Display location details  -->
@@ -89,37 +93,53 @@
             </h4>
             <!-- End of locatin displays -->
             <br>
-            <hr style="border: 1px solid #F0F0F0;">
-            <h4 class="text-blue fs-18 fw-700 margin-t--15">Services</h4>
+            <h4 class="text-blue fs-18 fw-700 margin-t-5">Services</h4>
             <div class="col-lg-12">
-                <table class="table fs-14">
-                    <thead>
-                        <th>#</th>
-                        <th>Category</th>
-                        <th>Name</th>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="service in oneFacility.facility_services">
-                            <td>{{$index + 1}}</td>
-                            <td>{{service.category_name}}</td>
-                            <td>{{service.name}}</td>
-                            <td>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 margin-b-20" ng-repeat="service in oneFacility.facility_services">
+                    <h4 class="fs-18 fw-700">
+                        {{$index + 1}}.&nbsp;{{service.service_name}}
+                    </h4>
+                    <h4>
+                        <label class="fs-14 fw-600">Category: </label>
+                        <span class="fs-14 fw-600">{{service.category_name}}</span>
+                    </h4>
+                    <h4>
+                        <span class="pull-left">
+                            <label class="fs-14 fw-600">Average rating: </label>
+                            <span class="fs-14 fw-600">{{service.average_rating}} <i style="color: #FFD700" class="fa fa-star-o"></i></span>
+                        </span>
+                    </h4>
+                    <br>
+                    <h4>
+                         <span class="pull-left fs-13 margin-t-5">
+                            <label>Rate facilities' service</label>
+                            <span>
                                 <!-- Testing rating directive -->
-                                <span ng-repeat="rating in ratings">
+                                <span class="fs-10" ng-repeat="rating in service.ratings">
                                 <!-- {{rating.current}} out of{{rating.max}} -->
-                                <div star-rating rating-value="rating.current" max="rating.max" on-rating-selected="getSelectedRating(rating)"></div>
+                                <div star-rating rating-value="rating.current" max="rating.max" on-rating-selected="getSelectedRating(rating, service.id)"></div>
                                 </span>
-                                <!-- End of rating directive -->
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                        <!-- End of rating directive -->
+                            </span>
+                        </span>
+                    </h4>
+                </div>
             </div>
         </div>
 
         </div>
         <!-- Extra details displayed not important to the facilities -->
         <div class="col-lg-3 pull-right results-card">
+            <div class="col-lg-12 col-md-12 hidden-sm hidden-xs">
+                <span class="pull-right">
+                    <button class="action-btn action-btn-md action-btn-primary"  data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="print facility details">
+                        <i class="fa fa-print"></i>
+                    </button>
+                    <button class="action-btn action-btn-md action-btn-primary" onclick="window.history.back()" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Go back">
+                        <i class="fa fa-arrow-left"></i>
+                    </button>
+                </span>
+            </div>
             <h4 class="fs-18 text-blue fw-700">
                 <i style="border: 1px solid #fff; border-radius : 50%;" class="fa fa-user-secret fa-1x"></i>
                 Ownership status
