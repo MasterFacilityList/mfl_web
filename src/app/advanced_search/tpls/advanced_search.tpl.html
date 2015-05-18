@@ -68,46 +68,64 @@
                         </div>
 
                         <div class="group">
-                         <div class="input-group ">
-                            <div ng-dropdown-multiselect="" events="events.county"  options="filter_data.county" selected-model="filter.county"
+                         <div class="">
+                            <div class="multiselect-div" ng-dropdown-multiselect="" events="events.county"  options="filter_data.county" selected-model="filter.county"
                             extra-settings="dropDownSettings" translation-texts="selectTitles.county"></div>
                        </div>
                        </div>
                        <div class="group">
-                           <div class="input-group ">
-                                <div ng-dropdown-multiselect="" events="events.constituency"  options="filter_data.constituency" selected-model="filter.constituency"
+                           <div class=" ">
+                                <div class="multiselect-div" ng-dropdown-multiselect="" events="events.constituency"  options="filter_data.constituency" selected-model="filter.constituency"
                                 extra-settings="dropDownSettings" translation-texts="selectTitles.constituency"></div>
                            </div>
                        </div>
 
                        <div class="group" ng-hide="disabled.ward">
-                           <div class="input-group ">
-                                <div ng-dropdown-multiselect=""  options="filter_data.ward" selected-model="filter.ward"
+                           <div class=" ">
+                                <div class="multiselect-div" ng-dropdown-multiselect=""  options="filter_data.ward" selected-model="filter.ward"
                                 extra-settings="dropDownSettings" translation-texts="selectTitles.ward"></div>
                            </div>
                        </div>
 
 
                        <div class="group">
-                           <div class="input-group ">
-                                <div ng-dropdown-multiselect=""  options="filter_data.operation_status" selected-model="filter.operation_status"
+                           <div class=" ">
+                                <div class="multiselect-div" ng-dropdown-multiselect=""  options="filter_data.operation_status" selected-model="filter.operation_status"
                                 extra-settings="dropDownSettings" translation-texts="selectTitles.operation_status"></div>
                            </div>
                        </div>
 
                        <div class="group">
-                           <div class="input-group ">
-                                <div ng-dropdown-multiselect=""  options="filter_data.facility_type" selected-model="filter.facility_type"
+                           <div class="">
+                                <div class="multiselect-div" ng-dropdown-multiselect=""  options="filter_data.facility_type" selected-model="filter.facility_type"
                                 extra-settings="dropDownSettings" translation-texts="selectTitles.facility_type"></div>
                            </div>
                        </div>
-                        <div class="form-group">
+                       <!-- Beginning of number of beds replacement -->
+                       <div class="group">
+                           <input type="text" ng-model="filter.number_of_beds" required>
+                           <span class="highlight"></span>
+                           <span class="bar"></span>
+                           <label>
+                               Number of beds
+                           </label>
+                       </div>
+                       <!-- End of number of beds replacement -->
+                        <!-- <div class="form-group">
                             <input placeholder="Number of Beds" ng-model="filter.number_of_beds" />
-                        </div>
+                        </div> -->
+                        <div class="group">
+                           <input type="text" ng-model="filter.number_of_cots" required>
+                           <span class="highlight"></span>
+                           <span class="bar"></span>
+                           <label>
+                               Number of cots
+                           </label>
+                       </div>
 
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <input placeholder="Nunber of cots" ng-model="filter.number_of_cots" />
-                        </div>
+                        </div> -->
 
                         <div class="checkbox-group margin-t-10">
                             <input name="open_whole_day" ng-model="filter.open_whole_day" type="checkbox" id="open_whole_day">
