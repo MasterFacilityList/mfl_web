@@ -1,6 +1,7 @@
-"use strict";
+(function (angular) {
+    "use strict";
 
-angular.module("mfl.rating.routes", [])
+    angular.module("mfl.rating.routes", [])
 
 
     .config(["$stateProvider", function ($stateProvider) {
@@ -19,3 +20,4 @@ angular.module("mfl.rating.routes", [])
                 }
             });
     }]);
+})(angular);

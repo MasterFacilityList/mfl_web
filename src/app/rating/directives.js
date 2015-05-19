@@ -1,6 +1,8 @@
-"use strict";
+(function (angular) {
 
-angular.module("mfl.rating.directives", [])
+    "use strict";
+
+    angular.module("mfl.rating.directives", [])
 
     .directive("starRating", function () {
         return {
@@ -51,3 +53,4 @@ angular.module("mfl.rating.directives", [])
             }
         };
     });
+})(angular);
