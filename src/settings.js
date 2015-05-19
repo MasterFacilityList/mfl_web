@@ -10,7 +10,7 @@
             "client_secret": ""
         }
     };
-
+    
     setts.CREDZ.token_url = setts.SERVER_URL + "o/token/";
 
     window.MFL_SETTINGS = setts;

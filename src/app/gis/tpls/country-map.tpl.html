@@ -1,0 +1,32 @@
+<div class="content-header">
+    <actionbar action="action"></actionbar>
+    <h2 class="content-title">
+        <cont-title title="title"></cont-title>
+    </h2>
+    <ul class="breadcrumb">
+        <li><a ui-sref="gis"> MFL Geolocation </a></li>
+        <span ui-view="county-breadcrumb"></span>
+    </ul>
+    <!--breadcrumbs-->
+</div>
+<div class="content-body">
+    <div>
+       <div class="container-fluid">
+            <div class="col-md-3 content-card">
+               <h3>MFL <span class="fs-16">GEOLOCATION:</span></h3>
+               <hr>
+               <h5 ng-show="hoveredCounty">
+                    <strong>County Hovered: 
+                        <span class="text-info">{{hoveredCounty.properties.name}}</span>
+                    </strong>
+               </h5>
+            </div>
+            <div class="col-md-9 margin-b-10">
+                <leaflet defaults="defaults" width="100%" markers="markers" layers="layers"
+                         geojson="geojson" event-broadcast="events"
+                         height="80vh">
+                </leaflet>
+            </div>
+       </div>
+    </div>
+</div>
