@@ -8,6 +8,8 @@
         "ngSanitize",
         "mflAppConfig",
         "ui.router",
+        "ui.bootstrap",
+        "ui.bootstrap.tpls",
         "ngTagsInput",
         "angularjs-dropdown-multiselect",
 
@@ -16,6 +18,7 @@
         "mfl.home",
         "mfl.filtering",
         "mfl.gis",
-        "mfl.auth"
+        "mfl.auth",
+        "mfl.rating"
     ]);
 })(angular);
