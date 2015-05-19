@@ -30,25 +30,13 @@
         </div>
     </div>
     <div class="col-lg-12 margin-b-20">
-
-            <div class="margin-h-5 hidden-lg hidden-md" >
-                 <a ng-class="class.small" id="offcanvas" ng-click="changeClass()"> <i class="fa fa-search"></i> </a>
-                 <div class="col-md-6">
-                     <h4>Offcanvas baby</h4>
-                 </div>
-            </div>
-
-
             <div class="col-lg-4 col-md-4 hidden-sm hidden-xs" >
                 <div class="col-lg-12 col-md-12 content-card">
                 <!-- Start of advanced filter form ===================-->
                 <h4>Advanced search</h4>
                     <form role="form" class="form-horizontal form-bordered" name="mfl.filters.form">
                     <div class="form-group">
-                        <!-- <div class="input-group input-group-in"> -->
                         <div class="group">
-                            <!-- <span class="input-group-addon text-silver">Name: </span> -->
-                            <!-- <input ng-model="filter.name" name="name" type="text" class="form-control"  autocomplete="off"> -->
 
                             <input type="text" ng-model="filter.name" name="name"   required>
                             <span class="highlight"></span>
@@ -58,7 +46,6 @@
                             </label>
                         </div>
                         <div class="group">
-                            <!-- <span class="input-group-addon text-silver">Description: </span> -->
                             <input ng-model="filter.description" name="description" type="text" required>
                             <span class="highlight"></span>
                             <span class="bar"></span>
@@ -101,7 +88,6 @@
                                 extra-settings="dropDownSettings" translation-texts="selectTitles.facility_type"></div>
                            </div>
                        </div>
-                       <!-- Beginning of number of beds replacement -->
                        <div class="group">
                            <input type="text" ng-model="filter.number_of_beds" required>
                            <span class="highlight"></span>
@@ -110,10 +96,6 @@
                                Number of beds
                            </label>
                        </div>
-                       <!-- End of number of beds replacement -->
-                        <!-- <div class="form-group">
-                            <input placeholder="Number of Beds" ng-model="filter.number_of_beds" />
-                        </div> -->
                         <div class="group">
                            <input type="text" ng-model="filter.number_of_cots" required>
                            <span class="highlight"></span>
@@ -122,10 +104,6 @@
                                Number of cots
                            </label>
                        </div>
-
-                        <!-- <div class="form-group">
-                            <input placeholder="Nunber of cots" ng-model="filter.number_of_cots" />
-                        </div> -->
 
                         <div class="checkbox-group margin-t-10">
                             <input name="open_whole_day" ng-model="filter.open_whole_day" type="checkbox" id="open_whole_day">
@@ -182,15 +160,10 @@
             </div>
 
             <!-- ng-class="class.large"> -->
-            <div class="col-lg-8 col-md-8 search-results"
-
-            >
-                <div class="col-lg-12 pull-right margin-t-50 search-loader" ng-show="search_results" style="text-align: center">
-                    <img src="assets/img/301.GIF">
-                </div>
-                <div class="col-lg-12" ng-if="err !== ''">
+            <div class="col-lg-8 col-md-8 search-results" >
+                <div class="col-lg-12" ng-if="alert">
                     <div class="alert alert-danger">
-                        {{err}}
+                        <p ng-bind-html="alert"></p>
                     </div>
                 </div>
                 <div class="col-lg-12 content-card" ng-show="no_result">
@@ -198,14 +171,10 @@
                         Oops sorry no matches were found for the query <span class="text-danger">{{query}}</span>. try the advanced search
                     </p>
                 </div>
-                <span class="pull-left fs-16 margin-b-5" ng-hide="search_results || no_result">Page &nbsp;{{pagination.current_page}} of {{pagination.page_count}}</span>
-
-                <!--  ===============Begining of pagin spinner-->
-                <div class="col-lg-12 margin-t-250 margin-b-100" ng-if="!page_spinner" style="text-align: center">
+                <div class="col-lg-12 margin-t-250 margin-b-100" ng-if="spinneractive" style="text-align: center">
                     <img src="assets/img/301.GIF">
                 </div>
-                <!-- ================end of paging spinner -->
-                <div class="col-md-12 results-card" ng-repeat="fac in query_results" ng-if="page_spinner">
+                <div class="col-md-12 results-card" ng-repeat="fac in query_results" ng-if="!spinneractive">
                         <div class="col-lg-12">
                             <a ui-sref="facility_details({fac_id : fac.id})" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Click to view facility details">
                                 <h5 class="search-resulthead">
@@ -246,25 +215,6 @@
                             </p>
                         </div>
                 </div>
-                <!-- ====Start of pagination -->
-                <nav class="col-md-12 col-xs-12" >
-                  <ul class="pagination col-md-12 col-xs-12" >
-                    <li class="col-md-3" ng-if="pagination.prev">
-                      <a class="login-btn login-btn-primary" aria-label="Previous" ng-click="paginate(prev_page)">
-                        <span aria-hidden="true">&laquo;</span> Prev
-                      </a>
-                    </li>
-                    <li class="col-md-3" ng-if="!pagination.prev">
-                    </li>
-                    <li class="col-md-6"></li>
-                    <li class="col-md-3" ng-if="pagination.next">
-                      <a class="pull-right login-btn login-btn-primary" aria-label="Next" ng-click="paginate(nxt_page)">
-                        Next <span aria-hidden="true">&raquo;</span>
-                      </a>
-                    </li>
-                  </ul>
-                </nav>
-                <!-- ====end of pagination -->
             </div>
     </div>
 </div>
