@@ -3,11 +3,11 @@
 
     angular.module("mfl.rating.controllers", [])
 
-    .controller("mfl.rating.controllers.rating", ["$scope",
+    .controller("mfl.rating.controllers.rating", ["$scope", "$stateParams",
         "facilitiesApi",
-        function ($scope, facilitiesApi) {
+        function ($scope, $stateParams,facilitiesApi) {
             $scope.test = "Rating";
-            $scope.fac_id = "1e0d5bc8-aa79-4c38-b938-714c28837c61";
+            $scope.fac_id = $stateParams.fac_id;
             facilitiesApi.facilities.get($scope.fac_id)
                 .success(function (data) {
                     $scope.rating = [

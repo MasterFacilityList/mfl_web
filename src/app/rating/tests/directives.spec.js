@@ -15,7 +15,6 @@
                     scope.ratingValue = 3;
                     scope.max = 5;
                     compile = $compile;
-                    /*scope.$digest();*/
                 }
             ]);
         });

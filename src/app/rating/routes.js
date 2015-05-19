@@ -7,7 +7,7 @@
     .config(["$stateProvider", function ($stateProvider) {
         $stateProvider
             .state("rating", {
-                url: "/rating",
+                url: "facility/rating/:fac_id",
                 views : {
                     "main" : {
                         controller: "mfl.rating.controllers.rating",

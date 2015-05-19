@@ -18,10 +18,14 @@
                     httpBackend = $httpBackend;
                     SERVER_URL = url;
                     facilitiesApi = facilitiesApi;
+                    scope.fakeStateParams = {
+                        fac_id : 1
+                    };
                     data = {
                         $scope :scope,
                         facilitiesApi : facilitiesApi,
-                        SERVER_URL : url
+                        SERVER_URL : url,
+                        $stateParams : scope.fakeStateParams
                     };
                     controller = function (cntrl) {
                         return $controller(cntrl, data);
@@ -38,7 +42,7 @@
         inject(["$httpBackend", function ($httpBackend) {
                 controller("mfl.rating.controllers.rating");
                 var rating = 3;
-                var id = "4d014de5-b500-439e-98b5-2fa1b5836b15";
+                var id = 1;
                 scope.fac_rating = {
                     facility_service : id,
                     rating : rating
@@ -57,8 +61,7 @@
                     ]
                 };
                 $httpBackend.expectGET(SERVER_URL +
-                    "api/facilities/facilities/1e0d5bc8-aa79-4c38-" +
-                    "b938-714c28837c61/").respond(200, data);
+                    "api/facilities/facilities/1/").respond(200, data);
                 var rate = [
                     {
                         current : 0,
@@ -82,10 +85,9 @@
             controller("mfl.rating.controllers.rating");
             $httpBackend.expectGET(
                 SERVER_URL +
-                "api/facilities/facilities/1e0d5bc8-aa79-4c38-" +
-                "b938-714c28837c61/").respond(400, {name : ""});
+                "api/facilities/facilities/1/").respond(400, {name : ""});
             var rating = 3;
-            var id = "4d014de5-b500-439e-98b5-2fa1b5836b15";
+            var id = 1;
             scope.getSelectedRating(rating, id);
             $httpBackend.expectPOST(
                     SERVER_URL +
