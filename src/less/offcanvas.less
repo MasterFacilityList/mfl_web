@@ -43,3 +43,45 @@
     -ms-transform: translate(13.725em, 0px);
     transform: translate(13.725em, 0px);
    }
+
+/* move the toggle button to the left and give it
+   some breathing room */
+.navbar-toggle {
+  float: left;
+  margin-left: 10px;
+}
+
+@media screen and (max-width: 767px) {
+
+   /* outer div */
+  .row-offcanvas {
+    position: relative;
+    left: 0;
+    -webkit-transition: left .3s ease-in;
+    -most-transition: left .3s ease-in;
+    transition: left .3s ease-in;
+  }
+
+  /* sidebar */
+  .sidebar-offcanvas {
+    left: -80%;
+    width: 80%;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    background-color: #F7F7F7;
+    padding: 0px;
+  }
+
+  /* content */
+  .row-offcanvas.active {
+    left: 80%;
+  }
+
+  /* Make the menu headers the same size as the
+     bootstrap navbar */
+  [data-role='panelbar'] .k-header {
+    min-height: 50px;
+  }
+
+}

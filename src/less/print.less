@@ -1,0 +1,43 @@
+@media print {
+    .header h3, nav, footer {
+        display: none;
+    }
+    nav > div {
+        display: none;
+    }
+    .navbar-header {
+        display: none;
+    }
+
+    body {
+        font: 12pt Georgia, "Times New Roman", Times, serif;
+        line-height: 1.3;
+    }
+    h1 {
+        font-size: 24pt;
+    }
+
+    h2 {
+        font-size: 14pt;
+        margin-top: 25px;
+    }
+
+    aside h2 {
+        font-size: 18pt;
+    }
+
+    ul {
+        margin: 0;
+    }
+
+    li {
+        content: "» ";
+    }
+    /*@page :left {
+        margin: 0.4cm;
+    }
+
+    @page :right {
+        margin: 0.4cm;
+    }*/
+}
