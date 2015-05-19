@@ -111,6 +111,46 @@
             "title": "",
             "checked": false
         };
+        $scope.pagination = {};
+        var addPagination = function(page_count, url_next, url_prev){
+            $scope.pagination.active = true;
+            $scope.pagination.page_count = Math.ceil(page_count/25);
+            var makeParams = function(url, next){
+                var params = url.substring(url.indexOf("?")+1, url.length).split("&");
+                _.each(params, function(param){
+                    var p = param.split("=");
+                    if(param.indexOf("page")!==-1){
+                        if(next){
+                            $scope.pagination.next_page = p[1];
+                        }
+                        else{
+                            $scope.pagination.prev_page = p[1];
+                        }
+                    }
+                });
+            };
+            if(url_next){
+                $scope.pagination.next=true;
+                makeParams(url_next, true);
+            }else{
+                $scope.pagination.next = false;
+                $scope.pagination.current_page = $scope.pagination.page_count;
+            }
+            if(url_prev){
+                $scope.pagination.prev = true;
+                makeParams(url_prev, false);
+            }else{
+                $scope.pagination.prev = false;
+                $scope.pagination.current_page = 1;
+            }
+            if($scope.pagination.next){
+                $scope.pagination.current_page = $scope.pagination.next_page-1;
+            }
+        };
+        $scope.paginate = function(page_count){
+            $scope.filter.page = page_count;
+            $scope.filterFacility($scope.filter);
+        };
 
         var resolves = {
             startSpinner: function(){
@@ -125,6 +165,7 @@
                         SERVER_URL + "api/common/download/download/xlsx/";
                     delete $scope.filter.format;
                 }else{
+                    addPagination(data.count, data.next, data.previous);
                     $scope.search_results = false;
                     $scope.query_results = data.results;
                     if($scope.query_results.length===0){
@@ -251,6 +292,7 @@
 
         $scope.filterFacility = function(filters){
             var changes= constructParams(filters);
+            delete filters.page;
             if(!_.isEmpty(changes)){
                 resolves.startSpinner();
                 if(_.has(changes, "ward")){
