@@ -1,5 +1,6 @@
-"use strict";
-(function(angular){
+
+(function(angular,_){
+    "use strict";
     angular.module("mfl.filtering.controllers", [
         "mfl.filtering.services",
         "mflAppConfig"
@@ -15,13 +16,6 @@
             $scope.filter = $stateParams;
         };
         initFilterModel();
-        //initializing the counter
-        $scope.counter = {
-            hits : "",
-            prev : "",
-            next : ""
-        };
-        //end of initializing the counter
         $scope.filter = {
             county: [],
             constituency: [],
@@ -65,11 +59,7 @@
                         $scope.selected[key] = _.uniq($scope.selected[key]);
                         var filter = {};
                         filter[filterKey]= $scope.selected[key].join(",");
-                        getChildren(
-                            api,
-                            label,
-                            filter
-                        );
+                        getChildren(api,label,filter);
                     },
                     removeSelected: function(key, value, label,filterKey, api){
                         $scope.selected[key].pop(value);
@@ -121,10 +111,34 @@
             "title": "",
             "checked": false
         };
-        $scope.page = true;
-        $scope.search_results = true;
-        $scope.no_result = false;
-        $scope.err = "";
+
+        var resolves = {
+            startSpinner: function(){
+                $scope.spinneractive = true;
+            },
+            stopSpinner: function(){
+                $scope.spinneractive = false;
+            },
+            success: function(data){
+                if(_.has($scope.filter, "format")){
+                    $window.location.href =
+                        SERVER_URL + "api/common/download/download/xlsx/";
+                    delete $scope.filter.format;
+                }else{
+                    $scope.search_results = false;
+                    $scope.query_results = data.results;
+                    if($scope.query_results.length===0){
+                        $scope.no_result = true;
+                    }
+                }
+                resolves.stopSpinner();
+            },
+            error: function(err){
+                $scope.alert = err.error;
+                resolves.stopSpinner();
+            }
+        };
+        resolves.startSpinner();
         _.each(["county", "operation_status", "constituency", "facility_type"], function(key){
             $scope.filter_data[key] = filteringData[key].data.results;
             $scope.filter_data.ward = [];
@@ -139,34 +153,14 @@
             return filters;
         };
 
-        var setNoResult = function(res){
-            if(res === 0) {
-                $scope.no_result = true;
-            }
-        };
         if(_.isEmpty($stateParams) || _.isUndefined($stateParams.search)){
-            filterApi.facilities.list().success(function(res){
-                $scope.search_results = false;
-                $scope.query_results = res.results;
-                setNoResult($scope.query_results.length);
-            }).error(function(err){
-                $scope.alert = err.error;
-                $scope.err = err.error;
-                $scope.search_results = false;
-            });
+            filterApi.facilities.list().success(resolves.success).error(resolves.error);
         }else{
             $scope.query = $stateParams.search;
             var filters = removeEmptyFilters($stateParams);
-            filterApi.facilities.filter(filters).success(function(res){
-                $scope.search_results = false;
-                $scope.query_results = res.results;
-                setNoResult($scope.query_results.length);
-            }).error(function(err){
-                $scope.search_results = false;
-                $scope.alert = err.error;
-            });
+            filterApi.facilities.filter(filters).success(resolves.success).error(resolves.error);
         }
-        //end of search results listung
+        //end of search results listing
         var getChildren = function(api, key, filter){
             api.filter(
                 _.extend(filter, $scope.default_filter))
@@ -258,6 +252,7 @@
         $scope.filterFacility = function(filters){
             var changes= constructParams(filters);
             if(!_.isEmpty(changes)){
+                resolves.startSpinner();
                 if(_.has(changes, "ward")){
                     delete changes.county;
                     delete changes.constituency;
@@ -268,22 +263,8 @@
                 }
                 changes.search = $stateParams.search;
                 changes = removeEmptyFilters(changes);
-                filterApi.facilities.filter(changes).success(function(data){
-                    if(_.has(filters, "format")){
-                        $window.location.href =
-                            SERVER_URL + "api/common/download/download/xlsx/";
-                        delete $scope.filter.format;
-                    }else{
-                        $scope.search_results = false;
-                        $scope.query_results = data.results;
-                        setNoResult($scope.query_results.length);
-                    }
-
-                }).error(function(error){
-                    $scope.alert = error.error;
-                    $scope.err = error.error;
-                    $scope.search_results = false;
-                });
+                filterApi.facilities.filter(changes)
+                    .success(resolves.success).error(resolves.error);
             }
         };
 
@@ -304,4 +285,4 @@
             $scope.filterFacility($scope.filter);
         };
     }]);
-})(angular);
+})(angular, _);
