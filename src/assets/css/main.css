@@ -691,7 +691,8 @@ fieldset[disabled] .btn-warning.active {
   margin-bottom: 15px;
 }
 .input-group {
-  margin-bottom: 15px;
+  /*margin-bottom: 15px;*/
+
 }
 .control-group.error input,
 .control-group.error select,

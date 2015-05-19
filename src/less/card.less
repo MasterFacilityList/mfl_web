@@ -1,7 +1,7 @@
 //
 // card less
 // Inspired by doc-containers
-// --------------------------------------------------
+// -------------------------------------------------
 
 // Base class
 .card-container {
@@ -16,11 +16,34 @@
   box-shadow: 0px 2px 7px 0 rgba(0, 0, 0, 0.86);
 }
 .card-panel{
+    text-decoration: none;
     background-color: #fff;
     padding-bottom: 10px 15px;
     margin-bottom: 20px;
-    box-shadow: 0px 2px 7px 0 rgba(0, 0, 0, 0.26);
+    box-shadow:  0 1px 1px rgba(0, 0, 0, 0.12), 0 2px 0 1px rgba(0, 0, 0, 0.07), 2px 1px 1px rgba(0, 0, 0, 0.10), 0px 1px 0 rgba(0, 0, 0, 0.12);
 }
+.card-panel:hover, .card-panel:focus{
+  box-shadow:  0 1px 1px rgba(0, 0, 0, 0.22), 0 2px 0 1px rgba(0, 0, 0, 0.17), 2px 1px 1px rgba(0, 0, 0, 0.20), 0px 1px 0 rgba(0, 0, 0, 0.22);
+}
+.card-panel > a{
+  margin: 0;
+  text-decoration: none;
+}
+.card-panel >a:hover, .card-panel >a:focus {
+  text-decoration : none;
+}
+.content-heading {
+    color: #fff;
+    background-color: #2196F3;
+    padding: 10px 4px 10px 4px;
+}
+
+.card-panel:hover  > .content-heading:hover, .card-panel:hover .content-heading:focus  {
+    color: #fff;
+    background-color: darken(#2196F3, 5%);
+    padding: 10px 4px 10px 4px;
+}
+
 .card-heading-active{
     color: #fff;
     background-color: #4caf50;
@@ -35,12 +58,24 @@
     border-bottom: 1px solid transparent;
     color: #fff;
 }
-//content card
-.content-card {
-  margin-bottom: @line-height-computed;
-  padding: 25px;
+/*=====================search results*/
+.results-card {
+  margin-bottom: 0px;
+  padding: 5px 10px 8px 10px;
   background-color: @card-container-bg;
   border: 1px solid transparent;
+  border-bottom: 1px solid #CCC;
+  box-sizing: border-box;
+  border-radius: @content-card-border-radius;
+  /*box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 2px 0 1px rgba(0, 0, 0, 0.07), 2px 1px 1px rgba(0, 0, 0, 0.10), 0px 1px 0 rgba(0, 0, 0, 0.12)*/
+}
+//content card
+.content-card {
+  margin-bottom: 0px;
+  padding: 5px 10px 8px 10px;
+  background-color: @card-container-bg;
+  border: 1px solid transparent;
+  border-bottom: 1px solid #CCC;
   box-sizing: border-box;
   border-radius: @content-card-border-radius;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 2px 0 1px rgba(0, 0, 0, 0.07), 2px 1px 1px rgba(0, 0, 0, 0.10), 0px 1px 0 rgba(0, 0, 0, 0.12)
@@ -59,28 +94,42 @@
 
 .search-card {
   margin-bottom: @line-height-computed;
-  padding: 25px;
+  padding: 1px 0px 1px 0px;
   background-color: @card-container-bg;
   /*background-color: rgba(0, 0, 0, 0.25);*/
   border: 1px solid transparent;
   box-sizing: border-box;
-  border-radius: @content-card-border-radius;
+  border-radius: 4px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 2px 0 1px rgba(0, 0, 0, 0.07), 2px 1px 1px rgba(0, 0, 0, 0.10), 0px 1px 0 rgba(0, 0, 0, 0.12)
 }
 
 .search-addon {
   background-color: #fff;
-  color: #CCC;
-  font-size: 20px;
+  color: #ddd;
+  font-size: 18px;
   border:transparent;
   box-shadow: 0;
-  
+
 }
 
 .search-addon:hover {
   cursor: pointer;
   color: #000;
-  box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.36);
+}
+
+.search-addon-btn {
+  background-color: #fff;
+  font-size: 17px;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 18px;
+  border:1px solid #ddd;
+  box-shadow: 0;
+}
+
+.search-addon-btn:hover {
+  cursor: pointer;
+  background-color: rgba(192, 192, 192, 0.8);
+  color: rgba(0, 0, 0, 0.8);
 }
 
 .search-input {
@@ -96,9 +145,64 @@
   color: rgba(0, 0, 0, 0.7);
   border-bottom: 1px solid #C9C9C9;
 }
+.search-resulthead {
+  text-decoration: none;
+  color: rgba(0,0,0, 0.9);
+}
+.search-resulthead > span {
+  color: rgba(0,0,0, 0.9);
+}
+.search-resulthead:hover{
+  color: #2196F3;
+}
+.search-resulthead > span:hover{
+  color: #2196F3;
+}
+
 
 .search-input:hover {
-  border-bottom: 1px solid #82CAFF;  
+  border-bottom: 1px solid #82CAFF;
+}
+
+.search-btn {
+  background: transparent;
+  border: transparent;
+}
+.search-icon {
+    color: #fff;
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    background-color: #ff1493;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 7px;
+    font-size: 16px;
+    line-height: 1.42857143;
+    border-radius: 50%;
+    box-shadow: 0px 2px 7px 0 rgba(0, 0, 0, 0.26);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.search-icon-md {
+  font-size: 22px;
+  padding: 5px 13px 5px 13px;
+}
+
+.search-icon:hover,
+.search-icon:focus,
+.search-icon:active,
+.search-icon.active{
+  color: #ffffff;
+  background-color: darken(#ff1493, 5%);
+  box-shadow: 0px 2px 7px 0 rgba(0, 0, 0, 0.46);
+  border-color: #ff00ff;
 }
 
 .grid-search-input {
@@ -114,7 +218,7 @@
 }
 
 .grid-search-input:hover {
-  border: 0 0 1px 1px solid #82CAFF;  
+  border: 0 0 1px 1px solid #82CAFF;
 }
 
 .grid-search-addon {
@@ -159,7 +263,7 @@
 }
 
 .card-header {
-  font-size: 26px; 
+  font-size: 26px;
   margin-bottom: @line-height-computed;
   padding: 25px;
   padding: 0px;

@@ -22,7 +22,7 @@
                 }
             })
             .state("gis_county", {
-                url: "/county/:county_id",
+                url: "/county/:county_id/:const_boundaries?c",
                 views: {
                     "main": {
                         controller: "mfl.gis.controllers.gis_county",
@@ -52,7 +52,7 @@
                     pageTitle: "MFL Constituency"
                 }
             }).state("gis_ward", {
-                url: "/ward/:ward_id",
+                url: "/ward/:ward_id?c",
                 views: {
                     "main": {
                         controller: "mfl.gis.controllers.gis_ward",

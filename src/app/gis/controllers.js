@@ -4,8 +4,7 @@
     angular.module("mfl.gis.controllers", [
         "leaflet-directive",
         "mfl.gis.wrapper",
-        "mfl.adminunits.wrapper",
-        "mfl.gis.interceptors"
+        "mfl.adminunits.wrapper"
     ])
 
     .controller("mfl.gis.controllers.gis", ["$scope", "countiesApi", "$http", "SERVER_URL",
@@ -48,8 +47,12 @@
         angular.extend($scope, {
             KEN: {
                 lat: 0.53,
-                lng: 37.85,
+                lng: 37.858,
                 zoom: 6
+            },
+            defaults: {
+                scrollWheelZoom: false,
+                tileLayer: ""
             }
         });
 

@@ -1,0 +1,33 @@
+<div class="container-fluid bg-overlay">
+    <div class="row   margin-h-5">
+        <div class="col-lg-12">
+            <h1 class="text-center margin-t-50 fw-900 hidden-sm hidden-xs" style="color: #fff;">
+                Welcome to the Master Facility List
+            </h1>
+            <h3 class="text-center margin-t-50 fw-700 hidden-lg hidden-md" style="color: #fff;">
+                Welcome to the Master Facility List
+            </h3>
+            <h2 class="text-center" style="">
+                <img src="../assets/img/kenya-coat-of-arms.png">
+            </h2>
+        </div>
+
+        <div class="text-center col-lg-8 col-lg-offset-2 margin-t-20 margin-b-10 search-loader" ng-show="loader" style=" text-align: center ">
+            <img class="fs-13" src="assets/img/294.GIF" style="background-color: #fff; border-radius: 5px;">
+        </div>
+        <div class="col-lg-8 col-lg-offset-2 search-card text-center" style="border: 1px solid #000;">
+            <form role="form" name="search-form" ng-submit="search(search.query)">
+                <div class="col-md-12 input-group">
+                    <input type="search" class="facilities" ng-model="search.query" placeholder="Search facilities..." ng-click="typeaheadFacilities()" />
+                    <span class="bar"></span>
+                    <span class="highlight"></span>
+                    <span class="search-addon-btn input-group-addon" id="sizing-addon1" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Search facility">
+                        <button type="submit" class="search-btn">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </span>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

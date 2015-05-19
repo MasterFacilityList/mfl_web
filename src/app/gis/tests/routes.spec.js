@@ -18,7 +18,7 @@
         });
 
         it("should go to county url", function () {
-            expect($state.href("gis_county", {county_id: 2})).toEqual("#/county/2");
+            expect($state.href("gis_county", {county_id: 2})).toEqual("#/county/2/");
         });
 
         it("should go to constituency url", function () {
