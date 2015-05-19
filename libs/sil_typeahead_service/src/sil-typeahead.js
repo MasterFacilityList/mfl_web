@@ -15,7 +15,6 @@ angular.module('sil-typeahead', ['sil.api.wrapper'])
     .service('sil-typeahead', [function () {
 
         var tt = {}; //holds the bloodhound adapters
-        window.TT = tt;
         var listeners = []; // holds the typeahead event listeners
         this.addListener = function (fxn) {
             listeners.push(fxn);
