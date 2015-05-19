@@ -28,13 +28,11 @@ input.reg-input:active:focus,select.reg-input:active:focus,
     border-bottom: 1px solid #0089FF;
 }*/
 
-input.reg-input,
-select.reg-input,
-textarea.reg-input {
+input.reg-input, select.reg-input, textarea.reg-input{
     font-size: 14px;
     margin-top: 15px;
     background-color: transparent;
-    border: none;
+    border:none;
     box-shadow: none;
     padding: 6px 5px;
     color: rgba(0, 0, 0, 0.7);
@@ -44,194 +42,144 @@ textarea.reg-input {
     margin-right: 5%;
     width: 90%;
 }
-
-input.reg-input:hover,
-select.reg-input:hover,
-textarea.reg-input:hover {
+input.reg-input:hover , select.reg-input:hover, textarea.reg-input:hover{
     border-bottom: 1px solid #0089FF;
 }
-
-input.reg-input::selection,
-select.reg-input::selection {
+input.reg-input::selection, select.reg-input::selection{
     border-bottom: 1px solid #0089ff;
 }
 
-input.reg-input.focus,
-select.reg-input:focus,
-textarea.reg-input:focus,
-input.reg-input:focus,
-select.reg-input.focus,
-textarea.reg-input.focus,
-input.reg-input:active:focus,
-select.reg-input:active:focus,
-textarea.reg-input:active:focus,
-.reg-input.active:focus,
-.reg-input:active,
-.reg-input.active {
+input.reg-input.focus, select.reg-input:focus, textarea.reg-input:focus,
+input.reg-input:focus, select.reg-input.focus, textarea.reg-input.focus,
+input.reg-input:active:focus,select.reg-input:active:focus,
+textarea.reg-input:active:focus, .reg-input.active:focus,
+.reg-input:active,.reg-input.active {
     border-bottom: 1px solid #0089FF;
 }
 /*form starting to style ----------------------*/
-
-.group {
-    position: relative;
-    margin-bottom: 20px;
+.group{
+    position:relative;
+    margin-bottom:20px;
 }
-
-input[type=text],
-input[type=number],
-input[type=search],
-input[type=password],
-select,
-textarea {
-    font-size: 16px;
-    padding: 10px 10px 10px 5px;
+input[type=text],input[type=number],input[type=search],
+input[type=password], input[type=email], select , textarea{
+    font-size:14px;
+    padding:10px 10px 10px 5px;
     background-color: #fff;
-    display: block;
-    width: 90%;
-    border: none;
-    border-bottom: 1px solid #757575;
+    display:block;
+    width:90%;
+    border:none;
+    border-bottom:1px solid #757575;
 }
-
-input[type=text]:focus,
-input[type=number]:focus,
-input[type=search]:focus,
-input[type=password],
-select:focus,
-textarea:focus {
-    outline: none;
-}
+input[type=text]:focus,input[type=number]:focus,
+input[type=search]:focus, input[type=password],input[type=email],
+ select:focus, textarea:focus { outline:none; }
 /* LABEL ======================================= */
-
-.group label {
-    color: #999;
-    font-size: 16px;
-    font-weight: normal;
-    position: absolute;
-    pointer-events: none;
-    left: 5px;
-    top: 10px;
-    transition: 0.2s ease all;
+.group label          {
+    color:#999;
+    font-size:16px;
+    font-weight:normal;
+    position:absolute;
+    pointer-events:none;
+    left:5px;
+    top:10px;
+    transition:0.2s ease all;
 }
-/* active state */
 
-input[type=text]:focus ~ label,
-input[type=text]:valid ~ label,
-input[type=number]:focus ~ label,
-input[type=number]:valid ~ label,
-input[type=search]:focus ~ label,
-input[type=search]:valid ~ label,
-input[type=password]:focus ~ label,
-input[type=password]:valid ~ label,
-select:focus ~ label,
-select:valid ~ label,
-textarea:focus ~ label,
-textarea:valid ~ label {
-    top: -10px;
-    font-size: 14px;
-    color: #2196F3;
+/* active state */
+input[type=text]:focus ~ label, input[type=text]:valid ~ label ,
+input[type=number]:focus ~ label, input[type=number]:valid ~ label ,
+input[type=search]:focus ~ label, input[type=search]:valid ~ label ,
+input[type=email]:focus ~ label, input[type=email]:valid ~ label ,
+input[type=password]:focus ~ label, input[type=password]:valid ~ label ,
+select:focus ~ label, select:valid ~ label,
+textarea:focus ~ label, textarea:valid ~ label {
+    top:-10px;
+    font-size:14px;
+    color:#2196F3;
 }
 /* BOTTOM BARS ================================= */
-
-.bar {
-    position: relative;
-    display: block;
-    width: 90%;
+.bar  { position:relative; display:block; width:90%; }
+.bar:before, .bar:after   {
+    content:'';
+    height:2px;
+    width:0;
+    bottom:1px;
+    position:absolute;
+    background:#2196F3;
+    transition:0.2s ease all;
 }
-
-.bar:before,
-.bar:after {
-    content: '';
-    height: 2px;
-    width: 0;
-    bottom: 1px;
-    position: absolute;
-    background: #2196F3;
-    transition: 0.2s ease all;
-}
-
 .bar:before {
-    left: 50%;
+    left:50%;
 }
-
 .bar:after {
-    right: 50%;
+    right:50%;
 }
-/* active state */
 
-input[type=text]:focus ~ .bar:before,
-input[type=text]:focus ~ .bar:after,
-input[type=number]:focus ~ .bar:before,
-input[type=number]:focus ~ .bar:after,
-input[type=search]:focus ~ .bar:before,
-input[type=search]:focus ~ .bar:after,
+/* active state */
+input[type=text]:focus ~ .bar:before, input[type=text]:focus ~ .bar:after,
+input[type=number]:focus ~ .bar:before, input[type=number]:focus ~ .bar:after,
+input[type=search]:focus ~ .bar:before, input[type=search]:focus ~ .bar:after,
+input[type=email]:focus ~ .bar:before, input[type=email]:focus ~ .bar:after,
 input[type=password]:focus ~ .bar:before,
 input[type=password]:focus ~ .bar:after,
-select:focus ~ .bar:before,
-select:focus ~ .bar:after,
-textarea:focus ~ .bar:before,
-textarea:focus ~ .bar:after {
-    width: 50%;
+select:focus ~ .bar:before, select:focus ~ .bar:after,
+textarea:focus ~ .bar:before, textarea:focus ~ .bar:after {
+    width:50%;
 }
 /* HIGHLIGHTER ================================== */
-
 .highlight {
-    position: absolute;
-    height: 60%;
-    width: 90%;
-    top: 25%;
-    left: 0;
-    pointer-events: none;
-    opacity: 0.5;
+    position:absolute;
+    height:60%;
+    width:90%;
+    top:25%;
+    left:0;
+    pointer-events:none;
+    opacity:0.5;
 }
-/* active state */
 
+/* active state */
 input[type=text]:focus ~ .highlight,
-input[type=number]:focus ~ .highlight,
-input[type=search]:focus ~ .highlight,
-input[type=password],
-select:focus ~ .highlight,
-textarea:focus ~ .highlight {
-    animation: inputHighlighter 0.3s ease;
+input[type=number]:focus ~ .highlight, input[type=email],
+input[type=search]:focus ~ .highlight, input[type=password],
+select:focus ~ .highlight, textarea:focus ~ .highlight {
+    animation:inputHighlighter 0.3s ease;
 }
+
 /* ANIMATIONS ================ */
-
 @keyframes inputHighlighter {
-    from {
-        background: #2196F3;
-    }
-    to {
-        width: 0;
-        background: transparent;
-    }
+    from  { background:#2196F3; }
+    to    { width:0; background:transparent; }
 }
-/* active state */
 
-input[type=text]:focus ~ label,
-input[type=text]:valid ~ label,
-input[type=number]:focus ~ label,
-input[type=number]:valid ~ label,
-input[type=search]:focus ~ label,
-input[type=search]:valid ~ label,
-input[type=password]:focus ~ label,
-input[type=password]:valid ~ label,
-select:focus ~ label,
-select:valid ~ label,
-textarea:focus ~ label,
-textarea:valid ~ label {
-    top: -10px;
-    font-size: 14px;
-    color: #2196F3;
+/* active state */
+input[type=text]:focus ~ label, input[type=text]:valid ~ label,
+input[type=number]:focus ~ label, input[type=number]:valid ~ label,
+input[type=search]:focus ~ label, input[type=search]:valid ~ label,
+input[type=email]:focus ~ label, input[type=email]:valid ~ label,
+input[type=password]:focus ~ label, input[type=password]:valid ~ label,
+select:focus ~ label, select:valid ~ label,
+textarea:focus ~ label, textarea:valid ~ label {
+    top:-10px;
+    font-size:14px;
+    color:#2196F3;
 }
 /*Material ripple effect =============*/
-
 .btn:after,
 .nav a:after {
+    content: "";
+    color: rgba(128, 128, 128, 0.7);
+    background: rgba(255,255,255,0.3);
     display: block;
     position: absolute;
+    border-radius: 50%;
+    /*padding-top: 240%;
+    padding-left: 240%;
+    margin-top: -120%;
+    margin-left: -120%;*/
     opacity: 0;
-    transition: all 1s;
+    /*transition: all 1s;*/
 }
-
 .btn:active:after,
 .nav a:active:after {
     padding-top: 0;
@@ -239,5 +187,45 @@ textarea:valid ~ label {
     margin-top: 0;
     margin-left: 0;
     opacity: 1;
-    transition: 0s;
+    /*transition: 0s;*/
+}
+
+input[type=search] {
+    font-size: 18px;
+    padding: 10px 10px 10px 5px;
+    background-color: #fff;
+    display: block;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    border-right: 1px solid #ddd
+}
+
+
+.multiselect-div {
+    background-color: #fff;
+    border: transparent;
+    border-bottom: 1px solid;
+    width: 90%;
+    text-align: left;
+}
+.multiselect-div > div {
+    width: 100% !important;
+    font-size: 14px;
+}
+.multiselect-div > div > button {
+    background-color: #fff;
+    border: transparent;
+/*    border-bottom: 1px solid;*/
+    width: 100%;
+    text-align: left;
+}
+
+.multiselect-div > div > button > span  {
+    float: right !important;
+    margin-top: 8px;
+}
+
+.multiselect-div > div > button > .btn-group {
+    width : 100% !important;
 }

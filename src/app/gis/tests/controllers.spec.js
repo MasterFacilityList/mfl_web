@@ -10,7 +10,6 @@
             module("mfl.gis.controllers");
             module("mfl.gis.wrapper");
             module("mfl.adminunits.wrapper");
-            module("mfl.gis.interceptors");
 
             inject(["$rootScope", "$controller","$httpBackend","$state",
                     "SERVER_URL","countiesApi",

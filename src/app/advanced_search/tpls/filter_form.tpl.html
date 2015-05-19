@@ -1,0 +1,139 @@
+<h4>Advanced search</h4>
+    <form role="form" class="form-horizontal form-bordered" name="mfl.filters.form">
+    <div class="form-group">
+        <div class="input-group input-group-in">
+            <span class="input-group-addon text-silver">Name: </span>
+            <input ng-model="filter.name" name="name" type="text" class="form-control"  autocomplete="off">
+        </div>
+        <div class="input-group input-group-in">
+            <span class="input-group-addon text-silver">Description: </span>
+            <input ng-model="filter.description" name="description" type="text" class="form-control"  autocomplete="off">
+        </div>
+
+         <div class="input-group ">
+            <span class="">County: </span> <br/>
+            <ui-select multiple ng-model="filter.county"
+            close-on-select="true" theme="select2" sortable="true" name="county" style="width:350px;">
+                 <ui-select-match placeholder="Select County">
+                        {{$item.name}}
+                </ui-select-match>
+                <ui-select-choices repeat="county in filter_data.county">
+                    <div ng-bind-html="county.name| highlight: $select.search"></div>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+
+
+        <div class="input-group ">
+            <span class="">Constituency:</span> <br/>
+            <ui-select multiple name="constituency" ng-model="filter.constituency"
+            close-on-select="true" theme="select2" sortable="true" style="width:350px;">
+                 <ui-select-match placeholder="Select County">
+                        {{$item.name}}
+                </ui-select-match>
+                <ui-select-choices repeat="consti in filter_data.constituency">
+                     <div ng-bind-html="consti.name| highlight: $select.search"></div>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+
+        <div class="input-group" ng-hide="disabled.ward">
+            <span class="">Ward:</span> <br/>
+            <ui-select multiple name="ward" ng-model="filter.ward" ng-disabled="disabled.ward"
+            close-on-select="true" theme="select2" sortable="true" style="width:350px;">
+                 <ui-select-match placeholder="Select Ward">
+                        {{$item.name}}
+                </ui-select-match>
+                <ui-select-choices repeat="ward in filter_data.ward track by $index | propsFilter: {name: $select.search} ">
+                     <div ng-bind-html="ward.name| highlight: $select.search"></div>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+
+        <div class="input-group">
+            <span class="">Operation Status: </span> <br/>
+            <ui-select multiple ng-model="filter.operation_status"
+            close-on-select="true" theme="select2" sortable="true" name="operation_status" style="width:350px;">
+                 <ui-select-match placeholder="Select Operation Status">
+                        {{$item.name}}
+                </ui-select-match>
+                <ui-select-choices repeat="status in filter_data.operation_status track by $index | propsFilter: {name: $select.search}">
+                    <div ng-bind-html="status.name| highlight: $select.search"></div>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+
+        <div class="input-group ">
+            <span class="">Facility Type: </span> <br/>
+            <ui-select multiple ng-model="filter.facility_type"
+            close-on-select="true"  theme="select2" sortable="true" name="facility_type" style="width:350px;">
+                 <ui-select-match placeholder="Select Operation Status">
+                        {{$item.name}}
+                </ui-select-match>
+                <ui-select-choices repeat="typ in filter_data.facility_type | propsFilter: {name: $select.search}">
+                    <div ng-bind-html="typ.name| highlight: $select.search"></div>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+
+
+        <div class="input-group">
+            <span class="control-label">Number of Beds: </span><br/>
+
+            <ui-select multiple name="number_of_beds" ng-model="filter.number_of_beds"
+            close-on-select="true"  theme="select2" sortable="true"  style="width:350px;">
+                 <ui-select-match placeholder="Beds Number">
+                        {{$item}}
+                </ui-select-match>
+                <ui-select-choices repeat="number in numbers | filter: $select.search">
+                    {{number}}
+                </ui-select-choices>
+            </ui-select>
+
+        </div>
+
+        <div class="input-group">
+            <span class="control-label">Number of Cots: </span><br/>
+
+            <ui-select multiple name="number_of_cots" ng-model="filter.number_of_cots"
+            close-on-select="true"  theme="select2" sortable="true"  style="width:350px;">
+                 <ui-select-match placeholder="Cots Number">
+                        {{$item}}
+                </ui-select-match>
+                <ui-select-choices repeat="number in numbers | filter: $select.search">
+                    {{number}}
+                </ui-select-choices>
+            </ui-select>
+
+        </div>
+
+        <div class="input-group input-group-in">
+            <span class="input-group-addon text-silver">Open Whole Day: </span>
+            <input name="open_whole_day" ng-model="filter.open_whole_day" type="checkbox" class="form-control" >
+        </div>
+
+        <div class="input-group input-group-in">
+            <span class="input-group-addon text-silver">Is Classified: </span>
+            <input name="is_classified" ng-model="filter.is_classified" type="checkbox" class="form-control">
+        </div>
+
+        <div class="input-group input-group-in">
+            <span class="input-group-addon text-silver">Is Published: </span>
+            <input name="is_published" ng-model="filter.is_published" type="checkbox" class="form-control">
+        </div>
+
+        <div class="input-group input-group-in">
+            <span class="input-group-addon text-silver">Is Regulated: </span>
+            <input name="is_regulated" ng-model="filter.is_regulated" type="checkbox" class="form-control" >
+        </div>
+
+        <div class="input-group input-group-in">
+            <span class="input-group-addon text-silver">Is Active: </span>
+            <input name="is_active" ng-model="filter.is_active" type="checkbox" class="form-control" >
+        </div>
+
+    </div>
+ </form>
+ <div>
+    <button class="btn btn-primary" ng-click="filterFacility(mfl.filters.form)">Filter </button>
+</div>

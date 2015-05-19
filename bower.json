@@ -18,7 +18,10 @@
     "angular-toastr": "~0.5.2",
     "angular-openlayers-directive": "~0.0.5",
     "angular-leaflet-directive": "~0.7.15",
+    "typeahead.js": "~0.11.1",
     "stacktrace-js": "~0.6.4",
+    "angularjs-dropdown-multiselect": "~1.5.2",
+    "ng-tags-input": "~2.3.0",
     "moment": "~2.10.3"
   },
   "resolutions": {

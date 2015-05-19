@@ -2,9 +2,12 @@
 angular.module("mfl.home", [
     //3rd party stuff
     "ui.router",
-    //out stuff
+    "ui.bootstrap",
+    "ui.bootstrap.tpls",
+    "sil-typeahead",
+    //our stuff
     "mfl.home.controllers",
     "mfl.home.routes",
-    "mfl.common.controllers"
-    
+    "mfl.common.controllers",
+    "mfl.facilities.wrapper"
 ]);

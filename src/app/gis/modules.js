@@ -7,4 +7,5 @@ angular.module("mfl.gis", [
     "mfl.common.controllers",
     "mfl.gis.routes",
     "mfl.common.directives"
+//    "mfl.gis.services"
 ]);
