@@ -1,6 +1,7 @@
-"use strict";
+(function (angular) {
+    "use strict";
 
-angular.module("mfl.rating.controllers", [])
+    angular.module("mfl.rating.controllers", [])
 
     .controller("mfl.rating.controllers.rating", ["$scope",
         "facilitiesApi",
@@ -15,7 +16,6 @@ angular.module("mfl.rating.controllers", [])
                             max: 5
                         }
                     ];
-                    console.log(data);
                     $scope.oneFacility = data;
                     _.each($scope.oneFacility.facility_services,
                         function (service) {
@@ -27,10 +27,9 @@ angular.module("mfl.rating.controllers", [])
                             ];
                         }
                     );
-                    console.log($scope.oneFacility.facility_services);
                 })
                 .error(function (e) {
-                    console.log(e.error);
+                    $scope.alert = e.error;
                 });
 
             $scope.getSelectedRating = function (rating, id) {
@@ -44,8 +43,9 @@ angular.module("mfl.rating.controllers", [])
                         console.log(data);
                     })
                     .error(function (e) {
-                        console.log(e.error);
+                        $scope.alert = e.error;
                     });
             };
         }
     ]);
+})(angular);

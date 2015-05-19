@@ -37,53 +37,44 @@
         it("should test if ratings are added to facilities services",
         inject(["$httpBackend", function ($httpBackend) {
                 controller("mfl.rating.controllers.rating");
-                var data = "";
                 var rating = 3;
                 var id = "4d014de5-b500-439e-98b5-2fa1b5836b15";
                 scope.fac_rating = {
                     facility_service : id,
                     rating : rating
                 };
-                var arg = {
-                    test : [
+                var data = {
+                    facility_services: [
                         {
-                            id : "",
-                            service_name: "",
-                            ratings: [
-                                {current: 0, max: 5}
-                            ]
+                            name: "owaga"
+                        },
+                        {
+                            name: "knh"
+                        },
+                        {
+                            name: "hostel"
                         }
                     ]
                 };
-                var equal = arg.test[0];
-                scope.oneFacility = {
-                    facility_services : [
-                        {
-                            id : "",
-                            service_name: ""
-                        }
-                    ]
-                };
-                _.each(scope.oneFacility.facility_services, function (serv) {
-                    serv.ratings = [
-                        {
-                            current: 0,
-                            max: 5
-                        }
-                    ];
-                });
                 $httpBackend.expectGET(SERVER_URL +
                     "api/facilities/facilities/1e0d5bc8-aa79-4c38-" +
                     "b938-714c28837c61/").respond(200, data);
+                var rate = [
+                    {
+                        current : 0,
+                        max: 5
+                    }
+                ];
+                $httpBackend.flush();
                 expect(
-                    scope.oneFacility.facility_services).toContain(
-                        equal);
+                    scope.oneFacility.facility_services[0].ratings).toEqual(rate);
                 scope.getSelectedRating(rating, id);
                 $httpBackend.expectPOST(
                     SERVER_URL +
                     "api/facilities/facility_service_ratings/").
                     respond(200, scope.fac_rating);
                 $httpBackend.flush();
+
             }
         ]));
         it("should fail on call to rate a facility service",
