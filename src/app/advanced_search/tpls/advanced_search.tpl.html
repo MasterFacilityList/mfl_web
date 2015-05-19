@@ -6,10 +6,10 @@
                 <span class="fs-18 fw-700" style="font-family: Lato Light" ng-hide="no_search_query">
                     <i class="fa fa-building"></i> Facilities
                 </span>
-                <span ng-show="no_search_query">
-                    Showing <span> <em>{{counter.hits}}</em></span> result(s) for
-                    <span class="text-danger">
-                        {{query}}
+                <span ng-show="!search_results">
+                    Showing <span> <em>{{hits}}</em></span> result(s)
+                    <span class="text-danger" ng-if="filter.serach">
+                       for {{filter.search}}
                     </span>
                 </span>
                 <span class="pull-right">
@@ -36,6 +36,14 @@
                 <h4>Advanced search</h4>
                     <form role="form" class="form-horizontal form-bordered" name="mfl.filters.form">
                     <div class="form-group">
+                        <div class="group">
+                            <input type="text" ng-model="filter.search" name="search"   required>
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label>
+                                Search Query  {{filter.search}}
+                            </label>
+                        </div>
                         <div class="group">
 
                             <input type="text" ng-model="filter.name" name="name"   required>
