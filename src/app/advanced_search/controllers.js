@@ -17,6 +17,7 @@
         };
         initFilterModel();
         $scope.filter = {
+            search: "",
             county: [],
             constituency: [],
             ward: [],
@@ -165,6 +166,7 @@
                         SERVER_URL + "api/common/download/download/xlsx/";
                     delete $scope.filter.format;
                 }else{
+                    $scope.hits = data.count;
                     addPagination(data.count, data.next, data.previous);
                     $scope.search_results = false;
                     $scope.query_results = data.results;
@@ -246,13 +248,15 @@
             return changes;
         };
         var addFilter = function(key, value){
-            var vals = value.split(",");
-            if(_.isUndefined($scope.filter[key])){
-                $scope.filter[key] = [];
+            if(!_.isArray($scope.filter[key])){
+                $scope.filter[key] = value;
+            }else{
+                var vals = value.split(",");
+                _.each(vals, function(val){
+                    $scope.filter[key].push({id: val});
+                });
             }
-            _.each(vals, function(val){
-                $scope.filter[key].push({id: val});
-            });
+
         };
         // pre-select filters
         var setFilters = function(){
@@ -303,7 +307,6 @@
                         delete changes.county;
                     }
                 }
-                changes.search = $stateParams.search;
                 changes = removeEmptyFilters(changes);
                 filterApi.facilities.filter(changes)
                     .success(resolves.success).error(resolves.error);

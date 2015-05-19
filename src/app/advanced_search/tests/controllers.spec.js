@@ -93,6 +93,17 @@
             httpBackend.flush();
             expect(scope.query_results).toEqual(["testing"]);
         });
+
+        it("should filter facilities: search param set:delete undefined", function(){
+            var scope = rootScope.$new();
+            httpBackend.expectGET(
+                    serverUrl+facilityUrl+"?search=name").respond(200, {results: ["testing"]});
+            createController(
+                scope, {"search": "name", "ward": undefined}, undefined, undefined, true);
+            httpBackend.flush();
+            expect(scope.query_results).toEqual(["testing"]);
+        });
+
         it("should filter facilities: search param set: success, empty results", function(){
             var scope = rootScope.$new();
             httpBackend.expectGET(
@@ -187,6 +198,12 @@
             scope.filterFacility({constituency :[{id: "21212"}], county :[{id: "fa21212"}]});
             httpBackend.flush();
             expect(scope.query_results).toEqual(["testing"]);
+        });
+
+        it("should remove empty filter", function(){
+            var scope = rootScope.$new();
+            createController(scope, {}, {constituency: undefined, search: "tafuta"});
+            expect(scope.query_results).toEqual([]);
         });
 
         it("should export data", function(){

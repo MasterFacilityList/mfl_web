@@ -4,9 +4,13 @@
     angular.module("mfl.rating.controllers", [])
 
     .controller("mfl.rating.controllers.rating", ["$scope", "$stateParams",
-        "facilitiesApi",
-        function ($scope, $stateParams,facilitiesApi) {
+        "facilitiesApi", "$window",
+        function ($scope, $stateParams,facilitiesApi, $window) {
             $scope.test = "Rating";
+            $scope.tooltip = {
+                "title": "",
+                "checked": false
+            };
             $scope.fac_id = $stateParams.fac_id;
             facilitiesApi.facilities.get($scope.fac_id)
                 .success(function (data) {
@@ -45,6 +49,11 @@
                     .error(function (e) {
                         $scope.alert = e.error;
                     });
+            };
+
+            //printing function
+            $scope.printing = function () {
+                $window.print();
             };
         }
     ]);

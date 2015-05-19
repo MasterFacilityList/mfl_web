@@ -1,8 +1,9 @@
 <div class="row">
-    <div class="col-lg-12 margin-t-20 margin-b-5">
-        <div class="col-sm-12 col-xs-12 hidden-lg hidden-md">
+<div class="col-lg-12">
+    <div class="col-lg-12 margin-t-20 margin-b-10">
+        <div class="col-sm-12 col-xs-12 ">
             <span class="pull-right">
-                <button class="action-btn action-btn-md action-btn-primary"  data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="print facility details">
+                <button class="action-btn action-btn-md action-btn-primary"  data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="print facility details" ng-click="printing()">
                     <i class="fa fa-print"></i>
                 </button>
                 <button class="action-btn action-btn-md action-btn-primary" onclick="window.history.back()" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Go back">
@@ -12,7 +13,7 @@
         </div>
     </div>
     <div class="col-lg-12">
-        <div class="col-lg-8 results-card margin-b-30">
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 results-card margin-b-30">
         <!-- Important data first displayed here -->
         <div class="col-lg-12">
             <h3 class="fw-700">
@@ -69,7 +70,7 @@
                 <span class="pull-right">
                     <label>Facilities' rating: </label>
                     <span class="fw-600" style="color: #DAA520">
-                        {{oneFacility.average_rating}}
+                        {{oneFacility.average_rating | number : 2}}
                     </span>
                 </span>
             </h4>
@@ -106,7 +107,7 @@
                     <h4>
                         <span class="pull-left">
                             <label class="fs-14 fw-600">Average rating: </label>
-                            <span class="fs-14 fw-600">{{service.average_rating}} <i style="color: #FFD700" class="fa fa-star-o"></i></span>
+                            <span class="fs-14 fw-600">{{service.average_rating | number : 2}} <i style="color: #FFD700" class="fa fa-star-o"></i></span>
                         </span>
                     </h4>
                     <br>
@@ -129,17 +130,7 @@
 
         </div>
         <!-- Extra details displayed here =========================== -->
-        <div class="col-lg-3 pull-right results-card">
-            <div class="col-lg-12 col-md-12 hidden-sm hidden-xs">
-                <span class="pull-right">
-                    <button class="action-btn action-btn-md action-btn-primary"  data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="print facility details">
-                        <i class="fa fa-print"></i>
-                    </button>
-                    <button class="action-btn action-btn-md action-btn-primary" onclick="window.history.back()" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Go back">
-                        <i class="fa fa-arrow-left"></i>
-                    </button>
-                </span>
-            </div>
+        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right results-card">
             <h4 class="fs-18 text-blue fw-700">
                 <i style="border: 1px solid #fff; border-radius : 50%;" class="fa fa-user-secret fa-1x"></i>
                 Ownership status
@@ -184,5 +175,6 @@
             </h4>
         </div>
         <!-- End of displaying extra details  -->
+    </div>
     </div>
 </div>
