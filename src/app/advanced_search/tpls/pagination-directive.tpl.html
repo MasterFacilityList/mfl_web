@@ -1,0 +1,11 @@
+<ul class="pager" ng-if="pagination.active">
+      <li ng-if="pagination.prev" class="previous mfl-pagination">
+            <a  ng-click=paginate(pagination.prev_page)>
+            <span aria-hidden="true">&larr;</span> Previous</a>
+      </li>
+      <li>Page {{pagination.current_page}} / {{pagination.page_count}}</li>
+       <li class="next mfl-pagination" ng-if="pagination.next">
+            <a ng-click=paginate(pagination.next_page)>Next
+            <span aria-hidden="true">&rarr;</span></a>
+      </li>
+</ul>

@@ -2,7 +2,7 @@
     "use strict";
     describe("Advanced Filtering : Controller", function(){
         var createController, rootScope, httpBackend, serverUrl;
-        var filterApi, $window;
+        var filterApi, $window, $compile;
         var facilityUrl = "api/facilities/facilities/";
         var filterData  = {
             county:{
@@ -28,10 +28,11 @@
             module("mflAppConfig");
             module("templates-app");
             module("templates-common");
-            inject(["$rootScope","$controller","$httpBackend", "filteringApi",
-                   "SERVER_URL",
-                function($rootScope, $controller, $httpBackend, filteringApi, SERVER_URL){
+            inject(["$rootScope","$controller","$httpBackend","$compile",
+                    "filteringApi","SERVER_URL",
+                function($rootScope, $controller, $httpBackend,compile, filteringApi, SERVER_URL){
                     rootScope = $rootScope;
+                    $compile = compile;
                     serverUrl = SERVER_URL;
                     httpBackend = $httpBackend;
                     filterApi = filteringApi;
@@ -346,6 +347,94 @@
             scope.events.constituency.onItemDeselect({"id": "200"});
             httpBackend.flush();
             expect(scope.filter_data.ward).toEqual(["name", "hapa"]);
+        });
+
+        it("should filter facility by county: paginate: next", function(){
+            var scope = rootScope.$new();
+            createController(scope, {});
+
+            httpBackend.expectGET(
+                serverUrl+facilityUrl+"?county=21212").respond(
+                200,
+                {
+                    results: ["testing"],
+                    count:10,
+                    previous: null,
+                    next:"http://hapa?page=2"
+                }
+            );
+            scope.filterFacility({county :[{id: "21212"}]});
+            httpBackend.flush();
+            expect(scope.pagination.next).toEqual(true);
+            expect(scope.pagination.prev).toEqual(false);
+        });
+
+        it("should filter facility by county: paginate: prev", function(){
+            var scope = rootScope.$new();
+            createController(scope, {});
+
+            httpBackend.expectGET(
+                serverUrl+facilityUrl+"?county=21212").respond(
+                200,
+                {
+                    results: ["testing"],
+                    count:10,
+                    previous: "http://hapa?page=1",
+                    next:"http://hapa?page=3"
+                }
+            );
+            scope.filterFacility({county :[{id: "21212"}]});
+            httpBackend.flush();
+            expect(scope.pagination.next).toEqual(true);
+            expect(scope.pagination.prev).toEqual(true);
+        });
+
+        it("should filter facility by county: paginate: no page no.", function(){
+            var scope = rootScope.$new();
+            createController(scope, {});
+
+            httpBackend.expectGET(
+                serverUrl+facilityUrl+"?county=21212").respond(
+                200,
+                {
+                    results: ["testing"],
+                    count:10,
+                    previous: "http://hapa?param=1",
+                    next:"http://hapa?param=3"
+                }
+            );
+            scope.filterFacility({county :[{id: "21212"}]});
+            httpBackend.flush();
+            expect(scope.pagination.current_page).toBeFalsy();
+        });
+
+        it("should should compile paginate directive: prev", function(){
+            var scope = rootScope.$new();
+            createController(scope, {});
+            httpBackend.expectGET(
+                serverUrl+facilityUrl+"?county=21212").respond(
+                200,
+                {
+                    results: ["testing"],
+                    count:10,
+                    previous: "http://hapa?page=1",
+                    next:"http://hapa?page=3"
+                }
+            );
+            scope.filterFacility({county :[{id: "21212"}]});
+            httpBackend.flush();
+            expect(scope.pagination.next).toEqual(true);
+            expect(scope.pagination.prev).toEqual(true);
+            var paginationDir = $compile("<mfl-pagination></mfl-pagination>")(scope);
+            expect(paginationDir.length).toEqual(1);
+        });
+
+        it("should should call paginate function", function(){
+            var scope = rootScope.$new();
+            createController(scope, {});
+            spyOn(scope, "filterFacility");
+            scope.paginate(21);
+            expect(scope.filterFacility).toHaveBeenCalledWith(scope.filter);
         });
     });
 })();
