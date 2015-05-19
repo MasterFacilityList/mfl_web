@@ -148,9 +148,6 @@
             }
         };
         $scope.paginate = function(page_count){
-            if(_.isUndefined($scope.filter)){
-                $scope.filter = {};
-            }
             $scope.filter.page = page_count;
             $scope.filterFacility($scope.filter);
         };
