@@ -5,6 +5,7 @@
 
         "ngAnimate",
         "ngCookies",
+        "ngSanitize",
         "mflAppConfig",
         "ui.router",
         "ngTagsInput",
@@ -13,10 +14,8 @@
         "templates-app",
         "templates-common",
         "mfl.home",
-        "mfl.common",
-        "ngSanitize",
         "mfl.filtering",
-        "mfl.settings",
-        "mfl.gis"
+        "mfl.gis",
+        "mfl.auth"
     ]);
 })(angular);

@@ -1,17 +1,23 @@
 "use strict";
 (function(){
     describe("Filtering: routes", function(){
-        var $state, $location, serverUrl, httpBackend;
-        beforeEach(module("mflwebApp"));
-        beforeEach(inject(["$state","$location",
-                   "$httpBackend", "SERVER_URL",
-         function(_$state,
-         _$location, $httpBackend, SERVER_URL){
-            $state = _$state;
-            $location = _$location;
-            serverUrl = SERVER_URL;
-            httpBackend = $httpBackend;
-        }]));
+        var $state, serverUrl, httpBackend;
+        beforeEach(function(){
+            module("mfl.filtering");
+            module("mflAppConfig");
+            module("templates-app");
+            module("templates-common");
+        });
+        beforeEach(function(){
+            inject(["$state","$httpBackend", "SERVER_URL",
+             function(_$state, $httpBackend, SERVER_URL){
+                $state = _$state;
+                serverUrl = SERVER_URL;
+                httpBackend = $httpBackend;
+            }]);
+        });
+
+
 
         it("should go to filtering page", function(){
 

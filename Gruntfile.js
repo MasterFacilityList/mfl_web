@@ -99,6 +99,28 @@ module.exports = function ( grunt ) {
          * `build_dir`, and then to copy the assets to `compile_dir`.
          */
         copy: {
+            build_app_settings:{
+                files: [
+                    {
+                        src: "src/<%= settings_file %>",
+                        dest: "<%= build_dir %>/",
+                        cwd: ".",
+                        flatten: true,
+                        expand: true
+                    }
+                ]
+            },
+            compile_app_settings:{
+                files: [
+                    {
+                        src: "<%= build_dir %>/<%= settings_file %>",
+                        dest: "<%= compile_dir %>/",
+                        cwd: ".",
+                        flatten: true,
+                        expand: true
+                    }
+                ]
+            },
             build_app_assets: {
                 files: [
                     {
@@ -288,7 +310,7 @@ module.exports = function ( grunt ) {
                 "Gruntfile.js", "build.config.js"
             ],
             config_files: [
-                ".jshintrc", "bower.json","package.json", ".bowerrc"
+                ".jshintrc", "bower.json","package.json", ".bowerrc", "src/<%= settings_file %>"
             ],
             options: {
                 curly: true,
@@ -383,6 +405,7 @@ module.exports = function ( grunt ) {
                 dir: "<%= build_dir %>",
                 src: [
                     "<%= vendor_files.js %>",
+                    "<%= build_dir %>/<%= settings_file %>",
                     "<%= build_dir %>/src/**/*.js",
                     "<%= html2js.common.dest %>",
                     "<%= html2js.app.dest %>",
@@ -399,6 +422,7 @@ module.exports = function ( grunt ) {
             compile: {
                 dir: "<%= compile_dir %>",
                 src: [
+                    "<%= compile_dir %>/<%= settings_file %>",
                     "<%= concat.compile_js.dest %>",
                     "<%= vendor_files.css %>",
                     "<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css"
@@ -414,6 +438,7 @@ module.exports = function ( grunt ) {
             unit: {
                 dir: "<%= build_dir %>",
                 src: [
+                    "src/<%= settings_file %>",
                     "<%= vendor_files.js %>",
                     "<%= html2js.app.dest %>",
                     "<%= html2js.common.dest %>",
@@ -486,6 +511,14 @@ module.exports = function ( grunt ) {
                     "src/assets/**/*"
                 ],
                 tasks: [ "copy:build_app_assets", "copy:build_vendor_assets" ]
+            },
+
+            /**
+             * The settings file
+             */
+            settings: {
+                files: [ "src/<%= settings_file %>" ],
+                tasks: [ "copy:build_app_settings" ]
             },
 
             /**
@@ -568,6 +601,7 @@ module.exports = function ( grunt ) {
     grunt.registerTask( "build", [
         "clean", "html2js", "jshint", "coffeelint", "coffee", "less:build",
         "concat:build_css", "copy:build_app_assets", "copy:build_vendor_assets",
+        "copy:build_app_settings",
         "copy:build_appjs", "copy:build_vendorjs", "index:build", "karmaconfig"
     ]);
 
@@ -577,7 +611,7 @@ module.exports = function ( grunt ) {
      */
     grunt.registerTask( "compile", [
         "less:compile", "copy:compile_assets", "ngmin", "concat:compile_js",
-        "uglify", "index:compile"
+        "copy:compile_app_settings", "uglify", "index:compile"
     ]);
 
     grunt.registerTask("test", ["build", "karma"]);

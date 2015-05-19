@@ -13,7 +13,7 @@
 //                longitude = coords[j][0];
 //                latitude = coords[j][1];
 //                // Update the bounds recursively by comparing the current
-//                // xMin/xMax and yMin/yMax with the coordinate 
+//                // xMin/xMax and yMin/yMax with the coordinate
 //                // we're currently checking
 //                bounds.xMin = bounds.xMin < longitude ? bounds.xMin : longitude;
 //                bounds.xMax = bounds.xMax > longitude ? bounds.xMax : longitude;

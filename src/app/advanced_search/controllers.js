@@ -2,7 +2,7 @@
 (function(angular){
     angular.module("mfl.filtering.controllers", [
         "mfl.filtering.services",
-        "mfl.settings"
+        "mflAppConfig"
     ])
     .controller("mfl.filtering.controller", ["$scope","$rootScope",
         "$stateParams", "filteringApi","filteringData", "SERVER_URL",

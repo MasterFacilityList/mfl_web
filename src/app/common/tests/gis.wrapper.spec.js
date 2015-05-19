@@ -2,10 +2,9 @@
 (function(describe, it){
     describe("GIS County api Wrapper", function(){
         var httpBackend, gisCountriesApi,gisCountiesApi,gisConstsApi,gisWardsApi, SERVER_URL;
-        beforeEach(function(){
-//            module("mflwebApp","mfl.gis.wrapper","mfl.settings");
-            module("mflwebApp","mfl.gis.wrapper","mfl.settings");
-            
+        beforeEach(function () {
+            module("mfl.gis.wrapper", "mflAppConfig");
+
             inject(["gisCountriesApi","gisCountiesApi","gisWardsApi","gisConstsApi",
                 function(gcountries,gcounties,gconsts,gwards){
                 gisCountriesApi = gcountries;
@@ -13,7 +12,7 @@
                 gisConstsApi = gconsts;
                 gisWardsApi = gwards;
             }]);
-            
+
             inject(["$httpBackend", "SERVER_URL", function(hb, url){
                 httpBackend = hb;
                 SERVER_URL = url;
@@ -22,7 +21,7 @@
         afterEach(inject([function(){
             httpBackend.verifyNoOutstandingRequest();
         }]));
-        
+
         it("should have gisCountriesApi defined", function(){
             expect(gisCountriesApi).toBeDefined();
         });

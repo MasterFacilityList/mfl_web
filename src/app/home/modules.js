@@ -9,5 +9,5 @@ angular.module("mfl.home", [
     "mfl.home.controllers",
     "mfl.home.routes",
     "mfl.common.controllers",
-    "mfl.common.providers"
+    "mfl.facilities.wrapper"
 ]);

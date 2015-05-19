@@ -19,12 +19,15 @@
             }
         };
         beforeEach(function(){
-            module("mflwebApp", ["$provide" , function($provide){
+            module("mfl.filtering", ["$provide" , function($provide){
                 $window = {
                     location: {}
                 };
                 $provide.constant("$window", $window);
             }]);
+            module("mflAppConfig");
+            module("templates-app");
+            module("templates-common");
             inject(["$rootScope","$controller","$httpBackend", "filteringApi",
                    "SERVER_URL",
                 function($rootScope, $controller, $httpBackend, filteringApi, SERVER_URL){
@@ -33,12 +36,10 @@
                     httpBackend = $httpBackend;
                     filterApi = filteringApi;
 
-                    createController = function(scope, stateParams,filteringData, baseRes, flush){
+                    createController = function(scope, stateParams,filteringData, baseRes,
+                                                   flush){
                         if(_.isUndefined(baseRes)){
                             baseRes = {code:undefined, data: undefined};
-                        }
-                        if(!_.isUndefined(filteringData)){
-                            filterData = filteringData;
                         }
                         var data = {
                             $scope: scope,
