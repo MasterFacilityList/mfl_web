@@ -89,6 +89,11 @@ module.exports = {
             "vendor/typeahead.js/dist/bloodhound.js",
             "vendor/typeahead.js/dist/typeahead.bundle.js",
             "vendor/typeahead.js/dist/typeahead.jquery.js",
+            "vendor/spin.js/spin.js",
+            "vendor/leaflet/dist/leaflet-src.js",
+            "vendor/leaflet.markercluster/dist/leaflet.markercluster.js",
+            "vendor/Leaflet.label/dist/leaflet.label.js",
+            "vendor/leaflet-spin/leaflet.spin.js",
             "vendor/angular-leaflet-directive/dist/angular-leaflet-directive.js",
             "vendor/stacktrace-js/dist/stacktrace.js",
             "vendor/angularjs-dropdown-multiselect/src/angularjs-dropdown-multiselect.js",
@@ -98,7 +103,12 @@ module.exports = {
             "libs/sil_typeahead_service/src/sil-typeahead.js",
             "libs/sil_grid/sil_grid_tpls.js",
             "libs/sil_grid/sil_grid.js",
-            "libs/sil_error_handler/error_handler.js"
+            "libs/sil_error_handler/error_handler.js",
+            "vendor/Leaflet.label/dist/leaflet.label.js",
+            "vendor/leaflet-spin/leaflet.spin.js",
+            "src/assets/js/leaflet-heat.js",
+            "vendor/webgl-heatmap-leaflet/js/webgl-heatmap.js",
+            "vendor/webgl-heatmap-leaflet/js/webgl-heatmap-leaflet.js"
         ],
         css: [
         ],
@@ -112,7 +122,7 @@ module.exports = {
 
     connect: {
         options: {
-            port: 8062,
+            port: 8063,
             hostname: "*",
             keepalive: true
         },
