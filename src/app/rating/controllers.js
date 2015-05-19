@@ -7,6 +7,10 @@
         "facilitiesApi",
         function ($scope, $stateParams,facilitiesApi) {
             $scope.test = "Rating";
+            $scope.tooltip = {
+                "title": "",
+                "checked": false
+            };
             $scope.fac_id = $stateParams.fac_id;
             facilitiesApi.facilities.get($scope.fac_id)
                 .success(function (data) {
