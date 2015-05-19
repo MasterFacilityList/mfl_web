@@ -1,0 +1,25 @@
+<div class="content-header">
+    <actionbar action="action"></actionbar>
+    <h2 class="content-title">
+        <cont-title title="title"></cont-title>
+    </h2>
+    <!--breadcrumbs-->
+</div>
+<div class="content-body"> 
+   <div class="container-fluid">
+        <div class="col-md-3 content-card">
+            <h3>{{constituency.properties.name}}</h3>
+            <h4>Facilities: {{constituency.properties.facility_count}}</h4>
+            <hr>
+            <h5 ng-show="hoveredWard">
+                <strong>Ward Hovered: <span class="text-info">{{hoveredWard.properties.name}}</span></strong>
+            </h5>
+            <a ui-sref="filtering" class="btn btn-primary margin-t-20">Facilities in <span class="titlecase">{{constituency.properties.name}}</span></a>
+        </div>
+        <div class="col-md-9 margin-b-10">
+            <leaflet markers="markers" width="100%"
+               defaults="defaults" geojson="geojson" events="events" height="80vh">
+            </leaflet>
+        </div>
+    </div>
+</div>

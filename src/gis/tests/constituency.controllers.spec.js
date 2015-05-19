@@ -1,0 +1,285 @@
+/*
+*
+*
+**********TESTS FOR CONSTITUENCY LEVEL************
+*
+*
+*/
+
+
+describe("Tests for mfl.gis.controllers.gis_const (Constituency Level):", function () {
+    "use strict";
+
+    var controller, scope, root, state, httpBackend, SERVER_URL;
+
+    beforeEach(function () {
+        module("mflwebApp");
+        module("mfl.gis_const.controllers");
+        module("mfl.gis.wrapper");
+        module("mfl.gis.routes");
+
+        inject(["$rootScope", "$controller","$httpBackend","$state","$stateParams",
+                "SERVER_URL","gisConstsApi","gisWardsApi",
+            function ($rootScope, $controller, $httpBackend, $state,$stateParams,
+                  url, gisConstsApi,gisWardsApi) {
+                root = $rootScope;
+                scope = root.$new();
+                state = $state;
+                httpBackend = $httpBackend;
+                SERVER_URL = url;
+                gisConstsApi = gisConstsApi;
+                gisWardsApi = gisWardsApi;
+                $stateParams.const_id = "34";
+                $stateParams.const_boundaries = "4,2,41";
+                $stateParams.ward_boundaries = "4,2,41";
+
+                controller = function (cntrl, data) {
+                    return $controller(cntrl, data);
+                };
+            }]);
+    });
+
+    it("should load mfl.gis.controller.gis_const", inject(["$httpBackend","$state",
+                 "leafletData","gisConstsApi","gisWardsApi",
+        function ($httpBackend, $state, leafletData,gisConstsApi,gisWardsApi) {
+        var data = {
+            results:{
+                id :"",
+                type:"",
+                geometry:{},
+                properties: {},
+                features: [
+                    {
+                        id:"",
+                        type:"",
+                        geometry:{
+                            type:"",
+                            coordinates:[]
+                        },
+                        properties:{
+                            bound:{
+                                type:"",
+                                coordinates:[[3,4],[4,5]]
+                            },
+                            center:{
+                                type:"",
+                                coordinates:[[3,4],[4,5]]
+                            }
+                        }
+                    }
+                ]
+            }
+        };
+        $httpBackend.expectGET(
+        SERVER_URL + "api/gis/constituency_boundaries/")
+            .respond(200, data);
+        $httpBackend.expectGET(
+        SERVER_URL + "api/gis/ward_boundaries/?id=undefined")
+            .respond(200, data);
+        $state.go("gis_const", {"county_id": "34"});
+        controller("mfl.gis.controllers.gis_const", {
+            "$scope": scope,
+            "leafletData": leafletData,
+            "gisConst": {
+                data: {
+                    properties: {
+                        bound: {
+                            coordinates: []
+                        }
+                    }
+                }
+            },
+            "$http": {},
+            "$state": {},
+            "$stateParams": {},
+            "SERVER_URL": SERVER_URL,
+            "gisConstsApi": gisConstsApi,
+            "gisWardsApi": gisWardsApi
+        });
+        $httpBackend.flush();
+    }]));
+    it("should fail to load data (Const Level)",
+       inject(["$httpBackend",
+        function ($httpBackend) {
+        var data = {
+            results:{
+                id :"",
+                type:"",
+                features:[],
+                geometry:{},
+                properties: {}
+            }
+        };
+        controller("mfl.gis.controllers.gis_const", {
+            "$scope": scope,
+            "gisConst": {
+                data: {
+                    properties: {
+                        bound: {
+                            coordinates: []
+                        }
+                    }
+                }
+            },
+            "$http": {},
+            "$state": {},
+            "$stateParams": {},
+            "SERVER_URL": SERVER_URL
+        });
+        $httpBackend.expectGET(
+        SERVER_URL + "api/gis/ward_boundaries/?id=undefined")
+            .respond(500, data);
+        $httpBackend.flush();
+    }]));
+    it("should expect broadcast of leafletDirectiveMap.geojsonMouseover(Constituency Level)",
+        inject(["$rootScope","leafletData","gisWardsApi","gisConstsApi","$state",
+                function ($rootScope, leafletData,gisCountiesApi,gisConstsApi,$state) {
+        $state.go("gis_const", {"const_id": "34"});
+        controller("mfl.gis.controllers.gis_const", {
+            "$scope": scope,
+            "leafletData": leafletData,
+            "gisConst": {
+                data: {
+                    properties: {
+                        bound: {
+                            coordinates: []
+                        }
+                    }
+                }
+            },
+            "$http": {},
+            "$state": {},
+            "$stateParams": {},
+            "SERVER_URL": SERVER_URL,
+            "gisConstsApi": gisConstsApi,
+            "gisCountiesApi": gisCountiesApi
+        });
+        var ward = {
+            type : "",
+            id: "",
+            geometry : {},
+            properties : {}
+        };
+        $rootScope.$broadcast("leafletDirectiveMap.geojsonMouseover");
+        scope.hoveredWard = {
+            type : "",
+            id: "",
+            geometry : {},
+            properties : {}
+        };
+        expect(scope.hoveredWard).toEqual(ward);
+    }]));
+    
+    it("should expect broadcast of leafletDirectiveMap.geojsonClick(Constituency Level)",
+       inject(["$state","leafletData","gisCountiesApi","gisConstsApi",
+               function ($state, leafletData,gisConstsApi,gisWardsApi) {
+        spyOn(scope, "$on").andCallThrough();
+        spyOn($state, "go");
+        controller("mfl.gis.controllers.gis_const", {
+            "$scope": scope,
+            "leafletData": leafletData,
+            "gisConst": {
+                data: {
+                    properties: {
+                        bound: {
+                            coordinates: []
+                        }
+                    }
+                }
+            },
+            "$http": {},
+            "$state": $state,
+            "$stateParams": {},
+            "SERVER_URL": SERVER_URL,
+            "gisConstsApi": gisConstsApi,
+            "gisWardsApi": gisWardsApi
+        });
+
+        var ward = {
+            type : "",
+            id: 1,
+            geometry : {},
+            properties : {
+                ward_boundary_ids: [
+                    "a",
+                    "b"
+                ],
+                center:{
+                    coordinates : [
+                        "12",
+                        "13"
+                    ]
+                }
+            }
+        };
+        var second_call = scope.$on.calls[1];
+        expect(second_call.args[0]).toEqual("leafletDirectiveMap.geojsonClick");
+        expect(angular.isFunction(second_call.args[1])).toBe(true);
+        var listener = second_call.args[1];
+        listener(null, ward);
+        expect($state.go).toHaveBeenCalledWith("gis_ward",{ward_id: 1});
+    }]));
+    it("should get leaflet data map(Constituency Level)",
+       inject(["$state", "leafletData","gisConstsApi","gisWardsApi",
+               function ($state, leafletData,gisConstsApi,gisWardsApi) {
+        spyOn(scope, "$on").andCallThrough();
+        spyOn($state, "go");
+        var obj = {
+            then: angular.noop
+        };
+        var timeout = {
+            timeout: angular.noop
+        };
+        spyOn(leafletData, "getMap").andReturn(obj);
+        spyOn(obj, "then");
+        spyOn(timeout, "timeout");
+        controller("mfl.gis.controllers.gis_const", {
+            "$scope": scope,
+            "leafletData": leafletData,
+            "gisConst": {
+                data: {
+                    properties: {
+                        bound: {
+                            "type": "Polygon",
+                            "coordinates": [
+                                [ [1, 2], [3, 4] ]
+                            ]
+                        }
+                    }
+                }
+            },
+            "$http": {},
+            "$state": $state,
+            "$stateParams": {},
+            "$timeout": timeout.timeout,
+            "SERVER_URL": SERVER_URL,
+            "gisConstsApi": gisConstsApi,
+            "gisWardsApi": gisWardsApi
+        });
+
+        expect(leafletData.getMap).toHaveBeenCalled();
+        expect(obj.then).toHaveBeenCalled();
+                   
+        var then_fxn = obj.then.calls[0].args[0];
+        expect(angular.isFunction(then_fxn)).toBe(true);
+        var map = {
+            fitBounds: angular.noop,
+            spin: angular.noop
+        };
+        spyOn(map, "fitBounds");
+        spyOn(map, "spin");
+        then_fxn(map);
+        
+        expect(map.fitBounds).toHaveBeenCalledWith([[2,1 ], [4, 3]]);
+        expect(map.spin).toHaveBeenCalledWith(
+            true, {lines: 13, length: 20,corners:1,radius:30,width:10});
+        expect(map.spin.calls[0].args[0]).toBe(true);
+        expect(timeout.timeout).toHaveBeenCalled();
+        
+        var timeout_fxn = timeout.timeout.calls[0].args[0];
+        expect(angular.isFunction(timeout.timeout.calls[0].args[0])).toBe(true);
+        timeout_fxn();
+        expect(map.spin.calls.length).toBe(2);
+        expect(map.spin.calls[1].args[0]).toBe(false);
+    }]));
+});
