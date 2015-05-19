@@ -1,5 +1,6 @@
-"use strict";
+
 (function(){
+    "use strict";
     describe("Filtering: routes", function(){
         var $state, serverUrl, httpBackend;
         beforeEach(function(){

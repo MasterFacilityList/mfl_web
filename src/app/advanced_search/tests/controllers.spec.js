@@ -1,5 +1,5 @@
-"use strict";
 (function(){
+    "use strict";
     describe("Advanced Filtering : Controller", function(){
         var createController, rootScope, httpBackend, serverUrl;
         var filterApi, $window;

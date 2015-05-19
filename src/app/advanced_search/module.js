@@ -1,5 +1,5 @@
-"use strict";
 (function(angular){
+    "use strict";
     angular.module("mfl.filtering", [
         "mfl.filtering.controllers",
         "mfl.filtering.services",
