@@ -2,7 +2,7 @@
     "use strict";
 
     describe("Tests for ratings controller: ", function () {
-        var controller, scope, root, data, httpBackend, SERVER_URL;
+        var controller, scope, root, data, httpBackend, SERVER_URL, windows;
 
         beforeEach(function () {
             module("mflAppConfig");
@@ -10,13 +10,14 @@
             module("mfl.facilities.wrapper");
 
             inject(["$rootScope", "$controller", "$httpBackend", "SERVER_URL",
-                "facilitiesApi",
+                "facilitiesApi", "$window",
                 function ($rootScope, $controller, $httpBackend, url,
-                    facilitiesApi) {
+                    facilitiesApi, $window) {
                     root = $rootScope;
                     scope = root.$new();
                     httpBackend = $httpBackend;
                     SERVER_URL = url;
+                    windows = $window;
                     facilitiesApi = facilitiesApi;
                     scope.fakeStateParams = {
                         fac_id : 1
@@ -94,6 +95,13 @@
                     "api/facilities/facility_service_ratings/").
                     respond(400, {name : ""});
             $httpBackend.flush();
+        }]));
+        it("should print facilities' detailed view",
+        inject(["$window", function ($window) {
+            spyOn($window, "print");
+            controller("mfl.rating.controllers.rating");
+            scope.printing();
+            expect($window.print).toHaveBeenCalled();
         }]));
     });
 })();
