@@ -1,5 +1,5 @@
-"use strict";
 (function(angular){
+    "use strict";
     var filterParams = [
         "search", "county", "constituency", "ward", "operation_status",
         "facility_type", "number_of_beds", "number_of_cots", "open_whole_day",

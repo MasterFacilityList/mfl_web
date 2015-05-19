@@ -1,5 +1,5 @@
-"use strict";
 (function(){
+    "use strict";
     describe("Advanced Filtering : Controller", function(){
         var createController, rootScope, httpBackend, serverUrl;
         var filterApi, $window;
@@ -80,7 +80,7 @@
         it("should fetch all facilites when no filters set: fail", function(){
             var scope = rootScope.$new();
             createController(scope, {}, undefined, {code: 500, data: {results: ["name"]}});
-            expect(scope.search_results).toEqual(false);
+            expect(scope.spinneractive).toEqual(false);
         });
 
         it("should filter facilities: search param set: success", function(){
@@ -99,7 +99,7 @@
             createController(
                 scope, {"search": "name"}, undefined, undefined, true);
             httpBackend.flush();
-            expect(scope.no_result).toEqual(true);
+            expect(scope.spinneractive).toEqual(false);
         });
         it("should filter facilities: search param set: fail", function(){
             var scope = rootScope.$new();
@@ -108,7 +108,7 @@
             createController(
                 scope, {"search": "name"}, undefined, undefined, true);
             httpBackend.flush();
-            expect(scope.search_results).toEqual(false);
+            expect(scope.spinneractive).toEqual(false);
         });
 
         it("should filter facility by county: success", function(){
@@ -130,7 +130,7 @@
                     serverUrl+facilityUrl+"?county=21212").respond(500, {error: "server err"});
             scope.filterFacility({county :[{id: "21212"}]});
             httpBackend.flush();
-            expect(scope.search_results).toEqual(false);
+            expect(scope.spinneractive).toEqual(false);
         });
         it("should filter facility by operation_status", function(){
             var scope = rootScope.$new();
