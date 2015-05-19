@@ -5,7 +5,7 @@ angular.module("mfl.home", [
     "ui.bootstrap",
     "ui.bootstrap.tpls",
     "sil-typeahead",
-    //out stuff
+    //our stuff
     "mfl.home.controllers",
     "mfl.home.routes",
     "mfl.common.controllers",
