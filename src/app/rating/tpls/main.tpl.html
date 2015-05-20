@@ -47,6 +47,10 @@
             </h4>
             <br>
             <h4 class="fs-16">
+                <span class="pull-left">
+                    <label>Beds: </label>
+                    {{oneFacility.number_of_beds}}
+                </span>
                 <span class="pull-right">
                     <label>Open whole day </label>
                     <span ng-show="oneFacility.open_whole_day" class="text-success">
@@ -55,10 +59,6 @@
                     <span ng-hide="oneFacility.open_whole_day" class="text-danger">
                         <i class="fa fa-times-circle-o fa-1x"></i>
                     </span>
-                </span>
-                <span class="pull-left">
-                    <label>Beds: </label>
-                    {{oneFacility.number_of_beds}}
                 </span>
             </h4>
             <br>
