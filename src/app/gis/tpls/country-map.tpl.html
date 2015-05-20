@@ -12,20 +12,34 @@
 <div class="content-body">
     <div>
        <div class="container-fluid">
-            <div class="col-md-3 content-card">
-               <h3>MFL <span class="fs-16">GEOLOCATION:</span></h3>
-               <hr>
-               <h5 ng-show="hoveredCounty">
-                    <strong>County Hovered: 
-                        <span class="text-info">{{hoveredCounty.properties.name}}</span>
-                    </strong>
-               </h5>
+            <div class="col-md-3 margin-15">
+              <div class=" content-card">
+                   <h3>MFL <span class="fs-16">GEOLOCATION:</span></h3>
+                   <hr>
+                   <strong class="margin-10">LEGEND</strong>
+                   <br>
+                   Concentration of Facilities: <br>
+                   <label class="label map-high-conc" >&#9679;</label> High <br>
+                   <label class="label map-moderate-conc">&#9679;</label> Moderate<br>
+                   <label class="label map-low-conc" >&#9679;</label> Low<br>
+                   <hr>
+                   <a ui-sref="filtering" class="login-btn login-btn-primary"><i class="fa fa-building"></i> Facilities</a>
+                   <hr>
+                   <h5 ng-show="hoveredCounty">
+                        <strong>County Hovered:
+                            <span class="text-info">{{hoveredCounty.properties.name}}</span>
+                        </strong>
+                   </h5>
+              </div>
             </div>
             <div class="col-md-9 margin-b-10">
                 <leaflet defaults="defaults" width="100%" markers="markers" layers="layers"
                          geojson="geojson" event-broadcast="events"
                          height="80vh">
                 </leaflet>
+            </div>
+            <div class="content-card">
+                {{heatpoints}}
             </div>
        </div>
     </div>
