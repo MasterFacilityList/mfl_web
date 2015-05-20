@@ -205,7 +205,7 @@
             return filters;
         };
 
-        if(_.isEmpty($stateParams) || _.isUndefined($stateParams.search)){
+        if(_.isEmpty($stateParams)){
             $scope.no_search_query = true;
             filterApi.facilities.list().success(resolves.success).error(resolves.error);
         }else{
@@ -273,30 +273,26 @@
         };
         // pre-select filters
         var setFilters = function(){
+            $stateParams = removeEmptyFilters($stateParams);
             _.each(_.keys($stateParams), function(key){
-                if(!_.isUndefined($stateParams[key])){
-                    addFilter(key, $stateParams[key]);
-                }
-
+                addFilter(key, $stateParams[key]);
             });
             // child pre-select filters
             _.each(_.keys($stateParams), function(key){
                 if(_.contains(["county", "constituency"], key)){
-                    if(!_.isUndefined($stateParams[key])){
-                        switch(key){
-                        case "county":
-                            getChildren(
-                                filterApi.constituencies,
-                                "constituency",
-                                {"county": $stateParams[key]});
-                            break;
-                        case "constituency":
-                            getChildren(
-                                    filterApi.wards,
-                                    "ward",
-                                    {"constituency": $stateParams[key]});
-                            break;
-                        }
+                    switch(key){
+                    case "county":
+                        getChildren(
+                            filterApi.constituencies,
+                            "constituency",
+                            {"county": $stateParams[key]});
+                        break;
+                    case "constituency":
+                        getChildren(
+                                filterApi.wards,
+                                "ward",
+                                {"constituency": $stateParams[key]});
+                        break;
                     }
                 }
             });
