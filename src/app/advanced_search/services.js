@@ -10,12 +10,14 @@
             var consts = filterApi.constituencies.filter(filter);
             var fType = filterApi.facility_types.filter(filter);
             var op = filterApi.operation_status.filter(filter);
-            return $q.all([counties, consts, fType, op]).then(function(results){
+            var service_cat = filterApi.service_category.filter(filter);
+            return $q.all([counties, consts, fType, op, service_cat]).then(function(results){
                 return {
                     county: results[0],
                     constituency: results[1],
                     facility_type: results[2],
-                    operation_status: results[3]
+                    operation_status: results[3],
+                    service_category: results[4]
                 };
             });
         };
@@ -31,5 +33,6 @@
         this.owners = api.setBaseUrl("api/facilities/owners");
         this.officers = api.setBaseUrl("api/facilities/officers");
         this.facility_types = api.setBaseUrl("api/facilities/facility_types");
+        this.service_category = api.setBaseUrl("api/facilities/service_categories");
     }]);
 })(angular);

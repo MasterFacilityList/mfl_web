@@ -16,6 +16,9 @@
             },
             facility_type: {
                 data: {results: []}
+            },
+            service_category: {
+                data: {results: []}
             }
         };
         beforeEach(function(){
@@ -221,7 +224,7 @@
         it("should filter facilities: county param set: success, empty results", function(){
             var scope = rootScope.$new();
             httpBackend.expectGET(
-                    serverUrl+facilityUrl).respond(200, {results: []});
+                    serverUrl+facilityUrl+"?county=1,2,3").respond(200, {results: []});
             httpBackend.expectGET(
                     serverUrl+"api/common/constituencies/?county=1,2,3&page_size=2000")
                     .respond(200, {results: []});
@@ -235,7 +238,7 @@
         it("should filter facilities:constituency param set: success, empty results", function(){
             var scope = rootScope.$new();
             httpBackend.expectGET(
-                    serverUrl+facilityUrl).respond(200, {results: []});
+                    serverUrl+facilityUrl+"?constituency=1,2,3").respond(200, {results: []});
             httpBackend.expectGET(
                     serverUrl+"api/common/wards/?constituency=1,2,3&page_size=2000")
                     .respond(200, {results: []});
@@ -249,7 +252,7 @@
         it("should filter facilities:ward param set: success, empty results", function(){
             var scope = rootScope.$new();
             httpBackend.expectGET(
-                    serverUrl+facilityUrl).respond(200, {results: []});
+                    serverUrl+facilityUrl+"?ward=1,2,3").respond(200, {results: []});
             httpBackend.expectGET(
                     serverUrl+"api/common/wards/?id=1,2,3&page_size=2000")
                     .respond(200, {results: []});
@@ -263,7 +266,7 @@
         it("should filter facilities:ward param set: error", function(){
             var scope = rootScope.$new();
             httpBackend.expectGET(
-                    serverUrl+facilityUrl).respond(200, {results: []});
+                    serverUrl+facilityUrl+"?ward=1,2,3").respond(200, {results: []});
             httpBackend.expectGET(
                     serverUrl+"api/common/wards/?id=1,2,3&page_size=2000")
                     .respond(500, {error: "server error"});
@@ -273,7 +276,7 @@
             expect(scope.alert).toEqual("server error");
         });
 
-        it("should filter facilities: unknow param set", function(){
+        it("should filter facilities: undefiend param set", function(){
             var scope = rootScope.$new();
             httpBackend.expectGET(
                     serverUrl+facilityUrl).respond(200, {results: []});
@@ -284,6 +287,22 @@
             var testFunc = function(){
                 createController(
                 scope, {"county": undefined}, undefined, undefined, true);
+                httpBackend.flush();
+            };
+            expect(testFunc).toThrow();
+        });
+
+        it("should filter facilities: unknown param set", function(){
+            var scope = rootScope.$new();
+            httpBackend.expectGET(
+                    serverUrl+facilityUrl).respond(200, {results: []});
+            httpBackend.expectGET(
+                    serverUrl+"api/common/constituencies/?county=1,2,3&page_size=2000")
+                    .respond(200, {results: []});
+
+            var testFunc = function(){
+                createController(
+                scope, {"hapana": "is there"}, {}, undefined, true);
                 httpBackend.flush();
             };
             expect(testFunc).toThrow();

@@ -11,6 +11,9 @@
         function($scope, $rootScope, $stateParams,filterApi,
             filteringData,SERVER_URL, $window){
         $scope.filter_data = {};
+        //variable to id if  on search or facility listings view
+        $scope.no_search_query = false;
+        $scope.no_err = false;
         $scope.query_results = [];
         var initFilterModel = function(){
             $scope.filter = $stateParams;
@@ -22,6 +25,7 @@
             constituency: [],
             ward: [],
             operation_status: [],
+            service_category: [],
             facility_type: [],
             number_of_beds: [],
             number_of_cots: []
@@ -45,6 +49,9 @@
             },
             facility_type: {
                 buttonDefaultText: "Select Facility Type"
+            },
+            service_category: {
+                buttonDefaultText: "Select Service Category"
             }
         };
         $scope.selected = {
@@ -167,6 +174,12 @@
                     delete $scope.filter.format;
                 }else{
                     $scope.hits = data.count;
+                    if($scope.hits >= 1) {
+                        $scope.no_err = true;
+                    }
+                    else{
+                        $scope.no_err = false;
+                    }
                     addPagination(data.count, data.next, data.previous);
                     $scope.search_results = false;
                     $scope.query_results = data.results;
@@ -182,7 +195,8 @@
             }
         };
         resolves.startSpinner();
-        _.each(["county", "operation_status", "constituency", "facility_type"], function(key){
+        _.each(["county", "operation_status", "constituency", "facility_type", "service_category"],
+        function(key){
             $scope.filter_data[key] = filteringData[key].data.results;
             $scope.filter_data.ward = [];
             $rootScope.mfl_filter_data = $scope.filter_data;
@@ -196,11 +210,13 @@
             return filters;
         };
 
-        if(_.isEmpty($stateParams) || _.isUndefined($stateParams.search)){
+        if(_.isEmpty($stateParams)){
+            $scope.no_search_query = true;
             filterApi.facilities.list().success(resolves.success).error(resolves.error);
         }else{
             $scope.query = $stateParams.search;
             var filters = removeEmptyFilters($stateParams);
+            $scope.no_search_query = false;
             filterApi.facilities.filter(filters).success(resolves.success).error(resolves.error);
         }
         //end of search results listing
@@ -211,6 +227,8 @@
                     $scope.filter_data[key] = [];
                     $scope.filter_data[key] = data.results;
                     $scope.disabled[key] = false;
+                    //to hide error message
+                    $scope.no_err = false;
                 }).error(function(err){
                     $scope.alert =err.error;
                     $scope.filter_data[key] = [];
@@ -260,30 +278,26 @@
         };
         // pre-select filters
         var setFilters = function(){
+            $stateParams = removeEmptyFilters($stateParams);
             _.each(_.keys($stateParams), function(key){
-                if(!_.isUndefined($stateParams[key])){
-                    addFilter(key, $stateParams[key]);
-                }
-
+                addFilter(key, $stateParams[key]);
             });
             // child pre-select filters
             _.each(_.keys($stateParams), function(key){
                 if(_.contains(["county", "constituency"], key)){
-                    if(!_.isUndefined($stateParams[key])){
-                        switch(key){
-                        case "county":
-                            getChildren(
-                                filterApi.constituencies,
-                                "constituency",
-                                {"county": $stateParams[key]});
-                            break;
-                        case "constituency":
-                            getChildren(
-                                    filterApi.wards,
-                                    "ward",
-                                    {"constituency": $stateParams[key]});
-                            break;
-                        }
+                    switch(key){
+                    case "county":
+                        getChildren(
+                            filterApi.constituencies,
+                            "constituency",
+                            {"county": $stateParams[key]});
+                        break;
+                    case "constituency":
+                        getChildren(
+                                filterApi.wards,
+                                "ward",
+                                {"constituency": $stateParams[key]});
+                        break;
                     }
                 }
             });
