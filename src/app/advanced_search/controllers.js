@@ -170,7 +170,12 @@
                     delete $scope.filter.format;
                 }else{
                     $scope.hits = data.count;
-                    if($scope.hits === 0) {$scope.no_err = true;}
+                    if($scope.hits >= 1) {
+                        $scope.no_err = true;
+                    }
+                    else{
+                        $scope.no_err = false;
+                    }
                     addPagination(data.count, data.next, data.previous);
                     $scope.search_results = false;
                     $scope.query_results = data.results;
