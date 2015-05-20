@@ -18,15 +18,16 @@ describe("Tests for mfl.gis.controllers.gis_ward (Ward Level):", function () {
         module("mfl.gis.routes");
 
         inject(["$rootScope", "$controller","$httpBackend","$state","$stateParams",
-                "SERVER_URL","gisWardsApi",
+                "SERVER_URL","gisWardsApi","gisFacilitiesApi",
             function ($rootScope, $controller, $httpBackend, $state,$stateParams,
-                  url,gisWardsApi) {
+                  url,gisWardsApi, gisFacilitiesApi) {
                 root = $rootScope;
                 scope = root.$new();
                 state = $state;
                 httpBackend = $httpBackend;
                 SERVER_URL = url;
                 gisWardsApi = gisWardsApi;
+                gisFacilitiesApi = gisFacilitiesApi;
                 $stateParams.ward_id = 4;
                 controller = function (cntrl, data) {
                     return $controller(cntrl, data);
@@ -41,13 +42,24 @@ describe("Tests for mfl.gis.controllers.gis_ward (Ward Level):", function () {
             results:{
                 id :"",
                 type:"",
-                features: [],
+                features: [
+                    {
+                        id: "",
+                        geometry:{
+                            type:"",
+                            coordinates:[0,1]
+                        },
+                        properties:{
+                            facility_name:""
+                        }
+                    }
+                ],
                 geometry:{},
                 properties: {}
             }
         };
         $httpBackend.expectGET(
-        SERVER_URL + "api/gis/ward_boundaries/?id=4")
+        SERVER_URL + "api/gis/coordinates/?ward=4")
             .respond(200, data);
         controller("mfl.gis.controllers.gis_ward", {
             "$scope": scope,
@@ -57,7 +69,8 @@ describe("Tests for mfl.gis.controllers.gis_ward (Ward Level):", function () {
                     properties: {
                         bound: {
                             coordinates: []
-                        }
+                        },
+                        ward_id:"4"
                     }
                 }
             },
@@ -76,7 +89,18 @@ describe("Tests for mfl.gis.controllers.gis_ward (Ward Level):", function () {
             results:{
                 id :"",
                 type:"",
-                features:[],
+                features: [
+                    {
+                        id: "",
+                        geometry:{
+                            type:"",
+                            coordinates:[0,1]
+                        },
+                        properties:{
+                            facility_name:""
+                        }
+                    }
+                ],
                 geometry:{},
                 properties: {}
             }
@@ -88,7 +112,8 @@ describe("Tests for mfl.gis.controllers.gis_ward (Ward Level):", function () {
                     properties: {
                         bound: {
                             coordinates: []
-                        }
+                        },
+                        ward_id:"4"
                     }
                 }
             },
@@ -98,7 +123,7 @@ describe("Tests for mfl.gis.controllers.gis_ward (Ward Level):", function () {
             "SERVER_URL": SERVER_URL
         });
         $httpBackend.expectGET(
-        SERVER_URL + "api/gis/ward_boundaries/?id=undefined")
+        SERVER_URL + "api/gis/coordinates/?ward=4")
             .respond(500, data);
         $httpBackend.flush();
     }]));
