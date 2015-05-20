@@ -30,6 +30,8 @@
                 .respond(200, {});
             httpBackend.expectGET(serverUrl+"api/facilities/facility_status/?page_size=200")
                 .respond(200, {});
+            httpBackend.expectGET(serverUrl+"api/facilities/service_categories/?page_size=200")
+                .respond(200, {});
             $state.go("filtering");
             expect($state.href("filtering")).toEqual("#/filtering");
             httpBackend.flush();

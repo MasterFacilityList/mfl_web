@@ -16,6 +16,9 @@
             },
             facility_type: {
                 data: {results: []}
+            },
+            service_category: {
+                data: {results: []}
             }
         };
         beforeEach(function(){
