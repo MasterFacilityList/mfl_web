@@ -6,10 +6,11 @@
         "CREDZ": {
             "username": "serikalikuu@mfltest.slade360.co.ke",
             "password": "serikalikuu",
-            "client_id": "aQtG5rUJKF9GxWQWCuoZc6m5i581i5pCxOEIN7L4",
-            "client_secret": "DZ4fCreUDhij74WdEV6RZ9qOi9O6UzWqYSB8TrmKixo" +
-            "d3WWHMJ6EeVY1DktZVgnAon5Czc2h6Wg8kjce3DiegP3xTfdKh67t2jHHhPyV"+
-            "815K8QjEm12R7xKEIaUcR7dB"
+            "client_id": "xMddOofHI0jOKboVxdoKAXWKpkEQAP0TuloGpfj5",
+            "client_secret": "PHrUzCRFm9558DGa6Fh1hEvSCh3C9Lijfq8s" +
+                             "bCMZhZqmANYV5ZP04mUXGJdsrZLXuZG4VCmv" +
+                             "jShdKHwU6IRmPQld5LDzvJoguEP8AAXGJhrq" +
+                             "fLnmtFXU3x2FO1nWLxUx"
         }
     };
 
