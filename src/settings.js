@@ -6,11 +6,10 @@
         "CREDZ": {
             "username": "",
             "password": "",
-            "client_id": "",
-            "client_secret": ""
+            "client_id": ""
         }
     };
-    
+
     setts.CREDZ.token_url = setts.SERVER_URL + "o/token/";
 
     window.MFL_SETTINGS = setts;
