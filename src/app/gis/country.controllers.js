@@ -64,7 +64,9 @@
         gisCountriesApi.api
         .filter($scope.filters_country)
         .success($scope.country_success)
-        .error(function () {});
+        .error(function (e) {
+            $scope.alert = e.error;
+        });
         $scope.filters_counties = {
             page_size: 47
         };
@@ -134,8 +136,7 @@
             });
         })
         .error(function(err){
-            /*TODO Error handling*/
-            console.log(err);
+            $scope.alert = err.error;
         });
 
         $scope.filters_fac = {
@@ -159,15 +160,16 @@
                     data: heatpoints,
                     layerOptions: {
                         radius: 25,
+                        opacity:1,
                         blur: 1,
-                        gradient: {0.05: "#050541", 0.1: "#040017", 0.2: "lime", 0.5:"red"}
+                        gradient: {0.2: "lime", 0.3: "orange",0.4: "red"}
                     },
                     visible: true
                 }
             };
         })
         .error(function(err){
-            console.log(err);
+            $scope.alert = err.error;
         });
         $scope.$on("leafletDirectiveMap.geojsonMouseover", function(ev, county) {
             $scope.hoveredCounty = county;

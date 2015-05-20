@@ -11,6 +11,9 @@
         function($scope, $rootScope, $stateParams,filterApi,
             filteringData,SERVER_URL, $window){
         $scope.filter_data = {};
+        //variable to id if  on search or facility listings view
+        $scope.no_search_query = false;
+        $scope.no_err = false;
         $scope.query_results = [];
         var initFilterModel = function(){
             $scope.filter = $stateParams;
@@ -167,6 +170,12 @@
                     delete $scope.filter.format;
                 }else{
                     $scope.hits = data.count;
+                    if($scope.hits >= 1) {
+                        $scope.no_err = true;
+                    }
+                    else{
+                        $scope.no_err = false;
+                    }
                     addPagination(data.count, data.next, data.previous);
                     $scope.search_results = false;
                     $scope.query_results = data.results;
@@ -197,10 +206,12 @@
         };
 
         if(_.isEmpty($stateParams) || _.isUndefined($stateParams.search)){
+            $scope.no_search_query = true;
             filterApi.facilities.list().success(resolves.success).error(resolves.error);
         }else{
             $scope.query = $stateParams.search;
             var filters = removeEmptyFilters($stateParams);
+            $scope.no_search_query = false;
             filterApi.facilities.filter(filters).success(resolves.success).error(resolves.error);
         }
         //end of search results listing
@@ -211,6 +222,8 @@
                     $scope.filter_data[key] = [];
                     $scope.filter_data[key] = data.results;
                     $scope.disabled[key] = false;
+                    //to hide error message
+                    $scope.no_err = false;
                 }).error(function(err){
                     $scope.alert =err.error;
                     $scope.filter_data[key] = [];
