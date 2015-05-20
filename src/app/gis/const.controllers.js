@@ -5,10 +5,10 @@
         "mfl.gis.wrapper","mfl.adminunits.wrapper"])
     .controller("mfl.gis.controllers.gis_const", ["$scope","leafletData",
         "constsApi","$http","$state","$stateParams","SERVER_URL","gisWardsApi",
-        "gisConst","$timeout",
+        "gisConst","$timeout","gisFacilitiesApi",
         function ($scope, leafletData, constsApi, $http, $state,
                    $stateParams,SERVER_URL, gisWardsApi,
-                  gisConst,$timeout) {
+                  gisConst,$timeout,gisFacilitiesApi) {
         $scope.constituency = gisConst.data;
         $scope.const_id = $stateParams.const_id;
         $scope.ward_boundaries = $stateParams.ward_boundaries;
@@ -53,6 +53,22 @@
                     radius:30,width:10});
                 $timeout(function() {map.spin(false);}, 500);
             });
+
+
+        $scope.filters_const = {
+            constituency : gisConst.data.properties.constituency_id
+        };
+        gisFacilitiesApi.api
+        .filter($scope.filters_const)
+        .success(function (data){
+            var marks = data.results.features;
+            $scope.facility_count = marks.length;
+        })
+        .error(function (e){
+            $scope.alert = e.error;
+        });
+
+
         $scope.filters = {
             id : $stateParams.ward_boundaries
         };
