@@ -21,6 +21,9 @@
                         controller: "mfl.common.controllers.time",
                         templateUrl: "common/tpls/time.tpl.html"
                     }
+                },
+                data:{
+                    pageTitle: "MFLv2 Facility Detail"
                 }
             });
     }]);
