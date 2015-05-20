@@ -4,7 +4,8 @@
         "ui.router",
         "ngCookies",
         "sil.grid",
-        "sil.api.wrapper"
+        "sil.api.wrapper",
+        "mfl.gis.interceptor"
     ])
 
     .constant("SERVER_URL", window.MFL_SETTINGS.SERVER_URL)
@@ -22,6 +23,7 @@
     ])
 
     .config(["$httpProvider",function ($httpProvider) {
+        $httpProvider.interceptors.push("mfl.gis.interceptor.headers");
         $httpProvider.defaults.withCredentials = false;
         $httpProvider.defaults.headers.common = {
             "Content-Type":"application/json",
