@@ -25,6 +25,7 @@
             constituency: [],
             ward: [],
             operation_status: [],
+            service_category: [],
             facility_type: [],
             number_of_beds: [],
             number_of_cots: []
@@ -48,6 +49,9 @@
             },
             facility_type: {
                 buttonDefaultText: "Select Facility Type"
+            },
+            service_category: {
+                buttonDefaultText: "Select Service Category"
             }
         };
         $scope.selected = {
@@ -191,7 +195,8 @@
             }
         };
         resolves.startSpinner();
-        _.each(["county", "operation_status", "constituency", "facility_type"], function(key){
+        _.each(["county", "operation_status", "constituency", "facility_type", "service_category"],
+        function(key){
             $scope.filter_data[key] = filteringData[key].data.results;
             $scope.filter_data.ward = [];
             $rootScope.mfl_filter_data = $scope.filter_data;
