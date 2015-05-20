@@ -13,6 +13,7 @@
         $scope.filter_data = {};
         //variable to id if  on search or facility listings view
         $scope.no_search_query = false;
+        $scope.no_err = false;
         $scope.query_results = [];
         var initFilterModel = function(){
             $scope.filter = $stateParams;
@@ -169,12 +170,14 @@
                     delete $scope.filter.format;
                 }else{
                     $scope.hits = data.count;
+                    if($scope.hits === 0) {$scope.no_err = true;}
                     addPagination(data.count, data.next, data.previous);
                     $scope.search_results = false;
                     $scope.query_results = data.results;
                     if($scope.query_results.length===0){
                         $scope.no_result = true;
                     }
+                    console.log($scope.hits, $scope.no_err);
                 }
                 resolves.stopSpinner();
             },
@@ -215,6 +218,9 @@
                     $scope.filter_data[key] = [];
                     $scope.filter_data[key] = data.results;
                     $scope.disabled[key] = false;
+                    //to hide error message
+                    $scope.no_err = false;
+                    console.log($scope.no_err);
                 }).error(function(err){
                     $scope.alert =err.error;
                     $scope.filter_data[key] = [];
