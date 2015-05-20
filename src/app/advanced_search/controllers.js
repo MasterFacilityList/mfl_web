@@ -146,6 +146,9 @@
             }
             if(url_prev){
                 $scope.pagination.prev = true;
+                if(url_prev.indexOf("page")=== -1){
+                    url_prev = url_prev+"?page=1";
+                }
                 makeParams(url_prev, false);
             }else{
                 $scope.pagination.prev = false;
