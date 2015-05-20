@@ -11,6 +11,8 @@
         function($scope, $rootScope, $stateParams,filterApi,
             filteringData,SERVER_URL, $window){
         $scope.filter_data = {};
+        //variable to id if  on search or facility listings view
+        $scope.no_search_query = false;
         $scope.query_results = [];
         var initFilterModel = function(){
             $scope.filter = $stateParams;
@@ -197,10 +199,12 @@
         };
 
         if(_.isEmpty($stateParams) || _.isUndefined($stateParams.search)){
+            $scope.no_search_query = true;
             filterApi.facilities.list().success(resolves.success).error(resolves.error);
         }else{
             $scope.query = $stateParams.search;
             var filters = removeEmptyFilters($stateParams);
+            $scope.no_search_query = false;
             filterApi.facilities.filter(filters).success(resolves.success).error(resolves.error);
         }
         //end of search results listing
