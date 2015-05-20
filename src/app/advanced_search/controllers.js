@@ -182,7 +182,6 @@
                     if($scope.query_results.length===0){
                         $scope.no_result = true;
                     }
-                    console.log($scope.hits, $scope.no_err);
                 }
                 resolves.stopSpinner();
             },
@@ -225,7 +224,6 @@
                     $scope.disabled[key] = false;
                     //to hide error message
                     $scope.no_err = false;
-                    console.log($scope.no_err);
                 }).error(function(err){
                     $scope.alert =err.error;
                     $scope.filter_data[key] = [];
