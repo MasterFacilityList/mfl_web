@@ -5,20 +5,19 @@
     </h2>
     <!--breadcrumb-->
 </div>
-<div class="content-body"> 
+<div class="content-body">
    <div class="container-fluid">
         <div class="col-md-3 content-card">
             <h3>{{ward.properties.name}}</h3>
             <h4>Facilities: {{ward.properties.facility_count}}</h4>
             <hr>
-            <h5 ng-show="hoveredWard">
-                <strong>Ward Hovered: <span class="text-info">{{hoveredWard.properties.name}}</span></strong>
-            </h5>
-            <a ui-sref="filtering" class="btn btn-primary margin-t-20">Facilities in <span class="titlecase">{{ward.properties.name}}</span></a>
+            <a ui-sref="filtering({ward:ward.properties.ward_id})" class="login-btn login-btn-primary margin-t-20">
+                Facilities in {{ward.properties.name}}
+            </a>
         </div>
         <div class="col-md-9 margin-b-10">
-            <leaflet width="100%" defaults="defaults"
-                geojson="geojson" events="events" height="80vh">
+            <leaflet width="100%" defaults="defaults" markers="markers" layer="layers"
+                geojson="geojson" event-broadcast="events" height="80vh">
             </leaflet>
         </div>
     </div>

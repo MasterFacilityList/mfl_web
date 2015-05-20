@@ -89,9 +89,9 @@
                 selectedWard: {}
             });
         })
-        .error(function(err){
+        .error(function(e){
             /*TODO Error handling*/
-            console.log(err);
+            $scope.alert = e.error;
         });
         $scope.$on("leafletDirectiveMap.geojsonMouseover", function(ev, ward) {
             $scope.hoveredWard= ward;

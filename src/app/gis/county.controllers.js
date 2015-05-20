@@ -62,7 +62,6 @@
         .filter($scope.filters)
         .success(function (data){
             var marks = data.results.features;
-            console.log(data.results);
             var markers = _.mapObject(marks, function(mark){
                 return {
                         lat: mark.properties.center.coordinates[1],
@@ -92,15 +91,14 @@
                 selectedConst: {}
             });
         })
-        .error(function(err){
+        .error(function(e){
             /*TODO Error handling*/
-            console.log(err);
+            $scope.alert = e.error;
         });
         $scope.$on("leafletDirectiveMap.geojsonMouseover", function(ev, constituency) {
             $scope.hoveredConst = constituency;
         });
         $scope.$on("leafletDirectiveMap.geojsonClick", function(ev, constituency) {
-            console.log(constituency);
             var boundary_ids = constituency.properties.ward_boundary_ids.join(",");
             $stateParams.ward_boundaries = boundary_ids;
             $state.go("gis_const",{const_id:constituency.id,
