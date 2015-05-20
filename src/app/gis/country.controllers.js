@@ -115,11 +115,6 @@
                         }
                     },
                     overlays:{
-                        counties:{
-                            name:"Counties",
-                            type:"markercluster",
-                            visible: true
-                        },
                         heat: {
                             name: "Facilities",
                             type: "heat",
@@ -128,6 +123,11 @@
                                 radius: 5,
                                 blur: 1
                             },
+                            visible: true
+                        },
+                        counties:{
+                            name:"Counties",
+                            type:"markercluster",
                             visible: true
                         }
                     }
