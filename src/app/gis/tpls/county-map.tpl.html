@@ -7,14 +7,16 @@
 </div>
 <div class="content-body">
    <div class="container-fluid">
-        <div class="col-md-3 content-card">
-            <h3>{{county.properties.name}}</h3>
-            <h4>Facilities: {{county.properties.facility_count}}</h4>
-            <hr>
-            <h5 ng-show="hoveredConst">
-                <strong>Constituency Hovered: <span class="text-info">{{hoveredConst.properties.name}}</span></strong>
-            </h5>
-            <a ui-sref="filtering({county:county.properties.county_id})" class="btn btn-primary margin-t-20">Facilities in <span class="titlecase">{{county.properties.name}}</span></a>
+        <div class="col-md-3 margin-15">
+           <div class="content-card">
+                <h3>{{county.properties.name}}</h3>
+                <h4>Facilities: {{facility_count}}</h4>
+                <hr>
+                <h5 ng-show="hoveredConst">
+                    <strong>Constituency Hovered: <span class="text-info">{{hoveredConst.properties.name}}</span></strong>
+                </h5>
+                <a ui-sref="filtering({county:county.properties.county_id})" class="login-btn login-btn-primary margin-t-20">Facilities in <span class="titlecase">{{county.properties.name}}</span></a>
+           </div>
         </div>
         <div class="col-md-9">
             <leaflet markers="markers" width="100%" defaults="defaults"

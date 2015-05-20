@@ -47,7 +47,7 @@ describe("Tests for mfl.gis_county.controllers.gis (County Level):", function ()
         function ($httpBackend, $state, leafletData,gisConstsApi,gisCountiesApi) {
         var data = {
             results:{
-                id :"",
+                id :"4",
                 type:"",
                 geometry:{},
                 properties: {},
@@ -77,6 +77,9 @@ describe("Tests for mfl.gis_county.controllers.gis (County Level):", function ()
         SERVER_URL + "api/gis/county_boundaries/34/")
             .respond(200, data);
         $httpBackend.expectGET(
+        SERVER_URL + "api/gis/coordinates/?county=4")
+            .respond(200, data);
+        $httpBackend.expectGET(
         SERVER_URL + "api/gis/constituency_boundaries/?id=undefined")
             .respond(200, data);
         $state.go("gis_county", {"county_id": "34"});
@@ -88,7 +91,8 @@ describe("Tests for mfl.gis_county.controllers.gis (County Level):", function ()
                     properties: {
                         bound: {
                             coordinates: []
-                        }
+                        },
+                        county_id:"4"
                     }
                 }
             },
@@ -121,7 +125,8 @@ describe("Tests for mfl.gis_county.controllers.gis (County Level):", function ()
                     properties: {
                         bound: {
                             coordinates: []
-                        }
+                        },
+                        county_id:"4"
                     }
                 }
             },
@@ -130,6 +135,9 @@ describe("Tests for mfl.gis_county.controllers.gis (County Level):", function ()
             "$stateParams": {},
             "SERVER_URL": SERVER_URL
         });
+        $httpBackend.expectGET(
+        SERVER_URL + "api/gis/coordinates/?county=4")
+            .respond(500, data);
         $httpBackend.expectGET(
         SERVER_URL + "api/gis/constituency_boundaries/?id=undefined")
             .respond(500, data);
@@ -147,7 +155,8 @@ describe("Tests for mfl.gis_county.controllers.gis (County Level):", function ()
                     properties: {
                         bound: {
                             coordinates: []
-                        }
+                        },
+                        county_id:"4"
                     }
                 }
             },

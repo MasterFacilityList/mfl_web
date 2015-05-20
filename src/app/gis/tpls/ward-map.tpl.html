@@ -7,13 +7,15 @@
 </div>
 <div class="content-body">
    <div class="container-fluid">
-        <div class="col-md-3 content-card">
-            <h3>{{ward.properties.name}}</h3>
-            <h4>Facilities: {{ward.properties.facility_count}}</h4>
-            <hr>
-            <a ui-sref="filtering({ward:ward.properties.ward_id})" class="login-btn login-btn-primary margin-t-20">
-                Facilities in {{ward.properties.name}}
-            </a>
+        <div class="col-md-3 margin-15">
+           <div class="content-card">
+                <h3>{{ward.properties.name}}</h3>
+                <h4>Facilities: {{facility_count}}</h4>
+                <hr>
+                <a ui-sref="filtering({ward:ward.properties.ward_id})" class="login-btn login-btn-primary margin-t-20">
+                    Facilities in {{ward.properties.name}}
+                </a>
+           </div>
         </div>
         <div class="col-md-9 margin-b-10">
             <leaflet width="100%" defaults="defaults" markers="markers" layer="layers"

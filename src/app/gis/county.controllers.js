@@ -5,10 +5,10 @@
         "mfl.gis.wrapper"])
     .controller("mfl.gis.controllers.gis_county", ["$scope","leafletData",
         "gisCounty","$http","$state","$stateParams", "$timeout",
-        "SERVER_URL","gisConstsApi",
+        "SERVER_URL","gisConstsApi","gisFacilitiesApi",
         function ($scope, leafletData, gisCounty, $http, $state,
                    $stateParams, $timeout,
-                   SERVER_URL, gisConstsApi) {
+                   SERVER_URL, gisConstsApi,gisFacilitiesApi) {
         $scope.county = gisCounty.data;
         $scope.county_id = $stateParams.county_id;
         $scope.const_boundaries = $stateParams.const_boundaries;
@@ -54,6 +54,24 @@
                     {lines: 13, length: 20,corners:1,radius:30,width:10});
                 $timeout(function() {map.spin(false);}, 500);
             });
+
+
+
+        $scope.filters_county = {
+            county : gisCounty.data.properties.county_id
+        };
+        gisFacilitiesApi.api
+        .filter($scope.filters_county)
+        .success(function (data){
+            var marks = data.results.features;
+            $scope.facility_count = marks.length;
+        })
+        .error(function (e){
+            $scope.alert = e.error;
+        });
+
+
+
 
         $scope.filters = {
             id : $stateParams.const_boundaries

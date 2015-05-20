@@ -89,17 +89,6 @@
             });
             $scope.markers = markers;
             angular.extend($scope, {
-                geojson: {
-                    data: data.results,
-                    style: {
-                        fillColor: "rgba(255, 255, 255, 0.01)",
-                        weight: 2,
-                        opacity: 1,
-                        color: "rgba(0, 0, 0, 0.52)",
-                        dashArray: "3",
-                        fillOpacity: 0.7
-                    }
-                },
                 layers:{
                     baselayers:{
                         mapbox_light: {
@@ -115,11 +104,6 @@
                         }
                     },
                     overlays:{
-                        counties:{
-                            name:"Counties",
-                            type:"markercluster",
-                            visible: true
-                        },
                         heat: {
                             name: "Facilities",
                             type: "heat",
@@ -129,7 +113,25 @@
                                 blur: 1
                             },
                             visible: true
+                        },
+                        counties:{
+                            name:"Counties",
+                            type:"markercluster",
+                            visible: true
                         }
+                    }
+                }
+            });
+            angular.extend($scope,{
+                geojson: {
+                    data: data.results,
+                    style: {
+                        fillColor: "rgba(255, 255, 255, 0.01)",
+                        weight: 2,
+                        opacity: 1,
+                        color: "rgba(0, 0, 0, 0.52)",
+                        dashArray: "3",
+                        fillOpacity: 0.7
                     }
                 },
                 selectedConst: {}

@@ -26,7 +26,7 @@
                     }
                 },
                 data:{
-                    pageTitle: "MFL Home"
+                    pageTitle: "MFLv2 Home"
                 }
             })
             .state("search_results", {
@@ -44,7 +44,11 @@
                         controller: "mfl.common.controllers.time",
                         templateUrl: "common/tpls/time.tpl.html"
                     }
+                },
+                data:{
+                    pageTitle: "MFLv2 Search Results"
                 }
+            
             })
             .state("facility_details", {
                 url : "/facility/:fac_id",
@@ -61,6 +65,9 @@
                         controller: "mfl.common.controllers.time",
                         templateUrl: "common/tpls/time.tpl.html"
                     }
+                },
+                data:{
+                    pageTitle: "MFLv2 Facility Detail"
                 }
             });
     }]);

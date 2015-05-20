@@ -19,9 +19,9 @@ describe("Tests for mfl.gis.controllers.gis_const (Constituency Level):", functi
         module("mfl.gis.routes");
 
         inject(["$rootScope", "$controller","$httpBackend","$state","$stateParams",
-                "SERVER_URL","gisConstsApi","gisWardsApi",
+                "SERVER_URL","gisConstsApi","gisWardsApi","gisFacilitiesApi",
             function ($rootScope, $controller, $httpBackend, $state,$stateParams,
-                  url, gisConstsApi,gisWardsApi) {
+                  url, gisConstsApi,gisWardsApi,gisFacilitiesApi) {
                 root = $rootScope;
                 scope = root.$new();
                 state = $state;
@@ -29,6 +29,7 @@ describe("Tests for mfl.gis.controllers.gis_const (Constituency Level):", functi
                 SERVER_URL = url;
                 gisConstsApi = gisConstsApi;
                 gisWardsApi = gisWardsApi;
+                gisFacilitiesApi = gisFacilitiesApi;
                 $stateParams.const_id = "34";
                 $stateParams.const_boundaries = "4,2,41";
                 $stateParams.ward_boundaries = "4,2,41";
@@ -74,6 +75,9 @@ describe("Tests for mfl.gis.controllers.gis_const (Constituency Level):", functi
         SERVER_URL + "api/gis/constituency_boundaries/")
             .respond(200, data);
         $httpBackend.expectGET(
+        SERVER_URL + "api/gis/coordinates/?constituency=4")
+            .respond(200, data);
+        $httpBackend.expectGET(
         SERVER_URL + "api/gis/ward_boundaries/?id=undefined")
             .respond(200, data);
         $state.go("gis_const", {"county_id": "34"});
@@ -85,7 +89,8 @@ describe("Tests for mfl.gis.controllers.gis_const (Constituency Level):", functi
                     properties: {
                         bound: {
                             coordinates: []
-                        }
+                        },
+                        constituency_id:"4"
                     }
                 }
             },
@@ -117,7 +122,8 @@ describe("Tests for mfl.gis.controllers.gis_const (Constituency Level):", functi
                     properties: {
                         bound: {
                             coordinates: []
-                        }
+                        },
+                        constituency_id:"4"
                     }
                 }
             },
@@ -126,6 +132,9 @@ describe("Tests for mfl.gis.controllers.gis_const (Constituency Level):", functi
             "$stateParams": {},
             "SERVER_URL": SERVER_URL
         });
+        $httpBackend.expectGET(
+        SERVER_URL + "api/gis/coordinates/?constituency=4")
+            .respond(500, data);
         $httpBackend.expectGET(
         SERVER_URL + "api/gis/ward_boundaries/?id=undefined")
             .respond(500, data);

@@ -26,6 +26,9 @@
                                 }]
                         }
                     }
+                },
+                data:{
+                    pageTitle: "MFLv2 Advanced Search"
                 }
             });
     }]);
