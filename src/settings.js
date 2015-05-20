@@ -6,15 +6,10 @@
         "CREDZ": {
             "username": "serikalikuu@mfltest.slade360.co.ke",
             "password": "serikalikuu",
-            /*"client_id": "89a15KxjyUktjGWyhCv8j8hHFZM6tWxvBczD9hNa",
-            "client_secret": "GgP1uuFAgPsTu6nMmxNTbiZWynHhRrhrLo535plh" +
-                             "TVWRWtRC51hvujbP9F9HX9I0s3td2JpPPiC3DmkQ" +
-                             "K0bmqjstoUtP71VvGvuKQDHnFLP4apE4mGnrDrXe" +
-                             "BN7tNDwQ"*/
-            "client_id": "w3xpORZhHG4RdjTXdZWOi2Zg3LBxiZfGMpaJEkPF",
-            "client_secret": "VEDhTr6CFEPOajWLxRYQBp8oK0c6tBpOu2Jm8Wp79e" +
-            "NHTFu5R0l5NBNnBuxgMuVf5TTY3EEPgAiXpITkqjW3NfF7ZkA7zSl97vSe4dn" +
-            "A9m5e27mqoaVNKod8vjHT1rwk"
+            "client_id": "aQtG5rUJKF9GxWQWCuoZc6m5i581i5pCxOEIN7L4",
+            "client_secret": "DZ4fCreUDhij74WdEV6RZ9qOi9O6UzWqYSB8TrmKixo" +
+            "d3WWHMJ6EeVY1DktZVgnAon5Czc2h6Wg8kjce3DiegP3xTfdKh67t2jHHhPyV"+
+            "815K8QjEm12R7xKEIaUcR7dB"
         }
     };
 
