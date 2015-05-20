@@ -159,8 +159,9 @@
                     data: heatpoints,
                     layerOptions: {
                         radius: 25,
+                        opacity:1,
                         blur: 1,
-                        gradient: {0.05: "#050541", 0.1: "#040017", 0.2: "lime", 0.5:"red"}
+                        gradient: {0.2: "lime", 0.3: "orange",0.4: "red"}
                     },
                     visible: true
                 }
