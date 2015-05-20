@@ -64,7 +64,9 @@
         gisCountriesApi.api
         .filter($scope.filters_country)
         .success($scope.country_success)
-        .error(function () {});
+        .error(function (e) {
+            $scope.alert = e.error;
+        });
         $scope.filters_counties = {
             page_size: 47
         };
@@ -134,8 +136,7 @@
             });
         })
         .error(function(err){
-            /*TODO Error handling*/
-            console.log(err);
+            $scope.alert = err.error;
         });
 
         $scope.filters_fac = {
@@ -168,7 +169,7 @@
             };
         })
         .error(function(err){
-            console.log(err);
+            $scope.alert = err.error;
         });
         $scope.$on("leafletDirectiveMap.geojsonMouseover", function(ev, county) {
             $scope.hoveredCounty = county;
