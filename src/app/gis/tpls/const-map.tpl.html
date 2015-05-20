@@ -15,7 +15,7 @@
                 <h5 ng-show="hoveredWard">
                     <strong>Ward Hovered: <span class="text-info">{{hoveredWard.properties.name}}</span></strong>
                 </h5>
-                <a ui-sref="filtering" class="login-btn login-btn-primary margin-t-20">Facilities in <span class="titlecase">{{constituency.properties.name}}</span></a>
+                <a ui-sref="filtering({constituency:constituency.properties.constituency_id})" class="login-btn login-btn-primary margin-t-20">Facilities in <span class="titlecase">{{constituency.properties.name}}</span></a>
            </div>
         </div>
         <div class="col-md-9 margin-b-10">
