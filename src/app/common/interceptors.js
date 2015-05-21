@@ -14,7 +14,6 @@
             }
             console.log("cache hit : ", config.url);
             if (headers.etag_header) {
-                config.headers.ETag = headers.etag_header;
                 config.headers["If-None-Match"] = headers.etag_header;
             }
             if (headers.last_modified_header) {
