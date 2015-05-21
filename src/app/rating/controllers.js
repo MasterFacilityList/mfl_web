@@ -12,7 +12,10 @@
                 "checked": false
             };
             $scope.fac_id = $stateParams.fac_id;
-            facilitiesApi.facilities.get($scope.fac_id)
+
+
+            $scope.getFacility = function () {
+                facilitiesApi.facilities.get($scope.fac_id)
                 .success(function (data) {
                     $scope.rating = [
                         {
@@ -25,7 +28,7 @@
                         function (service) {
                             var current_rate = "";
                             current_rate = ratingService.getRating(service.id);
-                            if(!_.isUndefined(current_rate) || !_.isEmpty(current_rate)) {
+                            if(!_.isNull(current_rate)) {
                                 service.ratings = [
                                     {
                                         current : current_rate,
@@ -47,6 +50,8 @@
                 .error(function (e) {
                     $scope.alert = e.error;
                 });
+            };
+            $scope.getFacility();
 
             $scope.getSelectedRating = function (rating, id) {
                 $scope.fac_rating = {
@@ -58,6 +63,7 @@
                         //save rating in localStorage
                         ratingService.storeRating(
                             data.facility_service, data.rating);
+                        $scope.getFacility();
                     })
                     .error(function (e) {
                         $scope.alert = e.error;
