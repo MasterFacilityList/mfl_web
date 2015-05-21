@@ -16,19 +16,28 @@
         <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 results-card margin-b-30">
         <!-- Important data first displayed here -->
         <div class="col-lg-12">
-            <h3 class="fw-700">
+            <h3 class="fw-700  hidden-xs">
                     <span class="fs-26">{{oneFacility.code}}</span> | {{oneFacility.name}}
             </h3>
+            <h4 class="fw-700  visible-xs">
+                    <span class="fs-22">{{oneFacility.code}}</span> | {{oneFacility.name}}
+            </h4>
             <hr style="border: 1px solid #F0F0F0;">
             <br>
-            <h4 class="margin-t--27 fw-600">
+            <h4 class="margin-t--27 fw-600  hidden-xs">
                 <span class="pull-left">
                     <label>Type: </label>
                     {{oneFacility.facility_type_name}}
                 </span>
             </h4>
+            <h5 class="margin-t--27 fw-600  visible-xs">
+                <span class="pull-left">
+                    <label>Type: </label>
+                    {{oneFacility.facility_type_name}}
+                </span>
+            </h5>
             <br>
-            <h4>
+            <h4 class=" hidden-xs">
                 <div class="pull-left">
                     <p ><b class="fs-16">Status:</b>
                     <span class="fs-16 label label-warning">
@@ -45,9 +54,26 @@
                     </span>
                 </span>
             </h4>
+            <h4 class=" visible-xs">
+                <div class="pull-left">
+                    <p ><b class="fs-13">Status:</b>
+                    <span class="fs-14 label label-warning">
+                        {{oneFacility.regulatory_status_name}}
+                    </span></p>
+                </div>
+                <span class="pull-right fs-13">
+                    <label>Open whole week </label>
+                    <span ng-show="oneFacility.open_whole_week" class="text-success">
+                        <i class="fa fa-check-circle-o fa-1x"></i>
+                    </span>
+                    <span ng-hide="oneFacility.open_whole_week" class="text-danger">
+                        <i class="fa fa-times-circle-o fa-1x"></i>
+                    </span>
+                </span>
+            </h4>
             <br>
             <br>
-            <h4 class="fs-16 margin-t-5">
+            <h4 class="fs-16 margin-t-5  hidden-xs">
                 <span class="pull-left">
                     <label>Beds: </label>
                     {{oneFacility.number_of_beds}}
@@ -62,8 +88,23 @@
                     </span>
                 </span>
             </h4>
+            <h5 class="fs-13 margin-t-5  visible-xs">
+                <span class="pull-left">
+                    <label>Beds: </label>
+                    {{oneFacility.number_of_beds}}
+                </span>
+                <span class="pull-right">
+                    <label>Open whole day </label>
+                    <span ng-show="oneFacility.open_whole_day" class="text-success">
+                        <i class="fa fa-check-circle-o fa-1x"></i>
+                    </span>
+                    <span ng-hide="oneFacility.open_whole_day" class="text-danger">
+                        <i class="fa fa-times-circle-o fa-1x"></i>
+                    </span>
+                </span>
+            </h5>
             <br>
-            <h4 class="fs-16">
+            <h4 class="fs-16  hidden-xs">
                 <span class="pull-left">
                     <label>Cots: </label>
                     {{oneFacility.number_of_cots}}
@@ -75,12 +116,25 @@
                     </span>
                 </span>
             </h4>
+            <h5 class="fs-13  visible-xs">
+                <span class="pull-left">
+                    <label>Cots: </label>
+                    {{oneFacility.number_of_cots}}
+                </span>
+                <span class="pull-right">
+                    <label>Facility's rating: </label>
+                    <span class="fw-600" style="color: #DAA520">
+                        {{oneFacility.average_rating | number : 2}}
+                    </span>
+                </span>
+            </h5>
             <br>
             <!-- Display location details  -->
             <hr style="border: 1px solid #F0F0F0;">
-            <h4 class="text-blue fs-18 fw-700"> Location</h4>
+            <h4 class="text-blue fs-18 fw-700  hidden-xs"> Location</h4>
+            <h4 class="text-blue fs-16 fw-700  visible-xs"> Location</h4>
             <br>
-            <h4 class="margin-t--15 fs-16 fw-600">
+            <h4 class="margin-t--15 fs-16 fw-600  hidden-xs">
                 <label>Town: </label>
                 {{oneFacility.facility_physical_address.town}}
                 <span class="pull-right">
@@ -88,17 +142,33 @@
                     {{oneFacility.facility_physical_address.plot_number}}
                 </span>
             </h4>
+            <h5 class="margin-t--15 fs-14 fw-600  visible-xs">
+                <label>Town: </label>
+                {{oneFacility.facility_physical_address.town}}
+                <span class="pull-right">
+                    <label>Plot number: </label>
+                    {{oneFacility.facility_physical_address.plot_number}}
+                </span>
+            </h5>
             <br>
-            <h4 class="margin-t--15 fs-16 fw-600">
+            <h4 class="margin-t--15 fs-16 fw-600  hidden-xs">
                 <label>Close to: </label>
                 {{oneFacility.location_desc}}
             </h4>
+            <h5 class="margin-t--15 fs-14 fw-600  visible-xs">
+                <label>Close to: </label>
+                {{oneFacility.location_desc}}
+            </h5>
             <!-- End of locatin displays -->
             <br>
-            <h4 class="text-blue fs-18 fw-700 margin-t-5">Services</h4>
+            <h4 class="text-blue fs-18 fw-700 margin-t-5  hidden-xs">Services</h4>
+            <h4 class="text-blue fs-16 fw-700 margin-t-5  visible-xs">Services</h4>
             <div class="col-lg-12">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 margin-b-20" ng-repeat="service in oneFacility.facility_services">
-                    <h4 class="fs-18 fw-700">
+                    <h4 class="fs-18 fw-700 hidden-xs">
+                        {{$index + 1}}.&nbsp;{{service.service_name}}
+                    </h4>
+                    <h4 class="fs-16 fw-700 visible-xs">
                         {{$index + 1}}.&nbsp;{{service.service_name}}
                     </h4>
                     <h4>
@@ -133,37 +203,68 @@
         </div>
         <!-- Extra details displayed here =========================== -->
         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right results-card">
-            <h4 class="fs-18 text-blue fw-700">
+            <h4 class="fs-18 text-blue fw-700 hidden-xs">
                 <i style="border: 1px solid #fff; border-radius : 50%;" class="fa fa-user-secret fa-1x"></i>
                 Ownership status
             </h4>
-            <h4 class="fw-500">
+            <h5 class="fs-16 text-blue fw-500 visible-xs">
+                <i style="border: 1px solid #fff; border-radius : 50%;" class="fa fa-user-secret fa-1x"></i>
+                Ownership status
+            </h5>
+            <h4 class="fw-500 hidden-xs">
                 <span class="pad-t-5">
                     <h5 class="fs-16 fw-600"><label>Owner: </label> {{oneFacility.owner_name}}</h5>
                     <h5 class="fs-14 fw-500"><label>Category: </label> {{oneFacility.owner_type_name}}</h5>
                 </span>
             </h4>
+            <h4 class="fw-500 visible-xs">
+                <span class="pad-t-5">
+                    <h5 class="fs-14 fw-600"><label>Owner: </label> {{oneFacility.owner_name}}</h5>
+                    <h5 class="fs-13 fw-500"><label>Category: </label> {{oneFacility.owner_type_name}}</h5>
+                </span>
+            </h4>
             <br><br>
             <hr class="margin-t--15" style="border : 1px solid #ddd;">
-            <h4 class="fs-18 margin-t--5 text-blue fw-700">
+            <h4 class="fs-18 margin-t--5 text-blue fw-700 hidden-xs">
                 <i style="border: 1px solid #fff; border-radius : 50%;" class="fa fa-map-marker fa-1x"></i>
                 Physical location
             </h4>
-            <h4 class="fw-500 ">
+            <h4 class="fs-16 margin-t--5 text-blue fw-600 visible-xs">
+                <i style="border: 1px solid #fff; border-radius : 50%;" class="fa fa-map-marker fa-1x"></i>
+                Physical location
+            </h4>
+            <h4 class="fw-500 hidden-xs">
                 <span class="pad-t-5">
                     <h5 class="fs-16 fw-600">{{oneFacility.county}} COUNTY</h5>
                     <h5 class="fs-14 fw-600">{{oneFacility.constituency}} CONSTITUENCY</h5>
                     <span class="fs-13 fw-600">{{oneFacility.ward_name}} WARD</span>
                 </span>
             </h4>
+            <h4 class="fw-400 visible-xs">
+                <span class="pad-t-5">
+                    <h5 class="fs-14 fw-600">{{oneFacility.county}} COUNTY</h5>
+                    <h5 class="fs-13 fw-600">{{oneFacility.constituency}} CONSTITUENCY</h5>
+                    <span class="fs-13 fw-600">{{oneFacility.ward_name}} WARD</span>
+                </span>
+            </h4>
             <br><br>
             <hr class="margin-t--15" style="border : 1px solid #ddd;">
-            <h4 class="fs-18 margin-t--5 text-blue fw-700">
+            <h4 class="fs-18 margin-t--5 text-blue fw-700 hidden-xs">
+                <i style="border: 1px solid #fff; border-radius : 50%;" class="fa fa-phone fa-1x"></i>
+                Contacts
+            </h4>
+            <h4 class="fs-16 margin-t--5 text-blue fw-600 visible-xs">
                 <i style="border: 1px solid #fff; border-radius : 50%;" class="fa fa-phone fa-1x"></i>
                 Contacts
             </h4>
             <h4 ng-repeat="cont in oneFacility.facility_contacts" class="fw-500">
-                <span  class="margin-b-10 fs-16">
+                <span  class="margin-b-10 fs-14 hidden-xs">
+                    <label>
+                        {{cont.contact_type_name}} :
+                    </label>
+                    {{cont.contact}}
+                </span>
+                <span  class="margin-b-10 fs-13 visible-xs">
                     <label>
                         {{cont.contact_type_name}} :
                     </label>
@@ -171,7 +272,11 @@
                 </span>
             </h4>
             <br>
-            <h4 class="margin-t--15 fs-16">
+            <h4 class="margin-t--15 fs-16 hidden-xs">
+                <label>P.O.Box: </label>
+                {{oneFacility.facility_physical_address.postal_code}} - {{oneFacility.facility_physical_address.address}}
+            </h4>
+            <h4 class="margin-t--15 fs-14 visible-xs">
                 <label>P.O.Box: </label>
                 {{oneFacility.facility_physical_address.postal_code}} - {{oneFacility.facility_physical_address.address}}
             </h4>

@@ -508,7 +508,7 @@
             expect(scope.query_results).toEqual(["testing"]);
         });
 
-        it("should handle `esp key` press event", function(){
+        it("should handle `escape key` press event", function(){
             var scope = rootScope.$new();
             createController(scope, {});
             httpBackend.expectGET(
@@ -523,6 +523,16 @@
             httpBackend.flush();
             expect(scope.query_results).toEqual(["testing"]);
             expect(scope.filter.search).toBeFalsy();
+        });
+        it("should assign show-nav class to advanced search ", function(){
+            var scope = rootScope.$new();
+            createController(scope, {});
+            scope.activate_offcanvas = false;
+            scope.offCanvas();
+            expect(scope.activate_offcanvas).toBeTruthy();
+            scope.activate_offcanvas = true;
+            scope.offCanvas();
+            expect(scope.activate_offcanvas).toBeFalsy();
         });
     });
 })();

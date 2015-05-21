@@ -1,87 +1,51 @@
-/*==================The width and right attrs need to be same*/
-.menu {
-    top: 10px;
-    margin-left: 10px;
-    bottom: 0;
-    width: 13.755em;
-    left: 13.755em;
-    min-height: 60%;
-    -webkit-transform: translate(0px, 0px);
-    -moz-transform: translate(0px, 0px);
-    -o-transform: translate(0px, 0px);
-    -ms-transform: translate(0px, 0px);
-    transform: translate(0px, 0px);
-    -webkit-transition: 0.15s ease;
-    -moz-transition: 0.15s ease;
-    -o-transition: 0.15s ease;
-    transition: 0.15s ease;
-}
-/*===Class moves navigation pane in from the left*/
-.menu-active {
-    -webkit-transform: translate(13.755em, 0px);
-    -moz-transform: translate(13.755em, 0px);
-    -o-transform: translate(13.755em, 0px);
-    -ms-transform: translate(13.755em, 0px);
-    transform: translate(13.755em, 0px);
-}
-.displaced {
-    -webkit-transform: translate(0px, 0px);
-    -moz-transform: translate(0px, 0px);
-    -o-transform: translate(0px, 0px);
-    -ms-transform: translate(0px, 0px);
-    transform: translate(0px, 0px);
-    -webkit-transition: 0.15s ease;
-    -moz-transition: 0.15s ease;
-    -o-transition: 0.15s ease;
-    transition: 0.15s ease;
-}
 
-.displaced-active {
-    -webkit-transform: translate(13.725em, 0px);
-    -moz-transform: translate(13.725em, 0px);
-    -o-transform: translate(13.725em, 0px);
-    -ms-transform: translate(13.725em, 0px);
-    transform: translate(13.725em, 0px);
-   }
-
-/* move the toggle button to the left and give it
-   some breathing room */
-/*.navbar-toggle {
-  float: left;
-  margin-left: 10px;
-}
+/*Offcanvas take two*/
+/*
+* Uses Font Awesome and Bootstrap 3
+* Both aren't required for this demo
 */
-@media screen and (max-width: 767px) {
+#search-wrapper {
+  position: relative;
+  /*overflow: hidden;*/
+  width: 100%;
 
-   /* outer div */
-  .row-offcanvas {
-    position: relative;
-    left: 0;
-    -webkit-transition: left .3s ease-in;
-    -most-transition: left .3s ease-in;
-    transition: left .3s ease-in;
-  }
+  height: 200vh !important;
+}
+#site-canvas {
+  width: 100%;
+  height: 100%;
+  position: relative;
 
-  /* sidebar */
-  .sidebar-offcanvas {
-    left: -80%;
-    width: 80%;
-    position: absolute;
-    top: 0;
-    height: 100%;
-    background-color: #F7F7F7;
-    padding: 0px;
-  }
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
 
-  /* content */
-  .row-offcanvas.active {
-    left: 80%;
-  }
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
 
-  /* Make the menu headers the same size as the
-     bootstrap navbar */
-  [data-role='panelbar'] .k-header {
-    min-height: 50px;
-  }
+  -webkit-transition: 300ms ease all;
+  transition: 300ms ease all;
 
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+
+
+
+
+  padding: 5% 0; /* Temp: Just spacing. */
+}
+.show-nav #site-canvas {
+  height: 160vh;
+  -webkit-transform: translateX(300px);
+  transform: translateX(300px);
+
+  -webkit-transform: translate3d(300px, 0, 0);
+  transform: translate3d(300px, 0, 0);
+}
+#site-menu {
+  width: 300px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: -300px;
+  padding: 15px;
 }

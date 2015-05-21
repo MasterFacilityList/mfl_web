@@ -3,12 +3,8 @@
         <div class="col-lg-12 margin-t-20 margin-b-10">
 
             <p class="lead text-left">
-                <span class="fs-18 fw-700" style="font-family: Lato Light"
-                ng-if="!no_search_query">
-                    <i class="fa fa-building"></i> Facilities
-                </span>
-                <span ng-if="no_search_query">
-                    Showing <span> <em>{{hits}}</em></span> result(s)
+                <span >
+                    Showing <span class="text-danger"> <em>{{hits}}</em></span> result(s)
                     <span class="text-danger" ng-if="filter.serach">
                        for {{filter.search}}
                     </span>
@@ -24,9 +20,13 @@
             </p>
         </div>
     </div>
-    <div class="col-lg-12 margin-b-20">
-            <div class="col-lg-4 col-md-4 hidden-sm hidden-xs" >
-                <div class="col-lg-12 col-md-12 content-card">
+
+    <!-- Beginning of offcanvas advanced search -->
+    <!-- End of offcanvas -->
+    <div class="col-lg-12 col-md-12 col-sm-12 margin-b-20 hidden-xs" ><!-- Offcanvas outer div -->
+
+            <div class="col-lg-4 col-md-4 col-sm-5 margin-b-20">
+                <div class="col-lg-12 col-md-12 col-sm-12 content-card">
                 <!-- Start of advanced filter form ===================-->
                     <advanced-search></advanced-search>
                 </div>
@@ -34,15 +34,18 @@
             </div>
 
             <!-- ng-class="class.large"> -->
-            <div class="col-lg-8 col-md-8 search-results" >
+            <div class="col-lg-8 col-md-8 col-sm-7 search-results" >
                 <div class="col-lg-12" ng-if="alert">
                     <div class="alert alert-danger">
                         <p ng-bind-html="alert"></p>
                     </div>
                 </div>
                 <div class="col-lg-12 content-card" ng-if="!no_err" ng-show=" !spinneractive">
-                    <p class="lead">
-                        Oops!! Sorry no match for the query <span class="text-danger">{{query}}</span>. Try the advanced search.
+                    <p class="lead" ng-if="!no_search_query">
+                        Sorry, no match for the query <span class="text-danger">{{query}}</span>.
+                    </p>
+                    <p ng-if="no_search_query">
+                        Sorry, no match was found.
                     </p>
                 </div>
                 <div class="col-lg-12 margin-t-250 margin-b-100" ng-if="spinneractive" style="text-align: center">
@@ -91,5 +94,99 @@
                 </div>
                 <mfl-pagination></mfl-pagination>
             </div>
+    </div>
+    <div class="visible-xs search-wrapper" ng-class="{'show-nav' : activate_offcanvas}" >
+        <!-- <div class="hidden-lg hidden-md margin-b-10">
+            <a href class="login-btn login-btn-primary">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div> -->
+        <div id="site-canvas" >
+
+         <div id="site-menu" style="height: 150vh;">
+           <div class="col-xs-12 content-card">
+            <!-- Start of advanced filter form ===================-->
+                <advanced-search></advanced-search>
+            </div>
+            <!-- End of advanced filter form ======================-->
+         </div>
+
+         <a href ng-click="offCanvas()" class="login-btn login-btn-primary" >
+            <span ng-hide="activate_offcanvas">
+                <i class="fa fa-search"></i> Advanced search
+            </span>
+            <span ng-show="activate_offcanvas">
+                <i class="fa fa-arrow-left"></i> Hide search
+            </span>
+        </a>
+
+            <!-- ng-class="class.large"> -->
+            <div class="col-xs-12 search-results" >
+                <div class="col-lg-12" ng-if="alert">
+                    <div class="alert alert-danger">
+                        <p ng-bind-html="alert"></p>
+                    </div>
+                </div>
+                <div class="col-lg-12 content-card" ng-if="!no_err" ng-show=" !spinneractive">
+                    <p class="lead" ng-if="!no_search_query">
+                        Sorry, no match for the query <span class="text-danger">{{query}}</span>.
+                    </p>
+                    <p ng-if="no_search_query">
+                        Sorry, no match was found
+                    </p>
+                </div>
+                <div class="col-lg-12 margin-t-250 margin-b-100" ng-if="spinneractive" style="text-align: center">
+                    <img src="assets/img/301.GIF">
+                </div>
+                <div class="col-md-12 results-card" ng-repeat="fac in query_results" ng-if="!spinneractive">
+                        <div class="col-lg-12">
+                            <a ui-sref="rating({fac_id : fac.id})" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Click to view facility details">
+                                <h5 class="search-resulthead margin-b-10">
+                                    <span class="fw-700 fs-16 pull-left" style="cursor: pointer">
+                                       <span class="fw-900 fs-16"> {{fac.code}} </span> | {{fac.name}}
+                                    </span>
+                                </h5>
+
+                            </a>
+                            <br>
+                            <br>
+                            <h5 class="margin-t-10">
+                                <span class="pull-left fs-14">
+                                    <label>Status: </label>
+                                    <span class="text-blue fw-500">{{fac.regulatory_status_name}}</span>
+                                </span>
+                                <span class="pull-right">
+                                    <span class="fs-13 fw-500 label label-primary">{{fac.facility_type_name}}
+                                    </span>
+                                </span>
+                            </h5>
+                            <br>
+                            <h5 class="margin-t-10 fw-500" style="color:#000;">
+                                <span class="pull-left" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Facility owner">
+                                    <label>Owner: </label>
+                                    {{fac.owner_name}}
+                                </span>
+                            </h5>
+                            <br>
+                            <h5 class="margin-t-10 fw-500" style="color:#000;">
+                                <span class="pull-left fs-14">
+                                     {{fac.county}} COUNTY
+                                </span>
+                            </h5>
+                            <br>
+                            <p class="margin-b-30 margin-t-5">
+                                <span class="pull-left fs-13 fw-400">
+                                 {{fac.constituency}} CONSTITUENCY
+                                </span>
+                                <!-- <span class="pull-right fs-13 fw-400">
+                                    {{fac.ward_name}} WARD
+                                </span> -->
+                            </p>
+                        </div>
+                </div>
+                <mfl-pagination></mfl-pagination>
+            </div>
+
+         </div>
     </div>
 </div>
