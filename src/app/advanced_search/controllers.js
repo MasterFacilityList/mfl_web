@@ -231,7 +231,7 @@
                     $scope.filter_data[key] = data.results;
                     $scope.disabled[key] = false;
                     //to hide error message
-                    $scope.no_err = false;
+                    //$scope.no_err = false;
                 }).error(function(err){
                     $scope.alert =err.error;
                     $scope.filter_data[key] = [];
@@ -351,6 +351,16 @@
         $scope.excelExport = function () {
             $scope.filter.format = "excel";
             $scope.filterFacility($scope.filter);
+        };
+        //declaring offcanvas
+        $scope.activate_offcanvas = false;
+        $scope.offCanvas = function () {
+            if(!$scope.activate_offcanvas) {
+                $scope.activate_offcanvas = !$scope.activate_offcanvas;
+            }
+            else {
+                $scope.activate_offcanvas = !$scope.activate_offcanvas;
+            }
         };
     }]);
 })(angular, _);
