@@ -6,5 +6,6 @@ angular.module("mfl.common", [
     "mfl.common.directives",
     "mfl.gis.wrapper",
     "mfl.adminunits.wrapper",
-    "mfl.auth"
+    "mfl.auth",
+    "mfl.gis.interceptor"
 ]);
