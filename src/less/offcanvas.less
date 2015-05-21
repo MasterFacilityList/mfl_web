@@ -1,87 +1,26 @@
-/*==================The width and right attrs need to be same*/
-.menu {
-    top: 10px;
-    margin-left: 10px;
-    bottom: 0;
-    width: 13.755em;
-    left: 13.755em;
-    min-height: 60%;
-    -webkit-transform: translate(0px, 0px);
-    -moz-transform: translate(0px, 0px);
-    -o-transform: translate(0px, 0px);
-    -ms-transform: translate(0px, 0px);
-    transform: translate(0px, 0px);
-    -webkit-transition: 0.15s ease;
-    -moz-transition: 0.15s ease;
-    -o-transition: 0.15s ease;
-    transition: 0.15s ease;
-}
-/*===Class moves navigation pane in from the left*/
-.menu-active {
-    -webkit-transform: translate(13.755em, 0px);
-    -moz-transform: translate(13.755em, 0px);
-    -o-transform: translate(13.755em, 0px);
-    -ms-transform: translate(13.755em, 0px);
-    transform: translate(13.755em, 0px);
-}
-.displaced {
-    -webkit-transform: translate(0px, 0px);
-    -moz-transform: translate(0px, 0px);
-    -o-transform: translate(0px, 0px);
-    -ms-transform: translate(0px, 0px);
-    transform: translate(0px, 0px);
-    -webkit-transition: 0.15s ease;
-    -moz-transition: 0.15s ease;
-    -o-transition: 0.15s ease;
-    transition: 0.15s ease;
-}
-
-.displaced-active {
-    -webkit-transform: translate(13.725em, 0px);
-    -moz-transform: translate(13.725em, 0px);
-    -o-transform: translate(13.725em, 0px);
-    -ms-transform: translate(13.725em, 0px);
-    transform: translate(13.725em, 0px);
-   }
-
-/* move the toggle button to the left and give it
-   some breathing room */
-/*.navbar-toggle {
-  float: left;
-  margin-left: 10px;
-}
-*/
-@media screen and (max-width: 767px) {
-
-   /* outer div */
+/*  * Off Canvas  * --------------------------------------------------
+          */
+ @media screen and (max-width: 768px) {
+    /* outer div */
   .row-offcanvas {
-    position: relative;
-    left: 0;
-    -webkit-transition: left .3s ease-in;
-    -most-transition: left .3s ease-in;
-    transition: left .3s ease-in;
-  }
-
-  /* sidebar */
+      position: relative;
+      left: 0;
+      -webkit-transition: left .3s ease-in;
+      -most-transition: left .3s ease-in;
+      transition: left .3s ease-in;
+   }
+    /* sidebar */
   .sidebar-offcanvas {
-    left: -80%;
-    width: 80%;
-    position: absolute;
-    top: 0;
-    height: 100%;
-    background-color: #F7F7F7;
-    padding: 0px;
+      left: -80%;
+      width: 80%;
+      position: absolute;
+      top: 0;
+      height: 100%;
+      /*background-color: #F7F7F7;
+      padding: 0px;*/
   }
-
   /* content */
   .row-offcanvas.active {
-    left: 80%;
+      left: 80%;
   }
-
-  /* Make the menu headers the same size as the
-     bootstrap navbar */
-  [data-role='panelbar'] .k-header {
-    min-height: 50px;
-  }
-
-}
+ }
