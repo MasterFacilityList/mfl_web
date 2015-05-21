@@ -10,6 +10,7 @@
         "mfl.rating.controllers",
         "mfl.rating.routes",
         "mfl.common.controllers",
+        "mfl.rating.services",
         "mfl.facilities.wrapper",
         "mfl.rating.directives"
     ]);

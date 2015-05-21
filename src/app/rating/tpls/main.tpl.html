@@ -46,7 +46,8 @@
                 </span>
             </h4>
             <br>
-            <h4 class="fs-16">
+            <br>
+            <h4 class="fs-16 margin-t-5">
                 <span class="pull-left">
                     <label>Beds: </label>
                     {{oneFacility.number_of_beds}}
@@ -68,7 +69,7 @@
                     {{oneFacility.number_of_cots}}
                 </span>
                 <span class="pull-right">
-                    <label>Facilities' rating: </label>
+                    <label>Facility's rating: </label>
                     <span class="fw-600" style="color: #DAA520">
                         {{oneFacility.average_rating | number : 2}}
                     </span>
@@ -113,7 +114,7 @@
                     <br>
                     <h4>
                          <span class="pull-left fs-13 margin-t-5 class-rate">
-                            <label>Rate facilities' service</label>
+                            <label>Rate facility's service</label>
                             <span>
                                 <!-- Testing rating directive -->
                                 <span class="fs-10" ng-repeat="rating in service.ratings">
@@ -122,6 +123,7 @@
                                 </span>
                         <!-- End of rating directive -->
                             </span>
+                            <span ng-bind-html="alert"></span>
                         </span>
                     </h4>
                 </div>
