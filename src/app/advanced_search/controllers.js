@@ -317,8 +317,8 @@
         $scope.filterFacility = function(filters){
             var changes= constructParams(filters);
             delete filters.page;
+            resolves.startSpinner();
             if(!_.isEmpty(changes)){
-                resolves.startSpinner();
                 if(_.has(changes, "ward")){
                     delete changes.county;
                     delete changes.constituency;
