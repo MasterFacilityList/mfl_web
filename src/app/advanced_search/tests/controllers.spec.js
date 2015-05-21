@@ -508,7 +508,7 @@
             expect(scope.query_results).toEqual(["testing"]);
         });
 
-        it("should handle `esp key` press event", function(){
+        it("should handle `escape key` press event", function(){
             var scope = rootScope.$new();
             createController(scope, {});
             httpBackend.expectGET(
@@ -524,7 +524,7 @@
             expect(scope.query_results).toEqual(["testing"]);
             expect(scope.filter.search).toBeFalsy();
         });
-        it("should handle `esp key` press event", function(){
+        it("should assign show-nav class to advanced search ", function(){
             var scope = rootScope.$new();
             createController(scope, {});
             scope.activate_offcanvas = false;

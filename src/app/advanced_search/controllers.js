@@ -230,8 +230,6 @@
                     $scope.filter_data[key] = [];
                     $scope.filter_data[key] = data.results;
                     $scope.disabled[key] = false;
-                    //to hide error message
-                    //$scope.no_err = false;
                 }).error(function(err){
                     $scope.alert =err.error;
                     $scope.filter_data[key] = [];
