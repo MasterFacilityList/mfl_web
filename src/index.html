@@ -1,18 +1,54 @@
 <!DOCTYPE html>
-<html ng-app="mflwebApp" >
+<!--[if lt IE 7]>
+    <html lang="en" ng-app="mflwebApp" class="no-js lt-ie9 lt-ie8 lt-ie7">
+        <div style="padding:100px 50px 50px 50px">
+            <h1><strong>MFLv2 Public Website:</strong></h1>
+            <h1>Your browser is not supported. Please update your browser.</h1>
+               <h2>You may also install any of the following supported browsers:</h2>
+                <ul><a target="blank" href="http://google.com/chrome">Google Chrome</a></ul>
+                <ul><a target="blank" href="http://getfirefox.com">Firefox</a></ul>
+        </div>
+  <![endif]-->
+<!--[if IE 7]>
+    <html lang="en" ng-app="mflwebApp" class="no-js lt-ie9 lt-ie8">
+        <div style="padding:100px 50px 100px 50px">
+            <h1><strong>MFLv2 Public Website:</strong></h1>
+            <h1>Your browser is not supported. Please update your browser.</h1>
+               <h2>You may also install any of the following supported browsers:</h2>
+                <ul><a target="blank" href="http://google.com/chrome">Google Chrome</a></ul>
+                <ul><a target="blank" href="http://getfirefox.com">Firefox</a></ul>
+        </div>
+<![endif]-->
+<!--[if IE 8]>
+    <html lang="en" ng-app="mflwebApp" class="no-js lt-ie9">
+        <div style="padding:100px 50px 100px 50px">
+            <h1><strong>MFLv2 Public Website:</strong></h1>
+            <h1>Your browser is not supported. Please update your browser.</h1>
+               <h2>You may also install any of the following supported browsers:</h2>
+                <ul><a target="blank" href="http://google.com/chrome">Google Chrome</a></ul>
+                <ul><a target="blank" href="http://getfirefox.com">Firefox</a></ul>
+        </div>
+<![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en" ng-app="mflwebApp" ><!--<![endif]-->
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
      <title ng-bind="$state.current.data.pageTitle"></title>
-
     <!-- compiled CSS --><% styles.forEach( function ( file ) { %>
     <link rel="icon"  href="assets/img/kenya-coat-of-arms.png" />
     <link rel="stylesheet" type="text/css" href="<%= file %>" /><% }); %>
   </head>
   <body>
       <div ui-view="header"></div>
-        <!--End of header-->
-        <div ui-view="main" class="content margin-t--27"></div>
+        <div ui-view="main" class="content margin-t--27">
+            <noscript>
+               <div style="padding:100px 50px 0 50px">
+                   <h1><strong>MFLv2 Public Website:</strong></h1>
+                <h1>Your browser has JavaScript disabled or is not supported. Please enable Javascript or update your browser.</h1>
+               </div>
+            </noscript>
+        </div>
         <footer class="footer">
             <div class="container-fluid">
               <div class="row">
