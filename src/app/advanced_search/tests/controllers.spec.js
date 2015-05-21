@@ -167,6 +167,15 @@
             expect(filterApi.facilities.filter).not.toHaveBeenCalled();
         });
 
+        it("should clear filters", function(){
+            var scope = rootScope.$new();
+            spyOn(filterApi.facilities, "filter");
+            createController(scope, {});
+            scope.filter.search = "hapa";
+            scope.clearFilters();
+            expect(scope.filter.search).toBeFalsy();
+        });
+
         it("should filter facility: param with no id set", function(){
             var scope = rootScope.$new();
             createController(scope, {});
