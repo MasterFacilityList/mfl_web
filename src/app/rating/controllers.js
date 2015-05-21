@@ -4,8 +4,8 @@
     angular.module("mfl.rating.controllers", [])
 
     .controller("mfl.rating.controllers.rating", ["$scope", "$stateParams",
-        "facilitiesApi", "$window",
-        function ($scope, $stateParams,facilitiesApi, $window) {
+        "facilitiesApi", "$window", "mfl.rating.services.rating",
+        function ($scope, $stateParams,facilitiesApi, $window, ratingService) {
             $scope.test = "Rating";
             $scope.tooltip = {
                 "title": "",
@@ -23,12 +23,24 @@
                     $scope.oneFacility = data;
                     _.each($scope.oneFacility.facility_services,
                         function (service) {
-                            service.ratings = [
-                                {
-                                    current : 0,
-                                    max: 5
-                                }
-                            ];
+                            var current_rate = "";
+                            current_rate = ratingService.getRating(service.id);
+                            if(!_.isUndefined(current_rate) || !_.isEmpty(current_rate)) {
+                                service.ratings = [
+                                    {
+                                        current : current_rate,
+                                        max: 5
+                                    }
+                                ];
+                            }
+                            else {
+                                service.ratings = [
+                                    {
+                                        current : 0,
+                                        max: 5
+                                    }
+                                ];
+                            }
                         }
                     );
                 })
@@ -37,14 +49,15 @@
                 });
 
             $scope.getSelectedRating = function (rating, id) {
-                console.log(rating, id);
                 $scope.fac_rating = {
                     facility_service : id,
                     rating : rating
                 };
                 facilitiesApi.ratings.create($scope.fac_rating)
                     .success(function (data) {
-                        console.log(data);
+                        //save rating in localStorage
+                        ratingService.storeRating(
+                            data.facility_service, data.rating);
                     })
                     .error(function (e) {
                         $scope.alert = e.error;
