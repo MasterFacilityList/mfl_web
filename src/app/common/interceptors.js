@@ -9,10 +9,9 @@
         var request_fxn = function(config) {
             var headers = cache_headers[config.url];
             if (_.isUndefined(headers)) {
-                console.log("cache miss : ", config.url);
                 return config;
             }
-            console.log("cache hit : ", config.url);
+
             if (headers.etag_header) {
                 config.headers["If-None-Match"] = headers.etag_header;
             }
