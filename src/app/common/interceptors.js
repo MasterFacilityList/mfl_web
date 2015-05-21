@@ -4,33 +4,42 @@
     angular.module("mfl.gis.interceptor", [])
 
     .factory("mfl.gis.interceptor.headers", [function () {
-        var etag_header = null;
-        var last_modified_header = null;
+        var cache_headers = {};
+
+        var request_fxn = function(config) {
+            var headers = cache_headers[config.url];
+            if (_.isUndefined(headers)) {
+                console.log("cache miss : ", config.url);
+                return config;
+            }
+            console.log("cache hit : ", config.url);
+            if (headers.etag_header) {
+                config.headers.ETag = headers.etag_header;
+                config.headers["If-None-Match"] = headers.etag_header;
+            }
+            if (headers.last_modified_header) {
+                config.headers["If-Modified-Since"] = headers.last_modified_header;
+            }
+            return config;
+        };
+
+        var response_fxn = function(response) {
+            var etag = response.headers("ETag");
+            var last_modified = response.headers("Last-Modified");
+            var headers = {};
+            if (etag) {
+                headers.etag_header = etag;
+            }
+            if (last_modified) {
+                headers.last_modified_header = last_modified;
+            }
+            cache_headers[response.config.url] = headers;
+            return response;
+        };
 
         return {
-            "request" : function(config) {
-
-                if (etag_header) {
-                    config.headers.ETag = etag_header;
-                    config.headers["If-None-Match"] = etag_header;
-                }
-                if (last_modified_header) {
-                    config.headers["If-Modified-Since"] = last_modified_header;
-                }
-                return config;
-            },
-
-            "response": function(response) {
-                var etag = response.headers("ETag");
-                var last_modified = response.headers("Last-Modified");
-                if (etag) {
-                    etag_header = etag;
-                }
-                if (last_modified) {
-                    last_modified_header = last_modified;
-                }
-                return response;
-            }
+            "request" : request_fxn,
+            "response": response_fxn
         };
     }]);
 
