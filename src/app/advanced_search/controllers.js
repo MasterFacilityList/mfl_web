@@ -16,20 +16,20 @@
         $scope.no_err = false;
         $scope.query_results = [];
         var initFilterModel = function(){
-            $scope.filter = $stateParams;
+            $scope.filter = {
+                search: "",
+                county: [],
+                constituency: [],
+                ward: [],
+                operation_status: [],
+                service_category: [],
+                facility_type: [],
+                number_of_beds: [],
+                number_of_cots: []
+            };
         };
         initFilterModel();
-        $scope.filter = {
-            search: "",
-            county: [],
-            constituency: [],
-            ward: [],
-            operation_status: [],
-            service_category: [],
-            facility_type: [],
-            number_of_beds: [],
-            number_of_cots: []
-        };
+
         $scope.disabled = {
             ward: true,
             consts: true
@@ -310,7 +310,10 @@
             }
         };
         setFilters();
-
+        $scope.clearFilters = function(){
+            initFilterModel();
+            $scope.filterFacility($scope.filter);
+        };
         $scope.filterFacility = function(filters){
             var changes= constructParams(filters);
             delete filters.page;
@@ -326,6 +329,9 @@
                 }
                 changes = removeEmptyFilters(changes);
                 filterApi.facilities.filter(changes)
+                    .success(resolves.success).error(resolves.error);
+            }else{
+                filterApi.facilities.list()
                     .success(resolves.success).error(resolves.error);
             }
         };
