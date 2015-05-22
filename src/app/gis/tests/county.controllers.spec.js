@@ -143,7 +143,7 @@ describe("Tests for mfl.gis_county.controllers.gis (County Level):", function ()
             .respond(500, data);
         $httpBackend.flush();
     }]));
-    it("should expect broadcast of leafletDirectiveMap.geojsonMouseover(County Level)",
+    it("should expect broadcast of leafletDirectiveGeoJson.mouseover(County Level)",
         inject(["$rootScope","leafletData","gisCountiesApi","gisConstsApi","$state",
                 function ($rootScope, leafletData,gisCountiesApi,gisConstsApi,$state) {
         $state.go("gis_county", {"county_id": "34"});
@@ -168,22 +168,24 @@ describe("Tests for mfl.gis_county.controllers.gis (County Level):", function ()
             "gisCountiesApi": gisCountiesApi
         });
         var constituency = {
-            type : "",
-            id: "",
-            geometry : {},
-            properties : {}
+            model:{
+                type : "",
+                id: "",
+                geometry : {},
+                properties : {}
+            }
         };
-        $rootScope.$broadcast("leafletDirectiveMap.geojsonMouseover");
+        $rootScope.$broadcast("leafletDirectiveGeoJson.mouseover",constituency);
         scope.hoveredConst = {
             type : "",
             id: "",
             geometry : {},
             properties : {}
         };
-        expect(scope.hoveredConst).toEqual(constituency);
+        expect(scope.hoveredConst).toEqual(constituency.model);
     }]));
     
-    it("should expect broadcast of leafletDirectiveMap.geojsonClick(County Level)",
+    it("should expect broadcast of leafletDirectiveGeoJson.click(County Level)",
        inject(["$state","leafletData","gisCountiesApi","gisConstsApi",
                function ($state, leafletData,gisCountiesApi,gisConstsApi) {
         spyOn(scope, "$on").andCallThrough();
@@ -209,24 +211,26 @@ describe("Tests for mfl.gis_county.controllers.gis (County Level):", function ()
         });
 
         var constituency = {
-            type : "",
-            id: "",
-            geometry : {},
-            properties : {
-                ward_boundary_ids: [
-                    "a",
-                    "b"
-                ],
-                center:{
-                    coordinates : [
-                        "12",
-                        "13"
-                    ]
+            model:{
+                type : "",
+                id: "",
+                geometry : {},
+                properties : {
+                    ward_boundary_ids: [
+                        "a",
+                        "b"
+                    ],
+                    center:{
+                        coordinates : [
+                            "12",
+                            "13"
+                        ]
+                    }
                 }
             }
         };
         var second_call = scope.$on.calls[1];
-        expect(second_call.args[0]).toEqual("leafletDirectiveMap.geojsonClick");
+        expect(second_call.args[0]).toEqual("leafletDirectiveGeoJson.click");
         expect(angular.isFunction(second_call.args[1])).toBe(true);
         var listener = second_call.args[1];
         listener(null, constituency);

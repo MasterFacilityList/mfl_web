@@ -70,10 +70,10 @@ describe("Tests for mfl.gis.controllers.gis (Country Level):", function () {
         SERVER_URL + "api/gis/country_borders/?code=KEN")
             .respond(200, data);
         $httpBackend.expectGET(
-        SERVER_URL + "api/gis/coordinates/")
+        SERVER_URL + "api/gis/county_boundaries/")
             .respond(200, data);
         $httpBackend.expectGET(
-        SERVER_URL + "api/gis/county_boundaries/")
+        SERVER_URL + "api/gis/coordinates/")
             .respond(200, data);
         controller("mfl.gis.controllers.gis", {
             "$scope": $rootScope.$new(),
@@ -123,15 +123,15 @@ describe("Tests for mfl.gis.controllers.gis (Country Level):", function () {
         SERVER_URL + "api/gis/country_borders/?code=KEN")
             .respond(500, data);
         $httpBackend.expectGET(
-        SERVER_URL + "api/gis/coordinates/")
+        SERVER_URL + "api/gis/county_boundaries/")
             .respond(500, data);
         $httpBackend.expectGET(
-        SERVER_URL + "api/gis/county_boundaries/")
+        SERVER_URL + "api/gis/coordinates/")
             .respond(500, data);
         $httpBackend.flush();
     }]));
     
-    it("should expect broadcast of leafletDirectiveMap.geojsonMouseover(Country)",
+    it("should expect broadcast of leafletDirectiveGeoJson.mouseover(Country)",
         inject(["$rootScope", "$state", function ($rootScope, $state) {
         var scope = $rootScope.$new();
         controller("mfl.gis.controllers.gis", {
@@ -144,16 +144,18 @@ describe("Tests for mfl.gis.controllers.gis (Country Level):", function () {
             "SERVER_URL": SERVER_URL
         });
         var county = {
-            type : "",
-            id: "",
-            geometry : {},
-            properties : {}
+            model:{
+                type : "",
+                id: "",
+                geometry : {},
+                properties : {}
+            }
         };
-        $rootScope.$broadcast("leafletDirectiveMap.geojsonMouseover", county);
-        expect(scope.hoveredCounty).toEqual(county);
+        $rootScope.$broadcast("leafletDirectiveGeoJson.mouseover", county);
+        expect(scope.hoveredCounty).toEqual(county.model);
     }]));
     
-    it("should expect broadcast of leafletDirectiveMap.geojsonClick(Country)",
+    it("should expect broadcast of leafletDirectiveGeoJson.click(Country)",
        inject(["$state", "$rootScope", function ($state, $rootScope) {
         var scope = $rootScope.$new();
         spyOn(scope, "$on").andCallThrough();
@@ -168,25 +170,27 @@ describe("Tests for mfl.gis.controllers.gis (Country Level):", function () {
             "SERVER_URL": SERVER_URL
         });
         var county = {
-            type : "",
-            id: "",
-            geometry : {},
-            properties : {
-                constituency_boundary_ids: [
-                    "a",
-                    "b"
-                ],
-                center:{
-                    coordinates : [
-                        "12",
-                        "13"
-                    ]
+            model: {
+                type : "",
+                id: "",
+                geometry : {},
+                properties : {
+                    constituency_boundary_ids: [
+                        "a",
+                        "b"
+                    ],
+                    center:{
+                        coordinates : [
+                            "12",
+                            "13"
+                        ]
+                    }
                 }
             }
         };
 
         var second_call = scope.$on.calls[1];
-        expect(second_call.args[0]).toEqual("leafletDirectiveMap.geojsonClick");
+        expect(second_call.args[0]).toEqual("leafletDirectiveGeoJson.click");
         expect(angular.isFunction(second_call.args[1])).toBe(true);
         var listener = second_call.args[1];
         listener(null, county);
@@ -256,10 +260,10 @@ describe("Tests for mfl.gis.controllers.gis (Country Level):", function () {
         SERVER_URL + "api/gis/country_borders/?code=KEN")
             .respond(200, data);
         $httpBackend.expectGET(
-        SERVER_URL + "api/gis/coordinates/")
+        SERVER_URL + "api/gis/county_boundaries/")
             .respond(200, data);
         $httpBackend.expectGET(
-        SERVER_URL + "api/gis/county_boundaries/")
+        SERVER_URL + "api/gis/coordinates/")
             .respond(200, data);
         $httpBackend.flush();
         expect(leafletData.getMap).toHaveBeenCalled();

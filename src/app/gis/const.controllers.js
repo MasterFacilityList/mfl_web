@@ -109,11 +109,12 @@
             /*TODO Error handling*/
             $scope.alert = e.error;
         });
-        $scope.$on("leafletDirectiveMap.geojsonMouseover", function(ev, ward) {
-            $scope.hoveredWard= ward;
+        $scope.$on("leafletDirectiveGeoJson.mouseover", function(ev, ward) {
+            var model = ward.model;
+            $scope.hoveredWard= model;
         });
-        $scope.$on("leafletDirectiveMap.geojsonClick", function(ev, ward) {
-            $state.go("gis_ward",{ward_id:ward.id});
+        $scope.$on("leafletDirectiveGeoJson.click", function(ev, ward) {
+            $state.go("gis_ward",{ward_id: ward.model.id});
         });
     }]);
 })(angular);

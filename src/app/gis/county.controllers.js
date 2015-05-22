@@ -132,13 +132,13 @@
             /*TODO Error handling*/
             $scope.alert = e.error;
         });
-        $scope.$on("leafletDirectiveMap.geojsonMouseover", function(ev, constituency) {
-            $scope.hoveredConst = constituency;
+        $scope.$on("leafletDirectiveGeoJson.mouseover", function(ev, constituency) {
+            $scope.hoveredConst = constituency.model;
         });
-        $scope.$on("leafletDirectiveMap.geojsonClick", function(ev, constituency) {
-            var boundary_ids = constituency.properties.ward_boundary_ids.join(",");
+        $scope.$on("leafletDirectiveGeoJson.click", function(ev, constituency) {
+            var boundary_ids = constituency.model.properties.ward_boundary_ids.join(",");
             $stateParams.ward_boundaries = boundary_ids;
-            $state.go("gis_const",{const_id:constituency.id,
+            $state.go("gis_const",{const_id:constituency.model.id,
                                     ward_boundaries : boundary_ids});
         });
     }]);
