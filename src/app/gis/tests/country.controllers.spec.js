@@ -70,10 +70,10 @@ describe("Tests for mfl.gis.controllers.gis (Country Level):", function () {
         SERVER_URL + "api/gis/country_borders/?code=KEN")
             .respond(200, data);
         $httpBackend.expectGET(
-        SERVER_URL + "api/gis/county_boundaries/")
+        SERVER_URL + "api/gis/coordinates/")
             .respond(200, data);
         $httpBackend.expectGET(
-        SERVER_URL + "api/gis/coordinates/")
+        SERVER_URL + "api/gis/county_boundaries/")
             .respond(200, data);
         controller("mfl.gis.controllers.gis", {
             "$scope": $rootScope.$new(),
@@ -123,10 +123,10 @@ describe("Tests for mfl.gis.controllers.gis (Country Level):", function () {
         SERVER_URL + "api/gis/country_borders/?code=KEN")
             .respond(500, data);
         $httpBackend.expectGET(
-        SERVER_URL + "api/gis/county_boundaries/")
+        SERVER_URL + "api/gis/coordinates/")
             .respond(500, data);
         $httpBackend.expectGET(
-        SERVER_URL + "api/gis/coordinates/")
+        SERVER_URL + "api/gis/county_boundaries/")
             .respond(500, data);
         $httpBackend.flush();
     }]));
@@ -256,10 +256,10 @@ describe("Tests for mfl.gis.controllers.gis (Country Level):", function () {
         SERVER_URL + "api/gis/country_borders/?code=KEN")
             .respond(200, data);
         $httpBackend.expectGET(
-        SERVER_URL + "api/gis/county_boundaries/")
+        SERVER_URL + "api/gis/coordinates/")
             .respond(200, data);
         $httpBackend.expectGET(
-        SERVER_URL + "api/gis/coordinates/")
+        SERVER_URL + "api/gis/county_boundaries/")
             .respond(200, data);
         $httpBackend.flush();
         expect(leafletData.getMap).toHaveBeenCalled();

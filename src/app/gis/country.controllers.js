@@ -127,7 +127,7 @@
                         heat: {
                             name: "Facilities",
                             type: "heat",
-                            data: $scope.heatpoints,
+                            data: angular.copy($scope.heatpoints),
                             layerOptions: {
                                 radius: 25,
                                 opacity:1,

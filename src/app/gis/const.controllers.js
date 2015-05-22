@@ -42,7 +42,7 @@
             },
             markers:{}
         });
-        leafletData.getMap()
+        leafletData.getMap("constmap")
             .then(function (map) {
                 var coords = gisConst.data.properties.bound.coordinates[0];
                 var bounds = _.map(coords, function(c) {
