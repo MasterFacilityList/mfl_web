@@ -60,35 +60,12 @@
             $scope.filters_ward = {
                 ward : gisWard.data.properties.ward_id
             };
-            gisFacilitiesApi.api
-            .filter($scope.filters_ward)
-            .success(function (data){
-                var marks = data.results.features;
-                $scope.facility_count = marks.length;
-                var markers = _.mapObject(marks, function(mark){
-                    return  {
-                            layer: "facilities",
-                            lat: mark.geometry.coordinates[1],
-                            lng: mark.geometry.coordinates[0],
-                            label: {
-                                message: "Facility",
-                                options: {
-                                    noHide: true
-                                }
-                            }
-                        };
-                });
-                $scope.markers = markers;
-            })
-            .error(function (e){
-                $scope.alert = e.error;
-            });
             $scope.ward = gisWard.data;
             angular.extend($scope, {
                     geojson: {
                         data: angular.copy($scope.ward),
                         style: {
-                            fillColor: "rgba(255, 24, 33, 0.59)",
+                            fillColor: "rgba(194, 255, 183, 0.42)",
                             weight: 2,
                             opacity: 1,
                             color: "white",
@@ -114,5 +91,28 @@
                     },
                     selectedWard: {}
                 });
+            gisFacilitiesApi.api
+            .filter($scope.filters_ward)
+            .success(function (data){
+                var marks = data.results.features;
+                $scope.facility_count = marks.length;
+                var markers = _.mapObject(marks, function(mark){
+                    return  {
+                            layer: "facilities",
+                            lat: mark.geometry.coordinates[1],
+                            lng: mark.geometry.coordinates[0],
+                            label: {
+                                message: "Facility",
+                                options: {
+                                    noHide: true
+                                }
+                            }
+                        };
+                });
+                $scope.markers = markers;
+            })
+            .error(function (e){
+                $scope.alert = e.error;
+            });
         }]);
 })(angular);

@@ -40,7 +40,8 @@
                 scrollWheelZoom: false,
                 tileLayer: ""
             },
-            markers:{}
+            markers:{},
+            layers:{}
         });
         leafletData.getMap("constmap")
             .then(function (map) {
@@ -63,6 +64,25 @@
         .success(function (data){
             var marks = data.results.features;
             $scope.facility_count = marks.length;
+            var heatpoints = _.map(marks, function(heat){
+                return [
+                        heat.geometry.coordinates[1],
+                        heat.geometry.coordinates[0]
+                    ];
+            });
+            $scope.heatpoints = heatpoints;
+            $scope.layers.overlays.heat = {
+                name: "Facilities",
+                type: "heat",
+                data: angular.copy($scope.heatpoints),
+                layerOptions: {
+                    radius: 25,
+                    opacity:1,
+                    blur: 1,
+                    gradient: {0.05: "lime", 0.1: "orange",0.2: "red"}
+                },
+                visible: true
+            };
         })
         .error(function (e){
             $scope.alert = e.error;
@@ -78,6 +98,7 @@
             var marks = data.results.features;
             var markers = _.mapObject(marks, function(mark){
                 return  {
+                        layer:"wards",
                         lat: mark.properties.center.coordinates[1],
                         lng: mark.properties.center.coordinates[0],
                         label: {
@@ -94,12 +115,29 @@
                 geojson: {
                     data: data.results,
                     style: {
-                        fillColor: "rgba(24, 246, 255, 0.59)",
+                        fillColor: "rgba(255, 255, 255, 0.17)",
                         weight: 2,
                         opacity: 1,
                         color: "white",
                         dashArray: "3",
                         fillOpacity: 0.7
+                    }
+                },
+                layers:{
+                    baselayers:{
+                        country: {
+                            name: "Base",
+                            url: "/assets/img/transparent.png",
+                            type:"xyz",
+                            data:[]
+                        }
+                    },
+                    overlays:{
+                        wards:{
+                            name:"Wards",
+                            type:"markercluster",
+                            visible: true
+                        }
                     }
                 },
                 selectedWard: {}
