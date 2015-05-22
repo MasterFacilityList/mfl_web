@@ -68,34 +68,6 @@
         .error(function (e) {
             $scope.alert = e.error;
         });
-        /*Gets Facilities for heatmap*/
-        gisFacilitiesApi.api
-        .list()
-        .success(function (data){
-            var heats = data.results.features;
-            var heatpoints = _.map(heats, function(heat){
-                return [
-                        heat.geometry.coordinates[1],
-                        heat.geometry.coordinates[0]
-                    ];
-            });
-            $scope.heatpoints = heatpoints;
-            $scope.layers.overlays.heat = {
-                name: "Facilities",
-                type: "heat",
-                data: angular.copy($scope.heatpoints),
-                layerOptions: {
-                    radius: 25,
-                    opacity:1,
-                    blur: 1,
-                    gradient: {0.2: "lime", 0.3: "orange",0.4: "red"}
-                },
-                visible: true
-            };
-        })
-        .error(function(err){
-            $scope.alert = err.error;
-        });
         /*Gets counties for boundaries*/
         gisCountiesApi.api.list()
         .success(function (data){
@@ -148,14 +120,41 @@
         .error(function(err){
             $scope.alert = err.error;
         });
-        $scope.$on("leafletDirectiveMap.geojsonMouseover", function(ev, county) {
-            $scope.hoveredCounty = county;
-            console.log(county);
+        /*Gets Facilities for heatmap*/
+        gisFacilitiesApi.api
+        .list()
+        .success(function (data){
+            var heats = data.results.features;
+            var heatpoints = _.map(heats, function(heat){
+                return [
+                        heat.geometry.coordinates[1],
+                        heat.geometry.coordinates[0]
+                    ];
+            });
+            $scope.heatpoints = heatpoints;
+            $scope.layers.overlays.heat = {
+                name: "Facilities",
+                type: "heat",
+                data: angular.copy($scope.heatpoints),
+                layerOptions: {
+                    radius: 25,
+                    opacity:1,
+                    blur: 1,
+                    gradient: {0.2: "lime", 0.3: "orange",0.4: "red"}
+                },
+                visible: true
+            };
+        })
+        .error(function(err){
+            $scope.alert = err.error;
         });
-        $scope.$on("leafletDirectiveMap.geojsonClick", function(ev, county) {
-            var boundary_ids = county.properties.constituency_boundary_ids.join(",");
+        $scope.$on("leafletDirectiveGeoJson.mouseover", function(ev, county) {
+            $scope.hoveredCounty = county.model;
+        });
+        $scope.$on("leafletDirectiveGeoJson.click", function(ev, county) {
+            var boundary_ids = county.model.properties.constituency_boundary_ids.join(",");
             $stateParams.const_boundaries = boundary_ids;
-            $state.go("gis_county",{county_id: county.id,
+            $state.go("gis_county",{county_id: county.model.id,
                                     const_boundaries : boundary_ids});
         });
     }]);
