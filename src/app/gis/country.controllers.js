@@ -8,6 +8,11 @@
         "$timeout",
         function ($scope,leafletData,gisCountriesApi,$http, $stateParams,
                    $state,SERVER_URL, gisCountiesApi, gisFacilitiesApi,$timeout) {
+        /*Destroy map object*/
+        $scope.$on("$destroy", function () {
+            leafletData.unresolveMap(attrs.id);
+            map.remove();
+        });
         $scope.tooltip = {
             "title": "",
             "checked": false
@@ -91,16 +96,10 @@
             angular.extend($scope, {
                 layers:{
                     baselayers:{
-                        mapbox_light: {
-                            name: "Mapbox Light",
-                            url: "http://api.tiles.mapbox.com/"+
-                            "v4/{mapid}/{z}/{x}/{y}.png?access_token={apikey}",
-                            type: "xyz",
-                            layerOptions: {
-                                apikey: "pk.eyJ1IjoiYnVmYW"+
-                                "51dm9scyIsImEiOiJLSURpX0pnIn0.2_9NrLz1U9bpwMQBhVk97Q",
-                                mapid: "jasonwanjohi.m706od7c"
-                            }
+                        country: {
+                            name: "Country",
+                            url: "/assets/img/banner.png",
+                            visible:true
                         }
                     },
                     overlays:{
