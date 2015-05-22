@@ -96,6 +96,7 @@ describe("Tests for mfl.gis_county.controllers.gis (County Level):", function ()
                     }
                 }
             },
+
             "$http": {},
             "$state": {},
             "$stateParams": {},
@@ -103,6 +104,9 @@ describe("Tests for mfl.gis_county.controllers.gis (County Level):", function ()
             "gisConstsApi": gisConstsApi,
             "gisCountiesApi": gisCountiesApi
         });
+        scope.layers.overlays = {
+            heat : {}
+        };
         $httpBackend.flush();
     }]));
     

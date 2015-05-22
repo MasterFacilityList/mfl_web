@@ -66,6 +66,25 @@
         .success(function (data){
             var marks = data.results.features;
             $scope.facility_count = marks.length;
+            var heatpoints = _.map(marks, function(heat){
+                return [
+                        heat.geometry.coordinates[1],
+                        heat.geometry.coordinates[0]
+                    ];
+            });
+            $scope.heatpoints = heatpoints;
+            $scope.layers.overlays.heat = {
+                name: "Facilities",
+                type: "heat",
+                data: angular.copy($scope.heatpoints),
+                layerOptions: {
+                    radius: 25,
+                    opacity:1,
+                    blur: 1,
+                    gradient: {0.2: "lime", 0.3: "orange",0.4: "red"}
+                },
+                visible: true
+            };
         })
         .error(function (e){
             $scope.alert = e.error;
@@ -99,7 +118,7 @@
                 geojson: {
                     data: data.results,
                     style: {
-                        fillColor: "rgba(255, 165, 0, 0.79)",
+                        fillColor: "rgba(255, 255, 255, 0.27)",
                         weight: 2,
                         opacity: 1,
                         color: "rgba(0, 0, 0, 0.52)",
