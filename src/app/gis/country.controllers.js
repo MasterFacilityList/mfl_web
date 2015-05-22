@@ -80,6 +80,18 @@
                     ];
             });
             $scope.heatpoints = heatpoints;
+            $scope.layers.overlays.heat = {
+                name: "Facilities",
+                type: "heat",
+                data: angular.copy($scope.heatpoints),
+                layerOptions: {
+                    radius: 25,
+                    opacity:1,
+                    blur: 1,
+                    gradient: {0.2: "lime", 0.3: "orange",0.4: "red"}
+                },
+                visible: true
+            };
         })
         .error(function(err){
             $scope.alert = err.error;
@@ -102,9 +114,10 @@
                     };
             });
             $scope.markers = markers;
+            $scope.geodata = data.results;
             angular.extend($scope, {
                 geojson: {
-                    data: data.results,
+                    data: $scope.geodata,
                     style: {
                         fillColor: "rgba(255, 255, 255, 0.01)",
                         weight: 2,
@@ -119,23 +132,10 @@
                         country: {
                             name: "Country",
                             url: "/assets/img/transparent.png",
-                            type:"xyz",
-                            data:[]
+                            type:"xyz"
                         }
                     },
                     overlays:{
-                        heat: {
-                            name: "Facilities",
-                            type: "heat",
-                            data: angular.copy($scope.heatpoints),
-                            layerOptions: {
-                                radius: 25,
-                                opacity:1,
-                                blur: 1,
-                                gradient: {0.2: "lime", 0.3: "orange",0.4: "red"}
-                            },
-                            visible: true
-                        },
                         counties:{
                             name:"Counties",
                             type:"markercluster",
@@ -144,13 +144,13 @@
                     }
                 }
             });
-            
         })
         .error(function(err){
             $scope.alert = err.error;
         });
         $scope.$on("leafletDirectiveMap.geojsonMouseover", function(ev, county) {
             $scope.hoveredCounty = county;
+            console.log(county);
         });
         $scope.$on("leafletDirectiveMap.geojsonClick", function(ev, county) {
             var boundary_ids = county.properties.constituency_boundary_ids.join(",");
