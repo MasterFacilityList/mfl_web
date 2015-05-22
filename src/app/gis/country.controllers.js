@@ -27,6 +27,9 @@
                 icon: "fa-arrow-left"
             }
         ];
+        $scope.selectedConst = {};
+        $scope.markers = {};
+        $scope.layers = {};
         angular.extend($scope, {
             defaults: {
                 scrollWheelZoom: false,
@@ -41,15 +44,13 @@
                     enable: [],
                     logic: "emit"
                 }
-            },
-            markers:{},
-            layers:{}
+            }
         });
         $scope.filters_country = {
             code: "KEN"
         };
         $scope.country_success = function (data){
-            leafletData.getMap()
+            leafletData.getMap("countrymap")
                 .then(function (map) {
                     var coords = data.results.features[0].properties.bound.coordinates[0];
                     var bounds = _.map(coords, function(c) {
@@ -61,17 +62,30 @@
                     $timeout(function() {map.spin(false);}, 1000);
                 });
         };
-        gisCountriesApi.api
-        .filter($scope.filters_country)
+        /*Gets Bounds*/
+        gisCountriesApi.api.filter($scope.filters_country)
         .success($scope.country_success)
         .error(function (e) {
             $scope.alert = e.error;
         });
-        $scope.filters_counties = {
-            page_size: 47
-        };
-        gisCountiesApi.api
-        .filter($scope.filters_counties)
+        /*Gets Facilities for heatmap*/
+        gisFacilitiesApi.api
+        .list()
+        .success(function (data){
+            var heats = data.results.features;
+            var heatpoints = _.map(heats, function(heat){
+                return [
+                        heat.geometry.coordinates[1],
+                        heat.geometry.coordinates[0]
+                    ];
+            });
+            $scope.heatpoints = heatpoints;
+        })
+        .error(function(err){
+            $scope.alert = err.error;
+        });
+        /*Gets counties for boundaries*/
+        gisCountiesApi.api.list()
         .success(function (data){
             var marks = data.results.features;
             var markers = _.mapObject(marks, function(mark){
@@ -89,40 +103,6 @@
             });
             $scope.markers = markers;
             angular.extend($scope, {
-                layers:{
-                    baselayers:{
-                        mapbox_light: {
-                            name: "Mapbox Light",
-                            url: "http://api.tiles.mapbox.com/"+
-                            "v4/{mapid}/{z}/{x}/{y}.png?access_token={apikey}",
-                            type: "xyz",
-                            layerOptions: {
-                                apikey: "pk.eyJ1IjoiYnVmYW"+
-                                "51dm9scyIsImEiOiJLSURpX0pnIn0.2_9NrLz1U9bpwMQBhVk97Q",
-                                mapid: "jasonwanjohi.m706od7c"
-                            }
-                        }
-                    },
-                    overlays:{
-                        heat: {
-                            name: "Facilities",
-                            type: "heat",
-                            data: angular.copy($scope.heatpoints),
-                            layerOptions: {
-                                radius: 5,
-                                blur: 1
-                            },
-                            visible: true
-                        },
-                        counties:{
-                            name:"Counties",
-                            type:"markercluster",
-                            visible: true
-                        }
-                    }
-                }
-            });
-            angular.extend($scope,{
                 geojson: {
                     data: data.results,
                     style: {
@@ -134,41 +114,37 @@
                         fillOpacity: 0.7
                     }
                 },
-                selectedConst: {}
-            });
-        })
-        .error(function(err){
-            $scope.alert = err.error;
-        });
-
-        $scope.filters_fac = {
-            page_size:9000
-        };
-        gisFacilitiesApi.api
-        .filter($scope.filters_fac)
-        .success(function (data){
-            var heats = data.results.features;
-            var heatpoints = _.map(heats, function(heat){
-                return [
-                        heat.geometry.coordinates[1],
-                        heat.geometry.coordinates[0]
-                    ];
-            });
-            $scope.heatpoints = heatpoints;
-            $scope.layers.overlays = {
-                heat: {
-                    name: "Facilities",
-                    type: "heat",
-                    data: heatpoints,
-                    layerOptions: {
-                        radius: 25,
-                        opacity:1,
-                        blur: 1,
-                        gradient: {0.2: "lime", 0.3: "orange",0.4: "red"}
+                layers:{
+                    baselayers:{
+                        country: {
+                            name: "Country",
+                            url: "/assets/img/transparent.png",
+                            type:"xyz",
+                            data:[]
+                        }
                     },
-                    visible: true
+                    overlays:{
+                        heat: {
+                            name: "Facilities",
+                            type: "heat",
+                            data: angular.copy($scope.heatpoints),
+                            layerOptions: {
+                                radius: 25,
+                                opacity:1,
+                                blur: 1,
+                                gradient: {0.2: "lime", 0.3: "orange",0.4: "red"}
+                            },
+                            visible: true
+                        },
+                        counties:{
+                            name:"Counties",
+                            type:"markercluster",
+                            visible: true
+                        }
+                    }
                 }
-            };
+            });
+            
         })
         .error(function(err){
             $scope.alert = err.error;

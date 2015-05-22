@@ -40,10 +40,11 @@
                 scrollWheelZoom: false,
                 tileLayer: ""
             },
-            markers:{}
+            markers:{},
+            layers:{}
         });
 
-        leafletData.getMap()
+        leafletData.getMap("countymap")
             .then(function (map) {
                 var coords = gisCounty.data.properties.bound.coordinates[0];
                 var bounds = _.map(coords, function(c) {
@@ -82,6 +83,7 @@
             var marks = data.results.features;
             var markers = _.mapObject(marks, function(mark){
                 return {
+                        layer:"constituencies",
                         lat: mark.properties.center.coordinates[1],
                         lng: mark.properties.center.coordinates[0],
                         label: {
@@ -103,6 +105,23 @@
                         color: "rgba(0, 0, 0, 0.52)",
                         dashArray: "3",
                         fillOpacity: 0.7
+                    }
+                },
+                layers:{
+                    baselayers:{
+                        country: {
+                            name: "Country",
+                            url: "/assets/img/transparent.png",
+                            type:"xyz",
+                            data:[]
+                        }
+                    },
+                    overlays:{
+                        constituencies:{
+                            name:"Constituencies",
+                            type:"markercluster",
+                            visible: true
+                        }
                     }
                 },
                 markers: markers,

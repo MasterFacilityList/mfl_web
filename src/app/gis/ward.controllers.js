@@ -46,7 +46,7 @@
                 markers:{},
                 layers:{}
             });
-            leafletData.getMap()
+            leafletData.getMap("wardmap")
                 .then(function (map) {
                 var coords = gisWard.data.properties.bound.coordinates[0];
                 var bounds = _.map(coords, function(c) {
@@ -67,11 +67,11 @@
                 $scope.facility_count = marks.length;
                 var markers = _.mapObject(marks, function(mark){
                     return  {
-                            group: "facilities",
+                            layer: "facilities",
                             lat: mark.geometry.coordinates[1],
                             lng: mark.geometry.coordinates[0],
                             label: {
-                                message: ""+mark.properties.facility_name+"",
+                                message: "Facility",
                                 options: {
                                     noHide: true
                                 }
@@ -88,7 +88,7 @@
                     geojson: {
                         data: angular.copy($scope.ward),
                         style: {
-                            fillColor: "rgba(24, 246, 255, 0.59)",
+                            fillColor: "rgba(255, 24, 33, 0.59)",
                             weight: 2,
                             opacity: 1,
                             color: "white",
@@ -98,16 +98,10 @@
                     },
                     layers:{
                         baselayers:{
-                            mapbox_light: {
-                                name: "Mapbox Light",
-                                url: "http://api.tiles.mapbox.com/"+
-                                "v4/{mapid}/{z}/{x}/{y}.png?access_token={apikey}",
-                                type: "xyz",
-                                layerOptions: {
-                                    apikey: "pk.eyJ1IjoiYnVmYW"+
-                                    "51dm9scyIsImEiOiJLSURpX0pnIn0.2_9NrLz1U9bpwMQBhVk97Q",
-                                    mapid: "jasonwanjohi.m706od7c"
-                                }
+                            country: {
+                                name: "Country",
+                                url: "/assets/img/transparent.png",
+                                type:"xyz"
                             }
                         },
                         overlays:{
