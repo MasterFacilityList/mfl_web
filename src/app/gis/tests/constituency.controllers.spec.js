@@ -101,6 +101,9 @@ describe("Tests for mfl.gis.controllers.gis_const (Constituency Level):", functi
             "gisConstsApi": gisConstsApi,
             "gisWardsApi": gisWardsApi
         });
+        scope.layers.overlays = {
+            heat : {}
+        };
         $httpBackend.flush();
     }]));
     it("should fail to load data (Const Level)",
