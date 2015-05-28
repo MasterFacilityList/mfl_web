@@ -10,7 +10,8 @@
                 constituency: [],
                 operation_status: [],
                 facility_type: [],
-                service_category: []
+                git: [],
+                owner_type: []
             }
         };
         beforeEach(function(){
