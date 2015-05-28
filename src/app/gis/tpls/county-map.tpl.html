@@ -15,8 +15,13 @@
                 <h5 ng-show="hoveredConst">
                     <strong>Constituency Hovered: <span class="text-info">{{hoveredConst.properties.name}}</span></strong>
                 </h5>
-                <a ui-sref="filtering({county:county.properties.county_id})" class="login-btn login-btn-primary margin-t-20">Facilities in <span class="titlecase">{{county.properties.name}}</span></a>
            </div>
+            <div>
+                <a ui-sref="filtering({county:county.properties.county_id})" class="col-xs-12 login-btn login-btn-primary margin-t-20">
+                    <i class="fa fa-eye fa-3x"></i>
+                    <h3>VIEW THE {{facility_count}} FACILITIES</h3>
+                </a>
+            </div>
         </div>
         <div class="col-md-8">
             <leaflet id="countymap" markers="markers" width="100%" defaults="defaults" layers="layers"

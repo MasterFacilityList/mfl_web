@@ -65,7 +65,7 @@
                     geojson: {
                         data: angular.copy($scope.ward),
                         style: {
-                            fillColor: "rgba(194, 255, 183, 0.42)",
+                            fillColor: "rgba(236, 255, 183, 0.14)",
                             weight: 2,
                             opacity: 1,
                             color: "white",

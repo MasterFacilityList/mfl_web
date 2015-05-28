@@ -5,10 +5,10 @@
         "mfl.gis.wrapper"])
     .controller("mfl.gis.controllers.gis_county", ["$scope","leafletData",
         "gisCounty","$http","$state","$stateParams", "$timeout",
-        "SERVER_URL","gisConstsApi","gisFacilitiesApi",
+        "SERVER_URL","gisConstsApi","gisFacilitiesApi","$q",
         function ($scope, leafletData, gisCounty, $http, $state,
                    $stateParams, $timeout,
-                   SERVER_URL, gisConstsApi,gisFacilitiesApi) {
+                   SERVER_URL, gisConstsApi,gisFacilitiesApi,$q) {
         $scope.county = gisCounty.data;
         $scope.county_id = $stateParams.county_id;
         $scope.const_boundaries = $stateParams.const_boundaries;
@@ -55,14 +55,34 @@
                     {lines: 13, length: 20,corners:1,radius:30,width:10});
                 $timeout(function() {map.spin(false);}, 500);
             });
+
+
+
+        $scope.filters_county = {
+            county : gisCounty.data.properties.county_id
+        };
+        var facilitiesPromise = gisFacilitiesApi.api
+        .filter($scope.filters_county);
+
         $scope.filters = {
             id : $stateParams.const_boundaries
         };
-        gisConstsApi.api
-        .filter($scope.filters)
-        .success(function (data){
-            var marks = data.results.features;
-            var markers = _.mapObject(marks, function(mark){
+        var constBoundariesPromise = gisConstsApi.api
+        .filter($scope.filters);
+
+        $q.all([facilitiesPromise, constBoundariesPromise])
+        .then(function(payload){
+            var fac_marks = payload[0].data.results.features;
+            var county_marks = payload[1].data.results.features;
+            $scope.facility_count = fac_marks.length;
+            var heatpoints = _.map(fac_marks, function(heat){
+                return [
+                        heat.geometry.coordinates[1],
+                        heat.geometry.coordinates[0]
+                    ];
+            });
+            $scope.heatpoints = heatpoints;
+            var markers = _.mapObject(county_marks, function(mark){
                 return {
                         layer:"constituencies",
                         lat: mark.properties.center.coordinates[1],
@@ -78,7 +98,7 @@
             $scope.marks = markers;
             angular.extend($scope, {
                 geojson: {
-                    data: data.results,
+                    data: payload[1].data.results,
                     style: {
                         fillColor: "rgba(255, 255, 255, 0.27)",
                         weight: 2,
@@ -102,6 +122,18 @@
                             name:"Constituencies",
                             type:"markercluster",
                             visible: true
+                        },
+                        heat:{
+                            name: "Facilities",
+                            type: "heat",
+                            data: angular.copy($scope.heatpoints),
+                            layerOptions: {
+                                radius: 25,
+                                opacity:1,
+                                blur: 1,
+                                gradient: {0.2: "lime", 0.3: "orange",0.4: "red"}
+                            },
+                            visible: true
                         }
                     }
                 },
@@ -109,41 +141,6 @@
                 selectedConst: {}
             });
             
-            $scope.filters_county = {
-                county : gisCounty.data.properties.county_id
-            };
-            gisFacilitiesApi.api
-            .filter($scope.filters_county)
-            .success(function (data){
-                var marks = data.results.features;
-                $scope.facility_count = marks.length;
-                var heatpoints = _.map(marks, function(heat){
-                    return [
-                            heat.geometry.coordinates[1],
-                            heat.geometry.coordinates[0]
-                        ];
-                });
-                $scope.heatpoints = heatpoints;
-                $scope.layers.overlays.heat = {
-                    name: "Facilities",
-                    type: "heat",
-                    data: angular.copy($scope.heatpoints),
-                    layerOptions: {
-                        radius: 25,
-                        opacity:1,
-                        blur: 1,
-                        gradient: {0.2: "lime", 0.3: "orange",0.4: "red"}
-                    },
-                    visible: true
-                };
-            })
-            .error(function (e){
-                $scope.alert = e.error;
-            });
-        })
-        .error(function(e){
-            /*TODO Error handling*/
-            $scope.alert = e.error;
         });
         $scope.$on("leafletDirectiveGeoJson.mouseover", function(ev, constituency) {
             $scope.hoveredConst = constituency.model;
