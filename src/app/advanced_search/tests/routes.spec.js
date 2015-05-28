@@ -22,15 +22,7 @@
 
         it("should go to filtering page", function(){
 
-            httpBackend.expectGET(serverUrl+"api/common/counties/?page_size=200")
-                .respond(200, {});
-            httpBackend.expectGET(serverUrl+"api/common/constituencies/?page_size=200")
-                .respond(200, {});
-            httpBackend.expectGET(serverUrl+"api/facilities/facility_types/?page_size=200")
-                .respond(200, {});
-            httpBackend.expectGET(serverUrl+"api/facilities/facility_status/?page_size=200")
-                .respond(200, {});
-            httpBackend.expectGET(serverUrl+"api/facilities/service_categories/?page_size=200")
+            httpBackend.expectGET(serverUrl+"api/common/filtering_summaries/")
                 .respond(200, {});
             $state.go("filtering");
             expect($state.href("filtering")).toEqual("#/filtering");

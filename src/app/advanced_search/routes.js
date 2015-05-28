@@ -21,9 +21,9 @@
                         controller: "mfl.filtering.controller",
                         templateUrl: "advanced_search/tpls/advanced_search.tpl.html",
                         resolve: {
-                            filteringData: ["mfl.filtering.data.controller",
-                                function(filteringDataController){
-                                    return filteringDataController();
+                            filteringData: ["filteringApi",
+                                function(filterApi){
+                                    return filterApi.filters.list();
                                 }]
                         }
                     }

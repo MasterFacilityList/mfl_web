@@ -29,11 +29,6 @@
             };
         };
         initFilterModel();
-
-        $scope.disabled = {
-            ward: true,
-            consts: true
-        };
         $scope.selectTitles = {
             county:{
                 buttonDefaultText: "Select County"
@@ -97,7 +92,6 @@
                     $scope.events.utils.addSelected(
                         "constituency", item.id, "ward", "constituency",
                         filterApi.wards);
-                    $scope.disabled.ward = false;
                 },
                 onItemDeselect: function(item){
                     $scope.events.utils.removeSelected(
@@ -192,11 +186,10 @@
             }
         };
         resolves.startSpinner();
-        _.each(["county", "operation_status", "constituency", "facility_type", "service_category"],
+        _.each(["county", "operation_status", "constituency", "facility_type",
+         "service_category", "ward"],
         function(key){
-            $scope.filter_data[key] = filteringData[key].data.results;
-            $scope.filter_data.ward = [];
-            $rootScope.mfl_filter_data = $scope.filter_data;
+            $scope.filter_data[key] = filteringData.data[key];
         });
         var removeEmptyFilters = function(filters){
             _.each(_.keys(filters), function(key){
@@ -223,11 +216,9 @@
                 .success(function(data){
                     $scope.filter_data[key] = [];
                     $scope.filter_data[key] = data.results;
-                    $scope.disabled[key] = false;
                 }).error(function(err){
                     $scope.alert =err.error;
                     $scope.filter_data[key] = [];
-                    $scope.disabled[key] = true;
                 });
         };
         var constructParams = function(items){
