@@ -25,7 +25,8 @@
                 service_category: [],
                 facility_type: [],
                 number_of_beds: [],
-                number_of_cots: []
+                number_of_cots: [],
+                owner_type: []
             };
         };
         initFilterModel();
@@ -47,6 +48,9 @@
             },
             service_category: {
                 buttonDefaultText: "Select Service Category"
+            },
+            owner_type: {
+                buttonDefaultText: "Select Owner Type"
             }
         };
         $scope.selected = {
@@ -187,7 +191,7 @@
         };
         resolves.startSpinner();
         _.each(["county", "operation_status", "constituency", "facility_type",
-         "service_category", "ward"],
+         "service_category", "ward", "owner_type"],
         function(key){
             $scope.filter_data[key] = filteringData.data[key];
         });
