@@ -1,0 +1,21 @@
+<div class="content-card">
+   <h3>MFL <span class="fs-16">GEOLOCATION:</span></h3>
+   <hr>
+   <strong class="margin-10">LEGEND</strong>
+   <br>
+   Concentration of Facilities: <br>
+   <label class="label map-high-conc" >&#9679;</label> High <br>
+   <label class="label map-moderate-conc">&#9679;</label> Moderate<br>
+   <label class="label map-low-conc" >&#9679;</label> Low<br>
+   <hr>
+   <h5 ng-show="hoveredCounty">
+        <strong>County Hovered:
+            <span class="text-info">{{hoveredCounty.properties.name}}</span>
+        </strong>
+   </h5>
+</div>
+<div>
+    <a ui-sref="filtering" class="col-xs-12 login-btn login-btn-primary margin-t-20">
+        <h4><i class="fa fa-eye"></i> VIEW THE ALL FACILITIES</h4>
+    </a>
+</div>

@@ -1,0 +1,9 @@
+<div ui-view="area"></div>
+<div class="col-xs-12 content-card margin-t-20">
+    <h4>NAVIGATION</h4>
+    <hr>
+    <a ui-sref="gis">COUNTRY MAP</a><br>
+    <a ui-sref="gis.gis_county({county_id:county_id,const_boundaries:const_boundaries})"> {{county.properties.name}} MAP</a>
+    <div ui-view="const-link"></div>
+    <div ui-view="ward-link"></div>
+</div>

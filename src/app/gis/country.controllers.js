@@ -5,9 +5,9 @@
         "mfl.gis.wrapper"])
     .controller("mfl.gis.controllers.gis", ["$scope","leafletData","gisCountriesApi",
         "$http","$stateParams","$state","SERVER_URL","gisCountiesApi","gisFacilitiesApi",
-        "$timeout",
+        "$timeout","$q",
         function ($scope,leafletData,gisCountriesApi,$http, $stateParams,
-                   $state,SERVER_URL, gisCountiesApi, gisFacilitiesApi,$timeout) {
+                   $state,SERVER_URL, gisCountiesApi, gisFacilitiesApi,$timeout,$q) {
         $scope.tooltip = {
             "title": "",
             "checked": false
@@ -49,25 +49,9 @@
         $scope.filters_country = {
             code: "KEN"
         };
-        $scope.country_success = function (data){
-            leafletData.getMap("countrymap")
-                .then(function (map) {
-                    var coords = data.results.features[0].properties.bound.coordinates[0];
-                    var bounds = _.map(coords, function(c) {
-                        return [c[1], c[0]];
-                    });
-                    map.fitBounds(bounds);
-                    map.spin(true,
-                             {lines: 13, length: 20,corners:1,radius:30,width:10});
-                    $timeout(function() {map.spin(false);}, 1000);
-                });
-        };
         /*Gets Bounds*/
-        gisCountriesApi.api.filter($scope.filters_country)
-        .success($scope.country_success)
-        .error(function (e) {
-            $scope.alert = e.error;
-        });
+        var boundPromise = gisCountriesApi.api.filter($scope.filters_country);
+            
         /*Gets counties for boundaries*/
         gisCountiesApi.api.list()
         .success(function (data){
@@ -120,6 +104,21 @@
         .error(function(err){
             $scope.alert = err.error;
         });
+        $q.all([boundPromise])
+            .then(function(payload){
+                leafletData.getMap("countrymap")
+                    .then(function (map) {
+                        var coords = payload[0].data.results.features[0]
+                         .properties.bound.coordinates[0];
+                        var bounds = _.map(coords, function(c) {
+                            return [c[1], c[0]];
+                        });
+                        map.fitBounds(bounds);
+                        map.spin(true,
+                                 {lines: 13, length: 20,corners:1,radius:30,width:10});
+                        $timeout(function() {map.spin(false);}, 1000);
+                    });
+            });
         /*Gets Facilities for heatmap*/
         gisFacilitiesApi.api
         .list()
@@ -154,7 +153,7 @@
         $scope.$on("leafletDirectiveGeoJson.click", function(ev, county) {
             var boundary_ids = county.model.properties.constituency_boundary_ids.join(",");
             $stateParams.const_boundaries = boundary_ids;
-            $state.go("gis_county",{county_id: county.model.id,
+            $state.go("gis.gis_county",{county_id: county.model.id,
                                     const_boundaries : boundary_ids});
         });
     }]);

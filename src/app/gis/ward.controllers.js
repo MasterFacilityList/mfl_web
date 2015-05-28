@@ -8,6 +8,11 @@
             "gisWard","$timeout","gisFacilitiesApi",
             function ($scope, leafletData,$http, $state, $stateParams,
                        SERVER_URL, gisWardsApi, gisWard,$timeout,gisFacilitiesApi) {
+            $scope.county_id = $stateParams.county_id;
+            $scope.const_boundaries = $stateParams.const_boundaries;
+            $scope.const_id = $stateParams.const_id;
+            $scope.ward_boundaries = $stateParams.ward_boundaries;
+            $scope.ward_id = $stateParams.ward_id;
             $scope.tooltip = {
                 "title": "",
                 "checked": false

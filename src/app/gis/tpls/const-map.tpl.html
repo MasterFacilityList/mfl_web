@@ -19,15 +19,12 @@
             <div>
                 <a ui-sref="filtering({constituency:constituency.properties.constituency_id})" class="col-xs-12 login-btn login-btn-primary margin-t-20">
                     <i class="fa fa-eye fa-3x"></i>
-                    <h3>VIEW THE {{facility_count}} FACILITIES</h3>
+                    <h4>VIEW THE {{facility_count}} FACILITIES</h4>
                 </a>
             </div>
             <br>
         </div>
         <div class="col-md-8 margin-b-10">
-            <leaflet id="constmap" markers="markers" width="100%" layers="layers"
-               defaults="defaults" geojson="geojson" events="events" height="80vh">
-            </leaflet>
         </div>
     </div>
 </div>

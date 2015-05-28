@@ -13,31 +13,37 @@
                     },
                     "main": {
                         controller: "mfl.gis.controllers.gis",
-                        templateUrl: "gis/tpls/country-map.tpl.html"
+                        templateUrl: "gis/tpls/all-map.tpl.html"
                     },
                     "footer": {
                         controller: "mfl.common.controllers.time",
                         templateUrl: "common/tpls/time.tpl.html"
+                    },
+                    "info@gis":{
+                        templateUrl: "gis/tpls/country-info.tpl.html"
+                    },
+                    "map@gis":{
+                        templateUrl:"gis/tpls/country-leaflet.tpl.html"
                     }
                 },
                 data:{
                     pageTitle: "MFLv2 Facility Geolocation"
                 }
             })
-            .state("gis_county", {
-                url: "/county/:county_id/:const_boundaries",
+            .state("gis.gis_county", {
+                url: "/:county_id/:const_boundaries",
                 views: {
-                    "header" : {
-                        controller: "mfl.home.controllers.header",
-                        templateUrl : "home/tpls/header.tpl.html"
+                    "info@gis":{
+                        controller:"mfl.gis.controllers.gis_county",
+                        templateUrl: "gis/tpls/info.tpl.html"
                     },
-                    "main": {
-                        controller: "mfl.gis.controllers.gis_county",
-                        templateUrl: "gis/tpls/county-map.tpl.html"
+                    "map@gis":{
+                        controller:"mfl.gis.controllers.gis_county",
+                        templateUrl:"gis/tpls/county-leaflet.tpl.html"
                     },
-                    "footer": {
-                        controller: "mfl.common.controllers.time",
-                        templateUrl: "common/tpls/time.tpl.html"
+                    "area@gis.gis_county":{
+                        controller:"mfl.gis.controllers.gis_county",
+                        templateUrl:"gis/tpls/county-info.tpl.html"
                     }
                 },
                 resolve:{
@@ -50,20 +56,20 @@
                     pageTitle: "MFLv2 County View Geolocation"
                 }
             })
-            .state("gis_const", {
-                url: "/constituency/:const_id/:ward_boundaries",
+            .state("gis.gis_county.gis_const", {
+                url: "/:const_id/:ward_boundaries",
                 views: {
-                    "header" : {
-                        controller: "mfl.home.controllers.header",
-                        templateUrl : "home/tpls/header.tpl.html"
+                    "area@gis.gis_county":{
+                        controller:"mfl.gis.controllers.gis_const",
+                        templateUrl: "gis/tpls/const-info.tpl.html"
                     },
-                    "main": {
-                        controller: "mfl.gis.controllers.gis_const",
-                        templateUrl: "gis/tpls/const-map.tpl.html"
+                    "map@gis":{
+                        controller:"mfl.gis.controllers.gis_const",
+                        templateUrl:"gis/tpls/const-leaflet.tpl.html"
                     },
-                    "footer": {
-                        controller: "mfl.common.controllers.time",
-                        templateUrl: "common/tpls/time.tpl.html"
+                    "const-link@gis.gis_county":{
+                        controller:"mfl.gis.controllers.gis_const",
+                        templateUrl:"gis/tpls/const-link.tpl.html"
                     }
                 },
                 resolve:{
@@ -75,20 +81,20 @@
                 data:{
                     pageTitle: "MFLv2 Constituency View Geolocation"
                 }
-            }).state("gis_ward", {
+            }).state("gis.gis_county.gis_const.gis_ward", {
                 url: "/ward/:ward_id",
                 views: {
-                    "header" : {
-                        controller: "mfl.home.controllers.header",
-                        templateUrl : "home/tpls/header.tpl.html"
+                    "area@gis.gis_county":{
+                        controller:"mfl.gis.controllers.gis_ward",
+                        templateUrl: "gis/tpls/ward-info.tpl.html"
                     },
-                    "main": {
-                        controller: "mfl.gis.controllers.gis_ward",
-                        templateUrl: "gis/tpls/ward-map.tpl.html"
+                    "map@gis":{
+                        controller:"mfl.gis.controllers.gis_ward",
+                        templateUrl:"gis/tpls/ward-leaflet.tpl.html"
                     },
-                    "footer": {
-                        controller: "mfl.common.controllers.time",
-                        templateUrl: "common/tpls/time.tpl.html"
+                    "ward-link@gis.gis_county":{
+                        controller:"mfl.gis.controllers.gis_ward",
+                        templateUrl:"gis/tpls/ward-link.tpl.html"
                     }
                 },
                 resolve:{

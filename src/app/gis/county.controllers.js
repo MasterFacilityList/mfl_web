@@ -135,10 +135,10 @@
                             },
                             visible: true
                         }
-                    }
+                    },
+                    selectedConst: {}
                 },
-                markers: markers,
-                selectedConst: {}
+                markers: markers
             });
             
         });
@@ -148,7 +148,9 @@
         $scope.$on("leafletDirectiveGeoJson.click", function(ev, constituency) {
             var boundary_ids = constituency.model.properties.ward_boundary_ids.join(",");
             $stateParams.ward_boundaries = boundary_ids;
-            $state.go("gis_const",{const_id:constituency.model.id,
+            $state.go("gis.gis_county.gis_const",{county_id:$stateParams.county_id,
+                                    county_boundaries:$stateParams.const_boundaries,
+                                    const_id:constituency.model.id,
                                     ward_boundaries : boundary_ids});
         });
     }]);

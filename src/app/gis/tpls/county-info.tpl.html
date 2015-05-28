@@ -1,0 +1,13 @@
+    <div class="content-card">
+        <h4>{{county.properties.name}}</h4>
+        <h4>Facilities: {{facility_count}}</h4>
+        <hr>
+        <h5 ng-show="hoveredConst">
+            <strong>Constituency Hovered: <span class="text-info">{{hoveredConst.properties.name}}</span></strong>
+        </h5>
+    </div>
+    <div>
+        <a ui-sref="filtering({county:county.properties.county_id})" class="col-xs-12 login-btn login-btn-primary margin-t-20">
+            <h4><i class="fa fa-eye"></i> VIEW THE {{facility_count}} FACILITIES</h4>
+        </a>
+    </div>

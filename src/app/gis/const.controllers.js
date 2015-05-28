@@ -10,6 +10,8 @@
                    $stateParams,SERVER_URL, gisWardsApi,
                   gisConst,$timeout,gisFacilitiesApi, $q) {
         $scope.constituency = gisConst.data;
+        $scope.county_id = $stateParams.county_id;
+        $scope.const_boundaries = $stateParams.const_boundaries;
         $scope.const_id = $stateParams.const_id;
         $scope.ward_boundaries = $stateParams.ward_boundaries;
         $scope.tooltip = {
@@ -146,7 +148,12 @@
             $scope.hoveredWard= model;
         });
         $scope.$on("leafletDirectiveGeoJson.click", function(ev, ward) {
-            $state.go("gis_ward",{ward_id: ward.model.id});
+            $state.go("gis.gis_county.gis_const.gis_ward",
+                       {county_id:$stateParams.county_id,
+                        county_boundaries:$stateParams.const_boundaries,
+                        const_id:$stateParams.const_id,
+                        ward_boundaries : $stateParams.ward_boundaries,
+                        ward_id: ward.model.id});
         });
     }]);
 })(angular);
