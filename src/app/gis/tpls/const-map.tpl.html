@@ -7,9 +7,9 @@
 </div>
 <div class="content-body"> 
    <div class="container-fluid">
-        <div class="col-md-3 margin-15">
+        <div class="col-md-4 margin-15">
            <div class="content-card">
-                <h3>{{constituency.properties.name}}</h3>
+                <h4>{{constituency.properties.name}}</h4>
                 <h4>Facilities: {{facility_count}}</h4>
                 <hr>
                 <h5 ng-show="hoveredWard">
@@ -18,7 +18,7 @@
                 <a ui-sref="filtering({constituency:constituency.properties.constituency_id})" class="login-btn login-btn-primary margin-t-20">Facilities in <span class="titlecase">{{constituency.properties.name}}</span></a>
            </div>
         </div>
-        <div class="col-md-9 margin-b-10">
+        <div class="col-md-8 margin-b-10">
             <leaflet id="constmap" markers="markers" width="100%" layers="layers"
                defaults="defaults" geojson="geojson" events="events" height="80vh">
             </leaflet>

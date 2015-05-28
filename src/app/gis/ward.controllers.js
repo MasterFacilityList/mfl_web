@@ -100,13 +100,7 @@
                     return  {
                             layer: "facilities",
                             lat: mark.geometry.coordinates[1],
-                            lng: mark.geometry.coordinates[0],
-                            label: {
-                                message: "Facility",
-                                options: {
-                                    noHide: true
-                                }
-                            }
+                            lng: mark.geometry.coordinates[0]
                         };
                 });
                 $scope.markers = markers;

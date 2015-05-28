@@ -41,7 +41,9 @@
                 tileLayer: ""
             },
             markers:{},
-            layers:{}
+            layers:{
+                overlays:{}
+            }
         });
         leafletData.getMap("constmap")
             .then(function (map) {
@@ -59,35 +61,6 @@
         $scope.filters_const = {
             constituency : gisConst.data.properties.constituency_id
         };
-        gisFacilitiesApi.api
-        .filter($scope.filters_const)
-        .success(function (data){
-            var marks = data.results.features;
-            $scope.facility_count = marks.length;
-            var heatpoints = _.map(marks, function(heat){
-                return [
-                        heat.geometry.coordinates[1],
-                        heat.geometry.coordinates[0]
-                    ];
-            });
-            $scope.heatpoints = heatpoints;
-            $scope.layers.overlays.heat = {
-                name: "Facilities",
-                type: "heat",
-                data: angular.copy($scope.heatpoints),
-                layerOptions: {
-                    radius: 25,
-                    opacity:1,
-                    blur: 1,
-                    gradient: {0.05: "lime", 0.1: "orange",0.2: "red"}
-                },
-                visible: true
-            };
-        })
-        .error(function (e){
-            $scope.alert = e.error;
-        });
-
 
         $scope.filters = {
             id : $stateParams.ward_boundaries
@@ -141,6 +114,34 @@
                     }
                 },
                 selectedWard: {}
+            });
+            gisFacilitiesApi.api
+            .filter($scope.filters_const)
+            .success(function (data){
+                var marks = data.results.features;
+                $scope.facility_count = marks.length;
+                var heatpoints = _.map(marks, function(heat){
+                    return [
+                            heat.geometry.coordinates[1],
+                            heat.geometry.coordinates[0]
+                        ];
+                });
+                $scope.heatpoints = heatpoints;
+                $scope.layers.overlays.heat = {
+                    name: "Facilities",
+                    type: "heat",
+                    data: angular.copy($scope.heatpoints),
+                    layerOptions: {
+                        radius: 25,
+                        opacity:1,
+                        blur: 1,
+                        gradient: {0.05: "lime", 0.1: "orange",0.2: "red"}
+                    },
+                    visible: true
+                };
+            })
+            .error(function (e){
+                $scope.alert = e.error;
             });
         })
         .error(function(e){
