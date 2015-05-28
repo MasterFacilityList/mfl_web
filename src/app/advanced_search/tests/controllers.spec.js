@@ -221,13 +221,16 @@
         it("should export data", function(){
             var scope = rootScope.$new();
             createController(scope, {});
-
-            httpBackend.expectGET(
-                    serverUrl+facilityUrl+"?format=excel")
-                    .respond(200, {results: ["testing"]});
             scope.excelExport();
-            httpBackend.flush();
-            expect(scope.filter.format).toBeFalsy();
+            expect($window.location.href).toContain("format=excel");
+        });
+        it("should export data: params set", function(){
+            var scope = rootScope.$new();
+            createController(scope, {});
+            scope.filter.county = "1";
+            scope.excelExport();
+            expect($window.location.href).toContain("format=excel");
+            expect($window.location.href).toContain("county=1");
         });
 
         it("should filter facilities: county param set: success, empty results", function(){
