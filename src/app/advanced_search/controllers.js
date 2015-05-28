@@ -194,6 +194,7 @@
          "service_category", "ward", "owner_type"],
         function(key){
             $scope.filter_data[key] = filteringData.data[key];
+            $rootScope.mflFilteringData = filteringData;
         });
         var removeEmptyFilters = function(filters){
             _.each(_.keys(filters), function(key){
