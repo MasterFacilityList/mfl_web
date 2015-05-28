@@ -5,10 +5,10 @@
         "mfl.gis.wrapper","mfl.adminunits.wrapper"])
     .controller("mfl.gis.controllers.gis_const", ["$scope","leafletData",
         "constsApi","$http","$state","$stateParams","SERVER_URL","gisWardsApi",
-        "gisConst","$timeout","gisFacilitiesApi",
+        "gisConst","$timeout","gisFacilitiesApi","$q",
         function ($scope, leafletData, constsApi, $http, $state,
                    $stateParams,SERVER_URL, gisWardsApi,
-                  gisConst,$timeout,gisFacilitiesApi) {
+                  gisConst,$timeout,gisFacilitiesApi, $q) {
         $scope.constituency = gisConst.data;
         $scope.const_id = $stateParams.const_id;
         $scope.ward_boundaries = $stateParams.ward_boundaries;
@@ -41,7 +41,9 @@
                 tileLayer: ""
             },
             markers:{},
-            layers:{}
+            layers:{
+                overlays:{}
+            }
         });
         leafletData.getMap("constmap")
             .then(function (map) {
@@ -59,45 +61,29 @@
         $scope.filters_const = {
             constituency : gisConst.data.properties.constituency_id
         };
-        gisFacilitiesApi.api
-        .filter($scope.filters_const)
-        .success(function (data){
-            var marks = data.results.features;
-            $scope.facility_count = marks.length;
-            var heatpoints = _.map(marks, function(heat){
+        var facilitiesPromise = gisFacilitiesApi.api
+        .filter($scope.filters_const);
+
+        $scope.filters = {
+            id : $stateParams.ward_boundaries
+        };
+        var wardBoundariesPromise = gisWardsApi.api
+        .filter($scope.filters);
+
+        $q.all([facilitiesPromise,wardBoundariesPromise])
+        .then(function(payload){
+            var fac_marks = payload[0].data.results.features;
+            var county_marks = payload[1].data.results.features;
+            $scope.facility_count = fac_marks.length;
+            var heatpoints = _.map(fac_marks, function(heat){
                 return [
                         heat.geometry.coordinates[1],
                         heat.geometry.coordinates[0]
                     ];
             });
             $scope.heatpoints = heatpoints;
-            $scope.layers.overlays.heat = {
-                name: "Facilities",
-                type: "heat",
-                data: angular.copy($scope.heatpoints),
-                layerOptions: {
-                    radius: 25,
-                    opacity:1,
-                    blur: 1,
-                    gradient: {0.05: "lime", 0.1: "orange",0.2: "red"}
-                },
-                visible: true
-            };
-        })
-        .error(function (e){
-            $scope.alert = e.error;
-        });
-
-
-        $scope.filters = {
-            id : $stateParams.ward_boundaries
-        };
-        gisWardsApi.api
-        .filter($scope.filters)
-        .success(function (data){
-            var marks = data.results.features;
-            var markers = _.mapObject(marks, function(mark){
-                return  {
+            var markers = _.mapObject(county_marks, function(mark){
+                return {
                         layer:"wards",
                         lat: mark.properties.center.coordinates[1],
                         lng: mark.properties.center.coordinates[0],
@@ -109,24 +95,23 @@
                         }
                     };
             });
-            $scope.markers = markers;
+            $scope.marks = markers;
             angular.extend($scope, {
-                markers: markers,
                 geojson: {
-                    data: data.results,
+                    data: payload[1].data.results,
                     style: {
-                        fillColor: "rgba(255, 255, 255, 0.17)",
+                        fillColor: "rgba(255, 255, 255, 0.27)",
                         weight: 2,
                         opacity: 1,
-                        color: "white",
+                        color: "rgba(0, 0, 0, 0.52)",
                         dashArray: "3",
                         fillOpacity: 0.7
                     }
                 },
                 layers:{
                     baselayers:{
-                        country: {
-                            name: "Base",
+                        Constituency: {
+                            name: "Constituency",
                             url: "/assets/img/transparent.png",
                             type:"xyz",
                             data:[]
@@ -137,15 +122,24 @@
                             name:"Wards",
                             type:"markercluster",
                             visible: true
+                        },
+                        heat:{
+                            name: "Facilities",
+                            type: "heat",
+                            data: angular.copy($scope.heatpoints),
+                            layerOptions: {
+                                radius: 25,
+                                opacity:1,
+                                blur: 1,
+                                gradient: {0.2: "lime", 0.3: "orange",0.4: "red"}
+                            },
+                            visible: true
                         }
                     }
                 },
-                selectedWard: {}
+                markers: markers,
+                selectedConst: {}
             });
-        })
-        .error(function(e){
-            /*TODO Error handling*/
-            $scope.alert = e.error;
         });
         $scope.$on("leafletDirectiveGeoJson.mouseover", function(ev, ward) {
             var model = ward.model;

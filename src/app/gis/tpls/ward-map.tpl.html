@@ -7,17 +7,20 @@
 </div>
 <div class="content-body">
    <div class="container-fluid">
-        <div class="col-md-3 margin-15">
+        <div class="col-md-4 margin-15">
            <div class="content-card">
-                <h3>{{ward.properties.name}}</h3>
+                <h4>{{ward.properties.name}}</h4>
                 <h4>Facilities: {{facility_count}}</h4>
                 <hr>
-                <a ui-sref="filtering({ward:ward.properties.ward_id})" class="login-btn login-btn-primary margin-t-20">
-                    Facilities in {{ward.properties.name}}
-                </a>
            </div>
+            <div>
+                <a ui-sref="filtering({ward:ward.properties.ward_id})" class="col-xs-12 login-btn login-btn-primary margin-t-20">
+                    <i class="fa fa-eye fa-3x"></i>
+                    <h3>VIEW THE {{facility_count}} FACILITIES</h3>
+                </a>
+            </div>
         </div>
-        <div class="col-md-9 margin-b-10">
+        <div class="col-md-8 margin-b-10">
             <leaflet id="wardmap" width="100%" defaults="defaults" markers="markers" layers="layers"
                 geojson="geojson" event-broadcast="events" height="80vh">
             </leaflet>

@@ -65,7 +65,7 @@
                     geojson: {
                         data: angular.copy($scope.ward),
                         style: {
-                            fillColor: "rgba(194, 255, 183, 0.42)",
+                            fillColor: "rgba(236, 255, 183, 0.14)",
                             weight: 2,
                             opacity: 1,
                             color: "white",
@@ -100,13 +100,7 @@
                     return  {
                             layer: "facilities",
                             lat: mark.geometry.coordinates[1],
-                            lng: mark.geometry.coordinates[0],
-                            label: {
-                                message: "Facility",
-                                options: {
-                                    noHide: true
-                                }
-                            }
+                            lng: mark.geometry.coordinates[0]
                         };
                 });
                 $scope.markers = markers;
