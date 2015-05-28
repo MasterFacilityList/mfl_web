@@ -171,24 +171,18 @@
                 $scope.spinneractive = false;
             },
             success: function(data){
-                if(_.has($scope.filter, "format")){
-                    $window.location.href =
-                        SERVER_URL + "api/common/download/download/xlsx/";
-                    delete $scope.filter.format;
-                }else{
-                    $scope.hits = data.count;
-                    if($scope.hits >= 1) {
-                        $scope.no_err = true;
-                    }
-                    else{
-                        $scope.no_err = false;
-                    }
-                    addPagination(data.count, data.next, data.previous);
-                    $scope.search_results = false;
-                    $scope.query_results = data.results;
-                    if($scope.query_results.length===0){
-                        $scope.no_result = true;
-                    }
+                $scope.hits = data.count;
+                if($scope.hits >= 1) {
+                    $scope.no_err = true;
+                }
+                else{
+                    $scope.no_err = false;
+                }
+                addPagination(data.count, data.next, data.previous);
+                $scope.search_results = false;
+                $scope.query_results = data.results;
+                if($scope.query_results.length===0){
+                    $scope.no_result = true;
                 }
                 resolves.stopSpinner();
             },
@@ -347,8 +341,14 @@
 
         //exporting to excel functionality
         $scope.excelExport = function () {
-            $scope.filter.format = "excel";
-            $scope.filterFacility($scope.filter);
+            var url = SERVER_URL+filterApi.facilities.apiBaseUrl+"/";
+            var url_frags = ["format=excel", "page_size=20000"];
+            var params= constructParams($scope.filter);
+            _.each(_.keys(params), function(key){
+                url_frags.push(key+"="+params[key]);
+            });
+            url = url+"?" + url_frags.join("&");
+            $window.location.href = url;
         };
         //declaring offcanvas
         $scope.activate_offcanvas = false;

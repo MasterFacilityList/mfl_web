@@ -164,6 +164,20 @@ textarea:focus ~ label, textarea:valid ~ label {
     font-size:14px;
     color:#2196F3;
 }
+
+/*=====================Remove mozilla's highlighting red for required fields*/
+input:invalid {
+  box-shadow: none;
+  -moz-box-shadow: none;
+}
+
+input:-moz-submit-invalid {
+  box-shadow: none;
+}
+
+input:-moz-ui-invalid {
+  box-shadow:none;
+}
 /*Material ripple effect =============*/
 .btn:after,
 .nav a:after {
