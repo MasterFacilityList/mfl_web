@@ -1,4 +1,4 @@
-(function(angular){
+(function(angular, _){
     "use strict";
     var filterParams = [
         "search", "county", "constituency", "ward", "operation_status",
@@ -21,9 +21,14 @@
                         controller: "mfl.filtering.controller",
                         templateUrl: "advanced_search/tpls/advanced_search.tpl.html",
                         resolve: {
-                            filteringData: ["filteringApi",
-                                function(filterApi){
-                                    return filterApi.filters.list();
+                            filteringData: ["$rootScope","filteringApi",
+                                function($rootScope, filterApi){
+                                    if(_.isEmpty($rootScope.mflFilteringData)){
+                                        return filterApi.filters.list();
+                                    }else{
+                                        return $rootScope.mflFilteringData;
+                                    }
+
                                 }]
                         }
                     }
@@ -33,4 +38,4 @@
                 }
             });
     }]);
-})(angular);
+})(angular,_);
