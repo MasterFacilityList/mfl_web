@@ -5,20 +5,12 @@
         var filterApi, $window, $compile;
         var facilityUrl = "api/facilities/facilities/";
         var filterData  = {
-            county:{
-                data: {results: []}
-            },
-            constituency: {
-                data: {results: []}
-            },
-            operation_status: {
-                data: {results: []}
-            },
-            facility_type: {
-                data: {results: []}
-            },
-            service_category: {
-                data: {results: []}
+            data: {
+                county: [],
+                constituency: [],
+                operation_status: [],
+                facility_type: [],
+                service_category: []
             }
         };
         beforeEach(function(){
