@@ -4,7 +4,7 @@
         "search", "county", "constituency", "ward", "operation_status",
         "facility_type", "number_of_beds", "number_of_cots", "open_whole_day",
         "is_classified", "is_published", "is_regulated", "is_active", "service_category",
-        "open_whole_week"
+        "open_whole_week", "owner_type"
     ];
     angular.module("mfl.filtering.routes", ["mfl.filtering.services"])
 
