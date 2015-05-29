@@ -19,11 +19,8 @@
                         controller: "mfl.common.controllers.time",
                         templateUrl: "common/tpls/time.tpl.html"
                     },
-                    "info@gis":{
-                        templateUrl: "gis/tpls/country-info.tpl.html"
-                    },
-                    "map@gis":{
-                        templateUrl:"gis/tpls/country-leaflet.tpl.html"
+                    "info-map@gis":{
+                        templateUrl:"gis/tpls/country-map-info.tpl.html"
                     }
                 },
                 data:{
@@ -33,17 +30,9 @@
             .state("gis.gis_county", {
                 url: "/:county_id/:const_boundaries",
                 views: {
-                    "info@gis":{
+                    "info-map@gis":{
                         controller:"mfl.gis.controllers.gis_county",
-                        templateUrl: "gis/tpls/info.tpl.html"
-                    },
-                    "map@gis":{
-                        controller:"mfl.gis.controllers.gis_county",
-                        templateUrl:"gis/tpls/county-leaflet.tpl.html"
-                    },
-                    "area@gis.gis_county":{
-                        controller:"mfl.gis.controllers.gis_county",
-                        templateUrl:"gis/tpls/county-info.tpl.html"
+                        templateUrl: "gis/tpls/county-map-info.tpl.html"
                     }
                 },
                 resolve:{
@@ -59,17 +48,9 @@
             .state("gis.gis_county.gis_const", {
                 url: "/:const_id/:ward_boundaries",
                 views: {
-                    "area@gis.gis_county":{
+                    "info-map@gis":{
                         controller:"mfl.gis.controllers.gis_const",
-                        templateUrl: "gis/tpls/const-info.tpl.html"
-                    },
-                    "map@gis":{
-                        controller:"mfl.gis.controllers.gis_const",
-                        templateUrl:"gis/tpls/const-leaflet.tpl.html"
-                    },
-                    "const-link@gis.gis_county":{
-                        controller:"mfl.gis.controllers.gis_const",
-                        templateUrl:"gis/tpls/const-link.tpl.html"
+                        templateUrl: "gis/tpls/const-map-info.tpl.html"
                     }
                 },
                 resolve:{
