@@ -66,7 +66,7 @@ describe("tests for GIS Routes:", function() {
         $httpBackend.expectGET(
         SERVER_URL + "api/gis/constituency_boundaries/34/")
             .respond(200, data);
-        $state.go("gis_const", {"const_id": "34"});
+        $state.go("gis.gis_county.gis_const", {"const_id": "34"});
     }]));
 
 
@@ -82,7 +82,7 @@ describe("tests for GIS Routes:", function() {
         $httpBackend.expectGET(
         SERVER_URL + "api/gis/ward_boundaries/34/")
             .respond(200, data);
-        $state.go("gis_ward", {"ward_id": "34"});
+        $state.go("gis.gis_county.gis_const.gis_ward", {"ward_id": "34"});
     }]));
 
 });
