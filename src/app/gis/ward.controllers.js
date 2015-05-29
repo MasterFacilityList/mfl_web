@@ -5,9 +5,17 @@
             "mfl.gis.wrapper"])
         .controller("mfl.gis.controllers.gis_ward", ["$scope","leafletData",
             "$http","$state","$stateParams","SERVER_URL","gisWardsApi",
-            "gisWard","$timeout","gisFacilitiesApi",
+            "gisWard","$timeout","gisFacilitiesApi","gisConst","gisCounty",
             function ($scope, leafletData,$http, $state, $stateParams,
-                       SERVER_URL, gisWardsApi, gisWard,$timeout,gisFacilitiesApi) {
+                       SERVER_URL, gisWardsApi, gisWard,$timeout,gisFacilitiesApi,
+                       gisConst,gisCounty) {
+            $scope.county = gisCounty.data;
+            $scope.constituency = gisConst.data;
+            $scope.county_id = $stateParams.county_id;
+            $scope.const_boundaries = $stateParams.const_boundaries;
+            $scope.const_id = $stateParams.const_id;
+            $scope.ward_boundaries = $stateParams.ward_boundaries;
+            $scope.ward_id = $stateParams.ward_id;
             $scope.tooltip = {
                 "title": "",
                 "checked": false

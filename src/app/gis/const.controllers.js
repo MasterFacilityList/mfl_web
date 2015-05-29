@@ -5,11 +5,14 @@
         "mfl.gis.wrapper","mfl.adminunits.wrapper"])
     .controller("mfl.gis.controllers.gis_const", ["$scope","leafletData",
         "constsApi","$http","$state","$stateParams","SERVER_URL","gisWardsApi",
-        "gisConst","$timeout","gisFacilitiesApi","$q",
+        "gisConst","$timeout","gisFacilitiesApi","$q","gisCounty",
         function ($scope, leafletData, constsApi, $http, $state,
                    $stateParams,SERVER_URL, gisWardsApi,
-                  gisConst,$timeout,gisFacilitiesApi, $q) {
+                  gisConst,$timeout,gisFacilitiesApi, $q,gisCounty) {
+        $scope.county = gisCounty.data;
         $scope.constituency = gisConst.data;
+        $scope.county_id = $stateParams.county_id;
+        $scope.const_boundaries = $stateParams.const_boundaries;
         $scope.const_id = $stateParams.const_id;
         $scope.ward_boundaries = $stateParams.ward_boundaries;
         $scope.tooltip = {
@@ -135,18 +138,22 @@
                             },
                             visible: true
                         }
-                    }
+                    },
+                    selectedWard: {}
                 },
-                markers: markers,
-                selectedConst: {}
+                markers: markers
             });
         });
         $scope.$on("leafletDirectiveGeoJson.mouseover", function(ev, ward) {
-            var model = ward.model;
-            $scope.hoveredWard= model;
+            $scope.hoveredWard= ward.model;
         });
         $scope.$on("leafletDirectiveGeoJson.click", function(ev, ward) {
-            $state.go("gis_ward",{ward_id: ward.model.id});
+            $state.go("gis.gis_county.gis_const.gis_ward",
+                       {county_id:$stateParams.county_id,
+                        county_boundaries:$stateParams.const_boundaries,
+                        const_id:$stateParams.const_id,
+                        ward_boundaries : $stateParams.ward_boundaries,
+                        ward_id: ward.model.id});
         });
     }]);
 })(angular);

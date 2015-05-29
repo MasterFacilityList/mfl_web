@@ -13,31 +13,26 @@
                     },
                     "main": {
                         controller: "mfl.gis.controllers.gis",
-                        templateUrl: "gis/tpls/country-map.tpl.html"
+                        templateUrl: "gis/tpls/all-map.tpl.html"
                     },
                     "footer": {
                         controller: "mfl.common.controllers.time",
                         templateUrl: "common/tpls/time.tpl.html"
+                    },
+                    "info-map@gis":{
+                        templateUrl:"gis/tpls/country-map-info.tpl.html"
                     }
                 },
                 data:{
                     pageTitle: "MFLv2 Facility Geolocation"
                 }
             })
-            .state("gis_county", {
-                url: "/county/:county_id/:const_boundaries",
+            .state("gis.gis_county", {
+                url: "/:county_id/:const_boundaries",
                 views: {
-                    "header" : {
-                        controller: "mfl.home.controllers.header",
-                        templateUrl : "home/tpls/header.tpl.html"
-                    },
-                    "main": {
-                        controller: "mfl.gis.controllers.gis_county",
-                        templateUrl: "gis/tpls/county-map.tpl.html"
-                    },
-                    "footer": {
-                        controller: "mfl.common.controllers.time",
-                        templateUrl: "common/tpls/time.tpl.html"
+                    "info-map@gis":{
+                        controller:"mfl.gis.controllers.gis_county",
+                        templateUrl: "gis/tpls/county-map-info.tpl.html"
                     }
                 },
                 resolve:{
@@ -50,20 +45,12 @@
                     pageTitle: "MFLv2 County View Geolocation"
                 }
             })
-            .state("gis_const", {
-                url: "/constituency/:const_id/:ward_boundaries",
+            .state("gis.gis_county.gis_const", {
+                url: "/:const_id/:ward_boundaries",
                 views: {
-                    "header" : {
-                        controller: "mfl.home.controllers.header",
-                        templateUrl : "home/tpls/header.tpl.html"
-                    },
-                    "main": {
-                        controller: "mfl.gis.controllers.gis_const",
-                        templateUrl: "gis/tpls/const-map.tpl.html"
-                    },
-                    "footer": {
-                        controller: "mfl.common.controllers.time",
-                        templateUrl: "common/tpls/time.tpl.html"
+                    "info-map@gis":{
+                        controller:"mfl.gis.controllers.gis_const",
+                        templateUrl: "gis/tpls/const-map-info.tpl.html"
                     }
                 },
                 resolve:{
@@ -75,20 +62,12 @@
                 data:{
                     pageTitle: "MFLv2 Constituency View Geolocation"
                 }
-            }).state("gis_ward", {
+            }).state("gis.gis_county.gis_const.gis_ward", {
                 url: "/ward/:ward_id",
                 views: {
-                    "header" : {
-                        controller: "mfl.home.controllers.header",
-                        templateUrl : "home/tpls/header.tpl.html"
-                    },
-                    "main": {
-                        controller: "mfl.gis.controllers.gis_ward",
-                        templateUrl: "gis/tpls/ward-map.tpl.html"
-                    },
-                    "footer": {
-                        controller: "mfl.common.controllers.time",
-                        templateUrl: "common/tpls/time.tpl.html"
+                    "info-map@gis":{
+                        controller:"mfl.gis.controllers.gis_ward",
+                        templateUrl: "gis/tpls/ward-map-info.tpl.html"
                     }
                 },
                 resolve:{

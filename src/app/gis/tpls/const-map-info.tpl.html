@@ -1,0 +1,40 @@
+<div class="col-md-4 margin-15">
+    <div class="content-card">
+        <h4>NAVIGATION</h4>
+        <a ui-sref="gis" ui-sref-opts="{reload: true}">KENYA /</a><br>
+        <a ui-sref="gis.gis_county({county_id:county_id,const_boundaries:const_boundaries})" ui-sref-opts="{reload: true}"> &nbsp;{{county.properties.name}} /</a><br>
+        <a ui-sref="gis.gis_county.gis_const({county_id:county_id,const_boundaries:const_boundaries,const_id:const_id,ward_boundaries:ward_boundaries})">&nbsp;&nbsp; {{constituency.properties.name}} MAP</a><br>
+    </div>
+    <div class="col-xs-12 content-card">
+       <strong class="margin-10">LEGEND</strong>
+       <br>
+       Concentration of Facilities: <br>
+       <label class="label map-high-conc" >&#9679;</label> High <br>
+       <label class="label map-moderate-conc">&#9679;</label> Moderate<br>
+       <label class="label map-low-conc" >&#9679;</label> Low<br>
+    </div>
+    <div class="col-xs-12 content-card">
+        <h4>{{constituency.properties.name}}</h4>
+        <h4>Facilities: {{facility_count}}</h4>
+        <h5 ng-show="hoveredWard">
+        <hr>
+            <strong>Constituency Hovered: <span class="text-info">{{hoveredWard.properties.name}}</span></strong>
+        </h5>
+    </div>
+    <div>
+        <a ui-sref="filtering({constituency:constituency.properties.constituency_id})" class="col-xs-12 login-btn login-btn-primary margin-t-20">
+            <h4><i class="fa fa-eye"></i> VIEW THE {{facility_count}} FACILITIES</h4>
+        </a>
+    </div>
+</div>
+<div class="col-md-8 margin-b-10">
+    <leaflet id="constmap"
+        markers="markers"
+        width="100%"
+        layers="layers"
+        defaults="defaults"
+        geojson="geojson"
+        events="events"
+        height="80vh">
+    </leaflet>
+</div>
