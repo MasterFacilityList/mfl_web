@@ -82,7 +82,7 @@ describe("Tests for mfl.gis_county.controllers.gis (County Level):", function ()
         $httpBackend.expectGET(
         SERVER_URL + "api/gis/constituency_boundaries/?id=undefined")
             .respond(200, data);
-        $state.go("gis_county", {"county_id": "34"});
+        $state.go("gis.gis_county", {"county_id": "34"});
         controller("mfl.gis.controllers.gis_county", {
             "$scope": scope,
             "leafletData": leafletData,
@@ -150,7 +150,7 @@ describe("Tests for mfl.gis_county.controllers.gis (County Level):", function ()
     it("should expect broadcast of leafletDirectiveGeoJson.mouseover(County Level)",
         inject(["$rootScope","leafletData","gisCountiesApi","gisConstsApi","$state",
                 function ($rootScope, leafletData,gisCountiesApi,gisConstsApi,$state) {
-        $state.go("gis_county", {"county_id": "34"});
+        $state.go("gis.gis_county", {"county_id": "34"});
         controller("mfl.gis.controllers.gis_county", {
             "$scope": scope,
             "leafletData": leafletData,
@@ -238,7 +238,7 @@ describe("Tests for mfl.gis_county.controllers.gis (County Level):", function ()
         expect(angular.isFunction(second_call.args[1])).toBe(true);
         var listener = second_call.args[1];
         listener(null, constituency);
-        expect($state.go).toHaveBeenCalledWith("gis_const",{const_id: "",
+        expect($state.go).toHaveBeenCalledWith("gis.gis_county.gis_const",{const_id: "",
                                                ward_boundaries: "a,b"});
     }]));
 

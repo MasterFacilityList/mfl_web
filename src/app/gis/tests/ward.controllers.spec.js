@@ -64,6 +64,25 @@ describe("Tests for mfl.gis.controllers.gis_ward (Ward Level):", function () {
         controller("mfl.gis.controllers.gis_ward", {
             "$scope": scope,
             "leafletData": leafletData,
+            "gisCounty": {
+                data: {
+                    properties: {
+                        bound: {
+                            coordinates: []
+                        },
+                        county_id:"4"
+                    }
+                }
+            },
+            "gisConst": {
+                data: {
+                    properties: {
+                        bound: {
+                            coordinates: []
+                        }
+                    }
+                }
+            },
             "gisWard": {
                 data: {
                     properties: {
@@ -107,6 +126,25 @@ describe("Tests for mfl.gis.controllers.gis_ward (Ward Level):", function () {
         };
         controller("mfl.gis.controllers.gis_ward", {
             "$scope": scope,
+            "gisCounty": {
+                data: {
+                    properties: {
+                        bound: {
+                            coordinates: []
+                        },
+                        county_id:"4"
+                    }
+                }
+            },
+            "gisConst": {
+                data: {
+                    properties: {
+                        bound: {
+                            coordinates: []
+                        }
+                    }
+                }
+            },
             "gisWard": {
                 data: {
                     properties: {
@@ -145,6 +183,25 @@ describe("Tests for mfl.gis.controllers.gis_ward (Ward Level):", function () {
         controller("mfl.gis.controllers.gis_ward", {
             "$scope": scope,
             "leafletData": leafletData,
+            "gisCounty": {
+                data: {
+                    properties: {
+                        bound: {
+                            coordinates: []
+                        },
+                        county_id:"4"
+                    }
+                }
+            },
+            "gisConst": {
+                data: {
+                    properties: {
+                        bound: {
+                            coordinates: []
+                        }
+                    }
+                }
+            },
             "gisWard": {
                 data: {
                     properties: {

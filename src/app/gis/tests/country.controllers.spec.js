@@ -194,7 +194,7 @@ describe("Tests for mfl.gis.controllers.gis (Country Level):", function () {
         expect(angular.isFunction(second_call.args[1])).toBe(true);
         var listener = second_call.args[1];
         listener(null, county);
-        expect($state.go).toHaveBeenCalledWith("gis_county",{county_id: "",
+        expect($state.go).toHaveBeenCalledWith("gis.gis_county",{county_id: "",
                                                const_boundaries: "a,b"});
     }]));
     

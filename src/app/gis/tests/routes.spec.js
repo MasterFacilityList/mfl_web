@@ -48,8 +48,7 @@ describe("tests for GIS Routes:", function() {
         $httpBackend.expectGET(
         SERVER_URL + "api/gis/county_boundaries/34/")
             .respond(200, data);
-        $state.go("gis_county", {"county_id": "34"});
-//        controller("mfl.gis.controllers.gis");
+        $state.go("gis.gis_county", {"county_id": "34"});
 
         $httpBackend.flush();
     }]));
