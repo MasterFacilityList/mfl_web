@@ -1,7 +1,7 @@
         <div class="col-md-4 margin-15">
             <div class="content-card">
                 <h4>NAVIGATION</h4>
-                <a ui-sref="gis">COUNTRY MAP</a><br>
+                <a ui-sref="gis" ui-sref-opts="{reload:true}">COUNTRY MAP</a><br>
                 <a ui-sref="gis.gis_county({county_id:county_id,const_boundaries:const_boundaries})">COUNTY MAP -> {{county.properties.name}}</a><br>
             </div>
             <div class="col-xs-12 content-card">
@@ -15,8 +15,8 @@
             <div class="col-xs-12 content-card">
                 <h4>{{county.properties.name}}</h4>
                 <h4>Facilities: {{facility_count}}</h4>
-                <hr>
                 <h5 ng-show="hoveredConst">
+                <hr>
                     <strong>Constituency Hovered: <span class="text-info">{{hoveredConst.properties.name}}</span></strong>
                 </h5>
             </div>

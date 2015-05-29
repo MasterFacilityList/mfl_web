@@ -65,17 +65,9 @@
             }).state("gis.gis_county.gis_const.gis_ward", {
                 url: "/ward/:ward_id",
                 views: {
-                    "area@gis.gis_county":{
+                    "info-map@gis":{
                         controller:"mfl.gis.controllers.gis_ward",
-                        templateUrl: "gis/tpls/ward-info.tpl.html"
-                    },
-                    "map@gis":{
-                        controller:"mfl.gis.controllers.gis_ward",
-                        templateUrl:"gis/tpls/ward-leaflet.tpl.html"
-                    },
-                    "ward-link@gis.gis_county":{
-                        controller:"mfl.gis.controllers.gis_ward",
-                        templateUrl:"gis/tpls/ward-link.tpl.html"
+                        templateUrl: "gis/tpls/ward-map-info.tpl.html"
                     }
                 },
                 resolve:{
