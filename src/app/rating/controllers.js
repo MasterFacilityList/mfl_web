@@ -12,11 +12,12 @@
                 "checked": false
             };
             $scope.fac_id = $stateParams.fac_id;
-
+            $scope.spinneractive = true;
 
             $scope.getFacility = function () {
                 facilitiesApi.facilities.get($scope.fac_id)
                 .success(function (data) {
+                    $scope.spinneractive = false;
                     $scope.rating = [
                         {
                             current: 3,
@@ -53,19 +54,22 @@
             };
             $scope.getFacility();
 
-            $scope.getSelectedRating = function (rating, id) {
+            $scope.getSelectedRating = function (rating, id, service_obj) {
                 $scope.fac_rating = {
                     facility_service : id,
                     rating : rating
                 };
+                service_obj.spinner = true;
                 facilitiesApi.ratings.create($scope.fac_rating)
                     .success(function (data) {
                         //save rating in localStorage
+                        service_obj.spinner = false;
                         ratingService.storeRating(
                             data.facility_service, data.rating);
                         $scope.getFacility();
                     })
                     .error(function (e) {
+                        service_obj.spinner = false;
                         $scope.alert = e.error;
                     });
             };
