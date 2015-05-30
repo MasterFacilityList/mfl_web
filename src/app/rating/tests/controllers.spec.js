@@ -49,6 +49,9 @@
                 controller("mfl.rating.controllers.rating");
                 var rating = 3;
                 var id = 1;
+                var service_obj = {
+                    id: 1
+                };
                 scope.fac_rating = {
                     facility_service : id,
                     rating : rating
@@ -77,7 +80,8 @@
                 $httpBackend.flush();
                 expect(
                     scope.oneFacility.facility_services[0].ratings).toEqual(rate);
-                scope.getSelectedRating(rating, id);
+
+                scope.getSelectedRating(rating, id, service_obj);
                 $httpBackend.expectPOST(
                     SERVER_URL +
                     "api/facilities/facility_service_ratings/").
@@ -86,7 +90,7 @@
                 $httpBackend.expectGET(SERVER_URL +
                     "api/facilities/facilities/1/").respond(200, data);
                 $httpBackend.flush();
-
+                expect(service_obj.spinner).toBeFalsy();
             }
         ]));
         it("should test if no ratings in localstorage ",
@@ -134,12 +138,16 @@
                 "api/facilities/facilities/1/").respond(400, {name : ""});
             var rating = 3;
             var id = 1;
-            scope.getSelectedRating(rating, id);
+            var service_obj = {
+                id: 1
+            };
+            scope.getSelectedRating(rating, id, service_obj);
             $httpBackend.expectPOST(
                     SERVER_URL +
                     "api/facilities/facility_service_ratings/").
                     respond(400, {name : ""});
             $httpBackend.flush();
+            expect(service_obj.spinner).toBeFalsy();
         }]));
         it("should print facilities' detailed view",
         inject(["$window", function ($window) {
