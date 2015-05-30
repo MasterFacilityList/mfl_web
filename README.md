@@ -1,5 +1,5 @@
 # mfl_web
-This is the publicly accessible front-end the [Kenyan MFL](https://github.com/MasterFacilityList/mfl_api).
+This is the publicly accessible front-end the [Kenyan MFL v2](https://github.com/MasterFacilityList/mfl_api).
 
 [![Circle CI](https://circleci.com/gh/MasterFacilityList/mfl_web.svg?style=svg)](https://circleci.com/gh/MasterFacilityList/mfl_web)
 
