@@ -1,17 +1,42 @@
 <!DOCTYPE html>
 <!--[if lt IE 10]>
     <html lang="en" class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>MFL Public Website</title>
+            <% styles.forEach( function ( file ) { %>
+            <link rel="icon"  href="assets/img/kenya-coat-of-arms.png" />
+            <link rel="stylesheet" type="text/css" href="<%= file %>" /><% }); %>
+        </head>
         <div style="padding:100px 50px 50px 50px">
-            <h1><strong>MFLv2 Public Website:</strong></h1>
+            <h1><strong>MFLv2 Administration Website:</strong></h1>
             <h1>Your browser is not supported. Please update your browser.</h1>
                <h2>You may also install any of the following supported browsers:</h2>
-                <ul><a target="blank" href="http://google.com/chrome">Google Chrome</a></ul>
-                <ul><a target="blank" href="http://getfirefox.com">Firefox</a></ul>
+                <div class="container-fluid">
+                    <div class="row-fluid">
+                        <div class="col-sm-3 row-fluid">
+                           <a target="blank" href="http://www.google.com/chrome/"><i class="sprite sprite-chrome"></i></a>
+                            Chrome
+                        </div>
+                        <div class="col-sm-3 row-fluid">
+                           <a target="blank" href="https://www.mozilla.org/en-US/firefox/new/"><i class="sprite sprite-firefox"></i></a>
+                            Firefox
+                        </div>
+                        <div class="col-sm-3 row-fluid">
+                           <a target="blank" href="http://windows.microsoft.com/en-us/internet-explorer/download-ie"><i class="sprite sprite-ie"></i></a>
+                            Internet Explorer
+                        </div>
+                        <div class="col-sm-3 row-fluid">
+                           <a target="blank" href="http://www.opera.com/computer"><i class="sprite sprite-opera"></i></a>
+                            Opera
+                        </div>
+                    </div>
+                </div>
         </div>
 <![endif]-->
 <!--[if gt IE 9]><!-->
 <html class="no-js" lang="en" ng-app="mflwebApp" >
-<!--<![endif]-->
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,6 +45,7 @@
     <link rel="icon"  href="assets/img/kenya-coat-of-arms.png" />
     <link rel="stylesheet" type="text/css" href="<%= file %>" /><% }); %>
   </head>
+<!--<![endif]-->
   <body>
       <div ui-view="header"></div>
         <div ui-view="main" class="content margin-t--27">
@@ -39,12 +65,12 @@
                   </li>
                   <li class="col-lg-3 col-md-3 col-sm-6 col-xs-6 ">
                     <a href="http://www.usaid.gov/"><span style="border-radius: 50%;">
-                      <img src="assets/img/usaid.png">
+                      <i class="sprite sprite-usaid"></i>
                     </span></a>
                   </li>
                   <li class="col-lg-3 col-md-3 col-sm-6 col-xs-6 ">
                     <a href="http://www.afyainfo.org/" target="_blank"><span style="border-radius: 50%;">
-                      <img src="assets/img/download.jpg">
+                      <i class="sprite sprite-download"></i>
                     </span></a>
                   </li>
                   <li style="border-left: 1px solid #ccc;" class="col-lg-6 col-md-6 hidden-sm hidden-xs text-left" >
