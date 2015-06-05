@@ -12,7 +12,8 @@
                 operation_status: [],
                 facility_type: [],
                 git: [],
-                owner_type: []
+                owner_type: [],
+                owner: []
             }
         };
         beforeEach(function(){
