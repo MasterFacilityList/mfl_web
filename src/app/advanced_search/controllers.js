@@ -56,6 +56,9 @@
             },
             owner_type: {
                 buttonDefaultText: "Select Owner Type"
+            },
+            owner: {
+                buttonDefaultText: "Select Owner"
             }
         };
         $scope.selected = {
@@ -196,7 +199,7 @@
         };
         resolves.startSpinner();
         _.each(["county", "operation_status", "constituency", "facility_type",
-         "service_category", "ward", "owner_type"],
+         "service_category", "ward", "owner_type", "owner"],
         function(key){
             $scope.filter_data[key] = filteringData.data[key];
             $rootScope.mflFilteringData = filteringData;
