@@ -15,6 +15,10 @@
         $scope.no_search_query = false;
         $scope.no_err = false;
         $scope.query_results = [];
+        $scope.defaultFilters = {
+            is_classified: false,
+            is_published: true
+        };
         var initFilterModel = function(){
             $scope.filter = {
                 search: "",
@@ -22,6 +26,7 @@
                 constituency: [],
                 ward: [],
                 operation_status: [],
+                owner: [],
                 service_category: [],
                 facility_type: [],
                 number_of_beds: [],
@@ -204,17 +209,6 @@
             });
             return filters;
         };
-
-        if(_.isEmpty($stateParams)){
-            $scope.no_search_query = true;
-            filterApi.facilities.list().success(resolves.success).error(resolves.error);
-        }else{
-            $scope.query = $stateParams.search;
-            var filters = removeEmptyFilters($stateParams);
-            $scope.no_search_query = false;
-            filterApi.facilities.filter(filters).success(resolves.success).error(resolves.error);
-        }
-        //end of search results listing
         var getChildren = function(api, key, filter){
             api.filter(
                 _.extend(filter, $scope.default_filter))
@@ -256,6 +250,42 @@
             });
             return changes;
         };
+        $scope.filterFacility = function(filters){
+            var changes= constructParams(filters);
+            delete filters.page;
+            resolves.startSpinner();
+            if(!_.isEmpty(changes)){
+                if(_.has(changes, "ward")){
+                    delete changes.county;
+                    delete changes.constituency;
+                }else{
+                    if(_.has(changes, "constituency")){
+                        delete changes.county;
+                    }
+                }
+                changes = removeEmptyFilters(changes);
+                var filters_to_apply = {};
+                _.extend(filters_to_apply, $scope.defaultFilters);
+                _.extend(filters_to_apply, changes);
+                filterApi.facilities.filter(filters_to_apply)
+                    .success(resolves.success).error(resolves.error);
+            }else{
+                filterApi.facilities.filter($scope.defaultFilters)
+                    .success(resolves.success).error(resolves.error);
+            }
+        };
+
+        if(_.isEmpty($stateParams)){
+            $scope.no_search_query = true;
+            $scope.filterFacility({});
+        }else{
+            $scope.query = $stateParams.search;
+            var filters = removeEmptyFilters($stateParams);
+            $scope.no_search_query = false;
+            $scope.filterFacility(filters);
+        }
+        //end of search results listing
+
         var addFilter = function(key, value){
             if(!_.isArray($scope.filter[key])){
                 $scope.filter[key] = value;
@@ -301,27 +331,6 @@
         $scope.clearFilters = function(){
             initFilterModel();
             $scope.filterFacility($scope.filter);
-        };
-        $scope.filterFacility = function(filters){
-            var changes= constructParams(filters);
-            delete filters.page;
-            resolves.startSpinner();
-            if(!_.isEmpty(changes)){
-                if(_.has(changes, "ward")){
-                    delete changes.county;
-                    delete changes.constituency;
-                }else{
-                    if(_.has(changes, "constituency")){
-                        delete changes.county;
-                    }
-                }
-                changes = removeEmptyFilters(changes);
-                filterApi.facilities.filter(changes)
-                    .success(resolves.success).error(resolves.error);
-            }else{
-                filterApi.facilities.list()
-                    .success(resolves.success).error(resolves.error);
-            }
         };
 
         $scope.class = {
