@@ -3,6 +3,10 @@
     "use strict";
     describe("Filtering: routes", function(){
         var $state, serverUrl, httpBackend, $rootScope;
+        var fields = ["county", "constituency",
+            "ward", "operation_status", "service_category",
+            "facility_type", "owner", "owner_type"
+            ];
         beforeEach(function(){
             module("mfl.filtering");
             module("mflAppConfig");
@@ -20,7 +24,9 @@
         });
 
         it("should go to filtering page: fetch options from backend", function(){
-            httpBackend.expectGET(serverUrl+"api/common/filtering_summaries/")
+
+            httpBackend.expectGET(
+                serverUrl+"api/common/filtering_summaries/?fields="+fields.join(","))
                 .respond(200, {});
             $state.go("filtering");
             expect($state.href("filtering")).toEqual("#/filtering");
@@ -28,7 +34,8 @@
         });
 
         it("should go to filtering page: use already fetch options", function(){
-            httpBackend.expectGET(serverUrl+"api/common/filtering_summaries/")
+            httpBackend.expectGET(
+                serverUrl+"api/common/filtering_summaries/?fields="+fields.join(","))
                 .respond(200, {});
             $rootScope.mflFilteringData = {data: {count: []}};
             $state.go("filtering");
