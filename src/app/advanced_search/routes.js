@@ -24,7 +24,11 @@
                             filteringData: ["$rootScope","filteringApi",
                                 function($rootScope, filterApi){
                                     if(_.isEmpty($rootScope.mflFilteringData)){
-                                        return filterApi.filters.list();
+                                        var fields = ["county", "constituency",
+                                        "ward", "operation_status", "service_category",
+                                        "facility_type", "owner", "owner_type"];
+                                        return filterApi.filters.filter(
+                                            {fields: fields.join(",")});
                                     }else{
                                         return $rootScope.mflFilteringData;
                                     }
