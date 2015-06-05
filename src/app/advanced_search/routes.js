@@ -4,7 +4,7 @@
         "search", "county", "constituency", "ward", "operation_status",
         "facility_type", "number_of_beds", "number_of_cots", "open_whole_day",
         "is_classified", "is_published", "is_regulated", "is_active", "service_category",
-        "open_whole_week", "owner_type"
+        "open_whole_week", "owner_type", "owner"
     ];
     angular.module("mfl.filtering.routes", ["mfl.filtering.services"])
 
@@ -24,7 +24,11 @@
                             filteringData: ["$rootScope","filteringApi",
                                 function($rootScope, filterApi){
                                     if(_.isEmpty($rootScope.mflFilteringData)){
-                                        return filterApi.filters.list();
+                                        var fields = ["county", "constituency",
+                                        "ward", "operation_status", "service_category",
+                                        "facility_type", "owner", "owner_type"];
+                                        return filterApi.filters.filter(
+                                            {fields: fields.join(",")});
                                     }else{
                                         return $rootScope.mflFilteringData;
                                     }

@@ -3,7 +3,8 @@
     describe("Advanced Filtering : Controller", function(){
         var createController, rootScope, httpBackend, serverUrl;
         var filterApi, $window, $compile;
-        var facilityUrl = "api/facilities/facilities/";
+        var default_params = "?is_classified=false&is_published=true";
+        var facilityUrl = "api/facilities/facilities/"+default_params;
         var filterData  = {
             data: {
                 county: [],
@@ -11,7 +12,8 @@
                 operation_status: [],
                 facility_type: [],
                 git: [],
-                owner_type: []
+                owner_type: [],
+                owner: []
             }
         };
         beforeEach(function(){
@@ -83,7 +85,7 @@
         it("should filter facilities: search param set: success", function(){
             var scope = rootScope.$new();
             httpBackend.expectGET(
-                    serverUrl+facilityUrl+"?search=name").respond(200, {results: ["testing"]});
+                    serverUrl+facilityUrl+"&search=name").respond(200, {results: ["testing"]});
             createController(
                 scope, {"search": "name"}, undefined, undefined, true);
             httpBackend.flush();
@@ -93,7 +95,7 @@
         it("should filter facilities: search param set:delete undefined", function(){
             var scope = rootScope.$new();
             httpBackend.expectGET(
-                    serverUrl+facilityUrl+"?search=name").respond(200, {results: ["testing"]});
+                    serverUrl+facilityUrl+"&search=name").respond(200, {results: ["testing"]});
             createController(
                 scope, {"search": "name", "ward": undefined}, undefined, undefined, true);
             httpBackend.flush();
@@ -103,7 +105,7 @@
         it("should filter facilities: search param set: success, empty results", function(){
             var scope = rootScope.$new();
             httpBackend.expectGET(
-                    serverUrl+facilityUrl+"?search=name").respond(200, {results: []});
+                    serverUrl+facilityUrl+"&search=name").respond(200, {results: []});
             createController(
                 scope, {"search": "name"}, undefined, undefined, true);
             httpBackend.flush();
@@ -112,7 +114,7 @@
         it("should filter facilities: search param set: fail", function(){
             var scope = rootScope.$new();
             httpBackend.expectGET(
-                    serverUrl+facilityUrl+"?search=name").respond(500, {error: "serve error"});
+                    serverUrl+facilityUrl+"&search=name").respond(500, {error: "serve error"});
             createController(
                 scope, {"search": "name"}, undefined, undefined, true);
             httpBackend.flush();
@@ -124,7 +126,7 @@
             createController(scope, {});
 
             httpBackend.expectGET(
-                    serverUrl+facilityUrl+"?county=21212").respond(200, {results: ["testing"]});
+                    serverUrl+facilityUrl+"&county=21212").respond(200, {results: ["testing"]});
             scope.filterFacility({county :[{id: "21212"}]});
             httpBackend.flush();
             expect(scope.query_results).toEqual(["testing"]);
@@ -135,7 +137,7 @@
             var scope = rootScope.$new();
             createController(scope, {});
             httpBackend.expectGET(
-                    serverUrl+facilityUrl+"?county=21212").respond(500, {error: "server err"});
+                    serverUrl+facilityUrl+"&county=21212").respond(500, {error: "server err"});
             scope.filterFacility({county :[{id: "21212"}]});
             httpBackend.flush();
             expect(scope.spinneractive).toEqual(false);
@@ -145,7 +147,7 @@
             createController(scope, {});
 
             httpBackend.expectGET(
-                    serverUrl+facilityUrl+"?operation_status=true").respond(200,
+                    serverUrl+facilityUrl+"&operation_status=true").respond(200,
                     {results: ["testing"]});
             scope.filterFacility({"operation_status" :true});
             httpBackend.flush();
@@ -154,19 +156,35 @@
 
         it("should filter facility, no filter", function(){
             var scope = rootScope.$new();
-            spyOn(filterApi.facilities, "filter");
             createController(scope, {});
+            httpBackend.expectGET(
+                    serverUrl+facilityUrl).respond(200,
+                    {results: ["testing"]});
+            scope.defaultFilters = {
+                is_classified: false,
+                is_published: true
+            };
             scope.filterFacility({});
-            expect(filterApi.facilities.filter).not.toHaveBeenCalled();
+            httpBackend.flush();
+            expect(scope.query_results).toEqual(["testing"]);
         });
 
         it("should clear filters", function(){
             var scope = rootScope.$new();
-            spyOn(filterApi.facilities, "filter");
             createController(scope, {});
+            createController(scope, {});
+            httpBackend.expectGET(
+                    serverUrl+facilityUrl).respond(200,
+                    {results: ["testing"]});
+            scope.defaultFilters = {
+                is_classified: false,
+                is_published: true
+            };
             scope.filter.search = "hapa";
             scope.clearFilters();
             expect(scope.filter.search).toBeFalsy();
+            httpBackend.flush();
+            expect(scope.query_results).toEqual(["testing"]);
         });
 
         it("should filter facility: param with no id set", function(){
@@ -174,7 +192,7 @@
             createController(scope, {});
 
             httpBackend.expectGET(
-                    serverUrl+facilityUrl+"?county=true").respond(200,
+                    serverUrl+facilityUrl+"&county=true").respond(200,
                     {results: ["testing"]});
             var testFunc = function(){
                 scope.filterFacility({county :[{name: "21212"}]});
@@ -188,7 +206,7 @@
             createController(scope, {});
 
             httpBackend.expectGET(
-                    serverUrl+facilityUrl+"?ward=21212").respond(200, {results: ["testing"]});
+                    serverUrl+facilityUrl+"&ward=21212").respond(200, {results: ["testing"]});
             scope.filterFacility({ward :[{id: "21212"}], county :[{id: "fa21212"}]});
             httpBackend.flush();
             expect(scope.query_results).toEqual(["testing"]);
@@ -198,7 +216,7 @@
             createController(scope, {});
 
             httpBackend.expectGET(
-                    serverUrl+facilityUrl+"?constituency=21212")
+                    serverUrl+facilityUrl+"&constituency=21212")
                     .respond(200, {results: ["testing"]});
             scope.filterFacility({constituency :[{id: "21212"}], county :[{id: "fa21212"}]});
             httpBackend.flush();
@@ -229,7 +247,7 @@
         it("should filter facilities: county param set: success, empty results", function(){
             var scope = rootScope.$new();
             httpBackend.expectGET(
-                    serverUrl+facilityUrl+"?county=1,2,3").respond(200, {results: []});
+                    serverUrl+facilityUrl+"&county=1,2,3").respond(200, {results: []});
             httpBackend.expectGET(
                     serverUrl+"api/common/constituencies/?county=1,2,3&page_size=2000")
                     .respond(200, {results: []});
@@ -243,7 +261,7 @@
         it("should filter facilities:constituency param set: success, empty results", function(){
             var scope = rootScope.$new();
             httpBackend.expectGET(
-                    serverUrl+facilityUrl+"?constituency=1,2,3").respond(200, {results: []});
+                    serverUrl+facilityUrl+"&constituency=1,2,3").respond(200, {results: []});
             httpBackend.expectGET(
                     serverUrl+"api/common/wards/?constituency=1,2,3&page_size=2000")
                     .respond(200, {results: []});
@@ -257,7 +275,7 @@
         it("should filter facilities:ward param set: success, empty results", function(){
             var scope = rootScope.$new();
             httpBackend.expectGET(
-                    serverUrl+facilityUrl+"?ward=1,2,3").respond(200, {results: []});
+                    serverUrl+facilityUrl+"&ward=1,2,3").respond(200, {results: []});
             httpBackend.expectGET(
                     serverUrl+"api/common/wards/?id=1,2,3&page_size=2000")
                     .respond(200, {results: []});
@@ -271,7 +289,7 @@
         it("should filter facilities:ward param set: error", function(){
             var scope = rootScope.$new();
             httpBackend.expectGET(
-                    serverUrl+facilityUrl+"?ward=1,2,3").respond(200, {results: []});
+                    serverUrl+facilityUrl+"&ward=1,2,3").respond(200, {results: []});
             httpBackend.expectGET(
                     serverUrl+"api/common/wards/?id=1,2,3&page_size=2000")
                     .respond(500, {error: "server error"});
@@ -395,7 +413,7 @@
             createController(scope, {});
 
             httpBackend.expectGET(
-                serverUrl+facilityUrl+"?county=21212").respond(
+                serverUrl+facilityUrl+"&county=21212").respond(
                 200,
                 {
                     results: ["testing"],
@@ -415,7 +433,7 @@
             createController(scope, {});
 
             httpBackend.expectGET(
-                serverUrl+facilityUrl+"?county=21212").respond(
+                serverUrl+facilityUrl+"&county=21212").respond(
                 200,
                 {
                     results: ["testing"],
@@ -435,7 +453,7 @@
             createController(scope, {});
 
             httpBackend.expectGET(
-                serverUrl+facilityUrl+"?county=21212").respond(
+                serverUrl+facilityUrl+"&county=21212").respond(
                 200,
                 {
                     results: ["testing"],
@@ -453,7 +471,7 @@
             var scope = rootScope.$new();
             createController(scope, {});
             httpBackend.expectGET(
-                serverUrl+facilityUrl+"?county=21212").respond(
+                serverUrl+facilityUrl+"&county=21212").respond(
                 200,
                 {
                     results: ["testing"],

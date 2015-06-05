@@ -71,6 +71,13 @@
 
    <div class="group">
        <div class="">
+            <div class="multiselect-div" ng-dropdown-multiselect=""  options="filter_data.owner" selected-model="filter.owner"
+            extra-settings="dropDownSettings" translation-texts="selectTitles.owner"></div>
+       </div>
+   </div>
+
+   <div class="group">
+       <div class="">
             <div class="multiselect-div" ng-dropdown-multiselect=""  options="filter_data.service_category" selected-model="filter.service_category"
             extra-settings="dropDownSettings" translation-texts="selectTitles.service_category"></div>
        </div>
@@ -107,24 +114,6 @@
             <span class="check"></span>
             <span class="box"></span>
              Open whole Week
-         </label>
-    </div>
-
-    <div class="checkbox-group margin-t-10">
-        <input name="is_classified" ng-model="filter.is_classified" type="checkbox" id="is_classified">
-        <label for="is_classified">
-            <span class="check"></span>
-            <span class="box"></span>
-             Is classified
-         </label>
-    </div>
-
-    <div class="checkbox-group margin-t-10">
-        <input name="is_published" ng-model="filter.is_published" type="checkbox" id="is_published">
-        <label for="is_published">
-            <span class="check"></span>
-            <span class="box"></span>
-             Is published
          </label>
     </div>
 
