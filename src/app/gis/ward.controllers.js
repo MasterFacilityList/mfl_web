@@ -39,7 +39,8 @@
             angular.extend($scope, {
                 defaults: {
                     scrollWheelZoom: false,
-                    tileLayer: ""
+                    tileLayer: "",
+                    dragging:false
                 },
                 events: {
                     map: {

@@ -3,15 +3,22 @@
     angular
     .module("mfl.gis_country.controllers", ["leaflet-directive",
         "mfl.gis.wrapper"])
-    .controller("mfl.gis.controllers.gis", ["$scope","leafletData","gisCountriesApi",
+    .controller("mfl.gis.controllers.gis", ["$scope","leafletData",
         "$http","$stateParams","$state","SERVER_URL","gisCountiesApi","gisFacilitiesApi",
-        "$timeout","$q",
-        function ($scope,leafletData,gisCountriesApi,$http, $stateParams,
-                   $state,SERVER_URL, gisCountiesApi, gisFacilitiesApi,$timeout,$q) {
+        "$timeout",
+        function ($scope,leafletData,$http, $stateParams,
+                   $state,SERVER_URL, gisCountiesApi, gisFacilitiesApi,$timeout) {
         $scope.tooltip = {
             "title": "",
             "checked": false
         };
+        var bounds = [
+            [-4.669618,33.907219],
+            [-4.669618,41.90516700000012],
+            [4.622499,41.90516700000012],
+            [4.622499,33.907219],
+            [-4.669618,33.907219]
+        ];
         $scope.title = [
             {
                 icon: "fa-map-marker",
@@ -33,7 +40,8 @@
         angular.extend($scope, {
             defaults: {
                 scrollWheelZoom: false,
-                tileLayer: ""
+                tileLayer: "",
+                dragging:false
             },
             events: {
                 map: {
@@ -46,12 +54,6 @@
                 }
             }
         });
-        $scope.filters_country = {
-            code: "KEN"
-        };
-        /*Gets Bounds*/
-        var boundPromise = gisCountriesApi.api.filter($scope.filters_country);
-            
         /*Gets counties for boundaries*/
         gisCountiesApi.api.list()
         .success(function (data){
@@ -104,20 +106,12 @@
         .error(function(err){
             $scope.alert = err.error;
         });
-        $q.all([boundPromise])
-            .then(function(payload){
-                leafletData.getMap("countrymap")
-                    .then(function (map) {
-                        var coords = payload[0].data.results.features[0]
-                         .properties.bound.coordinates[0];
-                        var bounds = _.map(coords, function(c) {
-                            return [c[1], c[0]];
-                        });
-                        map.fitBounds(bounds);
-                        map.spin(true,
-                                 {lines: 13, length: 20,corners:1,radius:30,width:10});
-                        $timeout(function() {map.spin(false);}, 1000);
-                    });
+        leafletData.getMap("countrymap")
+            .then(function (map) {
+                map.fitBounds(bounds);
+                map.spin(true,
+                         {lines: 13, length: 20,corners:1,radius:30,width:10});
+                $timeout(function() {map.spin(false);}, 1000);
             });
         /*Gets Facilities for heatmap*/
         gisFacilitiesApi.api

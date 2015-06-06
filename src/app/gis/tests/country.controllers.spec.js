@@ -67,9 +67,6 @@ describe("Tests for mfl.gis.controllers.gis (Country Level):", function () {
             }
         };
         $httpBackend.expectGET(
-        SERVER_URL + "api/gis/country_borders/?code=KEN")
-            .respond(200, data);
-        $httpBackend.expectGET(
         SERVER_URL + "api/gis/county_boundaries/")
             .respond(200, data);
         $httpBackend.expectGET(
@@ -119,9 +116,6 @@ describe("Tests for mfl.gis.controllers.gis (Country Level):", function () {
             "$stateParams": {},
             "SERVER_URL": SERVER_URL
         });
-        $httpBackend.expectGET(
-        SERVER_URL + "api/gis/country_borders/?code=KEN")
-            .respond(500, data);
         $httpBackend.expectGET(
         SERVER_URL + "api/gis/county_boundaries/")
             .respond(500, data);
@@ -256,9 +250,6 @@ describe("Tests for mfl.gis.controllers.gis (Country Level):", function () {
             "gisFacilitiesApi": gisFacilitiesApi,
             "$timeout": timeout.timeout
         });
-        $httpBackend.expectGET(
-        SERVER_URL + "api/gis/country_borders/?code=KEN")
-            .respond(200, data);
         $httpBackend.expectGET(
         SERVER_URL + "api/gis/county_boundaries/")
             .respond(200, data);

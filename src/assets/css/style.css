@@ -18,12 +18,6 @@ img {
     max-width: 100%;
 }
 
-h1,h2,h3,h4,h5,h6 {
-    font-weight: normal;
-    color: #777777;
-    font-family: 'Lato',sans-serif;
-	font-weight: 300;
-}
 
 h1,h2,h3 {
     margin: 0 0 25px;
@@ -116,11 +110,6 @@ ul,li,ol {
     padding: 0;
 }
 
-a:hover,a:focus {
-    text-decoration: none;
-    outline: none;
-	color: #777777;
-}
 
 .btn-special,.btn-normal,.btn-small,.btn-large,.comment-des,.steps .popup,.testimonial p,.contact-box {
     border-radius: 3px;
