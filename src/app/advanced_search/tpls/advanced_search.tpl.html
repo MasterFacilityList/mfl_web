@@ -44,7 +44,7 @@
                     <p class="lead" ng-if="!no_search_query">
                         Sorry, no match for the query <span class="text-danger">{{query}}</span>.
                     </p>
-                    <p ng-if="no_search_query">
+                    <p class="lead" ng-if="no_search_query">
                         Sorry, no match was found.
                     </p>
                 </div>
@@ -65,7 +65,7 @@
                             <h5>
                                 <span class="pull-left fs-16">
                                     <label>Status: </label>
-                                    <span class="text-blue fw-700">{{fac.regulatory_status_name}}</span>
+                                    <span class="text-success fw-700">{{fac.regulatory_status_name}}</span>
                                 </span>
                                 <span class="pull-right">
                                     <span class="fs-14 fw-600 label label-primary">{{fac.facility_type_name}}
