@@ -9,7 +9,9 @@
             "title": "",
             "checked": false
         };
+        $scope.isFocused = false;
         $scope.typeaheadFacilities = function () {
+            $scope.isFocused = !$scope.isFocused;
             _.debounce(searchService.typeaheadFacilities("facilities"),
             300);
         };
