@@ -32,6 +32,7 @@ module.exports = {
             "!src/<%= settings_file %>"
         ],
         jsunit: ["src/**/*.spec.js"],
+        png: ["src/**/*.png"],
 
         coffee: ["src/**/*.coffee", "!src/**/*.spec.coffee"],
         coffeeunit: ["src/**/*.spec.coffee"],
