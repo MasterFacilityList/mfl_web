@@ -67,9 +67,6 @@ describe("Tests for mfl.gis.controllers.gis (Country Level):", function () {
             }
         };
         $httpBackend.expectGET(
-        SERVER_URL + "api/gis/country_borders/?code=KEN")
-            .respond(200, data);
-        $httpBackend.expectGET(
         SERVER_URL + "api/gis/county_boundaries/")
             .respond(200, data);
         $httpBackend.expectGET(
@@ -119,9 +116,6 @@ describe("Tests for mfl.gis.controllers.gis (Country Level):", function () {
             "$stateParams": {},
             "SERVER_URL": SERVER_URL
         });
-        $httpBackend.expectGET(
-        SERVER_URL + "api/gis/country_borders/?code=KEN")
-            .respond(500, data);
         $httpBackend.expectGET(
         SERVER_URL + "api/gis/county_boundaries/")
             .respond(500, data);
@@ -216,7 +210,13 @@ describe("Tests for mfl.gis.controllers.gis (Country Level):", function () {
                         properties:{
                             bound:{
                                 type:"",
-                                coordinates:[[[3,4],[4,5]]]
+                                coordinates:[
+                                    [-4.669618,33.907219],
+                                    [-4.669618,41.90516700000012],
+                                    [4.622499,41.90516700000012],
+                                    [4.622499,33.907219],
+                                    [-4.669618,33.907219]
+                                ]
                             },
                             center:{
                                 type:"",
@@ -257,9 +257,6 @@ describe("Tests for mfl.gis.controllers.gis (Country Level):", function () {
             "$timeout": timeout.timeout
         });
         $httpBackend.expectGET(
-        SERVER_URL + "api/gis/country_borders/?code=KEN")
-            .respond(200, data);
-        $httpBackend.expectGET(
         SERVER_URL + "api/gis/county_boundaries/")
             .respond(200, data);
         $httpBackend.expectGET(
@@ -278,7 +275,11 @@ describe("Tests for mfl.gis.controllers.gis (Country Level):", function () {
         spyOn(map, "fitBounds");
         spyOn(map, "spin");
         then_fxn(map);
-        expect(map.fitBounds).toHaveBeenCalledWith([[4,3], [5,4]]);
+        expect(map.fitBounds).toHaveBeenCalledWith([[-4.669618,33.907219],
+                                    [-4.669618,41.90516700000012],
+                                    [4.622499,41.90516700000012],
+                                    [4.622499,33.907219],
+                                    [-4.669618,33.907219]]);
         expect(map.spin).toHaveBeenCalledWith(
             true, {lines: 13, length: 20,corners:1,radius:30,width:10});
         expect(map.spin.calls[0].args[0]).toBe(true);
