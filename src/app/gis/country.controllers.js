@@ -116,18 +116,17 @@
         gisFacilitiesApi.api
         .list()
         .success(function (data){
-            var heats = data.results.features;
+            var heats = data;
             var heatpoints = _.map(heats, function(heat){
                 return [
                         heat.geometry.coordinates[1],
                         heat.geometry.coordinates[0]
                     ];
             });
-            $scope.heatpoints = heatpoints;
             $scope.layers.overlays.heat = {
                 name: "Facilities",
-                type: "heat", 
-                data: angular.copy($scope.heatpoints),
+                type: "heat",
+                data: heatpoints,
                 layerOptions: {
                     radius: 25,
                     opacity:1,
