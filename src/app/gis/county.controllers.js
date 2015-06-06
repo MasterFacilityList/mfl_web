@@ -73,7 +73,7 @@
 
         $q.all([facilitiesPromise, constBoundariesPromise])
         .then(function(payload){
-            var fac_marks = payload[0].data.results.features;
+            var fac_marks = payload[0].data;
             var county_marks = payload[1].data.results.features;
             $scope.facility_count = fac_marks.length;
             var heatpoints = _.map(fac_marks, function(heat){
@@ -82,7 +82,6 @@
                         heat.geometry.coordinates[0]
                     ];
             });
-            $scope.heatpoints = heatpoints;
             var markers = _.mapObject(county_marks, function(mark){
                 return {
                         layer:"constituencies",
@@ -127,7 +126,7 @@
                         heat:{
                             name: "Facilities",
                             type: "heat",
-                            data: angular.copy($scope.heatpoints),
+                            data: heatpoints,
                             layerOptions: {
                                 radius: 25,
                                 opacity:1,
