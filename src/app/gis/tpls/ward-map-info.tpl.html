@@ -2,9 +2,9 @@
     <div class="content-card">
         <h4>NAVIGATION</h4>
         <a ui-sref="gis" ui-sref-opts="{reload: true}">KENYA /</a><br>
-        <a ui-sref="gis.gis_county({county_id:county_id,const_boundaries:const_boundaries})" ui-sref-opts="{reload: true}">&nbsp;{{county.properties.name}} /</a><br>
-        <a ui-sref="gis.gis_county.gis_const({county_id:county_id,const_boundaries:const_boundaries,const_id:const_id,ward_boundaries:ward_boundaries})" ui-sref-opts="{reload: true}">&nbsp;&nbsp;{{constituency.properties.name}} /</a><br>
-        <a ui-sref="gis.gis_county.gis_const.gis_ward({county_id:county_id,const_boundaries:const_boundaries,const_id:const_id,ward_boundaries:ward_boundaries,ward_id:ward_id})">&nbsp;&nbsp;&nbsp;{{ward.properties.name}} MAP</a><br>
+        &nbsp;<a ui-sref="gis.gis_county({county_id:county_id,const_boundaries:const_boundaries})" ui-sref-opts="{reload: true}">{{county.properties.name}} /</a><br>
+        &nbsp;&nbsp;<a ui-sref="gis.gis_county.gis_const({county_id:county_id,const_boundaries:const_boundaries,const_id:const_id,ward_boundaries:ward_boundaries})" ui-sref-opts="{reload: true}">{{constituency.properties.name}} /</a><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<a ui-sref="gis.gis_county.gis_const.gis_ward({county_id:county_id,const_boundaries:const_boundaries,const_id:const_id,ward_boundaries:ward_boundaries,ward_id:ward_id})">{{ward.properties.name}}</a><br>
     </div>
     <div class="col-xs-12 content-card">
        <strong class="margin-10">LEGEND</strong>
