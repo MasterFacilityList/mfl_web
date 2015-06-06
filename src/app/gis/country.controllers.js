@@ -5,9 +5,9 @@
         "mfl.gis.wrapper"])
     .controller("mfl.gis.controllers.gis", ["$scope","leafletData",
         "$http","$stateParams","$state","SERVER_URL","gisCountiesApi","gisFacilitiesApi",
-        "$timeout",
+        "$timeout","leafletEvents",
         function ($scope,leafletData,$http, $stateParams,
-                   $state,SERVER_URL, gisCountiesApi, gisFacilitiesApi,$timeout) {
+                   $state,SERVER_URL, gisCountiesApi, gisFacilitiesApi,$timeout,leafletEvents) {
         $scope.tooltip = {
             "title": "",
             "checked": false
@@ -49,8 +49,7 @@
                     logic: "emit"
                 },
                 marker: {
-                    enable: [],
-                    logic: "emit"
+                    disable : leafletEvents.getAvailableMarkerEvents()
                 }
             }
         });
@@ -127,7 +126,7 @@
             $scope.heatpoints = heatpoints;
             $scope.layers.overlays.heat = {
                 name: "Facilities",
-                type: "heat",
+                type: "heat", 
                 data: angular.copy($scope.heatpoints),
                 layerOptions: {
                     radius: 25,
