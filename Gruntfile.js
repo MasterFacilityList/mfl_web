@@ -18,6 +18,7 @@ module.exports = function ( grunt ) {
     grunt.loadNpmTasks("grunt-karma");
     grunt.loadNpmTasks("grunt-ngmin");
     grunt.loadNpmTasks("grunt-html2js");
+    grunt.loadNpmTasks("grunt-spritesmith");
 
     grunt.loadNpmTasks("grunt-istanbul-coverage");
     grunt.loadNpmTasks("grunt-contrib-connect");
@@ -60,6 +61,16 @@ module.exports = function ( grunt ) {
                 dest: "CHANGELOG.md",
                 template: "changelog.tpl"
             }
+        },
+        /**
+         * Sprites images in the assets
+         */
+        sprite:{
+            all: {
+                src: [ "<%= app_files.png %>" ],
+                dest: "src/assets/images/sprite.png",
+                destCss: "src/assets/css/sprites.css"
+          }
         },
 
         /**
