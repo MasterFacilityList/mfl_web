@@ -70,7 +70,7 @@ module.exports = function ( grunt ) {
                 src: [ "<%= app_files.png %>" ],
                 dest: "src/assets/images/sprite.png",
                 destCss: "src/assets/css/sprites.css"
-          }
+            }
         },
 
         /**
