@@ -11,7 +11,7 @@
         };
         $scope.typeaheadFacilities = function () {
             _.debounce(searchService.typeaheadFacilities("facilities"),
-                500);
+            300);
         };
         $scope.search = function (query) {
             $scope.loader = true;
