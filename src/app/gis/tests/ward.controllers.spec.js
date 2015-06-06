@@ -38,29 +38,27 @@ describe("Tests for mfl.gis.controllers.gis_ward (Ward Level):", function () {
     it("should load mfl.gis.controller.gis_ward", inject(["$httpBackend","$state",
                  "leafletData","gisWardsApi",
         function ($httpBackend, $state, leafletData,gisWardsApi) {
-        var data = {
-            results:{
-                id :"",
-                type:"",
-                features: [
-                    {
-                        id: "",
-                        geometry:{
-                            type:"",
-                            coordinates:[0,1]
-                        },
-                        properties:{
-                            facility_name:""
-                        }
+        var data2 = [
+            {
+                geometry:{
+                    type:"",
+                    coordinates:[]
+                },
+                properties:{
+                    bound:{
+                        type:"",
+                        coordinates:[[3,4],[4,5]]
+                    },
+                    center:{
+                        type:"",
+                        coordinates:[[3,4],[4,5]]
                     }
-                ],
-                geometry:{},
-                properties: {}
+                }
             }
-        };
+        ];
         $httpBackend.expectGET(
         SERVER_URL + "api/gis/coordinates/?ward=4")
-            .respond(200, data);
+            .respond(200, data2);
         controller("mfl.gis.controllers.gis_ward", {
             "$scope": scope,
             "leafletData": leafletData,
