@@ -16,30 +16,6 @@ angular.module('sil-typeahead', ['sil.api.wrapper'])
 
         var tt = {}; //holds the bloodhound adapters
         var listeners = []; // holds the typeahead event listeners
-
-        var helpers = {
-            /**
-             * Get typeahead input field
-             * @param event
-             * @param obj
-             * @param dataset_name
-             */
-            updateInput : function (event, obj, dataset_name) {
-                _.each(listeners, function (val) {
-                    if (_.isFunction(val)) {
-                        val(event, obj, dataset_name);
-                    }
-                });
-                $(event.target).trigger('input');
-            },
-            getSelector : function (classname) {
-                return $('.' + classname + ':not(\'.tt-hint\'):not(\'.tt-input\')');
-            },
-            setInputFocus: function (classname) {
-                $();
-            }
-        };
-
         this.addListener = function (fxn) {
             listeners.push(fxn);
         };
@@ -76,12 +52,38 @@ angular.module('sil-typeahead', ['sil.api.wrapper'])
                         transform: function (response) {
                             return response.results;
                         }
+                        // filter: function (results) {
+                        //     if(results.hasOwnProperty("hits")){
+                        //         return (results.hits);
+                        //     }
+                        //     return results;
+                        // }
                     }
                 });
             }
             tt_adapter.initialize();
             tt[name] = tt_adapter;
             return tt_adapter;
+        };
+
+        var helpers = {
+            /**
+             * Get typeahead input field
+             * @param event
+             * @param obj
+             * @param dataset_name
+             */
+            updateInput : function (event, obj, dataset_name) {
+                _.each(listeners, function (val) {
+                    if (_.isFunction(val)) {
+                        val(event, obj, dataset_name);
+                    }
+                });
+                $(event.target).trigger('input');
+            },
+            getSelector : function (classname) {
+                return $('.' + classname + ':not(\'.tt-hint\'):not(\'.tt-input\')');
+            }
         };
 
         /**
