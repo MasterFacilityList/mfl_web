@@ -35,11 +35,13 @@ describe("Tests for mfl.gis.controllers.gis (Country Level):", function () {
 
     it("should load mfl.gis.controller.gis (Country Level)",
        inject(["$httpBackend", "$rootScope", function ($httpBackend, $rootScope) {
-        var data = {
-            count: 1,
+        var data1 = {
             results:{
+                id :"4",
                 type:"",
-                features:[
+                geometry:{},
+                properties: {},
+                features: [
                     {
                         id:"",
                         type:"",
@@ -58,20 +60,33 @@ describe("Tests for mfl.gis.controllers.gis (Country Level):", function () {
                             }
                         }
                     }
-                ],
+                ]
+            }
+        };
+        var data2 = [
+            {
                 geometry:{
                     type:"",
                     coordinates:[]
                 },
-                properties: {}
+                properties:{
+                    bound:{
+                        type:"",
+                        coordinates:[[3,4],[4,5]]
+                    },
+                    center:{
+                        type:"",
+                        coordinates:[[3,4],[4,5]]
+                    }
+                }
             }
-        };
+        ];
         $httpBackend.expectGET(
         SERVER_URL + "api/gis/county_boundaries/")
-            .respond(200, data);
+            .respond(200, data1);
         $httpBackend.expectGET(
         SERVER_URL + "api/gis/coordinates/")
-            .respond(200, data);
+            .respond(200, data2);
         controller("mfl.gis.controllers.gis", {
             "$scope": $rootScope.$new(),
             "leafletData": leafletData,
@@ -195,7 +210,7 @@ describe("Tests for mfl.gis.controllers.gis (Country Level):", function () {
     it("should get leaflet data map(Country Level)",
        inject(["$state", "$httpBackend", "$rootScope",
                function ($state, $httpBackend, $rootScope) {
-        var data = {
+        var data1 = {
             count: 1,
             results:{
                 type:"",
@@ -232,6 +247,24 @@ describe("Tests for mfl.gis.controllers.gis (Country Level):", function () {
                 properties: {}
             }
         };
+        var data2 = [
+            {
+                geometry:{
+                    type:"",
+                    coordinates:[]
+                },
+                properties:{
+                    bound:{
+                        type:"",
+                        coordinates:[[3,4],[4,5]]
+                    },
+                    center:{
+                        type:"",
+                        coordinates:[[3,4],[4,5]]
+                    }
+                }
+            }
+        ];
         var obj = {
             then: angular.noop
         };
@@ -258,10 +291,10 @@ describe("Tests for mfl.gis.controllers.gis (Country Level):", function () {
         });
         $httpBackend.expectGET(
         SERVER_URL + "api/gis/county_boundaries/")
-            .respond(200, data);
+            .respond(200, data1);
         $httpBackend.expectGET(
         SERVER_URL + "api/gis/coordinates/")
-            .respond(200, data);
+            .respond(200, data2);
         $httpBackend.flush();
         expect(leafletData.getMap).toHaveBeenCalled();
         expect(obj.then).toHaveBeenCalled();

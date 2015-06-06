@@ -45,7 +45,7 @@ describe("Tests for mfl.gis_county.controllers.gis (County Level):", function ()
     it("should load mfl.gis.controller.gis_county (County Level)", inject(["$httpBackend","$state",
                  "leafletData","gisConstsApi","gisCountiesApi",
         function ($httpBackend, $state, leafletData,gisConstsApi,gisCountiesApi) {
-        var data = {
+        var data1 = {
             results:{
                 id :"4",
                 type:"",
@@ -73,15 +73,33 @@ describe("Tests for mfl.gis_county.controllers.gis (County Level):", function ()
                 ]
             }
         };
+        var data2 = [
+            {
+                geometry:{
+                    type:"",
+                    coordinates:[]
+                },
+                properties:{
+                    bound:{
+                        type:"",
+                        coordinates:[[3,4],[4,5]]
+                    },
+                    center:{
+                        type:"",
+                        coordinates:[[3,4],[4,5]]
+                    }
+                }
+            }
+        ];
         $httpBackend.expectGET(
         SERVER_URL + "api/gis/county_boundaries/34/")
-            .respond(200, data);
+            .respond(200, data1);
         $httpBackend.expectGET(
         SERVER_URL + "api/gis/coordinates/?county=4")
-            .respond(200, data);
+            .respond(200, data2);
         $httpBackend.expectGET(
         SERVER_URL + "api/gis/constituency_boundaries/?id=undefined")
-            .respond(200, data);
+            .respond(200, data1);
         $state.go("gis.gis_county", {"county_id": "34"});
         controller("mfl.gis.controllers.gis_county", {
             "$scope": scope,

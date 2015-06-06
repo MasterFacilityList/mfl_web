@@ -43,9 +43,9 @@ describe("Tests for mfl.gis.controllers.gis_const (Constituency Level):", functi
     it("should load mfl.gis.controller.gis_const", inject(["$httpBackend","$state",
                  "leafletData","gisConstsApi","gisWardsApi",
         function ($httpBackend, $state, leafletData,gisConstsApi,gisWardsApi) {
-        var data = {
+        var data1 = {
             results:{
-                id :"",
+                id :"4",
                 type:"",
                 geometry:{},
                 properties: {},
@@ -71,18 +71,36 @@ describe("Tests for mfl.gis.controllers.gis_const (Constituency Level):", functi
                 ]
             }
         };
+        var data2 = [
+            {
+                geometry:{
+                    type:"",
+                    coordinates:[]
+                },
+                properties:{
+                    bound:{
+                        type:"",
+                        coordinates:[[3,4],[4,5]]
+                    },
+                    center:{
+                        type:"",
+                        coordinates:[[3,4],[4,5]]
+                    }
+                }
+            }
+        ];
         $httpBackend.expectGET(
         SERVER_URL + "api/gis/county_boundaries/34/")
-            .respond(200, data);
+            .respond(200, data1);
         $httpBackend.expectGET(
         SERVER_URL + "api/gis/constituency_boundaries/")
-            .respond(200, data);
+            .respond(200, data1);
         $httpBackend.expectGET(
         SERVER_URL + "api/gis/coordinates/?constituency=4")
-            .respond(200, data);
+            .respond(200, data2);
         $httpBackend.expectGET(
         SERVER_URL + "api/gis/ward_boundaries/?id=undefined")
-            .respond(200, data);
+            .respond(200, data1);
         $state.go("gis.gis_county.gis_const", {"county_id": "34"});
         controller("mfl.gis.controllers.gis_const", {
             "$scope": scope,
