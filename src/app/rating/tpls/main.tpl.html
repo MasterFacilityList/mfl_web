@@ -76,7 +76,7 @@
             </h4>
             <br>
             <br>
-            <h4 class="fs-16 margin-t-5  hidden-xs">
+            <h4 class="fs-16 margin-t--15  hidden-xs">
                 <span class="pull-left">
                     <label>Beds: </label>
                     {{oneFacility.number_of_beds}}
@@ -91,7 +91,7 @@
                     </span>
                 </span>
             </h4>
-            <h5 class="fs-13 margin-t-5  visible-xs">
+            <h5 class="fs-13  visible-xs">
                 <span class="pull-left">
                     <label>Beds: </label>
                     {{oneFacility.number_of_beds}}
@@ -107,7 +107,7 @@
                 </span>
             </h5>
             <br>
-            <h4 class="fs-16  hidden-xs">
+            <h4 class="fs-16 margin-t--5 hidden-xs">
                 <span class="pull-left">
                     <label>Cots: </label>
                     {{oneFacility.number_of_cots}}
@@ -119,7 +119,7 @@
                     </span>
                 </span>
             </h4>
-            <h5 class="fs-13  visible-xs">
+            <h5 class="fs-13   visible-xs">
                 <span class="pull-left">
                     <label>Cots: </label>
                     {{oneFacility.number_of_cots}}
@@ -179,11 +179,11 @@
             </h5>
             <br ng-if="oneFacility.facility_physical_address.plot_number !== ''">
             <h4 class="margin-t--15 fs-16 fw-600  hidden-xs">
-                <label>Close to: </label>
+                <label>Description: </label>
                 {{oneFacility.location_desc}}
             </h4>
             <h5 class="margin-t--15 fs-14 fw-600  visible-xs">
-                <label>Close to: </label>
+                <label>Description: </label>
                 {{oneFacility.location_desc}}
             </h5>
             <!-- End of locatin displays -->

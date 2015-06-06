@@ -94,8 +94,10 @@ angular.module('sil-typeahead', ['sil.api.wrapper'])
             var selector = helpers.getSelector(fieldclass);
             selector
                 .typeahead({
-                    minLength: 2,
-                    highlight: true
+                    //changed min-length from 2 to 1 and added hint
+                    minLength: 0,
+                    highlight: true,
+                    hint: true
                 }, datasets)
                 .on('typeahead:autocompleted', function (a, b, c) {
                     helpers.updateInput(a, b, c);
