@@ -2,9 +2,9 @@
 (function(angular){
     angular.module("mfl.home.controllers", ["mfl.facilities.wrapper"])
 
-    .controller("mfl.home.controllers.home", ["$scope", "$state",
+    .controller("mfl.home.controllers.home", ["$scope", "$window",
         "searchService",
-        function ($scope, $state, searchService) {
+        function ($scope, $window, searchService) {
         $scope.tooltip = {
             "title": "",
             "checked": false
@@ -17,7 +17,7 @@
         };
         $scope.search = function (query) {
             $scope.loader = true;
-            $state.go("filtering", {search: query});
+            $window.location = "#/filtering?search="+query;
         };
     }])
 
