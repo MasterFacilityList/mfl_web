@@ -31,10 +31,9 @@
         });
 
         it("should search facilites on `mfl.home.controllers.home`", function(){
-            spyOn($state, "go");
             controller("mfl.home.controllers.home");
             scope.search("testing");
-            expect($state.go).toHaveBeenCalledWith("filtering", {search:"testing"});
+            expect(scope.loader).toBeTruthy();
         });
 
         it("should test auto-complete on `mfl.home.controllers.home`", function(){

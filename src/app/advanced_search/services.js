@@ -4,7 +4,7 @@
 
     .service("filteringApi", ["api", function(api){
         this.filters = api.setBaseUrl("api/common/filtering_summaries");
-        this.facilities = api.setBaseUrl("api/facilities/facilities");
+        this.facilities = api.setBaseUrl("api/facilities/facilities_list");
         this.constituencies = api.setBaseUrl("api/common/constituencies");
         this.wards = api.setBaseUrl("api/common/wards");
         this.counties = api.setBaseUrl("api/common/counties");
