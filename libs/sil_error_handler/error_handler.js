@@ -185,6 +185,11 @@
                                 loggingService.log(JSON.stringify(error_info), "critical", true);
                                 error_msg = helpers.showError("Resource not found");
                                 break;
+                            case 429:
+                                loggingService.log(JSON.stringify(error_info), "critical", true);
+                                error_msg = helpers.showError(
+                                    "You cannot rate service more than once on the same day");
+                                break;
                             case 401:
                                 loggingService.log(JSON.stringify(error_info),"critical", true);
                                 error_msg = helpers.showError(
