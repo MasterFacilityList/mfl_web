@@ -4,7 +4,7 @@
         var createController, rootScope, httpBackend, serverUrl;
         var filterApi, $window, $compile;
         var default_params = "?is_classified=false&is_published=true";
-        var facilityUrl = "api/facilities/facilities/"+default_params;
+        var facilityUrl = "api/facilities/facilities_list/"+default_params;
         var filterData  = {
             data: {
                 county: [],
