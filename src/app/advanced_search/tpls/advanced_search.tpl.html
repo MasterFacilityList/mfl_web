@@ -8,6 +8,17 @@
                     <span class="text-danger" ng-if="filter.serach">
                        for {{filter.search}}
                     </span>
+                    <span class="visible-xs">
+                        <br>
+                        <a href ng-click="offCanvas()" class="login-btn login-btn-primary" >
+                            <span ng-hide="activate_offcanvas">
+                                <i class="fa fa-bars"></i> Advanced search
+                            </span>
+                            <span ng-show="activate_offcanvas">
+                                <i class="fa fa-arrow-left"></i> Hide search
+                            </span>
+                        </a>
+                    </span>
                 </span>
                 <span class="pull-right">
                     <a class="action-btn action-btn-md action-btn-primary" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Excel export" ng-click="excelExport()" target="download" download >
@@ -107,15 +118,6 @@
             </div>
             <!-- End of advanced filter form ======================-->
          </div>
-
-         <a href ng-click="offCanvas()" class="login-btn login-btn-primary" >
-            <span ng-hide="activate_offcanvas">
-                <i class="fa fa-search"></i> Advanced search
-            </span>
-            <span ng-show="activate_offcanvas">
-                <i class="fa fa-arrow-left"></i> Hide search
-            </span>
-        </a>
 
             <!-- ng-class="class.large"> -->
             <div class="col-xs-12 search-results" >
