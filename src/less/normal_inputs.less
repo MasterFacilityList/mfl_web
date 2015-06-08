@@ -83,7 +83,7 @@ input[type=search]:focus, input[type=password],input[type=email],
     pointer-events:none;
     left:5px;
     top:10px;
-    transition:0.2s ease all;
+    transition:0.1s ease all;
 }
 
 /* active state */
@@ -107,7 +107,7 @@ textarea:focus ~ label, textarea:valid ~ label {
     bottom:1px;
     position:absolute;
     background:#2196F3;
-    transition:0.2s ease all;
+    transition:0.1s ease all;
 }
 .bar:before {
     left:50%;
@@ -143,7 +143,7 @@ input[type=text]:focus ~ .highlight,
 input[type=number]:focus ~ .highlight, input[type=email],
 input[type=search]:focus ~ .highlight, input[type=password],
 select:focus ~ .highlight, textarea:focus ~ .highlight {
-    animation:inputHighlighter 0.3s ease;
+    animation:inputHighlighter 0.1s ease;
 }
 
 /* ANIMATIONS ================ */
@@ -187,12 +187,7 @@ input:-moz-ui-invalid {
     display: block;
     position: absolute;
     border-radius: 50%;
-    /*padding-top: 240%;
-    padding-left: 240%;
-    margin-top: -120%;
-    margin-left: -120%;*/
     opacity: 0;
-    /*transition: all 1s;*/
 }
 .btn:active:after,
 .nav a:active:after {
