@@ -103,7 +103,7 @@
             gisFacilitiesApi.api
             .filter($scope.filters_ward)
             .success(function (data){
-                var marks = data.results.features;
+                var marks = data;
                 $scope.facility_count = marks.length;
                 var markers = _.mapObject(marks, function(mark){
                     return  {
