@@ -16,7 +16,12 @@
                 owner: []
             }
         };
+        var token = {
+            "access_token": "abcd"
+        };
+
         beforeEach(function(){
+            window.localStorage.setItem("auth.token", JSON.stringify(token));
             module("mfl.filtering", ["$provide" , function($provide){
                 $window = {
                     location: {}

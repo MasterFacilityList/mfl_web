@@ -8,9 +8,9 @@
     ])
     .controller("mfl.filtering.controller", ["$scope","$rootScope",
         "$stateParams", "filteringApi","filteringData", "SERVER_URL",
-        "$window", "api.auth",
+        "$window",
         function($scope, $rootScope, $stateParams,filterApi,
-            filteringData,SERVER_URL, $window, apiAuth){
+            filteringData,SERVER_URL, $window){
         $scope.filter_data = {};
         //variable to id if  on search or facility listings view
         $scope.no_search_query = false;
@@ -351,7 +351,7 @@
         //exporting to excel functionality
         $scope.excelExport = function () {
             var url = SERVER_URL+filterApi.facilities.apiBaseUrl+"/";
-            var token = apiAuth.getToken().access_token;
+            var token = JSON.parse(window.localStorage.getItem("auth.token")).access_token;
             var url_frags = [
                 "format=excel", "page_size=20000", 
                 "access_token="+token
