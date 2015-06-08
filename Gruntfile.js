@@ -63,12 +63,12 @@ module.exports = function ( grunt ) {
             }
         },
         /**
-         * Sprites images in the assets
+         * Sprites images in the assets folder
          */
         sprite:{
             all: {
                 src: [ "<%= app_files.png %>" ],
-                dest: "src/assets/images/sprite.png",
+                dest: "src/assets/images/sprites.png",
                 destCss: "src/assets/css/sprites.css"
             }
         },
@@ -135,7 +135,7 @@ module.exports = function ( grunt ) {
             build_app_assets: {
                 files: [
                     {
-                        src: [ "**/css/*","**/fonts/*","**/js/*" ],
+                        src: [ "**/css/*","**/fonts/*","**/js/*","**/images/sprites.png"],
                         dest: "<%= build_dir %>/assets/",
                         cwd: "src/assets",
                         expand: true
@@ -610,7 +610,7 @@ module.exports = function ( grunt ) {
      * The `build` task gets your app ready to run for development and testing.
      */
     grunt.registerTask( "build", [
-        "clean", "html2js", "jshint", "coffeelint", "coffee", "less:build",
+        "clean", "html2js", "jshint", "sprite","coffeelint", "coffee", "less:build",
         "concat:build_css", "copy:build_app_assets", "copy:build_vendor_assets",
         "copy:build_app_settings",
         "copy:build_appjs", "copy:build_vendorjs", "index:build", "karmaconfig"

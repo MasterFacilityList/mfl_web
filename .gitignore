@@ -8,3 +8,5 @@ vendor/
 coverage/
 .coverage
 karma/karma.conf.js
+src/assets/css/sprites.css
+src/assets/images/sprites.png
