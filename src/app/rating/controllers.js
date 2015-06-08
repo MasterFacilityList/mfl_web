@@ -72,6 +72,7 @@
                     .error(function (e) {
                         service_obj.spinner = false;
                         $scope.alert = e.error;
+                        console.log(e);
                         toastr.error($scope.alert);
                     });
             };
