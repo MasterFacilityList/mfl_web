@@ -3,13 +3,14 @@
     "use strict";
     angular.module("mfl.filtering.controllers", [
         "mfl.filtering.services",
-        "mflAppConfig"
+        "mflAppConfig",
+        "mfl.auth.service"
     ])
     .controller("mfl.filtering.controller", ["$scope","$rootScope",
         "$stateParams", "filteringApi","filteringData", "SERVER_URL",
-        "$window",
+        "$window", "api.auth",
         function($scope, $rootScope, $stateParams,filterApi,
-            filteringData,SERVER_URL, $window){
+            filteringData,SERVER_URL, $window, apiAuth){
         $scope.filter_data = {};
         //variable to id if  on search or facility listings view
         $scope.no_search_query = false;
@@ -350,7 +351,11 @@
         //exporting to excel functionality
         $scope.excelExport = function () {
             var url = SERVER_URL+filterApi.facilities.apiBaseUrl+"/";
-            var url_frags = ["format=excel", "page_size=20000"];
+            var token = apiAuth.getToken().access_token;
+            var url_frags = [
+                "format=excel", "page_size=20000", 
+                "access_token="+token
+            ];
             var params= constructParams($scope.filter);
             _.each(_.keys(params), function(key){
                 url_frags.push(key+"="+params[key]);
