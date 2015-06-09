@@ -21,23 +21,12 @@
         };
     }])
 
-    .controller("mfl.home.controllers.header", ["$rootScope", "$scope", "$http",
-        function ($rootScope, $scope, $http) {
+    .controller("mfl.home.controllers.header", ["$scope",
+        function ($scope) {
             $scope.tooltip = {
                 "title": "",
                 "checked": false
             };
-            $scope.stateTransition = true;
-
-            $scope.hasPendingRequests = function () {
-                return $http.pendingRequests.length > 0;
-            };
-            $rootScope.$on("$stateChangeStart", function () {
-                $scope.stateTransition = false;
-            });
-            $rootScope.$on("$stateChangeSuccess", function () {
-                $scope.stateTransition = true;
-            });
         }
     ])
     .controller("mfl.home.controllers.facility_details", ["$scope",
