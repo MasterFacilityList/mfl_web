@@ -30,7 +30,7 @@
             "Accept" : "application/json, */*"
         };
     }])
-    
+
     .run(["$http","$cookies","$rootScope","$state","$stateParams",
           function ($http, $cookies,$rootScope,$state,$stateParams) {
         // apparently the angular doesn"t do CSRF headers using

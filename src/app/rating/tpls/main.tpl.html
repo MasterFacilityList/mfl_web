@@ -179,7 +179,7 @@
             </h5>
             <br ng-if="oneFacility.facility_physical_address.plot_number !== ''">
             <h4 class="margin-t--15 fs-16 fw-600  hidden-xs">
-                <label>Description: </label>
+                <label>Specific directions: </label>
                 {{oneFacility.location_desc}}
             </h4>
             <h5 class="margin-t--15 fs-14 fw-600  visible-xs">
@@ -273,6 +273,13 @@
                     <span class="pull-left">
                         <label class="fs-14 fw-600">Average rating: </label>
                         <span class="fs-14 fw-600">{{service.average_rating | number : 2}} <i style="color: #FFD700" class="fa fa-star-o"></i></span>
+                    </span>
+                </h4>
+                <br>
+                <h4>
+                    <span class="pull-left fs-13">
+                        <label>Number of ratings: </label>
+                        {{service.number_of_ratings}}
                     </span>
                 </h4>
                 <br>

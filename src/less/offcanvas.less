@@ -6,7 +6,6 @@
 */
 #search-wrapper {
   position: relative;
-  /*overflow: hidden;*/
   width: 100%;
 
   height: 200vh !important;
@@ -35,11 +34,21 @@
 }
 .show-nav #site-canvas {
   height: 160vh;
-  -webkit-transform: translateX(300px);
-  transform: translateX(300px);
+  #site-menu {
+    position:absolute;
+    top: 0;
+    margin-top: 18px;
+    width: 80%;
+    z-index: 10;
+    -webkit-transform: translateX(300px);
+    transform: translateX(300px);
 
-  -webkit-transform: translate3d(300px, 0, 0);
-  transform: translate3d(300px, 0, 0);
+    -webkit-transform: translate3d(300px, 0, 0);
+    transform: translate3d(300px, 0, 0);
+  }
+  .search-results {
+    position: relative;
+  }
 }
 #site-menu {
   width: 300px;
