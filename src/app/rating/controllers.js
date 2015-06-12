@@ -6,13 +6,12 @@
     .controller("mfl.rating.controllers.rating", ["$scope", "$stateParams",
         "facilitiesApi", "$window", "mfl.rating.services.rating",
         function ($scope, $stateParams,facilitiesApi, $window, ratingService) {
-            $scope.test = "Rating";
+            $scope.spinneractive = true;
             $scope.tooltip = {
                 "title": "",
                 "checked": false
             };
             $scope.fac_id = $stateParams.fac_id;
-            $scope.spinneractive = true;
 
             $scope.getFacility = function () {
                 facilitiesApi.facilities.get($scope.fac_id)
