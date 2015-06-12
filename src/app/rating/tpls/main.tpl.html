@@ -2,9 +2,9 @@
 <div class="col-lg-12 margin-t-50" ng-if="spinneractive" style="text-align: center">
     <img src="assets/img/301.GIF">
 </div>
-<div class="col-lg-12" ng-if="!spinneractive">
-    <div class="col-lg-12 margin-t-20 margin-b-10">
-        <div class="col-sm-12 col-xs-12 ">
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-if="!spinneractive">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-t-20 margin-b-10">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
             <span class="pull-right">
                 <button class="action-btn action-btn-md action-btn-primary"  data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="print facility details" ng-click="printing()">
                     <i class="fa fa-print"></i>
@@ -15,7 +15,7 @@
             </span>
         </div>
     </div>
-    <div class="col-lg-12">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 results-card">
         <!-- Important data first displayed here -->
         <div class="col-lg-12">
@@ -112,23 +112,11 @@
                     <label>Cots: </label>
                     {{oneFacility.number_of_cots}}
                 </span>
-                <span class="pull-right">
-                    <label>Facility's rating: </label>
-                    <span class="fw-600" style="color: #DAA520">
-                        {{oneFacility.average_rating | number : 2}}
-                    </span>
-                </span>
             </h4>
             <h5 class="fs-13   visible-xs">
                 <span class="pull-left">
                     <label>Cots: </label>
                     {{oneFacility.number_of_cots}}
-                </span>
-                <span class="pull-right">
-                    <label>Facility's rating: </label>
-                    <span class="fw-600" style="color: #DAA520">
-                        {{oneFacility.average_rating | number : 2}}
-                    </span>
                 </span>
             </h5>
             <br>
@@ -215,7 +203,7 @@
                 </h4>
             </div>
             <br><br>
-            <div class="col-md-12 results-card">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 results-card">
                 <h4 class="fs-18 text-blue fw-700 hidden-xs">
                     <i style="border: 1px solid #fff; border-radius : 50%;" class="fa fa-phone fa-1x"></i>
                     Contacts
@@ -253,12 +241,25 @@
         <!-- End of displaying extra details  -->
     </div>
     <!-- Start of displaying services -->
-    <div class="col-lg-12">
-    <div class="col-lg-12 results-card margin-b-20 margin-t-20">
-        <h4 class="text-blue fs-18 fw-700 margin-t-5  hidden-xs pad-l-15"> <i class="fa fa-exchange"></i> Services</h4>
-        <h4 class="text-blue fs-16 fw-700 margin-t-5  visible-xs pad-l-15">  <i class="fa fa-exchange"></i> Services</h4>
-        <div class="col-lg-12">
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin-b-20" ng-repeat="service in oneFacility.facility_services">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 results-card margin-b-20 margin-t-20">
+        <h4 class=" margin-t-5  hidden-xs pad-l-15">
+            <span class="fs-20 fw-700 text-blue">
+                <i class="fa fa-exchange"></i> Services
+            </span>
+            <span class="pull-right">
+                <label class="fs-18 fw-800">Total Facility Rating:</label>
+                <span class="fs-18 fw-600">{{oneFacility.average_rating | number : 2}} <i style="color: #FFD700" class="fa fa-star-o"></i></span>
+            </span>
+        </h4>
+        <h4 class="text-blue fs-16 fw-700 margin-t-5  visible-xs pad-l-15">  <i class="fa fa-exchange"></i> Services
+            <span class="pull-right">
+                <label>Total Facility Rating:</label>
+                <span class="fw-500" style="color: #666;">{{oneFacility.average_rating | number : 2}} <i style="color: #FFD700" class="fa fa-star-o"></i></span>
+            </span>
+        </h4>
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin-b-10 margin-t-10" ng-repeat-start="service in oneFacility.facility_services">
                 <h4 class="fs-18 fw-700 hidden-xs">
                     {{$index + 1}}.&nbsp;{{service.service_name}}
                 </h4>
@@ -301,6 +302,9 @@
                     </span>
                 </h4>
             </div>
+            <div class="clearfix hidden-sm hidden-xs" ng-if="$index%3==2" ></div>
+            <div class="clearfix visible-sm visible-xs" ng-if="$index%2==2" ></div>
+            <div ng-repeat-end=""></div>
         </div>
     </div>
     </div>

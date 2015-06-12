@@ -39,8 +39,8 @@
         });
         it("should test rating controller scope variable", function () {
             controller("mfl.rating.controllers.rating");
-            var test = "Rating";
-            expect(test).toEqual(scope.test);
+            var test = true;
+            expect(test).toEqual(scope.spinneractive);
         });
         it("should test if ratings are added to facilities services",
         inject(["$httpBackend", "mfl.rating.services.rating",
