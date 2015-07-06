@@ -100,6 +100,7 @@ module.exports = {
             "vendor/angularjs-dropdown-multiselect/src/angularjs-dropdown-multiselect.js",
             "vendor/ng-tags-input/ng-tags-input.js",
             "vendor/moment/moment.js",
+            "vendor/angular-loading-bar/build/loading-bar.js",
             "libs/api_wrapper.js",
             "libs/sil_typeahead_service/src/sil-typeahead.js",
             "libs/sil_grid/sil_grid_tpls.js",

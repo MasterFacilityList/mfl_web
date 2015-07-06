@@ -49,12 +49,14 @@
   <body>
       <div ui-view="header"></div>
         <div ui-view="main" class="content margin-t--27">
-            <noscript>
-               <div style="padding:100px 50px 0 50px">
-                   <h1><strong>MFLv2 Public Website:</strong></h1>
-                <h1>Your browser has JavaScript disabled or is not supported. Please enable Javascript or update your browser.</h1>
-               </div>
-            </noscript>
+            <div>
+                <div class="main-ui-view-loader">
+                    <div class="loader"></div>
+                    <div class="row">
+                        <h3 class="text-center loader-text">Please wait...</h3>
+                    </div>
+                </div>
+            </div>
         </div>
         <footer class="footer">
             <div class="container-fluid">
