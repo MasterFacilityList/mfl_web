@@ -1,0 +1,65 @@
+<h4 class="hidden-xs fade-content">
+        <label class="fs-18 fw-500">Total Facility Rating:</label>
+        <span class="fs-18 fw-500">{{oneFacility.average_rating | number : 2}} <i style="color: #FFD700" class="fa fa-star-o"></i></span>
+</h4>
+<h4 class="fs-16 fw-500 visible-xs fade-content">
+        <label>Total Facility Rating:</label>
+        <span class="fw-500" style="color: #666;">{{oneFacility.average_rating | number : 2}} <i style="color: #FFD700" class="fa fa-star-o"></i></span>
+</h4>
+<div class="row fade-content">
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin-b-10 margin-t-10" ng-repeat-start="service in oneFacility.facility_services">
+        <p class="lead fs-18 fw-500 text-black hidden-xs">
+            {{$index + 1}}.&nbsp;{{service.service_name}}
+        </p>
+        <p class="lead fs-16 fw-500 text-black visible-xs">
+            {{$index + 1}}.&nbsp;{{service.service_name}}
+        </p>
+        <p class="lead fs-14">
+            <label class="fs-14 fw-600">Category: </label>
+            <span class="fs-14 fw-600">{{service.category_name}}</span>
+        </p>
+        <p>
+            <button class="login-btn login-btn-primary" ng-click="rateFacility = !rateFacility">
+                &nbsp;{{rateFacility ? 'Hide' : 'View'}} Rating&nbsp;<i ng-if="!rateFacility" class="fa fa-caret-down"></i> <i class="fa fa-caret-up" ng-if="rateFacility"></i>
+            </button>
+        </p>
+        <!-- Start of content slide in -->
+        <div content-slide-in="rateFacility" slide-show-duration="1000">
+            <p class="lead margin-t--5">
+                <span class="pull-left">
+                    <label class="fs-14 fw-600">Average rating: </label>
+                    <span class="fs-14 fw-600">{{service.average_rating | number : 2}} <i style="color: #FFD700" class="fa fa-star-o"></i></span>
+                </span>
+            </p>
+            <br>
+            <h4>
+                <span class="pull-left fs-14">
+                    <label class="fw-500 light-font">Number of ratings: </label>
+                    {{service.number_of_ratings}}
+                </span>
+            </h4>
+            <br>
+            <h4>
+                 <span class="pull-left margin-t--5 class-rate">
+                    <label class="fs-14 fw-500 light-font">Rate facility's service</label>
+                    <span>
+                        <!-- Testing rating directive -->
+                        <span class="fs-10" ng-repeat="rating in service.ratings">
+                        <!-- {{rating.current}} out of{{rating.max}} -->
+                        <div star-rating rating-value="rating.current" max="rating.max" on-rating-selected="getSelectedRating(rating, service.id, service)"></div>
+                        </span>
+                <!-- End of rating directive -->
+                    </span>
+                    <span ng-bind-html="alert"></span>
+                </span>
+                <span class="pull-left" ng-if="service.spinner">
+                    <img src="assets/img/ajax-loader.gif" style="font-size: 10px; width: 20px height: 20px;">
+                </span>
+            </h4>
+        </div>
+        <!-- End of content slide in -->
+    </div>
+    <div class="clearfix hidden-sm hidden-xs" ng-if="$index%3==2" ></div>
+    <div class="clearfix visible-sm visible-xs" ng-if="$index%2==2" ></div>
+    <div ng-repeat-end=""></div>
+</div>

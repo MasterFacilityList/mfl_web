@@ -1,0 +1,26 @@
+<div class="row margin-b-20">
+    <table class="table fs-14">
+        <thead class="results-card">
+            <th class="text-primary">Code</th>
+            <th class="text-primary">Name</th>
+            <th class="text-primary">Monitored Households</th>
+            <th class="text-right text-primary">Status</th>
+        </thead>
+        <tbody class="fade-content fw-600">
+            <tr ng-repeat="unit in chus" class="results-card">
+                <td class="pad-t-15">
+                    {{unit.code}}
+                </td>
+                <td class="pad-t-15">
+                    {{unit.name}}
+                </td>
+                <td class="pad-t-15">
+                    {{unit.households_monitored}}
+                </td>
+                <td class="pad-t-15 text-right">
+                    {{unit.status_name}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

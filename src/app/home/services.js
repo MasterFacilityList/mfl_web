@@ -7,6 +7,7 @@ angular.module("mfl.facilities.wrapper", ["sil.api.wrapper", "mflAppConfig"])
         this.services = api.setBaseUrl("api/facilities/services");
         this.ratings = api.setBaseUrl(
             "api/facilities/facility_service_ratings/");
+        this.chus = api.setBaseUrl("api/chul/units");
     }])
     .service("searchService",["SERVER_URL", "sil-typeahead",
         function (SERVER_URL, typeahead) {
