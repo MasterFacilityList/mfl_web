@@ -2,7 +2,6 @@
     "use strict";
 
     angular.module("mflwebApp", [
-
         "ngAnimate",
         "ngCookies",
         "ngSanitize",
@@ -13,7 +12,6 @@
         "ngTagsInput",
         "angularjs-dropdown-multiselect",
         "angular-loading-bar",
-
         "templates-app",
         "templates-common",
         "mfl.home",

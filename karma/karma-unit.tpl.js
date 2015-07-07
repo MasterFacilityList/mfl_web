@@ -14,7 +14,6 @@ module.exports = function ( karma ) {
       'src/**/*.js'
     ],
     exclude: [
-      'src/assets/**/*.js'
     ],
     frameworks: [
         'jasmine'

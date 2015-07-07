@@ -83,7 +83,6 @@ module.exports = {
             "vendor/leaflet.markercluster/dist/leaflet.markercluster.js",
             "vendor/Leaflet.label/dist/leaflet.label.js",
             "vendor/leaflet-spin/leaflet.spin.js",
-            "src/assets/js/leaflet-heat.js",
             "vendor/angular-animate/angular-animate.js",
             "vendor/angular-cookies/angular-cookies.js",
             "vendor/angular-resource/angular-resource.js",
@@ -101,11 +100,10 @@ module.exports = {
             "vendor/ng-tags-input/ng-tags-input.js",
             "vendor/moment/moment.js",
             "vendor/angular-loading-bar/build/loading-bar.js",
+            "libs/leaflet-heat.js",
             "libs/api_wrapper.js",
-            "libs/sil_typeahead_service/src/sil-typeahead.js",
-            "libs/sil_grid/sil_grid_tpls.js",
-            "libs/sil_grid/sil_grid.js",
-            "libs/sil_error_handler/error_handler.js"
+            "libs/typeahead.js",
+            "libs/error_handler.js"
         ],
         css: [
         ],
@@ -113,7 +111,6 @@ module.exports = {
             "vendor/fontawesome/fonts/*"
         ],
         imgs: [
-            "libs/sil_grid/img/*"
         ]
     },
 
