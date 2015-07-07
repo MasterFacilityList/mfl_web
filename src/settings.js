@@ -2,7 +2,7 @@
     "use strict";
 
     var setts = {
-        "SERVER_URL": "http://localhost:8061/",
+        "SERVER_URL": "http://mfl.azure.slade360.co.ke",
         "CREDZ": {
             "username": "public@mfltest.slade360.co.ke",
             "password": "public",
