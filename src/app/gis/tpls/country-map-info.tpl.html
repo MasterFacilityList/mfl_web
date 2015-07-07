@@ -19,11 +19,19 @@
             <div class="col-md-12">
                 <h4 class="pad-t-50">Quick Help</h4>
                 <accordion>
-                    <accordion-group is-open="status.open">
+                    <accordion-group is-open="drilldown.open">
                         <accordion-heading>
-                            Clustered Facilities <i class="pull-right fa" ng-class="{'fa-chevron-down': status.open, 'fa-chevron-right': !status.open}"></i>
+                            Drilldown <i class="pull-right fa" ng-class="{'fa-chevron-down': drilldown.open, 'fa-chevron-right': !drildown.open}"></i>
                         </accordion-heading>
-                        Facilities that are close to each other cluster into points that can be clicked:
+                        <div class="col-sm-4 margin-t-50">Click inside the map to drill down</div>
+                        <img class="col-sm-8" src="/assets/images/drilldown.gif" alt="drilldown">
+                    </accordion-group>
+                    <accordion-group is-open="unit.open">
+                        <accordion-heading>
+                            View unit names <i class="pull-right fa" ng-class="{'fa-chevron-down': unit.open, 'fa-chevron-right': !unit.open}"></i>
+                        </accordion-heading>
+                        <div class="col-sm-4 margin-t-20">Hover on the blue markers to show the adminstrative unit name</div>
+                        <img class="col-sm-8" src="/assets/images/hover.gif" alt="drilldown">
                     </accordion-group>
                 </accordion>
             </div>
