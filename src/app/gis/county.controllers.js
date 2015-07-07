@@ -39,7 +39,7 @@
             defaults: {
                 scrollWheelZoom: false,
                 tileLayer: "",
-                dragging:false
+                dragging:true
             },
             markers:{},
             layers:{}
@@ -146,8 +146,8 @@
             $scope.hoveredConst = constituency.model;
         });
         $scope.$on("leafletDirectiveGeoJson.click", function(ev, constituency) {
-            var boundary_ids = constituency.model.properties.ward_boundary_ids.join(",");
-            $stateParams.ward_boundaries = boundary_ids;
+            $stateParams.ward_boundaries = constituency.model.properties
+                                                             .ward_boundary_ids.join(",");
             $state.go("gis.gis_county.gis_const",{county_id:$stateParams.county_id,
                                     county_boundaries:$stateParams.const_boundaries,
                                     const_id:constituency.model.id,

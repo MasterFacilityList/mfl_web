@@ -41,7 +41,7 @@
             defaults: {
                 scrollWheelZoom: false,
                 tileLayer: "",
-                dragging:false
+                dragging:true
             },
             events: {
                 map: {
@@ -143,8 +143,8 @@
             $scope.hoveredCounty = county.model;
         });
         $scope.$on("leafletDirectiveGeoJson.click", function(ev, county) {
-            var boundary_ids = county.model.properties.constituency_boundary_ids.join(",");
-            $stateParams.const_boundaries = boundary_ids;
+            $stateParams.const_boundaries = county.model.properties
+                                                        .constituency_boundary_ids.join(",");
             $state.go("gis.gis_county",{county_id: county.model.id,
                                     const_boundaries : boundary_ids});
         });
