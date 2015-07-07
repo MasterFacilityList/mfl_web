@@ -1120,7 +1120,6 @@ label.valid {
 */
 .nav > li > a:hover {
   color: #fff;
-  border-left: solid 4px #3DB4E8;
   background-color: #293949;
 }
 .nav-pills > li.active > a,
