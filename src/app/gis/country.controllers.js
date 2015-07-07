@@ -5,9 +5,10 @@
         "mfl.gis.wrapper"])
     .controller("mfl.gis.controllers.gis", ["$scope","leafletData",
         "$http","$stateParams","$state","SERVER_URL","gisCountiesApi","gisFacilitiesApi",
-        "$timeout","leafletEvents",
+        "$timeout","leafletEvents","gisAdminUnitsApi",
         function ($scope,leafletData,$http, $stateParams,
-                   $state,SERVER_URL, gisCountiesApi, gisFacilitiesApi,$timeout,leafletEvents) {
+                   $state,SERVER_URL, gisCountiesApi, gisFacilitiesApi,$timeout,leafletEvents,
+                  adminUnitsApi) {
         $scope.tooltip = {
             "title": "",
             "checked": false
@@ -54,9 +55,7 @@
                 }
             }
         });
-        /*Gets counties for boundaries*/
-        gisCountiesApi.api.list()
-        .success(function (data){
+        adminUnitsApi.getCounties().then(function (data) {
             var marks = data.results.features;
             var markers = _.mapObject(marks, function(mark){
                 return  {
@@ -103,8 +102,7 @@
                     }
                 }
             });
-        })
-        .error(function(err){
+        },function(err){
             $scope.alert = err.error;
         });
         leafletData.getMap("countrymap")
