@@ -16,17 +16,38 @@
                     <h4><i class="fa fa-eye"></i> VIEW ALL FACILITIES</h4>
                 </a>
             </div>
+            <div class="col-md-12">
+                <h4 class="pad-t-50">Quick Help</h4>
+                <accordion>
+                    <accordion-group is-open="status.open">
+                        <accordion-heading>
+                            Clustered Facilities <i class="pull-right fa" ng-class="{'fa-chevron-down': status.open, 'fa-chevron-right': !status.open}"></i>
+                        </accordion-heading>
+                        Facilities that are close to each other cluster into points that can be clicked:
+                    </accordion-group>
+                </accordion>
+            </div>
         </div>
         <div class="col-md-8 margin-b-10">
-            <leaflet
-                id="countrymap"
-                defaults="defaults"
-                width="100%"
-                markers="markers"
-                layers="layers"
-                geojson-watch-options="{doWatch:true,isDeep:true}"
-                geojson="geojson"
-                event-broadcast="events"
-                height="80vh">
-            </leaflet>
+           <div ng-if="spinner">
+                <div class="map-change-state">
+                    <div class="loader"></div>
+                    <div class="row">
+                        <h3 class="text-center loader-text">Please wait...</h3>
+                    </div>
+                </div>
+           </div>
+           <div ng-if="!spinner">
+                <leaflet
+                    id="countrymap"
+                    defaults="defaults"
+                    width="100%"
+                    markers="markers"
+                    layers="layers"
+                    geojson-watch-options="{doWatch:true,isDeep:true}"
+                    geojson="geojson"
+                    event-broadcast="events"
+                    height="80vh">
+                </leaflet>
+           </div>
         </div>
