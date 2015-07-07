@@ -4,14 +4,6 @@
     angular.module("sil.api.wrapper", [])
     // CRUD API wrapper to be used by specific API wrappers
 
-    .provider("apiConfig", function(){
-        this.SERVER_URL = undefined;
-        this.$get = [function(){
-            return {
-                SERVER_URL: this.SERVER_URL
-            };
-        }];
-    })
     .provider("api", function(){
         function Helpers(){}
         Helpers.prototype.hasTrailingSlash = function(url){
@@ -66,9 +58,9 @@
             return "?"+url_param;
         };
         this.helpers = new Helpers();
-        this.$get = ["$http", "apiConfig", function($http, apiConfig){
+        this.$get = ["$http", "SERVER_URL", function($http, SERVER_URL){
             var self = this;
-            self.SERVER_URL = apiConfig.SERVER_URL;
+            self.SERVER_URL = SERVER_URL;
             function Api(){}
             Api.apiUrl = self.SERVER_URL;
             Api.apiBaseUrl = undefined;
