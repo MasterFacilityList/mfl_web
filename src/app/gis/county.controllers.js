@@ -39,7 +39,7 @@
             defaults: {
                 scrollWheelZoom: false,
                 tileLayer: "",
-                dragging:false
+                dragging:true
             },
             markers:{},
             layers:{}
