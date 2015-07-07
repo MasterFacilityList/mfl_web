@@ -89,6 +89,7 @@ module.exports = {
             "vendor/angular-bootstrap/ui-bootstrap.js",
             "vendor/angular-bootstrap/ui-bootstrap-tpls.js",
             "vendor/angular-ui-router/release/angular-ui-router.js",
+            "vendor/angular-ui-select/dist/select.js",
             "vendor/angular-sanitize/angular-sanitize.js",
             "vendor/angular-leaflet-directive/dist/angular-leaflet-directive.js",
             "vendor/modernizr/modernizr.js",

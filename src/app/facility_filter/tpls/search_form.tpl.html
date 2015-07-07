@@ -1,0 +1,201 @@
+<div class="row margin-t-50">
+
+    <div class="col-sm-4 content-card">
+        <form ng-submit="filterFacilities()">
+            <p class="text-muted">Advanced Search</p>
+
+            <div class="form-group">
+                <label>Search all facilities</label>
+                <input placeholder="search all facilities" type="text" class="form-control" ng-model="filters.single.search" />
+            </div>
+
+            <hr />
+
+            <div>
+                <span class="text-muted">Facility Info</span>
+                <div class="form-group">
+                    <label>Facility Name</label>
+                    <input placeholder="Facility Name" type="text" class="form-control" ng-model="filters.single.name" />
+                </div>
+                <div class="form-group">
+                    <label>Facility Code</label>
+                    <input placeholder="Facility Code" type="text" class="form-control" ng-model="filters.single.code" />
+                </div>
+            </div>
+
+            <hr />
+
+            <div>
+                <span class="text-muted">Administrative Unit</span>
+                <div class="form-group">
+                    <label>County</label>
+                    <ui-select ng-model="filters.multiple.county" multiple>
+                        <ui-select-match placeholder="Select a county...">
+                            <span>{{$item.name}}</span>
+                        </ui-select-match>
+                        <ui-select-choices repeat="county in filter_summaries.county | filter:$select.search">
+                            <span>{{county.name}}</span>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+
+                <div class="form-group">
+                    <label>Constituency</label>
+                    <ui-select ng-model="filters.multiple.constituency" multiple ng-disabled="filters.multiple.county.length==0">
+                        <ui-select-match placeholder="Select a constituency...">
+                            <span>{{$item.name}}</span>
+                        </ui-select-match>
+                        <ui-select-choices repeat="const in filter_summaries.constituency | filter:filterFxns.constFilter | filter:$select.search">
+                            <span>{{const.name}}</span>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+
+                <div class="form-group">
+                    <label>Ward</label>
+                    <ui-select ng-model="filters.multiple.ward" multiple ng-disabled="filters.multiple.constituency.length==0">
+                        <ui-select-match placeholder="Select a ward...">
+                            <span>{{$item.name}}</span>
+                        </ui-select-match>
+                        <ui-select-choices repeat="ward in filter_summaries.ward | filter:filterFxns.wardFilter | filter:$select.search">
+                            <span>{{ward.name}}</span>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+            </div>
+
+            <hr />
+
+            <div>
+                <div class="form-group">
+                    <p class="text-muted">Facility Details</p>
+
+                    <div class="form-group">
+                        <label>Facility Type</label>
+                        <ui-select ng-model="filters.multiple.facility_type" multiple>
+                            <ui-select-match placeholder="Select a facility type...">
+                                <span>{{$item.name}}</span>
+                            </ui-select-match>
+                            <ui-select-choices repeat="ft in filter_summaries.facility_type | filter:$select.search">
+                                <span>{{ft.name}}</span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Facility Owner Type</label>
+                        <ui-select ng-model="filters.multiple.owner_type" multiple>
+                            <ui-select-match placeholder="Select a facility owner type...">
+                                <span>{{$item.name}}</span>
+                            </ui-select-match>
+                            <ui-select-choices repeat="ot in filter_summaries.owner_type | filter:$select.search">
+                                <span>{{ot.name}}</span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Facility Owner</label>
+                        <ui-select ng-model="filters.multiple.owner" multiple>
+                            <ui-select-match placeholder="Select a facility owner...">
+                                <span>{{$item.name}}</span>
+                            </ui-select-match>
+                            <ui-select-choices repeat="ot in filter_summaries.owner | filter:filterFxns.ownerFilter | filter:$select.search">
+                                <span>{{ot.name}}</span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Operation Status</label>
+                        <ui-select ng-model="filters.multiple.operation_status" multiple>
+                            <ui-select-match placeholder="Select a operation status...">
+                                <span>{{$item.name}}</span>
+                            </ui-select-match>
+                            <ui-select-choices repeat="os in filter_summaries.operation_status | filter:$select.search">
+                                <span>{{os.name}}</span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Facility Service Category</label>
+                        <ui-select ng-model="filters.multiple.service_category" multiple>
+                            <ui-select-match placeholder="Select a service category...">
+                                <span>{{$item.name}}</span>
+                            </ui-select-match>
+                            <ui-select-choices repeat="os in filter_summaries.service_category | filter:$select.search">
+                                <span>{{os.name}}</span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Service</label>
+                        <ui-select ng-model="filters.multiple.service" multiple>
+                            <ui-select-match placeholder="Select a service...">
+                                <span>{{$item.name}}</span>
+                            </ui-select-match>
+                            <ui-select-choices repeat="serv in filter_summaries.service | filter:$select.search">
+                                <span>{{serv.name}}</span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Number of beds</label>
+                        <input placeholder="number of beds" type="text" class="form-control"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Number of cots</label>
+                        <input placeholder="number of cots" type="text" class="form-control" />
+                    </div>
+
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="">
+                            Open public holidays
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="">
+                            Open weekends
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="">
+                            Open 24 Hours
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="">
+                            Is regulated
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="">
+                            Is active
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input class="btn btn-primary" type="submit" value="Search" />
+                <a ui-sref="facility_filter" class="btn btn-default">Clear Search</a>
+                <a ui-sref="facility_filter.results" class="btn btn-default">search</a>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-sm-8" ui-view="results" autoscroll>
+        <div class="content-card">
+            <span class="text-center">use the form on the left to filter</span>
+        </div>
+    </div>
+</div>

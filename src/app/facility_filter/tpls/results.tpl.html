@@ -1,0 +1,61 @@
+<div>
+    <div>
+        <div class="pull-left">
+            <p>Showing {{results.page_size}} of {{results.count}} results</p>
+        </div>
+        <div class="pull-right">
+            <a class="btn btn-primary">Export to Excel</a>
+        </div>
+    </div>
+
+    <div>
+        <div ng-repeat="fac in results.results">
+            <div>
+                <a ui-sref="rating({fac_id : fac.id})" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Click to view facility details">
+                    <h5 class="search-resulthead">
+                        <span class="fw-700 fs-18 pull-left" style="cursor: pointer">
+                            <span class="fw-900 fs-20"> {{fac.code}} </span> | {{fac.name}}
+                        </span>
+                    </h5>
+                </a>
+
+                <br />
+
+                <h5 class="margin-b-5">
+                    <span class="pull-left fs-16">
+                        <label>Status: </label>
+                        <span class="text-success fw-700">{{fac.regulatory_status_name}}</span>
+                    </span>
+                    <span class="pull-right">
+                        <span class="fs-14 fw-600 label label-primary">{{fac.facility_type_name}}</span>
+                    </span>
+                </h5>
+
+                <br>
+
+                <h5 class="margin-t-10 fw-700 margin-t-5" style="color:#000;">
+
+                <span class="pull-left fs-15">{{fac.county}} COUNTY</span>
+                <span class="pull-right" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Facility owner">
+                    <i class="fa fa-user-secret"></i> {{fac.owner_type_name}}
+                </span>
+
+                </h5>
+
+                <br>
+
+                <p class="margin-b-30 margin-t--55">
+                    <span class="pull-left fs-14 fw-400">{{fac.constituency}} CONSTITUENCY</span>
+                    <span class="pull-right fs-13 fw-400">{{fac.ward_name}} WARD</span>
+                </p>
+
+                <hr style="border-bottom: 1px solid #ccc" />
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <a href class="btn btn-primary pull-left" ng-if="results.previous">Previous</a>
+        <a href class="btn btn-primary pull-right" ng-if="results.next">Next</a>
+    </div>
+</div>

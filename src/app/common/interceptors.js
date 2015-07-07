@@ -39,6 +39,24 @@
             "request" : request_fxn,
             "response": response_fxn
         };
-    }]);
+    }])
+
+    .factory("mfl.gis.interceptor.auth", ["$window", "$injector",
+        function ($window, $injector) {
+            var response_fxn = function (rejection) {
+                var auth = $injector.get("api.auth");
+                if (rejection.status === 403 || rejection.status === 401) {
+                    $window.localStorage.clear();
+                    auth.fetchToken().success(function () {
+                        $window.location.reload();
+                    });
+                }
+            };
+
+            return {
+                "responseError": response_fxn
+            };
+        }
+    ]);
 
 })(angular);
