@@ -20,7 +20,8 @@
 /*Adds fontawesome less files*/
 
 @import '../../vendor/fontawesome/less/font-awesome.less';
-/*Adds ng-table less files*/
+
+
 /**
  * This is our main variables file. We must include it last so we can overwrite any variable
  * definitions in our imported stylesheets.
@@ -38,7 +39,9 @@
 @import (less) '../assets/css/theme.css';
 @import 'basic.less'; // contains basic css classes for minor adjustments
 @import 'theme.less'; //imports all the less files used for the theme
-/*Add openlayer css*/
+
+/*Adds loading bar less files*/
+@import 'loading-bar.less';
 
 @import (less) '../../vendor/leaflet/dist/leaflet.css';
 @import (less) '../../vendor/leaflet.markercluster/dist/MarkerCluster.css';
@@ -52,13 +55,13 @@
 @font-face {
     font-family: 'Lato';
     src: url('fonts/lato.woff2') format('truetype');
-    font-weight: 300;
+    font-weight: 500;
 }
 
 @font-face {
     font-family: 'Lato Light';
     src: url('fonts/latolight.woff2') format('truetype');
-    font-weight: 500;
+    font-weight: 700;
 }
 
 html,
@@ -75,7 +78,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: 'Lato Light', sans-serif;
+    font-family: 'Lato', sans-serif;
 }
 
 code,
