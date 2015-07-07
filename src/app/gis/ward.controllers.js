@@ -40,7 +40,7 @@
                 defaults: {
                     scrollWheelZoom: false,
                     tileLayer: "",
-                    dragging:false
+                    dragging:true
                 },
                 events: {
                     map: {
