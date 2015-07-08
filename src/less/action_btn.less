@@ -57,7 +57,7 @@
   border-color: #285e8e;
 }
 
-/* button warm*/
+/* button default*/
 .action-btn-warning {
   color: #ffffff;
   padding: 5px 8px 5px 10px;
@@ -132,49 +132,27 @@
   background-image: none;
 }
 
-.action-btn-warm {
+.action-btn-default {
   color: #ffffff;
   padding:5px 11px 5px 11px;
-  background-color: #ff1493;
+  background-color: @white;
   /*bright pink #f433ff*/
-  border-color: #ff1494;
+  border-color: @gray;
 }
-.action-btn-warm:hover,
-.action-btn-warm:focus,
-.action-btn-warm:active,
-.action-btn-warm.active{
+.action-btn-default:hover,
+.action-btn-default:focus,
+.action-btn-default:active,
+.action-btn-default.active{
   color: #ffffff;
-  background-color: darken(#ff1493, 5%);
-  border-color: #ff00ff;
+  background-color: darken(@white, 5%);
+  border-color: @gray;
 }
-.action-btn-warm:active,
-.action-btn-warm.active {
+.action-btn-default:active,
+.action-btn-default.active {
   background-image: none;
 }
 
 /*Material ripple effect =============*/
-/*.action-btn:after{
-    content: "";
-    background: rgba(255,255,255,0.3);
-    display: block;
-    position: absolute;
-    border-radius: 50%;
-    padding-top: 240%;
-    padding-left: 240%;
-    margin-top: -120%;
-    margin-left: -120%;
-    opacity: 0;
-    transition: all 1s;
-}
-.action-btn:active:after {
-    padding-top: 0;
-    padding-left: 0;
-    margin-top: 0;
-    margin-left: 0;
-    opacity: 1;
-    transition: 0s;
-}
-*/
 .action-container {
   display: inline-block;
 }
