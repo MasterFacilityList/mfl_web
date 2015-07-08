@@ -11,7 +11,7 @@
     <div>
         <div ng-repeat="fac in results.results">
             <div>
-                <a ui-sref="rating({fac_id : fac.id})" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Click to view facility details">
+                <a ui-sref="rating.services({fac_id : fac.id})" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Click to view facility details">
                     <h5 class="search-resulthead">
                         <span class="fw-700 fs-18 pull-left" style="cursor: pointer">
                             <span class="fw-900 fs-20"> {{fac.code}} </span> | {{fac.name}}
