@@ -6,12 +6,10 @@
             </p>
         </div>
         <div class="pull-right">
-            <button class="login-btn login-btn-primary" ng-click="excelExport()" ng-disabled="!results.count">
-                Export Excel
+            <button class="action-btn action-btn-primary action-btn-md" ng-click="excelExport()" ng-disabled="!results.count" tooltip="Export Excel">
+                <i class="fa fa-file-excel-o"></i>
             </button>
-            <button class="login-btn login-btn-primary" ng-click="clearFilters()">
-                Clear Search
-            </button>
+            <button class="action-btn action-btn-primary action-btn-md" ng-click="clearFilters()" tooltip="Clear Search"> <i class="fa fa-undo"></i></button>
         </div>
 
     </div>
