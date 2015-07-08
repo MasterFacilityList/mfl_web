@@ -35,34 +35,6 @@ describe("Tests for mfl.gis.controllers.gis (Country Level):", function () {
 
     it("should load mfl.gis.controller.gis (Country Level)",
        inject(["$httpBackend", "$rootScope", function ($httpBackend, $rootScope) {
-        var data1 = {
-            results:{
-                id :"4",
-                type:"",
-                geometry:{},
-                properties: {},
-                features: [
-                    {
-                        id:"",
-                        type:"",
-                        geometry:{
-                            type:"",
-                            coordinates:[]
-                        },
-                        properties:{
-                            bound:{
-                                type:"",
-                                coordinates:[[3,4],[4,5]]
-                            },
-                            center:{
-                                type:"",
-                                coordinates:[[3,4],[4,5]]
-                            }
-                        }
-                    }
-                ]
-            }
-        };
         var data2 = [
             {
                 geometry:{
@@ -81,9 +53,6 @@ describe("Tests for mfl.gis.controllers.gis (Country Level):", function () {
                 }
             }
         ];
-        $httpBackend.expectGET(
-        SERVER_URL + "api/gis/county_boundaries/")
-            .respond(200, data1);
         $httpBackend.expectGET(
         SERVER_URL + "api/gis/coordinates/")
             .respond(200, data2);
@@ -131,9 +100,9 @@ describe("Tests for mfl.gis.controllers.gis (Country Level):", function () {
             "$stateParams": {},
             "SERVER_URL": SERVER_URL
         });
-        $httpBackend.expectGET(
-        SERVER_URL + "api/gis/county_boundaries/")
-            .respond(500, data);
+//        $httpBackend.expectGET(
+//        SERVER_URL + "api/gis/county_boundaries/")
+//            .respond(500, data);
         $httpBackend.expectGET(
         SERVER_URL + "api/gis/coordinates/")
             .respond(500, data);
@@ -210,43 +179,43 @@ describe("Tests for mfl.gis.controllers.gis (Country Level):", function () {
     it("should get leaflet data map(Country Level)",
        inject(["$state", "$httpBackend", "$rootScope",
                function ($state, $httpBackend, $rootScope) {
-        var data1 = {
-            count: 1,
-            results:{
-                type:"",
-                features:[
-                    {
-                        id:"",
-                        type:"",
-                        geometry:{
-                            type:"",
-                            coordinates:[]
-                        },
-                        properties:{
-                            bound:{
-                                type:"",
-                                coordinates:[
-                                    [-4.669618,33.907219],
-                                    [-4.669618,41.90516700000012],
-                                    [4.622499,41.90516700000012],
-                                    [4.622499,33.907219],
-                                    [-4.669618,33.907219]
-                                ]
-                            },
-                            center:{
-                                type:"",
-                                coordinates:[[3,4],[4,5]]
-                            }
-                        }
-                    }
-                ],
-                geometry:{
-                    type:"",
-                    coordinates:[]
-                },
-                properties: {}
-            }
-        };
+//        var data1 = {
+//            count: 1,
+//            results:{
+//                type:"",
+//                features:[
+//                    {
+//                        id:"",
+//                        type:"",
+//                        geometry:{
+//                            type:"",
+//                            coordinates:[]
+//                        },
+//                        properties:{
+//                            bound:{
+//                                type:"",
+//                                coordinates:[
+//                                    [-4.669618,33.907219],
+//                                    [-4.669618,41.90516700000012],
+//                                    [4.622499,41.90516700000012],
+//                                    [4.622499,33.907219],
+//                                    [-4.669618,33.907219]
+//                                ]
+//                            },
+//                            center:{
+//                                type:"",
+//                                coordinates:[[3,4],[4,5]]
+//                            }
+//                        }
+//                    }
+//                ],
+//                geometry:{
+//                    type:"",
+//                    coordinates:[]
+//                },
+//                properties: {}
+//            }
+//        };
         var data2 = [
             {
                 geometry:{
@@ -289,9 +258,6 @@ describe("Tests for mfl.gis.controllers.gis (Country Level):", function () {
             "gisFacilitiesApi": gisFacilitiesApi,
             "$timeout": timeout.timeout
         });
-        $httpBackend.expectGET(
-        SERVER_URL + "api/gis/county_boundaries/")
-            .respond(200, data1);
         $httpBackend.expectGET(
         SERVER_URL + "api/gis/coordinates/")
             .respond(200, data2);
