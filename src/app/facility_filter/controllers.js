@@ -66,19 +66,18 @@
             };
 
             $scope.clearFilters = function () {
-                // https://github.com/angular/angular.js/blob/v1.3.x/src/ng/location.js#L537-L568
+                var params = {};
                 _.each(URL_SEARCH_PARAMS, function (a) {
-                    $location.search(a, null);
+                    params[a] = undefined;
                 });
-                $location.$$compose();
-                $state.go("facility_filter", {});
+                $state.go("facility_filter", params);
             };
         }]
     )
 
     .controller("mfl.facility_filter.controllers.results",
-        ["$scope", "filterParams", "mfl.facility_filter.services.wrappers",
-        function ($scope, filterParams, wrappers) {
+        ["$scope", "$window", "filterParams", "mfl.facility_filter.services.wrappers", "api.auth",
+        function ($scope, $window, filterParams, wrappers, auth) {
             var filter_keys = _.keys(filterParams);
             var params = _.reduce(filter_keys, function (memo, b) {
                 if (filterParams[b]) {
@@ -90,6 +89,23 @@
             .success(function (data) {
                 $scope.results = data;
             });
+
+            $scope.excelExport = function () {
+                var download_params = {
+                    "format": "excel",
+                    "access_token": auth.getToken().access_token,
+                    "page_size": $scope.results.count
+                };
+                _.extend(download_params, _.omit(params, "page"));
+
+                var helpers = wrappers.helpers;
+                var url = helpers.joinUrl([
+                    wrappers.facilities.makeUrl(wrappers.facilities.apiBaseUrl),
+                    helpers.makeGetParam(helpers.makeParams(download_params))
+                ]);
+
+                $window.location.href = url;
+            };
         }]
     );
 

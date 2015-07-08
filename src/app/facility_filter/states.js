@@ -6,6 +6,8 @@
     ])
 
     .constant("URL_SEARCH_PARAMS", [
+        "name", "code",
+
         "search",
 
         "county", "constituency", "ward",

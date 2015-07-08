@@ -1,13 +1,17 @@
 <div class="row">
     <div class="col-xs-12 margin-b-10">
         <div class="pull-left">
-            <p class="lead fw-500 text-black margin-t-10">Showing {{results.page_size}} of <span class="text-danger">{{results.count}}</span> results</p>
+            <p class="lead fw-500 text-black margin-t-10">
+                Showing {{results.page_size}} of <span class="text-danger">{{results.count}}</span> results.
+            </p>
         </div>
         <div class="pull-right">
-            <button class="action-btn action-btn-md action-btn-primary">
+            <button class="btn btn-primary" ng-click="excelExport()" ng-disabled="!results.count">
                 <i class="fa fa-file-excel-o"></i>
             </button>
+            <button class="login-btn login-btn-primary" ng-click="clearFilters()"> <i class="fa fa-times-circle"></i> Clear Search</button>
         </div>
+
     </div>
 
     <div class="col-xs-12">
