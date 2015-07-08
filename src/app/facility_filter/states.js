@@ -1,7 +1,9 @@
 (function (angular) {
     "use strict";
 
-    angular.module("mfl.facility_filter.states", [])
+    angular.module("mfl.facility_filter.states", [
+        "ui.router"
+    ])
 
     .config(["$stateProvider", function ($stateProvider) {
         var filterParams = [
@@ -26,7 +28,7 @@
                     templateUrl : "home/tpls/header.tpl.html"
                 },
                 "main": {
-                    controller: "mfl.facility_filter.controller",
+                    controller: "mfl.facility_filter.controllers.form",
                     templateUrl: "facility_filter/tpls/search_form.tpl.html"
                 }
             },
@@ -42,7 +44,7 @@
             url: "/results",
             views: {
                 "results@facility_filter": {
-                    controller: "mfl.facility_filter.controller.results",
+                    controller: "mfl.facility_filter.controllers.results",
                     templateUrl: "facility_filter/tpls/results.tpl.html"
                 }
             }

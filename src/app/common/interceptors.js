@@ -41,7 +41,7 @@
         };
     }])
 
-    .factory("mfl.gis.interceptor.auth", ["$window", "$injector",
+    /*.factory("mfl.gis.interceptor.auth", ["$window", "$injector",
         function ($window, $injector) {
             var response_fxn = function (rejection) {
                 var auth = $injector.get("api.auth");
@@ -57,6 +57,6 @@
                 "responseError": response_fxn
             };
         }
-    ]);
+    ])*/;
 
 })(angular);

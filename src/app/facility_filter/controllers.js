@@ -1,15 +1,17 @@
 (function (angular, _) {
     "use strict";
 
-    angular.module("mfl.facility_filter.controllers", [])
+    angular.module("mfl.facility_filter.controllers", [
+        "mfl.facility_filter.services"
+    ])
 
-    .controller("mfl.facility_filter.controller",
-        ["$stateParams", "$scope", "$state", "filteringApi",
-        function ($stateParams, $scope, $state, filteringApi) {
+    .controller("mfl.facility_filter.controllers.form",
+        ["$stateParams", "$scope", "$state", "mfl.facility_filter.services.wrappers",
+        function ($stateParams, $scope, $state, wrappers) {
             var filter_fields = ["county", "facility_type", "constituency",
                 "ward", "operation_status", "service_category", "owner_type", "owner"
             ];
-            filteringApi.filters.filter({"fields": filter_fields})
+            wrappers.filters.filter({"fields": filter_fields})
             .success(function (data) {
                 $scope.filter_summaries = data;
             });
@@ -67,10 +69,9 @@
         }]
     )
 
-    .controller("mfl.facility_filter.controller.results",
-        ["$scope", "filterParams", "filteringApi",
+    .controller("mfl.facility_filter.controllers.results",
+        ["$scope", "filterParams", "mfl.facility_filter.services.wrappers",
         function ($scope, filterParams, wrappers) {
-
             var filter_keys = _.keys(filterParams);
             var params = _.reduce(filter_keys, function (memo, b) {
                 if (filterParams[b]) {
