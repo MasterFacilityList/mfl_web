@@ -12,6 +12,7 @@
         $scope.county = gisCounty.data;
         $scope.county_id = $stateParams.county_id;
         $scope.const_boundaries = $stateParams.const_boundaries;
+        $scope.spinner = false;
         $scope.tooltip = {
             "title": "",
             "checked": false
@@ -90,7 +91,7 @@
                         label: {
                             message: ""+mark.properties.name+"",
                             options: {
-                                noHide: true
+                                noHide: false
                             }
                         }
                     };
@@ -120,7 +121,7 @@
                     overlays:{
                         constituencies:{
                             name:"Constituencies",
-                            type:"markercluster",
+                            type:"group",
                             visible: true
                         },
                         heat:{
@@ -146,6 +147,7 @@
             $scope.hoveredConst = constituency.model;
         });
         $scope.$on("leafletDirectiveGeoJson.click", function(ev, constituency) {
+            $scope.spinner = true;
             var boundary_ids = constituency.model.properties.ward_boundary_ids.join(",");
             $stateParams.ward_boundaries = boundary_ids;
             $state.go("gis.gis_county.gis_const",{county_id:$stateParams.county_id,

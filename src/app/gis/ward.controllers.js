@@ -93,7 +93,7 @@
                         overlays:{
                             facilities:{
                                 name:"Facilities",
-                                type:"markercluster",
+                                type:"group",
                                 visible: true
                             }
                         }
