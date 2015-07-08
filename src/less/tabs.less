@@ -12,12 +12,22 @@
     // Actual tabs (as links)
     > a {
       color: @nav-tabs-link-color;
+      font-size: 14px;
       margin-right: 2px;
       line-height: @line-height-base;
       border: 1px solid transparent;
       border-radius: @border-radius-base @border-radius-base 0 0;
       &:hover {
+        background-color: @blue;
         border-color: @nav-tabs-link-hover-border-color @nav-tabs-link-hover-border-color @nav-tabs-border-color;
+        -webkit-transition: background-color 100ms ease-out 100ms;
+        -moz-transition: background-color 100ms ease-out 100ms;
+        -o-transition: background-color 100ms ease-out 100ms;
+        transition: background-color 100ms ease-out 100ms;
+         -webkit-transition: border-bottom 100ms ease-out 100ms;
+        -moz-transition: border-bottom 100ms ease-out 100ms;
+        -o-transition: border-bottom 100ms ease-out 100ms;
+        transition: border-bottom 100ms ease-out 100ms;
       }
     }
 
@@ -29,9 +39,17 @@
         color: @nav-tabs-active-link-hover-color;
         background-color: @nav-tabs-active-link-hover-bg;
         border: 1px solid @nav-tabs-active-link-hover-border-color;
-        border-bottom-color: transparent;
+        border-bottom-color: @blue;
         cursor: default;
-        box-shadow: 10px;
+        -webkit-transition: background-color 100ms ease-out 100ms;
+        -moz-transition: background-color 100ms ease-out 100ms;
+        -o-transition: background-color 100ms ease-out 100ms;
+        transition: background-color 100ms ease-out 100ms;
+         -webkit-transition: border-bottom 100ms ease-out 100ms;
+        -moz-transition: border-bottom 100ms ease-out 100ms;
+        -o-transition: border-bottom 100ms ease-out 100ms;
+        transition: border-bottom 100ms ease-out 100ms;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 2px 0 1px rgba(0, 0, 0, 0.07), 2px 1px 1px rgba(0, 0, 0, 0.10), 0px 1px 0 rgba(0, 0, 0, 0.12);
       }
     }
   }
