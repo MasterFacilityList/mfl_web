@@ -9,7 +9,6 @@
         function ($scope, leafletData, gisCounty, $http, $state,
                    $stateParams, $timeout,
                    SERVER_URL, gisConstsApi,gisFacilitiesApi,$q) {
-        $scope.state_name = $state.$current.name;
         $scope.county = gisCounty.data;
         $scope.county_id = $stateParams.county_id;
         $scope.const_boundaries = $stateParams.const_boundaries;
