@@ -8,14 +8,14 @@
         function Helpers(){}
         Helpers.prototype.hasTrailingSlash = function(url){
             // check ir url has a trailing slash
-            if(url[url.length-1]==='/'){
+            if(url[url.length-1] === "/"){
                 return true;
             }
             return false;
         };
         Helpers.prototype.hasLeadingSlash = function(url){
             // check ir url has a trailing slash
-            if(url[0]==='/'){
+            if(url[0] === "/") {
                 return true;
             }
             return false;
