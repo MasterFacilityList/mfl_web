@@ -117,11 +117,29 @@
                     <label>Cots: </label>
                     {{oneFacility.number_of_cots}}
                 </span>
+                <span class="pull-right">
+                    <label>Open on public holidays </label>
+                    <span ng-show="oneFacility.open_public_holidays" class="text-success">
+                        <i class="fa fa-check-circle-o fa-1x"></i>
+                    </span>
+                    <span ng-hide="oneFacility.open_public_holidays" class="text-danger">
+                        <i class="fa fa-times-circle-o fa-1x"></i>
+                    </span>
+                </span>
             </h4>
             <h5 class="fs-13   visible-xs">
                 <span class="pull-left">
                     <label>Cots: </label>
                     {{oneFacility.number_of_cots}}
+                </span>
+                <span class="pull-right">
+                    <label>Open on public holidays </label>
+                    <span ng-show="oneFacility.open_public_holidays" class="text-success">
+                        <i class="fa fa-check-circle-o fa-1x"></i>
+                    </span>
+                    <span ng-hide="oneFacility.open_public_holidays" class="text-danger">
+                        <i class="fa fa-times-circle-o fa-1x"></i>
+                    </span>
                 </span>
             </h5>
             <br>
