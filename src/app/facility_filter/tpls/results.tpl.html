@@ -1,5 +1,10 @@
 <div class="col-lg-12" ng-if="spinner" style="text-align: center">
-    <img class="margin-t-50" src="assets/img/301.GIF">
+    <div class="map-change-state">
+        <div class="loader"></div>
+        <div class="row">
+            <h3 class="text-center loader-text">Please wait...</h3>
+        </div>
+    </div>
 </div>
 <div class="row" ng-if="!spinner">
     <div class="col-xs-12 margin-b-10">
@@ -12,7 +17,7 @@
             <button class="action-btn action-btn-primary action-btn-md" ng-click="excelExport()" ng-disabled="!results.count" tooltip="Export Excel">
                 <i class="fa fa-file-excel-o"></i>
             </button>
-            <button class="action-btn action-btn-primary action-btn-md" ng-click="clearFilters()" tooltip="Clear Search"> <i class="fa fa-undo"></i></button>
+            <button class="action-btn action-btn-default action-btn-md" ng-click="clearFilters()" tooltip="Reset Search"> <i class="fa fa-refresh text-danger"></i></button>
         </div>
 
     </div>
