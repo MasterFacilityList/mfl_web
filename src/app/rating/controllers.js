@@ -12,8 +12,15 @@
                 "checked": false
             };
             $scope.fac_id = $stateParams.fac_id;
-
+            $scope.oneFacility = {};
             $scope.getFacility = function () {
+                facilitiesApi.chus.filter({"facility" : $scope.fac_id})
+                .success(function (data) {
+                    $scope.chus = data.results;
+                })
+                .error(function (e) {
+                    $scope.alert = e.error;
+                });
                 facilitiesApi.facilities.get($scope.fac_id)
                 .success(function (data) {
                     $scope.spinneractive = false;

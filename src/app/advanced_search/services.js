@@ -9,6 +9,7 @@
         this.wards = api.setBaseUrl("api/common/wards");
         this.counties = api.setBaseUrl("api/common/counties");
         this.towns = api.setBaseUrl("api/common/towns");
+        this.chus = api.setBaseUrl("api/chul/units");
         this.operation_status = api.setBaseUrl("api/facilities/facility_status");
         this.owners = api.setBaseUrl("api/facilities/owners");
         this.officers = api.setBaseUrl("api/facilities/officers");
