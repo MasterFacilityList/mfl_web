@@ -65,11 +65,11 @@
                     </span></p>
                 </div>
                 <span class="pull-right fs-13">
-                    <label>Open 24 hrs </label>
-                    <span ng-show="oneFacility.open_whole_day" class="text-success">
+                    <label>Open weekends </label>
+                    <span ng-show="oneFacility.open_weekends" class="text-success">
                         <i class="fa fa-check-circle-o fa-1x"></i>
                     </span>
-                    <span ng-hide="oneFacility.open_whole_day" class="text-danger">
+                    <span ng-hide="oneFacility.open_weekends" class="text-danger">
                         <i class="fa fa-times-circle-o fa-1x"></i>
                     </span>
                 </span>
@@ -82,7 +82,7 @@
                     {{oneFacility.number_of_beds}}
                 </span>
                 <span class="pull-right">
-                    <label>Open whole day </label>
+                    <label>Open 24 hours </label>
                     <span ng-show="oneFacility.open_whole_day" class="text-success">
                         <i class="fa fa-check-circle-o fa-1x"></i>
                     </span>
@@ -97,7 +97,7 @@
                     {{oneFacility.number_of_beds}}
                 </span>
                 <span class="pull-right">
-                    <label>Open whole day </label>
+                    <label>Open 24 hours </label>
                     <span ng-show="oneFacility.open_whole_day" class="text-success">
                         <i class="fa fa-check-circle-o fa-1x"></i>
                     </span>
@@ -245,20 +245,17 @@
         <!-- End of displaying extra details  -->
     </div>
 
-    <!-- Start of displaying services -->
-    <div class="col-xs-12 margin-b-20">
-    <div class="col-xs-12 content-card margin-b-10 margin-t-20">
+    <div class="col-xs-12 margin-b-20 margin-t-20">
         <!-- Start of tabbed multi step form  -->
-        <div class="container-fluid">
-            <ul class="form-tab col-sm-12">
-                <li ui-sref-active="active" class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            <ul class="nav nav-tabs col-sm-12">
+                <li ui-sref-active="active">
                     <a ui-sref=".services">
                         <span class="fw-900">
                             <i class="fa fa-exchange"></i> Facility Services
                         </span>
                     </a>
                 </li>
-                <li ui-sref-active="active" class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                <li ui-sref-active="active">
                     <a ui-sref=".units">
                         <span class="fw-900 ">
                             <i class="fa fa-hospital-o"></i> Community Health Units
@@ -269,10 +266,7 @@
             <div class="tab-content margin-t-20">
                 <div class="pad-t-20" ui-view="form-view"></div>
             </div><!-- /tab-content -->
-        </div>
         <!-- end of tabbed multistep form -->
     </div>
-    </div>
-    <!-- End of displaying services -->
     </div>
 </div>
