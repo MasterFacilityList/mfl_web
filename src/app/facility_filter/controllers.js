@@ -2,12 +2,14 @@
     "use strict";
 
     angular.module("mfl.facility_filter.controllers", [
-        "mfl.facility_filter.services"
+        "mfl.facility_filter.services",
+        "mfl.facility_filter.states"
     ])
 
     .controller("mfl.facility_filter.controllers.form",
-        ["$stateParams", "$scope", "$state", "mfl.facility_filter.services.wrappers",
-        function ($stateParams, $scope, $state, wrappers) {
+        ["$stateParams", "$scope", "$state", "$location",
+        "mfl.facility_filter.services.wrappers", "URL_SEARCH_PARAMS",
+        function ($stateParams, $scope, $state, $location, wrappers, URL_SEARCH_PARAMS) {
             var filter_fields = ["county", "facility_type", "constituency",
                 "ward", "operation_status", "service_category", "owner_type", "owner"
             ];
@@ -64,6 +66,11 @@
             };
 
             $scope.clearFilters = function () {
+                // https://github.com/angular/angular.js/blob/v1.3.x/src/ng/location.js#L537-L568
+                _.each(URL_SEARCH_PARAMS, function (a) {
+                    $location.search(a, null);
+                });
+                $location.$$compose();
                 $state.go("facility_filter", {});
             };
         }]

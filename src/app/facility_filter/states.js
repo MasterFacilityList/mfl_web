@@ -5,23 +5,23 @@
         "ui.router"
     ])
 
-    .config(["$stateProvider", function ($stateProvider) {
-        var filterParams = [
-            "search",
+    .constant("URL_SEARCH_PARAMS", [
+        "search",
 
-            "county", "constituency", "ward",
+        "county", "constituency", "ward",
 
-            "operation_status", "facility_type", "number_of_beds", "number_of_cots",
-            "open_whole_day", "service_category", "open_whole_week",
-            "owner_type", "owner",
+        "operation_status", "facility_type", "number_of_beds", "number_of_cots",
+        "open_whole_day", "service_category", "open_whole_week",
+        "owner_type", "owner",
 
-            // pagination controls
-            "page_size", "page"
-        ];
+        // pagination controls
+        "page_size", "page"
+    ])
 
+    .config(["$stateProvider", "URL_SEARCH_PARAMS", function ($stateProvider, URL_SEARCH_PARAMS) {
         $stateProvider
         .state("facility_filter", {
-            url: "/facility_filter?"+filterParams.join("&"),
+            url: "/facility_filter?"+URL_SEARCH_PARAMS.join("&"),
             views: {
                 "header" : {
                     controller: "mfl.home.controllers.header",
