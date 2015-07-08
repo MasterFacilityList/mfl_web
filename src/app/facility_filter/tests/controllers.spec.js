@@ -189,7 +189,6 @@
             it("should load state", function () {
                 state.go("facility_filter");
             });
-
         });
 
         describe("test results controller", function () {
@@ -253,6 +252,85 @@
                     expect(url).not.toContain("constituency=");
                     expect(url).toContain("format=excel");
                 }]);
+            });
+
+            it("should go to the next page", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$state": state,
+                    "filterParams": {
+                        "county": "12",
+                        "page": 3,
+                        "constituency": undefined
+                    }
+                };
+                httpBackend
+                    .expectGET(server_url+"api/facilities/facilities_list/?county=12&page=3")
+                    .respond(200, {
+                        "count": 8361,
+                        "current_page": 4,
+                        "next": "http://localhost:8061/api/facilities/facilities_list/?page=5",
+                        "page_size": 25,
+                        "previous": "http://localhost:8061/api/facilities/facilities_list/?page=3",
+                        "results": [],
+                        "total_pages": 335
+                    });
+
+                spyOn(state, "go");
+                ctrl("results", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+
+                data.$scope.nextPage();
+
+                expect(state.go).toHaveBeenCalled();
+                expect(state.go.calls[0].args[1].page).toEqual(5);
+
+                data.$scope.results.total_pages = 1;
+                data.$scope.results.current_page = 1;
+                data.$scope.nextPage();
+                expect(state.go.calls.length).toEqual(1);
+            });
+
+            it("should go to the previous page", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$state": state,
+                    "filterParams": {
+                        "county": "12",
+                        "page": 3,
+                        "constituency": undefined
+                    }
+                };
+                httpBackend
+                    .expectGET(server_url+"api/facilities/facilities_list/?county=12&page=3")
+                    .respond(200, {
+                        "count": 8361,
+                        "current_page": 4,
+                        "next": "http://localhost:8061/api/facilities/facilities_list/?page=5",
+                        "page_size": 25,
+                        "previous": "http://localhost:8061/api/facilities/facilities_list/?page=3",
+                        "results": [],
+                        "total_pages": 335
+                    });
+
+                spyOn(state, "go");
+                ctrl("results", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+
+                data.$scope.prevPage();
+
+                expect(state.go).toHaveBeenCalled();
+                expect(state.go.calls[0].args[1].page).toEqual(3);
+
+                data.$scope.results.current_page = 1;
+                data.$scope.prevPage();
+                expect(state.go.calls.length).toEqual(1);
             });
         });
     });
