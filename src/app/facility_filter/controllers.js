@@ -66,12 +66,11 @@
             };
 
             $scope.clearFilters = function () {
-                // https://github.com/angular/angular.js/blob/v1.3.x/src/ng/location.js#L537-L568
+                var params = {};
                 _.each(URL_SEARCH_PARAMS, function (a) {
-                    $location.search(a, null);
+                    params[a] = undefined;
                 });
-                $location.$$compose();
-                $state.go("facility_filter", {});
+                $state.go("facility_filter", params);
             };
         }]
     )
