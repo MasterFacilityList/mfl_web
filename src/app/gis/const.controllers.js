@@ -15,6 +15,7 @@
         $scope.const_boundaries = $stateParams.const_boundaries;
         $scope.const_id = $stateParams.const_id;
         $scope.ward_boundaries = $stateParams.ward_boundaries;
+        $scope.spinner = false;
         $scope.tooltip = {
             "title": "",
             "checked": false
@@ -93,7 +94,7 @@
                         label: {
                             message: ""+mark.properties.name+"",
                             options: {
-                                noHide: true
+                                noHide: false
                             }
                         }
                     };
@@ -123,7 +124,7 @@
                     overlays:{
                         wards:{
                             name:"Wards",
-                            type:"markercluster",
+                            type:"group",
                             visible: true
                         },
                         heat:{
@@ -148,6 +149,7 @@
             $scope.hoveredWard= ward.model;
         });
         $scope.$on("leafletDirectiveGeoJson.click", function(ev, ward) {
+            $scope.spinner = true;
             $state.go("gis.gis_county.gis_const.gis_ward",
                        {county_id:$stateParams.county_id,
                         county_boundaries:$stateParams.const_boundaries,

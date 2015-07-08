@@ -25,16 +25,45 @@
                     <h4><i class="fa fa-eye"></i> VIEW THE {{facility_count}} FACILITIES</h4>
                 </a>
             </div>
+            <div class="col-md-12">
+                <h4 class="pad-t-50">Quick Help</h4>
+                <accordion>
+                    <accordion-group is-open="drilldown.open">
+                        <accordion-heading>
+                            Drilldown <i class="pull-right fa" ng-class="{'fa-chevron-down': drilldown.open, 'fa-chevron-right': !drildown.open}"></i>
+                        </accordion-heading>
+                        <div class="col-sm-4 margin-t-50">Click inside the map to drill down</div>
+                        <img class="col-sm-8" src="/assets/images/drilldown.gif" alt="drilldown">
+                    </accordion-group>
+                    <accordion-group is-open="unit.open">
+                        <accordion-heading>
+                            View unit names <i class="pull-right fa" ng-class="{'fa-chevron-down': unit.open, 'fa-chevron-right': !unit.open}"></i>
+                        </accordion-heading>
+                        <div class="col-sm-4 margin-t-20">Hover on the blue markers to show the adminstrative unit name</div>
+                        <img class="col-sm-8" src="/assets/images/hover.gif" alt="drilldown">
+                    </accordion-group>
+                </accordion>
+            </div>
         </div>
         <div class="col-md-8 margin-b-10">
-            <leaflet id="countymap"
-                markers="markers"
-                width="100%"
-                defaults="defaults"
-                layers="layers"
-                geojson="geojson"
-                geojson-watch-options="{doWatch:true,isDeep:true}"
-                events="events"
-                height="80vh">
-             </leaflet>
+            <div ng-if="spinner">
+                <div class="map-change-state">
+                    <div class="loader"></div>
+                    <div class="row">
+                        <h3 class="text-center loader-text">Please wait...</h3>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="!spinner">
+                <leaflet id="countymap"
+                    markers="markers"
+                    width="100%"
+                    defaults="defaults"
+                    layers="layers"
+                    geojson="geojson"
+                    geojson-watch-options="{doWatch:true,isDeep:true}"
+                    events="events"
+                    height="80vh">
+                 </leaflet>
+            </div>
         </div>
