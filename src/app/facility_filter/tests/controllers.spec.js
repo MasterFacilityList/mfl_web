@@ -36,7 +36,7 @@
                 httpBackend
                     .expectGET(server_url+"api/common/filtering_summaries/" +
                                "?fields=county,facility_type,constituency," +
-                               "ward,operation_status,service_category,owner_type,owner")
+                               "ward,operation_status,service_category,owner_type,owner,service")
                     .respond(200, {});
 
                 ctrl("form", data);
@@ -57,7 +57,7 @@
                 httpBackend
                     .expectGET(server_url+"api/common/filtering_summaries/" +
                                "?fields=county,facility_type,constituency," +
-                               "ward,operation_status,service_category,owner_type,owner")
+                               "ward,operation_status,service_category,owner_type,owner,service")
                     .respond(200, {});
 
                 spyOn(state, "go");
@@ -93,7 +93,7 @@
                 httpBackend
                     .expectGET(server_url+"api/common/filtering_summaries/" +
                                "?fields=county,facility_type,constituency," +
-                               "ward,operation_status,service_category,owner_type,owner")
+                               "ward,operation_status,service_category,owner_type,owner,service")
                     .respond(200, {});
 
                 spyOn(state, "go");
@@ -119,7 +119,7 @@
                 httpBackend
                     .expectGET(server_url+"api/common/filtering_summaries/" +
                                "?fields=county,facility_type,constituency," +
-                               "ward,operation_status,service_category,owner_type,owner")
+                               "ward,operation_status,service_category,owner_type,owner,service")
                     .respond(200, {});
 
                 spyOn(state, "go");
@@ -183,6 +183,29 @@
                 ).toBe(true);
                 expect(
                     data.$scope.filterFxns.ownerFilter({"id": "3", "owner_type": "3"})
+                ).toBe(false);
+
+                expect(
+                    data.$scope.filterFxns.serviceFilter({"id": "1", "category": "1"})
+                ).toBe(true);
+                expect(
+                    data.$scope.filterFxns.serviceFilter({"id": "2", "category": "2"})
+                ).toBe(true);
+                expect(
+                    data.$scope.filterFxns.serviceFilter({"id": "3", "category": "3"})
+                ).toBe(true);
+
+                data.$scope.filters.multiple.service_category = [
+                    {"id": "1"}, {"id": "2"}
+                ];
+                expect(
+                    data.$scope.filterFxns.serviceFilter({"id": "1", "category": "1"})
+                ).toBe(true);
+                expect(
+                    data.$scope.filterFxns.serviceFilter({"id": "2", "category": "2"})
+                ).toBe(true);
+                expect(
+                    data.$scope.filterFxns.serviceFilter({"id": "3", "category": "3"})
                 ).toBe(false);
             });
 

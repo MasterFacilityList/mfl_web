@@ -132,7 +132,7 @@
                             <ui-select-match placeholder="Select a service...">
                                 <span>{{$item.name}}</span>
                             </ui-select-match>
-                            <ui-select-choices repeat="serv in filter_summaries.service | filter:$select.search">
+                            <ui-select-choices repeat="serv in filter_summaries.service | filter:filterFxns.serviceFilter | filter:$select.search">
                                 <span>{{serv.name}}</span>
                             </ui-select-choices>
                         </ui-select>

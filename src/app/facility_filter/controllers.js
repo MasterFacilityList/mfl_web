@@ -10,19 +10,11 @@
         ["$stateParams", "$scope", "$state", "$location",
         "mfl.facility_filter.services.wrappers", "URL_SEARCH_PARAMS",
         function ($stateParams, $scope, $state, $location, wrappers, URL_SEARCH_PARAMS) {
-            var filter_fields = ["county", "facility_type", "constituency",
-                "ward", "operation_status", "service_category", "owner_type", "owner"
-            ];
-            wrappers.filters.filter({"fields": filter_fields})
-            .success(function (data) {
-                $scope.filter_summaries = data;
-            });
-
             $scope.filters = {
                 single: {
-                    name: "",
-                    code: "",
-                    search: "",
+                    name: $stateParams.name || "",
+                    code: $stateParams.code || "",
+                    search: $stateParams.search || "",
                     page: "",
                     page_size: ""
                 },
@@ -39,6 +31,10 @@
                 }
             };
 
+            var updateSelectFilters = function (source) {
+                console.log(source);
+            };
+
             $scope.filterFxns = {
                 constFilter: function (a) {
                     var county_ids = _.pluck($scope.filters.multiple.county, "id");
@@ -53,8 +49,22 @@
                     return (_.isEmpty(owner_types)) ?
                         true :
                         _.contains(owner_types, a.owner_type);
+                },
+                serviceFilter: function (a) {
+                    var categories = _.pluck($scope.filters.multiple.service_category, "id");
+                    return (_.isEmpty(categories)) ?
+                        true :
+                        _.contains(categories, a.category);
                 }
             };
+
+            wrappers.filters.filter({"fields": ["county", "facility_type", "constituency",
+                "ward", "operation_status", "service_category", "owner_type", "owner", "service"
+            ]})
+            .success(function (data) {
+                $scope.filter_summaries = data;
+                updateSelectFilters(data);
+            });
 
             $scope.filterFacilities = function () {
                 var filter_keys = _.keys($scope.filters.multiple);
