@@ -9,8 +9,6 @@
         "ui.router",
         "ui.bootstrap",
         "ui.bootstrap.tpls",
-        "ngTagsInput",
-        "angularjs-dropdown-multiselect",
         "angular-loading-bar",
         "templates-app",
         "templates-common",

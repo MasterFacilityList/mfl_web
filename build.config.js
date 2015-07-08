@@ -97,8 +97,6 @@ module.exports = {
             "vendor/typeahead.js/dist/typeahead.bundle.js",
             "vendor/typeahead.js/dist/typeahead.jquery.js",
             "vendor/stacktrace-js/dist/stacktrace.js",
-            "vendor/angularjs-dropdown-multiselect/src/angularjs-dropdown-multiselect.js",
-            "vendor/ng-tags-input/ng-tags-input.js",
             "vendor/moment/moment.js",
             "vendor/angular-loading-bar/build/loading-bar.js",
             "libs/leaflet-heat.js",
