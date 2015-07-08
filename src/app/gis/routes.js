@@ -25,7 +25,7 @@
                 },
                 data:{
                     pageTitle: "MFLv2 Facility Geolocation",
-                    back: true
+                    back: false
                 }
             })
             .state("gis.gis_county", {
@@ -44,7 +44,7 @@
                 },
                 data:{
                     pageTitle: "MFLv2 County View Geolocation",
-                    back: false
+                    back: true
                     
                 }
             })
