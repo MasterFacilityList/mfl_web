@@ -18,7 +18,6 @@
         $scope.search = function (query) {
             $scope.loader = true;
             $state.go("facility_filter.results", {"search" : query});
-            /*$window.location = "#/filtering?search="+query;*/
         };
     }])
 
