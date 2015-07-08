@@ -67,10 +67,10 @@
                         deferred.reject(error);
                     });
                 } else {
-                    $localForage.getItem("mflApp.counties")
-                    .then(function (data) {
+                    var success_fn =  function(data){
                         deferred.resolve(data);
-                    });
+                    };
+                    $localForage.getItem("mflApp.counties").then(success_fn);
                 }
             };
             
