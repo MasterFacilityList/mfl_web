@@ -7,45 +7,43 @@
             <div class="col-xs-12 content-card">
                <strong class="margin-10">LEGEND</strong>
                <br>
-               Concentration of Facilities: <br>
-               <label class="label map-high-conc" >&#9679;</label> High <br>
-               <label class="label map-moderate-conc">&#9679;</label> Moderate<br>
+               <span class="fw-500">Concentration of Facilities:   <br></span>
+               <label class="label map-high-conc" >&#9679;</label> High
+               <label class="label map-moderate-conc">&#9679;</label> Moderate
                <label class="label map-low-conc" >&#9679;</label> Low<br>
-            </div>
-            <div class="col-xs-12 content-card">
-                <h4>{{county.properties.name}}</h4>
-                <h4>Facilities: {{facility_count}}</h4>
-                <h5 ng-show="hoveredConst">
-                <hr>
-                    <strong>Constituency Hovered: <span class="text-info">{{hoveredConst.properties.name}}</span></strong>
-                </h5>
             </div>
             <div>
                 <a ui-sref="filtering({county:county.properties.county_id})" class="col-xs-12 login-btn login-btn-primary margin-t-20">
                     <h4><i class="fa fa-eye"></i> VIEW THE {{facility_count}} FACILITIES</h4>
                 </a>
             </div>
-            <div class="col-md-12">
-                <h4 class="pad-t-50">Quick Help</h4>
-                <accordion>
-                    <accordion-group is-open="drilldown.open">
-                        <accordion-heading>
-                            Drilldown <i class="pull-right fa" ng-class="{'fa-chevron-down': drilldown.open, 'fa-chevron-right': !drildown.open}"></i>
-                        </accordion-heading>
-                        <div class="col-sm-4 margin-t-50">Click inside the map to drill down</div>
-                        <img class="col-sm-8" src="/assets/images/drilldown.gif" alt="drilldown">
-                    </accordion-group>
-                    <accordion-group is-open="unit.open">
-                        <accordion-heading>
-                            View unit names <i class="pull-right fa" ng-class="{'fa-chevron-down': unit.open, 'fa-chevron-right': !unit.open}"></i>
-                        </accordion-heading>
-                        <div class="col-sm-4 margin-t-20">Hover on the blue markers to show the adminstrative unit name</div>
-                        <img class="col-sm-8" src="/assets/images/hover.gif" alt="drilldown">
-                    </accordion-group>
-                </accordion>
+            <div class="col-xs-12">
+                <h4 class="fw-500 pad-t-50">Quick Help</h4>
+                <hr>
+                <div  class="content-card">
+                    <accordion>
+                        <accordion-group is-open="drilldown.open">
+                            <accordion-heading>
+                                Drilldown <i class="pull-right fa" ng-class="{'fa-chevron-down': drilldown.open, 'fa-chevron-right': !drildown.open}"></i>
+                            </accordion-heading>
+                            <div class="col-sm-4 margin-t-50">Click inside the map to drill down</div>
+                            <img class="col-sm-8" src="/assets/images/drilldown.gif" alt="drilldown">
+                        </accordion-group>
+                        <accordion-group is-open="unit.open">
+                            <accordion-heading>
+                                View unit names <i class="pull-right fa" ng-class="{'fa-chevron-down': unit.open, 'fa-chevron-right': !unit.open}"></i>
+                            </accordion-heading>
+                            <div class="col-sm-4 margin-t-20">Hover on the blue markers to show the adminstrative unit name</div>
+                            <img class="col-sm-8" src="/assets/images/hover.gif" alt="drilldown">
+                        </accordion-group>
+                    </accordion>
+                </div>
             </div>
         </div>
         <div class="col-md-8 margin-b-10">
+            <div class="col-xs-12 content-card">
+                <h4 class="fw-400">{{county.properties.name}} COUNTY <span class="pull-right">{{facility_count}} facilities</span></h4>
+            </div>
             <div ng-if="spinner">
                 <div class="map-change-state">
                     <div class="loader"></div>
@@ -61,7 +59,7 @@
                     defaults="defaults"
                     layers="layers"
                     geojson="geojson"
-                    geojson-watch-options="{doWatch:true,isDeep:true}"
+                    geojson-watch-options="{doWatch:true,isDeep:false,individual:{doWatch:true,isDeep: false}}"
                     events="events"
                     height="80vh">
                  </leaflet>
