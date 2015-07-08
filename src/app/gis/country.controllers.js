@@ -8,7 +8,7 @@
         "$timeout","leafletEvents","gisAdminUnitsApi",
         function ($scope,leafletData,$http, $stateParams,
                    $state,SERVER_URL, gisCountiesApi, gisFacilitiesApi,$timeout,leafletEvents,
-                  adminUnitsApi) {
+                  gisAdminUnitsApi) {
         $scope.tooltip = {
             "title": "",
             "checked": false
@@ -55,7 +55,7 @@
                 }
             }
         });
-        adminUnitsApi.getCounties().then(function (data) {
+        gisAdminUnitsApi.getCounties().then(function (data) {
             var marks = data.results.features;
             var markers = _.mapObject(marks, function(mark){
                 return  {

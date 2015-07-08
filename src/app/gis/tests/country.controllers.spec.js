@@ -1,7 +1,7 @@
 describe("Tests for mfl.gis.controllers.gis (Country Level):", function () {
     "use strict";
 
-    var controller, httpBackend, SERVER_URL, gisCountriesApi, 
+    var controller, httpBackend, SERVER_URL, gisCountriesApi, gisAdminUnitsApi,
         gisCountiesApi, gisFacilitiesApi, leafletData;
 
     beforeEach(function () {
@@ -14,13 +14,16 @@ describe("Tests for mfl.gis.controllers.gis (Country Level):", function () {
 
         inject(["$rootScope", "$controller","$httpBackend","$state","$stateParams",
                 "SERVER_URL","gisCountriesApi","gisCountiesApi","gisFacilitiesApi","leafletData",
+                "gisAdminUnitsApi",
             function ($rootScope, $controller, $httpBackend, $state,$stateParams,
-                  url, gis_countries_api, gis_counties_api, gis_facilities_api, leaflet_data) {
+                  url, gis_countries_api, gis_counties_api, gis_facilities_api, leaflet_data,
+                    gis_admin_units_api) {
                 httpBackend = $httpBackend;
                 SERVER_URL = url;
                 gisCountriesApi = gis_countries_api;
                 gisCountiesApi = gis_counties_api;
                 gisFacilitiesApi = gis_facilities_api;
+                gisAdminUnitsApi = gis_admin_units_api;
                 leafletData = leaflet_data;
                 $stateParams.county_id = 4;
                 $stateParams.const_boundaries = "4,2,41";
@@ -255,6 +258,7 @@ describe("Tests for mfl.gis.controllers.gis (Country Level):", function () {
             "SERVER_URL": SERVER_URL,
             "gisCountriesApi": gisCountriesApi,
             "gisCountiesApi": gisCountiesApi,
+            "gisAdminUnitsApi": gisAdminUnitsApi,
             "gisFacilitiesApi": gisFacilitiesApi,
             "$timeout": timeout.timeout
         });
