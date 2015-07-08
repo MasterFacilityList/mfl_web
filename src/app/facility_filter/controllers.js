@@ -76,8 +76,9 @@
     )
 
     .controller("mfl.facility_filter.controllers.results",
-        ["$scope", "$window", "filterParams", "mfl.facility_filter.services.wrappers", "api.auth",
-        function ($scope, $window, filterParams, wrappers, auth) {
+        ["$scope", "$state", "$window", "filterParams",
+        "mfl.facility_filter.services.wrappers", "api.auth",
+        function ($scope, $state, $window, filterParams, wrappers, auth) {
             var filter_keys = _.keys(filterParams);
             var params = _.reduce(filter_keys, function (memo, b) {
                 if (filterParams[b]) {
@@ -90,6 +91,8 @@
             .success(function (data) {
                 $scope.spinner = false;
                 $scope.results = data;
+                $scope.results.from_index = data.page_size * data.current_page;
+                $scope.results.to_index = $scope.results.from_index + data.results.length;
             });
 
             $scope.excelExport = function () {
@@ -107,6 +110,21 @@
                 ]);
 
                 $window.location.href = url;
+            };
+
+            $scope.nextPage = function () {
+                if ($scope.results.total_pages === $scope.results.current_page) {
+                    return;
+                }
+                params.page = $scope.results.current_page + 1 ;
+                $state.go("facility_filter.results", params);
+            };
+            $scope.prevPage = function () {
+                if ($scope.results.current_page === 1) {
+                    return;
+                }
+                params.page = $scope.results.current_page - 1;
+                $state.go("facility_filter.results", params);
             };
         }]
     );
