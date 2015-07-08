@@ -78,15 +78,13 @@
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
             }]));
-        it("should have keyName defined for localForage",inject(["$localForage","$rootScope","$q",
-        function ($localForage,$rootScope,$q) {
+        it("should have keyName defined for localForage",inject(["$localForage","$rootScope",
+        function ($localForage,$rootScope) {
                 var data = {results: {}, count: 0};
                 var keyName = {
-                    then: {
-                        0: "mflApp.counties"
-                    }
+                    then: angular.noop
                 };
-                var getsItem = {
+                var keyItem = {
                     then : angular.noop
                 };
                 spyOn($localForage, "key").andReturn(keyName);
@@ -94,12 +92,13 @@
                 gisAdminUnitsApi.getCounties();
                 var then_fxn1 = keyName.then.calls[0].args[0];
                 expect(angular.isFunction(then_fxn1)).toBe(true);
+                then_fxn1("mflApp.counties");
                 $rootScope.$digest();
-                spyOn($localForage, "getItem").andReturn(getsItem);
-                spyOn(getsItem, "then");
+                spyOn($localForage, "getItem").andReturn(keyItem);
+                spyOn(keyItem, "then");
                 $localForage.getItem("mflApp.counties");
                 expect($localForage.getItem).toHaveBeenCalledWith("mflApp.counties");
-                var then_fxn2 = getsItem.then.calls[0].args[0];
+                var then_fxn2 = keyItem.then.calls[0].args[0];
                 expect(angular.isFunction(then_fxn2)).toBe(true);
                 then_fxn2(data);
             }]));
