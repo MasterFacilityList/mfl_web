@@ -85,8 +85,10 @@
                 }
                 return memo;
             }, {});
+            $scope.spinner = true;
             wrappers.facilities.filter(params)
             .success(function (data) {
+                $scope.spinner = false;
                 $scope.results = data;
             });
 
