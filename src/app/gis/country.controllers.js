@@ -12,6 +12,7 @@
             "title": "",
             "checked": false
         };
+        $scope.spinner = false;
         var bounds = [
             [-4.669618,33.907219],
             [-4.669618,41.90516700000012],
@@ -62,10 +63,11 @@
                         layer: "counties",
                         lat: mark.properties.center.coordinates[1],
                         lng: mark.properties.center.coordinates[0],
+                        message: ""+mark.properties.name+"",
                         label: {
                             message: ""+mark.properties.name+"",
                             options: {
-                                noHide: true
+                                noHide: false
                             }
                         }
                     };
@@ -95,7 +97,7 @@
                     overlays:{
                         counties:{
                             name:"Counties",
-                            type:"markercluster",
+                            type:"group",
                             visible: true
                         }
                     }
@@ -143,6 +145,7 @@
             $scope.hoveredCounty = county.model;
         });
         $scope.$on("leafletDirectiveGeoJson.click", function(ev, county) {
+            $scope.spinner = true;
             var boundary_ids = county.model.properties.constituency_boundary_ids.join(",");
             $stateParams.const_boundaries = boundary_ids;
             $state.go("gis.gis_county",{county_id: county.model.id,
