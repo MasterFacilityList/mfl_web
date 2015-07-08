@@ -213,6 +213,47 @@
                 httpBackend.verifyNoOutstandingExpectation();
                 httpBackend.verifyNoOutstandingRequest();
             });
+
+            it("should export all filtered facilities to excel", function () {
+                inject(["api.auth", function (a) {
+                    var data = {
+                        "$scope": rootScope.$new(),
+                        "filterParams": {
+                            "county": "12",
+                            "page": 3,
+                            "constituency": undefined
+                        },
+                        "$window": {
+                            location: {}
+                        },
+                        "api.auth": a
+                    };
+                    httpBackend
+                        .expectGET(server_url+"api/facilities/facilities_list/?county=12&page=3")
+                        .respond(200, {
+                            count: 10,
+                            results: []
+                        });
+
+                    spyOn(a, "getToken").andReturn({access_token: 21});
+                    ctrl("results", data);
+
+                    httpBackend.flush();
+                    httpBackend.verifyNoOutstandingExpectation();
+                    httpBackend.verifyNoOutstandingRequest();
+
+                    data.$scope.excelExport();
+                    expect(a.getToken).toHaveBeenCalled();
+
+                    var url = data.$window.location.href;
+                    expect(url).toContain("access_token=21");
+                    expect(url).toContain("page_size=10");
+                    expect(url).toContain("county=12");
+                    expect(url).not.toContain("page=");
+                    expect(url).not.toContain("constituency=");
+                    expect(url).toContain("format=excel");
+                }]);
+            });
         });
     });
 

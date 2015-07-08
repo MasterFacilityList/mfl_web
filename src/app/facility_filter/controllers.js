@@ -76,8 +76,8 @@
     )
 
     .controller("mfl.facility_filter.controllers.results",
-        ["$scope", "filterParams", "mfl.facility_filter.services.wrappers",
-        function ($scope, filterParams, wrappers) {
+        ["$scope", "$window", "filterParams", "mfl.facility_filter.services.wrappers", "api.auth",
+        function ($scope, $window, filterParams, wrappers, auth) {
             var filter_keys = _.keys(filterParams);
             var params = _.reduce(filter_keys, function (memo, b) {
                 if (filterParams[b]) {
@@ -89,6 +89,23 @@
             .success(function (data) {
                 $scope.results = data;
             });
+
+            $scope.excelExport = function () {
+                var download_params = {
+                    "format": "excel",
+                    "access_token": auth.getToken().access_token,
+                    "page_size": $scope.results.count
+                };
+                _.extend(download_params, _.omit(params, "page"));
+
+                var helpers = wrappers.helpers;
+                var url = helpers.joinUrl([
+                    wrappers.facilities.makeUrl(wrappers.facilities.apiBaseUrl),
+                    helpers.makeGetParam(helpers.makeParams(download_params))
+                ]);
+
+                $window.location.href = url;
+            };
         }]
     );
 

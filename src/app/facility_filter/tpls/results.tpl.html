@@ -1,11 +1,13 @@
 <div>
-    <div>
-        <div class="pull-left">
+    <div class="margin-b-20">
+        <div>
             <p>Showing {{results.page_size}} of {{results.count}} results</p>
         </div>
-        <div class="pull-right">
-            <a class="btn btn-primary">Export results to excel</a>
+        <div>
+            <button class="btn btn-primary" ng-click="excelExport()" ng-disabled="!results.count">Export results to excel</button>
+            <button class="btn btn-primary" ng-click="clearFilters()">Clear Search</button>
         </div>
+
     </div>
 
     <div>

@@ -136,6 +136,7 @@
             };
 
             return {
+                apiHelpers: self.helpers,
                 setBaseUrl: function(url){
                     var api = new Api();
                     api.setBaseUrl(url);
