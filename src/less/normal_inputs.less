@@ -1,38 +1,9 @@
-input.reg-input, select.reg-input, textarea.reg-input{
-    font-size: 14px;
-    margin-top: 15px;
-    background-color: transparent;
-    border:none;
-    box-shadow: none;
-    padding: 6px 5px;
-    color: rgba(0, 0, 0, 0.7);
-    border-bottom: 1px solid #C9C9C9;
-    border-radius: 0px;
-    margin-left: 5%;
-    margin-right: 5%;
-    width: 90%;
-}
-input.reg-input:hover , select.reg-input:hover, textarea.reg-input:hover{
-    border-bottom: 1px solid #0089FF;
-}
-input.reg-input::selection, select.reg-input::selection{
-    border-bottom: 1px solid #0089ff;
-}
-
-input.reg-input.focus, select.reg-input:focus, textarea.reg-input:focus,
-input.reg-input:focus, select.reg-input.focus, textarea.reg-input.focus,
-input.reg-input:active:focus,select.reg-input:active:focus,
-textarea.reg-input:active:focus, .reg-input.active:focus,
-.reg-input:active,.reg-input.active {
-    border-bottom: 1px solid #0089FF;
-}
 /*form starting to style ----------------------*/
 .group{
     position:relative;
     margin-bottom:20px;
 }
-input[type=text],input[type=number],input[type=search],
-input[type=password], input[type=email], select , textarea{
+input[type=search]{
     font-size:14px;
     padding:10px 10px 10px 5px;
     background-color: #fff;
@@ -41,9 +12,7 @@ input[type=password], input[type=email], select , textarea{
     border:none;
     border-bottom:1px solid #757575;
 }
-input[type=text]:focus,input[type=number]:focus,
-input[type=search]:focus, input[type=password],input[type=email],
- select:focus, textarea:focus { outline:none; }
+input[type=search]:focus { outline:none; }
 /* LABEL ======================================= */
 .group label          {
     color:#999;
@@ -57,13 +26,7 @@ input[type=search]:focus, input[type=password],input[type=email],
 }
 
 /* active state */
-input[type=text]:focus ~ label, input[type=text]:valid ~ label ,
-input[type=number]:focus ~ label, input[type=number]:valid ~ label ,
-input[type=search]:focus ~ label, input[type=search]:valid ~ label ,
-input[type=email]:focus ~ label, input[type=email]:valid ~ label ,
-input[type=password]:focus ~ label, input[type=password]:valid ~ label ,
-select:focus ~ label, select:valid ~ label,
-textarea:focus ~ label, textarea:valid ~ label {
+input[type=search]:focus ~ label {
     top:-10px;
     font-size:14px;
     color:#2196F3;
@@ -87,14 +50,7 @@ textarea:focus ~ label, textarea:valid ~ label {
 }
 
 /* active state */
-input[type=text]:focus ~ .bar:before, input[type=text]:focus ~ .bar:after,
-input[type=number]:focus ~ .bar:before, input[type=number]:focus ~ .bar:after,
-input[type=search]:focus ~ .bar:before, input[type=search]:focus ~ .bar:after,
-input[type=email]:focus ~ .bar:before, input[type=email]:focus ~ .bar:after,
-input[type=password]:focus ~ .bar:before,
-input[type=password]:focus ~ .bar:after,
-select:focus ~ .bar:before, select:focus ~ .bar:after,
-textarea:focus ~ .bar:before, textarea:focus ~ .bar:after {
+input[type=search]:focus ~ .bar:before, input[type=search]:focus ~ .bar:after {
     width:50%;
 }
 /* HIGHLIGHTER ================================== */
@@ -109,10 +65,7 @@ textarea:focus ~ .bar:before, textarea:focus ~ .bar:after {
 }
 
 /* active state */
-input[type=text]:focus ~ .highlight,
-input[type=number]:focus ~ .highlight, input[type=email],
-input[type=search]:focus ~ .highlight, input[type=password],
-select:focus ~ .highlight, textarea:focus ~ .highlight {
+input[type=search]:focus ~ .highlight {
     animation:inputHighlighter 0.1s ease;
 }
 
@@ -123,13 +76,7 @@ select:focus ~ .highlight, textarea:focus ~ .highlight {
 }
 
 /* active state */
-input[type=text]:focus ~ label, input[type=text]:valid ~ label,
-input[type=number]:focus ~ label, input[type=number]:valid ~ label,
-input[type=search]:focus ~ label, input[type=search]:valid ~ label,
-input[type=email]:focus ~ label, input[type=email]:valid ~ label,
-input[type=password]:focus ~ label, input[type=password]:valid ~ label,
-select:focus ~ label, select:valid ~ label,
-textarea:focus ~ label, textarea:valid ~ label {
+input[type=search]:focus ~ label, input[type=search]:valid ~ label {
     top:-10px;
     font-size:14px;
     color:#2196F3;

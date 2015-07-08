@@ -1,0 +1,67 @@
+<div class="row">
+    <div class="col-xs-12 margin-b-10">
+        <div class="pull-left">
+            <p class="lead fw-500 text-black margin-t-10">
+                Showing {{results.page_size}} of <span class="text-danger">{{results.count}}</span> results.
+            </p>
+        </div>
+        <div class="pull-right">
+            <button class="login-btn login-btn-primary" ng-click="excelExport()" ng-disabled="!results.count">
+                Export Excel
+            </button>
+            <button class="login-btn login-btn-primary" ng-click="clearFilters()">
+                Clear Search
+            </button>
+        </div>
+
+    </div>
+
+    <div class="col-xs-12">
+        <div class="fade-content results-card col-xs-12" ng-repeat="fac in results.results">
+            <div>
+                <a ui-sref="rating.services({fac_id : fac.id})" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Click to view facility details">
+                    <p class="search-resulthead lead">
+                        <span class="fw-600 fs-18 pull-left" style="cursor: pointer">
+                            <span class="fw-600 fs-20"> {{fac.code}} </span> | {{fac.name}}
+                        </span>
+                    </p>
+                </a>
+
+                <br />
+
+                <h5 class="margin-b-5">
+                    <span class="pull-left fs-16">
+                        <label>Status: </label>
+                        <span class="text-success fw-600">{{fac.regulatory_status_name}}</span>
+                    </span>
+                    <span class="pull-right">
+                        <span class="fs-14 fw-600 label label-primary">{{fac.facility_type_name}}</span>
+                    </span>
+                </h5>
+
+                <br>
+
+                <h5 class="margin-t-10 fw-600 margin-t-5" style="color:#000;">
+
+                <span class="pull-left fs-15">{{fac.county}} COUNTY</span>
+                <span class="pull-right" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Facility owner">
+                    <i class="fa fa-user-secret"></i> {{fac.owner_type_name}}
+                </span>
+
+                </h5>
+
+                <br>
+
+                <p class="margin-b-30 margin-t--55">
+                    <span class="pull-left fs-14 fw-500 text-black">{{fac.constituency}} CONSTITUENCY</span>
+                    <span class="pull-right fs-13 fw-500 text-black">{{fac.ward_name}} WARD</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <a href class="btn btn-primary pull-left" ng-if="results.previous">Previous</a>
+        <a href class="btn btn-primary pull-right" ng-if="results.next">Next</a>
+    </div>
+</div>
