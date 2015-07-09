@@ -12,16 +12,16 @@
         function ($stateParams, $scope, $state, $location, wrappers, URL_SEARCH_PARAMS) {
             $scope.filters = {
                 single: {
-                    name: $stateParams.name || "",
-                    code: $stateParams.code || "",
-                    search: $stateParams.search || "",
-                    number_of_beds: $stateParams.number_of_beds || "",
-                    number_of_cots: $stateParams.number_of_cots || "",
-                    open_public_holidays: true,
-                    open_weekends: true,
-                    open_whole_day: true,
-                    is_regulated: true,
-                    is_active: true
+                    name: "",
+                    code: "",
+                    search: "",
+                    number_of_beds: "",
+                    number_of_cots: "",
+                    open_public_holidays: "",
+                    open_weekends: "",
+                    open_whole_day: "",
+                    is_regulated: "",
+                    is_active: ""
                 },
                 multiple: {
                     county: [],

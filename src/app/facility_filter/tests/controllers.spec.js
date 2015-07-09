@@ -71,27 +71,9 @@
                     {"id": "3"}
                 ];
                 data.$scope.filterFacilities();
-                expect(state.go).toHaveBeenCalledWith("facility_filter.results", {
-                    "name": "",
-                    "code": "",
-                    "search": "",
-                    "number_of_beds": "",
-                    "number_of_cots": "",
-                    "open_public_holidays": true,
-                    "open_weekends": true,
-                    "open_whole_day": true,
-                    "is_regulated": true,
-                    "is_active": true,
-                    "county": "3",
-                    "facility_type" : "",
-                    "constituency" : "",
-                    "ward" : "",
-                    "operation_status" : "",
-                    "service_category" : "",
-                    "owner_type" : "",
-                    "owner" : "",
-                    "service": ""
-                });
+                expect(state.go).toHaveBeenCalled();
+                expect(state.go.calls[0].args[0]).toEqual("facility_filter.results");
+                expect(state.go.calls[0].args[1].county).toEqual("3");
             });
 
             it("should clear filter facilities", function () {
