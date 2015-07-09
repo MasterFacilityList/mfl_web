@@ -65,11 +65,13 @@
             spyOn(leafletData, "getMap").andReturn(obj);
             spyOn(obj, "then");
             spyOn(timeout, "timeout");
-            $httpBackend.expectGET(SERVER_URL + "api/gis/coordinates/").respond(200, data2);
 
             var promise = {then: angular.noop};
+            var promise2 = {then: angular.noop};
             spyOn(gisAdminUnitsApi, "getCounties").andReturn(promise);
             spyOn(promise, "then");
+            spyOn(gisAdminUnitsApi, "getFacCoordinates").andReturn(promise2);
+            spyOn(promise2, "then");
 
             controller("mfl.gis.controllers.gis", {
                 "$scope": scope,
@@ -84,16 +86,20 @@
 
             scope.layers.overlays = {};
 
-            $httpBackend.flush();
-            $httpBackend.verifyNoOutstandingRequest();
-            $httpBackend.verifyNoOutstandingExpectation();
-
             expect(gisAdminUnitsApi.getCounties).toHaveBeenCalled();
             expect(promise.then).toHaveBeenCalled();
             var success_fxn = promise.then.calls[0].args[0];
             var error_fxn = promise.then.calls[0].args[1];
 
-            error_fxn({"error": "ADS"});
+            error_fxn({"error": "ADIS"});
+            expect(scope.alert).toEqual("ADIS");
+
+            expect(gisAdminUnitsApi.getFacCoordinates).toHaveBeenCalled();
+            expect(promise2.then).toHaveBeenCalled();
+            var success_fxn2 = promise2.then.calls[0].args[0];
+            var error_fxn2 = promise2.then.calls[0].args[1];
+
+            error_fxn2({"error": "ADS"});
             expect(scope.alert).toEqual("ADS");
 
             var payload = {
@@ -125,42 +131,7 @@
                 }
             };
             success_fxn(payload);
-        }]));
-
-        it("should fail to load data (Country Level)",
-           inject(["$httpBackend", "$rootScope", function ($httpBackend, $rootScope) {
-            var data = {
-                count: 1,
-                results:{
-                    type:"",
-                    features:[
-                        {
-                            id:"",
-                            type:"",
-                            properties:{
-                                bound:{
-                                    type:"",
-                                    coordinates:[[3,4],[4,5]]
-                                }
-                            }
-                        }
-                    ],
-                    geometry:{},
-                    properties: {}
-                }
-            };
-            controller("mfl.gis.controllers.gis", {
-                "$scope": $rootScope.$new(),
-                "leafletData": leafletData,
-                "$http": {},
-                "$state": {},
-                "$stateParams": {},
-                "SERVER_URL": SERVER_URL
-            });
-            $httpBackend.expectGET(
-            SERVER_URL + "api/gis/coordinates/")
-                .respond(500, data);
-            $httpBackend.flush();
+            success_fxn2(data2);
         }]));
 
         it("should expect broadcast of leafletDirectiveGeoJson.mouseover(Country)",
@@ -227,24 +198,6 @@
         it("should get leaflet data map(Country Level)",
            inject(["$state", "$httpBackend", "$rootScope",
                    function ($state, $httpBackend, $rootScope) {
-            var data2 = [
-                {
-                    geometry:{
-                        type:"",
-                        coordinates:[]
-                    },
-                    properties:{
-                        bound:{
-                            type:"",
-                            coordinates:[[3,4],[4,5]]
-                        },
-                        center:{
-                            type:"",
-                            coordinates:[[3,4],[4,5]]
-                        }
-                    }
-                }
-            ];
             var obj = {
                 then: angular.noop
             };
@@ -268,11 +221,8 @@
                 "$timeout": timeout.timeout
             });
             gisAdminUnitsApi.getCounties();
+            gisAdminUnitsApi.getFacCoordinates();
             scope.layers.overlays ={};
-            $httpBackend.expectGET(
-            SERVER_URL + "api/gis/coordinates/")
-                .respond(200, data2);
-            $httpBackend.flush();
             expect(leafletData.getMap).toHaveBeenCalled();
             expect(obj.then).toHaveBeenCalled();
 
