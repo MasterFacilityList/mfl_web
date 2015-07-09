@@ -12,9 +12,15 @@
 
         "county", "constituency", "ward",
 
-        "operation_status", "facility_type", "number_of_beds", "number_of_cots",
-        "open_whole_day", "service_category", "open_whole_week",
+        "operation_status", "facility_type",
+
         "owner_type", "owner",
+
+        "service_category", "service",
+
+        "number_of_beds", "number_of_cots", "open_public_holidays", "open_weekends",
+        "open_whole_day", "is_regulated", "is_active",
+
 
         // pagination controls
         "page_size", "page"

@@ -4,22 +4,22 @@
     <div class="col-sm-4 content-card pad-l-5">
     <h4>Advanced Search</h4>
     <div class="col-xs-12 facet-detail-content pad-5">
-        <form ng-submit="filterFacilities()">
+        <form ng-submit="filterFacilities()" name="frm_filter_facilities">
 
             <div class="form-group results-card">
                 <label class="fw-500 fs-14">Search all facilities</label>
-                <input placeholder="search all facilities" type="text" class="form-control" ng-model="filters.single.search" />
+                <input placeholder="search all facilities" type="text" class="form-control" ng-model="filters.single.search" id="search" name="search"/>
             </div>
 
             <div class="col-xs-12 results-card margin-b-10">
                 <span class="text-muted fs-16">Facility Info</span>
                 <div class="form-group">
                     <label class="fw-500 fs-14">Facility Name</label>
-                    <input placeholder="Facility Name" type="text" class="form-control" ng-model="filters.single.name" />
+                    <input placeholder="Facility Name" type="text" class="form-control" ng-model="filters.single.name" id="name" name="name"/>
                 </div>
                 <div class="form-group">
                     <label class="fw-500 fs-14">Facility Code</label>
-                    <input placeholder="Facility Code" type="text" class="form-control" ng-model="filters.single.code" />
+                    <input placeholder="Facility Code" type="text" class="form-control" ng-model="filters.single.code" id="code" name="code"/>
                 </div>
             </div>
 
@@ -27,7 +27,7 @@
                 <span class="text-muted fs-16">Administrative Unit</span>
                 <div class="form-group fs-14">
                     <label class="fw-500 fs-14">County</label>
-                    <ui-select ng-model="filters.multiple.county" multiple>
+                    <ui-select ng-model="filters.multiple.county" multiple id="county" name="county">
                         <ui-select-match placeholder="Select a county...">
                             <span>{{$item.name}}</span>
                         </ui-select-match>
@@ -38,9 +38,9 @@
                 </div>
 
                 <div class="form-group fs-14">
-                    <label class="fw-500 fs-14">Constituency</label>
-                    <ui-select ng-model="filters.multiple.constituency" multiple ng-disabled="filters.multiple.county.length==0">
-                        <ui-select-match placeholder="Select a constituency...">
+                    <label class="fw-500 fs-14">Sub County</label>
+                    <ui-select ng-model="filters.multiple.constituency" multiple ng-disabled="filters.multiple.county.length==0" id="constituency" name="constituency">
+                        <ui-select-match placeholder="Select a sub county...">
                             <span>{{$item.name}}</span>
                         </ui-select-match>
                         <ui-select-choices repeat="const in filter_summaries.constituency | filter:filterFxns.constFilter | filter:$select.search">
@@ -51,7 +51,7 @@
 
                 <div class="form-group fs-14">
                     <label class="fw-500 fs-14">Ward</label>
-                    <ui-select ng-model="filters.multiple.ward" multiple ng-disabled="filters.multiple.constituency.length==0">
+                    <ui-select ng-model="filters.multiple.ward" multiple ng-disabled="filters.multiple.constituency.length==0" id="ward" name="ward">
                         <ui-select-match placeholder="Select a ward...">
                             <span>{{$item.name}}</span>
                         </ui-select-match>
@@ -68,7 +68,7 @@
 
                     <div class="form-group fs-14">
                         <label  class="fw-500">Facility Type</label>
-                        <ui-select ng-model="filters.multiple.facility_type" multiple>
+                        <ui-select ng-model="filters.multiple.facility_type" multiple id="facility_type" name="facility_type">
                             <ui-select-match placeholder="Select a facility type...">
                                 <span>{{$item.name}}</span>
                             </ui-select-match>
@@ -80,7 +80,7 @@
 
                     <div class="form-group fs-14">
                         <label  class="fw-500">Facility Owner Type</label>
-                        <ui-select ng-model="filters.multiple.owner_type" multiple>
+                        <ui-select ng-model="filters.multiple.owner_type" multiple id="owner_type" name="owner_type">
                             <ui-select-match placeholder="Select a facility owner type...">
                                 <span>{{$item.name}}</span>
                             </ui-select-match>
@@ -93,7 +93,7 @@
                     <div class="form-group fs-14">
                         <label  class="fw-500">Facility Owner</label>
                         <ui-select ng-model="filters.multiple.owner" multiple>
-                            <ui-select-match placeholder="Select a facility owner...">
+                            <ui-select-match placeholder="Select a facility owner..." id="owner" name="owner">
                                 <span>{{$item.name}}</span>
                             </ui-select-match>
                             <ui-select-choices repeat="ot in filter_summaries.owner | filter:filterFxns.ownerFilter | filter:$select.search">
@@ -104,7 +104,7 @@
 
                     <div class="form-group fs-14">
                         <label  class="fw-500">Operation Status</label>
-                        <ui-select ng-model="filters.multiple.operation_status" multiple>
+                        <ui-select ng-model="filters.multiple.operation_status" multiple id="operation_status" name="operation_status">
                             <ui-select-match placeholder="Select a operation status...">
                                 <span>{{$item.name}}</span>
                             </ui-select-match>
@@ -116,7 +116,7 @@
 
                     <div class="form-group fs-14">
                         <label  class="fw-500">Facility Service Category</label>
-                        <ui-select ng-model="filters.multiple.service_category" multiple>
+                        <ui-select ng-model="filters.multiple.service_category" multiple id="service_category" name="service_category">
                             <ui-select-match placeholder="Select a service category...">
                                 <span>{{$item.name}}</span>
                             </ui-select-match>
@@ -128,11 +128,11 @@
 
                     <div class="form-group fs-14">
                         <label  class="fw-500">Service</label>
-                        <ui-select ng-model="filters.multiple.service" multiple>
+                        <ui-select ng-model="filters.multiple.service" multiple id="service" name="service">
                             <ui-select-match placeholder="Select a service...">
                                 <span>{{$item.name}}</span>
                             </ui-select-match>
-                            <ui-select-choices repeat="serv in filter_summaries.service | filter:$select.search">
+                            <ui-select-choices repeat="serv in filter_summaries.service | filter:filterFxns.serviceFilter | filter:$select.search">
                                 <span>{{serv.name}}</span>
                             </ui-select-choices>
                         </ui-select>
@@ -140,17 +140,17 @@
 
                     <div class="form-group fs-14">
                         <label  class="fw-500">Number of beds</label>
-                        <input placeholder="number of beds" type="text" class="form-control"/>
+                        <input placeholder="number of beds" type="text" class="form-control" ng-model="filters.number_of_beds" id="number_of_beds" name="number_of_beds"/>
                     </div>
 
                     <div class="form-group fs-14">
                         <label  class="fw-500">Number of cots</label>
-                        <input placeholder="number of cots" type="text" class="form-control" />
+                        <input placeholder="number of cots" type="text" class="form-control" ng-model="filters.number_of_cots" id="number_of_cots" name="number_of_cots"/>
                     </div>
                     <div class="col-xs-8 pad-l-5">
                         <div class="checkbox-group">
-                            <input type="checkbox" id="" name="">
-                            <label for="" class="fw-500 fs-14 text-black">
+                            <input type="checkbox" id="open_public_holidays" name="open_public_holidays" ng-model="filters.open_public_holidays">
+                            <label for="open_public_holidays" class="fw-500 fs-14 text-black">
                                 <span class="check"></span>
                                 <span class="box"></span>
                                  Open Public Holidays
@@ -159,8 +159,8 @@
                     </div>
                     <div class="col-xs-8 pad-l-5">
                         <div class="checkbox-group">
-                            <input type="checkbox" id="" name="">
-                            <label for="" class="fw-600 fs-14 text-black">
+                            <input type="checkbox" id="open_weekends" name="open_weekends" ng-model="filters.open_weekends">
+                            <label for="open_weekends" class="fw-600 fs-14 text-black">
                                 <span class="check"></span>
                                 <span class="box"></span>
                                  Open Weekends
@@ -169,8 +169,8 @@
                     </div>
                     <div class="col-xs-8 pad-l-5">
                         <div class="checkbox-group">
-                            <input type="checkbox" id="" name="">
-                            <label for="" class="fw-600 fs-14 text-black">
+                            <input type="checkbox" id="open_whole_day" name="open_whole_day" ng-model="filters.open_whole_day">
+                            <label for="open_whole_day" class="fw-600 fs-14 text-black">
                                 <span class="check"></span>
                                 <span class="box"></span>
                                  Open 24 Hours
@@ -179,8 +179,8 @@
                     </div>
                     <div class="col-xs-8 pad-l-5">
                         <div class="checkbox-group">
-                            <input type="checkbox" id="" name="">
-                            <label for="" class="fw-600 fs-14 text-black">
+                            <input type="checkbox" id="is_regulated" name="is_regulated" ng-model="filters.is_regulated">
+                            <label for="is_regulated" class="fw-600 fs-14 text-black">
                                 <span class="check"></span>
                                 <span class="box"></span>
                                  Is regulated
@@ -189,7 +189,7 @@
                     </div>
                     <div class="col-xs-8 pad-l-5">
                         <div class="checkbox-group">
-                            <input type="checkbox" id="" name="">
+                            <input type="checkbox" id="is_active" name="is_active">
                             <label for="" class="fw-600 fs-14 text-black">
                                 <span class="check"></span>
                                 <span class="box"></span>
@@ -204,7 +204,7 @@
                 <button class="login-btn login-btn-primary margin-l--10" type="submit">
                     <i class="fa fa-search"></i> Search
                 </button>
-                <button class="login-btn login-btn-primary margin-l-5" ng-click="clearFilters()"> <i class="fa fa-refresh"></i> Reset</button>
+                <button type="reset" class="login-btn login-btn-primary margin-l-5" ng-click="clearFilters()"> <i class="fa fa-refresh"></i> Reset</button>
             </div>
         </form>
     </div>
