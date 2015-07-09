@@ -93,6 +93,10 @@
                 $scope.results = data;
                 $scope.results.from_index = data.page_size * data.current_page;
                 $scope.results.to_index = $scope.results.from_index + data.results.length;
+            })
+            .error(function (e) {
+                $scope.alert = e.detail || "Server refused connection";
+                $scope.spinner = false;
             });
 
             $scope.excelExport = function () {
