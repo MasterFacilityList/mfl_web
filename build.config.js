@@ -99,6 +99,8 @@ module.exports = {
             "vendor/stacktrace-js/dist/stacktrace.js",
             "vendor/moment/moment.js",
             "vendor/angular-loading-bar/build/loading-bar.js",
+            "vendor/localforage/dist/localforage.js",
+            "vendor/angular-localforage/dist/angular-localForage.js",
             "libs/leaflet-heat.js",
             "libs/api_wrapper.js",
             "libs/typeahead.js",

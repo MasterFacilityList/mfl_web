@@ -4,10 +4,11 @@
     .module("mfl.gis_country.controllers", ["leaflet-directive",
         "mfl.gis.wrapper"])
     .controller("mfl.gis.controllers.gis", ["$scope","leafletData",
-        "$http","$stateParams","$state","SERVER_URL","gisCountiesApi","gisFacilitiesApi",
-        "$timeout","leafletEvents",
+        "$http","$stateParams","$state","SERVER_URL",
+        "$timeout","leafletEvents","gisAdminUnitsApi",
         function ($scope,leafletData,$http, $stateParams,
-                   $state,SERVER_URL, gisCountiesApi, gisFacilitiesApi,$timeout,leafletEvents) {
+                  $state, SERVER_URL, $timeout, leafletEvents,
+                  gisAdminUnitsApi) {
         $scope.tooltip = {
             "title": "",
             "checked": false
@@ -54,9 +55,7 @@
                 }
             }
         });
-        /*Gets counties for boundaries*/
-        gisCountiesApi.api.list()
-        .success(function (data){
+        gisAdminUnitsApi.getCounties().then(function (data) {
             var marks = data.results.features;
             var markers = _.mapObject(marks, function(mark){
                 return  {
@@ -102,8 +101,7 @@
                     }
                 }
             });
-        })
-        .error(function(err){
+        },function(err){
             $scope.alert = err.error;
         });
         leafletData.getMap("countrymap")
@@ -114,9 +112,8 @@
                 $timeout(function() {map.spin(false);}, 1000);
             });
         /*Gets Facilities for heatmap*/
-        gisFacilitiesApi.api
-        .list()
-        .success(function (data){
+        gisAdminUnitsApi.getFacCoordinates()
+        .then(function (data){
             var heats = data;
             var heatpoints = _.map(heats, function(heat){
                 return [
@@ -136,8 +133,8 @@
                 },
                 visible: true
             };
-        })
-        .error(function(err){
+        },
+        function(err) {
             $scope.alert = err.error;
         });
         $scope.$on("leafletDirectiveGeoJson.mouseover", function(ev, county) {

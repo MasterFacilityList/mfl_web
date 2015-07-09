@@ -1,11 +1,3 @@
-/*
-*
-*
-**********TESTS FOR COUNTY LEVEL************
-*
-*
-*/
-
 describe("Tests for mfl.gis_county.controllers.gis (County Level):", function () {
     "use strict";
     var controller, scope, root, state, httpBackend, SERVER_URL;
@@ -17,24 +9,17 @@ describe("Tests for mfl.gis_county.controllers.gis (County Level):", function ()
         module("mfl.gis.routes");
 
         inject(["$rootScope", "$controller","$httpBackend","$state","$stateParams",
-                "SERVER_URL","countiesApi","constsApi","gisCountiesApi","gisConstsApi",
-                "gisWardsApi",
-            function ($rootScope, $controller, $httpBackend, $state,$stateParams,
-                  url, countiesApi,constsApi, gisCountiesApi, gisConstsApi,gisWardsApi) {
+                "SERVER_URL",
+            function ($rootScope, $controller, $httpBackend, $state,$stateParams, url) {
                 root = $rootScope;
                 scope = root.$new();
                 state = $state;
                 httpBackend = $httpBackend;
                 SERVER_URL = url;
-                countiesApi = countiesApi;
-                gisCountiesApi = gisCountiesApi;
-                gisConstsApi = gisConstsApi;
-                gisWardsApi = gisWardsApi;
                 $stateParams.county_id = 4;
                 $stateParams.const_boundaries = "4,2,41";
                 $stateParams.ward_boundaries = "4,2,41";
                 $stateParams.ward_id = "3";
-                constsApi = constsApi;
 
                 controller = function (cntrl, data) {
                     return $controller(cntrl, data);
@@ -43,8 +28,8 @@ describe("Tests for mfl.gis_county.controllers.gis (County Level):", function ()
     });
 
     it("should load mfl.gis.controller.gis_county (County Level)", inject(["$httpBackend","$state",
-                 "leafletData","gisConstsApi","gisCountiesApi",
-        function ($httpBackend, $state, leafletData,gisConstsApi,gisCountiesApi) {
+                 "leafletData",
+        function ($httpBackend, $state, leafletData) {
         var data1 = {
             results:{
                 id :"4",
@@ -118,16 +103,14 @@ describe("Tests for mfl.gis_county.controllers.gis (County Level):", function ()
             "$http": {},
             "$state": {},
             "$stateParams": {},
-            "SERVER_URL": SERVER_URL,
-            "gisConstsApi": gisConstsApi,
-            "gisCountiesApi": gisCountiesApi
+            "SERVER_URL": SERVER_URL
         });
         scope.layers.overlays = {
             heat : {}
         };
         $httpBackend.flush();
     }]));
-    
+
     it("should fail to load data (County Level)",
        inject(["$httpBackend",
         function ($httpBackend) {
@@ -166,8 +149,7 @@ describe("Tests for mfl.gis_county.controllers.gis (County Level):", function ()
         $httpBackend.flush();
     }]));
     it("should expect broadcast of leafletDirectiveGeoJson.mouseover(County Level)",
-        inject(["$rootScope","leafletData","gisCountiesApi","gisConstsApi","$state",
-                function ($rootScope, leafletData,gisCountiesApi,gisConstsApi,$state) {
+        inject(["$rootScope","leafletData","$state", function ($rootScope, leafletData,$state) {
         $state.go("gis.gis_county", {"county_id": "34"});
         controller("mfl.gis.controllers.gis_county", {
             "$scope": scope,
@@ -185,9 +167,7 @@ describe("Tests for mfl.gis_county.controllers.gis (County Level):", function ()
             "$http": {},
             "$state": {},
             "$stateParams": {},
-            "SERVER_URL": SERVER_URL,
-            "gisConstsApi": gisConstsApi,
-            "gisCountiesApi": gisCountiesApi
+            "SERVER_URL": SERVER_URL
         });
         var constituency = {
             model:{
@@ -206,10 +186,10 @@ describe("Tests for mfl.gis_county.controllers.gis (County Level):", function ()
         };
         expect(scope.hoveredConst).toEqual(constituency.model);
     }]));
-    
+
     it("should expect broadcast of leafletDirectiveGeoJson.click(County Level)",
-       inject(["$state","leafletData","gisCountiesApi","gisConstsApi",
-               function ($state, leafletData,gisCountiesApi,gisConstsApi) {
+       inject(["$state","leafletData",
+               function ($state, leafletData) {
         spyOn(scope, "$on").andCallThrough();
         spyOn($state, "go");
         controller("mfl.gis.controllers.gis_county", {
@@ -227,9 +207,7 @@ describe("Tests for mfl.gis_county.controllers.gis (County Level):", function ()
             "$http": {},
             "$state": $state,
             "$stateParams": {},
-            "SERVER_URL": SERVER_URL,
-            "gisConstsApi": gisConstsApi,
-            "gisCountiesApi": gisCountiesApi
+            "SERVER_URL": SERVER_URL
         });
 
         var constituency = {
@@ -261,8 +239,8 @@ describe("Tests for mfl.gis_county.controllers.gis (County Level):", function ()
     }]));
 
     it("should get leaflet data map(County Level)",
-       inject(["$state", "leafletData","gisCountiesApi","gisConstsApi",
-               function ($state, leafletData,gisCountiesApi,gisConstsApi) {
+       inject(["$state", "leafletData",
+               function ($state, leafletData) {
         spyOn(scope, "$on").andCallThrough();
         spyOn($state, "go");
         var obj = {
@@ -293,14 +271,12 @@ describe("Tests for mfl.gis_county.controllers.gis (County Level):", function ()
             "$state": $state,
             "$stateParams": {},
             "$timeout": timeout.timeout,
-            "SERVER_URL": SERVER_URL,
-            "gisConstsApi": gisConstsApi,
-            "gisCountiesApi": gisCountiesApi
+            "SERVER_URL": SERVER_URL
         });
 
         expect(leafletData.getMap).toHaveBeenCalled();
         expect(obj.then).toHaveBeenCalled();
-                   
+
         var then_fxn = obj.then.calls[0].args[0];
         expect(angular.isFunction(then_fxn)).toBe(true);
         var map = {
@@ -310,13 +286,13 @@ describe("Tests for mfl.gis_county.controllers.gis (County Level):", function ()
         spyOn(map, "fitBounds");
         spyOn(map, "spin");
         then_fxn(map);
-        
+
         expect(map.fitBounds).toHaveBeenCalledWith([[2,1 ], [4, 3]]);
         expect(map.spin).toHaveBeenCalledWith(
             true, {lines: 13, length: 20,corners:1,radius:30,width:10});
         expect(map.spin.calls[0].args[0]).toBe(true);
         expect(timeout.timeout).toHaveBeenCalled();
-        
+
         var timeout_fxn = timeout.timeout.calls[0].args[0];
         expect(angular.isFunction(timeout.timeout.calls[0].args[0])).toBe(true);
         timeout_fxn();

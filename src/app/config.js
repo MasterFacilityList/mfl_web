@@ -4,7 +4,8 @@
         "ui.router",
         "ngCookies",
         "sil.api.wrapper",
-        "mfl.gis.interceptor"
+        "mfl.gis.interceptor",
+        "LocalForageModule"
     ])
 
     .constant("SERVER_URL", angular.copy(window.MFL_SETTINGS.SERVER_URL))
@@ -14,7 +15,11 @@
     .config(["$urlRouterProvider", function ($urlRouterProvider) {
         $urlRouterProvider.otherwise("/home");
     }])
-
+    .config(["$localForageProvider", function($localForageProvider) {
+        $localForageProvider.config({
+            name: "mflApp" // name of the database and prefix for your data
+        });
+    }])
     .config(["$httpProvider",function ($httpProvider) {
         $httpProvider.interceptors.push("mfl.gis.interceptor.headers");
         $httpProvider.defaults.withCredentials = false;
