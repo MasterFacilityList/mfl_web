@@ -1,10 +1,11 @@
 # mfl_web
 This is the publicly accessible front-end the [Kenyan MFL v2](https://github.com/MasterFacilityList/mfl_api).
 
-[![Circle CI](https://circleci.com/gh/MasterFacilityList/mfl_web.svg?style=svg)](https://circleci.com/gh/MasterFacilityList/mfl_web)
-
+[![Circle CI](https://circleci.com/gh/MasterFacilityList/mfl_web/tree/master.svg?style=svg)](https://circleci.com/gh/MasterFacilityList/mfl_web/tree/master)
 
 ![Grunt](https://cdn.gruntjs.com/builtwith.png)
+
+[![Sauce Test Status](https://saucelabs.com/browser-matrix/mfl-public-web.svg)](https://saucelabs.com/u/mfl-public-web)
 
 
 ## Project organization

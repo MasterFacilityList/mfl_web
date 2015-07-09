@@ -2,8 +2,11 @@ machine:
     node:
         version: 0.10.33
 
+    environment:
+        PATH: "$(npm bin):$PATH"
+
+
 test:
     override:
-        - grunt test:
-            environment:
-                PATH: "$(npm bin):$PATH"
+        - bash ci_test.sh:
+            parallel: true
