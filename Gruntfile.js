@@ -203,23 +203,6 @@ module.exports = function ( grunt ) {
         },
 
         /**
-         * `ng-min` annotates the sources before minifying. That is, it allows us
-         * to code without the array syntax.
-         */
-        ngmin: {
-            compile: {
-                files: [
-                    {
-                        src: [ "<%= app_files.js %>" ],
-                        cwd: "<%= build_dir %>",
-                        dest: "<%= build_dir %>",
-                        expand: true
-                    }
-                ]
-            }
-        },
-
-        /**
          * Minify the sources!
          */
         uglify: {
@@ -576,7 +559,7 @@ module.exports = function ( grunt ) {
      * minifying your code.
      */
     grunt.registerTask( "compile", [
-        "less:compile", "copy:compile_assets", "ngmin", "concat:compile_js",
+        "less:compile", "copy:compile_assets", "concat:compile_js",
         "copy:compile_app_settings", "uglify", "index:compile"
     ]);
 
