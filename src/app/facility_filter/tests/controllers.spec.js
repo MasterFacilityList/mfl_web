@@ -48,6 +48,42 @@
                 expect(data.$scope.filter_summaries).toEqual({});
             });
 
+            it("should update filters from params", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$state": state,
+                    "$stateParams": {
+                        "name": "ASD",
+                        "number_of_cots": "34",
+                        "is_active": "false",
+                        "is_regulated": "dsa",
+                        "county": "1,2"
+                    }
+                };
+
+                httpBackend
+                    .expectGET(server_url+"api/common/filtering_summaries/" +
+                               "?fields=county,facility_type,constituency," +
+                               "ward,operation_status,service_category,owner_type,owner,service")
+                    .respond(200, {
+                        county: [{"id": "1"}, {"id": "2"}, {"id": "3"}]
+                    });
+
+                spyOn(state, "go");
+                ctrl("form", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                expect(data.$scope.filters.single.name).toEqual("ASD");
+                expect(data.$scope.filters.single.number_of_cots).toEqual("34");
+                expect(data.$scope.filters.single.is_active).toEqual(false);
+                expect(data.$scope.filters.single.is_regulated).toEqual(true);
+
+                expect(data.$scope.filters.multiple.county).toEqual([{"id": "1"}, {"id": "2"}]);
+            });
+
             it("should filter facilities", function () {
                 var data = {
                     "$scope": rootScope.$new(),
