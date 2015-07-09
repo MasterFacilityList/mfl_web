@@ -116,10 +116,12 @@
                 }
                 return memo;
             }, {});
-            var extractPageMeta = function() {
+            var extractPageMeta = function(data) {
+                var from_index = data.page_size * data.current_page;
+                var to_index = from_index + data.results.length;
                 return {
-                    from_index: 0,
-                    to_index: 1
+                    "from_index": from_index,
+                    "to_index": to_index
                 };
             };
             $scope.spinner = true;
@@ -128,6 +130,10 @@
                 $scope.spinner = false;
                 $scope.results = data;
                 _.extend($scope.results, extractPageMeta(data));
+            })
+            .error(function (e) {
+                $scope.alert = e.detail || "Sorry, a server connection error occured.";
+                $scope.spinner = false;
             });
 
             $scope.excelExport = function () {

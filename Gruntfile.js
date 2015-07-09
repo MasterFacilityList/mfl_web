@@ -1,4 +1,5 @@
 module.exports = function ( grunt ) {
+    "use strict";
 
     /**
      * Load required Grunt tasks. These are installed based on the versions listed
@@ -12,11 +13,9 @@ module.exports = function ( grunt ) {
     grunt.loadNpmTasks("grunt-contrib-uglify");
     grunt.loadNpmTasks("grunt-contrib-coffee");
     grunt.loadNpmTasks("grunt-contrib-less");
-    grunt.loadNpmTasks("grunt-conventional-changelog");
     grunt.loadNpmTasks("grunt-bump");
     grunt.loadNpmTasks("grunt-coffeelint");
     grunt.loadNpmTasks("grunt-karma");
-    grunt.loadNpmTasks("grunt-ngmin");
     grunt.loadNpmTasks("grunt-html2js");
 
     grunt.loadNpmTasks("grunt-istanbul-coverage");
@@ -50,39 +49,6 @@ module.exports = function ( grunt ) {
                 " * Generated <%= grunt.template.today('yyyy-mm-dd') %>\n" +
                 " * Copyright Savannah Informatics\n" +
                 " */"
-        },
-
-        /**
-         * Creates a changelog on a new version.
-         */
-        changelog: {
-            options: {
-                dest: "CHANGELOG.md",
-                template: "changelog.tpl"
-            }
-        },
-
-        /**
-         * Increments the version number, etc.
-         */
-        bump: {
-            options: {
-                files: [
-                    "package.json",
-                    "bower.json"
-                ],
-                commit: false,
-                commitMessage: "chore(release): v%VERSION%",
-                commitFiles: [
-                    "package.json",
-                    "client/bower.json"
-                ],
-                createTag: false,
-                tagName: "v%VERSION%",
-                tagMessage: "Version %VERSION%",
-                push: false,
-                pushTo: "origin"
-            }
         },
 
         /**
@@ -233,23 +199,6 @@ module.exports = function ( grunt ) {
                 src: [ "<%= app_files.coffee %>" ],
                 dest: "<%= build_dir %>",
                 ext: ".js"
-            }
-        },
-
-        /**
-         * `ng-min` annotates the sources before minifying. That is, it allows us
-         * to code without the array syntax.
-         */
-        ngmin: {
-            compile: {
-                files: [
-                    {
-                        src: [ "<%= app_files.js %>" ],
-                        cwd: "<%= build_dir %>",
-                        dest: "<%= build_dir %>",
-                        expand: true
-                    }
-                ]
             }
         },
 
@@ -610,11 +559,11 @@ module.exports = function ( grunt ) {
      * minifying your code.
      */
     grunt.registerTask( "compile", [
-        "less:compile", "copy:compile_assets", "ngmin", "concat:compile_js",
+        "less:compile", "copy:compile_assets", "concat:compile_js",
         "copy:compile_app_settings", "uglify", "index:compile"
     ]);
 
-    grunt.registerTask("test", ["build", "karma"]);
+    grunt.registerTask("test", ["build", "karma:continuous"]);
 
     /**
      * A utility function to get all app JavaScript sources.
