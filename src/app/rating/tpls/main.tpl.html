@@ -120,32 +120,33 @@
             <br>
             <!-- Display location details  -->
             <hr style="border: 1px solid #F0F0F0;">
-            <h4 class="text-blue fs-18 fw-500  hidden-xs"> <i class="fa fa-map-marker"></i> Location</h4>
-            <h4 class="text-blue fs-16 fw-500  visible-xs"> <i class="fa fa-map-marker"></i> Location</h4>
+            <h4 class="fs-18 fw-600  hidden-xs"> <i class="fa fa-map-marker"></i> Location</h4>
+            <h4 class="fs-16 fw-600  visible-xs"> <i class="fa fa-map-marker"></i> Location</h4>
             <br>
-            <h4 class="margin-t--15 fs-14 fw-500  hidden-xs">
-                <a ui-sref="gis.gis_county({county_id:oneFacility.boundaries.county_boundary,const_boundaries:const_boundaries})">{{oneFacility.county}} COUNTY</a>
+            <h4 class="margin-t--15 fs-14 fw-500  hidden-xs text-blue">
+                <a ui-sref="gis.gis_county({county_id:oneFacility.boundaries.county_boundary,const_boundaries:const_boundaries})">
+                <span class="text-blue">{{oneFacility.county}} COUNTY</span></a>
                 <span class="pull-right">
                     <a ui-sref="gis.gis_county.gis_const({county_id:oneFacility.boundaries.county_boundary,const_boundaries:const_boundaries,const_id:oneFacility.boundaries.constituency_boundary,ward_boundaries:ward_boundaries})">
-                        <span class="fs-14 fw-500">{{oneFacility.constituency}} SUB-COUNTY</span>
+                        <span class="fs-14 fw-500 text-blue">{{oneFacility.constituency}} SUB-COUNTY</span>
                     </a>
                 </span>
             </h4>
-            <h5 class="margin-t--15 fs-14 fw-500  visible-xs">
+            <h5 class="margin-t--15 fs-14 fw-500  visible-xs text-blue">
                 <a ui-sref="gis.gis_county({county_id:oneFacility.boundaries.county_boundary,const_boundaries:const_boundaries})">
-                    {{oneFacility.county}} COUNTY
+                    <span class="text-blue">{{oneFacility.county}} COUNTY</span>
                 </a>
                 <span class="pull-right">
                     <a ui-sref="gis.gis_county.gis_const({county_id:oneFacility.boundaries.county_boundary,const_boundaries:const_boundaries,const_id:oneFacility.boundaries.constituency_boundary,ward_boundaries:ward_boundaries})">
-                        {{oneFacility.constituency}} SUB-COUNTY
+                        <span class="text-blue">{{oneFacility.constituency}} SUB-COUNTY</span>
                     </a>
                 </span>
             </h5>
             <br>
             <h4 class="margin-t--15 fs-16 fw-500  hidden-xs">
-                <span class="fs-14 fw-500">
+                <span class="fs-14 fw-500 text-blue">
                     <a ui-sref="gis.gis_county.gis_const.gis_ward({county_id:oneFacility.boundaries.county_boundary,const_boundaries:const_boundaries,const_id:oneFacility.boundaries.constituency_boundary,const_boundaries:const_boundaries,ward_id:oneFacility.boundaries.ward_boundary})">
-                    {{oneFacility.ward_name}} WARD
+                    <span class="text-blue">{{oneFacility.ward_name}} WARD</span>
                     </a>
                 </span>
                 <span class="pull-right">
@@ -154,7 +155,7 @@
             </h4>
             <h5 class="margin-t--15 fs-14 fw-500 visible-xs">
                 <a ui-sref="gis.gis_county.gis_const.gis_ward({county_id:oneFacility.boundaries.county_boundary,const_boundaries:const_boundaries,const_id:oneFacility.boundaries.constituency_boundary,ward_boundaries:ward_boundaries,ward_id:oneFacility.boundaries.ward_boundary})">
-                    {{oneFacility.ward_name}} WARD
+                    <span class="text-blue">{{oneFacility.ward_name}} WARD</span>
                 </a>
                 <span class="pull-right">
                 {{oneFacility.facility_physical_address.town}} town
