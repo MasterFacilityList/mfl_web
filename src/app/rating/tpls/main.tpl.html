@@ -20,12 +20,12 @@
             </span>
         </div>
     </div>
-    <div ng-if="alert">
+    <div ng-if="alert_main">
         <div  class="col-xs-12 fade-content alert alert-danger margin-t-20">
             <p class="lead">Sorry, a server connection error occured.</p>
         </div>
     </div>
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-if="!alert">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-if="!alert_main">
         <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 content-card margin-b-20 fade-content">
         <!-- Important data first displayed here -->
         <div class="col-lg-12">
@@ -231,7 +231,7 @@
         <!-- End of displaying extra details  -->
     </div>
 
-    <div class="col-xs-12 margin-b-20 margin-t-20" ng-if="!alert">
+    <div class="col-xs-12 margin-b-20 margin-t-20" ng-if="!alert_main">
         <!-- Start of tabbed multi step form  -->
             <ul class="nav nav-tabs col-sm-12">
                 <li ui-sref-active="active">
