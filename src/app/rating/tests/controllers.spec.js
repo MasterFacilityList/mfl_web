@@ -9,11 +9,12 @@
             module("mfl.rating");
             module("mfl.facilities.wrapper");
             module("mfl.rating.services");
+            module("mfl.gis.wrapper");
 
             inject(["$rootScope", "$controller", "$httpBackend", "SERVER_URL",
-                "facilitiesApi", "$window", "mfl.rating.services.rating",
+                "facilitiesApi", "$window", "mfl.rating.services.rating","gisAdminUnitsApi",
                 function ($rootScope, $controller, $httpBackend, url,
-                    facilitiesApi, $window, ratingService) {
+                    facilitiesApi, $window, ratingService,gisAdminUnitsApi) {
                     root = $rootScope;
                     scope = root.$new();
                     httpBackend = $httpBackend;
@@ -21,6 +22,7 @@
                     windows = $window;
                     facilitiesApi = facilitiesApi;
                     ratingService = ratingService;
+                    gisAdminUnitsApi = gisAdminUnitsApi;
                     scope.fakeStateParams = {
                         fac_id : 1
                     };
@@ -28,6 +30,7 @@
                         $scope :scope,
                         facilitiesApi : facilitiesApi,
                         ratingService : ratingService,
+                        gisAdminUnitsApi : gisAdminUnitsApi,
                         SERVER_URL : url,
                         $stateParams : scope.fakeStateParams
                     };
@@ -67,13 +70,40 @@
                         {
                             name: "hostel"
                         }
-                    ]
+                    ],
+                    boundaries: {
+                        county_boundary:"1",
+                        constituency_boundary:"1"
+                    }
+                };
+                var payload1 = {
+                    properties: {
+                        constituency_boundary_ids: [
+                            "id_1",
+                            "id_2"
+                        ]
+                    }
+                };
+                var payload2 = {
+                    properties: {
+                        ward_boundary_ids: [
+                            "id_1",
+                            "id_2"
+                        ]
+                    }
                 };
                 $httpBackend.expectGET(SERVER_URL +
                     "api/chul/units/?facility=1").respond(200, {name : "chu"});
 
                 $httpBackend.expectGET(SERVER_URL +
                     "api/facilities/facilities/1/").respond(200, data);
+
+                $httpBackend.expectGET(SERVER_URL +
+                    "api/gis/county_boundaries/1/").respond(200, payload1);
+
+                $httpBackend.expectGET(SERVER_URL +
+                    "api/gis/constituency_boundaries/1/").respond(200, payload2);
+
                 var rate = [
                     {
                         current : 3,
@@ -114,12 +144,39 @@
                         {
                             name: "hostel"
                         }
-                    ]
+                    ],
+                    boundaries: {
+                        county_boundary:"1",
+                        constituency_boundary:"1"
+                    }
+                };
+                var payload1 = {
+                    properties: {
+                        constituency_boundary_ids: [
+                            "id_1",
+                            "id_2"
+                        ]
+                    }
+                };
+                var payload2 = {
+                    properties: {
+                        ward_boundary_ids: [
+                            "id_1",
+                            "id_2"
+                        ]
+                    }
                 };
                 $httpBackend.expectGET(SERVER_URL +
                     "api/chul/units/?facility=1").respond(200, {name : "chu"});
                 $httpBackend.expectGET(SERVER_URL +
                     "api/facilities/facilities/1/").respond(200, data);
+
+                $httpBackend.expectGET(SERVER_URL +
+                    "api/gis/county_boundaries/1/").respond(200, payload1);
+
+                $httpBackend.expectGET(SERVER_URL +
+                    "api/gis/constituency_boundaries/1/").respond(200, payload2);
+
                 var rate = [
                     {
                         current : 0,
