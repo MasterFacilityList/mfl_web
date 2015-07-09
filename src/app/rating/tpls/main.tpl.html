@@ -47,41 +47,41 @@
             <br>
             <h4 class=" hidden-xs">
                 <div class="pull-left">
-                    <p ><b class="fs-16">Status:</b>
-                    <span class="fs-16 label label-warning">
+                    <p ><b class="fs-15">Status:</b>
+                    <span class="fs-15 label label-warning">
                         {{oneFacility.regulatory_status_name}}
                     </span></p>
                 </div>
-                <span class="pull-right fs-16">
+                <span class="pull-right fs-14">
                     <label>Open weekends </label>
                     <span ng-show="oneFacility.open_weekends" class="text-success">
-                        <i class="fa fa-check-circle-o fa-1x"></i>
+                        <i class="fa fa-check-circle-o fa-1x fs-15"></i>
                     </span>
                     <span ng-hide="oneFacility.open_weekends" class="text-danger">
-                        <i class="fa fa-times-circle-o fa-1x"></i>
+                        <i class="fa fa-times-circle-o fa-1x fs-15"></i>
                     </span>
                 </span>
             </h4>
             <h4 class=" visible-xs">
                 <div class="pull-left">
-                    <p ><b class="fs-13">Status:</b>
+                    <p ><b class="fs-14">Status:</b>
                     <span class="fs-14 label label-warning">
                         {{oneFacility.regulatory_status_name}}
                     </span></p>
                 </div>
-                <span class="pull-right fs-13">
+                <span class="pull-right fs-14">
                     <label>Open weekends </label>
                     <span ng-show="oneFacility.open_weekends" class="text-success">
-                        <i class="fa fa-check-circle-o fa-1x"></i>
+                        <i class="fa fa-check-circle-o fa-1x fs-15"></i>
                     </span>
                     <span ng-hide="oneFacility.open_weekends" class="text-danger">
-                        <i class="fa fa-times-circle-o fa-1x"></i>
+                        <i class="fa fa-times-circle-o fa-1x fs-15"></i>
                     </span>
                 </span>
             </h4>
             <br>
             <br>
-            <h4 class="fs-16 margin-t--15  hidden-xs">
+            <h4 class="fs-14 margin-t--15">
                 <span class="pull-left">
                     <label>Beds: </label>
                     {{oneFacility.number_of_beds}}
@@ -89,30 +89,15 @@
                 <span class="pull-right">
                     <label>Open 24 hours </label>
                     <span ng-show="oneFacility.open_whole_day" class="text-success">
-                        <i class="fa fa-check-circle-o fa-1x"></i>
+                        <i class="fa fa-check-circle-o fa-1x fs-15"></i>
                     </span>
                     <span ng-hide="oneFacility.open_whole_day" class="text-danger">
-                        <i class="fa fa-times-circle-o fa-1x"></i>
+                        <i class="fa fa-times-circle-o fa-1x fs-15"></i>
                     </span>
                 </span>
             </h4>
-            <h5 class="fs-13  visible-xs">
-                <span class="pull-left">
-                    <label>Beds: </label>
-                    {{oneFacility.number_of_beds}}
-                </span>
-                <span class="pull-right">
-                    <label>Open 24 hours </label>
-                    <span ng-show="oneFacility.open_whole_day" class="text-success">
-                        <i class="fa fa-check-circle-o fa-1x"></i>
-                    </span>
-                    <span ng-hide="oneFacility.open_whole_day" class="text-danger">
-                        <i class="fa fa-times-circle-o fa-1x"></i>
-                    </span>
-                </span>
-            </h5>
             <br>
-            <h4 class="fs-16 margin-t--5 hidden-xs">
+            <h4 class="fs-14 margin-t--5">
                 <span class="pull-left">
                     <label>Cots: </label>
                     {{oneFacility.number_of_cots}}
@@ -120,28 +105,13 @@
                 <span class="pull-right">
                     <label>Open on public holidays </label>
                     <span ng-show="oneFacility.open_public_holidays" class="text-success">
-                        <i class="fa fa-check-circle-o fa-1x"></i>
+                        <i class="fa fa-check-circle-o fa-1x fs-15"></i>
                     </span>
                     <span ng-hide="oneFacility.open_public_holidays" class="text-danger">
-                        <i class="fa fa-times-circle-o fa-1x"></i>
+                        <i class="fa fa-times-circle-o fa-1x fs-15"></i>
                     </span>
                 </span>
             </h4>
-            <h5 class="fs-13   visible-xs">
-                <span class="pull-left">
-                    <label>Cots: </label>
-                    {{oneFacility.number_of_cots}}
-                </span>
-                <span class="pull-right">
-                    <label>Open on public holidays </label>
-                    <span ng-show="oneFacility.open_public_holidays" class="text-success">
-                        <i class="fa fa-check-circle-o fa-1x"></i>
-                    </span>
-                    <span ng-hide="oneFacility.open_public_holidays" class="text-danger">
-                        <i class="fa fa-times-circle-o fa-1x"></i>
-                    </span>
-                </span>
-            </h5>
             <br>
             <!-- Display location details  -->
             <hr style="border: 1px solid #F0F0F0;">
@@ -176,31 +146,19 @@
                 </span>
             </h5>
             <br>
-            <h4 class="margin-t--15 fs-16 fw-500  hidden-xs" ng-if="oneFacility.facility_physical_address.plot_number !== ''">
-                <span class="pull-left" >
-                    <label>Plot number: </label>
-                    {{oneFacility.facility_physical_address.plot_number}}
-                </span>
-            </h4>
-            <h5 class="margin-t--15 fs-14 fw-500  visible-xs" ng-if="oneFacility.facility_physical_address.plot_number !== ''">
+            <h5 class="margin-t--15 fs-14 fw-500" ng-if="oneFacility.facility_physical_address.plot_number !== ''">
                 <span class="pull-left" >
                     <label>Plot number: </label>
                     {{oneFacility.facility_physical_address.plot_number}}
                 </span>
             </h5>
             <br ng-if="oneFacility.facility_physical_address.plot_number !== ''">
-            <h4 class="margin-t--15 fs-16 fw-500  hidden-xs">
-                <p class="lead fs-16">
-                    <label>Specific directions: </label>
-                    {{oneFacility.location_desc}}
-                </p>
-            </h4>
-            <h5 class="margin-t--15 fs-14 fw-500  visible-xs">
+            <h4 class="fs-14 fw-500 margin-t--5" ng-if="oneFacility.location_desc !== ''">
                 <p class="lead fs-14">
                     <label>Specific directions: </label>
                     {{oneFacility.location_desc}}
                 </p>
-            </h5>
+            </h4>
             <!-- End of locatin displays -->
         </div>
 
@@ -230,7 +188,7 @@
                 </h4>
             </div>
             <br><br>
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 results-card">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 results-card" ng-if="oneFacility.facility_contacts.length !== 0">
                 <h4 class="fs-18 text-blue fw-500 hidden-xs">
                     <i style="border: 1px solid #fff; border-radius : 50%;" class="fa fa-phone fa-1x"></i>
                     Contacts
