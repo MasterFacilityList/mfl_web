@@ -4,13 +4,20 @@
     angular.module("mfl.rating.controllers", [])
 
     .controller("mfl.rating.controllers.rating", ["$scope", "$stateParams",
-        "facilitiesApi", "$window", "mfl.rating.services.rating",
-        function ($scope, $stateParams,facilitiesApi, $window, ratingService) {
+        "facilitiesApi", "$window", "mfl.rating.services.rating","gisAdminUnitsApi",
+        function ($scope, $stateParams,facilitiesApi, $window, ratingService,gisAdminUnitsApi) {
             $scope.spinneractive = true;
             $scope.tooltip = {
                 "title": "",
                 "checked": false
             };
+            gisAdminUnitsApi.getCounties.list()
+                .success(function (data) {
+                    $scope.gis_county =data;
+                })
+                .error(function (error) {
+                    $scope.error = error;
+                });
             $scope.fac_id = $stateParams.fac_id;
             $scope.oneFacility = {};
             $scope.getFacility = function () {
