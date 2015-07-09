@@ -4,8 +4,8 @@
     angular.module("mfl.rating.controllers", [])
 
     .controller("mfl.rating.controllers.rating", ["$scope", "$stateParams",
-        "facilitiesApi", "$window", "mfl.rating.services.rating",
-        function ($scope, $stateParams,facilitiesApi, $window, ratingService) {
+        "facilitiesApi", "$window", "mfl.rating.services.rating","gisAdminUnitsApi",
+        function ($scope, $stateParams,facilitiesApi, $window, ratingService,gisAdminUnitsApi) {
             $scope.spinneractive = true;
             $scope.tooltip = {
                 "title": "",
@@ -31,6 +31,23 @@
                         }
                     ];
                     $scope.oneFacility = data;
+                    /*get link for gis to go to county*/
+                    gisAdminUnitsApi.counties.get(data.boundaries.county_boundary)
+                        .success(function (data) {
+                            $scope.const_boundaries =data.properties
+                                                            .constituency_boundary_ids.join(",");
+                        })
+                        .error(function (error) {
+                            $scope.error = error;
+                        });
+                    /*get link for gis to go to constituency*/
+                    gisAdminUnitsApi.constituencies.get(data.boundaries.constituency_boundary)
+                        .success(function (data) {
+                            $scope.ward_boundaries =data.properties.ward_boundary_ids.join(",");
+                        })
+                        .error(function (error) {
+                            $scope.error = error;
+                        });
                     _.each($scope.oneFacility.facility_services,
                         function (service) {
                             var current_rate = "";
