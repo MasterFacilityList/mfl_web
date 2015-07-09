@@ -1,0 +1,219 @@
+<div class="row margin-b-20 margin-t-10">
+<div class="col-xs-12">
+
+    <div class="col-sm-4 content-card pad-l-5">
+    <h4>Advanced Search</h4>
+    <div class="col-xs-12 facet-detail-content pad-5">
+        <form ng-submit="filterFacilities()">
+
+            <div class="form-group results-card">
+                <label class="fw-500 fs-14">Search all facilities</label>
+                <input placeholder="search all facilities" type="text" class="form-control" ng-model="filters.single.search" />
+            </div>
+
+            <div class="col-xs-12 results-card margin-b-10">
+                <span class="text-muted fs-16">Facility Info</span>
+                <div class="form-group">
+                    <label class="fw-500 fs-14">Facility Name</label>
+                    <input placeholder="Facility Name" type="text" class="form-control" ng-model="filters.single.name" />
+                </div>
+                <div class="form-group">
+                    <label class="fw-500 fs-14">Facility Code</label>
+                    <input placeholder="Facility Code" type="text" class="form-control" ng-model="filters.single.code" />
+                </div>
+            </div>
+
+            <div class="col-xs-12 results-card margin-b-10">
+                <span class="text-muted fs-16">Administrative Unit</span>
+                <div class="form-group fs-14">
+                    <label class="fw-500 fs-14">County</label>
+                    <ui-select ng-model="filters.multiple.county" multiple>
+                        <ui-select-match placeholder="Select a county...">
+                            <span>{{$item.name}}</span>
+                        </ui-select-match>
+                        <ui-select-choices repeat="county in filter_summaries.county | filter:$select.search">
+                            <span>{{county.name}}</span>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+
+                <div class="form-group fs-14">
+                    <label class="fw-500 fs-14">Constituency</label>
+                    <ui-select ng-model="filters.multiple.constituency" multiple ng-disabled="filters.multiple.county.length==0">
+                        <ui-select-match placeholder="Select a constituency...">
+                            <span>{{$item.name}}</span>
+                        </ui-select-match>
+                        <ui-select-choices repeat="const in filter_summaries.constituency | filter:filterFxns.constFilter | filter:$select.search">
+                            <span>{{const.name}}</span>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+
+                <div class="form-group fs-14">
+                    <label class="fw-500 fs-14">Ward</label>
+                    <ui-select ng-model="filters.multiple.ward" multiple ng-disabled="filters.multiple.constituency.length==0">
+                        <ui-select-match placeholder="Select a ward...">
+                            <span>{{$item.name}}</span>
+                        </ui-select-match>
+                        <ui-select-choices repeat="ward in filter_summaries.ward | filter:filterFxns.wardFilter | filter:$select.search">
+                            <span>{{ward.name}}</span>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+            </div>
+
+            <div class="col-xs-12 results-card margin-b-10">
+                <div class="form-group">
+                    <p class="text-muted fs-16">Facility Details</p>
+
+                    <div class="form-group fs-14">
+                        <label  class="fw-500">Facility Type</label>
+                        <ui-select ng-model="filters.multiple.facility_type" multiple>
+                            <ui-select-match placeholder="Select a facility type...">
+                                <span>{{$item.name}}</span>
+                            </ui-select-match>
+                            <ui-select-choices repeat="ft in filter_summaries.facility_type | filter:$select.search">
+                                <span>{{ft.name}}</span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+
+                    <div class="form-group fs-14">
+                        <label  class="fw-500">Facility Owner Type</label>
+                        <ui-select ng-model="filters.multiple.owner_type" multiple>
+                            <ui-select-match placeholder="Select a facility owner type...">
+                                <span>{{$item.name}}</span>
+                            </ui-select-match>
+                            <ui-select-choices repeat="ot in filter_summaries.owner_type | filter:$select.search">
+                                <span>{{ot.name}}</span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+
+                    <div class="form-group fs-14">
+                        <label  class="fw-500">Facility Owner</label>
+                        <ui-select ng-model="filters.multiple.owner" multiple>
+                            <ui-select-match placeholder="Select a facility owner...">
+                                <span>{{$item.name}}</span>
+                            </ui-select-match>
+                            <ui-select-choices repeat="ot in filter_summaries.owner | filter:filterFxns.ownerFilter | filter:$select.search">
+                                <span>{{ot.name}}</span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+
+                    <div class="form-group fs-14">
+                        <label  class="fw-500">Operation Status</label>
+                        <ui-select ng-model="filters.multiple.operation_status" multiple>
+                            <ui-select-match placeholder="Select a operation status...">
+                                <span>{{$item.name}}</span>
+                            </ui-select-match>
+                            <ui-select-choices repeat="os in filter_summaries.operation_status | filter:$select.search">
+                                <span>{{os.name}}</span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+
+                    <div class="form-group fs-14">
+                        <label  class="fw-500">Facility Service Category</label>
+                        <ui-select ng-model="filters.multiple.service_category" multiple>
+                            <ui-select-match placeholder="Select a service category...">
+                                <span>{{$item.name}}</span>
+                            </ui-select-match>
+                            <ui-select-choices repeat="os in filter_summaries.service_category | filter:$select.search">
+                                <span>{{os.name}}</span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+
+                    <div class="form-group fs-14">
+                        <label  class="fw-500">Service</label>
+                        <ui-select ng-model="filters.multiple.service" multiple>
+                            <ui-select-match placeholder="Select a service...">
+                                <span>{{$item.name}}</span>
+                            </ui-select-match>
+                            <ui-select-choices repeat="serv in filter_summaries.service | filter:$select.search">
+                                <span>{{serv.name}}</span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+
+                    <div class="form-group fs-14">
+                        <label  class="fw-500">Number of beds</label>
+                        <input placeholder="number of beds" type="text" class="form-control"/>
+                    </div>
+
+                    <div class="form-group fs-14">
+                        <label  class="fw-500">Number of cots</label>
+                        <input placeholder="number of cots" type="text" class="form-control" />
+                    </div>
+                    <div class="col-xs-8 pad-l-5">
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="" name="">
+                            <label for="" class="fw-500 fs-14 text-black">
+                                <span class="check"></span>
+                                <span class="box"></span>
+                                 Open Public Holidays
+                             </label>
+                        </div>
+                    </div>
+                    <div class="col-xs-8 pad-l-5">
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="" name="">
+                            <label for="" class="fw-600 fs-14 text-black">
+                                <span class="check"></span>
+                                <span class="box"></span>
+                                 Open Weekends
+                             </label>
+                        </div>
+                    </div>
+                    <div class="col-xs-8 pad-l-5">
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="" name="">
+                            <label for="" class="fw-600 fs-14 text-black">
+                                <span class="check"></span>
+                                <span class="box"></span>
+                                 Open 24 Hours
+                             </label>
+                        </div>
+                    </div>
+                    <div class="col-xs-8 pad-l-5">
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="" name="">
+                            <label for="" class="fw-600 fs-14 text-black">
+                                <span class="check"></span>
+                                <span class="box"></span>
+                                 Is regulated
+                             </label>
+                        </div>
+                    </div>
+                    <div class="col-xs-8 pad-l-5">
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="" name="">
+                            <label for="" class="fw-600 fs-14 text-black">
+                                <span class="check"></span>
+                                <span class="box"></span>
+                                 Is Active
+                             </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group margin-t-10">
+                <button class="login-btn login-btn-primary" type="submit">
+                    <i class="fa fa-search"></i> Search
+                </button>
+                <button class="login-btn login-btn-primary" ng-click="clearFilters()"> <i class="fa fa-refresh"></i> Reset</button>
+            </div>
+        </form>
+    </div>
+    </div>
+
+    <div class="col-sm-8" ui-view="results" autoscroll>
+        <div class="content-card margin-t-10">
+            <p class="lead text-center margin-t-10">Use the form on the left to filter facilities or <a class="fw-600" ui-sref=".results">view all facilities</a></p>
+        </div>
+    </div>
+</div>
+</div>

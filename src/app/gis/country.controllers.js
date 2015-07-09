@@ -62,7 +62,6 @@
                         layer: "counties",
                         lat: mark.properties.center.coordinates[1],
                         lng: mark.properties.center.coordinates[0],
-                        message: ""+mark.properties.name+"",
                         label: {
                             message: ""+mark.properties.name+"",
                             options: {

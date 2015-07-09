@@ -1,0 +1,77 @@
+<div class="col-lg-12" ng-if="spinner" style="text-align: center">
+    <div class="map-change-state">
+        <div class="loader"></div>
+        <div class="row">
+            <h3 class="text-center loader-text">Please wait...</h3>
+        </div>
+    </div>
+</div>
+<div class="row" ng-if="!spinner">
+    <div class="col-xs-12 margin-b-10">
+        <div class="pull-left">
+            <p class="lead fw-500 text-black margin-t-10">
+                Showing {{results.from_index}} - {{results.to_index}} of <span class="text-danger"><b>{{results.count}}</b></span> results.
+            </p>
+        </div>
+        <div class="pull-right">
+            <button class="action-btn action-btn-primary action-btn-md" ng-click="excelExport()" ng-disabled="!results.count" tooltip="Export Excel">
+                <i class="fa fa-file-excel-o"></i>
+            </button>
+            <button class="action-btn action-btn-default action-btn-md" ng-click="clearFilters()" tooltip="Reset Search"> <i class="fa fa-refresh text-danger"></i></button>
+        </div>
+
+    </div>
+
+    <div class="col-xs-12">
+        <div class="fade-content results-card col-xs-12" ng-repeat="fac in results.results">
+            <div>
+                <a ui-sref="rating.services({fac_id : fac.id})" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Click to view facility details">
+                    <p class="search-resulthead lead">
+                        <span class="fw-600 fs-18 pull-left" style="cursor: pointer">
+                            <span class="fw-600 fs-20"> {{fac.code}} </span> | {{fac.name}}
+                        </span>
+                    </p>
+                </a>
+
+                <br />
+
+                <h5 class="margin-b-5">
+                    <span class="pull-left fs-16">
+                        <label>Status: </label>
+                        <span class="text-success fw-600">{{fac.regulatory_status_name}}</span>
+                    </span>
+                    <span class="pull-right">
+                        <span class="fs-14 fw-600 label label-primary">{{fac.facility_type_name}}</span>
+                    </span>
+                </h5>
+
+                <br>
+
+                <h5 class="margin-t-10 fw-600 margin-t-5" style="color:#000;">
+
+                <span class="pull-left fs-15">{{fac.county}} COUNTY</span>
+                <span class="pull-right" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Facility owner">
+                    <i class="fa fa-user-secret"></i> {{fac.owner_type_name}}
+                </span>
+
+                </h5>
+
+                <br>
+
+                <p class="margin-b-30 margin-t--55">
+                    <span class="pull-left fs-14 fw-500 text-black">{{fac.constituency}} CONSTITUENCY</span>
+                    <span class="pull-right fs-13 fw-500 text-black">{{fac.ward_name}} WARD</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 margin-t-10">
+        <button ng-click="prevPage()" class="login-btn login-btn-primary pull-left" ng-if="results.previous">
+            <i class="fa fa-angle-double-left"></i> Prev
+        </button>
+        <button ng-click="nextPage()" class="login-btn login-btn-primary pull-right" ng-if="results.next">
+            Next <i class="fa fa-angle-double-right"></i>
+        </button>
+    </div>
+</div>

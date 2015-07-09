@@ -25,6 +25,24 @@
                 data:{
                     pageTitle: "MFLv2 Facility Detail"
                 }
+            })
+
+            .state("rating.services", {
+                url: "/services/",
+                views : {
+                    "form-view@rating" : {
+                        templateUrl : "rating/tpls/services.tpl.html"
+                    }
+                }
+            })
+
+            .state("rating.units", {
+                url: "/units/",
+                views : {
+                    "form-view@rating" : {
+                        templateUrl : "rating/tpls/units.tpl.html"
+                    }
+                }
             });
     }]);
 })(angular);

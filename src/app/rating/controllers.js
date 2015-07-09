@@ -12,8 +12,15 @@
                 "checked": false
             };
             $scope.fac_id = $stateParams.fac_id;
-
+            $scope.oneFacility = {};
             $scope.getFacility = function () {
+                facilitiesApi.chus.filter({"facility" : $scope.fac_id})
+                .success(function (data) {
+                    $scope.chus = data.results;
+                })
+                .error(function (e) {
+                    $scope.alert = e.error;
+                });
                 facilitiesApi.facilities.get($scope.fac_id)
                 .success(function (data) {
                     $scope.spinneractive = false;
@@ -70,7 +77,7 @@
                     })
                     .error(function (e) {
                         service_obj.spinner = false;
-                        $scope.alert = e.error;
+                        $scope.alert = e.error || "Service can only be rated once a day";
                         console.log(e);
                         toastr.error($scope.alert);
                     });

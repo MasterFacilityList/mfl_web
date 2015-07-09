@@ -70,6 +70,9 @@
                     ]
                 };
                 $httpBackend.expectGET(SERVER_URL +
+                    "api/chul/units/?facility=1").respond(200, {name : "chu"});
+
+                $httpBackend.expectGET(SERVER_URL +
                     "api/facilities/facilities/1/").respond(200, data);
                 var rate = [
                     {
@@ -88,6 +91,8 @@
                     respond(200, scope.fac_rating);
                 //get one facility and redisplay all of its details
                 $httpBackend.expectGET(SERVER_URL +
+                    "api/chul/units/?facility=1").respond(200, {name : "chu"});
+                $httpBackend.expectGET(SERVER_URL +
                     "api/facilities/facilities/1/").respond(200, data);
                 $httpBackend.flush();
                 expect(service_obj.spinner).toBeFalsy();
@@ -98,12 +103,6 @@
             function ($httpBackend, ratingService) {
                 spyOn(ratingService, "getRating").andReturn(null);
                 controller("mfl.rating.controllers.rating");
-                /*var rating = 3;
-                var id = 1;
-                scope.fac_rating = {
-                    facility_service : id,
-                    rating : rating
-                };*/
                 var data = {
                     facility_services: [
                         {
@@ -117,6 +116,8 @@
                         }
                     ]
                 };
+                $httpBackend.expectGET(SERVER_URL +
+                    "api/chul/units/?facility=1").respond(200, {name : "chu"});
                 $httpBackend.expectGET(SERVER_URL +
                     "api/facilities/facilities/1/").respond(200, data);
                 var rate = [
@@ -133,6 +134,8 @@
         it("should fail on call to rate a facility service",
         inject(["$httpBackend", function ($httpBackend) {
             controller("mfl.rating.controllers.rating");
+            $httpBackend.expectGET(SERVER_URL +
+                    "api/chul/units/?facility=1").respond(400, {});
             $httpBackend.expectGET(
                 SERVER_URL +
                 "api/facilities/facilities/1/").respond(400, {name : ""});

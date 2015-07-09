@@ -1,9 +1,9 @@
 <div class="container-fluid bg-overlay">
     <div class="row   margin-h-5">
         <div class="col-lg-12">
-            <h1 class="welcome-text text-center hidden-sm hidden-xs">
+            <h2 class="welcome-text text-center hidden-sm hidden-xs">
                 Welcome to the Master Facility List
-            </h1>
+            </h2>
             <h3 class="welcome-text text-center hidden-lg hidden-md" style="color: #fff;">
                 Welcome to the Master Facility List
             </h3>
@@ -20,8 +20,8 @@
             <form role="form" name="search-form" ng-submit="search(search.query)">
                 <div class="col-md-12 input-group">
                     <input type="search" class="facilities" ng-model="search.query" placeholder="Search facilities..." ng-click="typeaheadFacilities()" sync-focus-with="isFocused"/>
-                    <span class="bar"></span>
                     <span class="highlight"></span>
+                    <span class="bar"></span>
                     <span class="search-addon-btn input-group-addon" id="sizing-addon1" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Search facility" ng-click="search(search.query)">
                         <button type="submit" class="search-btn">
                             <i class="fa fa-search"></i>

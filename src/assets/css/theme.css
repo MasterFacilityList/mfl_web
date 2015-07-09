@@ -2817,7 +2817,8 @@ fieldset[disabled] .btn-link:focus {
     border-color: #82CAFF
 }
 .nav-tabs {
-    border-bottom: 1px solid #E0E4E8
+    /*border-bottom: 1px solid #E0E4E8*/
+    border-bottom: 1px solid #2196F3;
 }
 .nav-tabs>li>a:hover {
     border-color: #ecf0f1 #ecf0f1 #E0E4E8

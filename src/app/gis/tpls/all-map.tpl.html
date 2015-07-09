@@ -1,12 +1,21 @@
-<div class="content-header">
+<div class="content-header transparent-background">
    <div class="pull-left margin-t-10">
        <h5>MFL Geolocation</h5>
    </div>
-    <div class="pull-right margin-t-10">
-        <button class="action-btn action-btn-md action-btn-primary" onclick="window.history.back()">
-            <i class="fa fa-arrow-left"></i>
-        </button>
-    </div>
+       <div ng-show="$state.current.data.back">
+        <div class="pull-right margin-t-10">
+            <button class="action-btn action-btn-md action-btn-primary" ui-sref="gis" ui-sref-opts="{reload:true}">
+                <i class="fa fa-arrow-left"></i>
+            </button>
+        </div>
+       </div>
+       <div ng-hide="$state.current.data.back">
+        <div class="pull-right margin-t-10">
+            <button class="action-btn action-btn-md action-btn-primary" onclick="window.history.back()">
+                <i class="fa fa-arrow-left"></i>
+            </button>
+        </div>
+       </div>
     <!--breadcrumbs-->
 </div>
 <div class="content-body">
