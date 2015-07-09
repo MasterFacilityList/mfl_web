@@ -2,32 +2,22 @@
 
 describe("tests for GIS Routes:", function() {
 
-    var data,state,injector,SERVER_URL,scope,
-        rootScope;//initialize dependencies
+    var data,state,injector,SERVER_URL,scope, rootScope;
 
     beforeEach(function() {
         module("mflwebApp");
         module("mfl.gis.wrapper");
         module("mfl.gis.routes");
-        inject(["$state","$stateParams","$rootScope",
-                "gisCountiesApi","gisConstsApi","gisWardsApi","$injector","SERVER_URL",
-                function ($state,$stateParams,$rootScope,
-                  gisCountiesApi,gisConstsApi,gisWardsApi,$injector,url) {
+        inject(["$state","$stateParams","$rootScope", "$injector","SERVER_URL",
+                function ($state,$stateParams,$rootScope,$injector,url) {
             rootScope =  $rootScope;
             scope = rootScope.$new();
             injector =  $injector;
             state = $state;
             SERVER_URL = url;
-            gisCountiesApi = gisCountiesApi;
-            gisConstsApi = gisConstsApi;
-            gisWardsApi = gisWardsApi;
             data = {
                 $state: $state,
-                $stateParams: $stateParams,
-                gisCountiesApi: gisCountiesApi,
-                gisConstsApi: gisConstsApi,
-                gisWardsApi: gisWardsApi,
-                SERVER_URL: url
+                $stateParams: $stateParams
             };
         }]);
     });

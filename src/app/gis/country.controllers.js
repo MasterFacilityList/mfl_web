@@ -4,10 +4,10 @@
     .module("mfl.gis_country.controllers", ["leaflet-directive",
         "mfl.gis.wrapper"])
     .controller("mfl.gis.controllers.gis", ["$scope","leafletData",
-        "$http","$stateParams","$state","SERVER_URL","gisCountiesApi","gisFacilitiesApi",
+        "$http","$stateParams","$state","SERVER_URL",
         "$timeout","leafletEvents","gisAdminUnitsApi",
         function ($scope,leafletData,$http, $stateParams,
-                   $state,SERVER_URL, gisCountiesApi, gisFacilitiesApi,$timeout,leafletEvents,
+                  $state, SERVER_URL, $timeout, leafletEvents,
                   gisAdminUnitsApi) {
         $scope.tooltip = {
             "title": "",
@@ -112,8 +112,7 @@
                 $timeout(function() {map.spin(false);}, 1000);
             });
         /*Gets Facilities for heatmap*/
-        gisFacilitiesApi.api
-        .list()
+        gisAdminUnitsApi.facilities.list()
         .success(function (data){
             var heats = data;
             var heatpoints = _.map(heats, function(heat){
@@ -135,7 +134,7 @@
                 visible: true
             };
         })
-        .error(function(err){
+        .error(function(err) {
             $scope.alert = err.error;
         });
         $scope.$on("leafletDirectiveGeoJson.mouseover", function(ev, county) {

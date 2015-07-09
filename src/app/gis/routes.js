@@ -37,15 +37,15 @@
                     }
                 },
                 resolve:{
-                    gisCounty : ["gisCountiesApi","$stateParams",
-                                function (gisCountiesApi, $stateParams){
-                                    return gisCountiesApi.api.get($stateParams.county_id);
+                    gisCounty : ["gisAdminUnitsApi","$stateParams",
+                                function (gisAdminUnitsApi, $stateParams){
+                                    return gisAdminUnitsApi.counties.get($stateParams.county_id);
                                 }]
                 },
                 data:{
                     pageTitle: "MFLv2 County View Geolocation",
                     back: true
-                    
+
                 }
             })
             .state("gis.gis_county.gis_const", {
@@ -57,9 +57,11 @@
                     }
                 },
                 resolve:{
-                    gisConst : ["gisConstsApi","$stateParams",
-                                function (gisConstsApi, $stateParams){
-                                    return gisConstsApi.api.get($stateParams.const_id);
+                    gisConst : ["gisAdminUnitsApi","$stateParams",
+                                function (gisAdminUnitsApi, $stateParams){
+                                    return gisAdminUnitsApi.constituencies.get(
+                                        $stateParams.const_id
+                                    );
                                 }]
                 },
                 data:{
@@ -75,9 +77,9 @@
                     }
                 },
                 resolve:{
-                    gisWard : ["gisWardsApi","$stateParams",
-                                function (gisWardsApi, $stateParams){
-                                    return gisWardsApi.api.get($stateParams.ward_id);
+                    gisWard : ["gisAdminUnitsApi","$stateParams",
+                                function (gisAdminUnitsApi, $stateParams){
+                                    return gisAdminUnitsApi.wards.get($stateParams.ward_id);
                                 }]
                 },
                 data:{

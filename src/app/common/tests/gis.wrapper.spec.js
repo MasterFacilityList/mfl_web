@@ -2,19 +2,12 @@
     "use strict";
 
     describe("GIS County api Wrapper", function(){
-        var httpBackend, gisCountriesApi,gisCountiesApi,gisConstsApi,
-            gisAdminUnitsApi,gisWardsApi, SERVER_URL;
+        var httpBackend, gisAdminUnitsApi, SERVER_URL;
 
         beforeEach(function () {
             module("mfl.gis.wrapper", "mflAppConfig");
 
-            inject(["gisCountriesApi","gisCountiesApi","gisWardsApi","gisConstsApi",
-                "gisAdminUnitsApi",
-                function(gcountries,gcounties,gconsts,gwards,gadmin_units){
-                gisCountriesApi = gcountries;
-                gisCountiesApi = gcounties;
-                gisConstsApi = gconsts;
-                gisWardsApi = gwards;
+            inject(["gisAdminUnitsApi", function(gadmin_units) {
                 gisAdminUnitsApi =  gadmin_units;
             }]);
 
@@ -28,18 +21,6 @@
             httpBackend.verifyNoOutstandingRequest();
         }]));
 
-        it("should have gisCountriesApi defined", function(){
-            expect(gisCountriesApi).toBeDefined();
-        });
-        it("should have gisCountiesApi defined", function(){
-            expect(gisCountiesApi).toBeDefined();
-        });
-        it("should have gisConstsApi defined", function(){
-            expect(gisConstsApi).toBeDefined();
-        });
-        it("should have gisWardsApi defined", function(){
-            expect(gisWardsApi).toBeDefined();
-        });
         it("should have gisAdminUnitsApi defined", function(){
             expect(gisAdminUnitsApi).toBeDefined();
         });

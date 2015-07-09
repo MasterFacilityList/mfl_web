@@ -3,8 +3,7 @@
 
     describe("Tests for mfl.gis.controllers.gis (Country Level):", function () {
 
-        var controller, httpBackend, SERVER_URL, gisCountriesApi, gisAdminUnitsApi,
-            gisCountiesApi, gisFacilitiesApi, leafletData;
+        var controller, httpBackend, SERVER_URL, leafletData, gisAdminUnitsApi;
 
         beforeEach(function () {
             module("mflwebApp");
@@ -15,18 +14,13 @@
             module("ui.router");
 
             inject(["$rootScope", "$controller","$httpBackend","$state","$stateParams",
-                    "SERVER_URL", "gisCountriesApi", "gisCountiesApi",
-                    "gisFacilitiesApi", "leafletData", "gisAdminUnitsApi",
+                    "SERVER_URL", "leafletData", "gisAdminUnitsApi",
                 function ($rootScope, $controller, $httpBackend, $state,$stateParams,
-                      url, gis_countries_api, gis_counties_api, gis_facilities_api, leaflet_data,
-                        gis_admin_units_api) {
+                      url, leaflet_data, gis_api) {
                     httpBackend = $httpBackend;
                     SERVER_URL = url;
-                    gisCountriesApi = gis_countries_api;
-                    gisCountiesApi = gis_counties_api;
-                    gisFacilitiesApi = gis_facilities_api;
-                    gisAdminUnitsApi = gis_admin_units_api;
                     leafletData = leaflet_data;
+                    gisAdminUnitsApi = gis_api;
                     $stateParams.county_id = 4;
                     $stateParams.const_boundaries = "4,2,41";
                     $stateParams.ward_boundaries = "4,2,41";
@@ -84,10 +78,7 @@
                 "$state": $state,
                 "$stateParams": {},
                 "SERVER_URL": SERVER_URL,
-                "gisCountriesApi": gisCountriesApi,
-                "gisCountiesApi": gisCountiesApi,
                 "gisAdminUnitsApi": gisAdminUnitsApi,
-                "gisFacilitiesApi": gisFacilitiesApi,
                 "$timeout": timeout.timeout
             });
 
@@ -178,9 +169,6 @@
                 controller("mfl.gis.controllers.gis", {
                     "$scope" : scope,
                     "$state" : $state,
-                    "gisCountriesApi" : gisCountriesApi,
-                    "gisCountiesApi" : gisCountiesApi,
-                    "gisFacilitiesApi": gisFacilitiesApi,
                     "leafletData": leafletData,
                     "SERVER_URL": SERVER_URL
                 });
@@ -205,9 +193,6 @@
             controller("mfl.gis.controllers.gis", {
                 "$scope" : scope,
                 "$state" : $state,
-                "gisCountriesApi" : gisCountriesApi,
-                "gisCountiesApi" : gisCountiesApi,
-                "gisFacilitiesApi": gisFacilitiesApi,
                 "leafletData": leafletData,
                 "SERVER_URL": SERVER_URL
             });
@@ -279,10 +264,7 @@
                 "$state": $state,
                 "$stateParams": {},
                 "SERVER_URL": SERVER_URL,
-                "gisCountriesApi": gisCountriesApi,
-                "gisCountiesApi": gisCountiesApi,
                 "gisAdminUnitsApi": gisAdminUnitsApi,
-                "gisFacilitiesApi": gisFacilitiesApi,
                 "$timeout": timeout.timeout
             });
             gisAdminUnitsApi.getCounties();
