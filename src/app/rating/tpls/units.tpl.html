@@ -7,10 +7,10 @@
 <div class="col-xs-12 detail-content" ng-if="chus.length !== 0">
     <table class="table fs-14 table-hover">
         <thead class="detail-content">
-            <th class="text-blue">Code</th>
-            <th class="text-blue">Name</th>
-            <th class="text-blue">Monitored Households</th>
-            <th class="text-right text-blue">Status</th>
+            <th class="text-blue col-xs-3">Code</th>
+            <th class="text-blue col-xs-3">Name</th>
+            <th class="text-blue col-xs-4">Status</th>
+            <th class="text-blue text-center col-xs-2">Monitored Households</th>
         </thead>
         <tbody class="fw-600">
             <tr ng-repeat="unit in chus" class="results-card">
@@ -21,10 +21,10 @@
                     {{unit.name}}
                 </td>
                 <td class="pad-t-15">
-                    {{unit.households_monitored}}
-                </td>
-                <td class="pad-t-15 text-right">
                     {{unit.status_name}}
+                </td>
+                <td class="pad-t-15 text-center">
+                    {{unit.households_monitored}}
                 </td>
             </tr>
         </tbody>
