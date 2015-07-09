@@ -51,14 +51,20 @@
             };
         }];
     })
-    .service("gisAdminUnitsApi", ["$localForage","$http","$q","SERVER_URL",
-        function ($localForage,$http,$q,server_url) {
+    .service("gisAdminUnitsApi", ["$localForage","$http","$q","SERVER_URL", "api",
+        function ($localForage, $http, $q, server_url, api) {
+        // var country_border = api.setBaseUrl("api/gis/country_borders/");
+        var counties = api.setBaseUrl("api/gis/county_boundaries/");
+        // var constituencies = api.setBaseUrl("api/gis/constituency_boundaries/");
+        // var wards = api.setBaseUrl("api/gis/ward_boundaries/");
+        // var facilities = api.setBaseUrl("api/gis/coordinates/");
+
         this.getCounties = function () {
             var deferred = $q.defer();
-            
+
             var success_fxn = function (keyName) {
                 if(_.isNull(keyName)){
-                    $http({method: "GET",url:server_url+"api/gis/county_boundaries/"})
+                    counties.list()
                     .success(function (data) {
                         deferred.resolve(data);
                         $localForage.setItem("mflApp.counties", data);
@@ -73,7 +79,7 @@
                     $localForage.getItem("mflApp.counties").then(success_fn);
                 }
             };
-            
+
             $localForage.key(0).then(success_fxn);
             return deferred.promise;
         };
