@@ -55,7 +55,7 @@
                     );
                 })
                 .error(function (e) {
-                    $scope.alert = e.detail;
+                    $scope.alert_main = e.detail;
                     $scope.spinneractive = false;
                 });
             };
