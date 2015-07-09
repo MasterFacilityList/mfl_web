@@ -78,7 +78,7 @@
                     })
                     .error(function (e) {
                         service_obj.spinner = false;
-                        $scope.alert = e.error || "Service can only be rated once a day";
+                        $scope.alert = e.detail || "Service can only be rated once a day";
                         console.log(e);
                         toastr.error($scope.alert);
                     });
