@@ -31,8 +31,29 @@
                         $localForage.getItem("mflApp.counties").then(success_fn);
                     }
                 };
-
                 $localForage.key(0).then(success_fxn);
+                return deferred.promise;
+            };
+            this.getFacCoordinates = function (){
+                var deferred = $q.defer();
+                var success_fn = function (keyName) {
+                    if(_.isNull(keyName)){
+                        self.facilities.list()
+                        .success(function (data) {
+                            deferred.resolve(data);
+                            $localForage.setItem("mflApp.gis_facilities", data);
+                        })
+                        .error(function (error) {
+                            deferred.reject(error);
+                        });
+                    } else {
+                        var success_fxn = function (data){
+                            deferred.resolve(data);
+                        };
+                        $localForage.getItem("mflApp.gis_facilities").then(success_fxn);
+                    }
+                };
+                $localForage.key(1).then(success_fn);
                 return deferred.promise;
             };
         }

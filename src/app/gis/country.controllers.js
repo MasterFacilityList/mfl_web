@@ -112,8 +112,8 @@
                 $timeout(function() {map.spin(false);}, 1000);
             });
         /*Gets Facilities for heatmap*/
-        gisAdminUnitsApi.facilities.list()
-        .success(function (data){
+        gisAdminUnitsApi.getFacCoordinates()
+        .then(function (data){
             var heats = data;
             var heatpoints = _.map(heats, function(heat){
                 return [
@@ -133,8 +133,8 @@
                 },
                 visible: true
             };
-        })
-        .error(function(err) {
+        },
+        function(err) {
             $scope.alert = err.error;
         });
         $scope.$on("leafletDirectiveGeoJson.mouseover", function(ev, county) {
