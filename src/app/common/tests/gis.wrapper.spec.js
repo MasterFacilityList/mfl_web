@@ -107,6 +107,8 @@
                 var then_fxn2 = promise.then.calls[1].args[0];
                 expect(angular.isFunction(then_fxn2)).toBe(true);
                 then_fxn2(data);
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
             }]));
     });
 })(describe, it);
