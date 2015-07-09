@@ -15,8 +15,13 @@
                     name: $stateParams.name || "",
                     code: $stateParams.code || "",
                     search: $stateParams.search || "",
-                    page: "",
-                    page_size: ""
+                    number_of_beds: $stateParams.number_of_beds || "",
+                    number_of_cots: $stateParams.number_of_cots || "",
+                    open_public_holidays: true,
+                    open_weekends: true,
+                    open_whole_day: true,
+                    is_regulated: true,
+                    is_active: true
                 },
                 multiple: {
                     county: [],
@@ -66,13 +71,27 @@
                 updateSelectFilters(data);
             });
 
-            $scope.filterFacilities = function () {
-                var filter_keys = _.keys($scope.filters.multiple);
+            $scope.dumpMultipleFilters = function (src) {
+                var filter_keys = _.keys(src);
                 var params = _.reduce(filter_keys, function (memo, b) {
-                    memo[b] = _.pluck($scope.filters.multiple[b], "id").join(",");
+                    memo[b] = _.pluck(src[b], "id").join(",");
                     return memo;
                 }, {});
-                $state.go("facility_filter.results", params);
+                return params;
+            };
+            $scope.dumpSimpleFilters = function (src) {
+                var filter_keys = _.keys(src);
+                var params = _.reduce(filter_keys, function (memo, b) {
+                    memo[b] = src[b];
+                    return memo;
+                }, {});
+                return params;
+            };
+
+            $scope.filterFacilities = function () {
+                var multiple = $scope.dumpMultipleFilters($scope.filters.multiple);
+                var simple = $scope.dumpSimpleFilters($scope.filters.single);
+                $state.go("facility_filter.results", _.extend(simple, multiple));
             };
 
             $scope.clearFilters = function () {
@@ -80,6 +99,7 @@
                 _.each(URL_SEARCH_PARAMS, function (a) {
                     params[a] = undefined;
                 });
+                // also cancel filter_promise defined in L120
                 $state.go("facility_filter", params);
             };
         }]
@@ -96,13 +116,18 @@
                 }
                 return memo;
             }, {});
+            var extractPageMeta = function() {
+                return {
+                    from_index: 0,
+                    to_index: 1
+                };
+            };
             $scope.spinner = true;
-            wrappers.facilities.filter(params)
+            $scope.filter_promise = wrappers.facilities.filter(params)
             .success(function (data) {
                 $scope.spinner = false;
                 $scope.results = data;
-                $scope.results.from_index = data.page_size * data.current_page;
-                $scope.results.to_index = $scope.results.from_index + data.results.length;
+                _.extend($scope.results, extractPageMeta(data));
             });
 
             $scope.excelExport = function () {
