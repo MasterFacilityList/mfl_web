@@ -95,7 +95,8 @@
                 $scope.results.to_index = $scope.results.from_index + data.results.length;
             })
             .error(function (e) {
-                $scope.alert = e.detail || "Server refused connection";
+                $scope.alert = e.detail || "Sorry, a server connection error"+
+                " occured.";
                 $scope.spinner = false;
             });
 
