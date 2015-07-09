@@ -48,14 +48,6 @@
                         .error(function (error) {
                             $scope.error = error;
                         });
-                    /*get link for gis to go to ward*/
-                    gisAdminUnitsApi.wards.get(data.boundaries.ward_boundary)
-                        .success(function (data) {
-                            $scope.gis_ward =data;
-                        })
-                        .error(function (error) {
-                            $scope.error = error;
-                        });
                     _.each($scope.oneFacility.facility_services,
                         function (service) {
                             var current_rate = "";
