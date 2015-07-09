@@ -7,6 +7,9 @@ This is the publicly accessible front-end the [Kenyan MFL v2](https://github.com
 ![Grunt](https://cdn.gruntjs.com/builtwith.png)
 
 
+[![Sauce Test Status](https://saucelabs.com/browser-matrix/mfl-public-web.svg)](https://saucelabs.com/u/mfl-public-web)
+
+
 ## Project organization
 The project's structure has been derived from [ng-boilerplate](https://github.com/ngbp/ngbp/blob/v0.3.2-release/README.md#overall-directory-structure)
 
