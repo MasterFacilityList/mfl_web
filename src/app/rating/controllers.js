@@ -55,7 +55,8 @@
                     );
                 })
                 .error(function (e) {
-                    $scope.alert = e.error;
+                    $scope.alert = e.detail;
+                    $scope.spinneractive = false;
                 });
             };
             $scope.getFacility();

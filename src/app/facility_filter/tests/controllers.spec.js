@@ -213,6 +213,26 @@
                 httpBackend.verifyNoOutstandingRequest();
             });
 
+            it("should fail to find facilities using the filters", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "filterParams": {
+                        "county": "12",
+                        "page": 3,
+                        "constituency": undefined
+                    }
+                };
+                httpBackend
+                    .expectGET(server_url+"api/facilities/facilities_list/?county=12&page=3")
+                    .respond(500, {});
+
+                ctrl("results", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+            });
+
             it("should export all filtered facilities to excel", function () {
                 inject(["api.auth", function (a) {
                     var data = {
