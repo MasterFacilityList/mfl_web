@@ -4,10 +4,10 @@
         .module("mfl.gis_ward.controllers", ["leaflet-directive",
             "mfl.gis.wrapper"])
         .controller("mfl.gis.controllers.gis_ward", ["$scope","leafletData",
-            "$http","$state","$stateParams","SERVER_URL","gisWardsApi",
-            "gisWard","$timeout","gisFacilitiesApi","gisConst","gisCounty",
+            "$http","$state","$stateParams","SERVER_URL",
+            "gisWard","$timeout","gisAdminUnitsApi","gisConst","gisCounty",
             function ($scope, leafletData,$http, $state, $stateParams,
-                       SERVER_URL, gisWardsApi, gisWard,$timeout,gisFacilitiesApi,
+                       SERVER_URL, gisWard,$timeout,gisAdminUnitsApi,
                        gisConst,gisCounty) {
             $scope.county = gisCounty.data;
             $scope.constituency = gisConst.data;
@@ -65,7 +65,7 @@
                 map.spin(true,  {lines: 13, length: 20,corners:1,radius:30,width:10});
                 $timeout(function() {map.spin(false);}, 1000);
             });
-                
+
             $scope.filters_ward = {
                 ward : gisWard.data.properties.ward_id
             };
@@ -100,8 +100,7 @@
                     },
                     selectedWard: {}
                 });
-            gisFacilitiesApi.api
-            .filter($scope.filters_ward)
+            gisAdminUnitsApi.facilities.filter($scope.filters_ward)
             .success(function (data){
                 var marks = data;
                 $scope.facility_count = marks.length;

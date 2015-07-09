@@ -4,11 +4,11 @@
     .module("mfl.gis_const.controllers", ["leaflet-directive",
         "mfl.gis.wrapper","mfl.adminunits.wrapper"])
     .controller("mfl.gis.controllers.gis_const", ["$scope","leafletData",
-        "constsApi","$http","$state","$stateParams","SERVER_URL","gisWardsApi",
-        "gisConst","$timeout","gisFacilitiesApi","$q","gisCounty",
-        function ($scope, leafletData, constsApi, $http, $state,
-                   $stateParams,SERVER_URL, gisWardsApi,
-                  gisConst,$timeout,gisFacilitiesApi, $q,gisCounty) {
+        "$http","$state","$stateParams","SERVER_URL",
+        "gisConst","$timeout","gisAdminUnitsApi","$q","gisCounty",
+        function ($scope, leafletData, $http, $state,
+                   $stateParams,SERVER_URL,
+                  gisConst,$timeout,gisAdminUnitsApi, $q,gisCounty) {
         $scope.county = gisCounty.data;
         $scope.constituency = gisConst.data;
         $scope.county_id = $stateParams.county_id;
@@ -66,14 +66,12 @@
         $scope.filters_const = {
             constituency : gisConst.data.properties.constituency_id
         };
-        var facilitiesPromise = gisFacilitiesApi.api
-        .filter($scope.filters_const);
+        var facilitiesPromise = gisAdminUnitsApi.facilities.filter($scope.filters_const);
 
         $scope.filters = {
             id : $stateParams.ward_boundaries
         };
-        var wardBoundariesPromise = gisWardsApi.api
-        .filter($scope.filters);
+        var wardBoundariesPromise = gisAdminUnitsApi.wards.filter($scope.filters);
 
         $q.all([facilitiesPromise,wardBoundariesPromise])
         .then(function(payload){

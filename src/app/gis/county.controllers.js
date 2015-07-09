@@ -5,10 +5,10 @@
         "mfl.gis.wrapper"])
     .controller("mfl.gis.controllers.gis_county", ["$scope","leafletData",
         "gisCounty","$http","$state","$stateParams", "$timeout",
-        "SERVER_URL","gisConstsApi","gisFacilitiesApi","$q",
+        "SERVER_URL","gisAdminUnitsApi","$q",
         function ($scope, leafletData, gisCounty, $http, $state,
                    $stateParams, $timeout,
-                   SERVER_URL, gisConstsApi,gisFacilitiesApi,$q) {
+                   SERVER_URL,gisAdminUnitsApi,$q) {
         $scope.county = gisCounty.data;
         $scope.county_id = $stateParams.county_id;
         $scope.const_boundaries = $stateParams.const_boundaries;
@@ -63,14 +63,12 @@
         $scope.filters_county = {
             county : gisCounty.data.properties.county_id
         };
-        var facilitiesPromise = gisFacilitiesApi.api
-        .filter($scope.filters_county);
+        var facilitiesPromise = gisAdminUnitsApi.facilities.filter($scope.filters_county);
 
         $scope.filters = {
             id : $stateParams.const_boundaries
         };
-        var constBoundariesPromise = gisConstsApi.api
-        .filter($scope.filters);
+        var constBoundariesPromise = gisAdminUnitsApi.constituencies.filter($scope.filters);
 
         $q.all([facilitiesPromise, constBoundariesPromise])
         .then(function(payload){
@@ -141,7 +139,7 @@
                 },
                 markers: markers
             });
-            
+
         });
         $scope.$on("leafletDirectiveGeoJson.mouseover", function(ev, constituency) {
             $scope.hoveredConst = constituency.model;

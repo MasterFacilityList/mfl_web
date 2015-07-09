@@ -1,14 +1,6 @@
-/*
-*
-*
-**********TESTS FOR WARD LEVEL************
-*
-*
-*/
-
-
 describe("Tests for mfl.gis.controllers.gis_ward (Ward Level):", function () {
     "use strict";
+
     var controller, scope, root, state, httpBackend, SERVER_URL;
 
     beforeEach(function () {
@@ -18,26 +10,23 @@ describe("Tests for mfl.gis.controllers.gis_ward (Ward Level):", function () {
         module("mfl.gis.routes");
 
         inject(["$rootScope", "$controller","$httpBackend","$state","$stateParams",
-                "SERVER_URL","gisWardsApi","gisFacilitiesApi",
-            function ($rootScope, $controller, $httpBackend, $state,$stateParams,
-                  url,gisWardsApi, gisFacilitiesApi) {
+                "SERVER_URL",
+            function ($rootScope, $controller, $httpBackend, $state,$stateParams, url) {
                 root = $rootScope;
                 scope = root.$new();
                 state = $state;
                 httpBackend = $httpBackend;
                 SERVER_URL = url;
-                gisWardsApi = gisWardsApi;
-                gisFacilitiesApi = gisFacilitiesApi;
                 $stateParams.ward_id = 4;
                 controller = function (cntrl, data) {
                     return $controller(cntrl, data);
                 };
             }]);
     });
-    
+
     it("should load mfl.gis.controller.gis_ward", inject(["$httpBackend","$state",
-                 "leafletData","gisWardsApi",
-        function ($httpBackend, $state, leafletData,gisWardsApi) {
+                 "leafletData",
+        function ($httpBackend, $state, leafletData) {
         var data2 = [
             {
                 geometry:{
@@ -94,8 +83,7 @@ describe("Tests for mfl.gis.controllers.gis_ward (Ward Level):", function () {
             "$http": {},
             "$state": {},
             "$stateParams": {ward_id: 4},
-            "SERVER_URL": SERVER_URL,
-            "gisWardsApi": gisWardsApi
+            "SERVER_URL": SERVER_URL
         });
         $httpBackend.flush();
     }]));
@@ -165,8 +153,7 @@ describe("Tests for mfl.gis.controllers.gis_ward (Ward Level):", function () {
     }]));
 
     it("should get leaflet data map(Ward Level)",
-       inject(["$state", "leafletData","gisWardsApi",
-               function ($state, leafletData,gisWardsApi) {
+       inject(["$state", "leafletData", function ($state, leafletData) {
         spyOn(scope, "$on").andCallThrough();
         spyOn($state, "go");
         var obj = {
@@ -216,13 +203,12 @@ describe("Tests for mfl.gis.controllers.gis_ward (Ward Level):", function () {
             "$state": $state,
             "$stateParams": {},
             "$timeout": timeout.timeout,
-            "SERVER_URL": SERVER_URL,
-            "gisWardsApi": gisWardsApi
+            "SERVER_URL": SERVER_URL
         });
 
         expect(leafletData.getMap).toHaveBeenCalled();
         expect(obj.then).toHaveBeenCalled();
-                   
+
         var then_fxn = obj.then.calls[0].args[0];
         expect(angular.isFunction(then_fxn)).toBe(true);
         var map = {
@@ -232,13 +218,13 @@ describe("Tests for mfl.gis.controllers.gis_ward (Ward Level):", function () {
         spyOn(map, "fitBounds");
         spyOn(map, "spin");
         then_fxn(map);
-        
+
         expect(map.fitBounds).toHaveBeenCalledWith([[2,1 ], [4, 3]]);
         expect(map.spin).toHaveBeenCalledWith(
             true, {lines: 13, length: 20,corners:1,radius:30,width:10});
         expect(map.spin.calls[0].args[0]).toBe(true);
         expect(timeout.timeout).toHaveBeenCalled();
-        
+
         var timeout_fxn = timeout.timeout.calls[0].args[0];
         expect(angular.isFunction(timeout.timeout.calls[0].args[0])).toBe(true);
         timeout_fxn();
