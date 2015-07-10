@@ -27,15 +27,13 @@
                     <accordion-heading>
                         Drilldown <i class="pull-right fa" ng-class="{'fa-chevron-down': drilldown.open, 'fa-chevron-right': !drildown.open}"></i>
                     </accordion-heading>
-                    <div class="col-sm-4 margin-t-50">Click inside the map to drill down</div>
-                    <img class="col-sm-8" src="/assets/images/drilldown.gif" alt="drilldown">
+                    <div class="col-sm-12 margin-t-20 fw-500">Click inside the administrative unit to drill down into it. Avoid clicking the blue markers. The markers only show the name of the unit.</div>
                 </accordion-group>
                 <accordion-group is-open="unit.open">
                     <accordion-heading>
                         View unit names <i class="pull-right fa" ng-class="{'fa-chevron-down': unit.open, 'fa-chevron-right': !unit.open}"></i>
                     </accordion-heading>
-                    <div class="col-sm-4 margin-t-20">Hover on the blue markers to show the adminstrative unit name</div>
-                    <img class="col-sm-8" src="/assets/images/hover.gif" alt="drilldown">
+                    <div class="col-sm-4 margin-t-20  fw-400">Hover on the blue markers to show the adminstrative unit name</div>
                 </accordion-group>
             </accordion>
         </div>
