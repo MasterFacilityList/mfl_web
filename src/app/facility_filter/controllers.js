@@ -17,9 +17,9 @@
                     search: "",
                     number_of_beds: "",
                     number_of_cots: "",
-                    open_public_holidays: true,
-                    open_weekends: true,
-                    open_whole_day: true
+                    open_public_holidays: false,
+                    open_weekends: false,
+                    open_whole_day: false
                 },
                 multiple: {
                     county: [],
@@ -34,7 +34,7 @@
                 }
             };
 
-            var updateSelectFilters = function (params, filter_summaries) {
+            var updateSingleFilters = function (params) {
                 // update text inputs
                 _.each(["name", "code", "search", "number_of_cots", "number_of_beds"],
                     function (a) {
@@ -45,9 +45,12 @@
                 _.each(["open_weekends", "open_whole_day", "open_public_holidays"],
                     function (a) {
                         var val = params[a];
-                        $scope.filters.single[a] = (val !== "false");
+                        $scope.filters.single[a] = (val === "true");
                     }
                 );
+            };
+            updateSingleFilters($stateParams);
+            var updateMultipleFilters = function (params, filter_summaries) {
                 // update ui-select inputs
                 _.each(_.keys($scope.filters.multiple),
                     function (a) {
@@ -95,7 +98,7 @@
             ]})
             .success(function (data) {
                 $scope.filter_summaries = data;
-                updateSelectFilters($stateParams, data);
+                updateMultipleFilters($stateParams, data);
             });
 
             var dumpMultipleFilters = function (src) {
