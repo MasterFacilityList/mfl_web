@@ -262,7 +262,7 @@
         }]));
     });
     describe("Test for gis controller in ratings app:", function () {
-        var controller, scope, root, data, httpBackend, SERVER_URL, windows;// leafletData;
+        var controller, scope, root, data, httpBackend, SERVER_URL;
 
         beforeEach(function () {
             module("mflAppConfig");
@@ -273,26 +273,19 @@
             module("leaflet-directive");
 
             inject(["$rootScope", "$controller", "$httpBackend", "SERVER_URL",
-                "facilitiesApi", "$window", "mfl.rating.services.rating","gisAdminUnitsApi",
+                "facilitiesApi", "mfl.rating.services.rating","gisAdminUnitsApi",
                     "leafletData",
                 function ($rootScope, $controller, $httpBackend, url,
-                    facilitiesApi, $window, ratingService,gisAdminUnitsApi,leafletData) {
+                    facilitiesApi,ratingService,gisAdminUnitsApi,leafletData) {
                     root = $rootScope;
                     scope = root.$new();
                     httpBackend = $httpBackend;
                     SERVER_URL = url;
-                    windows = $window;
-                    facilitiesApi = facilitiesApi;
-                    leafletData = leafletData;
-                    ratingService = ratingService;
-                    gisAdminUnitsApi = gisAdminUnitsApi;
                     scope.fakeStateParams = {
                         fac_id : 1
                     };
                     data = {
                         $scope :scope,
-                        facilitiesApi : facilitiesApi,
-                        ratingService : ratingService,
                         gisAdminUnitsApi : gisAdminUnitsApi,
                         SERVER_URL : url,
                         leafletData: leafletData,

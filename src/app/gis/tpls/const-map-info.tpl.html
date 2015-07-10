@@ -25,15 +25,25 @@
             <accordion>
                 <accordion-group is-open="drilldown.open">
                     <accordion-heading>
-                        Drilldown <i class="pull-right fa" ng-class="{'fa-chevron-down': drilldown.open, 'fa-chevron-right': !drildown.open}"></i>
+                        Unit Drilldown <i class="pull-right fa" ng-class="{'fa-chevron-down': drilldown.open, 'fa-chevron-right': !drildown.open}"></i>
                     </accordion-heading>
-                    <div class="col-sm-12 margin-t-20 fw-500">Click inside the administrative unit to drill down into it. Avoid clicking the blue markers. The markers only show the name of the unit.</div>
+                    <div class="col-sm-12 margin-t-20">
+                        <ul class="pad-l-0">
+                            <li><span class="text-info">Click inside the administrative unit to drill down into it.</span></li>
+                            <li><span class="text-danger">Avoid clicking the blue markers.They only show unit names</span></li>
+                        </ul>
+                    </div>
                 </accordion-group>
                 <accordion-group is-open="unit.open">
                     <accordion-heading>
                         View unit names <i class="pull-right fa" ng-class="{'fa-chevron-down': unit.open, 'fa-chevron-right': !unit.open}"></i>
                     </accordion-heading>
-                    <div class="col-sm-12 margin-t-20  fw-400">Hover on the blue markers to show the adminstrative unit name</div>
+                    <div class="col-sm-12 margin-t-20">
+                        <ul class="pad-l-0">
+                           <li><span class="text-info">Hover on the blue markers to show the admin unit name</span></li>
+                           <li><span class="text-info">When hovering on the unit names, zoom in to the units closer to avoid overlapping unit names</span></li>
+                        </ul>
+                    </div>
                 </accordion-group>
             </accordion>
         </div>
