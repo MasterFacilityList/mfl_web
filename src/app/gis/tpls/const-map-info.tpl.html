@@ -21,23 +21,7 @@
     <div class="col-xs-12">
         <h4 class="fw-500 pad-t-50">Quick Help</h4>
         <hr>
-        <div  class="content-card">
-            <accordion>
-                <accordion-group is-open="drilldown.open">
-                    <accordion-heading>
-                        Drilldown <i class="pull-right fa" ng-class="{'fa-chevron-down': drilldown.open, 'fa-chevron-right': !drildown.open}"></i>
-                    </accordion-heading>
-                    <div class="col-sm-4 margin-t-50">Click inside the map to drill down</div>
-                    <img class="col-sm-8" src="/assets/images/drilldown.gif" alt="drilldown">
-                </accordion-group>
-                <accordion-group is-open="unit.open">
-                    <accordion-heading>
-                        View unit names <i class="pull-right fa" ng-class="{'fa-chevron-down': unit.open, 'fa-chevron-right': !unit.open}"></i>
-                    </accordion-heading>
-                    <div class="col-sm-4 margin-t-20">Hover on the blue markers to show the adminstrative unit name</div>
-                    <img class="col-sm-8" src="/assets/images/hover.gif" alt="drilldown">
-                </accordion-group>
-            </accordion>
+        <div class="content-card" ng-include="'gis/tpls/quick_help.tpl.html'">
         </div>
     </div>
 </div>

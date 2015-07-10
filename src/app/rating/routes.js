@@ -43,6 +43,16 @@
                         templateUrl : "rating/tpls/units.tpl.html"
                     }
                 }
+            })
+
+            .state("rating.map", {
+                url: "/map/",
+                views : {
+                    "form-view@rating" : {
+                        templateUrl : "rating/tpls/map.tpl.html",
+                        controller : "mfl.rating.controllers.rating.map"
+                    }
+                }
             });
     }]);
 })(angular);

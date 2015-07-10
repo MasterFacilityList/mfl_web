@@ -123,28 +123,23 @@
             <h4 class="fs-18 fw-600  hidden-xs"> <i class="fa fa-map-marker"></i> Location</h4>
             <h4 class="fs-16 fw-600  visible-xs"> <i class="fa fa-map-marker"></i> Location</h4>
             <br>
-            <h4 class="margin-t--15 fs-14 fw-500  hidden-xs text-blue">
-                <a ui-sref="gis.gis_county({county_id:oneFacility.boundaries.county_boundary,const_boundaries:const_boundaries})">
-                <span class="text-blue">{{oneFacility.county}} COUNTY</span></a>
+            <h4 class="margin-t--15 fs-14 fw-500  hidden-sm hidden-xs">
+                <a ui-sref="gis.gis_county({county_id:oneFacility.boundaries.county_boundary,const_boundaries:const_boundaries})">{{oneFacility.county}} COUNTY</a>
                 <span class="pull-right">
                     <a ui-sref="gis.gis_county.gis_const({county_id:oneFacility.boundaries.county_boundary,const_boundaries:const_boundaries,const_id:oneFacility.boundaries.constituency_boundary,ward_boundaries:ward_boundaries})">
                         <span class="fs-14 fw-500 text-blue">{{oneFacility.constituency}} SUB-COUNTY</span>
                     </a>
                 </span>
             </h4>
-            <h5 class="margin-t--15 fs-14 fw-500  visible-xs text-blue">
-                <a ui-sref="gis.gis_county({county_id:oneFacility.boundaries.county_boundary,const_boundaries:const_boundaries})">
-                    <span class="text-blue">{{oneFacility.county}} COUNTY</span>
-                </a>
+            <h5 class="margin-t--15 fs-14 fw-500  visible-sm visible-xs">
+                    {{oneFacility.county}} COUNTY
                 <span class="pull-right">
-                    <a ui-sref="gis.gis_county.gis_const({county_id:oneFacility.boundaries.county_boundary,const_boundaries:const_boundaries,const_id:oneFacility.boundaries.constituency_boundary,ward_boundaries:ward_boundaries})">
-                        <span class="text-blue">{{oneFacility.constituency}} SUB-COUNTY</span>
-                    </a>
+                        {{oneFacility.constituency}} SUB-COUNTY
                 </span>
             </h5>
             <br>
-            <h4 class="margin-t--15 fs-16 fw-500  hidden-xs">
-                <span class="fs-14 fw-500 text-blue">
+            <h4 class="margin-t--15 fs-16 fw-500  hidden-sm hidden-xs">
+                <span class="fs-14 fw-500">
                     <a ui-sref="gis.gis_county.gis_const.gis_ward({county_id:oneFacility.boundaries.county_boundary,const_boundaries:const_boundaries,const_id:oneFacility.boundaries.constituency_boundary,const_boundaries:const_boundaries,ward_id:oneFacility.boundaries.ward_boundary})">
                     <span class="text-blue">{{oneFacility.ward_name}} WARD</span>
                     </a>
@@ -153,10 +148,8 @@
                     {{oneFacility.facility_physical_address.town}} town
                 </span>
             </h4>
-            <h5 class="margin-t--15 fs-14 fw-500 visible-xs">
-                <a ui-sref="gis.gis_county.gis_const.gis_ward({county_id:oneFacility.boundaries.county_boundary,const_boundaries:const_boundaries,const_id:oneFacility.boundaries.constituency_boundary,ward_boundaries:ward_boundaries,ward_id:oneFacility.boundaries.ward_boundary})">
-                    <span class="text-blue">{{oneFacility.ward_name}} WARD</span>
-                </a>
+            <h5 class="margin-t--15 fs-14 fw-500 visible-sm visible-xs">
+                    {{oneFacility.ward_name}} WARD
                 <span class="pull-right">
                 {{oneFacility.facility_physical_address.town}} town
                 </span>
@@ -256,6 +249,13 @@
                     <a ui-sref=".units">
                         <span class="fw-900 ">
                             <i class="fa fa-hospital-o"></i> Community Health Units
+                        </span>
+                    </a>
+                </li>
+                <li ui-sref-active="active" class="hidden-sm hidden-xs">
+                    <a ui-sref=".map">
+                        <span class="fw-900 ">
+                            <i class="fa fa-map-marker"></i> Show facility on map
                         </span>
                     </a>
                 </li>
