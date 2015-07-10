@@ -55,8 +55,8 @@
                     "$stateParams": {
                         "name": "ASD",
                         "number_of_cots": "34",
-                        "is_active": "false",
-                        "is_regulated": "dsa",
+                        "is_approved": "false",
+                        "regulated": "dsa",
                         "county": "1,2"
                     }
                 };
@@ -78,8 +78,8 @@
 
                 expect(data.$scope.filters.single.name).toEqual("ASD");
                 expect(data.$scope.filters.single.number_of_cots).toEqual("34");
-                expect(data.$scope.filters.single.is_active).toEqual(false);
-                expect(data.$scope.filters.single.is_regulated).toEqual(true);
+                expect(data.$scope.filters.single.is_approved).toEqual(false);
+                expect(data.$scope.filters.single.regulated).toEqual(true);
 
                 expect(data.$scope.filters.multiple.county).toEqual([{"id": "1"}, {"id": "2"}]);
             });
