@@ -17,11 +17,9 @@
                     search: "",
                     number_of_beds: "",
                     number_of_cots: "",
-                    open_public_holidays: "",
-                    open_weekends: "",
-                    open_whole_day: "",
-                    is_regulated: "",
-                    is_active: ""
+                    open_public_holidays: true,
+                    open_weekends: true,
+                    open_whole_day: true
                 },
                 multiple: {
                     county: [],
@@ -36,8 +34,36 @@
                 }
             };
 
-            var updateSelectFilters = function (source) {
-                console.log(source);
+            var updateSelectFilters = function (params, filter_summaries) {
+                // update text inputs
+                _.each(["name", "code", "search", "number_of_cots", "number_of_beds"],
+                    function (a) {
+                        $scope.filters.single[a] = params[a] || "";
+                    }
+                );
+                // update bool inputs
+                _.each(["open_weekends", "open_whole_day", "open_public_holidays"],
+                    function (a) {
+                        var val = params[a];
+                        $scope.filters.single[a] = (val !== "false");
+                    }
+                );
+                // update ui-select inputs
+                _.each(_.keys($scope.filters.multiple),
+                    function (a) {
+                        var val = params[a];
+                        if (val) {
+                            $scope.filters.multiple[a] = _.filter(
+                                filter_summaries[a],
+                                function (b) {
+                                    return val.indexOf(b.id) !== -1;
+                                }
+                            );
+                        }
+                    }
+                );
+
+                // TODO : update ui-select with relationships
             };
 
             $scope.filterFxns = {
@@ -63,35 +89,37 @@
                 }
             };
 
-            wrappers.filters.filter({"fields": ["county", "facility_type", "constituency",
-                "ward", "operation_status", "service_category", "owner_type", "owner", "service"
+            wrappers.filters.filter({"fields": ["county", "facility_type",
+                "constituency", "ward", "operation_status", "service_category",
+                "owner_type", "owner", "service"
             ]})
             .success(function (data) {
                 $scope.filter_summaries = data;
-                updateSelectFilters(data);
+                updateSelectFilters($stateParams, data);
             });
 
-            $scope.dumpMultipleFilters = function (src) {
-                var filter_keys = _.keys(src);
-                var params = _.reduce(filter_keys, function (memo, b) {
+            var dumpMultipleFilters = function (src) {
+                return _.reduce(_.keys(src), function (memo, b) {
                     memo[b] = _.pluck(src[b], "id").join(",");
                     return memo;
                 }, {});
-                return params;
             };
-            $scope.dumpSimpleFilters = function (src) {
-                var filter_keys = _.keys(src);
-                var params = _.reduce(filter_keys, function (memo, b) {
+
+            var dumpSingleFilters = function (src) {
+                var k = _.keys(src);
+                return _.reduce(k, function (memo, b) {
                     memo[b] = src[b];
                     return memo;
                 }, {});
-                return params;
             };
 
             $scope.filterFacilities = function () {
-                var multiple = $scope.dumpMultipleFilters($scope.filters.multiple);
-                var simple = $scope.dumpSimpleFilters($scope.filters.single);
-                $state.go("facility_filter.results", _.extend(simple, multiple));
+                var multiple = dumpMultipleFilters($scope.filters.multiple);
+                var single = dumpSingleFilters($scope.filters.single);
+                var params = _.extend(single, multiple);
+                params.page = undefined;
+                params.page_size = undefined;
+                $state.go("facility_filter.results", params);
             };
 
             $scope.clearFilters = function () {
@@ -99,7 +127,7 @@
                 _.each(URL_SEARCH_PARAMS, function (a) {
                     params[a] = undefined;
                 });
-                // also cancel filter_promise defined in L120
+                // TODO : cancel filter_promise defined in L120
                 $state.go("facility_filter", params);
             };
         }]
@@ -116,23 +144,16 @@
                 }
                 return memo;
             }, {});
-            var extractPageMeta = function(data) {
-                var from_index = data.page_size * data.current_page;
-                var to_index = from_index + data.results.length;
-                return {
-                    "from_index": from_index,
-                    "to_index": to_index
-                };
-            };
+
             $scope.spinner = true;
             $scope.filter_promise = wrappers.facilities.filter(params)
             .success(function (data) {
                 $scope.spinner = false;
                 $scope.results = data;
-                _.extend($scope.results, extractPageMeta(data));
             })
             .error(function (e) {
-                $scope.alert = e.detail || "Sorry, a server connection error occured.";
+                $scope.alert = e.detail ||
+                               "Sorry, a server connection error occured.";
                 $scope.spinner = false;
             });
 
@@ -160,6 +181,7 @@
                 params.page = $scope.results.current_page + 1 ;
                 $state.go("facility_filter.results", params);
             };
+
             $scope.prevPage = function () {
                 if ($scope.results.current_page === 1) {
                     return;

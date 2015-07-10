@@ -18,9 +18,8 @@
 
         "service_category", "service",
 
-        "number_of_beds", "number_of_cots", "open_public_holidays", "open_weekends",
-        "open_whole_day", "is_regulated", "is_active",
-
+        "number_of_beds", "number_of_cots",
+        "open_public_holidays", "open_weekends", "open_whole_day",
 
         // pagination controls
         "page_size", "page"
