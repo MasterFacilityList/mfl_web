@@ -55,7 +55,7 @@
                     "$stateParams": {
                         "name": "ASD",
                         "number_of_cots": "34",
-                        "open_weekends": "false",
+                        "open_weekends": "true",
                         "county": "1,2"
                     }
                 };
@@ -77,7 +77,7 @@
 
                 expect(data.$scope.filters.single.name).toEqual("ASD");
                 expect(data.$scope.filters.single.number_of_cots).toEqual("34");
-                expect(data.$scope.filters.single.open_weekends).toEqual(false);
+                expect(data.$scope.filters.single.open_weekends).toEqual(true);
 
                 expect(data.$scope.filters.multiple.county).toEqual([{"id": "1"}, {"id": "2"}]);
             });
