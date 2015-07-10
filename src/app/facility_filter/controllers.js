@@ -19,9 +19,7 @@
                     number_of_cots: "",
                     open_public_holidays: true,
                     open_weekends: true,
-                    open_whole_day: true,
-                    is_regulated: true,
-                    is_active: true
+                    open_whole_day: true
                 },
                 multiple: {
                     county: [],
@@ -44,8 +42,7 @@
                     }
                 );
                 // update bool inputs
-                _.each(["open_weekends", "open_whole_day", "open_public_holidays",
-                        "is_regulated", "is_active"],
+                _.each(["open_weekends", "open_whole_day", "open_public_holidays"],
                     function (a) {
                         var val = params[a];
                         $scope.filters.single[a] = (val !== "false");
@@ -109,9 +106,7 @@
             };
 
             var dumpSingleFilters = function (src) {
-                // TODO : enable intermediate checkboxes to use next line
-                // var k = _.keys(src);
-                var k = ["name", "code", "search", "number_of_cots", "number_of_beds"];
+                var k = _.keys(src);
                 return _.reduce(k, function (memo, b) {
                     memo[b] = src[b];
                     return memo;
@@ -121,7 +116,10 @@
             $scope.filterFacilities = function () {
                 var multiple = dumpMultipleFilters($scope.filters.multiple);
                 var single = dumpSingleFilters($scope.filters.single);
-                $state.go("facility_filter.results", _.extend(single, multiple));
+                var params = _.extend(single, multiple);
+                params.page = undefined;
+                params.page_size = undefined;
+                $state.go("facility_filter.results", params);
             };
 
             $scope.clearFilters = function () {
