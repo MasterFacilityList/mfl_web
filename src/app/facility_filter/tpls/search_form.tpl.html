@@ -8,7 +8,7 @@
 
             <div class="form-group results-card">
                 <label class="fw-500 fs-14">Search all facilities</label>
-                <input placeholder="search all facilities" type="text" class="form-control" ng-model="filters.single.search" id="search" name="search"/>
+                <input placeholder="Search all facilities" type="text" class="form-control" ng-model="filters.single.search" id="search" name="search"/>
             </div>
 
             <div class="col-xs-12 results-card margin-b-10">
@@ -140,16 +140,16 @@
 
                     <div class="form-group fs-14">
                         <label  class="fw-500">Number of beds</label>
-                        <input placeholder="number of beds" type="text" class="form-control" ng-model="filters.number_of_beds" id="number_of_beds" name="number_of_beds"/>
+                        <input placeholder="Number of beds" type="text" class="form-control" ng-model="filters.single.number_of_beds" id="number_of_beds" name="number_of_beds"/>
                     </div>
 
                     <div class="form-group fs-14">
                         <label  class="fw-500">Number of cots</label>
-                        <input placeholder="number of cots" type="text" class="form-control" ng-model="filters.number_of_cots" id="number_of_cots" name="number_of_cots"/>
+                        <input placeholder="Number of cots" type="text" class="form-control" ng-model="filters.single.number_of_cots" id="number_of_cots" name="number_of_cots"/>
                     </div>
                     <div class="col-xs-8 pad-l-5">
                         <div class="checkbox-group">
-                            <input type="checkbox" id="open_public_holidays" name="open_public_holidays" ng-model="filters.open_public_holidays">
+                            <input type="checkbox" id="open_public_holidays" name="open_public_holidays" ng-model="filters.single.open_public_holidays">
                             <label for="open_public_holidays" class="fw-500 fs-14 text-black">
                                 <span class="check"></span>
                                 <span class="box"></span>
@@ -159,7 +159,7 @@
                     </div>
                     <div class="col-xs-8 pad-l-5">
                         <div class="checkbox-group">
-                            <input type="checkbox" id="open_weekends" name="open_weekends" ng-model="filters.open_weekends">
+                            <input type="checkbox" id="open_weekends" name="open_weekends" ng-model="filters.single.open_weekends">
                             <label for="open_weekends" class="fw-600 fs-14 text-black">
                                 <span class="check"></span>
                                 <span class="box"></span>
@@ -169,7 +169,7 @@
                     </div>
                     <div class="col-xs-8 pad-l-5">
                         <div class="checkbox-group">
-                            <input type="checkbox" id="open_whole_day" name="open_whole_day" ng-model="filters.open_whole_day">
+                            <input type="checkbox" id="open_whole_day" name="open_whole_day" ng-model="filters.single.open_whole_day">
                             <label for="open_whole_day" class="fw-600 fs-14 text-black">
                                 <span class="check"></span>
                                 <span class="box"></span>
@@ -179,7 +179,7 @@
                     </div>
                     <div class="col-xs-8 pad-l-5">
                         <div class="checkbox-group">
-                            <input type="checkbox" id="is_regulated" name="is_regulated" ng-model="filters.is_regulated">
+                            <input type="checkbox" id="is_regulated" name="is_regulated" ng-model="filters.single.is_regulated">
                             <label for="is_regulated" class="fw-600 fs-14 text-black">
                                 <span class="check"></span>
                                 <span class="box"></span>
@@ -189,8 +189,8 @@
                     </div>
                     <div class="col-xs-8 pad-l-5">
                         <div class="checkbox-group">
-                            <input type="checkbox" id="is_active" name="is_active">
-                            <label for="" class="fw-600 fs-14 text-black">
+                            <input type="checkbox" id="is_active" name="is_active" ng-model="filters.single.is_active">
+                            <label for="is_active" class="fw-600 fs-14 text-black">
                                 <span class="check"></span>
                                 <span class="box"></span>
                                  Is Active

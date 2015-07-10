@@ -16,7 +16,7 @@
         <div class="col-xs-12 margin-b-10">
             <div class="pull-left">
                 <p class="lead fw-500 text-black margin-t-10">
-                    Showing {{results.from_index}} - {{results.to_index}} of <span class="text-danger"><b>{{results.count}}</b></span> results.
+                    Showing {{results.start_index}} - {{results.end_index}} of <span class="text-danger"><b>{{results.count}}</b></span> results.
                 </p>
             </div>
             <div class="pull-right">
@@ -75,12 +75,19 @@
         </div>
 
         <div class="col-md-12 col-xs-12 margin-t-10">
-            <button ng-click="prevPage()" class="login-btn login-btn-primary pull-left" ng-if="results.previous">
-                <i class="fa fa-angle-double-left"></i> Prev
-            </button>
-            <button ng-click="nextPage()" class="login-btn login-btn-primary pull-right" ng-if="results.next">
-                Next <i class="fa fa-angle-double-right"></i>
-            </button>
+            <div class="col-md-4 col-xs-13">
+                <button ng-click="prevPage()" class="login-btn login-btn-primary pull-left" ng-if="results.previous">
+                    <i class="fa fa-angle-double-left"></i> Prev
+                </button>
+            </div>
+            <div class="col-md-4 col-xs-12 text-center" style="padding:4px 7px 4px 7px;">
+                <span>Page {{results.current_page}} of {{results.total_pages}}</span>
+            </div>
+            <div class="col-md-4 col-xs-12">
+                <button ng-click="nextPage()" class="login-btn login-btn-primary pull-right" ng-if="results.next">
+                    Next <i class="fa fa-angle-double-right"></i>
+                </button>
+            </div>
         </div>
     </div>
 </div>
