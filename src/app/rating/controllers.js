@@ -197,7 +197,6 @@
                 });
             })
             .error(function(error){
-                $scope.spinner = false;
                 $log.error(error);
             });
 

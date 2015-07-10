@@ -261,4 +261,176 @@
             expect($window.print).toHaveBeenCalled();
         }]));
     });
+    describe("Test for gis controller in ratings app:", function () {
+        var controller, scope, root, data, httpBackend, SERVER_URL, windows;// leafletData;
+
+        beforeEach(function () {
+            module("mflAppConfig");
+            module("mfl.rating");
+            module("mfl.facilities.wrapper");
+            module("mfl.rating.services");
+            module("mfl.gis.wrapper");
+            module("leaflet-directive");
+
+            inject(["$rootScope", "$controller", "$httpBackend", "SERVER_URL",
+                "facilitiesApi", "$window", "mfl.rating.services.rating","gisAdminUnitsApi",
+                    "leafletData",
+                function ($rootScope, $controller, $httpBackend, url,
+                    facilitiesApi, $window, ratingService,gisAdminUnitsApi,leafletData) {
+                    root = $rootScope;
+                    scope = root.$new();
+                    httpBackend = $httpBackend;
+                    SERVER_URL = url;
+                    windows = $window;
+                    facilitiesApi = facilitiesApi;
+                    leafletData = leafletData;
+                    ratingService = ratingService;
+                    gisAdminUnitsApi = gisAdminUnitsApi;
+                    scope.fakeStateParams = {
+                        fac_id : 1
+                    };
+                    data = {
+                        $scope :scope,
+                        facilitiesApi : facilitiesApi,
+                        ratingService : ratingService,
+                        gisAdminUnitsApi : gisAdminUnitsApi,
+                        SERVER_URL : url,
+                        leafletData: leafletData,
+                        $stateParams : scope.fakeStateParams
+                    };
+                    controller = function (cntrl) {
+                        return $controller(cntrl, data);
+                    };
+                }
+            ]);
+        });
+        it("should load data required by controller",
+        inject(["$httpBackend","leafletData",
+            function ($httpBackend,leafletData) {
+                var data = {
+                    geometry:{
+                        coordinates: {
+                            coordinates:[
+                                [1,2],[3,4]
+                            ]
+                        }
+                    },
+                    properties: {
+                        coordinates: {
+                            coordinates:[
+                                [1,2],[3,4]
+                            ]
+                        },
+                        bound: {
+                            coordinates:[
+                                [
+                                    [1,2],[3,4]
+                                ]
+                            ]
+                        }
+                    }
+                };
+                var obj = {
+                    then: angular.noop
+                };
+                $httpBackend.expectGET(SERVER_URL +
+                    "api/gis/ward_boundaries/1/").respond(200, data);
+                $httpBackend.expectGET(SERVER_URL +
+                    "api/gis/coordinates/1/").respond(200, data);
+
+                spyOn(scope, "$on").andCallThrough();
+                spyOn(leafletData, "getMap").andReturn(obj);
+                spyOn(obj, "then");
+
+                controller("mfl.rating.controllers.rating.map");
+                scope.oneFacility = {
+                    ward : "1",
+                    coordinates: "1",
+                    boundaries: {
+                        ward_boundary: "1"
+                    }
+                };
+                scope.$apply();
+                scope.$digest();
+
+                $httpBackend.flush();
+                expect(leafletData.getMap).toHaveBeenCalled();
+                expect(obj.then).toHaveBeenCalled();
+
+                var then_fxn = obj.then.calls[0].args[0];
+                expect(angular.isFunction(then_fxn)).toBe(true);
+                var map = {
+                    fitBounds: angular.noop
+                };
+                spyOn(map, "fitBounds");
+                then_fxn(map);
+                expect(map.fitBounds).toHaveBeenCalledWith([[2,1],
+                                                            [4,3]]);
+
+            }]));
+        it("should fail to load data for acquiring one facility",
+            function () {
+                controller("mfl.rating.controllers.rating.map");
+                scope.oneFacility = undefined;
+                scope.$apply();
+                scope.$digest();
+            });
+        it("should fail to load data required by for wards in the controller",
+        inject(["$httpBackend",
+            function ($httpBackend) {
+                $httpBackend.expectGET(SERVER_URL +
+                    "api/gis/ward_boundaries/1/").respond(500, {});
+                controller("mfl.rating.controllers.rating.map");
+                scope.oneFacility = {
+                    ward : "1",
+                    coordinates: "1",
+                    boundaries: {
+                        ward_boundary: "1"
+                    }
+                };
+                scope.$apply();
+                scope.$digest();
+                $httpBackend.flush();
+            }]));
+        it("should fail to load data required by for facilities in the controller",
+        inject(["$httpBackend",
+            function ($httpBackend) {
+                var data = {
+                    geometry:{
+                        coordinates: {
+                            coordinates:[
+                                [1,2],[3,4]
+                            ]
+                        }
+                    },
+                    properties: {
+                        coordinates: {
+                            coordinates:[
+                                [1,2],[3,4]
+                            ]
+                        },
+                        bound: {
+                            coordinates:[
+                                [1,2],[3,4]
+                            ]
+                        }
+                    }
+                };
+                $httpBackend.expectGET(SERVER_URL +
+                    "api/gis/ward_boundaries/1/").respond(200, data);
+                $httpBackend.expectGET(SERVER_URL +
+                    "api/gis/coordinates/1/").respond(500, {});
+                controller("mfl.rating.controllers.rating.map");
+                scope.oneFacility = {
+                    ward : "1",
+                    coordinates: "1",
+                    boundaries: {
+                        ward_boundary: "1"
+                    }
+                };
+                scope.$apply();
+                scope.$digest();
+                $httpBackend.flush();
+            }]));
+    });
 })();
