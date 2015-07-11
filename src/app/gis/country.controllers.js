@@ -67,7 +67,8 @@
                             options: {
                                 noHide: false
                             }
-                        }
+                        },
+                        riseOnHover: true
                     };
             });
             $scope.markers = markers;
