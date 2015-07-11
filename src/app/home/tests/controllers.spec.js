@@ -1,5 +1,6 @@
 (function () {
     "use strict";
+
     describe("Tests for Home controllers:", function () {
         var controller, scope, root, data, $state, $ctrl, $httpBackend, serverUrl;
 
@@ -25,7 +26,7 @@
                     };
                 }]);
         });
-        it("it should have `mfl.home.controllers.home` defined", function () {
+        it("should have `mfl.home.controllers.home` defined", function () {
             var ctrl = controller("mfl.home.controllers.home");
             expect(ctrl).toBeDefined();
         });

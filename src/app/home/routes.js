@@ -9,7 +9,6 @@
                 url: "/home",
                 views: {
                     "header" : {
-                        controller: "mfl.home.controllers.header",
                         templateUrl : "home/tpls/header.tpl.html"
                     },
                     "main": {
@@ -23,6 +22,15 @@
                 },
                 data:{
                     pageTitle: "MFLv2 Home"
+                },
+                resolve: {
+                    "auth": ["api.auth", "$q", function (auth, $q) {
+                        var current_token = auth.getToken();
+                        if (current_token) {
+                            return $q.when(current_token);
+                        }
+                        return auth.fetchToken();
+                    }]
                 }
             });
     }]);
