@@ -58,7 +58,9 @@
                         "open_weekends": "true",
                         "open_whole_day": "false",
                         "open_public_holidays": "jksd",
-                        "county": "1,2"
+                        "county": "1,2",
+                        "constituency": "11,31,42",
+                        "ward": "111,231"
                     }
                 };
 
@@ -67,7 +69,17 @@
                                "?fields=county,facility_type,constituency," +
                                "ward,operation_status,service_category,owner_type,owner,service")
                     .respond(200, {
-                        county: [{"id": "1"}, {"id": "2"}, {"id": "3"}]
+                        county: [{"id": "1"}, {"id": "2"}, {"id": "3"}],
+                        constituency: [
+                            {"id": "11", "county": "1"},
+                            {"id": "12", "county": "1"},
+                            {"id": "31", "county": "3"}
+                        ],
+                        ward: [
+                            {"id": "111", "constituency": "11"},
+                            {"id": "311", "constituency": "31"},
+                            {"id": "231", "constituency": "23"}
+                        ]
                     });
 
                 spyOn(state, "go");
@@ -83,7 +95,12 @@
                 expect(data.$scope.filters.single.open_whole_day).toEqual(false);
                 expect(data.$scope.filters.single.open_public_holidays).toEqual(false);
 
-                expect(data.$scope.filters.multiple.county).toEqual([{"id": "1"}, {"id": "2"}]);
+                expect(data.$scope.filters.multiple.county)
+                    .toEqual([{"id": "1"}, {"id": "2"}, {"id": "3"}]);
+                expect(data.$scope.filters.multiple.constituency)
+                    .toEqual([{"id": "11","county": "1"}, {"id": "31","county": "3"}]);
+                expect(data.$scope.filters.multiple.ward)
+                    .toEqual([{"id":"111","constituency":"11"}, {"id":"231","constituency":"23"}]);
             });
 
             it("should filter facilities", function () {
