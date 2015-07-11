@@ -124,7 +124,10 @@
             <h4 class="fs-16 fw-600  visible-xs"> <i class="fa fa-map-marker"></i> Location</h4>
             <br>
             <h4 class="margin-t--15 fs-14 fw-500  hidden-sm hidden-xs">
-                <a ui-sref="gis.gis_county({county_id:oneFacility.boundaries.county_boundary,const_boundaries:const_boundaries})">{{oneFacility.county}} COUNTY</a>
+                <a ui-sref="gis.gis_county({county_id:oneFacility.boundaries.county_boundary,const_boundaries:const_boundaries})">
+                <span class="fs-14 fw-500 text-blue">
+                    {{oneFacility.county}} COUNTY
+                </span></a>
                 <span class="pull-right">
                     <a ui-sref="gis.gis_county.gis_const({county_id:oneFacility.boundaries.county_boundary,const_boundaries:const_boundaries,const_id:oneFacility.boundaries.constituency_boundary,ward_boundaries:ward_boundaries})">
                         <span class="fs-14 fw-500 text-blue">{{oneFacility.constituency}} SUB-COUNTY</span>
