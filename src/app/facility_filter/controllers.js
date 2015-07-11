@@ -52,21 +52,36 @@
             updateSingleFilters($stateParams);
             var updateMultipleFilters = function (params, filter_summaries) {
                 // update ui-select inputs
-                _.each(_.keys($scope.filters.multiple),
-                    function (a) {
-                        var val = params[a];
-                        if (val) {
-                            $scope.filters.multiple[a] = _.filter(
-                                filter_summaries[a],
-                                function (b) {
-                                    return val.indexOf(b.id) !== -1;
-                                }
-                            );
-                        }
+                _.each(_.keys($scope.filters.multiple),function (a) {
+                    var val = params[a];
+                    if (val) {
+                        $scope.filters.multiple[a] = _.filter(
+                            filter_summaries[a],
+                            function (b) {
+                                return val.indexOf(b.id) !== -1;
+                            }
+                        );
                     }
-                );
+                });
 
-                // TODO : update ui-select with relationships
+                // update ui-select with relationships
+                var relationships = [
+                    {child: "ward", parent: "constituency"},
+                    {child: "constituency", parent: "county"}
+                ];
+                _.each(relationships, function (r) {
+                    _.each($scope.filters.multiple[r.child], function (w) {
+                        var x = _.findWhere(filter_summaries[r.parent], {"id": w[r.parent]});
+                        if (!_.isUndefined(x)) {
+                            $scope.filters.multiple[r.parent].push(x);
+                        }
+                    });
+                });
+
+                // remove duplicates in ui-select repeat sources
+                _.each(_.keys($scope.filters.multiple), function (a) {
+                    $scope.filters.multiple[a] = _.uniq($scope.filters.multiple[a]);
+                });
             };
 
             $scope.filterFxns = {
