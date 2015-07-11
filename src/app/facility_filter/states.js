@@ -2,7 +2,8 @@
     "use strict";
 
     angular.module("mfl.facility_filter.states", [
-        "ui.router"
+        "ui.router",
+        "mfl.auth.service"
     ])
 
     .constant("URL_SEARCH_PARAMS", [
@@ -31,7 +32,6 @@
             url: "/facility_filter?"+URL_SEARCH_PARAMS.join("&"),
             views: {
                 "header" : {
-                    controller: "mfl.home.controllers.header",
                     templateUrl : "home/tpls/header.tpl.html"
                 },
                 "main": {
@@ -40,8 +40,15 @@
                 }
             },
 
-            // https://github.com/angular-ui/ui-router/wiki/URL-Routing#important-stateparams-gotcha
             resolve: {
+                "auth": ["api.auth", "$q", function (auth, $q) {
+                    var current_token = auth.getToken();
+                    if (current_token) {
+                        return $q.when(current_token);
+                    }
+                    return auth.fetchToken();
+                }],
+                // github.com/angular-ui/ui-router/wiki/URL-Routing#important-stateparams-gotcha
                 filterParams: ["$stateParams", function (sp) {
                     return sp;
                 }]
