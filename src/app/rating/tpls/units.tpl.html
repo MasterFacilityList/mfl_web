@@ -4,16 +4,16 @@
        <i class="fa fa-info-circle"></i> Facility Community Health Units Currently Unavailable
     </p>
 </div>
-<div class="col-xs-12 detail-content" ng-if="chus.length !== 0">
-    <table class="table fs-14 table-hover">
-        <thead class="detail-content">
+<div class="col-xs-12 margin-t-20 margin-b-20" ng-if="chus.length !== 0">
+    <table class="table fs-14 table-hover table-stripped">
+        <thead>
             <th class="text-blue col-xs-3">Code</th>
             <th class="text-blue col-xs-3">Name</th>
             <th class="text-blue col-xs-4">Status</th>
             <th class="text-blue text-center col-xs-2">Monitored Households</th>
         </thead>
         <tbody class="fw-600">
-            <tr ng-repeat="unit in chus" class="results-card">
+            <tr ng-repeat="unit in chus">
                 <td class="pad-t-15">
                     {{unit.code}}
                 </td>
