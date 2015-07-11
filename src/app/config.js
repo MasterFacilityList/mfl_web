@@ -4,7 +4,7 @@
         "ui.router",
         "ngCookies",
         "sil.api.wrapper",
-        "mfl.gis.interceptor",
+        "mfl.common.interceptors",
         "LocalForageModule"
     ])
 
@@ -21,7 +21,7 @@
         });
     }])
     .config(["$httpProvider",function ($httpProvider) {
-        $httpProvider.interceptors.push("mfl.gis.interceptor.headers");
+        $httpProvider.interceptors.push("mfl.common.interceptors.headers");
         $httpProvider.defaults.withCredentials = false;
         $httpProvider.defaults.headers.common = {
             "Content-Type":"application/json",

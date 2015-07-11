@@ -7,5 +7,5 @@ angular.module("mfl.common", [
     "mfl.gis.wrapper",
     "mfl.adminunits.wrapper",
     "mfl.auth",
-    "mfl.gis.interceptor"
+    "mfl.common.interceptors"
 ]);

@@ -1,9 +1,9 @@
 (function (angular) {
     "use strict";
 
-    angular.module("mfl.gis.interceptor", [])
+    angular.module("mfl.common.interceptors", [])
 
-    .factory("mfl.gis.interceptor.headers", [function () {
+    .factory("mfl.common.interceptors.headers", [function () {
         var cache_headers = {};
 
         var request_fxn = function(config) {
@@ -39,6 +39,20 @@
             "request" : request_fxn,
             "response": response_fxn
         };
-    }]);
+    }])
+
+    .factory("mfl.auth.interceptor", ["$window",
+        function ($window) {
+            return {
+                "responseError": function (rejection) {
+                    if (rejection.status === 401 || rejection.status === 403) {
+                        $window.localStorage.removeItem("auth.token");
+                        $window.location.reload();
+                    }
+                    return rejection;
+                }
+            };
+        }
+    ]);
 
 })(angular);
