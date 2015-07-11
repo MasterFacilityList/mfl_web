@@ -84,8 +84,8 @@
             });
 
             it("should allow another token request on failure", function () {
-                inject(["$window", "$httpBackend", "CREDZ", "api.auth",
-                    function ($window, $httpBackend, credz, auth) {
+                inject(["$httpBackend", "CREDZ", "api.auth",
+                    function ($httpBackend, credz, auth) {
                         var payload =
                             "grant_type=" + "password" +
                             "&username=" + credz.username +
