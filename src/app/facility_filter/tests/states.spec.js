@@ -1,11 +1,11 @@
 (function () {
     "use strict";
 
-    describe("Tests for home routes: ", function() {
+    describe("Test filter states", function () {
         var testAuthed, testUnAuthed;
 
         beforeEach(function () {
-            module("mfl.home");
+            module("mfl.facility_filter");
             module("mflAppConfig");
             module("templates-app");
             module("mfl.auth.service");
@@ -32,12 +32,20 @@
             );
         });
 
-        it("should load home state (authed)", function () {
-            testAuthed("home");
+        it("should load filter state (authed)", function () {
+            testAuthed("facility_filter");
         });
 
-        it("should load home state (unauthed)", function () {
-            testUnAuthed("home");
+        it("should load filter state (unauthed)", function () {
+            testUnAuthed("facility_filter");
+        });
+
+        it("should load results state (authed)", function () {
+            testAuthed("facility_filter.results");
+        });
+
+        it("should load results state (unauthed)", function () {
+            testUnAuthed("facility_filter.results");
         });
     });
 

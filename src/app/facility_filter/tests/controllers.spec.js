@@ -238,10 +238,6 @@
                     data.$scope.filterFxns.serviceFilter({"id": "3", "category": "3"})
                 ).toBe(false);
             });
-
-            it("should load state", function () {
-                state.go("facility_filter");
-            });
         });
 
         describe("test results controller", function () {

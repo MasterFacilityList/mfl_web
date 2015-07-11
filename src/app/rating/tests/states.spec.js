@@ -1,11 +1,11 @@
 (function () {
     "use strict";
 
-    describe("Tests for home routes: ", function() {
+    describe("Test rating states", function () {
         var testAuthed, testUnAuthed;
 
         beforeEach(function () {
-            module("mfl.home");
+            module("mfl.rating");
             module("mflAppConfig");
             module("templates-app");
             module("mfl.auth.service");
@@ -32,12 +32,28 @@
             );
         });
 
-        it("should load home state (authed)", function () {
-            testAuthed("home");
+        it("should load rating state (authed)", function () {
+            testAuthed("rating");
         });
 
-        it("should load home state (unauthed)", function () {
-            testUnAuthed("home");
+        it("should load rating state (unauthed)", function () {
+            testUnAuthed("rating");
+        });
+
+        it("should load rating services state (authed)", function () {
+            testAuthed("rating.services");
+        });
+
+        it("should load rating services state (unauthed)", function () {
+            testUnAuthed("rating.services");
+        });
+
+        it("should load rating units state (authed)", function () {
+            testAuthed("rating.units");
+        });
+
+        it("should load rating units state (unauthed)", function () {
+            testUnAuthed("rating.units");
         });
     });
 
