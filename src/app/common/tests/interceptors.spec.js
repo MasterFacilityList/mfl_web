@@ -69,19 +69,19 @@
 
         it("should not care about other response errors", function () {
             inject(["$injector", function (inj) {
-                var interceptor = inj.get("mfl.auth.interceptor");
+                var interceptor = inj.get("mfl.common.interceptors.auth");
                 var rejection = {status: 404};
-                expect(interceptor.responseError(rejection)).toBe(rejection);
+                expect(interceptor.responseError(rejection).$$state.value).toBe(rejection);
                 expect(wndw.location.reload).not.toHaveBeenCalled();
                 expect(wndw.localStorage.removeItem).not.toHaveBeenCalled();
             }]);
         });
 
         it("should take action on 401 or 403", function () {
-            inject(["mfl.auth.interceptor", function (i) {
+            inject(["mfl.common.interceptors.auth", function (i) {
                 [401, 403].forEach(function (code) {
                     var rejection = {status: code};
-                    expect(i.responseError(rejection)).toBe(rejection);
+                    expect(i.responseError(rejection).$$state.value).toBe(rejection);
                     expect(wndw.location.reload).toHaveBeenCalled();
                     expect(wndw.localStorage.removeItem).toHaveBeenCalled();
                 });

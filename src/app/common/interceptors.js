@@ -41,15 +41,15 @@
         };
     }])
 
-    .factory("mfl.auth.interceptor", ["$window",
-        function ($window) {
+    .factory("mfl.common.interceptors.auth", ["$window", "$q",
+        function ($window, $q) {
             return {
                 "responseError": function (rejection) {
                     if (rejection.status === 401 || rejection.status === 403) {
                         $window.localStorage.removeItem("auth.token");
                         $window.location.reload();
                     }
-                    return rejection;
+                    return $q.reject(rejection);
                 }
             };
         }

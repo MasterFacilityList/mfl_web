@@ -22,6 +22,7 @@
     }])
     .config(["$httpProvider",function ($httpProvider) {
         $httpProvider.interceptors.push("mfl.common.interceptors.headers");
+        $httpProvider.interceptors.push("mfl.common.interceptors.auth");
         $httpProvider.defaults.withCredentials = false;
         $httpProvider.defaults.headers.common = {
             "Content-Type":"application/json",
