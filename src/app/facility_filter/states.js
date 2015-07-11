@@ -49,7 +49,7 @@
                     return auth.fetchToken();
                 }],
                 // github.com/angular-ui/ui-router/wiki/URL-Routing#important-stateparams-gotcha
-                filterParams: ["$stateParams", function (sp) {
+                filterParams: ["auth", "$stateParams", function (auth, sp) {
                     return sp;
                 }]
             }
