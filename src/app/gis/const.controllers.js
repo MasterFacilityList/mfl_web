@@ -94,7 +94,8 @@
                             options: {
                                 noHide: false
                             }
-                        }
+                        },
+                        riseOnHover: true
                     };
             });
             $scope.marks = markers;
