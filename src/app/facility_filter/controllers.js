@@ -6,6 +6,24 @@
         "mfl.facility_filter.states"
     ])
 
+    .directive("indeterminateValue", function () {
+        var link_fxn = function (scope, elem, attrs) {
+            var truthy = scope.$eval(attrs.ngTrueValue);
+            var falsy = scope.$eval(attrs.ngFalseValue);
+
+            scope.$watch(attrs.ngModel, function (n) {
+                if (n !== truthy && n !== falsy) {
+                    elem[0].indeterminate = true;
+                }
+            });
+        };
+        return {
+            "require": "ngModel",
+            "restrict": "A",
+            "link": link_fxn
+        };
+    })
+
     .controller("mfl.facility_filter.controllers.form",
         ["$stateParams", "$scope", "$state", "$location",
         "mfl.facility_filter.services.wrappers", "URL_SEARCH_PARAMS",
@@ -17,9 +35,9 @@
                     search: "",
                     number_of_beds: "",
                     number_of_cots: "",
-                    open_public_holidays: false,
-                    open_weekends: false,
-                    open_whole_day: false
+                    open_public_holidays: "",
+                    open_weekends: "",
+                    open_whole_day: ""
                 },
                 multiple: {
                     county: [],
@@ -34,20 +52,17 @@
                 }
             };
 
+            $scope.bool_clear = function () {
+                $scope.filters.single.open_weekends = "";
+                $scope.filters.single.open_whole_day = "";
+                $scope.filters.single.open_public_holidays = "";
+            };
+
             var updateSingleFilters = function (params) {
-                // update text inputs
-                _.each(["name", "code", "search", "number_of_cots", "number_of_beds"],
-                    function (a) {
-                        $scope.filters.single[a] = params[a] || "";
-                    }
-                );
-                // update bool inputs
-                _.each(["open_weekends", "open_whole_day", "open_public_holidays"],
-                    function (a) {
-                        var val = params[a];
-                        $scope.filters.single[a] = (val === "true");
-                    }
-                );
+                // update single inputs
+                _.each(_.keys($scope.filters.single), function (a) {
+                    $scope.filters.single[a] = params[a] || "";
+                });
             };
             updateSingleFilters($stateParams);
             var updateMultipleFilters = function (params, filter_summaries) {

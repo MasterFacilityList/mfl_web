@@ -79,11 +79,35 @@
 
                 expect(data.$scope.filters.single.name).toEqual("ASD");
                 expect(data.$scope.filters.single.number_of_cots).toEqual("34");
-                expect(data.$scope.filters.single.open_weekends).toEqual(true);
-                expect(data.$scope.filters.single.open_whole_day).toEqual(false);
-                expect(data.$scope.filters.single.open_public_holidays).toEqual(false);
+                expect(data.$scope.filters.single.open_weekends).toEqual("true");
+                expect(data.$scope.filters.single.open_whole_day).toEqual("false");
+                expect(data.$scope.filters.single.open_public_holidays).toEqual("jksd");
 
                 expect(data.$scope.filters.multiple.county).toEqual([{"id": "1"}, {"id": "2"}]);
+            });
+
+            it("should clear bool filters", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "$state": state
+                };
+
+                httpBackend
+                    .expectGET(server_url+"api/common/filtering_summaries/" +
+                               "?fields=county,facility_type,constituency," +
+                               "ward,operation_status,service_category,owner_type,owner,service")
+                    .respond(200, {});
+
+                spyOn(state, "go");
+                ctrl("form", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingRequest();
+                httpBackend.verifyNoOutstandingExpectation();
+
+                data.$scope.filters.single.open_public_holidays = "true";
+                data.$scope.bool_clear();
+                expect(data.$scope.filters.single.open_public_holidays).toEqual("");
             });
 
             it("should filter facilities", function () {
@@ -402,6 +426,32 @@
                 expect(state.go.calls.length).toEqual(1);
             });
         });
+
+        describe("test indeterminate directive", function () {
+
+            it("should watch and toggle indeterminate", function () {
+                inject(["$compile", function ($compile) {
+                    var html = "<input type=\"checkbox\" ng-model=\"bool_val\"" +
+                        " ng-true-value=\"'true'\" ng-false-value=\"'false'\"" +
+                        " indeterminate-value />";
+                    var scope = rootScope.$new();
+                    var element = $compile(html)(scope);
+
+                    scope.bool_val = "true";
+                    scope.$apply();
+                    expect(element[0].indeterminate).toBe(false);
+
+                    scope.bool_val = "false";
+                    scope.$apply();
+                    expect(element[0].indeterminate).toBe(false);
+
+                    scope.bool_val = "";
+                    scope.$apply();
+                    expect(element[0].indeterminate).toBe(true);
+                }]);
+            });
+        });
+
     });
 
 })();
