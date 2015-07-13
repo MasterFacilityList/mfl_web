@@ -12,7 +12,6 @@
                 url: "/facility/rating/:fac_id",
                 views : {
                     "header" : {
-                        controller: "mfl.home.controllers.header",
                         templateUrl : "home/tpls/header.tpl.html"
                     },
                     "main" : {
