@@ -8,7 +8,6 @@
                 url: "/gis",
                 views: {
                     "header" : {
-                        controller: "mfl.home.controllers.header",
                         templateUrl : "home/tpls/header.tpl.html"
                     },
                     "main": {
