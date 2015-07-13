@@ -147,32 +147,46 @@
                         <label  class="fw-500">Number of cots</label>
                         <input placeholder="Number of cots" type="text" class="form-control" ng-model="filters.single.number_of_cots" id="number_of_cots" name="number_of_cots"/>
                     </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 results-card margin-b-10">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-9"><p class="text-muted fs-16">Availability</p></div>
+                        <div class="col-xs-3">
+                            <a ng-if="filters.single.open_public_holidays!==''||filters.single.open_weekends!==''||filters.single.open_whole_day!==''"
+                                style="text-align:right;display:block;" href ng-click="bool_clear()">
+                                Clear
+                            </a>
+                        </div>
+                    </div>
+
                     <div class="col-xs-8 pad-l-5">
-                        <div class="checkbox-group">
-                            <input type="checkbox" id="open_public_holidays" name="open_public_holidays" ng-model="filters.single.open_public_holidays">
-                            <label for="open_public_holidays" class="fw-500 fs-14 text-black">
-                                <span class="check"></span>
-                                <span class="box"></span>
+                        <div class="checkbox">
+                            <label class="fw-500 fs-14 text-black">
+                                <input type="checkbox" id="open_public_holidays" name="open_public_holidays" ng-model="filters.single.open_public_holidays"
+                                    ng-true-value="'true'" ng-false-value="'false'" indeterminate-value />
                                  Open Public Holidays
                              </label>
                         </div>
                     </div>
+
                     <div class="col-xs-8 pad-l-5">
-                        <div class="checkbox-group">
-                            <input type="checkbox" id="open_weekends" name="open_weekends" ng-model="filters.single.open_weekends">
-                            <label for="open_weekends" class="fw-600 fs-14 text-black">
-                                <span class="check"></span>
-                                <span class="box"></span>
+                        <div class="checkbox">
+                            <label class="fw-600 fs-14 text-black">
+                                <input type="checkbox" id="open_weekends" name="open_weekends" ng-model="filters.single.open_weekends"
+                                    ng-true-value="'true'" ng-false-value="'false'" indeterminate-value />
                                  Open Weekends
                              </label>
                         </div>
                     </div>
+
                     <div class="col-xs-8 pad-l-5">
-                        <div class="checkbox-group">
-                            <input type="checkbox" id="open_whole_day" name="open_whole_day" ng-model="filters.single.open_whole_day">
-                            <label for="open_whole_day" class="fw-600 fs-14 text-black">
-                                <span class="check"></span>
-                                <span class="box"></span>
+                        <div class="checkbox">
+                            <label class="fw-600 fs-14 text-black">
+                                <input type="checkbox" id="open_whole_day" name="open_whole_day" ng-model="filters.single.open_whole_day"
+                                    ng-true-value="'true'" ng-false-value="'false'" indeterminate-value/>
                                  Open 24 Hours
                              </label>
                         </div>
