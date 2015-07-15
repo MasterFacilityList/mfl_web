@@ -41,13 +41,31 @@
         };
     }])
 
-    .factory("mfl.common.interceptors.auth", ["$window", "$q",
-        function ($window, $q) {
+    .factory("mfl.common.interceptors.auth",
+        ["$window", "$timeout", "$interval", "$rootScope", "$q",
+        function ($window, $timeout, $interval, $rootScope, $q) {
             return {
+                "response": function (response) {
+                    $window.localStorage.removeItem("auth.reload");
+                    return response;
+                },
                 "responseError": function (rejection) {
-                    if (rejection.status === 401 || rejection.status === 403) {
-                        $window.localStorage.removeItem("auth.token");
-                        $window.location.reload();
+                    if (rejection.status === 401 || rejection.status === 403 ||
+                        rejection.status === 0) {
+                        var timeout = parseInt($window.localStorage.getItem("auth.reload"), 10);
+                        if (_.isNaN(timeout)) {
+                            timeout = 1000;
+                        }
+                        $rootScope.reload_timeout = timeout;
+                        $timeout(function () {
+                            timeout *= 5;
+                            $window.localStorage.removeItem("auth.token");
+                            $window.localStorage.setItem("auth.reload", timeout);
+                            $window.location.reload();
+                        }, timeout);
+                        $interval(function () {
+                            $rootScope.reload_timeout = timeout/1000;
+                        }, 1000);
                     }
                     return $q.reject(rejection);
                 }

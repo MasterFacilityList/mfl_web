@@ -1,8 +1,5 @@
-<!-- Begining of new header -->
-<!-- Begining of bootstrap header -->
 <nav class="header text-white navbar navbar-default">
   <div class="row">
-    <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
         <span class="sr-only">Toggle navigation</span>
@@ -13,22 +10,21 @@
       <a class="navbar-brand fs-20" ui-sref="home"><span class="text-warning">M</span>aster Facility List <span class="fs-16">v2.0</span></a>
     </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right header-color">
-        <li ui-sref-active="active" requires-permission="facilities.view_facility">
+        <li ui-sref-active="active" >
           <a ui-sref="facility_filter"><i class="fa fa-building"></i> Find Facilities</a>
         </li>
-        <li ui-sref-active="active" requires-permission="facilities.view_service" class="hidden-sm hidden-xs">
+        <li ui-sref-active="active" class="hidden-sm hidden-xs">
           <a ui-sref="gis"><i class="fa fa-map-marker"></i> Facility Geolocator</a>
         </li>
-        <li ui-sref-active="active" requires-user-feature="is_staff">
+        <li ui-sref-active="active" >
           <a target="_blank" href="https://masterfacilitylist.github.io/#welcome-to-the-master-facility-list-documentation"> <i class="fa fa-info-circle"></i> Help</a>
         </li>
       </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
+    </div>
+  </div>
 </nav>
-<!-- End of bootstrap header -->
-
-<!-- End of header -->
+<div class="well warning">
+  <p>Error connecting to server. Retrying in {{reload_timeout || 0}} seconds. <a href="#">Retry now</a></p>
+</div>
