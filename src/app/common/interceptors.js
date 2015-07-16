@@ -56,21 +56,45 @@
                         if (_.isNaN(timeout)) {
                             timeout = 1000;
                         }
-                        $rootScope.reload_timeout = timeout;
+                        $rootScope.reload_timeout = timeout/1000;
                         $timeout(function () {
                             timeout *= 5;
                             $window.localStorage.removeItem("auth.token");
                             $window.localStorage.setItem("auth.reload", timeout);
                             $window.location.reload();
                         }, timeout);
-                        $interval(function () {
-                            $rootScope.reload_timeout = timeout/1000;
+                        $interval(function (a) {
+                            $rootScope.reload_timeout = (timeout/1000) - a;
                         }, 1000);
                     }
                     return $q.reject(rejection);
                 }
             };
         }
-    ]);
+    ])
+
+    .run(["$rootScope", function ($rootScope) {
+        var retries = 0;
+        var MAX_RETRIES = 3;
+
+        $rootScope.$on("$stateChangeError",
+            function (evt, toState, toParams, fromState, fromParams, err) {
+                console.log(err);
+                if (retries < MAX_RETRIES) {
+                    retries++;
+                } else {
+                    evt.preventDefault();
+                    retries = 0;
+                }
+                // if (_.contains([0, 401, 403], err.status) && (retries < MAX_RETRIES)) {
+                //     // connection error, auth error (retry)
+                //     retries++;
+                // } else if (err.status >= 500) {  // server error
+                //     retries = 0;
+                //     evt.preventDefault();
+                // }
+            }
+        );
+    }]);
 
 })(angular);
