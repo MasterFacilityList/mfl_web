@@ -1,4 +1,4 @@
-"user script";
+"use strict";
 
 describe("Directives: Test the Content Header directive", function() {
     var $compile, $rootScope;

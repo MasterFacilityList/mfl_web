@@ -1,4 +1,4 @@
-"user script";
+"use strict";
 
 describe("Directives: Test the breadcrumbs directive", function() {
     var $compile, $rootScope, path;
