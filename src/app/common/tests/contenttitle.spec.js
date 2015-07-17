@@ -1,4 +1,4 @@
-"user script";
+"use strict";
 
 describe("Directives: Test the Content Title directive", function() {
     var $compile, $rootScope, title;

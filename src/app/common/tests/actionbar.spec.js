@@ -1,4 +1,4 @@
-"user script";
+"use strict";
 
 describe("Directives: Test the Action Bar directive", function() {
     var $compile, $rootScope, action;
