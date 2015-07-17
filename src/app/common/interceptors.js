@@ -1,4 +1,4 @@
-(function (angular) {
+(function (angular, jQuery) {
     "use strict";
 
     angular.module("mfl.common.interceptors", [])
@@ -47,6 +47,7 @@
             return {
                 "response": function (response) {
                     $window.localStorage.removeItem("auth.reload");
+                    jQuery("#conn_error").addClass("hidden");  // this is illegal
                     return response;
                 },
                 "responseError": function (rejection) {
@@ -66,6 +67,7 @@
                         $interval(function (a) {
                             $rootScope.reload_timeout = (timeout/1000) - a;
                         }, 1000);
+                        jQuery("#conn_error").removeClass("hidden");  // this is illegal
                     }
                     return $q.reject(rejection);
                 }
@@ -101,4 +103,4 @@
         stateThrottle.startListening();
     }]);
 
-})(angular);
+})(angular, jQuery);
