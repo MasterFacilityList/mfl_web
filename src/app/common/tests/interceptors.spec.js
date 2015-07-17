@@ -91,6 +91,20 @@
                 });
             }]);
         });
+
+        it("should use existing timeout", function () {
+            wndw.localStorage.getItem.andReturn(5);
+            inject(["mfl.common.interceptors.auth", "$timeout", "$interval", function (i, to, iv) {
+                [401, 403].forEach(function (code) {
+                    var rejection = {status: code};
+                    expect(i.responseError(rejection).$$state.value).toBe(rejection);
+                    iv.flush(1000);
+                    to.flush(1000);
+                    expect(wndw.location.reload).toHaveBeenCalled();
+                    expect(wndw.localStorage.removeItem).toHaveBeenCalled();
+                });
+            }]);
+        });
     });
 
     describe("test resolve throttle", function () {
