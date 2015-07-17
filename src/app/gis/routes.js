@@ -7,9 +7,6 @@
             .state("gis", {
                 url: "/gis",
                 views: {
-                    "header" : {
-                        templateUrl : "home/tpls/header.tpl.html"
-                    },
                     "main": {
                         controller: "mfl.gis.controllers.gis",
                         templateUrl: "gis/tpls/all-map.tpl.html"

@@ -41,18 +41,64 @@
         };
     }])
 
-    .factory("mfl.common.interceptors.auth", ["$window", "$q",
-        function ($window, $q) {
+    .factory("mfl.common.interceptors.auth",
+        ["$window", "$timeout", "$interval", "$rootScope", "$q",
+        function ($window, $timeout, $interval, $rootScope, $q) {
             return {
+                "response": function (response) {
+                    $window.localStorage.removeItem("auth.reload");
+                    return response;
+                },
                 "responseError": function (rejection) {
-                    if (rejection.status === 401 || rejection.status === 403) {
-                        $window.localStorage.removeItem("auth.token");
-                        $window.location.reload();
+                    if (rejection.status === 401 || rejection.status === 403 ||
+                        rejection.status === 0) {
+                        var timeout = parseInt($window.localStorage.getItem("auth.reload"), 10);
+                        if (_.isNaN(timeout)) {
+                            timeout = 1000;
+                        }
+                        $rootScope.reload_timeout = timeout/1000;
+                        $timeout(function () {
+                            timeout *= 5;
+                            $window.localStorage.removeItem("auth.token");
+                            $window.localStorage.setItem("auth.reload", timeout);
+                            $window.location.reload();
+                        }, timeout);
+                        $interval(function (a) {
+                            $rootScope.reload_timeout = (timeout/1000) - a;
+                        }, 1000);
                     }
                     return $q.reject(rejection);
                 }
             };
         }
-    ]);
+    ])
+
+    .service("mfl.common.state.resolve.throttle", ["$rootScope", function ($rootScope) {
+        var retries = 0;
+        var MAX_RETRIES = 3;
+
+        var evt_listener = function (evt, toState, toParams, fromState, fromParams, err) {
+            if (angular.isObject(err) && angular.isDefined(err.status)) {  // it is a http error
+                if (retries < MAX_RETRIES) {
+                    retries++;
+                } else {
+                    evt.preventDefault();
+                    retries = 0;
+                }
+            }
+        };
+
+        var startListening = function () {
+            $rootScope.$on("$stateChangeError", evt_listener);
+        };
+
+        return {
+            "startListening": startListening
+        };
+    }])
+
+    .run(["mfl.common.state.resolve.throttle", function (stateThrottle) {
+        stateThrottle.startListening();
+    }]);
 
 })(angular);

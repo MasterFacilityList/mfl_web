@@ -47,7 +47,39 @@
   </head>
 <!--<![endif]-->
   <body>
-      <div ui-view="header"></div>
+      <div>
+        <nav class="header text-white navbar navbar-default">
+          <div class="row">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand fs-20" ui-sref="home"><span class="text-warning">M</span>aster Facility List <span class="fs-16">v2.0</span></a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav navbar-right header-color">
+                <li ui-sref-active="active" >
+                  <a ui-sref="facility_filter"><i class="fa fa-building"></i> Find Facilities</a>
+                </li>
+                <li ui-sref-active="active" class="hidden-sm hidden-xs">
+                  <a ui-sref="gis"><i class="fa fa-map-marker"></i> Facility Geolocator</a>
+                </li>
+                <li ui-sref-active="active" >
+                  <a target="_blank" href="https://masterfacilitylist.github.io/#welcome-to-the-master-facility-list-documentation"> <i class="fa fa-info-circle"></i> Help</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <div class="alert alert-warning col-sm-6 col-sm-offset-3 col-xs-12" ng-cloak>
+          <p>Error connecting to server. Retrying in {{reload_timeout || 0}} seconds. <a href="javascript:window.location.reload()" title="Retry now">Retry now</a></p>
+        </div>
+      </div>
+
         <div ui-view="main" class="content">
             <div>
                 <div class="main-ui-view-loader">
