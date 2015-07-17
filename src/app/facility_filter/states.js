@@ -31,9 +31,6 @@
         .state("facility_filter", {
             url: "/facility_filter?"+URL_SEARCH_PARAMS.join("&"),
             views: {
-                "header" : {
-                    templateUrl : "home/tpls/header.tpl.html"
-                },
                 "main": {
                     controller: "mfl.facility_filter.controllers.form",
                     templateUrl: "facility_filter/tpls/search_form.tpl.html"
