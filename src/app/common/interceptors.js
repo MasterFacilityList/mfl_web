@@ -73,28 +73,32 @@
         }
     ])
 
-    .run(["$rootScope", function ($rootScope) {
+    .service("mfl.common.state.resolve.throttle", ["$rootScope", function ($rootScope) {
         var retries = 0;
         var MAX_RETRIES = 3;
 
-        $rootScope.$on("$stateChangeError",
-            function (evt, toState, toParams, fromState, fromParams, err) {
-                console.log(err);
+        var evt_listener = function (evt, toState, toParams, fromState, fromParams, err) {
+            if (angular.isObject(err) && angular.isDefined(err.status)) {  // it is a http error
                 if (retries < MAX_RETRIES) {
                     retries++;
                 } else {
                     evt.preventDefault();
                     retries = 0;
                 }
-                // if (_.contains([0, 401, 403], err.status) && (retries < MAX_RETRIES)) {
-                //     // connection error, auth error (retry)
-                //     retries++;
-                // } else if (err.status >= 500) {  // server error
-                //     retries = 0;
-                //     evt.preventDefault();
-                // }
             }
-        );
+        };
+
+        var startListening = function () {
+            $rootScope.$on("$stateChangeError", evt_listener);
+        };
+
+        return {
+            "startListening": startListening
+        };
+    }])
+
+    .run(["mfl.common.state.resolve.throttle", function (stateThrottle) {
+        stateThrottle.startListening();
     }]);
 
 })(angular);
