@@ -115,4 +115,4 @@
         "mfl.auth.config"
     ]);
 
-})(angular, _, jQuery, moment);
+})(window.angular, window._, window.jQuery, window.moment);

@@ -1,4 +1,4 @@
-(function(angular){
+(function(angular, _){
     "use strict";
 
     angular.module("mfl.home.controllers", ["mfl.facilities.wrapper"])
@@ -23,4 +23,4 @@
         }
     ]);
 
-})(angular);
+})(window.angular, window._);

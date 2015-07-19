@@ -1,4 +1,4 @@
-(function(angular){
+(function (angular, _){
     "use strict";
 
     angular.module("mfl.gis_ward.controllers", [
@@ -120,4 +120,4 @@
             $scope.alert = e.error;
         });
     }]);
-})(angular);
+})(window.angular, window._);

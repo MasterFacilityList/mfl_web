@@ -1,4 +1,4 @@
-(function(angular){
+(function(angular, _){
     "use strict";
     angular.module("mfl.gis.wrapper", ["api.wrapper"])
 
@@ -58,4 +58,4 @@
             };
         }
     ]);
-})(angular);
+})(window.angular, window._);

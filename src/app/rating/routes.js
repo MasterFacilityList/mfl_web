@@ -58,4 +58,5 @@
                 }
             });
     }]);
-})(angular);
+
+})(window.angular);

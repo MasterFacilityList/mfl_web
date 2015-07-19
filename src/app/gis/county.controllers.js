@@ -1,4 +1,4 @@
-(function(angular){
+(function (angular, _){
     "use strict";
     angular
     .module("mfl.gis_county.controllers", ["leaflet-directive",
@@ -155,4 +155,4 @@
                                     ward_boundaries : boundary_ids});
         });
     }]);
-})(angular);
+})(window.angular, window._);

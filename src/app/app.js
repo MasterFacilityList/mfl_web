@@ -17,4 +17,4 @@
         "mfl.auth",
         "mfl.rating"
     ]);
-})(angular);
+})(window.angular);

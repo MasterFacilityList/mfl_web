@@ -1,4 +1,4 @@
-(function (angular) {
+(function (angular, jQuery) {
     "use strict";
 
     angular.module("mfl.common.directives", [])
@@ -11,19 +11,18 @@
                 element.bind("click", function() {
                     if ($rootScope.offsetClass) {
                         $rootScope.offsetClass = "";
-                        $(".content").removeClass("left-col-hidden");
-                        $("#mini i").removeClass("fa-chevron-circle-right");
-                        $("#mini i").addClass("fa-chevron-circle-left");
+                        jQuery(".content").removeClass("left-col-hidden");
+                        jQuery("#mini i").removeClass("fa-chevron-circle-right");
+                        jQuery("#mini i").addClass("fa-chevron-circle-left");
                     } else {
                         $rootScope.offsetClass = "left-col-hidden";
-                        $(".content").addClass("left-col-hidden");
-                        $("#mini i").removeClass("fa-chevron-circle-left");
-                        $("#mini i").addClass("fa-chevron-circle-right");
+                        jQuery(".content").addClass("left-col-hidden");
+                        jQuery("#mini i").removeClass("fa-chevron-circle-left");
+                        jQuery("#mini i").addClass("fa-chevron-circle-right");
                     }
                 });
             }
         };
     }]);
 
-
-})(angular);
+})(window.angular, window.jQuery);

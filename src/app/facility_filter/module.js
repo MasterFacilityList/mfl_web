@@ -8,4 +8,4 @@
         "ui.select"
     ]);
 
-})(angular);
+})(window.angular);

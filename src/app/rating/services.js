@@ -15,4 +15,5 @@
             return rate;
         };
     }]);
-})(angular);
+
+})(window.angular);

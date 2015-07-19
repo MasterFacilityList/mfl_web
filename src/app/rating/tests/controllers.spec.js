@@ -1,4 +1,4 @@
-(function () {
+(function (angular) {
     "use strict";
 
     describe("Tests for ratings controller: ", function () {
@@ -426,4 +426,4 @@
                 $httpBackend.flush();
             }]));
     });
-})();
+})(window.angular);

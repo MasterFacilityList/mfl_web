@@ -34,4 +34,4 @@
             };
         }
     ]);
-})(angular);
+})(window.angular);

@@ -1,4 +1,4 @@
-(function () {
+(function (angular) {
     "use strict";
     angular.module("mfl.home.directives", [])
     .directive("syncFocusWith", [function() {
@@ -18,4 +18,4 @@
             }
         };
     }]);
-})();
+})(window.angular);

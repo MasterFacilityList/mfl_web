@@ -1,4 +1,4 @@
-(function(angular){
+(function (angular){
     "use strict";
     angular.module("mfl.gis", [
         "ui.router",
@@ -8,4 +8,4 @@
         "mfl.gis_ward.controllers",
         "mfl.gis.routes"
     ]);
-})(angular);
+})(window.angular);

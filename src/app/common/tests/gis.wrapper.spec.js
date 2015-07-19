@@ -1,4 +1,4 @@
-(function(describe, it){
+(function(angular){
     "use strict";
 
     describe("GIS County api Wrapper", function(){
@@ -161,4 +161,4 @@
                 httpBackend.verifyNoOutstandingExpectation();
             }]));
     });
-})(describe, it);
+})(window.angular);

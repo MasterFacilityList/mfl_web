@@ -11,5 +11,5 @@
         "mfl.facilities.wrapper",
         "mfl.rating.directives"
     ]);
-})(angular);
 
+})(window.angular);

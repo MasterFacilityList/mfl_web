@@ -1,4 +1,4 @@
-(function () {
+(function (angular) {
     "use strict";
 
     describe("Tests for mfl.gis.controllers.gis_const (Constituency Level):", function () {
@@ -346,5 +346,4 @@
             expect(map.spin.calls[1].args[0]).toBe(false);
         }]));
     });
-
-})();
+})(window.angular);

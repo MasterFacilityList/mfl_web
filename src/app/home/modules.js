@@ -12,4 +12,4 @@
         "mfl.home.directives"
     ]);
 
-})(angular);
+})(window.angular);

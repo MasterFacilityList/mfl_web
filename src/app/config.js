@@ -1,5 +1,7 @@
 (function (angular) {
+
     "use strict";
+
     angular.module("mflAppConfig", [
         "ui.router",
         "api.wrapper",
@@ -28,4 +30,4 @@
             "Accept" : "application/json, */*"
         };
     }]);
-})(angular);
+})(window.angular);

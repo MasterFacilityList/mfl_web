@@ -1,4 +1,4 @@
-(function(angular){
+(function (angular, _){
     "use strict";
 
     angular.module("mfl.gis_const.controllers", [
@@ -160,4 +160,4 @@
                         ward_id: ward.model.id});
         });
     }]);
-})(angular);
+})(window.angular, window._);

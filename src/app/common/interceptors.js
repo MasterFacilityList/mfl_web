@@ -1,4 +1,4 @@
-(function (angular, jQuery) {
+(function (angular, jQuery, _) {
     "use strict";
 
     angular.module("mfl.common.interceptors", [])
@@ -103,4 +103,4 @@
         stateThrottle.startListening();
     }]);
 
-})(angular, jQuery);
+})(window.angular, window.jQuery, window._);

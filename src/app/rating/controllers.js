@@ -1,4 +1,4 @@
-(function (angular) {
+(function (angular, _, toastr) {
     "use strict";
 
     angular.module("mfl.rating.controllers", [])
@@ -202,4 +202,4 @@
 
         });
     }]);
-})(angular);
+})(window.angular, window._, window.toastr);
