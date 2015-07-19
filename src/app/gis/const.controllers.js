@@ -1,8 +1,11 @@
 (function(angular){
     "use strict";
-    angular
-    .module("mfl.gis_const.controllers", ["leaflet-directive",
-        "mfl.gis.wrapper","mfl.adminunits.wrapper"])
+
+    angular.module("mfl.gis_const.controllers", [
+        "leaflet-directive",
+        "mfl.gis.wrapper"
+    ])
+
     .controller("mfl.gis.controllers.gis_const", ["$scope","leafletData",
         "$http","$state","$stateParams","SERVER_URL",
         "gisConst","$timeout","gisAdminUnitsApi","$q","gisCounty",

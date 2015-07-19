@@ -1,7 +1,7 @@
 (function(angular, _){
     "use strict";
 
-    angular.module("sil.api.wrapper", [])
+    angular.module("api.wrapper", [])
     // CRUD API wrapper to be used by specific API wrappers
 
     .provider("api", function(){

@@ -84,7 +84,6 @@ module.exports = {
             "vendor/Leaflet.label/dist/leaflet.label.js",
             "vendor/leaflet-spin/leaflet.spin.js",
             "vendor/angular-animate/angular-animate.js",
-            "vendor/angular-cookies/angular-cookies.js",
             "vendor/angular-resource/angular-resource.js",
             "vendor/angular-bootstrap/ui-bootstrap.js",
             "vendor/angular-bootstrap/ui-bootstrap-tpls.js",

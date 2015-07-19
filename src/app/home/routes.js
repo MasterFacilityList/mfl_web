@@ -11,10 +11,6 @@
                     "main": {
                         controller: "mfl.home.controllers.home",
                         templateUrl: "home/tpls/main.tpl.html"
-                    },
-                    "footer": {
-                        controller: "mfl.common.controllers.time",
-                        templateUrl: "common/tpls/time.tpl.html"
                     }
                 },
                 data:{

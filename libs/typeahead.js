@@ -1,18 +1,10 @@
-(function(angular) {
+(function(angular, _, Bloodhound) {
 
-"use strict";
+    "use strict";
 
-angular.module('sil-typeahead', ['sil.api.wrapper'])
+    angular.module("mfl.common.typeahead", [])
 
-    .provider('searchApi', function(){
-        this.$get = ["api", function(api){
-            return {
-                api: api.setBaseUrl(this.baseUrl)
-            };
-        }];
-    })
-
-    .service('sil-typeahead', [function () {
+    .service("mfl.typeahead", [function () {
 
         var tt = {}; //holds the bloodhound adapters
         var listeners = []; // holds the typeahead event listeners
@@ -52,12 +44,6 @@ angular.module('sil-typeahead', ['sil.api.wrapper'])
                         transform: function (response) {
                             return response.results;
                         }
-                        // filter: function (results) {
-                        //     if(results.hasOwnProperty("hits")){
-                        //         return (results.hits);
-                        //     }
-                        //     return results;
-                        // }
                     }
                 });
             }
@@ -79,10 +65,10 @@ angular.module('sil-typeahead', ['sil.api.wrapper'])
                         val(event, obj, dataset_name);
                     }
                 });
-                $(event.target).trigger('input');
+                $(event.target).trigger("input");
             },
             getSelector : function (classname) {
-                return $('.' + classname + ':not(\'.tt-hint\'):not(\'.tt-input\')');
+                return $("." + classname + ":not('.tt-hint'):not('.tt-input')");
             }
         };
 
@@ -94,19 +80,17 @@ angular.module('sil-typeahead', ['sil.api.wrapper'])
             var selector = helpers.getSelector(fieldclass);
             selector
                 .typeahead({
-                    //changed min-length from 2 to 1 and added hint
-                    minLength: 0,
+                    minLength: 2,
                     highlight: true,
                     hint: true
                 }, datasets)
-                .on('typeahead:autocompleted', function (a, b, c) {
+                .on("typeahead:autocompleted", function (a, b, c) {
                     helpers.updateInput(a, b, c);
                 })
-                .on('typeahead:selected', function (a, b, c) {
+                .on("typeahead:selected", function (a, b, c) {
                     helpers.updateInput(a, b, c);
                 });
             return selector;
         };
-
     }]);
-})(angular);
+})(angular, _, window.Bloodhound);

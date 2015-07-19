@@ -3,7 +3,6 @@
 
     angular.module("mflwebApp", [
         "ngAnimate",
-        "ngCookies",
         "ngSanitize",
         "mflAppConfig",
         "ui.router",

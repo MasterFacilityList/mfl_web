@@ -2,7 +2,7 @@
     "use strict";
 
     angular.module("mfl.facility_filter.services", [
-        "sil.api.wrapper",
+        "api.wrapper",
         "mfl.auth.service"
     ])
 

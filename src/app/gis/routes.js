@@ -11,10 +11,6 @@
                         controller: "mfl.gis.controllers.gis",
                         templateUrl: "gis/tpls/all-map.tpl.html"
                     },
-                    "footer": {
-                        controller: "mfl.common.controllers.time",
-                        templateUrl: "common/tpls/time.tpl.html"
-                    },
                     "info-map@gis":{
                         templateUrl:"gis/tpls/country-map-info.tpl.html"
                     }
