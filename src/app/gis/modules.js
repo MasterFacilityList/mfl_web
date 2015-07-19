@@ -6,7 +6,6 @@
         "mfl.gis_county.controllers",
         "mfl.gis_const.controllers",
         "mfl.gis_ward.controllers",
-        "mfl.gis.routes",
-        "mfl.common.directives"
+        "mfl.gis.routes"
     ]);
 })(angular);
