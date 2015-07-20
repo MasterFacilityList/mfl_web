@@ -7,7 +7,8 @@
             module("mflAppConfig");
             module("templates-app");
             module("templates-common");
-            inject(["searchService","sil-typeahead",function(searchService, typeahead){
+            module("mfl.common.typeahead");
+            inject(["searchService","mfl.typeahead",function(searchService, typeahead){
                 charia = searchService;
                 tt = typeahead;
             }]);

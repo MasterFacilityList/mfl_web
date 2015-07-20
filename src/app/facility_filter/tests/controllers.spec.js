@@ -283,6 +283,13 @@
 
         describe("test results controller", function () {
 
+            var default_url;
+            beforeEach(function () {
+                default_url = server_url+"api/facilities/facilities/?" +
+                              "fields=id,code,name,regulatory_status_name," +
+                              "facility_type_name,owner_name,county,constituency,ward_name&";
+            });
+
             it("should find facilities using the filters", function () {
                 var data = {
                     "$scope": rootScope.$new(),
@@ -292,9 +299,7 @@
                         "constituency": undefined
                     }
                 };
-                httpBackend
-                    .expectGET(server_url+"api/facilities/facilities_list/?county=12&page=3")
-                    .respond(200, {results: []});
+                httpBackend.expectGET(default_url+"county=12&page=3").respond(200, {results: []});
 
                 ctrl("results", data);
 
@@ -312,9 +317,7 @@
                         "constituency": undefined
                     }
                 };
-                httpBackend
-                    .expectGET(server_url+"api/facilities/facilities_list/?county=12&page=3")
-                    .respond(500, {});
+                httpBackend.expectGET(default_url+"county=12&page=3").respond(500, {});
 
                 ctrl("results", data);
 
@@ -337,8 +340,7 @@
                         },
                         "api.auth": a
                     };
-                    httpBackend
-                        .expectGET(server_url+"api/facilities/facilities_list/?county=12&page=3")
+                    httpBackend.expectGET(default_url+"county=12&page=3")
                         .respond(200, {
                             count: 10,
                             results: []
@@ -375,13 +377,13 @@
                     }
                 };
                 httpBackend
-                    .expectGET(server_url+"api/facilities/facilities_list/?county=12&page=3")
+                    .expectGET(default_url+"county=12&page=3")
                     .respond(200, {
                         "count": 8361,
                         "current_page": 4,
-                        "next": "http://localhost:8061/api/facilities/facilities_list/?page=5",
+                        "next": "http://localhost:8061/api/facilities/facilities/?page=5",
                         "page_size": 25,
-                        "previous": "http://localhost:8061/api/facilities/facilities_list/?page=3",
+                        "previous": "http://localhost:8061/api/facilities/facilities/?page=3",
                         "results": [],
                         "total_pages": 335
                     });
@@ -415,13 +417,13 @@
                     }
                 };
                 httpBackend
-                    .expectGET(server_url+"api/facilities/facilities_list/?county=12&page=3")
+                    .expectGET(default_url+"county=12&page=3")
                     .respond(200, {
                         "count": 8361,
                         "current_page": 4,
-                        "next": "http://localhost:8061/api/facilities/facilities_list/?page=5",
+                        "next": "http://localhost:8061/api/facilities/facilities/?page=5",
                         "page_size": 25,
-                        "previous": "http://localhost:8061/api/facilities/facilities_list/?page=3",
+                        "previous": "http://localhost:8061/api/facilities/facilities/?page=3",
                         "results": [],
                         "total_pages": 335
                     });

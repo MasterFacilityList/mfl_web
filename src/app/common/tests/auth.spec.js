@@ -257,4 +257,4 @@
         });
 
     });
-})(angular, jQuery, moment);
+})(window.angular, window.jQuery, window.moment);

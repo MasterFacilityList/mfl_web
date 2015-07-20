@@ -1,17 +1,21 @@
-"use strict";
+(function (angular) {
 
-angular.module("mfl.facilities.wrapper", ["sil.api.wrapper", "mflAppConfig"])
+    "use strict";
+
+    angular.module("mfl.facilities.wrapper", [
+        "api.wrapper", "mflAppConfig"
+    ])
 
     .service("facilitiesApi", ["api", function (api) {
         this.facilities = api.setBaseUrl("api/facilities/facilities");
         this.services = api.setBaseUrl("api/facilities/services");
-        this.ratings = api.setBaseUrl(
-            "api/facilities/facility_service_ratings/");
+        this.ratings = api.setBaseUrl("api/facilities/facility_service_ratings/");
         this.chus = api.setBaseUrl("api/chul/units");
     }])
-    .service("searchService",["SERVER_URL", "sil-typeahead",
+
+    .service("searchService",["SERVER_URL", "mfl.typeahead",
         function (SERVER_URL, typeahead) {
-            var facilities_url = "api/facilities/facilities/?search=%QUERY";
+            var facilities_url = "api/facilities/facilities/?fields=name&search=%QUERY";
             var initFacilities = function () {
                 return typeahead.initTT(
                     "facilities",
@@ -28,4 +32,6 @@ angular.module("mfl.facilities.wrapper", ["sil.api.wrapper", "mflAppConfig"])
                     source: f.ttAdapter()
                 });
             };
-        }]);
+        }
+    ]);
+})(window.angular);

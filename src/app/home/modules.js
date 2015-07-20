@@ -5,12 +5,11 @@
         "ui.router",
         "ui.bootstrap",
         "ui.bootstrap.tpls",
-        "sil-typeahead",
+        "mfl.common.typeahead",
         "mfl.home.controllers",
         "mfl.home.routes",
-        "mfl.common.controllers",
         "mfl.facilities.wrapper",
         "mfl.home.directives"
     ]);
 
-})(angular);
+})(window.angular);

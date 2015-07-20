@@ -1,6 +1,6 @@
-(function(angular){
+(function(angular, _){
     "use strict";
-    angular.module("mfl.gis.wrapper", ["sil.api.wrapper"])
+    angular.module("mfl.gis.wrapper", ["api.wrapper"])
 
     .service("gisAdminUnitsApi", ["$localForage","$http","$q","SERVER_URL", "api",
         function ($localForage, $http, $q, server_url, api) {
@@ -58,4 +58,4 @@
             };
         }
     ]);
-})(angular);
+})(window.angular, window._);

@@ -1,4 +1,4 @@
-(function () {
+(function (_) {
     "use strict";
 
     describe("Tests for Home controllers:", function () {
@@ -45,4 +45,4 @@
             expect(_.debounce).toHaveBeenCalled();
         });
     });
-})();
+})(window._);

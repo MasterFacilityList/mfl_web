@@ -1,4 +1,4 @@
-(function () {
+(function (angular) {
     "use strict";
 
     describe("Tests for ratings controller: ", function () {
@@ -92,8 +92,10 @@
                         ]
                     }
                 };
-                $httpBackend.expectGET(SERVER_URL +
-                    "api/chul/units/?facility=1").respond(200, {name : "chu"});
+                $httpBackend
+                .expectGET(SERVER_URL +
+                    "api/chul/units/?facility=1&fields=id,code,name,status,households_monitored")
+                .respond(200, {name : "chu"});
 
                 $httpBackend.expectGET(SERVER_URL +
                     "api/facilities/facilities/1/").respond(200, data);
@@ -120,8 +122,10 @@
                     "api/facilities/facility_service_ratings/").
                     respond(200, scope.fac_rating);
                 //get one facility and redisplay all of its details
-                $httpBackend.expectGET(SERVER_URL +
-                    "api/chul/units/?facility=1").respond(200, {name : "chu"});
+                $httpBackend
+                .expectGET(SERVER_URL +
+                    "api/chul/units/?facility=1&fields=id,code,name,status,households_monitored")
+                .respond(200, {name : "chu"});
                 $httpBackend.expectGET(SERVER_URL +
                     "api/facilities/facilities/1/").respond(200, data);
                 $httpBackend.expectGET(SERVER_URL +
@@ -171,8 +175,10 @@
                         ]
                     }
                 };
-                $httpBackend.expectGET(SERVER_URL +
-                    "api/chul/units/?facility=1").respond(200, {name : "chu"});
+                $httpBackend
+                .expectGET(SERVER_URL +
+                    "api/chul/units/?facility=1&fields=id,code,name,status,households_monitored")
+                .respond(200, {name : "chu"});
                 $httpBackend.expectGET(SERVER_URL +
                     "api/facilities/facilities/1/").respond(200, data);
 
@@ -197,8 +203,10 @@
         it("should fail on call to rate a facility service",
         inject(["$httpBackend", function ($httpBackend) {
             controller("mfl.rating.controllers.rating");
-            $httpBackend.expectGET(SERVER_URL +
-                    "api/chul/units/?facility=1").respond(400, {});
+            $httpBackend
+                .expectGET(SERVER_URL +
+                    "api/chul/units/?facility=1&fields=id,code,name,status,households_monitored")
+                .respond(400, {});
             $httpBackend.expectGET(
                 SERVER_URL +
                 "api/facilities/facilities/1/").respond(400, {name : ""});
@@ -238,8 +246,10 @@
 
                 controller("mfl.rating.controllers.rating");
 
-                $httpBackend.expectGET(SERVER_URL +
-                    "api/chul/units/?facility=1").respond(200, {name : "chu"});
+                $httpBackend
+                .expectGET(SERVER_URL +
+                    "api/chul/units/?facility=1&fields=id,code,name,status,households_monitored")
+                .respond(200, {name : "chu"});
 
                 $httpBackend.expectGET(SERVER_URL +
                     "api/facilities/facilities/1/").respond(200, data);
@@ -426,4 +436,4 @@
                 $httpBackend.flush();
             }]));
     });
-})();
+})(window.angular);

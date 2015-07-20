@@ -1,11 +1,10 @@
-"use strict";
+(function (angular) {
+    "use strict";
 
-angular.module("mfl.common", [
-    "ui.router",
-    "mfl.common.controllers",
-    "mfl.common.directives",
-    "mfl.gis.wrapper",
-    "mfl.adminunits.wrapper",
-    "mfl.auth",
-    "mfl.common.interceptors"
-]);
+    angular.module("mfl.common", [
+        "ui.router",
+        "mfl.gis.wrapper",
+        "mfl.auth",
+        "mfl.common.interceptors"
+    ]);
+})(window.angular);

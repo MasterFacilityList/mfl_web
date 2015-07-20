@@ -3,7 +3,6 @@
 
     angular.module("mflwebApp", [
         "ngAnimate",
-        "ngCookies",
         "ngSanitize",
         "mflAppConfig",
         "ui.router",
@@ -18,4 +17,4 @@
         "mfl.auth",
         "mfl.rating"
     ]);
-})(angular);
+})(window.angular);

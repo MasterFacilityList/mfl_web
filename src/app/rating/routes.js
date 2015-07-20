@@ -14,10 +14,6 @@
                     "main" : {
                         controller: "mfl.rating.controllers.rating",
                         templateUrl: "rating/tpls/main.tpl.html"
-                    },
-                    "footer" : {
-                        controller: "mfl.common.controllers.time",
-                        templateUrl: "common/tpls/time.tpl.html"
                     }
                 },
                 data:{
@@ -62,4 +58,5 @@
                 }
             });
     }]);
-})(angular);
+
+})(window.angular);

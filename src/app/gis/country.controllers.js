@@ -1,4 +1,4 @@
-(function(angular){
+(function (angular, _){
     "use strict";
     angular
     .module("mfl.gis_country.controllers", ["leaflet-directive",
@@ -149,4 +149,4 @@
                                     const_boundaries : boundary_ids});
         });
     }]);
-})(angular);
+})(window.angular, window._);

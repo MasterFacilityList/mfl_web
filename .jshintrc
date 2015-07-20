@@ -12,10 +12,12 @@
     "unused": true,
     "maxlen": 100,
     "eqnull": true,
+    "forin": true,
+    "maxcomplexity": 5,
+    "strict": true,
+    "undef": true,
     "globals": {
         "jasmine": true,
-        "jQuery": true,
-        "angular": true,
         "beforeEach": true,
         "afterEach": true,
         "describe": true,
@@ -25,12 +27,9 @@
         "it": true,
         "xit": true,
         "browser": true,
-        "localStorage":true,
         "protractor": true,
         "by": true,
         "module":true,
-        "$": true,
-        "_": true,
         "window": true,
         "spyOn": true
     }
