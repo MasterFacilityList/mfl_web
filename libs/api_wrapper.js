@@ -1,4 +1,4 @@
-(function(angular, _){
+(function(angular, _, jQuery){
     "use strict";
 
     angular.module("api.wrapper", [])
@@ -97,10 +97,13 @@
             };
             Api.prototype.get = function(id, params){
                 var params_url_frag = self.helpers.makeParams(params);
-                var url = self.helpers.joinUrl([
-                    this.makeUrl(self.helpers.joinUrl([this.apiBaseUrl, id])),
-                    self.helpers.makeGetParam(params_url_frag)]
-                );
+                var url = this.makeUrl(self.helpers.joinUrl([this.apiBaseUrl, id]));
+                if (params_url_frag) {
+                    url = self.helpers.joinUrl([
+                        url,
+                        self.helpers.makeGetParam(params_url_frag)]
+                    );
+                }
                 return this.callApi("GET", url);
             };
             /**
@@ -125,4 +128,30 @@
             };
         }];
     });
-})(window.angular, window._);
+
+    angular.module("mfl.facility_filter.directives", [])
+
+    .directive("sidebarToogle", [function () {
+        return {
+            restrict: "A",
+            link: function (scope, element, attrs) {
+                var hidden_class = "left-col-hidden";
+                var target = jQuery(attrs.sidebarToogle);
+                var icon = element.find("i");
+                var changer = function() {
+                    if (target.hasClass(hidden_class)) {
+                        target.removeClass(hidden_class);
+                        icon.removeClass("fa-chevron-circle-right");
+                        icon.addClass("fa-chevron-circle-left");
+                    } else {
+                        target.addClass(hidden_class);
+                        icon.removeClass("fa-chevron-circle-left");
+                        icon.addClass("fa-chevron-circle-right");
+                    }
+                };
+                element.click(changer);
+            }
+        };
+    }]);
+
+})(window.angular, window._, window.jQuery);
