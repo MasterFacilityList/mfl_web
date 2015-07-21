@@ -17,6 +17,7 @@ module.exports = function ( grunt ) {
     grunt.loadNpmTasks("grunt-coffeelint");
     grunt.loadNpmTasks("grunt-karma");
     grunt.loadNpmTasks("grunt-html2js");
+    grunt.loadNpmTasks("grunt-jscs");
 
     grunt.loadNpmTasks("grunt-istanbul-coverage");
     grunt.loadNpmTasks("grunt-contrib-connect");
@@ -274,6 +275,14 @@ module.exports = function ( grunt ) {
             globals: {}
         },
 
+        jscs: {
+            src: [
+                "<%= app_files.js %>"
+            ],
+            options: {
+                config: ".jscsrc"
+            }
+        },
         /**
          * `coffeelint` does the same as `jshint`, but for CoffeeScript.
          * CoffeeScript is not the default in ngBoilerplate, so we're just using
