@@ -84,9 +84,9 @@
                         </div>
 
                         <div class="form-group fs-14">
-                            <label  class="fw-500">Facility Owner Type</label>
+                            <label  class="fw-500">Facility Owner Category</label>
                             <ui-select ng-model="filters.multiple.owner_type" multiple id="owner_type" name="owner_type">
-                                <ui-select-match placeholder="Select a facility owner type...">
+                                <ui-select-match placeholder="Select a facility owner category...">
                                     <span>{{$item.name}}</span>
                                 </ui-select-match>
                                 <ui-select-choices repeat="ot in filter_summaries.owner_type | filter:$select.search">
