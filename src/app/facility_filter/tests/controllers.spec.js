@@ -36,7 +36,8 @@
                 httpBackend
                     .expectGET(server_url+"api/common/filtering_summaries/" +
                                "?fields=county,facility_type,constituency," +
-                               "ward,operation_status,service_category,owner_type,owner,service")
+                               "ward,operation_status,service_category," +
+                               "owner_type,owner,service,keph_level")
                     .respond(200, {});
 
                 ctrl("form", data);
@@ -67,7 +68,8 @@
                 httpBackend
                     .expectGET(server_url+"api/common/filtering_summaries/" +
                                "?fields=county,facility_type,constituency," +
-                               "ward,operation_status,service_category,owner_type,owner,service")
+                               "ward,operation_status,service_category," +
+                               "owner_type,owner,service,keph_level")
                     .respond(200, {
                         county: [{"id": "1"}, {"id": "2"}, {"id": "3"}],
                         constituency: [
@@ -112,7 +114,8 @@
                 httpBackend
                     .expectGET(server_url+"api/common/filtering_summaries/" +
                                "?fields=county,facility_type,constituency," +
-                               "ward,operation_status,service_category,owner_type,owner,service")
+                               "ward,operation_status,service_category," +
+                               "owner_type,owner,service,keph_level")
                     .respond(200, {});
 
                 spyOn(state, "go");
@@ -136,7 +139,8 @@
                 httpBackend
                     .expectGET(server_url+"api/common/filtering_summaries/" +
                                "?fields=county,facility_type,constituency," +
-                               "ward,operation_status,service_category,owner_type,owner,service")
+                               "ward,operation_status,service_category," +
+                               "owner_type,owner,service,keph_level")
                     .respond(200, {});
 
                 spyOn(state, "go");
@@ -164,7 +168,8 @@
                 httpBackend
                     .expectGET(server_url+"api/common/filtering_summaries/" +
                                "?fields=county,facility_type,constituency," +
-                               "ward,operation_status,service_category,owner_type,owner,service")
+                               "ward,operation_status,service_category," +
+                               "owner_type,owner,service,keph_level")
                     .respond(200, {});
 
                 spyOn(state, "go");
@@ -190,7 +195,8 @@
                 httpBackend
                     .expectGET(server_url+"api/common/filtering_summaries/" +
                                "?fields=county,facility_type,constituency," +
-                               "ward,operation_status,service_category,owner_type,owner,service")
+                               "ward,operation_status,service_category," +
+                               "owner_type,owner,service,keph_level")
                     .respond(200, {});
 
                 spyOn(state, "go");
@@ -287,7 +293,8 @@
             beforeEach(function () {
                 default_url = server_url+"api/facilities/facilities/?" +
                               "fields=id,code,name,regulatory_status_name," +
-                              "facility_type_name,owner_name,county,constituency,ward_name&";
+                              "facility_type_name,owner_name,county," +
+                              "constituency,ward_name,keph_level&";
             });
 
             it("should find facilities using the filters", function () {
