@@ -72,6 +72,18 @@
                         <p class="text-muted fs-16">Facility Details</p>
 
                         <div class="form-group fs-14">
+                            <label  class="fw-500">KEPH Level</label>
+                            <ui-select ng-model="filters.multiple.keph_level" multiple id="keph_level" name="keph_level">
+                                <ui-select-match placeholder="Select a KEPH Level ...">
+                                    <span>{{$item.name}}</span>
+                                </ui-select-match>
+                                <ui-select-choices repeat="kl in filter_summaries.keph_level | filter:$select.search">
+                                    <span>{{kl.name}}</span>
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+
+                        <div class="form-group fs-14">
                             <label  class="fw-500">Facility Type</label>
                             <ui-select ng-model="filters.multiple.facility_type" multiple id="facility_type" name="facility_type">
                                 <ui-select-match placeholder="Select a facility type...">
