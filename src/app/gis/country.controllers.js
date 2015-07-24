@@ -13,6 +13,7 @@
             "title": "",
             "checked": false
         };
+        $scope.current_state = $state.$current.data.back;
         $scope.spinner = false;
         var bounds = [
             [-4.669618,33.907219],
