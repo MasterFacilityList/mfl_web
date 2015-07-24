@@ -10,7 +10,6 @@
                    $stateParams, $timeout,
                    SERVER_URL,gisAdminUnitsApi,$q) {
         $scope.county = gisCounty.data;
-        $scope.current_state = $state.$current.data.back;
         $scope.county_id = $stateParams.county_id;
         $scope.const_boundaries = $stateParams.const_boundaries;
         $scope.spinner = false;
