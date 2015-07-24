@@ -13,7 +13,7 @@
 
         "county", "constituency", "ward",
 
-        "operation_status", "facility_type",
+        "operation_status", "facility_type", "keph_level",
 
         "owner_type", "owner",
 

@@ -48,7 +48,8 @@
                     service_category: [],
                     owner_type: [],
                     owner: [],
-                    service: []
+                    service: [],
+                    keph_level: []
                 }
             };
 
@@ -124,7 +125,7 @@
 
             wrappers.filters.filter({"fields": ["county", "facility_type",
                 "constituency", "ward", "operation_status", "service_category",
-                "owner_type", "owner", "service"
+                "owner_type", "owner", "service", "keph_level"
             ]})
             .success(function (data) {
                 $scope.filter_summaries = data;
@@ -178,7 +179,7 @@
                 return memo;
             }, {
                 "fields": "id,code,name,regulatory_status_name," +
-                          "facility_type_name,owner_name,county,constituency,ward_name"
+                          "facility_type_name,owner_name,county,constituency,ward_name,keph_level"
             });
 
             $scope.spinner = true;
