@@ -19,8 +19,7 @@
                     }
                 },
                 data:{
-                    pageTitle: "MFLv2 Facility Geolocation",
-                    back: false
+                    pageTitle: "MFLv2 Facility Geolocation"
                 }
             })
             .state("gis.gis_county", {
@@ -41,9 +40,7 @@
                                 }]
                 },
                 data:{
-                    pageTitle: "MFLv2 County View Geolocation",
-                    back: true
-
+                    pageTitle: "MFLv2 County View Geolocation"
                 }
             })
             .state("gis.gis_county.gis_const", {
@@ -66,8 +63,7 @@
                                 }]
                 },
                 data:{
-                    pageTitle: "MFLv2 Constituency View Geolocation",
-                    back: true
+                    pageTitle: "MFLv2 Constituency View Geolocation"
                 }
             }).state("gis.gis_county.gis_const.gis_ward", {
                 url: "/ward/:ward_id",
@@ -87,8 +83,7 @@
                                 }]
                 },
                 data:{
-                    pageTitle: "MFLv2 Ward View Geolocation",
-                    back: true
+                    pageTitle: "MFLv2 Ward View Geolocation"
                 }
             });
     }]);
