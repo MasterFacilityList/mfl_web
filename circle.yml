@@ -4,9 +4,23 @@ machine:
 
     environment:
         PATH: "$(npm bin):$PATH"
+        RELEASE_ASSET: mfl_admin_web
+        PACKAGE_JSON: "package.json"
 
 
 test:
     override:
         - bash ci_test.sh:
             parallel: true
+
+
+
+deployment:
+    release:
+        branch: bump-release
+        owner: MasterFacilityList
+        commands:
+            - grunt default
+            - tar cvzf "$RELEASE_ASSET" bin
+            - sudo pip install github3.py
+            - python deploy.py
