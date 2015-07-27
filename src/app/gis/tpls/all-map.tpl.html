@@ -1,23 +1,11 @@
-<div class="content-header transparent-background">
-   <div class="pull-left margin-t-10">
-       <h5>Facility Geolocator</h5>
-   </div>
-       <div ng-show="$state.current.data.back">
-        <div class="pull-right margin-t-10">
-            <button class="action-btn action-btn-md action-btn-primary" ui-sref="gis" ui-sref-opts="{reload:true}">
-                <i class="fa fa-arrow-left"></i>
-            </button>
-        </div>
-       </div>
-       <div ng-hide="$state.current.data.back">
-        <div class="pull-right margin-t-10">
-            <button class="action-btn action-btn-md action-btn-primary" onclick="window.history.back()">
-                <i class="fa fa-arrow-left"></i>
-            </button>
-        </div>
-       </div>
-    <!--breadcrumbs-->
+
+<div class="row">
+    <div class="col-sm-3 map-header">
+        <span class="fs-18 margin-t-20">Facility Geolocator</span>
+    </div>
+        <div ui-view="back" class="pull-right margin-r-40 col-sm-8"></div>
 </div>
+<hr>
 <div class="content-body">
    <div class="container-fluid fade-content" ui-view="info-map">
    </div>
