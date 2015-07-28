@@ -17,6 +17,7 @@ module.exports = function ( grunt ) {
     grunt.loadNpmTasks("grunt-coffeelint");
     grunt.loadNpmTasks("grunt-karma");
     grunt.loadNpmTasks("grunt-html2js");
+    grunt.loadNpmTasks("grunt-jscs");
 
     grunt.loadNpmTasks("grunt-istanbul-coverage");
     grunt.loadNpmTasks("grunt-contrib-connect");
@@ -274,6 +275,14 @@ module.exports = function ( grunt ) {
             globals: {}
         },
 
+        jscs: {
+            src: [
+                "<%= app_files.js %>"
+            ],
+            options: {
+                config: ".jscsrc"
+            }
+        },
         /**
          * `coffeelint` does the same as `jshint`, but for CoffeeScript.
          * CoffeeScript is not the default in ngBoilerplate, so we're just using
@@ -437,7 +446,7 @@ module.exports = function ( grunt ) {
                 files: [
                     "<%= app_files.js %>"
                 ],
-                tasks: [ "jshint:src", "karma:unit:run", "copy:build_appjs" ]
+                tasks: [ "jshint:src", "jscs", "karma:unit:run", "copy:build_appjs" ]
             },
 
             /**
@@ -548,7 +557,7 @@ module.exports = function ( grunt ) {
      * The `build` task gets your app ready to run for development and testing.
      */
     grunt.registerTask( "build", [
-        "clean", "html2js", "jshint", "coffeelint", "coffee", "less:build",
+        "clean", "html2js", "jshint", "jscs", "coffeelint", "coffee", "less:build",
         "concat:build_css", "copy:build_app_assets", "copy:build_vendor_assets",
         "copy:build_app_settings",
         "copy:build_appjs", "copy:build_vendorjs", "index:build", "karmaconfig"
