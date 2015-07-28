@@ -25,135 +25,6 @@
                     };
                 }]);
         });
-
-        it("should load mfl.gis.controller.gis_ward", inject(["$httpBackend","$state",
-                     "leafletData",
-            function ($httpBackend, $state, leafletData) {
-            var data2 = [
-                {
-                    geometry:{
-                        type:"",
-                        coordinates:[]
-                    },
-                    properties:{
-                        bound:{
-                            type:"",
-                            coordinates:[[3,4],[4,5]]
-                        },
-                        center:{
-                            type:"",
-                            coordinates:[[3,4],[4,5]]
-                        }
-                    }
-                }
-            ];
-            $httpBackend.expectGET(
-            SERVER_URL + "api/gis/coordinates/?ward=4")
-                .respond(200, data2);
-            controller("mfl.gis.controllers.gis_ward", {
-                "$scope": scope,
-                "leafletData": leafletData,
-                "gisCounty": {
-                    data: {
-                        properties: {
-                            bound: {
-                                coordinates: []
-                            },
-                            county_id:"4"
-                        }
-                    }
-                },
-                "gisConst": {
-                    data: {
-                        properties: {
-                            bound: {
-                                coordinates: []
-                            }
-                        }
-                    }
-                },
-                "gisWard": {
-                    data: {
-                        properties: {
-                            bound: {
-                                coordinates: []
-                            },
-                            ward_id:"4"
-                        }
-                    }
-                },
-                "$http": {},
-                "$state": {},
-                "$stateParams": {ward_id: 4},
-                "SERVER_URL": SERVER_URL
-            });
-            $httpBackend.flush();
-        }]));
-        it("should fail to load data (Ward Level)",
-           inject(["$httpBackend",
-            function ($httpBackend) {
-            var data = {
-                results:{
-                    id :"",
-                    type:"",
-                    features: [
-                        {
-                            id: "",
-                            geometry:{
-                                type:"",
-                                coordinates:[0,1]
-                            },
-                            properties:{
-                                facility_name:""
-                            }
-                        }
-                    ],
-                    geometry:{},
-                    properties: {}
-                }
-            };
-            controller("mfl.gis.controllers.gis_ward", {
-                "$scope": scope,
-                "gisCounty": {
-                    data: {
-                        properties: {
-                            bound: {
-                                coordinates: []
-                            },
-                            county_id:"4"
-                        }
-                    }
-                },
-                "gisConst": {
-                    data: {
-                        properties: {
-                            bound: {
-                                coordinates: []
-                            }
-                        }
-                    }
-                },
-                "gisWard": {
-                    data: {
-                        properties: {
-                            bound: {
-                                coordinates: []
-                            },
-                            ward_id:"4"
-                        }
-                    }
-                },
-                "$http": {},
-                "$state": {},
-                "$stateParams": {},
-                "SERVER_URL": SERVER_URL
-            });
-            $httpBackend.expectGET(
-            SERVER_URL + "api/gis/coordinates/?ward=4")
-                .respond(500, data);
-            $httpBackend.flush();
-        }]));
-
         it("should get leaflet data map(Ward Level)",
            inject(["$state", "leafletData", function ($state, leafletData) {
             spyOn(scope, "$on").andCallThrough();
@@ -197,7 +68,17 @@
                                 "coordinates": [
                                     [ [1, 2], [3, 4] ]
                                 ]
-                            }
+                            },
+                            ward_id:"4",
+                            facility_coordinates:[
+                                {
+                                    geometry:{
+                                        type:"",
+                                        coordinates:[0,1]
+                                    },
+                                    name: "Sasa Hospital"
+                                }
+                            ]
                         }
                     }
                 },

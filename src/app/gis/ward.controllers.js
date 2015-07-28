@@ -103,21 +103,21 @@
                 },
                 selectedWard: {}
             });
-        gisAdminUnitsApi.facilities.filter($scope.filters_ward)
-        .success(function (data){
-            var marks = data;
-            $scope.facility_count = marks.length;
-            var markers = _.mapObject(marks, function(mark){
-                return  {
-                        layer: "facilities",
-                        lat: mark.geometry.coordinates[1],
-                        lng: mark.geometry.coordinates[0]
-                    };
-            });
-            $scope.markers = markers;
-        })
-        .error(function (e){
-            $scope.alert = e.error;
+        var marks = gisWard.data.properties.facility_coordinates;
+        $scope.facility_count = marks.length;
+        var markers = _.mapObject(marks, function(mark){
+            return  {
+                    layer: "facilities",
+                    lat: mark.geometry.coordinates[1],
+                    lng: mark.geometry.coordinates[0],
+                    label: {
+                        message: ""+mark.name+"",
+                        options: {
+                            noHide: true
+                        }
+                    }
+                };
         });
+        $scope.markers = markers;
     }]);
 })(window.angular, window._);

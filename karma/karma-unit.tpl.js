@@ -34,7 +34,8 @@ module.exports = function ( karma ) {
             "karma-coverage",
             "karma-threshold-reporter",
             "karma-coffee-preprocessor",
-            "karma-mocha-reporter"
+            "karma-mocha-reporter",
+            "karma-htmlfile-reporter"
         ],
 
         preprocessors: {
@@ -49,7 +50,8 @@ module.exports = function ( karma ) {
             "progress",
             "coverage",
             "threshold",
-            "mocha"
+            "mocha",
+            "html"
         ],
 
         /**
@@ -82,6 +84,14 @@ module.exports = function ( karma ) {
             "Firefox",
             "Chrome"
         ],
+
+        htmlReporter: {
+            outputFile: "html_tests/units.html",
+
+            // Optional
+            pageTitle: "Unit Tests",
+            subPageTitle: "A sample project description"
+        },
 
         coverageReporter: {
             dir: "coverage/",
