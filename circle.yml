@@ -4,7 +4,7 @@ machine:
 
     environment:
         PATH: "$(npm bin):$PATH"
-        RELEASE_ASSET: mfl_admin_web
+        RELEASE_ASSET: "$CIRCLE_PROJECT_REPONAME"
         PACKAGE_JSON: "package.json"
 
 
