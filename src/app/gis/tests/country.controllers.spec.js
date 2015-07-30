@@ -78,7 +78,7 @@
                 "leafletData": leafletData,
                 "$http": {},
                 "$state": $state,
-                "$stateParams": {},
+                "$stateParams": {county_id: 4},
                 "SERVER_URL": SERVER_URL,
                 "gisAdminUnitsApi": gisAdminUnitsApi,
                 "$timeout": timeout.timeout
