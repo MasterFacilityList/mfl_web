@@ -15,6 +15,8 @@
         "mfl.facility_filter",
         "mfl.gis",
         "mfl.auth",
-        "mfl.rating"
+        "mfl.rating",
+        "angulartics",
+        "angulartics.google.analytics"
     ]);
 })(window.angular);
