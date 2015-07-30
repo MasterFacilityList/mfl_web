@@ -30,4 +30,5 @@
             "Accept" : "application/json, */*"
         };
     }]);
+
 })(window.angular);

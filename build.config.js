@@ -98,6 +98,8 @@ module.exports = {
             "vendor/angular-loading-bar/build/loading-bar.js",
             "vendor/localforage/dist/localforage.js",
             "vendor/angular-localforage/dist/angular-localForage.js",
+            "vendor/angulartics/dist/angulartics.min.js",
+            "vendor/angulartics-google-analytics/dist/angulartics-google-analytics.min.js",
             "libs/leaflet-heat.js",
             "libs/api_wrapper.js",
             "libs/typeahead.js",
