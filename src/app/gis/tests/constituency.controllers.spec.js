@@ -498,7 +498,7 @@
             spyOn(map, "spin");
             then_fxn(map);
 
-            expect(map.fitBounds).toHaveBeenCalledWith([[2,1 ], [4, 3]]);
+            expect(map.fitBounds).toHaveBeenCalled();
             expect(map.spin).toHaveBeenCalledWith(
                 true, {lines: 13, length: 20,corners:1,radius:30,width:10});
             expect(map.spin.calls[0].args[0]).toBe(true);
