@@ -76,12 +76,6 @@
                         templateUrl: "gis/tpls/ward-map-info.tpl.html"
                     }
                 },
-                resolve:{
-                    gisWard : ["gisAdminUnitsApi","$stateParams",
-                                function (gisAdminUnitsApi, $stateParams){
-                                    return gisAdminUnitsApi.wards.get($stateParams.ward_id);
-                                }]
-                },
                 data:{
                     pageTitle: "MFLv2 Ward View Geolocation"
                 }

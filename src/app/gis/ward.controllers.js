@@ -8,116 +8,127 @@
 
     .controller("mfl.gis.controllers.gis_ward", ["$scope","leafletData",
         "$http","$state","$stateParams","SERVER_URL",
-        "gisWard","$timeout","gisAdminUnitsApi","gisConst","gisCounty",
+        "$timeout","gisAdminUnitsApi",
         function ($scope, leafletData,$http, $state, $stateParams,
-                   SERVER_URL, gisWard,$timeout,gisAdminUnitsApi,
-                   gisConst,gisCounty) {
-        $scope.county = gisCounty.data;
-        $scope.constituency = gisConst.data;
+                   SERVER_URL,$timeout,gisAdminUnitsApi) {
         $scope.county_id = $stateParams.county_id;
-        $scope.const_boundaries = $stateParams.const_boundaries;
+        gisAdminUnitsApi.counties.get($scope.county_id)
+        .success(function (county_data) {
+            $scope.county = county_data;
+        })
+        .error(function (error) {
+            console.log(error);
+        });
         $scope.const_id = $stateParams.const_id;
+        gisAdminUnitsApi.constituencies.get($scope.const_id)
+        .success(function (const_data) {
+            $scope.constituency = const_data;
+        })
+        .error(function (error) {
+            console.log(error);
+        });
+        $scope.const_boundaries = $stateParams.const_boundaries;
         $scope.ward_boundaries = $stateParams.ward_boundaries;
         $scope.ward_id = $stateParams.ward_id;
         $scope.tooltip = {
             "title": "",
             "checked": false
         };
-        $scope.ward = gisWard.data;
-        $scope.title = [
-            {
-                icon: "fa-map-marker",
-                name: "Ward"
-            }
-        ];
-        $scope.action = [
-            {
-                func : "onclick=window.history.back()",
-                class: "action-btn action-btn-primary action-btn-md",
-                color: "blue",
-                tipmsg: "Go back",
-                icon: "fa-arrow-left"
-            }
-        ];
-        angular.extend($scope, {
-            defaults: {
-                scrollWheelZoom: false,
-                tileLayer: "",
-                dragging:true
-            },
-            events: {
-                map: {
-                    enable: ["moveend", "popupopen"],
-                    logic: "emit"
-                },
-                marker: {
-                    enable: [],
-                    logic: "emit"
+        gisAdminUnitsApi.wards.get($scope.ward_id)
+        .success(function (ward_data) {
+            $scope.ward = ward_data;
+            $scope.action = [
+                {
+                    func : "onclick=window.history.back()",
+                    class: "action-btn action-btn-primary action-btn-md",
+                    color: "blue",
+                    tipmsg: "Go back",
+                    icon: "fa-arrow-left"
                 }
-            },
-            markers:{},
-            layers:{}
-        });
-        leafletData.getMap("wardmap")
-            .then(function (map) {
-            var coords = gisWard.data.properties.bound.coordinates[0];
-            var bounds = _.map(coords, function(c) {
-                return [c[1], c[0]];
-            });
-            map.fitBounds(bounds);
-            map.spin(true,  {lines: 13, length: 20,corners:1,radius:30,width:10});
-            $timeout(function() {map.spin(false);}, 1000);
-        });
-
-        $scope.filters_ward = {
-            ward : gisWard.data.properties.ward_id
-        };
-        $scope.ward = gisWard.data;
-        angular.extend($scope, {
-                geojson: {
-                    data: angular.copy($scope.ward),
-                    style: {
-                        fillColor: "rgba(236, 255, 183, 0.14)",
-                        weight: 2,
-                        opacity: 1,
-                        color: "white",
-                        dashArray: "3",
-                        fillOpacity: 0.7
+            ];
+            angular.extend($scope, {
+                defaults: {
+                    scrollWheelZoom: false,
+                    tileLayer: "",
+                    dragging:true
+                },
+                events: {
+                    map: {
+                        enable: ["moveend", "popupopen"],
+                        logic: "emit"
+                    },
+                    marker: {
+                        enable: [],
+                        logic: "emit"
                     }
                 },
-                layers:{
-                    baselayers:{
-                        country: {
-                            name: "Country",
-                            url: "/assets/img/transparent.png",
-                            type:"xyz"
+                markers:{},
+                layers:{}
+            });
+            leafletData.getMap("wardmap")
+                .then(function (map) {
+                var coords = ward_data.properties.bound.coordinates[0];
+                var bounds = _.map(coords, function(c) {
+                    return [c[1], c[0]];
+                });
+                map.fitBounds(bounds);
+                map.spin(true,  {lines: 13, length: 20,corners:1,radius:30,width:10});
+                $timeout(function() {map.spin(false);}, 1000);
+            });
+
+            $scope.filters_ward = {
+                ward : ward_data.properties.ward_id
+            };
+            $scope.ward = ward_data;
+            angular.extend($scope, {
+                    geojson: {
+                        data: angular.copy($scope.ward),
+                        style: {
+                            fillColor: "rgba(236, 255, 183, 0.14)",
+                            weight: 2,
+                            opacity: 1,
+                            color: "white",
+                            dashArray: "3",
+                            fillOpacity: 0.7
                         }
                     },
-                    overlays:{
-                        facilities:{
-                            name:"Facilities",
-                            type:"group",
-                            visible: true
+                    layers:{
+                        baselayers:{
+                            country: {
+                                name: "Country",
+                                url: "/assets/img/transparent.png",
+                                type:"xyz"
+                            }
+                        },
+                        overlays:{
+                            facilities:{
+                                name:"Facilities",
+                                type:"group",
+                                visible: true
+                            }
                         }
-                    }
-                },
-                selectedWard: {}
+                    },
+                    selectedWard: {}
+                });
+            var marks = ward_data.properties.facility_coordinates;
+            $scope.facility_count = marks.length;
+            var markers = _.mapObject(marks, function(mark){
+                return  {
+                        layer: "facilities",
+                        lat: mark.geometry.coordinates[1],
+                        lng: mark.geometry.coordinates[0],
+                        label: {
+                            message: ""+mark.name+"",
+                            options: {
+                                noHide: true
+                            }
+                        }
+                    };
             });
-        var marks = gisWard.data.properties.facility_coordinates;
-        $scope.facility_count = marks.length;
-        var markers = _.mapObject(marks, function(mark){
-            return  {
-                    layer: "facilities",
-                    lat: mark.geometry.coordinates[1],
-                    lng: mark.geometry.coordinates[0],
-                    label: {
-                        message: ""+mark.name+"",
-                        options: {
-                            noHide: true
-                        }
-                    }
-                };
+            $scope.markers = markers;
+        })
+        .error(function (error) {
+            console.log(error);
         });
-        $scope.markers = markers;
     }]);
 })(window.angular, window._);

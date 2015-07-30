@@ -10,7 +10,6 @@
             self.constituencies = api.setBaseUrl("api/gis/constituency_boundaries/");
             self.wards = api.setBaseUrl("api/gis/ward_boundaries/");
             self.facilities = api.setBaseUrl("api/gis/coordinates/");
-
             this.getCounties = function () {
                 var deferred = $q.defer();
 
