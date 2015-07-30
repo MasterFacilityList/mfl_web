@@ -25,8 +25,27 @@
                     };
                 }]);
         });
+        it("should expect fetch of data to fail",
+        inject(["$httpBackend",function($httpBackend) {
+            $httpBackend.expectGET(
+            SERVER_URL + "api/gis/county_boundaries/4/")
+                .respond(500, {});
+            $httpBackend.expectGET(
+            SERVER_URL + "api/gis/constituency_boundaries/4/")
+                .respond(500, {});
+            $httpBackend.expectGET(
+            SERVER_URL + "api/gis/ward_boundaries/4/")
+                .respond(500, {});
+            controller("mfl.gis.controllers.gis_ward", {
+                "$scope": scope,
+                "$stateParams": {ward_id: 4, county_id: 4, const_id: 4},
+                "SERVER_URL": SERVER_URL
+            });
+            $httpBackend.flush();
+        }]));
         it("should get leaflet data map(Ward Level)",
-           inject(["$state", "leafletData", function ($state, leafletData) {
+           inject(["$state", "leafletData","$httpBackend",
+           function ($state, leafletData, $httpBackend) {
             spyOn(scope, "$on").andCallThrough();
             spyOn($state, "go");
             var obj = {
@@ -35,60 +54,48 @@
             var timeout = {
                 timeout: angular.noop
             };
+            var data1 = {
+                properties: {
+                    bound: {
+                        type: "Polygon",
+                        coordinates: [
+                            [ [1, 2], [3, 4] ]
+                        ]
+                    },
+                    ward_id:"4",
+                    facility_coordinates:[
+                        {
+                            geometry:{
+                                type:"",
+                                coordinates:[0,1]
+                            },
+                            name: "Sasa Hospital"
+                        }
+                    ]
+                }
+            };
             spyOn(leafletData, "getMap").andReturn(obj);
             spyOn(obj, "then");
             spyOn(timeout, "timeout");
+            $httpBackend.expectGET(
+            SERVER_URL + "api/gis/county_boundaries/4/")
+                .respond(200, data1);
+            $httpBackend.expectGET(
+            SERVER_URL + "api/gis/constituency_boundaries/4/")
+                .respond(200, data1);
+            $httpBackend.expectGET(
+            SERVER_URL + "api/gis/ward_boundaries/4/")
+                .respond(200, data1);
             controller("mfl.gis.controllers.gis_ward", {
                 "$scope": scope,
                 "leafletData": leafletData,
-                "gisCounty": {
-                    data: {
-                        properties: {
-                            bound: {
-                                coordinates: []
-                            },
-                            county_id:"4"
-                        }
-                    }
-                },
-                "gisConst": {
-                    data: {
-                        properties: {
-                            bound: {
-                                coordinates: []
-                            }
-                        }
-                    }
-                },
-                "gisWard": {
-                    data: {
-                        properties: {
-                            bound: {
-                                "type": "Polygon",
-                                "coordinates": [
-                                    [ [1, 2], [3, 4] ]
-                                ]
-                            },
-                            ward_id:"4",
-                            facility_coordinates:[
-                                {
-                                    geometry:{
-                                        type:"",
-                                        coordinates:[0,1]
-                                    },
-                                    name: "Sasa Hospital"
-                                }
-                            ]
-                        }
-                    }
-                },
-                "$http": {},
                 "$state": $state,
-                "$stateParams": {},
+                "$stateParams": {ward_id: 4, county_id: 4, const_id: 4},
                 "$timeout": timeout.timeout,
                 "SERVER_URL": SERVER_URL
             });
-
+            scope.county_id = 4;
+            $httpBackend.flush();
             expect(leafletData.getMap).toHaveBeenCalled();
             expect(obj.then).toHaveBeenCalled();
 
