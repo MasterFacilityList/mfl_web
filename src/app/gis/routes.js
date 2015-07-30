@@ -54,14 +54,6 @@
                         templateUrl: "gis/tpls/const-map-info.tpl.html"
                     }
                 },
-                resolve:{
-                    gisConst : ["gisAdminUnitsApi","$stateParams",
-                                function (gisAdminUnitsApi, $stateParams){
-                                    return gisAdminUnitsApi.constituencies.get(
-                                        $stateParams.const_id
-                                    );
-                                }]
-                },
                 data:{
                     pageTitle: "MFLv2 Constituency View Geolocation"
                 }
