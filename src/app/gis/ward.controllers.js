@@ -37,15 +37,6 @@
         gisAdminUnitsApi.wards.get($scope.ward_id)
         .success(function (ward_data) {
             $scope.ward = ward_data;
-            $scope.action = [
-                {
-                    func : "onclick=window.history.back()",
-                    class: "action-btn action-btn-primary action-btn-md",
-                    color: "blue",
-                    tipmsg: "Go back",
-                    icon: "fa-arrow-left"
-                }
-            ];
             angular.extend($scope, {
                 defaults: {
                     scrollWheelZoom: false,
@@ -118,7 +109,7 @@
                         lat: mark.geometry.coordinates[1],
                         lng: mark.geometry.coordinates[0],
                         label: {
-                            message: ""+mark.name+"",
+                            message: mark.name,
                             options: {
                                 noHide: true
                             }

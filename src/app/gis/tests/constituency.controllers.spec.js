@@ -91,6 +91,9 @@
                 }
             ];
             $httpBackend.expectGET(
+            SERVER_URL + "api/gis/county_boundaries/4/")
+                .respond(200, data1);
+            $httpBackend.expectGET(
             SERVER_URL + "api/gis/constituency_boundaries/4/")
                 .respond(200, data1);
             $httpBackend.expectGET(
@@ -102,16 +105,6 @@
             controller("mfl.gis.controllers.gis_const", {
                 "$scope": scope,
                 "leafletData": leafletData,
-                "gisCounty": {
-                    data: {
-                        properties: {
-                            bound: {
-                                coordinates: []
-                            },
-                            county_id:"4"
-                        }
-                    }
-                },
                 "$http": {},
                 "$state": {},
                 "$stateParams": {county_id: 4, const_id: 4, ward_boundaries: 4},
@@ -125,30 +118,13 @@
            inject(["$httpBackend",
             function ($httpBackend) {
             $httpBackend.expectGET(
+            SERVER_URL + "api/gis/county_boundaries/4/")
+                .respond(500, {});
+            $httpBackend.expectGET(
             SERVER_URL + "api/gis/constituency_boundaries/4/")
                 .respond(500, {});
             controller("mfl.gis.controllers.gis_const", {
                 "$scope": scope,
-                "gisCounty": {
-                    data: {
-                        properties: {
-                            bound: {
-                                coordinates: []
-                            },
-                            county_id:"4"
-                        }
-                    }
-                },
-                "gisConst": {
-                    data: {
-                        properties: {
-                            bound: {
-                                coordinates: []
-                            },
-                            constituency_id:"4"
-                        }
-                    }
-                },
                 "$http": {},
                 "$state": {},
                 "$stateParams": {county_id: 4, const_id: 4, ward_boundaries: 4},
@@ -219,6 +195,9 @@
                 }
             ];
             $httpBackend.expectGET(
+            SERVER_URL + "api/gis/county_boundaries/4/")
+                .respond(200, data1);
+            $httpBackend.expectGET(
             SERVER_URL + "api/gis/constituency_boundaries/4/")
                 .respond(200, data1);
             $httpBackend.expectGET(
@@ -231,16 +210,6 @@
             controller("mfl.gis.controllers.gis_const", {
                 "$scope": scope,
                 "leafletData": leafletData,
-                "gisCounty": {
-                    data: {
-                        properties: {
-                            bound: {
-                                coordinates: []
-                            },
-                            county_id:"4"
-                        }
-                    }
-                },
                 "$http": {},
                 "$state": {},
                 "$stateParams": {county_id: 4, const_id: 4, ward_boundaries: 4},
@@ -328,6 +297,9 @@
                 }
             ];
             $httpBackend.expectGET(
+            SERVER_URL + "api/gis/county_boundaries/4/")
+                .respond(200, data1);
+            $httpBackend.expectGET(
             SERVER_URL + "api/gis/constituency_boundaries/4/")
                 .respond(200, data1);
             $httpBackend.expectGET(
@@ -341,16 +313,6 @@
             controller("mfl.gis.controllers.gis_const", {
                 "$scope": scope,
                 "leafletData": leafletData,
-                "gisCounty": {
-                    data: {
-                        properties: {
-                            bound: {
-                                coordinates: []
-                            },
-                            county_id:"4"
-                        }
-                    }
-                },
                 "$http": {},
                 "$state": $state,
                 "$stateParams": {county_id:4,const_id: 4,county_boundaries:4,ward_boundaries: 4},
@@ -446,6 +408,9 @@
                 }
             ];
             $httpBackend.expectGET(
+            SERVER_URL + "api/gis/county_boundaries/4/")
+                .respond(200, data1);
+            $httpBackend.expectGET(
             SERVER_URL + "api/gis/constituency_boundaries/4/")
                  .respond(200, data1);
             $httpBackend.expectGET(
@@ -468,16 +433,6 @@
             controller("mfl.gis.controllers.gis_const", {
                 "$scope": scope,
                 "leafletData": leafletData,
-                "gisCounty": {
-                    data: {
-                        properties: {
-                            bound: {
-                                coordinates: []
-                            },
-                            county_id:"4"
-                        }
-                    }
-                },
                 "$http": {},
                 "$state": $state,
                 "$stateParams": {county_id: 4, const_id: 4, ward_boundaries: 4},

@@ -89,8 +89,8 @@ module.exports = function ( karma ) {
             outputFile: "html_tests/units.html",
 
             // Optional
-            pageTitle: "Unit Tests",
-            subPageTitle: "A sample project description"
+            pageTitle: "MFL Public Unit Tests",
+            subPageTitle: "Unit Tests Results"
         },
 
         coverageReporter: {

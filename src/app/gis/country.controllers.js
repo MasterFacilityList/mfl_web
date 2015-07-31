@@ -21,21 +21,6 @@
             [4.622499,33.907219],
             [-4.669618,33.907219]
         ];
-        $scope.title = [
-            {
-                icon: "fa-map-marker",
-                name: "Geographic Discovery"
-            }
-        ];
-        $scope.action = [
-            {
-                func : "onclick=window.history.back()",
-                class: "action-btn action-btn-primary action-btn-md",
-                color: "blue",
-                tipmsg: "Go back",
-                icon: "fa-arrow-left"
-            }
-        ];
         $scope.selectedConst = {};
         $scope.markers = {};
         $scope.layers = {};
@@ -63,7 +48,7 @@
                         lat: mark.properties.center.coordinates[1],
                         lng: mark.properties.center.coordinates[0],
                         label: {
-                            message: ""+mark.properties.name+"",
+                            message: mark.properties.name,
                             options: {
                                 noHide: false
                             }

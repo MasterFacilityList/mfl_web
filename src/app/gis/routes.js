@@ -33,12 +33,6 @@
                         templateUrl: "gis/tpls/county-map-info.tpl.html"
                     }
                 },
-                resolve:{
-                    gisCounty : ["gisAdminUnitsApi","$stateParams",
-                                function (gisAdminUnitsApi, $stateParams){
-                                    return gisAdminUnitsApi.counties.get($stateParams.county_id);
-                                }]
-                },
                 data:{
                     pageTitle: "MFLv2 County View Geolocation"
                 }
