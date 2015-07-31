@@ -25,25 +25,6 @@ describe("tests for GIS Routes:", function() {
         expect($state.href("gis", { id: 1 })).toEqual("#/gis");
     }]));
         /*Tests for resolves within routes*/
-    it("should resolve gisCounty",
-            inject(["$httpBackend","$state",function ($httpBackend,$state) {
-        var data = {
-            results:{
-                id :"",
-                type:"",
-                geometry:{},
-                properties: {}
-            }
-        };
-        $httpBackend.expectGET(
-        SERVER_URL + "api/gis/county_boundaries/34/")
-            .respond(200, data);
-        $state.go("gis.gis_county", {"county_id": "34"});
-
-        $httpBackend.flush();
-    }]));
-
-
 
     it("should resolve gisConst",
             inject(["$httpBackend","$state",function ($httpBackend,$state) {

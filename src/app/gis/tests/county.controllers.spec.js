@@ -34,6 +34,17 @@
             inject(["$httpBackend","$state", "leafletData",
             function ($httpBackend, $state, leafletData) {
             var data1 = {
+                properties: {
+                    bound:{
+                        type:"",
+                        coordinates:[[3,4],[4,5]]
+                    },
+                    county_id:"4",
+                    center:{
+                        type:"",
+                        coordinates:[[3,4],[4,5]]
+                    }
+                },
                 results:{
                     id :"4",
                     type:"",
@@ -80,38 +91,27 @@
                 }
             ];
             $httpBackend.expectGET(
-            SERVER_URL + "api/gis/county_boundaries/34/")
+            SERVER_URL + "api/gis/county_boundaries/4/")
                 .respond(200, data1);
             $httpBackend.expectGET(
             SERVER_URL + "api/gis/coordinates/?county=4")
                 .respond(200, data2);
             $httpBackend.expectGET(
-            SERVER_URL + "api/gis/constituency_boundaries/?id=undefined")
+            SERVER_URL + "api/gis/constituency_boundaries/?id=4")
                 .respond(200, data1);
-            $state.go("gis.gis_county", {"county_id": "34"});
             controller("mfl.gis.controllers.gis_county", {
                 "$scope": scope,
                 "leafletData": leafletData,
-                "gisCounty": {
-                    data: {
-                        properties: {
-                            bound: {
-                                coordinates: []
-                            },
-                            county_id:"4"
-                        }
-                    }
-                },
-
                 "$http": {},
                 "$state": {},
-                "$stateParams": {},
+                "$stateParams": {county_id: 4, const_boundaries: 4},
                 "SERVER_URL": SERVER_URL
             });
+            $httpBackend.flush();
+            scope.county_id = 4;
             scope.layers.overlays = {
                 heat : {}
             };
-            $httpBackend.flush();
         }]));
 
         it("should fail to load data (County Level)",
@@ -128,48 +128,91 @@
             };
             controller("mfl.gis.controllers.gis_county", {
                 "$scope": scope,
-                "gisCounty": {
-                    data: {
-                        properties: {
-                            bound: {
-                                coordinates: []
-                            },
-                            county_id:"4"
-                        }
-                    }
-                },
                 "$http": {},
                 "$state": {},
-                "$stateParams": {},
+                "$stateParams": {county_id: 4, const_boundaries: 4},
                 "SERVER_URL": SERVER_URL
             });
             $httpBackend.expectGET(
-            SERVER_URL + "api/gis/coordinates/?county=4")
-                .respond(500, data);
-            $httpBackend.expectGET(
-            SERVER_URL + "api/gis/constituency_boundaries/?id=undefined")
+            SERVER_URL + "api/gis/county_boundaries/4/")
                 .respond(500, data);
             $httpBackend.flush();
         }]));
         it("should expect broadcast of leafletDirectiveGeoJson.mouseover(County Level)",
-            inject(["$rootScope","leafletData","$state", function ($rootScope, leafletData,$state) {
-            $state.go("gis.gis_county", {"county_id": "34"});
+            inject(["$rootScope","leafletData","$state","$httpBackend",
+             function ($rootScope, leafletData,$state,$httpBackend) {
+            var data1 = {
+                properties: {
+                    bound:{
+                        type:"",
+                        coordinates:[[3,4],[4,5]]
+                    },
+                    county_id:"4",
+                    center:{
+                        type:"",
+                        coordinates:[[3,4],[4,5]]
+                    }
+                },
+                results:{
+                    id :"4",
+                    type:"",
+                    geometry:{},
+                    properties: {},
+                    features: [
+                        {
+                            id:"",
+                            type:"",
+                            geometry:{
+                                type:"",
+                                coordinates:[]
+                            },
+                            properties:{
+                                bound:{
+                                    type:"",
+                                    coordinates:[[3,4],[4,5]]
+                                },
+                                center:{
+                                    type:"",
+                                    coordinates:[[3,4],[4,5]]
+                                }
+                            }
+                        }
+                    ]
+                }
+            };
+            var data2 = [
+                {
+                    geometry:{
+                        type:"",
+                        coordinates:[]
+                    },
+                    properties:{
+                        bound:{
+                            type:"",
+                            coordinates:[[3,4],[4,5]]
+                        },
+                        center:{
+                            type:"",
+                            coordinates:[[3,4],[4,5]]
+                        }
+                    }
+                }
+            ];
+            $httpBackend.expectGET(
+            SERVER_URL + "api/gis/county_boundaries/4/")
+                .respond(200, data1);
+            $httpBackend.expectGET(
+            SERVER_URL + "api/gis/coordinates/?county=4")
+                .respond(200, data2);
+            $httpBackend.expectGET(
+            SERVER_URL + "api/gis/constituency_boundaries/?id=4")
+                .respond(200, data1);
             controller("mfl.gis.controllers.gis_county", {
                 "$scope": scope,
                 "leafletData": leafletData,
-                "gisCounty": {
-                    data: {
-                        properties: {
-                            bound: {
-                                coordinates: []
-                            },
-                            county_id:"4"
-                        }
-                    }
-                },
                 "$http": {},
                 "$state": {},
-                "$stateParams": {},
+                "$stateParams": {county_id: 4, const_boundaries: 4},
                 "SERVER_URL": SERVER_URL
             });
             var constituency = {
@@ -180,6 +223,7 @@
                     properties : {}
                 }
             };
+            $httpBackend.flush();
             $rootScope.$broadcast("leafletDirectiveGeoJson.mouseover",constituency);
             scope.hoveredConst = {
                 type : "",
@@ -191,8 +235,74 @@
         }]));
 
         it("should expect broadcast of leafletDirectiveGeoJson.click(County Level)",
-           inject(["$state","leafletData",
-                   function ($state, leafletData) {
+           inject(["$state","leafletData","$httpBackend",
+                   function ($state, leafletData, $httpBackend) {
+            var data1 = {
+                properties: {
+                    bound:{
+                        type:"",
+                        coordinates:[[3,4],[4,5]]
+                    },
+                    county_id:"4",
+                    center:{
+                        type:"",
+                        coordinates:[[3,4],[4,5]]
+                    }
+                },
+                results:{
+                    id :"4",
+                    type:"",
+                    geometry:{},
+                    properties: {},
+                    features: [
+                        {
+                            id:"",
+                            type:"",
+                            geometry:{
+                                type:"",
+                                coordinates:[]
+                            },
+                            properties:{
+                                bound:{
+                                    type:"",
+                                    coordinates:[[3,4],[4,5]]
+                                },
+                                center:{
+                                    type:"",
+                                    coordinates:[[3,4],[4,5]]
+                                }
+                            }
+                        }
+                    ]
+                }
+            };
+            var data2 = [
+                {
+                    geometry:{
+                        type:"",
+                        coordinates:[]
+                    },
+                    properties:{
+                        bound:{
+                            type:"",
+                            coordinates:[[3,4],[4,5]]
+                        },
+                        center:{
+                            type:"",
+                            coordinates:[[3,4],[4,5]]
+                        }
+                    }
+                }
+            ];
+            $httpBackend.expectGET(
+            SERVER_URL + "api/gis/county_boundaries/4/")
+                .respond(200, data1);
+            $httpBackend.expectGET(
+            SERVER_URL + "api/gis/coordinates/?county=4")
+                .respond(200, data2);
+            $httpBackend.expectGET(
+            SERVER_URL + "api/gis/constituency_boundaries/?id=4")
+                .respond(200, data1);
             spyOn(scope, "$on").andCallThrough();
             spyOn($state, "go");
             controller("mfl.gis.controllers.gis_county", {
@@ -209,7 +319,7 @@
                 },
                 "$http": {},
                 "$state": $state,
-                "$stateParams": {},
+                "$stateParams": {county_id: 4, const_boundaries: 4},
                 "SERVER_URL": SERVER_URL
             });
 
@@ -232,18 +342,85 @@
                     }
                 }
             };
+            $httpBackend.flush();
             var second_call = scope.$on.calls[1];
             expect(second_call.args[0]).toEqual("leafletDirectiveGeoJson.click");
             expect(angular.isFunction(second_call.args[1])).toBe(true);
             var listener = second_call.args[1];
             listener(null, constituency);
-            expect($state.go).toHaveBeenCalledWith("gis.gis_county.gis_const",{const_id: "",
-                                                   ward_boundaries: "a,b"});
+            expect($state.go).toHaveBeenCalledWith("gis.gis_county.gis_const",{county_id: 4,
+                county_boundaries : 4, const_id : "", ward_boundaries : "a,b"});
         }]));
 
         it("should get leaflet data map(County Level)",
-           inject(["$state", "leafletData",
-                   function ($state, leafletData) {
+           inject(["$state", "leafletData","$httpBackend",
+                   function ($state, leafletData,$httpBackend) {
+            var data1 = {
+                properties: {
+                    bound:{
+                        type:"",
+                        coordinates:[[3,4],[4,5]]
+                    },
+                    county_id:"4",
+                    center:{
+                        type:"",
+                        coordinates:[[3,4],[4,5]]
+                    }
+                },
+                results:{
+                    id :"4",
+                    type:"",
+                    geometry:{},
+                    properties: {},
+                    features: [
+                        {
+                            id:"",
+                            type:"",
+                            geometry:{
+                                type:"",
+                                coordinates:[]
+                            },
+                            properties:{
+                                bound:{
+                                    type:"",
+                                    coordinates:[[3,4],[4,5]]
+                                },
+                                center:{
+                                    type:"",
+                                    coordinates:[[3,4],[4,5]]
+                                }
+                            }
+                        }
+                    ]
+                }
+            };
+            var data2 = [
+                {
+                    geometry:{
+                        type:"",
+                        coordinates:[]
+                    },
+                    properties:{
+                        bound:{
+                            type:"",
+                            coordinates:[[3,4],[4,5]]
+                        },
+                        center:{
+                            type:"",
+                            coordinates:[[3,4],[4,5]]
+                        }
+                    }
+                }
+            ];
+            $httpBackend.expectGET(
+            SERVER_URL + "api/gis/county_boundaries/4/")
+               .respond(200, data1);
+            $httpBackend.expectGET(
+            SERVER_URL + "api/gis/coordinates/?county=4")
+               .respond(200, data2);
+            $httpBackend.expectGET(
+            SERVER_URL + "api/gis/constituency_boundaries/?id=4")
+               .respond(200, data1);
             spyOn(scope, "$on").andCallThrough();
             spyOn($state, "go");
             var obj = {
@@ -272,11 +449,12 @@
                 },
                 "$http": {},
                 "$state": $state,
-                "$stateParams": {},
+                "$stateParams": {county_id: 4, const_boundaries: 4},
                 "$timeout": timeout.timeout,
                 "SERVER_URL": SERVER_URL
             });
 
+            $httpBackend.flush();
             expect(leafletData.getMap).toHaveBeenCalled();
             expect(obj.then).toHaveBeenCalled();
 
@@ -290,7 +468,7 @@
             spyOn(map, "spin");
             then_fxn(map);
 
-            expect(map.fitBounds).toHaveBeenCalledWith([[2,1 ], [4, 3]]);
+            expect(map.fitBounds).toHaveBeenCalled();
             expect(map.spin).toHaveBeenCalledWith(
                 true, {lines: 13, length: 20,corners:1,radius:30,width:10});
             expect(map.spin.calls[0].args[0]).toBe(true);

@@ -20,6 +20,15 @@
                 },
                 data:{
                     pageTitle: "MFLv2 Facility Geolocation"
+                },
+                resolve: {
+                    "auth": ["api.auth", "$q", function (auth, $q) {
+                        var current_token = auth.getToken();
+                        if (current_token) {
+                            return $q.when(current_token);
+                        }
+                        return auth.fetchToken();
+                    }]
                 }
             })
             .state("gis.gis_county", {
@@ -32,12 +41,6 @@
                         controller:"mfl.gis.controllers.gis_county",
                         templateUrl: "gis/tpls/county-map-info.tpl.html"
                     }
-                },
-                resolve:{
-                    gisCounty : ["gisAdminUnitsApi","$stateParams",
-                                function (gisAdminUnitsApi, $stateParams){
-                                    return gisAdminUnitsApi.counties.get($stateParams.county_id);
-                                }]
                 },
                 data:{
                     pageTitle: "MFLv2 County View Geolocation"
