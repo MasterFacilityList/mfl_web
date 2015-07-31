@@ -6,6 +6,7 @@
         "ngSanitize",
         "mflAppConfig",
         "ui.router",
+        "anim-in-out",
         "ui.bootstrap",
         "ui.bootstrap.tpls",
         "angular-loading-bar",

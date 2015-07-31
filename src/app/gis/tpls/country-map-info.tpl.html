@@ -1,4 +1,4 @@
-        <div class="col-md-4 margin-15">
+        <div class="col-md-4 margin-15 anim-slide-below-fade">
            <div class="col-xs-12">
                 <div class="col-xs-12 content-card">
                     <h4 class="fw-600 ">NAVIGATION</h4>
@@ -25,15 +25,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-8 margin-b-10">
-           <div ng-if="spinner">
-                <div class="map-change-state">
-                    <div class="loader"></div>
-                    <div class="row">
-                        <h3 class="text-center loader-text">Please wait...</h3>
-                    </div>
-                </div>
-           </div>
+        <div class="col-md-8 margin-b-10 anim-fade">
            <div ng-if="!spinner">
                 <leaflet
                     id="countrymap"
