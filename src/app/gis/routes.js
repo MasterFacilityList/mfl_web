@@ -20,15 +20,6 @@
                 },
                 data:{
                     pageTitle: "MFLv2 Facility Geolocation"
-                },
-                resolve: {
-                    "auth": ["api.auth", "$q", function (auth, $q) {
-                        var current_token = auth.getToken();
-                        if (current_token) {
-                            return $q.when(current_token);
-                        }
-                        return auth.fetchToken();
-                    }]
                 }
             })
             .state("gis.gis_county", {
