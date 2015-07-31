@@ -96,6 +96,7 @@ module.exports = {
             "vendor/stacktrace-js/dist/stacktrace.js",
             "vendor/moment/moment.js",
             "vendor/angular-loading-bar/build/loading-bar.js",
+            "vendor/angular-ui-router-anim-in-out/anim-in-out.js",
             "vendor/localforage/dist/localforage.js",
             "vendor/angular-localforage/dist/angular-localForage.js",
             "vendor/angulartics/dist/angulartics.min.js",
