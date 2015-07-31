@@ -91,6 +91,9 @@
                 }
             ];
             $httpBackend.expectGET(
+            SERVER_URL + "api/gis/county_boundaries/4/")
+                .respond(200, data1);
+            $httpBackend.expectGET(
             SERVER_URL + "api/gis/constituency_boundaries/4/")
                 .respond(200, data1);
             $httpBackend.expectGET(
@@ -124,6 +127,9 @@
         it("should fail to load data (Const Level)",
            inject(["$httpBackend",
             function ($httpBackend) {
+            $httpBackend.expectGET(
+            SERVER_URL + "api/gis/county_boundaries/4/")
+                .respond(500, {});
             $httpBackend.expectGET(
             SERVER_URL + "api/gis/constituency_boundaries/4/")
                 .respond(500, {});
@@ -218,6 +224,9 @@
                     }
                 }
             ];
+            $httpBackend.expectGET(
+            SERVER_URL + "api/gis/county_boundaries/4/")
+                .respond(200, data1);
             $httpBackend.expectGET(
             SERVER_URL + "api/gis/constituency_boundaries/4/")
                 .respond(200, data1);
@@ -327,6 +336,9 @@
                     }
                 }
             ];
+            $httpBackend.expectGET(
+            SERVER_URL + "api/gis/county_boundaries/4/")
+                .respond(200, data1);
             $httpBackend.expectGET(
             SERVER_URL + "api/gis/constituency_boundaries/4/")
                 .respond(200, data1);
@@ -445,6 +457,9 @@
                     }
                 }
             ];
+            $httpBackend.expectGET(
+            SERVER_URL + "api/gis/county_boundaries/4/")
+                .respond(200, data1);
             $httpBackend.expectGET(
             SERVER_URL + "api/gis/constituency_boundaries/4/")
                  .respond(200, data1);

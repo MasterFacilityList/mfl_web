@@ -8,17 +8,21 @@
 
     .controller("mfl.gis.controllers.gis_const", ["$scope","leafletData",
         "$http","$state","$stateParams","SERVER_URL",
-        "$timeout","gisAdminUnitsApi","$q","gisCounty",
+        "$timeout","gisAdminUnitsApi","$q",
         function ($scope, leafletData, $http, $state,
                    $stateParams,SERVER_URL,
-                  $timeout,gisAdminUnitsApi, $q,gisCounty) {
-        $scope.county = gisCounty.data;
+                  $timeout,gisAdminUnitsApi, $q) {
+        $scope.county_id = $stateParams.county_id;
+        gisAdminUnitsApi.counties.get($scope.county_id).success(function (data) {
+            $scope.county = data;
+        }).error(function (err) {
+            console.log(err);
+        });
         // $scope.constituency = gisConst.data;
         $scope.const_id = $stateParams.const_id;
         gisAdminUnitsApi.constituencies.get($scope.const_id)
         .success(function (const_data) {
             $scope.constituency = const_data;
-            $scope.county_id = $stateParams.county_id;
             $scope.const_boundaries = $stateParams.const_boundaries;
             $scope.ward_boundaries = $stateParams.ward_boundaries;
             $scope.spinner = false;
