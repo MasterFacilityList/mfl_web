@@ -18,7 +18,6 @@
         }).error(function (err) {
             console.log(err);
         });
-        // $scope.constituency = gisConst.data;
         $scope.const_id = $stateParams.const_id;
         gisAdminUnitsApi.constituencies.get($scope.const_id)
         .success(function (const_data) {

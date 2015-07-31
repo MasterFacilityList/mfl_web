@@ -308,15 +308,6 @@
             controller("mfl.gis.controllers.gis_county", {
                 "$scope": scope,
                 "leafletData": leafletData,
-                "gisCounty": {
-                    data: {
-                        properties: {
-                            bound: {
-                                coordinates: []
-                            }
-                        }
-                    }
-                },
                 "$http": {},
                 "$state": $state,
                 "$stateParams": {county_id: 4, const_boundaries: 4},
@@ -435,18 +426,6 @@
             controller("mfl.gis.controllers.gis_county", {
                 "$scope": scope,
                 "leafletData": leafletData,
-                "gisCounty": {
-                    data: {
-                        properties: {
-                            bound: {
-                                "type": "Polygon",
-                                "coordinates": [
-                                    [ [1, 2], [3, 4] ]
-                                ]
-                            }
-                        }
-                    }
-                },
                 "$http": {},
                 "$state": $state,
                 "$stateParams": {county_id: 4, const_boundaries: 4},

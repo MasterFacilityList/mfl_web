@@ -105,16 +105,6 @@
             controller("mfl.gis.controllers.gis_const", {
                 "$scope": scope,
                 "leafletData": leafletData,
-                "gisCounty": {
-                    data: {
-                        properties: {
-                            bound: {
-                                coordinates: []
-                            },
-                            county_id:"4"
-                        }
-                    }
-                },
                 "$http": {},
                 "$state": {},
                 "$stateParams": {county_id: 4, const_id: 4, ward_boundaries: 4},
@@ -135,26 +125,6 @@
                 .respond(500, {});
             controller("mfl.gis.controllers.gis_const", {
                 "$scope": scope,
-                "gisCounty": {
-                    data: {
-                        properties: {
-                            bound: {
-                                coordinates: []
-                            },
-                            county_id:"4"
-                        }
-                    }
-                },
-                "gisConst": {
-                    data: {
-                        properties: {
-                            bound: {
-                                coordinates: []
-                            },
-                            constituency_id:"4"
-                        }
-                    }
-                },
                 "$http": {},
                 "$state": {},
                 "$stateParams": {county_id: 4, const_id: 4, ward_boundaries: 4},
@@ -240,16 +210,6 @@
             controller("mfl.gis.controllers.gis_const", {
                 "$scope": scope,
                 "leafletData": leafletData,
-                "gisCounty": {
-                    data: {
-                        properties: {
-                            bound: {
-                                coordinates: []
-                            },
-                            county_id:"4"
-                        }
-                    }
-                },
                 "$http": {},
                 "$state": {},
                 "$stateParams": {county_id: 4, const_id: 4, ward_boundaries: 4},
@@ -353,16 +313,6 @@
             controller("mfl.gis.controllers.gis_const", {
                 "$scope": scope,
                 "leafletData": leafletData,
-                "gisCounty": {
-                    data: {
-                        properties: {
-                            bound: {
-                                coordinates: []
-                            },
-                            county_id:"4"
-                        }
-                    }
-                },
                 "$http": {},
                 "$state": $state,
                 "$stateParams": {county_id:4,const_id: 4,county_boundaries:4,ward_boundaries: 4},
@@ -483,16 +433,6 @@
             controller("mfl.gis.controllers.gis_const", {
                 "$scope": scope,
                 "leafletData": leafletData,
-                "gisCounty": {
-                    data: {
-                        properties: {
-                            bound: {
-                                coordinates: []
-                            },
-                            county_id:"4"
-                        }
-                    }
-                },
                 "$http": {},
                 "$state": $state,
                 "$stateParams": {county_id: 4, const_id: 4, ward_boundaries: 4},
