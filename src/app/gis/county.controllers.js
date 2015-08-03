@@ -48,6 +48,7 @@
 
 
             $scope.filters_county = {
+                "fields":"geometry,county",
                 county : county_data.properties.county_id
             };
             var facilitiesPromise = gisAdminUnitsApi.facilities.filter($scope.filters_county);

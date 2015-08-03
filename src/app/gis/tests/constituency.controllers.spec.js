@@ -97,7 +97,7 @@
             SERVER_URL + "api/gis/constituency_boundaries/4/")
                 .respond(200, data1);
             $httpBackend.expectGET(
-            SERVER_URL + "api/gis/coordinates/?constituency=4")
+            SERVER_URL + "api/gis/coordinates/?fields=geometry,constituency&constituency=4")
                 .respond(200, data2);
             $httpBackend.expectGET(
             SERVER_URL + "api/gis/ward_boundaries/?id=4")
@@ -201,7 +201,7 @@
             SERVER_URL + "api/gis/constituency_boundaries/4/")
                 .respond(200, data1);
             $httpBackend.expectGET(
-            SERVER_URL + "api/gis/coordinates/?constituency=4")
+            SERVER_URL + "api/gis/coordinates/?fields=geometry,constituency&constituency=4")
                 .respond(200, data2);
             $httpBackend.expectGET(
             SERVER_URL + "api/gis/ward_boundaries/?id=4")
@@ -303,7 +303,7 @@
             SERVER_URL + "api/gis/constituency_boundaries/4/")
                 .respond(200, data1);
             $httpBackend.expectGET(
-            SERVER_URL + "api/gis/coordinates/?constituency=4")
+            SERVER_URL + "api/gis/coordinates/?fields=geometry,constituency&constituency=4")
                 .respond(200, data2);
             $httpBackend.expectGET(
             SERVER_URL + "api/gis/ward_boundaries/?id=4")
@@ -414,7 +414,7 @@
             SERVER_URL + "api/gis/constituency_boundaries/4/")
                  .respond(200, data1);
             $httpBackend.expectGET(
-            SERVER_URL + "api/gis/coordinates/?constituency=4")
+            SERVER_URL + "api/gis/coordinates/?fields=geometry,constituency&constituency=4")
                  .respond(200, data2);
             $httpBackend.expectGET(
             SERVER_URL + "api/gis/ward_boundaries/?id=4")
