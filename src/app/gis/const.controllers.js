@@ -57,6 +57,7 @@
 
 
             $scope.filters_const = {
+                "fields":"geometry,constituency"
                 constituency : const_data.properties.constituency_id
             };
             var facilitiesPromise = gisAdminUnitsApi.facilities.filter($scope.filters_const);
