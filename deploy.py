@@ -5,15 +5,23 @@ import logging
 from github3 import login
 
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.DEBUG)
 
 
-def main(access_token, repo_owner, repo_name, tag, branch_name, release_asset, release_asset_type, prerelease=True, ):  # noqa
+def main(access_token, repo_owner, repo_name, tag, branch_name, release_asset, release_asset_type, prerelease=True, deploy_env='staging'):  # noqa
     gh = login(token=access_token)
     repo = gh.repository(repo_owner, repo_name)
-    release = repo.create_release(tag, branch_name, prerelease=prerelease)
+
+    # create release
     release_asset_name = "{}__{}.tar.gz".format(release_asset.name, tag)
+    release = repo.create_release(tag, branch_name, prerelease=prerelease)
     release.upload_asset(release_asset_type, release_asset_name, release_asset)
+
+    # create deployment
+    repo.create_deployment(
+        branch_name, force=False, payload=json.dumps({"version": tag}),
+        auto_merge=False, environment=deploy_env
+    )
 
 
 if __name__ == '__main__':
@@ -26,5 +34,6 @@ if __name__ == '__main__':
             tag=version,
             branch_name=os.getenv('CIRCLE_BRANCH'),
             release_asset=asset,
-            release_asset_type='application/x-gzip'
+            release_asset_type='application/x-gzip',
+            deploy_env='staging',
         )
