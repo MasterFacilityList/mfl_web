@@ -266,50 +266,12 @@ h1 i, h2 i, h3 i, h4 i, h5 i {
 	border-radius: 4px;
 }
 
-/* Breadcrumbs */
-.breadcrumb-wrapper, .login-page, .register-page  {
-    background: #fff;
-}
-
 h2.title {
     font-size: 26px;
     line-height: 40px;
     margin: 20px 0;
 }
 
-.breadcrumbs {
-    margin: 24px 0;
-}
-
-.breadcrumbs ul li {
-    display: inline-block;
-    line-height: 24px;
-    font-size: 13px;
-    color: #9e9e9e;
-    margin: 0 0 0 5px;
-}
-
-.breadcrumbs ul li a {
-    color: #898989;
-    font-weight: 600;
-}
-
-.breadcrumbs ul li:first-child {
-    margin-left: 2px !important;
-}
-
-.breadcrumbs ul li:nth-child(2):before,.breadcrumbs ul li:first-child:before {
-    content: " ";
-    margin: 0;
-}
-
-.breadcrumbs ul li:before {
-    color: #9e9e9e;
-    content: "\f105";
-    font-family: FontAwesome;
-    font-size: 12px;
-    margin: 0 9px 0 0;
-}
 /* Slider */
 .fullwidthbanner-container {
     width: 100% !important;

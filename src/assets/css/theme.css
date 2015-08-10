@@ -7620,18 +7620,7 @@ a:focus {
 
     text-decoration: none
 }
-.content-control>.breadcrumb {
-    background-color: #fff;
-    display: inline-block;
-    font-size: 11px;
-    line-height: 39px;
-    margin: 0;
-    padding: 0 15px;
-    border-radius: 0
-}
-.content-control>.breadcrumb a {
-    color: #394264
-}
+
 .content>.content-body {
     position: relative;
     padding: 15px 15px 30px;
