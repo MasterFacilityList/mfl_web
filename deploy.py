@@ -20,7 +20,7 @@ def main(access_token, repo_owner, repo_name, tag, branch_name, release_asset, r
     # create deployment
     repo.create_deployment(
         branch_name, force=False, payload=json.dumps({"version": tag}),
-        auto_merge=False, environment=deploy_env
+        auto_merge=False, environment=deploy_env, required_contexts=[]
     )
 
 
