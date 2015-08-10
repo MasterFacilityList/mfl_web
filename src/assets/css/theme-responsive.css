@@ -291,14 +291,6 @@ div.content-box.big.bottom-pad-small {
     margin-bottom: 15px;
 }
 
-.breadcrumb-wrapper {
-    text-align: center;
-}
-
-.breadcrumbs.pull-right {
-    float: none !important;
-}
-
 .blog-small article .post-image {
     width: 99.7%;
 }
