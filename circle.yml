@@ -22,5 +22,5 @@ deployment:
         commands:
             - grunt default
             - tar cvzf "$RELEASE_ASSET" bin
-            - 'sudo pip install git+git://github.com/mbacho/github3.py.git@develop#egg=github3.py'
+            - sudo pip install github3.py
             - python deploy.py
