@@ -96,7 +96,6 @@
                 facilitiesApi.ratings.create($scope.service_rating)
                     .success(function (data) {
                         //save rating in localStorage
-                        console.log($scope.service_rating);
                         service_obj.spinner = false;
                         ratingService.storeRating(
                             data.facility_service, data.rating);
