@@ -81,15 +81,22 @@
             };
             $scope.getFacility();
 
-            $scope.getSelectedRating = function (rating, id, service_obj) {
+            $scope.getSelectedRating = function (rating, id) {
                 $scope.fac_rating = {
                     facility_service : id,
                     rating : rating
                 };
+            };
+            $scope.rateService = function (service_obj) {
+                $scope.service_rating = {
+                    facility_service : service_obj.id,
+                    rating : service_obj.ratings
+                };
                 service_obj.spinner = true;
-                facilitiesApi.ratings.create($scope.fac_rating)
+                facilitiesApi.ratings.create($scope.service_rating)
                     .success(function (data) {
                         //save rating in localStorage
+                        console.log($scope.service_rating);
                         service_obj.spinner = false;
                         ratingService.storeRating(
                             data.facility_service, data.rating);
@@ -97,12 +104,12 @@
                         toastr.success("Successfully rated");
                     })
                     .error(function (e) {
+                        console.log($scope.service_rating);
                         service_obj.spinner = false;
                         $scope.alert = e.detail || "Service can only be rated once a day";
                         toastr.error($scope.alert);
                     });
             };
-
             //printing function
             $scope.printing = function () {
                 $window.print();
