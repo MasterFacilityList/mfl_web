@@ -118,7 +118,30 @@ input.login-input:active:focus,
   background-color: darken(#F0F1F6, 5%);
   border-color: darken(#F0F1F6, 7%);
 }
+.login-btn-success {
+  padding: 7px 13px 8px 10px;
+  color: #ffffff;
+  background-color: #179600;
+  border-color: transparent;
+}
+.login-btn-success:hover,
+.login-btn-success:focus,
+.login-btn-success:active,
+.login-btn-success.active{
+  color: #F0F0F0;
+  background-color: darken(#179600, 5%);
+  border-color: #179600;
+}
 
+.login-btn-success[disabled],
+.login-btn-success:disabled, .login-btn-success[disabled]:hover,
+.login-btn-success[disabled]:focus, .login-btn-success[disabled].active,
+.login-btn-success.disabled {
+  color : darken(#f0f0f0, 15%);
+  background-color: darken(#179600, 15%) !important;
+  border-color: #179600 !important;
+  box-shadow: 1px 1px #FFFFFF !important;
+}
 .dis-container {
     background-color: rgba(192, 192, 192, 0.6);
 }
@@ -128,29 +151,3 @@ input.login-input:active:focus,
     font-size: 10px;
     font-weight: 300;
 }
-
-
-/*Material ripple effect =============*/
-/*.login-btn:after,
-.nav a:after {
-    content: "";
-    background: rgba(255,255,255,0.3);
-    display: block;
-    position: absolute;
-    border-radius: 50%;
-    padding-top: 240%;
-    padding-left: 240%;
-    margin-top: -120%;
-    margin-left: -120%;
-    opacity: 0;
-    transition: all 1s;
-}
-.login-btn:active:after,
-.nav a:active:after {
-    padding-top: 0;
-    padding-left: 0;
-    margin-top: 0;
-    margin-left: 0;
-    opacity: 1;
-    transition: 0s;
-}*/

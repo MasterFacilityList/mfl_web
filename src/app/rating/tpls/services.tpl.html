@@ -4,7 +4,9 @@
         <span class="fs-18 fw-500">{{oneFacility.average_rating | number : 2}} <i style="color: #FFD700" class="fa fa-star-o"></i></span>
 </h4>
 <h4 class="fs-16 fw-500 visible-xs fade-content">
-        <label>Total Facility Rating:</label>
+        <label>
+            Total Facility Rating:
+        </label>
         <span class="fw-500" style="color: #666;">{{oneFacility.average_rating | number : 2}} <i style="color: #FFD700" class="fa fa-star-o"></i></span>
 </h4>
 <div class="row fade-content">
@@ -21,7 +23,7 @@
         </p>
         <p>
             <button class="login-btn login-btn-primary" ng-click="rateFacility = !rateFacility">
-                &nbsp;{{rateFacility ? 'Hide' : 'View'}} Rating&nbsp;<i ng-if="!rateFacility" class="fa fa-caret-down"></i> <i class="fa fa-caret-up" ng-if="rateFacility"></i>
+                &nbsp;{{rateFacility ? 'Hide' : 'View'}} Service Rating&nbsp;<i ng-if="!rateFacility" class="fa fa-caret-down"></i> <i class="fa fa-caret-up" ng-if="rateFacility"></i>
             </button>
         </p>
         <!-- Start of content slide in -->
@@ -41,20 +43,29 @@
             </h4>
             <br>
             <h4>
-                 <span class="pull-left margin-t--5 class-rate">
+                 <span class="col-xs-12 pad-0 pull-left margin-t--5 class-rate">
                     <label class="fs-14 fw-500 light-font">Rate facility's service</label>
                     <span>
                         <!-- Testing rating directive -->
-                        <span class="fs-10" ng-repeat="rating in service.ratings">
+                        <span class="fs-12" ng-repeat="rating in service.ratings">
+                        <div class="form-group">
+                            <textarea class="form-control" rows="1" placeholder="Leave comment" ng-model="rating.comment"></textarea>
+                        </div>
                         <!-- {{rating.current}} out of{{rating.max}} -->
-                        <div star-rating rating-value="rating.current" max="rating.max" on-rating-selected="getSelectedRating(rating, service.id, service)"></div>
+                        <div star-rating rating-value="rating.current" max="rating.max" on-rating-selected="getSelectedRating(rating, service.id)"></div>
+                        <span class="col-xs-12 pad-0 margin-t-10">
+                            <button ng-click="rateService(service)" class="login-btn login-btn-success">
+                             &nbsp;Rate Service
+                            </button>
+                            <span class="pull-right" ng-if="service.spinner">
+                                <img src="assets/img/ajax-loader.gif" style="font-size: 10px; width: 20px height: 20px;">
+                            </span>
+                        </span>
                         </span>
                 <!-- End of rating directive -->
                     </span>
                 </span>
-                <span class="pull-left" ng-if="service.spinner">
-                    <img src="assets/img/ajax-loader.gif" style="font-size: 10px; width: 20px height: 20px;">
-                </span>
+
             </h4>
         </div>
         <!-- End of content slide in -->

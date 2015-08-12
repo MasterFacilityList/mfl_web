@@ -115,7 +115,7 @@
                 $httpBackend.flush();
                 expect(
                     scope.oneFacility.facility_services[0].ratings).toEqual(rate);
-
+                scope.rateService(service_obj);
                 scope.getSelectedRating(rating, id, service_obj);
                 $httpBackend.expectPOST(
                     SERVER_URL +
@@ -215,6 +215,7 @@
             var service_obj = {
                 id: 1
             };
+            scope.rateService(service_obj);
             scope.getSelectedRating(rating, id, service_obj);
             $httpBackend.expectPOST(
                     SERVER_URL +
