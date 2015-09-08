@@ -1,0 +1,25 @@
+<div class="col-xs-12 margin-b-20 content-card fade-content">
+<div class="alert alert-info margin-t-10 margin-r-20" ng-if="oneFacility.facility_units.length === 0">
+    <p class="lead fs-16 fw-600" >
+       <i class="fa fa-info-circle"></i> Facility not Assigned any Departments
+    </p>
+</div>
+<div class="col-xs-12 margin-t-20 margin-b-20" ng-if="oneFacility.facility_units.length !== 0">
+    <table class="table fs-14 table-hover table-condensed table-stripped">
+        <thead>
+            <th class="text-black col-md-8 col-xs-7">Name</th>
+            <th class="text-black col-md-4 col-xs-5 text-center">Regulating Nody</th>
+        </thead>
+        <tbody class="fw-600">
+            <tr ng-repeat="unit in oneFacility.facility_units">
+                <td class="pad-t-15 col-md-8 col-xs-7">
+                    {{unit.name}}
+                </td>
+                <td class="pad-t-15 col-md-4 col-xs-5 text-center">
+                    {{unit.regulating_body_name}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</div>

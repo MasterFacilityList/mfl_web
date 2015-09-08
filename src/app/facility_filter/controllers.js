@@ -179,7 +179,8 @@
                 return memo;
             }, {
                 "fields": "id,code,name,regulatory_status_name," +
-                          "facility_type_name,owner_name,county,constituency,ward_name,keph_level"
+                          "facility_type_name,owner_name,county,constituency,"+
+                          "ward_name,keph_level,operation_status_name"
             });
 
             $scope.spinner = true;
