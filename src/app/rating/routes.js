@@ -38,7 +38,14 @@
                     }
                 }
             })
-
+            .state("rating.regulation", {
+                url: "/regulation/",
+                views : {
+                    "form-view@rating" : {
+                        templateUrl : "rating/tpls/regulation.tpl.html"
+                    }
+                }
+            })
             .state("rating.units", {
                 url: "/units/",
                 views : {
