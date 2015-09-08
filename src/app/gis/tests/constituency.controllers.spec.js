@@ -28,8 +28,8 @@
                 }]);
         });
 
-        it("should load mfl.gis.controller.gis_const", inject(["$httpBackend","$state",
-                     "leafletData",
+        it("should load mfl.gis.controller.gis_const", inject(["$httpBackend",
+            "$state", "leafletData",
             function ($httpBackend, $state, leafletData) {
             var data1 = {
                 properties: {
