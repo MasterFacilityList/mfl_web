@@ -75,6 +75,10 @@
     <div ng-repeat-end=""></div>
 </div>
 </div>
-<div class="alert alert-info" ng-show="!oneFacility.service_catalogue_active">
-    The  facility is not operational, therefore the service catalogue has been deactivated
+<div class="col-xs-12 content-card" ng-if="!oneFacility.service_catalogue_active">
+    <div class="col-xs-12 alert alert-info margin-t-10">
+        <p class="lead fs-16 fw-600" >
+       <i class="fa fa-info-circle"></i>The  facility is not operational, therefore the service catalogue has been deactivated
+       </p>
+    </div>
 </div>
