@@ -294,7 +294,7 @@
                 default_url = server_url+"api/facilities/facilities/?" +
                               "fields=id,code,name,regulatory_status_name," +
                               "facility_type_name,owner_name,county," +
-                              "constituency,ward_name,keph_level&";
+                              "constituency,ward_name,keph_level,operation_status_name&";
             });
 
             it("should find facilities using the filters", function () {
