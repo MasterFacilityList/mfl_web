@@ -109,7 +109,7 @@
                     })
                     .error(function (e) {
                         service_obj.spinner = false;
-                        $scope.alert = e.detail || "Service can only be rated once a day";
+                        $scope.alert = "Service can only be rated once a day";
                         toastr.error($scope.alert);
                     });
             };
