@@ -48,16 +48,19 @@
         it("should test if ratings are added to facilities services",
         inject(["$httpBackend", "mfl.rating.services.rating",
             function ($httpBackend, ratingService) {
-                spyOn(ratingService, "getRating").andReturn(3);
+                spyOn(ratingService, "getRating").andReturn([3, "A comment"]);
                 controller("mfl.rating.controllers.rating");
                 var rating = 3;
                 var id = 1;
+                var comment = "A comment";
                 var service_obj = {
-                    id: 1
+                    id: 1,
+                    ratings : [3, "A comment"]
                 };
                 scope.fac_rating = {
                     facility_service : id,
-                    rating : rating
+                    rating : rating,
+                    comment : comment
                 };
                 var data = {
                     facility_services: [
@@ -213,10 +216,11 @@
             var rating = 3;
             var id = 1;
             var service_obj = {
-                id: 1
+                id: 1,
+                ratings : [3, "A comment"]
             };
             scope.rateService(service_obj);
-            scope.getSelectedRating(rating, id, service_obj);
+            scope.getSelectedRating(rating, id);
             $httpBackend.expectPOST(
                     SERVER_URL +
                     "api/facilities/facility_service_ratings/").

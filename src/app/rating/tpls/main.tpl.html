@@ -37,24 +37,27 @@
             </h4>
             <hr style="border: 1px solid #F0F0F0;">
             <br>
-            <h4 class="margin-t--27 fw-500  hidden-xs">
-                <span class="pull-left col-xs-12">
+            <h4 class="margin-t--27 fw-500">
+                <span class="pull-left col-md-6 col-xs-12">
                     <label>Type: </label>
                     {{oneFacility.facility_type_name}}
                 </span>
             </h4>
-            <h5 class="margin-t--27 fw-500  visible-xs">
-                <span class="pull-left col-xs-12">
-                    <label>Type: </label>
-                    {{oneFacility.facility_type_name}}
-                </span>
-            </h5>
             <br>
-            <h4 class=" hidden-xs">
+            <h4>
+                <div class="pull-left col-xs-12">
+                    <p ><b class="fs-16 text-black">Regulatory Body:</b>
+                    <span class="fs-16">
+                        {{oneFacility.regulatory_body_name}}
+                    </span></p>
+                </div>
+            </h4>
+            <br>
+            <h4>
                 <div class="pull-left col-md-6 col-xs-12">
-                    <p ><b class="fs-15">Status:</b>
-                    <span class="fs-15 label label-warning">
-                        {{oneFacility.regulatory_status_name}}
+                    <p ><b class="fs-15 text-black">Operation status:</b>
+                    <span class="fs-15 label label-success fs-13">
+                        {{oneFacility.operation_status_name}}
                     </span></p>
                 </div>
                 <span class="content-right fs-14 col-md-6 col-xs-12">
@@ -67,19 +70,20 @@
                     </span>
                 </span>
             </h4>
-            <h4 class=" visible-xs">
+            <br>
+            <h4>
                 <div class="pull-left col-md-6 col-xs-12">
-                    <p ><b class="fs-14">Status:</b>
-                    <span class="fs-14 label label-warning">
+                    <p ><b class="fs-15 text-black">Regulation Status:</b>
+                    <span class="fs-13 label label-warning">
                         {{oneFacility.regulatory_status_name}}
                     </span></p>
                 </div>
                 <span class="content-right fs-14 col-md-6 col-xs-12">
-                    <label>Open weekends </label>
-                    <span ng-show="oneFacility.open_weekends" class="text-success">
+                    <label>Open 24 hours </label>
+                    <span ng-show="oneFacility.open_whole_day" class="text-success">
                         <i class="fa fa-check-circle-o fa-1x fs-15"></i>
                     </span>
-                    <span ng-hide="oneFacility.open_weekends" class="text-danger">
+                    <span ng-hide="oneFacility.open_whole_day" class="text-danger">
                         <i class="fa fa-times-circle-o fa-1x fs-15"></i>
                     </span>
                 </span>
@@ -92,11 +96,11 @@
                     {{oneFacility.number_of_beds}}
                 </span>
                 <span class="content-right col-md-6 col-xs-12">
-                    <label>Open 24 hours </label>
-                    <span ng-show="oneFacility.open_whole_day" class="text-success">
+                    <label>Open late night </label>
+                    <span ng-show="oneFacility.open_late_night" class="text-success">
                         <i class="fa fa-check-circle-o fa-1x fs-15"></i>
                     </span>
-                    <span ng-hide="oneFacility.open_whole_day" class="text-danger">
+                    <span ng-hide="oneFacility.open_late_night" class="text-danger">
                         <i class="fa fa-times-circle-o fa-1x fs-15"></i>
                     </span>
                 </span>
@@ -119,9 +123,46 @@
             </h4>
             <br>
             <!-- Display location details  -->
+            <hr style="border: 1px solid #F0F0F0;" ng-if="oneFacility.officer_in_charge !== null">
+            <h4 class="fs-20 fw-600  col-xs-12" ng-if="oneFacility.officer_in_charge !== null">
+            <span class="fa-stack fa-lg fs-13">
+              <i class="fa fa-circle fa-stack-2x"></i>
+              <i class="fa fa-user-md fa-stack-1x fa-inverse"></i>
+            </span> Officer in charge</h4>
+            <br ng-if="oneFacility.officer_in_charge !== null">
+            <h4 class="fs-14 fw-500" ng-if="oneFacility.officer_in_charge.name !== null">
+                <span class="pull-left col-md-6 col-xs-12" ng-if="oneFacility.officer_in_charge !== null">
+                    <label>Name: </label>
+                    {{oneFacility.officer_in_charge.name}}
+                </span>
+                <span class="content-right fs-14 col-md-6 col-xs-12" ng-if="oneFacility.officer_in_charge !== null">
+                    <label>Job Title: </label>
+                    {{oneFacility.officer_in_charge.title_name}}
+                </span>
+            </h4>
+            <br ng-if="oneFacility.officer_in_charge !== null">
+            <h4 class="fs-14 fw-500" ng-if="oneFacility.officer_in_charge !== null">
+                <span class="pull-left col-xs-12">
+                    <label>Registration #: </label>
+                    {{oneFacility.officer_in_charge.reg_no}}
+                </span>
+            </h4>
+            <br ng-if="oneFacility.officer_in_charge !== null">
+            <h4 class="fs-14 fw-500 margin-t-10 margin-b-10" ng-if="oneFacility.officer_in_charge.contacts.length !== 0 && oneFacility.officer_in_charge !== null">
+                <span class="fs-15 fw-600 col-xs-12 text-black margin-b-10">Officer Contacts</span>
+                <span class="pull-left col-xs-12 margin-b-10" ng-repeat="contact in oneFacility.officer_in_charge.contacts">
+                    <label>{{contact.contact_type_name}}: </label>
+                    {{contact.contact}}
+                </span>
+            </h4>
+            <br ng-if="oneFacility.officer_in_charge.contacts.length !== 0 && oneFacility.officer_in_charge !== null">
+            <!-- Display location details  -->
             <hr style="border: 1px solid #F0F0F0;">
-            <h4 class="fs-18 fw-600  hidden-xs col-xs-12"> <i class="fa fa-map-marker"></i> Location</h4>
-            <h4 class="fs-16 fw-600  visible-xs col-xs-12"> <i class="fa fa-map-marker"></i> Location</h4>
+            <h4 class="fs-20 fw-600  col-xs-12">
+            <span class="fa-stack fa-lg fs-13">
+              <i class="fa fa-circle fa-stack-2x"></i>
+              <i class="fa fa-map-marker fa-stack-1x fa-inverse"></i>
+            </span> Location</h4>
             <br>
             <h4 class="fs-14 fw-500  hidden-sm hidden-xs">
                 <a ui-sref="gis.gis_county({county_id:oneFacility.boundaries.county_boundary,const_boundaries:const_boundaries})">
@@ -143,33 +184,33 @@
                 </span>
             </h5>
             <br>
-            <h4 class="fs-16 fw-500  hidden-sm hidden-xs">
+            <h4 class="fs-16 fw-500  hidden-sm hidden-xs margin-t-15">
                 <span class="fs-14 fw-500 pull-left col-md-6 col-xs-12">
                     <a ui-sref="gis.gis_county.gis_const.gis_ward({county_id:oneFacility.boundaries.county_boundary,const_boundaries:const_boundaries,const_id:oneFacility.boundaries.constituency_boundary,const_boundaries:const_boundaries,ward_id:oneFacility.boundaries.ward_boundary})">
                     <span class="text-blue">{{oneFacility.ward_name}} WARD</span>
                     </a>
                 </span>
-                <span class="content-right col-md-6 col-xs-12 fs-14">
-                    {{oneFacility.facility_physical_address.town}} town
+                <span class="content-right col-md-6 col-xs-12 fs-14" ng-if="neFacility.facility_physical_address.town !== null">
+                    {{oneFacility.town_name}} town
                 </span>
             </h4>
-            <h5 class="fs-14 fw-500 visible-sm visible-xs">
+            <h5 class="fs-14 fw-500 visible-sm visible-xs margin-t-15">
                 <span class="pull-left col-md-6 col-xs-12">
                     {{oneFacility.ward_name}} WARD
                 </span>
-                <span class="content-right col-md-6 col-xs-12">
-                {{oneFacility.facility_physical_address.town}} town
+                <span class="content-right col-md-6 col-xs-12" ng-if="neFacility.town !== null">
+                {{oneFacility.town_name}} town
                 </span>
             </h5>
             <br>
-            <h5 class="fs-14 fw-500" ng-if="oneFacility.facility_physical_address.plot_number !== ''">
+            <h5 class="fs-14 fw-500" ng-if="oneFacility.plot_number !== null">
                 <span class="pull-left col-xs-12" >
                     <label>Plot number: </label>
-                    {{oneFacility.facility_physical_address.plot_number}}
+                    {{oneFacility.plot_number}}
                 </span>
             </h5>
-            <br ng-if="oneFacility.facility_physical_address.plot_number !== ''">
-            <h4 class="fs-14 fw-500" ng-if="oneFacility.location_desc !== ''">
+            <br ng-if="oneFacility.plot_number !== null">
+            <h4 class="fs-14 fw-500" ng-if="oneFacility.location_desc !== null">
                 <p class="lead fs-14 col-xs-12">
                     <label>Specific directions: </label>
                     {{oneFacility.location_desc}}
@@ -180,55 +221,60 @@
 
         </div>
         <!-- Extra details displayed here =========================== -->
-        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right side-cont">
-            <div class="col-md-12 results-card margin-b-10">
-                <h4 class="fs-18 text-blue fw-500 hidden-xs">
-                    <i class="fa fa-user-secret fa-1x"></i>
-                    Ownership status
-                </h4>
-                <h5 class="fs-16 text-blue fw-500 visible-xs">
-                    <i class="fa fa-user-secret fa-1x"></i>
-                    Ownership status
-                </h5>
-                <h4 class="fw-500 hidden-xs">
-                    <span class="pad-t-5">
-                        <h5 class="fs-16 fw-500"><label>Owner: </label> {{oneFacility.owner_name}}</h5>
-                        <h5 class="fs-14 fw-500"><label>Category: </label> {{oneFacility.owner_type_name}}</h5>
+        <div class="side-cont col-lg-4 col-md-4 col-sm-12 col-xs-12 pull-right pad-l-20">
+            <div class="col-md-12 col-xs-12 results-card margin-b-10">
+                <div class="col-md-2 col-xs-2 margin-t-5 pad-l-0">
+                    <span class="fa-stack fa-lg text-blue fs-26">
+                      <i class="fa fa-circle fa-stack-2x"></i>
+                      <i class="fa fa-user-secret fa-stack-1x fa-inverse"></i>
                     </span>
-                </h4>
-                <h4 class="fw-500 visible-xs">
-                    <span class="pad-t-5">
-                        <h5 class="fs-14 fw-500"><label>Owner: </label> {{oneFacility.owner_name}}</h5>
-                        <h5 class="fs-13 fw-500"><label>Category: </label> {{oneFacility.owner_type_name}}</h5>
-                    </span>
-                </h4>
+                </div>
+                <div class="col-md-9 col-xs-10 pad-l-0 margin-t-3">
+                    <p class="fw-500">
+                        <span class="pad-t-5">
+                            <h5 class="fs-14 fw-500"><label>Owner: </label> {{oneFacility.owner_name}}</h5>
+                            <h5 class="fs-12 fw-500 margin-t--5"><label>Category: </label> {{oneFacility.owner_type_name}}</h5>
+                        </span>
+                    </p>
+                </div>
             </div>
             <br><br>
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 results-card" ng-if="oneFacility.facility_contacts.length !== 0">
-                <h4 class="fs-18 text-blue fw-500 hidden-xs">
-                    <i style="border: 1px solid #fff; border-radius : 50%;" class="fa fa-phone fa-1x"></i>
-                    Contacts
-                </h4>
-                <h4 class="fs-16 margin-t--5 text-blue fw-500 visible-xs">
-                    <i style="border: 1px solid #fff; border-radius : 50%;" class="fa fa-phone fa-1x"></i>
-                    Contacts
-                </h4>
-                <h4 ng-repeat="cont in oneFacility.facility_contacts" class="fw-500">
-                    <span  class="margin-b-10 fs-14 hidden-xs">
-                        <label>
-                            {{cont.contact_type_name}} :
-                        </label>
-                        {{cont.contact}}
+            <div class="col-md-12 col-xs-12 results-card margin-b-10" ng-if="oneFacility.bank_name">
+                <div class="col-md-2 col-xs-2 margin-t-5 pad-l-0">
+                    <span class="fa-stack fa-lg text-blue fs-26">
+                      <i class="fa fa-circle fa-stack-2x"></i>
+                      <i class="fa fa-bank fa-stack-1x fa-inverse"></i>
                     </span>
-                    <span  class="margin-b-10 fs-13 visible-xs">
-                        <label>
-                            {{cont.contact_type_name}} :
-                        </label>
-                        {{cont.contact}}
-                    </span>
-                </h4>
+                </div>
+                <div class="col-md-9 col-xs-10 pad-l-0 margin-t-3">
+                    <p class="fw-500">
+                        <span class="pad-t-5">
+                            <h5 class="fs-14 fw-500"><label>Bank: </label> {{oneFacility.bank_name}}</h5>
+                            <h5 class="fs-12 fw-500 margin-t--5"><label>Branch: </label> {{oneFacility.branch_name}}</h5>
+                            <h5 class="fs-12 fw-500 margin-t--5"><label>Account #: </label> {{oneFacility.bank_account}}</h5>
+                        </span>
+                    </p>
+                </div>
             </div>
-
+            <br><br>
+            <div class="col-sm-12 col-xs-12 results-card margin-b-10" ng-if="oneFacility.facility_contacts.length !== 0">
+                <div class="col-md-2 col-xs-2 margin-t-5 pad-l-0">
+                    <span class="fa-stack fa-lg text-blue fs-26">
+                      <i class="fa fa-circle fa-stack-2x"></i>
+                      <i class="fa fa-phone fa-stack-1x fa-inverse"></i>
+                    </span>
+                </div>
+                <div class="col-md-10 col-xs-10 pad-l-0 margin-t-3">
+                <p ng-repeat="cont in oneFacility.facility_contacts" class="fw-500 margin-b-0">
+                    <span  class="fs-14">
+                        <label>
+                            {{cont.contact_type_name}} :
+                        </label>
+                        {{cont.contact}}
+                    </span>
+                </p>
+                </div>
+            </div>
         </div>
         <!-- End of displaying extra details  -->
     </div>
@@ -240,6 +286,13 @@
                     <a ui-sref=".services">
                         <span class="fw-900">
                             <i class="fa fa-exchange"></i> Facility Services
+                        </span>
+                    </a>
+                </li>
+                <li ui-sref-active="active">
+                    <a ui-sref=".regulation">
+                        <span class="fw-900 ">
+                            <i class="fa fa-gavel"></i> Regulation
                         </span>
                     </a>
                 </li>
