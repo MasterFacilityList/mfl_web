@@ -56,9 +56,10 @@
                             var current_rate = "";
                             current_rate = ratingService.getRating(service.id);
                             if(!_.isNull(current_rate)) {
+                                service.comment = current_rate[1];
                                 service.ratings = [
                                     {
-                                        current : current_rate,
+                                        current : current_rate[0],
                                         max: 5
                                     }
                                 ];
@@ -90,20 +91,23 @@
             $scope.rateService = function (service_obj) {
                 $scope.service_rating = {
                     facility_service : service_obj.id,
-                    rating : service_obj.ratings
+                    rating : service_obj.ratings[0].current,
+                    comment : service_obj.ratings[0].comment
                 };
                 service_obj.spinner = true;
                 facilitiesApi.ratings.create($scope.service_rating)
                     .success(function (data) {
                         //save rating in localStorage
+                        var rating_val = [];
+                        rating_val[0] = data.rating;
+                        rating_val[1] = data.comment;
                         service_obj.spinner = false;
                         ratingService.storeRating(
-                            data.facility_service, data.rating);
+                            data.facility_service, rating_val);
                         $scope.getFacility();
                         toastr.success("Successfully rated");
                     })
                     .error(function (e) {
-                        console.log($scope.service_rating);
                         service_obj.spinner = false;
                         $scope.alert = e.detail || "Service can only be rated once a day";
                         toastr.error($scope.alert);
