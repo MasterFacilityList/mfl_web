@@ -13,12 +13,17 @@
 
     .constant("CREDZ", angular.copy(window.MFL_SETTINGS.CREDZ))
 
+    .constant("LAST_UPDATE", angular.copy(window.MFL_SETTINGS.last_update))
+
+    .constant("DB_NAME", "mflAppStore")
+
     .config(["$urlRouterProvider", function ($urlRouterProvider) {
         $urlRouterProvider.otherwise("/home");
     }])
-    .config(["$localForageProvider", function($localForageProvider) {
+
+    .config(["$localForageProvider", "DB_NAME", function($localForageProvider, DB_NAME) {
         $localForageProvider.config({
-            name: "mflApp" // name of the database and prefix for your data
+            "name": DB_NAME // name of the database and prefix for your data
         });
     }])
     .config(["$httpProvider",function ($httpProvider) {

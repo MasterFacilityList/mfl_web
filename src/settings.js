@@ -11,7 +11,8 @@
                              "bCMZhZqmANYV5ZP04mUXGJdsrZLXuZG4VCmv" +
                              "jShdKHwU6IRmPQld5LDzvJoguEP8AAXGJhrq" +
                              "fLnmtFXU3x2FO1nWLxUx",
-            "token_url": "o/token/"
+            "token_url": "o/token/",
+            "last_update": null
         }
     };
 
