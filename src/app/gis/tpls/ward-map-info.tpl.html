@@ -1,4 +1,4 @@
-<div class="col-md-4 margin-15 anim-slide-below-fade">
+<div class="col-md-4 col-xs-12 margin-15 anim-slide-below-fade">
     <div class="content-card">
         <h4>NAVIGATION</h4>
         <a ui-sref="gis" ui-sref-opts="{reload: true}">KENYA /</a><br>
@@ -21,9 +21,12 @@
         </a>
     </div>
 </div>
-<div class="col-md-8 margin-b-10 anim-fade">
-    <div ng-if="!spinner" class="col-xs-12 content-card">
+<div class="col-md-7 col-xs-12 margin-b-10 anim-fade">
+    <div ng-if="!spinner" class="col-xs-12 content-card margin-t-15">
         <h4 class="fw-500">{{ward.properties.name}} WARD <span class="pull-right">{{facility_count}} facilities</span></h4>
+    </div>
+    <div ng-if="alert" class="col-xs-12 alert alert-danger">
+      <p class="lead fs-16">{{alert}}</p>
     </div>
     <leaflet class="col-xs-12 pad-r-0 pad-l-0" id="wardmap"
         width="100%"
