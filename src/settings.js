@@ -12,8 +12,7 @@
                              "jShdKHwU6IRmPQld5LDzvJoguEP8AAXGJhrq" +
                              "fLnmtFXU3x2FO1nWLxUx",
             "token_url": "o/token/",
-            "last_update": null,
-            "db_name": "mflApp"
+            "last_update": null
         }
     };
 
