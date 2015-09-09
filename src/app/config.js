@@ -15,7 +15,7 @@
 
     .constant("LAST_UPDATE", angular.copy(window.MFL_SETTINGS.last_update))
 
-    .constant("DB_NAME", angular.copy(window.MFL_SETTINGS.db_name))
+    .constant("DB_NAME", "mflAppStore")
 
     .config(["$urlRouterProvider", function ($urlRouterProvider) {
         $urlRouterProvider.otherwise("/home");
