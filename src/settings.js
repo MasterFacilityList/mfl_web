@@ -11,9 +11,9 @@
                              "bCMZhZqmANYV5ZP04mUXGJdsrZLXuZG4VCmv" +
                              "jShdKHwU6IRmPQld5LDzvJoguEP8AAXGJhrq" +
                              "fLnmtFXU3x2FO1nWLxUx",
-            "token_url": "o/token/",
-            "last_update": null
-        }
+            "token_url": "o/token/"
+        },
+        "last_update": null
     };
 
     setts.CREDZ.token_url = setts.SERVER_URL + setts.CREDZ.token_url;
