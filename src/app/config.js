@@ -13,8 +13,6 @@
 
     .constant("CREDZ", angular.copy(window.MFL_SETTINGS.CREDZ))
 
-    .constant("LAST_UPDATE", angular.copy(window.MFL_SETTINGS.last_update))
-
     .constant("DB_NAME", "mflAppStore")
 
     .config(["$urlRouterProvider", function ($urlRouterProvider) {
