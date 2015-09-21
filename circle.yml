@@ -17,7 +17,7 @@ test:
 
 deployment:
     release:
-        branch: bump-release
+        branch: master
         owner: MasterFacilityList
         commands:
             - grunt default
