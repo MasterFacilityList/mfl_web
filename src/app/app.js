@@ -14,6 +14,7 @@
         "templates-common",
         "mfl.home",
         "mfl.facility_filter",
+        "mfl.chul",
         "mfl.gis",
         "mfl.auth",
         "mfl.rating",
