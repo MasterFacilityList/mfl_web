@@ -3,7 +3,7 @@
 
     angular.module("mfl.chul.services", [
         "api.wrapper",
-        "mfl.auth.service"
+        "mflAppConfig"
     ])
 
     .service("mfl.chul.services.wrappers",

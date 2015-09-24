@@ -24,12 +24,21 @@
                 }
             })
             .state("chul_view", {
-                url: "/chul/view/:unit_id",
+                url: "/view/:unit_id",
                 views: {
                     "main": {
                         controller: "mfl.chul.controllers.view",
                         templateUrl: "chul/tpls/chul_view.tpl.html"
                     }
+                },
+                resolve: {
+                    "auth": ["api.auth", "$q", function (auth, $q) {
+                        var current_token = auth.getToken();
+                        if (current_token) {
+                            return $q.when(current_token);
+                        }
+                        return auth.fetchToken();
+                    }]
                 }
             });
     }]);
