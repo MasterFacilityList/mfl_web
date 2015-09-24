@@ -7082,11 +7082,11 @@ body {
     color: #F6F4F4
 }
 a {
-    color: #82CAFF
+    color: #2196F3;
 }
 a:hover,
 a:focus {
-    color: #0E7D76
+    color: #673ab7;
 }
 .translate-left {
     -webkit-transition: all .3s ease;
