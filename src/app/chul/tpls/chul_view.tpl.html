@@ -93,7 +93,7 @@
             </div>
             <!-- Extra details displayed here =========================== -->
             <div class="side-cont col-md-4 col-xs-12 pull-right pad-l-20">
-                <div class="col-xs-12 results-card margin-b-10" ng-if="unit.facility_contacts.length !== 0">
+                <div class="col-xs-12 results-card margin-b-10" ng-if="unit.contacts.length !== 0">
                     <div class="col-xs-2 margin-t-5 pad-l-0">
                         <span class="fa-stack fa-lg text-blue fs-26">
                           <i class="fa fa-circle fa-stack-2x"></i>
@@ -101,7 +101,7 @@
                         </span>
                     </div>
                     <div class="col-md-10 col-xs-10 pad-l-0 margin-t-3">
-                    <p ng-repeat="cont in oneFacility.facility_contacts" class="fw-500 margin-b-0">
+                    <p ng-repeat="cont in unit.contacts" class="fw-500 margin-b-0">
                         <span  class="fs-14">
                             <label>
                                 {{cont.contact_type_name}} :
@@ -110,6 +110,9 @@
                         </span>
                     </p>
                     </div>
+                </div>
+                <div ng-if="unit.contacts.length == 0">
+                    Contacts missing
                 </div>
                 <br><br>
             </div>
