@@ -68,22 +68,6 @@
             httpBackend
                 .expectGET(server_url+"api/chul/units/1/")
                 .respond(200, {facility:1});
-            httpBackend
-                .expectGET(server_url+"api/facilities/facilities/1/")
-                .respond(200, {
-                    properties:{
-                        bound:{
-                                coordinates:[0,1]
-                            }
-                        },
-                        boundaries:{
-                            ward_boundary:1
-                        }
-                    }
-                    );
-            httpBackend
-                .expectGET(server_url+"api/gis/ward_boundaries/1/")
-                .respond(200, {boundaries:{ward_boundary:1}});
             httpBackend.flush();
             httpBackend.verifyNoOutstandingRequest();
             httpBackend.verifyNoOutstandingExpectation();
