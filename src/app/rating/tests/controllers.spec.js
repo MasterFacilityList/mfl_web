@@ -97,7 +97,7 @@
                 };
                 $httpBackend
                 .expectGET(SERVER_URL +
-                    "api/chul/units/?facility=1&fields=id,code,name,status,households_monitored")
+                "api/chul/units/?facility=1&fields=id,code,name,status_name,households_monitored")
                 .respond(200, {name : "chu"});
 
                 $httpBackend.expectGET(SERVER_URL +
@@ -127,7 +127,7 @@
                 //get one facility and redisplay all of its details
                 $httpBackend
                 .expectGET(SERVER_URL +
-                    "api/chul/units/?facility=1&fields=id,code,name,status,households_monitored")
+                "api/chul/units/?facility=1&fields=id,code,name,status_name,households_monitored")
                 .respond(200, {name : "chu"});
                 $httpBackend.expectGET(SERVER_URL +
                     "api/facilities/facilities/1/").respond(200, data);
@@ -180,7 +180,7 @@
                 };
                 $httpBackend
                 .expectGET(SERVER_URL +
-                    "api/chul/units/?facility=1&fields=id,code,name,status,households_monitored")
+                "api/chul/units/?facility=1&fields=id,code,name,status_name,households_monitored")
                 .respond(200, {name : "chu"});
                 $httpBackend.expectGET(SERVER_URL +
                     "api/facilities/facilities/1/").respond(200, data);
@@ -208,7 +208,7 @@
             controller("mfl.rating.controllers.rating");
             $httpBackend
                 .expectGET(SERVER_URL +
-                    "api/chul/units/?facility=1&fields=id,code,name,status,households_monitored")
+                "api/chul/units/?facility=1&fields=id,code,name,status_name,households_monitored")
                 .respond(400, {});
             $httpBackend.expectGET(
                 SERVER_URL +
@@ -253,7 +253,7 @@
 
                 $httpBackend
                 .expectGET(SERVER_URL +
-                    "api/chul/units/?facility=1&fields=id,code,name,status,households_monitored")
+                "api/chul/units/?facility=1&fields=id,code,name,status_name,households_monitored")
                 .respond(200, {name : "chu"});
 
                 $httpBackend.expectGET(SERVER_URL +

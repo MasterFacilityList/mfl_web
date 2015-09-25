@@ -16,7 +16,7 @@
             $scope.getFacility = function () {
                 facilitiesApi.chus.filter({
                     "facility" : $scope.fac_id,
-                    "fields": "id,code,name,status,households_monitored"
+                    "fields": "id,code,name,status_name,households_monitored"
                 })
                 .success(function (data) {
                     $scope.chus = data.results;
