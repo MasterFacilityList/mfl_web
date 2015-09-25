@@ -7,18 +7,19 @@
 <div class="col-xs-12 margin-t-20 margin-b-20" ng-if="chus.length !== 0">
     <table class="table fs-14 table-hover table-stripped">
         <thead>
-            <th class="text-blue col-xs-3">Code</th>
-            <th class="text-blue col-xs-3">Name</th>
-            <th class="text-blue col-xs-4">Status</th>
-            <th class="text-blue text-center col-xs-2">Monitored Households</th>
+            <th class="col-xs-3">Name</th>
+            <th class="col-xs-3">Code</th>
+            <th class="col-xs-4">Status</th>
+            <th class="text-center col-xs-2">Monitored Households</th>
+            <th></th>
         </thead>
-        <tbody class="fw-600">
+        <tbody class="lato">
             <tr ng-repeat="unit in chus">
                 <td class="pad-t-15">
-                    {{unit.code}}
+                    <a ui-sref="chul_view({unit_id:unit.id})">{{unit.name}}</a>
                 </td>
                 <td class="pad-t-15">
-                    {{unit.name}}
+                    {{unit.code}}
                 </td>
                 <td class="pad-t-15">
                     {{unit.status_name}}

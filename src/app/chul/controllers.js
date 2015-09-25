@@ -1,7 +1,8 @@
 (function(angular){
     "use strict";
 
-    angular.module("mfl.chul.controllers", ["mfl.chul.services"])
+    angular.module("mfl.chul.controllers", ["mfl.chul.services",
+                                            "mfl.facility_filter.services"])
 
     .controller("mfl.chul.controllers.list", ["$scope","mfl.chul.services.wrappers",
         function ($scope,wrappers) {
