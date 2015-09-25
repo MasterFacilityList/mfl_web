@@ -40,7 +40,8 @@
                     <p class="fs-16 pull-md-right pull-xs-left"><b class="text-black">Status:</b>
                     <span>
                         {{unit.status_name}}
-                    </span></p>
+                    </span>
+                    </p>
                 </div>
                 <br>
                 <br>
@@ -103,14 +104,13 @@
             <br><br>
             <div class="col-xs-12 content-card margin-v-20">
                 <div class="margin-b-50">
-                    <h4>{{unit.facility_name}} MAP</h4>
                     <leaflet id="wardmap"
                         defaults="defaults"
                         markers="markers"
                         layers="layers"
                         tiles="tiles"
                         width="100%"
-                        height="250px"
+                        height="350px"
                         geojson="geojson">
                     </leaflet>
                 </div>
