@@ -29,47 +29,42 @@
         </div>
 
         <div class="col-xs-12">
-            <p class="lead" ng-if="results.results.length === 0">
-                Sorry, no match found for search.</p>
-            <div class="fade-content results-card col-xs-12" ng-repeat="fac in results.results">
-                <div>
-                    <a ui-sref="rating.services({fac_id : fac.id})">
-                        <p class="search-resulthead lead col-xs-12">
-                            <span class="fw-600 fs-18 pull-left" style="cursor: pointer">
-                                <span class="fw-600 fs-20"> {{fac.code}} </span> | {{fac.name}}
-                            </span>
-                        </p>
-                    </a>
-
-                    <br />
-
-                    <h5 class="margin-b-10">
-                        <span class="pull-left fs-16 col-md-6 col-xs-12">
-                            <label>Status: </label>
-                            <span class="text-success fw-600">{{fac.operation_status_name}}</span>
-                        </span>
-                        <span class="content-right col-md-6 col-xs-12">
-                            <span class="fs-14 fw-600 label label-primary">{{fac.facility_type_name}}</span>
-                        </span>
-                    </h5>
-
-                    <br>
-
-                    <h5 class="margin-t-10 fw-600 margin-t-5" style="color:#000;">
-
-                    <span class="pull-left fs-15 col-md-6 col-xs-12">{{fac.county}} COUNTY</span>
-                    <span class="content-right col-md-6 col-xs-12" data-trigger="hover" data-type="success" data-title="View Patient" bs-tooltip title="Facility owner">
-                        <i class="fa fa-user-secret"></i> {{fac.owner_name}}
+            <p class="lead" ng-if="results.results.length === 0">Sorry, no match found for search.</p>
+            <div class="col-xs-12 fade-content results-card fs-responsive" ng-repeat="chu in results.results">
+                <a class="col-xs-12 margin-b-10" ui-sref="chul_view({unit_id : chu.id})">
+                    <strong class="fs-20"> {{chu.code}} | {{chu.name}} </strong>
+                </a>
+                <div class="col-md-12 margin-b-5">
+                    <span class="pull-left col-md-8 col-xs-12">
+                        <label>Linked Facility: </label>
+                        <a ui-sref="rating.services({fac_id : chu.facility})">
+                            <span class="fw-600 fs-18" style="cursor: pointer">{{chu.facility_name}}</span>
+                        </a>
                     </span>
+                    <span class="col-md-4 col-xs-12">
+                       <span class="pull-xs-left pull-md-right">
+                            <span class="label label-primary fw-600">{{chu.status_name}}</span>
+                       </span>
+                    </span>
+                </div>
 
-                    </h5>
+                <div class="col-md-12 margin-b-5">
+                    <strong class="pull-left col-md-5 col-xs-12">{{chu.facility_county}} COUNTY</strong>
+                    <span class="col-md-7 col-xs-12">
+                        <span class="pull-xs-left pull-md-right">
+                            <strong>Date Established:</strong>
+                            {{chu.date_established | date : 'EEE, dd-MM-yyyy'}}
+                        </span>
+                    </span>
+                </div>
 
-                    <br>
-
-                    <p class="margin-b-10 margin-t--5 col-xs-12">
-                        <span class="pull-left fs-14 fw-500 text-black">{{fac.constituency}} SUB-COUNTY</span>
-                        <span class="pull-right fs-13 fw-500 text-black">{{fac.ward_name}} WARD</span>
-                    </p>
+                <div class="col-md-12 margin-b-5">
+                    <span class="pull-left col-md-6 col-xs-12">{{chu.facility_subcounty}} SUB-COUNTY</span>
+                    <span class="col-md-6 col-xs-12">
+                        <span class="pull-xs-left pull-md-right">
+                                {{chu.facility_ward}} WARD
+                        </span>
+                    </span>
                 </div>
             </div>
         </div>
