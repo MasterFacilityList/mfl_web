@@ -27,13 +27,13 @@
                         <input placeholder="CHU Code" type="text" class="form-control" ng-model="filters.single.code" id="code" name="code"/>
                     </div>
                     <div class="form-group fs-14">
-                        <label  class="fw-500">Operation Status</label>
-                        <ui-select ng-model="filters.multiple.operation_status" multiple id="operation_status" name="operation_status">
-                            <ui-select-match placeholder="Select a operation status...">
+                        <label  class="fw-500">Status</label>
+                        <ui-select ng-model="filters.multiple.status" multiple id="status" name="status">
+                            <ui-select-match placeholder="Select a status...">
                                 <span>{{$item.name}}</span>
                             </ui-select-match>
-                            <ui-select-choices repeat="os in filter_summaries.operation_status | filter:$select.search">
-                                <span>{{os.name}}</span>
+                            <ui-select-choices repeat="s in filter_summaries.status | filter:$select.search">
+                                <span>{{s.name}}</span>
                             </ui-select-choices>
                         </ui-select>
                     </div>

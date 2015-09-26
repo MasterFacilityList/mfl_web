@@ -54,7 +54,7 @@
                         <!-- {{rating.current}} out of{{rating.max}} -->
                         <div star-rating rating-value="rating.current" max="rating.max" on-rating-selected="getSelectedRating(rating, service.id)"></div>
                         <span class="col-xs-12 pad-0 margin-t-10">
-                            <button ng-click="rateService(service)" class="login-btn login-btn-success">
+                            <button ng-click="rateService(service)" class="login-btn login-btn-success btn-sm">
                              &nbsp;Rate Service
                             </button>
                             <span class="pull-right" ng-if="service.spinner">

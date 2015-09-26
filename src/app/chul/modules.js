@@ -6,7 +6,9 @@
         "ui.bootstrap",
         "ui.bootstrap.tpls",
         "mfl.chul.controllers",
-        "mfl.chul.routes"
+        "mfl.chul.routes",
+        "mfl.rating.directives",
+        "mfl.rating.services"
     ]);
 
 })(window.angular);

@@ -3,8 +3,21 @@
        <span class="main-title fs-20"><i class="fa fa-download"></i> Downloads </span>
    </h2>
 </div>
-<div class="container-fluid margin-t-20">
-    <div class="fade-content results-card col-md-10 col-md-offset-1" ng-repeat="doc in documents">
+<div class="col-xs-12 margin-t-20" ng-if="spinner" style="text-align: center">
+    <div class="map-change-state">
+        <div class="loader"></div>
+        <div class="row">
+            <h3 class="text-center loader-text">Please wait...</h3>
+        </div>
+    </div>
+</div>
+<div class="container-fluid margin-t-20" ng-if="!spinner">
+    <div class="fade-content results-card col-md-10 col-md-offset-1 col-xs-12" ng-if="errors">
+        <div class="col-xs-12 aler alert-danger">
+            <p class="lead">{{errors}}</p>
+        </div>
+    </div>
+    <div class="fade-content results-card col-md-10 col-md-offset-1 col-xs-12" ng-repeat="doc in documents">
         <div class="col-md-1 col-xs-2 text-primary">
             <span class="fa-stack fa-lg fs-26 margin-t-10">
               <i class="fa fa-circle fa-stack-2x"></i>
@@ -25,7 +38,7 @@
             </div>
         </div>
     </div>
-    <div class="fade-content results-card col-md-10 col-md-offset-1" ng-if="documents.lenght === 0">
+    <div class="fade-content results-card col-md-10 col-md-offset-1 col-xs-12" ng-if="documents.lenght === 0">
         <p class="lead">
             <i class="text-info fa fa-info-o"></i> No Downloads available currently.
         </p>

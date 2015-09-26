@@ -9,12 +9,15 @@
                 "title": "",
                 "checked": false
             };
+            $scope.spinner = true;
             wrappers.documents.list()
             .success(function (data) {
                 $scope.documents = data.results;
+                $scope.spinner = false;
             })
             .error(function (data) {
                 $scope.errors = data;
+                $scope.spinner = false;
             });
         }
     ]);
