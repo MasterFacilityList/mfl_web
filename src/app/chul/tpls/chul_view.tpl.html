@@ -22,7 +22,7 @@
                 <p class="lead">Sorry, a server connection error occured.</p>
             </div>
         </div>
-        <div class="col-xs-12" ng-if="!alert_main">
+        <div class="col-xs-12 margin-b-10" ng-if="!alert_main">
             <div class="col-md-8 col-xs-12 content-card margin-b-20 fade-content">
             <!-- Important data first displayed here -->
             <div class="row">
@@ -30,20 +30,16 @@
                         <span class="fs-22">{{unit.code}}</span> | {{unit.name}}
                 </h3>
                 <hr style="border: 1px solid #F0F0F0;">
-                <div class="fw-500 col-md-6 col-xs-12">
-                    <span class="fs-16 pull-left">
+                <h5 class="fs-14 fw-500 col-xs-12 pad-0">
+                    <span class="fs-16 pull-left col-md-6 col-xs-12">
                         <label>Linked Facility: </label>
                         <a ui-sref="rating.units({fac_id:unit.facility})">{{unit.facility_name}}</a>
                     </span>
-                </div>
-                <div class="col-md-6 col-xs-12">
-                    <p class="fs-16 pull-md-right pull-xs-left"><b class="text-black">Status:</b>
-                    <span>
-                        {{unit.status_name}}
+                    <span class="content-right text-black col-md-6 col-xs-12">
+                            <label class="fw-600 text-black">Status: </label>
+                            <span class="label label-warning fs-13">{{unit.status_name}}</span>
                     </span>
-                    </p>
-                </div>
-                <br>
+                </h5>
                 <br>
                 <div class="fs-14 margin-t--15">
                     <span class="pull-left col-md-6 col-xs-12">
@@ -51,7 +47,7 @@
                         {{unit.households_monitored}}
                     </span>
                     <span class="content-right col-md-6 col-xs-12">
-                        <label>Date Established </label>
+                        <label>Date Established: </label>
                         <span>
                             {{unit.date_established | date : 'EEE, dd-MM-yyyy'}}
                         </span>
@@ -59,7 +55,13 @@
                 </div>
                 <!-- Display location details  -->
                 <hr style="border: 1px solid #F0F0F0;" ng-if="unit.officer_in_charge !== null">
-                <h4 class="fs-16 col-xs-12 margin-b-20"> Location</h4>
+                <h4 class="fs-18 col-xs-12 margin-b-5">
+                    <span class="fa-stack fa-lg fs-13">
+                      <i class="fa fa-circle fa-stack-2x"></i>
+                      <i class="fa fa-map-marker fa-stack-1x fa-inverse"></i>
+                    </span>
+                    Location
+                </h4>
                 <br>
                 <h5 class="fs-14 fw-500">
                     <span class="pull-left col-md-6 col-xs-12">
@@ -85,24 +87,115 @@
             </div>
             <!-- Extra details displayed here =========================== -->
             <div class="side-cont col-md-4 col-xs-12 pull-right pad-l-20">
-                <div class="col-xs-12 results-card margin-b-10" ng-if="unit.contacts.length !== 0">
-                    <div class="col-xs-12 pad-l-0 margin-t-3">
-                    <p ng-repeat="cont in unit.contacts" class="fw-500 margin-b-0">
-                        <span  class="fs-14">
-                            <label>
-                                {{cont.contact_type_name}} :
-                            </label>
-                            {{cont.contact}}
+                <div class="col-xs-12 results-card margin-b-10" ng-if="unit.health_unit_workers.length !== 0" tooltip="Community Health Extension Workers">
+                    <div class="col-md-2 col-xs-2 margin-t-5 pad-l-0">
+                        <span class="fa-stack fa-lg text-blue fs-26">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-user-md fa-stack-1x fa-inverse"></i>
                         </span>
-                    </p>
+                    </div>
+                    <div class="col-md-9 col-xs-10 pad-l-0 margin-t-3">
+                        <p ng-repeat="worker in unit.health_unit_workers" class="fw-500 margin-b-0">
+                            <span  class="fs-14">
+                                <label>
+                                    CHEW {{worker.is_incharge ? 'in Charge' : 'at Facility'}} :
+                                </label>
+                                {{worker.name}}
+                            </span>
+                        </p>
                     </div>
                 </div>
+
+                <div class="col-xs-12 results-card margin-b-10" ng-if="unit.contacts.length !== 0">
+                    <div class="col-md-2 col-xs-2 margin-t-5 pad-l-0">
+                        <span class="fa-stack fa-lg text-blue fs-26">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-phone fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </div>
+                    <div class="col-md-9 col-xs-10 pad-l-0 margin-t-3">
+                        <p ng-repeat="cont in unit.contacts" class="fw-500 margin-b-0">
+                            <span  class="fs-14">
+                                <label>
+                                    {{cont.contact_type_name}} :
+                                </label>
+                                {{cont.contact}}
+                            </span>
+                        </p>
+                    </div>
+                </div>
+
                 <div ng-if="unit.contacts.length == 0">
                     Contacts missing
                 </div>
             </div>
+            <div class="col-xs-12 pad-0 margin-t-20">
+                <div class="col-md-6 col-xs-12  content-card fade-content">
+                    <h4 class="fs-18 col-xs-12 pad-0 margin-b-5" tooltip="Community Health Unit Average Rating">
+                        <span class="fa-stack fa-lg fs-12">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-star fa-stack-1x fa-inverse"></i>
+                        </span>
+                        CHUL Average Rating
+                    </h4>
+                    <div class="col-xs-12 margin-b-10 margin-t-5">
+                        <div class="col-sm-3 col-xs-5 fs-65 lato-light pad-l-10 margin-t-10">
+                        {{unit.avg_rating | number : 1}}
+                        </div>
+                        <div class="col-sm-6 col-xs-7 lato-light pad-l-0">
+                            <p class="fs-12 margin-b-0">
+                                <i class="fa fa-star" ng-if="unit.avg_rating >= 1"></i>
+                                <i class="fa fa-star" ng-if="unit.avg_rating >= 2"></i>
+                                <i class="fa fa-star" ng-if="unit.avg_rating >= 3"></i>
+                                <i class="fa fa-star" ng-if="unit.avg_rating >= 4"></i>
+                                <i class="fa fa-star" ng-if="unit.avg_rating >= 5"></i>
+                                <i class="fa fa-star-o" ng-if="unit.avg_rating < 1"></i>
+                                <i class="fa fa-star-o" ng-if="unit.avg_rating < 2"></i>
+                                <i class="fa fa-star-o" ng-if="unit.avg_rating < 3"></i>
+                                <i class="fa fa-star-o" ng-if="unit.avg_rating < 4"></i>
+                                <i class="fa fa-star-o" ng-if="unit.avg_rating < 5"></i>
+                            </p>
+                            <p class="lead fs-15 margin-b-3">
+                                {{unit.number_of_ratings}} Ratings
+                            </p>
+                            <p>
+                                <button class="login-btn login-btn-primary btn-sm" ng-click="rateCU = !rateCU">
+                                    &nbsp;Rate CHUL <i class="fa {{rateCU ? 'fa-chevron-up' : 'fa-chevron-down'}}"></i>
+                                </button>
+                            </p>
+                        </div>
+                        <div content-slide-in="rateCU" slide-show-duration="1000" class="col-xs-12 margin-t-15">
+                        <!-- Beggining of CU rating -->
+                            <span class="col-xs-12 pad-0 pull-left margin-t--5 class-rate">
+                                <label class="fs-16 fw-500 light-font">Rate Community Unit</label>
+                                <span>
+                                    <!-- Testing rating directive -->
+                                    <span class="fs-12" ng-repeat="rating in unit.ratings">
+                                    <div class="form-group">
+                                        <textarea class="form-control" rows="1" placeholder="Leave comment" ng-model="rating.comment"></textarea>
+                                    </div>
+                                    <!-- {{rating.current}} out of{{rating.max}} -->
+                                    <div star-rating rating-value="rating.current" max="rating.max" on-rating-selected="getSelectedRating(rating, unit.id)"></div>
+                                    <span class="col-xs-12 pad-0 margin-t-5">
+                                        <button ng-click="rateCU(unit)" class="login-btn login-btn-success btn-sm">
+                                         &nbsp;Submit Rating
+                                        </button>
+                                        <span class="pull-right" ng-if="unit.spinner">
+                                            <img src="assets/img/ajax-loader.gif" style="font-size: 10px; width: 20px height: 20px;">
+                                        </span>
+                                    </span>
+                                    </span>
+                            <!-- End of rating directive -->
+                                </span>
+                            </span>
+                        <!-- End of CU rating -->
+                        </div>
+                    </div>
+                </div>
+            </div>
             <br><br>
             <div class="col-xs-12 content-card margin-v-20 hidden-xs hidden-sm">
+                <h4>{{unit.facility_ward}} WARD</h4>
                 <div class="margin-b-50">
                     <leaflet id="wardmap"
                         defaults="defaults"

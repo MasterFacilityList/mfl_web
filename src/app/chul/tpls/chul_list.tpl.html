@@ -95,7 +95,7 @@
                 <p class="lead">Sorry, a server connection error occured.</p>
                 </div>
             </div>
-            
+
             <div class="row" ng-if="!alert">
                 <div class="col-xs-12 margin-b-10">
                     <div class="pull-left">
@@ -122,21 +122,21 @@
                             <a class="col-xs-12 margin-b-10" ui-sref="chul_view({unit_id : fac.id})">
                                 <strong class="fs-20"> {{fac.code}} | {{fac.name}} </strong>
                             </a>
-                            <div class="col-md-12 margin-b-5">
-                                <span class="pull-left col-md-8 col-xs-12">
+                            <div class="col-md-12 margin-b-0">
+                                <span class="pull-left col-md-8 col-xs-12 pad-0">
                                     <label>Linked Facility: </label>
                                     <span class="text-success fw-600">{{fac.facility_name}}</span>
                                 </span>
-                                <span class="col-md-4 col-xs-12">
+                                <span class="col-md-4 col-xs-12 pad-0">
                                    <span class="pull-xs-left pull-md-right">
                                         <span class="label label-primary fw-600">{{fac.status_name}}</span>
                                    </span>
                                 </span>
                             </div>
 
-                            <div class="col-md-12 margin-b-5">
-                                <strong class="pull-left col-md-5 col-xs-12">{{fac.facility_county}} COUNTY</strong>
-                                <span class="col-md-7 col-xs-12">
+                            <div class="col-md-12 margin-b-0">
+                                <strong class="pull-left col-md-5 col-xs-12 pad-0 fs-16">{{fac.facility_county}} COUNTY</strong>
+                                <span class="col-md-7 col-xs-12 pad-0 fs-14">
                                     <span class="pull-xs-left pull-md-right">
                                         <strong>Date Established:</strong>
                                         {{fac.date_established | date : 'EEE, dd-MM-yyyy'}}
@@ -144,9 +144,9 @@
                                 </span>
                             </div>
 
-                            <div class="col-md-12 margin-b-5">
-                                <span class="pull-left col-md-6 col-xs-12">{{fac.facility_subcounty}} SUB-COUNTY</span>
-                                <span class="col-md-6 col-xs-12">
+                            <div class="col-md-12 margin-b-0">
+                                <span class="pull-left col-md-6 col-xs-12 pad-0 fs-16">{{fac.facility_subcounty}} SUB-COUNTY</span>
+                                <span class="col-md-6 col-xs-12 fs-14 pad-0">
                                     <span class="pull-xs-left pull-md-right">
                                             {{fac.facility_ward}} WARD
                                     </span>
