@@ -6,7 +6,7 @@
         "mfl.auth.service"
     ])
 
-    .constant("URL_SEARCH_PARAMS", [
+    .constant("FACILITY_SEARCH_PARAMS", [
         "name", "code",
 
         "search",
@@ -26,10 +26,11 @@
         "page_size", "page"
     ])
 
-    .config(["$stateProvider", "URL_SEARCH_PARAMS", function ($stateProvider, URL_SEARCH_PARAMS) {
+    .config(["$stateProvider", "FACILITY_SEARCH_PARAMS", function ($stateProvider,
+            FACILITY_SEARCH_PARAMS) {
         $stateProvider
         .state("facility_filter", {
-            url: "/facility_filter?"+URL_SEARCH_PARAMS.join("&"),
+            url: "/facility_filter?"+FACILITY_SEARCH_PARAMS.join("&"),
             views: {
                 "main": {
                     controller: "mfl.facility_filter.controllers.form",

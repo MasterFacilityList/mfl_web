@@ -1,0 +1,109 @@
+<div class="row margin-b-20 margin-t-10" id="search_frm_div" >
+<div class="col-xs-12">
+
+    <div class="col-md-4 col-xs-12 content-card pad-l-5 left-col">
+        <h4>
+            <span class="left-ttl-hidden">Advanced Search</span>
+            <span class="pull-right" title="Hide/show advanced search" sidebar-toogle="#search_frm_div">
+                <i class="fa fa-chevron-circle-left"></i>
+            </span>
+        </h4>
+        <div class="col-xs-12 facet-detail-content pad-5 left-col-content">
+            <form ng-submit="filterCHUs()" name="frm_filter_chus">
+
+                <div class="form-group results-card">
+                    <label class="fw-500 fs-14">Search all CHUs</label>
+                    <input placeholder="Search all CHUs" type="text" class="form-control" ng-model="filters.single.search" id="search" name="search" autofocus />
+                </div>
+
+                <div class="col-xs-12 results-card margin-b-10">
+                    <span class="text-muted fs-16">CHU Info</span>
+                    <div class="form-group">
+                        <label class="fw-500 fs-14">CHU Name</label>
+                        <input placeholder="CHU Name" type="text" class="form-control" ng-model="filters.single.name" id="name" name="name"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="fw-500 fs-14">CHU Code</label>
+                        <input placeholder="CHU Code" type="text" class="form-control" ng-model="filters.single.code" id="code" name="code"/>
+                    </div>
+                    <div class="form-group fs-14">
+                        <label  class="fw-500">Operation Status</label>
+                        <ui-select ng-model="filters.multiple.operation_status" multiple id="operation_status" name="operation_status">
+                            <ui-select-match placeholder="Select a operation status...">
+                                <span>{{$item.name}}</span>
+                            </ui-select-match>
+                            <ui-select-choices repeat="os in filter_summaries.operation_status | filter:$select.search">
+                                <span>{{os.name}}</span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+
+                    <div class="form-group fs-14">
+                        <label  class="fw-500">Service</label>
+                        <ui-select ng-model="filters.multiple.service" multiple id="service" name="service">
+                            <ui-select-match placeholder="Select a service...">
+                                <span>{{$item.name}}</span>
+                            </ui-select-match>
+                            <ui-select-choices repeat="serv in filter_summaries.service | filter:filterFxns.serviceFilter | filter:$select.search">
+                                <span>{{serv.name}}</span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 results-card margin-b-10">
+                    <span class="text-muted fs-16">Administrative Unit</span>
+                    <div class="form-group fs-14">
+                        <label class="fw-500 fs-14">County</label>
+                        <ui-select ng-model="filters.multiple.county" multiple id="county" name="county">
+                            <ui-select-match placeholder="Select a county...">
+                                <span>{{$item.name}}</span>
+                            </ui-select-match>
+                            <ui-select-choices repeat="county in filter_summaries.county | filter:$select.search">
+                                <span>{{county.name}}</span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+
+                    <div class="form-group fs-14">
+                        <label class="fw-500 fs-14">Sub County</label>
+                        <ui-select ng-model="filters.multiple.constituency" multiple ng-disabled="filters.multiple.county.length==0" id="constituency" name="constituency">
+                            <ui-select-match placeholder="Select a sub county...">
+                                <span>{{$item.name}}</span>
+                            </ui-select-match>
+                            <ui-select-choices repeat="const in filter_summaries.constituency | filter:filterFxns.constFilter | filter:$select.search">
+                                <span>{{const.name}}</span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+
+                    <div class="form-group fs-14">
+                        <label class="fw-500 fs-14">Ward</label>
+                        <ui-select ng-model="filters.multiple.ward" multiple ng-disabled="filters.multiple.constituency.length==0" id="ward" name="ward">
+                            <ui-select-match placeholder="Select a ward...">
+                                <span>{{$item.name}}</span>
+                            </ui-select-match>
+                            <ui-select-choices repeat="ward in filter_summaries.ward | filter:filterFxns.wardFilter | filter:$select.search">
+                                <span>{{ward.name}}</span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 margin-t-10">
+                    <button class="login-btn login-btn-primary margin-l--10" type="submit">
+                        <i class="fa fa-search"></i> Search
+                    </button>
+                    <button type="reset" class="login-btn login-btn-primary margin-l-5" ng-click="clearFilters()"> <i class="fa fa-refresh"></i> Reset</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="col-md-8 col-xs-12 center-col" ui-view="results" autoscroll>
+        <div class="content-card margin-t-10">
+            <p class="lead text-center margin-t-10">Use the form on the left to filter CHUs or <a class="fw-600" ui-sref=".results">view all CHUs</a></p>
+        </div>
+    </div>
+</div>
+</div>

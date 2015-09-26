@@ -28,32 +28,6 @@
             ]);
         });
 
-        it("should load list controller and data", function () {
-            var data = {
-                "$scope": rootScope.$new()
-            };
-            ctrl("list", data);
-            httpBackend
-                .expectGET(server_url+"api/chul/units/")
-                .respond(200, {});
-            httpBackend.flush();
-            httpBackend.verifyNoOutstandingRequest();
-            httpBackend.verifyNoOutstandingExpectation();
-        });
-
-        it("should test failing to view chul list", function () {
-            var data = {
-                "$scope": rootScope.$new()
-            };
-            ctrl("list", data);
-            httpBackend
-                .expectGET(server_url+"api/chul/units/")
-                .respond(500, {});
-            httpBackend.flush();
-            httpBackend.verifyNoOutstandingRequest();
-            httpBackend.verifyNoOutstandingExpectation();
-        });
-
         it("should load view controller and data",
         inject(["leafletData",
            function (leafletData) {
