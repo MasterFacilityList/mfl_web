@@ -26,8 +26,8 @@
 
     .controller("mfl.facility_filter.controllers.form",
         ["$stateParams", "$scope", "$state", "$location",
-        "mfl.facility_filter.services.wrappers", "URL_SEARCH_PARAMS",
-        function ($stateParams, $scope, $state, $location, wrappers, URL_SEARCH_PARAMS) {
+        "mfl.facility_filter.services.wrappers", "FACILITY_SEARCH_PARAMS",
+        function ($stateParams, $scope, $state, $location, wrappers, FACILITY_SEARCH_PARAMS) {
             $scope.filters = {
                 single: {
                     name: "",
@@ -158,7 +158,7 @@
 
             $scope.clearFilters = function () {
                 var params = {};
-                _.each(URL_SEARCH_PARAMS, function (a) {
+                _.each(FACILITY_SEARCH_PARAMS, function (a) {
                     params[a] = undefined;
                 });
                 // TODO : cancel filter_promise defined in L120

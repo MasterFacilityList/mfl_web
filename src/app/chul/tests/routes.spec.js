@@ -33,11 +33,11 @@
         });
 
         it("should load chu list (authed)", function () {
-            testAuthed("chul");
+            testAuthed("chul_filter");
         });
 
         it("should load chu list (unauthed)", function () {
-            testUnAuthed("chul");
+            testUnAuthed("chul_filter");
         });
 
         it("should load chu view (authed)", function () {
