@@ -18,6 +18,7 @@
         "mfl.gis",
         "mfl.auth",
         "mfl.rating",
+        "mfl.downloads",
         "angulartics",
         "angulartics.google.analytics"
     ]);
