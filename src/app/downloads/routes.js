@@ -15,6 +15,18 @@
                 },
                 data:{
                     pageTitle: "MFLv2 Downloads"
+                },
+                resolve: {
+                    "auth": ["api.auth", "$q", function (auth, $q) {
+                        var current_token = auth.getToken();
+                        if (current_token) {
+                            return $q.when(current_token);
+                        }
+                        return auth.fetchToken();
+                    }],
+                    filterParams: ["auth", "$stateParams", function (auth, sp) {
+                        return sp;
+                    }]
                 }
             });
     }]);
