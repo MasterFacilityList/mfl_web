@@ -76,7 +76,7 @@
                     $scope.getUnitRating();
                     toastr.success("Successfully rated");
                 })
-                .error(function (data) {
+                .error(function () {
                     $scope.unit.spinner = false;
                     $scope.alert = "CHU can only be rated once a day";
                     toastr.error($scope.alert);
