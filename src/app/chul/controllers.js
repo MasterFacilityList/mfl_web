@@ -78,7 +78,7 @@
                 })
                 .error(function (data) {
                     $scope.unit.spinner = false;
-                    $scope.alert = data;
+                    $scope.alert = "CHU can only be rated once a day";
                     toastr.error($scope.alert);
                 });
             };
