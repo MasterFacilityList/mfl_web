@@ -229,10 +229,12 @@
             };
 
             wrappers.filters.filter({"fields": [
-                "county", "constituency", "ward", "status", "service"
+                "county", "constituency", "ward", "chu_status", "chu_service"
             ]})
             .success(function (data) {
                 $scope.filter_summaries = data;
+                $scope.filter_summaries.status = $scope.filter_summaries.chu_status;
+                $scope.filter_summaries.service = $scope.filter_summaries.chu_service;
                 updateMultipleFilters($stateParams, data);
             });
 

@@ -48,7 +48,6 @@
                     templateUrl: "chul/tpls/search_form.tpl.html"
                 }
             },
-
             resolve: {
                 "auth": ["api.auth", "$q", function (auth, $q) {
                     var current_token = auth.getToken();

@@ -377,15 +377,19 @@
 
         describe("test search form controller", function () {
 
+            var default_url;
+
+            beforeEach(function () {
+                default_url = server_url + "api/common/filtering_summaries/" +
+                               "?fields=county,constituency,ward,chu_status,chu_service";
+            });
+
             it("should load filter summaries", function () {
                 var data = {
                     "$scope": rootScope.$new()
                 };
 
-                httpBackend
-                    .expectGET(server_url+"api/common/filtering_summaries/" +
-                               "?fields=county,constituency,ward,status,service")
-                    .respond(200, {});
+                httpBackend.expectGET(default_url).respond(200, {});
 
                 ctrl("search_form", data);
 
@@ -408,9 +412,7 @@
                     }
                 };
 
-                httpBackend
-                    .expectGET(server_url+"api/common/filtering_summaries/" +
-                               "?fields=county,constituency,ward,status,service")
+                httpBackend.expectGET(default_url)
                     .respond(200, {
                         county: [{"id": "1"}, {"id": "2"}, {"id": "3"}],
                         constituency: [
@@ -448,10 +450,7 @@
                     "$state": state
                 };
 
-                httpBackend
-                    .expectGET(server_url+"api/common/filtering_summaries/" +
-                               "?fields=county,constituency,ward,status,service")
-                    .respond(200, {});
+                httpBackend.expectGET(default_url).respond(200, {});
 
                 spyOn(state, "go");
                 ctrl("search_form", data);
@@ -473,10 +472,7 @@
                     "$state": state
                 };
 
-                httpBackend
-                    .expectGET(server_url+"api/common/filtering_summaries/" +
-                               "?fields=county,constituency,ward,status,service")
-                    .respond(200, {});
+                httpBackend.expectGET(default_url).respond(200, {});
 
                 spyOn(state, "go");
                 ctrl("search_form", data);
@@ -496,10 +492,7 @@
                     "$state": state
                 };
 
-                httpBackend
-                    .expectGET(server_url+"api/common/filtering_summaries/" +
-                               "?fields=county,constituency,ward,status,service")
-                    .respond(200, {});
+                httpBackend.expectGET(default_url).respond(200, {});
 
                 spyOn(state, "go");
                 ctrl("search_form", data);
