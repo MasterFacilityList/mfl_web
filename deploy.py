@@ -8,13 +8,13 @@ from github3 import login
 logging.basicConfig(level=logging.DEBUG)
 
 
-def main(access_token, repo_owner, repo_name, tag, branch_name, release_asset, release_asset_type, prerelease=True):  # noqa
+def main(access_token, repo_owner, repo_name, tag, commitish, release_asset, release_asset_type, prerelease=True):  # noqa
     gh = login(token=access_token)
     repo = gh.repository(repo_owner, repo_name)
 
     # create release
     release_asset_name = "{}__{}.tar.gz".format(release_asset.name, tag)
-    release = repo.create_release(tag, branch_name, prerelease=prerelease)
+    release = repo.create_release(tag, commitish, prerelease=prerelease)
     release.upload_asset(release_asset_type, release_asset_name, release_asset)
 
 
@@ -26,7 +26,7 @@ if __name__ == '__main__':
             repo_owner='masterfacilitylist',
             repo_name=os.getenv('CIRCLE_PROJECT_REPONAME'),
             tag=version,
-            branch_name=os.getenv('CIRCLE_BRANCH'),
+            commitish=os.getenv('CIRCLE_SHA1'),
             release_asset=asset,
             release_asset_type='application/x-gzip'
         )
