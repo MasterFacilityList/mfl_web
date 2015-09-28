@@ -12,6 +12,7 @@
         this.ratings = api.setBaseUrl("api/facilities/facility_service_ratings/");
         this.chus = api.setBaseUrl("api/chul/units");
         this.documents = api.setBaseUrl("api/common/documents/");
+        this.chul_services = api.setBaseUrl("api/chul/services/");
     }])
 
     .service("searchService",["SERVER_URL", "mfl.typeahead",

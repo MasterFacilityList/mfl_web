@@ -19,6 +19,7 @@
         "mfl.auth",
         "mfl.rating",
         "mfl.downloads",
+        "mfl.about",
         "angulartics",
         "angulartics.google.analytics"
     ]);
