@@ -381,7 +381,7 @@
 
             beforeEach(function () {
                 default_url = server_url + "api/common/filtering_summaries/" +
-                               "?fields=county,constituency,ward,chu_status,chu_service";
+                               "?fields=county,constituency,ward,chu_status";
             });
 
             it("should load filter summaries", function () {
