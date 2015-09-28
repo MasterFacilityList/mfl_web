@@ -171,8 +171,7 @@
                     county: [],
                     constituency: [],
                     ward: [],
-                    status: [],
-                    service: []
+                    status: []
                 }
             };
 
