@@ -171,8 +171,7 @@
                     county: [],
                     constituency: [],
                     ward: [],
-                    status: [],
-                    service: []
+                    status: []
                 }
             };
 
@@ -228,13 +227,10 @@
                 }
             };
 
-            wrappers.filters.filter({"fields": [
-                "county", "constituency", "ward", "chu_status", "chu_service"
-            ]})
+            wrappers.filters.filter({"fields": ["county", "constituency", "ward", "chu_status"]})
             .success(function (data) {
                 $scope.filter_summaries = data;
                 $scope.filter_summaries.status = $scope.filter_summaries.chu_status;
-                $scope.filter_summaries.service = $scope.filter_summaries.chu_service;
                 updateMultipleFilters($stateParams, data);
             });
 
