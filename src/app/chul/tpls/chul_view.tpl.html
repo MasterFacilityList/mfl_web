@@ -1,12 +1,4 @@
 <div class="row lato">
-    <div class="col-xs-12" ng-if="spinneractive" style="text-align: center">
-        <div class="map-change-state">
-            <div class="loader"></div>
-            <div class="row">
-                <h3 class="text-center loader-text">Please wait...</h3>
-            </div>
-        </div>
-    </div>
     <div class="col-xs-12">
         <div class="col-xs-12 margin-t-20 margin-b-10">
             <div class="col-xs-12 ">
@@ -17,12 +9,20 @@
                 </span>
             </div>
         </div>
+        <div class="col-xs-12" ng-if="spinner" style="text-align: center">
+            <div class="map-change-state">
+                <div class="loader"></div>
+                <div class="row">
+                    <h3 class="text-center loader-text">Please wait...</h3>
+                </div>
+            </div>
+        </div>
         <div ng-if="alert_main">
             <div  class="col-xs-12 fade-content alert alert-danger margin-t-20">
                 <p class="lead">Sorry, a server connection error occured.</p>
             </div>
         </div>
-        <div class="col-xs-12 margin-b-10" ng-if="!alert_main">
+        <div class="col-xs-12 margin-b-10" ng-if="!alert_main && !spinner">
             <div class="col-md-8 col-xs-12 content-card margin-b-20 fade-content">
             <!-- Important data first displayed here -->
             <div class="row">
@@ -64,15 +64,15 @@
                 </h4>
                 <br>
                 <h5 class="fs-14 fw-500">
-                    <span class="pull-left col-md-6 col-xs-12">
+                    <span class="pull-left col-md-6 col-xs-12 margin-b-5">
                         {{unit.facility_county}} COUNTY
                     </span>
-                    <span class="content-right text-black col-md-6 col-xs-12">
+                    <span class="content-right text-black col-md-6 col-xs-12 margin-b-5">
                             {{unit.facility_subcounty}} SUB-COUNTY
                     </span>
                 </h5>
                 <br>
-                <h5 class="fs-14 text-black fw-500 margin-t-15">
+                <h5 class="fs-14 text-black fw-500 margin-t-10">
                     <span class="pull-left col-md-6 col-xs-12">
                         {{unit.facility_ward}} WARD
                     </span>
