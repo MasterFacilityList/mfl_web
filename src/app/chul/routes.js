@@ -4,15 +4,7 @@
     angular.module("mfl.chul.routes", ["ui.router"])
 
     .constant("CHU_SEARCH_PARAMS", [
-        "name", "code",
-
-        "search",
-
-        "county", "constituency", "ward",
-
-        "status", "facility",
-
-        "service",
+        "name", "code", "search", "county", "constituency", "ward", "status",
 
         // pagination controls
         "page_size", "page"
