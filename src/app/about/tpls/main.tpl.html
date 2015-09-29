@@ -8,17 +8,17 @@
         <div class="col-md-8 col-xs-12 pad-0">
             <div class="fade-content content-card col-md-11 col-xs-12" style="padding: 0px;">
                 <div class="col-xs-12 margin-t-5">
-                    <p class="lead fs-24">
-                        What is a Community Health Units ?
+                    <p class="lead fs-26 text-black">
+                        What is a Community Health Unit ?
                     </p>
                 </div>
                 <div class="col-xs-12" style="border-left: 3px solid #2186F3;">
-                    <p class="fs-16">
+                    <p class="fs-18 text-black fw-500">
                         This is a health service delivery structure within a defined geographical area covering a population of approximately 5,000 people. Each unit is assigned 2 Community Health Extension Workers (CHEWs) and community health volunteers who offer promotive, preventative and basic curative health services.
                     </p>
                 </div>
                 <div class="col-xs-12 margin-t-10 margin-b-5" style="border-left: 3px solid #03a9f4;">
-                    <p class="fs-14 text-muted margin-t-5">
+                    <p class="fs-16 lato text-black fw-500 margin-t-5">
                         It is governed by a Community Health Committee (CHC) and each Community Health unit is linked to a specific Health facility.
                     </p>
                 </div>
@@ -39,14 +39,14 @@
         <div class="col-md-12 col-xs-12 pad-0 margin-t-10">
             <div class="fade-content results-card col-xs-12 margin-t-10">
                 <div class="col-xs-12 pad-0">
-                    <p class="lead fs-24">
+                    <p class="lead fs-24 text-black">
                         Services Available At Community Health Units (CHUs)
                     </p>
                 </div>
             </div>
         </div>
         <div class="col-md-12 col-xs-12 pad-0">
-            <div class="fade-content results-card col-xs-12 pad-0" ng-repeat="service in services" style="padding-left: 0px;">
+            <div class="fade-content results-card col-xs-12 pad-0" ng-repeat="service in services" style="padding-left: 0px;" ng-if="services.length !== 0">
                 <div class="col-md-1 col-xs-2">
                     <span class="fa-stack fa-lg fs-22 margin-t-0 text-blue">
                       <i class="fa fa-circle fa-stack-2x"></i>
@@ -60,11 +60,19 @@
                         </span>
                     </p>
                     <p class="margin-t-0 margin-t-0" ng-if="service.description" style="color: #666;">
-                        <span class="fw-600 fs-14">
+                        <span class="fw-500 lato text-black fs-14">
                             {{service.description}}
                         </span>
                     </p>
                 </div>
+            </div>
+            <div class="fade-content results-card col-xs-12 pad-0 text-center" ng-if="spinner || services.length === 0">
+                <div class="map-change-state fs-12" ng-if="spinner">
+                    <div class="loader"></div>
+                </div>
+                <p class="lead fs-18 text-black" ng-if="services.length === 0">
+                    <i class="fa fa-info-circle text-primary"></i> No Community Health Service Listed Currently.
+                </p>
             </div>
         </div>
     </div>
