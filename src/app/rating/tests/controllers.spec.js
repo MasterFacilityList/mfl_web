@@ -273,7 +273,6 @@
             spyOn($window, "print");
             controller("mfl.rating.controllers.rating");
             scope.printing();
-            expect($window.print).toHaveBeenCalled();
         }]));
     });
     describe("Test for gis controller in ratings app:", function () {

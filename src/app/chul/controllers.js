@@ -8,9 +8,9 @@
     ])
 
     .controller("mfl.chul.controllers.view", ["$scope","mfl.chul.services.wrappers","$stateParams",
-        "gisAdminUnitsApi","leafletData", "mfl.rating.services.rating", "$window",
+        "gisAdminUnitsApi","leafletData", "mfl.rating.services.rating", "$window", "$state",
         function ($scope,wrappers,$stateParams,gisAdminUnitsApi,leafletData,
-            ratingService, $window) {
+            ratingService, $window, $state) {
             $scope.tooltip = {
                 "title": "",
                 "checked": false
@@ -75,6 +75,7 @@
                     ratingService.storeRating(unit.id, rating_val);
                     $scope.getUnitRating();
                     toastr.success("Successfully rated");
+                    $state.go("chul_view", {unit_id : unit.id},{reload: true});
                 })
                 .error(function () {
                     $scope.unit.spinner = false;
@@ -82,14 +83,14 @@
                     toastr.error($scope.alert);
                 });
             };
-            $scope.printCU = function (unit) {
-                var url = wrappers.helpers.joinUrl([
+            $scope.printCU = function (unit_id) {
+                $scope.file_url = wrappers.helpers.joinUrl([
                     wrappers.chul_pdf.makeUrl(wrappers.chul_pdf.apiBaseUrl),
-                    unit.id,
-                    "/"
+                    unit_id, "/"
                 ]);
-                $window.location.href = url;
             };
+            $scope.unit_id = $stateParams.unit_id;
+            $scope.printCU($scope.unit_id);
             wrappers.chul.get($stateParams.unit_id)
             .success(function (unit) {
                 $scope.spinner = false;

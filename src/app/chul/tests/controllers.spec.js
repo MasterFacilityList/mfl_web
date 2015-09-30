@@ -248,7 +248,9 @@
                 httpBackend
                     .expectGET(server_url+"api/chul/units/1/?fields=avg_rating,number_of_ratings")
                     .respond(500, {});
+                data.$scope.unit_id = 1;
                 data.$scope.getUnitRating();
+                data.$scope.printCU(data.$scope.unit_id);
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();
                 httpBackend.verifyNoOutstandingExpectation();
@@ -259,8 +261,10 @@
                     "$scope": rootScope.$new(),
                     "$stateParams": {
                         unit_id: 1
-                    }
+                    },
+                    "$state" : state
                 };
+                spyOn(state, "go");
                 var unit = {
                     id : 1,
                     avg_rating : "4",
