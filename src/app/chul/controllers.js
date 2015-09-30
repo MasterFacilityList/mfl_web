@@ -8,9 +8,9 @@
     ])
 
     .controller("mfl.chul.controllers.view", ["$scope","mfl.chul.services.wrappers","$stateParams",
-        "gisAdminUnitsApi","leafletData", "mfl.rating.services.rating",
+        "gisAdminUnitsApi","leafletData", "mfl.rating.services.rating", "$window",
         function ($scope,wrappers,$stateParams,gisAdminUnitsApi,leafletData,
-            ratingService) {
+            ratingService, $window) {
             $scope.tooltip = {
                 "title": "",
                 "checked": false
@@ -81,6 +81,14 @@
                     $scope.alert = "CHU can only be rated once a day";
                     toastr.error($scope.alert);
                 });
+            };
+            $scope.printCU = function (unit) {
+                var url = wrappers.helpers.joinUrl([
+                    wrappers.chul_pdf.makeUrl(wrappers.chul_pdf.apiBaseUrl),
+                    unit.id,
+                    "/"
+                ]);
+                $window.location.href = url;
             };
             wrappers.chul.get($stateParams.unit_id)
             .success(function (unit) {

@@ -7042,23 +7042,6 @@ table.fc-border-separate {
 .fc-agenda .ui-resizable-resizing {
     _overflow: hidden
 }
-@media print {
-    /*!
-   /* FullCalendar v1.6.4 Print Stylesheet
-   * Docs & License: http://arshaw.com/fullcalendar/
-   * (c) 2013 Adam Shaw
-   */
-    .fc-event {
-        background: #fff!important;
-        color: #394264!important
-    }
-    .fc-event-bg {
-        display: none!important
-    }
-    .fc-event .ui-resizable-handle {
-        display: none!important
-    }
-}
 
 body {
     background: #F6F4F4;

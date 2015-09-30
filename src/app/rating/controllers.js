@@ -115,7 +115,12 @@
             };
             //printing function
             $scope.printing = function () {
-                $window.print();
+                var url = facilitiesApi.helpers.joinUrl([
+                    facilitiesApi.facility_pdf.makeUrl(facilitiesApi.facility_pdf.apiBaseUrl),
+                    $stateParams.fac_id,
+                    "/"
+                ]);
+                $window.location.href = url;
             };
         }
     ])
