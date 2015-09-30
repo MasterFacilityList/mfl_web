@@ -4,8 +4,8 @@
     angular.module("mfl.rating.controllers", [])
 
     .controller("mfl.rating.controllers.rating", ["$scope", "$stateParams",
-        "facilitiesApi", "$window", "mfl.rating.services.rating","gisAdminUnitsApi",
-        function ($scope, $stateParams,facilitiesApi, $window, ratingService,gisAdminUnitsApi) {
+        "facilitiesApi", "mfl.rating.services.rating","gisAdminUnitsApi",
+        function ($scope, $stateParams,facilitiesApi, ratingService,gisAdminUnitsApi) {
             $scope.spinneractive = true;
             $scope.tooltip = {
                 "title": "",
@@ -115,8 +115,14 @@
             };
             //printing function
             $scope.printing = function () {
-                $window.print();
+                $scope.file_url = facilitiesApi.helpers.joinUrl([
+                    facilitiesApi.facility_pdf.makeUrl(facilitiesApi.
+                        facility_pdf.apiBaseUrl),
+                    $stateParams.fac_id,
+                    "/"
+                ]);
             };
+            $scope.printing();
         }
     ])
     .controller("mfl.rating.controllers.rating.map",["$scope","$log","gisAdminUnitsApi",
