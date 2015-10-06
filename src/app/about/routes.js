@@ -16,6 +16,22 @@
                 data:{
                     pageTitle: "MFLv2 About"
                 }
+            })
+            .state("about.facilities", {
+                url: "/facilities/",
+                views: {
+                    "form-view@about" : {
+                        templateUrl: "about/tpls/facilities.tpl.html"
+                    }
+                }
+            })
+            .state("about.chus", {
+                url: "/community_units/",
+                views: {
+                    "form-view@about" : {
+                        templateUrl: "about/tpls/chus.tpl.html"
+                    }
+                }
             });
     }]);
 })(window.angular);

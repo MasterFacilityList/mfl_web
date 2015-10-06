@@ -13,6 +13,8 @@
         this.chus = api.setBaseUrl("api/chul/units");
         this.documents = api.setBaseUrl("api/common/documents/");
         this.chul_services = api.setBaseUrl("api/chul/services/");
+        this.helpers = api.apiHelpers;
+        this.facility_pdf = api.setBaseUrl("api/facilities/facility_detail_report/");
     }])
 
     .service("searchService",["SERVER_URL", "mfl.typeahead",
