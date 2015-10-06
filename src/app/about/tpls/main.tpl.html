@@ -1,9 +1,60 @@
 <div class="content-header" style="padding-top: 10px;">
    <h2 class="content-title margint-10">
-       <span class="main-title fs-20"><i class="fa fa-rss"></i> About </span>
+       <span class="main-title fs-20"><i class="fa fa-rss"></i> About Us</span>
    </h2>
 </div>
 <div class="container-fluid margin-t-20 margin-b-10">
+    <div class="detail-content container-fluid light-font">
+        <div class="col-xs-12 content-card" style="padding: 0px;">
+            <h3 class="fw-500 text-black" >
+                <span class="pull-left margin-t-10 col-md-6 col-xs-12">
+                    About the Master Facility List (MFL)
+                </span>
+                <span class="content-right col-md-6 col-xs-12">
+                    <img src="assets/img/title.gif" >
+                </span>
+            </h3>
+            <br>
+            <hr class="margin-t-20 margin-b-0" style="border: 1px solid #F0F0F0;">
+            <br>
+            <div class="col-xs-12" style="border-left: 3px solid #2186F3;">
+                <p class="fs-18 text-black fw-500">
+                    The Master Facility List is a Ministry of Health initiative to avail an online platform for the public to query and locate health facilities in Kenya.
+                    A user can search and/or filter by various facility attributes.
+                </p>
+            </div>
+            <div class="col-xs-12 margin-t-10 margin-b-5" style="border-left: 3px solid #03a9f4;">
+                <p class="fs-16 lato text-black fw-500 margin-t-5">
+                    There is also discoverability through the MFL Geolocator Service. The Geolocator Service visualizes administrative units at national, county, constituency and ward levels, which shows facilities in that particular ward.
+                </p>
+            </div>
+        </div>
+    </div>
+    <!-- Start of tabs -->
+    <div class="col-xs-12 margin-b-20 margin-t-20" ng-if="!alert_main">
+        <!-- Start of tabbed multi step form  -->
+            <ul class="nav nav-tabs col-sm-12">
+                <li ui-sref-active="active">
+                    <a ui-sref=".services">
+                        <span class="fw-900">
+                            <i class="fa fa-exchange"></i> Health Facilities
+                        </span>
+                    </a>
+                </li>
+                <li ui-sref-active="active">
+                    <a ui-sref=".regulation">
+                        <span class="fw-900 ">
+                            <i class="fa fa-gavel"></i> Community Health Units
+                        </span>
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content margin-t-20">
+                <div class="pad-t-20" ui-view="form-view"></div>
+            </div><!-- /tab-content -->
+        <!-- end of tabbed multistep form -->
+    </div>
+    <!-- end of tabs -->
     <div class="col-md-10 col-md-offset-1 col-xs-12 pad-0">
         <div class="col-md-8 col-xs-12 pad-0">
             <div class="fade-content content-card col-md-11 col-xs-12" style="padding: 0px;">
@@ -36,36 +87,48 @@
                 </p>
             </div>
         </div>
-        <div class="col-md-12 col-xs-12 pad-0 margin-t-10">
-            <div class="fade-content results-card col-xs-12 margin-t-10">
+        <div class="col-md-12 col-xs-12 pad-0 margin-t-20">
+            <div class="col-xs-12 margin-t-10 margin-b-5 pad-0">
                 <div class="col-xs-12 pad-0">
-                    <p class="lead fs-24 text-black">
+                    <p class="lead fs-20 text-black">
                         Services Available At Community Health Units (CHUs)
                     </p>
                 </div>
             </div>
         </div>
-        <div class="col-md-12 col-xs-12 pad-0">
-            <div class="fade-content results-card col-xs-12 pad-0" ng-repeat="service in services" style="padding-left: 0px;" ng-if="services.length !== 0">
-                <div class="col-md-1 col-xs-2">
+        <div class="col-xs-12 pad-0 fade-content">
+            <div class="fade-content col-xs-12 margin-b-3 pad-0" ng-repeat="service in services">
+                <div class="col-xs-12 results-card" style="padding-left: 0px;">
+                <div class="col-md-1 col-xs-3 pad-0 text-center">
                     <span class="fa-stack fa-lg fs-22 margin-t-0 text-blue">
                       <i class="fa fa-circle fa-stack-2x"></i>
                       <i class="fa fa-medkit fa-stack-1x fa-inverse"></i>
                     </span>
                 </div>
-                <div class="col-xs-11 pad-l-0">
-                    <p class="lato-light fw-500 margin-b-0">
-                        <span class="fs-18">
+                <div class="col-md-11 col-xs-9 pad-0">
+                    <p class="lato-light text-black fw-500 margin-b-0">
+                        <span class="fs-16 col-xs-11 pad-l-0">
                             {{service.name}}
                         </span>
+                        <span class="pull-right col-xs-1 text-right">
+                            <i class="fa {{view_desc ? 'fa-chevron-up' : 'fa-chevron-down'}} fs-18" ng-click="view_desc = !view_desc" style="cursor :pointer;"></i>
+                        </span>
                     </p>
-                    <p class="margin-t-0 margin-t-0" ng-if="service.description" style="color: #666;">
-                        <span class="fw-500 lato text-black fs-14">
+                    <p class="margin-t-0 col-xs-12 pad-l-0" style="color: #666;" content-slide-in="view_desc" slide-show-duration="1000">
+                        <span class="fw-500 lato text-black fs-13">
                             {{service.description}}
+                        </span>
+                        <span class="fw-500 lato text-black fs-13" ng-if="!service.description">
+                            There's no description for this service at the moment
                         </span>
                     </p>
                 </div>
+                </div>
             </div>
+            <div ng-if="$odd" class="clearfix"></div>
+            <div ng-repeat-end=""></div>
+            </div>
+            <div ng-repeat-end=""></div>
             <div class="fade-content results-card col-xs-12 pad-0 text-center" ng-if="spinner || services.length === 0">
                 <div class="map-change-state fs-12" ng-if="spinner">
                     <div class="loader"></div>
