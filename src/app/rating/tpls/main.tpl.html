@@ -149,7 +149,7 @@
             </h4>
             <br ng-if="oneFacility.officer_in_charge !== null">
             <h4 class="fs-14 fw-500 margin-t-10 margin-b-10" ng-if="oneFacility.officer_in_charge.contacts.length !== 0 && oneFacility.officer_in_charge !== null">
-                <span class="fs-15 fw-600 col-xs-12 text-black margin-b-10">Officer Contacts</span>
+                <span class="fs-15 fw-600 col-xs-12 text-black margin-b-10">Officer Address Details</span>
                 <span class="pull-left col-xs-12 margin-b-10" ng-repeat="contact in oneFacility.officer_in_charge.contacts">
                     <label>{{contact.contact_type_name}}: </label>
                     {{contact.contact}}
