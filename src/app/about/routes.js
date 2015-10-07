@@ -15,7 +15,8 @@
                 },
                 data:{
                     pageTitle: "MFLv2 About"
-                }
+                },
+                redirectTo : "about.facilities"
             })
             .state("about.facilities", {
                 url: "/facilities/",
