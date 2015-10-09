@@ -32,6 +32,14 @@
 
         describe("test view controller", function () {
 
+            beforeEach(function() {
+                inject(["api.auth", function (auth) {
+                    spyOn(auth, "getToken").andReturn({
+                        "access_token": "345"
+                    });
+                }]);
+            });
+
             it("should load view controller and data",
             inject(["leafletData", "mfl.rating.services.rating",
                function (leafletData, ratingService) {

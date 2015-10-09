@@ -9,8 +9,9 @@
 
     .controller("mfl.chul.controllers.view", ["$scope","mfl.chul.services.wrappers","$stateParams",
         "gisAdminUnitsApi","leafletData", "mfl.rating.services.rating", "$window", "$state",
+        "api.auth",
         function ($scope,wrappers,$stateParams,gisAdminUnitsApi,leafletData,
-            ratingService, $window, $state) {
+            ratingService, $window, $state, auth) {
             $scope.tooltip = {
                 "title": "",
                 "checked": false
@@ -84,9 +85,16 @@
                 });
             };
             $scope.printCU = function (unit_id) {
+                var download_params = {
+                    "format": "pdf",
+                    "access_token": auth.getToken().access_token
+                };
                 $scope.file_url = wrappers.helpers.joinUrl([
                     wrappers.chul_pdf.makeUrl(wrappers.chul_pdf.apiBaseUrl),
-                    unit_id, "/"
+                    unit_id, "/",
+                    wrappers.helpers.makeGetParam(
+                        wrappers.helpers.makeParams(download_params)
+                    )
                 ]);
             };
             $scope.unit_id = $stateParams.unit_id;
