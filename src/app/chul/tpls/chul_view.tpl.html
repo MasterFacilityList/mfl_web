@@ -27,7 +27,7 @@
             </div>
         </div>
         <div class="col-xs-12 margin-b-10" ng-if="!alert_main && !spinner">
-            <div class="col-md-8 col-xs-12 content-card margin-b-20 fade-content">
+            <div class="col-md-7 col-xs-12 content-card margin-b-20 fade-content">
             <!-- Important data first displayed here -->
             <div class="row">
                 <h3 class="fw-400 col-xs-12">
@@ -90,7 +90,7 @@
 
             </div>
             <!-- Extra details displayed here =========================== -->
-            <div class="side-cont col-md-4 col-xs-12 pull-right pad-l-20">
+            <div class="side-cont col-md-5 col-xs-12 pull-right pad-l-20">
                 <div class="col-xs-12 results-card margin-b-10" ng-if="unit.health_unit_workers.length !== 0" tooltip="Community Health Extension Workers">
                     <div class="col-md-2 col-xs-2 margin-t-5 pad-l-0">
                         <span class="fa-stack fa-lg text-blue fs-26">
@@ -99,12 +99,10 @@
                         </span>
                     </div>
                     <div class="col-md-9 col-xs-10 pad-l-0 margin-t-3">
+                        <h4>Community Health Extension Workers</h4>
                         <p ng-repeat="worker in unit.health_unit_workers" class="fw-500 margin-b-0">
                             <span  class="fs-14">
-                                <label>
-                                    CHEW {{worker.is_incharge ? 'in Charge' : 'at Facility'}} :
-                                </label>
-                                {{worker.name}}
+                                {{worker.name}} <strong>{{worker.is_incharge ? '(In Charge)' : ''}}</strong>
                             </span>
                         </p>
                     </div>
@@ -134,7 +132,7 @@
                 </div>
             </div>
             <div class="col-xs-12 pad-0 margin-t-20">
-                <div class="col-md-6 col-xs-12  content-card fade-content">
+                <div class="col-md-7 col-xs-12  content-card fade-content">
                     <h4 class="fs-18 col-xs-12 pad-0 margin-b-5" tooltip="Community Health Unit Average Rating">
                         <span class="fa-stack fa-lg fs-12">
                           <i class="fa fa-circle fa-stack-2x"></i>
