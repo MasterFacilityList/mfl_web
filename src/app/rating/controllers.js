@@ -4,8 +4,8 @@
     angular.module("mfl.rating.controllers", [])
 
     .controller("mfl.rating.controllers.rating", ["$scope", "$stateParams",
-        "facilitiesApi", "mfl.rating.services.rating","gisAdminUnitsApi",
-        function ($scope, $stateParams,facilitiesApi, ratingService,gisAdminUnitsApi) {
+        "facilitiesApi", "mfl.rating.services.rating","gisAdminUnitsApi", "api.auth",
+        function ($scope, $stateParams,facilitiesApi, ratingService,gisAdminUnitsApi, auth) {
             $scope.spinneractive = true;
             $scope.tooltip = {
                 "title": "",
@@ -113,13 +113,20 @@
                         toastr.error($scope.alert);
                     });
             };
-            //printing function
+
             $scope.printing = function () {
+                var download_params = {
+                    "format": "pdf",
+                    "access_token": auth.getToken().access_token
+                };
                 $scope.file_url = facilitiesApi.helpers.joinUrl([
                     facilitiesApi.facility_pdf.makeUrl(facilitiesApi.
                         facility_pdf.apiBaseUrl),
                     $stateParams.fac_id,
-                    "/"
+                    "/",
+                    facilitiesApi.helpers.makeGetParam(
+                        facilitiesApi.helpers.makeParams(download_params)
+                    )
                 ]);
             };
             $scope.printing();
