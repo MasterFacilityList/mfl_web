@@ -2,17 +2,18 @@
     "use strict";
 
     describe("Tests for Home controllers:", function () {
-        var controller, scope, root, data, $state, $ctrl, $httpBackend, serverUrl;
+        var controller, scope, root, data, $state, $ctrl, httpBackend, serverUrl;
 
         beforeEach(function () {
             module("mfl.home");
             module("mflAppConfig");
+            module("mfl.facilities.wrapper");
             module("templates-app");
             module("templates-common");
             inject(["$rootScope", "$controller","$state","$httpBackend","SERVER_URL",
-                function ($rootScope, $controller, _$state, _$httpBackend, SERVER_URL) {
+                function ($rootScope, $controller, _$state, $httpBackend, SERVER_URL) {
                     root = $rootScope;
-                    $httpBackend = _$httpBackend;
+                    httpBackend = $httpBackend;
                     serverUrl = SERVER_URL;
                     $state = _$state;
                     $ctrl = $controller;
@@ -44,5 +45,6 @@
             scope.typeaheadFacilities();
             expect(_.debounce).toHaveBeenCalled();
         });
+
     });
 })(window._);
