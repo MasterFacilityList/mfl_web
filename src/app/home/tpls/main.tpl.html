@@ -19,6 +19,16 @@
             <div class="col-lg-8 col-lg-offset-2 search-card text-center" style="border: 1px solid #FFF;">
                 <form role="form" name="search-form" ng-submit="search(search.query)">
                     <div class="col-md-12 input-group">
+                        <div class="search-addon-btn input-group-btn">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Facilities <i class="fa fa-caret-down"></i>
+                            </button>
+                            <div class="dropdown-menu">
+                              <a class="dropdown-item fw-500" href="#">Facilities</a>
+                              <div role="separator" class="dropdown-divider"></div>
+                              <a class="dropdown-item fw-500" href="#">Community Units</a>
+                            </div>
+                        </div>
                         <input type="search" class="facilities" ng-model="search.query" placeholder="Search facilities..." ng-focus="typeaheadFacilities()" sync-focus-with="isFocused" autofocus />
                         <span class="highlight"></span>
                         <span class="bar"></span>
