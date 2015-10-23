@@ -301,12 +301,36 @@
                 var data = {
                     "$scope": rootScope.$new(),
                     "filterParams": {
+                        "search" : "Endebess",
                         "county": "12",
                         "page": 3,
                         "constituency": undefined
                     }
                 };
-                httpBackend.expectGET(default_url+"county=12&page=3").respond(200, {results: []});
+                httpBackend.expectGET(default_url+
+                    "search={\"query\":{\"query_string\":{\"default_field\":\"name\""+
+                    ",\"query\":\"Endebess\"}}}&county=12&page=3").respond(200,
+                    {results: []});
+                ctrl("results", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+            });
+
+            it("should find facilities using code", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "filterParams": {
+                        "search" : 1445,
+                        "county": "12",
+                        "page": 3,
+                        "constituency": undefined
+                    }
+                };
+                httpBackend.expectGET(default_url+
+                    "search={\"query\":{\"term\":"+
+                    "{\"code\":1445}}}&county=12&page=3").respond(200, {results: []});
 
                 ctrl("results", data);
 
