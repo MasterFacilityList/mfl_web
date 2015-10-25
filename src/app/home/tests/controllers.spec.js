@@ -1,50 +1,73 @@
 (function (_) {
     "use strict";
 
-    describe("Tests for Home controllers:", function () {
-        var controller, scope, root, data, $state, $ctrl, httpBackend, serverUrl;
+    describe("Test Home controller", function () {
+        var controller, rootScope, state, httpBackend, serverUrl;
 
         beforeEach(function () {
-            module("mfl.home");
+            module("mfl.home.controllers");
             module("mflAppConfig");
-            module("mfl.facilities.wrapper");
-            module("templates-app");
-            module("templates-common");
+
             inject(["$rootScope", "$controller","$state","$httpBackend","SERVER_URL",
-                function ($rootScope, $controller, _$state, $httpBackend, SERVER_URL) {
-                    root = $rootScope;
+                function ($rootScope, $controller, $state, $httpBackend, SERVER_URL) {
+                    rootScope = $rootScope;
                     httpBackend = $httpBackend;
                     serverUrl = SERVER_URL;
-                    $state = _$state;
-                    $ctrl = $controller;
-                    scope = root.$new();
-                    data = {
-                        $scope: scope,
-                        $state: $state
-                    };
-                    controller = function (cntrl) {
-                        return $controller(cntrl, data);
-                    };
+                    state = $state;
+                    controller = $controller;
                 }]);
         });
-        it("should have `mfl.home.controllers.home` defined", function () {
-            var ctrl = controller("mfl.home.controllers.home");
-            expect(ctrl).toBeDefined();
+
+        it("should handle failure to load chu service list", function () {
+            var scope = rootScope.$new();
+            httpBackend
+                .expectGET(serverUrl+"api/chul/services/?fields=name,description")
+                .respond(500, {});
+            controller("mfl.home.controllers.home", {
+                "$scope": scope
+            });
+            httpBackend.flush();
+            httpBackend.verifyNoOutstandingRequest();
+            httpBackend.verifyNoOutstandingExpectation();
+            expect(scope.errors).toEqual({});
+            expect(scope.services).toBe(undefined);
+            expect(scope.spinner).toBe(false);
+        });
+
+        it("should load chu service list", function () {
+            var scope = rootScope.$new();
+            httpBackend
+                .expectGET(serverUrl+"api/chul/services/?fields=name,description")
+                .respond(200, {"results": []});
+            controller("mfl.home.controllers.home", {"$scope": scope});
+            httpBackend.flush();
+            httpBackend.verifyNoOutstandingRequest();
+            httpBackend.verifyNoOutstandingExpectation();
+            expect(scope.errors).toBe(undefined);
+            expect(scope.services).toEqual([]);
+            expect(scope.spinner).toBe(false);
         });
 
         it("should search facilites on `mfl.home.controllers.home`", function(){
-            spyOn($state, "go");
-            controller("mfl.home.controllers.home");
+            var scope = rootScope.$new();
+            spyOn(state, "go");
+            controller("mfl.home.controllers.home", {
+                "$scope": scope,
+                "$state": state
+            });
             scope.search("testing");
             expect(scope.loader).toBeTruthy();
         });
 
         it("should test auto-complete on `mfl.home.controllers.home`", function(){
+            var scope = rootScope.$new();
             spyOn(_, "debounce");
-            controller("mfl.home.controllers.home");
+            controller("mfl.home.controllers.home", {
+                "$scope": scope
+            });
             scope.typeaheadFacilities();
             expect(_.debounce).toHaveBeenCalled();
         });
-
     });
+
 })(window._);

@@ -1,20 +1,16 @@
-(function(angular, _){
+(function(angular, _) {
     "use strict";
 
-    angular.module("mfl.home.controllers", ["mfl.facilities.wrapper"])
+    angular.module("mfl.home.controllers", [
+        "mfl.facilities.wrapper",
+        "mfl.common.typeahead"
+    ])
 
-    .controller("mfl.home.controllers.home", ["$scope", "$window",
+    .controller("mfl.home.controllers.home", ["$scope",
         "searchService", "$state", "facilitiesApi",
-        function ($scope, $window, searchService, $state, wrappers) {
-            $scope.tooltip = {
-                "title": "",
-                "checked": false
-            };
-            /*
-             *Putting in backend call to fetch CHUL services
-             */
+        function ($scope, searchService, $state, wrappers) {
             $scope.spinner = true;
-            wrappers.chul_services.list()
+            wrappers.chul_services.filter({"fields":"name,description"})
             .success(function (data) {
                 $scope.services = data.results;
                 $scope.spinner = false;
