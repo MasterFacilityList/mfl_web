@@ -1,4 +1,4 @@
-(function (angular) {
+(function (angular, jQuery) {
 
     "use strict";
 
@@ -20,22 +20,32 @@
     .service("searchService",["SERVER_URL", "mfl.typeahead",
         function (SERVER_URL, typeahead) {
             var facilities_url = "api/facilities/facilities/?fields=name&search=%QUERY";
-            var initFacilities = function () {
-                return typeahead.initTT(
-                    "facilities",
-                    "name",
-                    SERVER_URL+facilities_url,
-                    15
+            var chus_url = "api/chul/units/?fields=name&search=%QUERY";
+
+            var initTT = function (url_stub, fieldclass, recreate) {
+                var f = typeahead.initTT(
+                    "facilities", "name", SERVER_URL+url_stub, 15, recreate
                 );
-            };
-            this.typeaheadFacilities = function (fieldclass) {
-                var f = initFacilities();
                 var name = fieldclass || "facilities";
                 typeahead.typeaheadUI(name, {
                     displayKey: "name",
                     source: f.ttAdapter()
                 });
             };
+
+            this.destroyTT = function (fieldclass) {
+                // yeah...this is criminal
+                return jQuery(fieldclass).typeahead("destroy");
+            };
+
+            this.typeaheadFacilities = function (fieldclass) {
+                initTT(facilities_url, fieldclass, true);
+            };
+
+            this.typeaheadCHUs = function (fieldclass) {
+                initTT(chus_url, fieldclass, true);
+            };
         }
     ]);
-})(window.angular);
+
+})(window.angular, window.jQuery);
