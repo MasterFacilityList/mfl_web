@@ -26,12 +26,13 @@
          * @param tokenize_field
          * @param search_url
          * @param limit
+         * @param recreate
          * @returns {*}
          */
-        this.initTT = function (name, tokenize_field, search_url, limit) {
+        this.initTT = function (name, tokenize_field, search_url, limit, recreate) {
             var tt_adapter = tt[name];
             var tt_limit = limit || 10;
-            if (_.isUndefined(tt_adapter)) {
+            if (_.isUndefined(tt_adapter) || recreate) {
                 tt_adapter = new Bloodhound({
                     datumTokenizer: function (d) {
                         return Bloodhound.tokenizers.whitespace(d[tokenize_field]);

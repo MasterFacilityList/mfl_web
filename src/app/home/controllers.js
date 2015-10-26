@@ -20,15 +20,31 @@
                 $scope.spinner = false;
             });
             $scope.isFocused = false;
+            $scope.chu_mode = false;
+
             $scope.typeaheadFacilities = function () {
+                $scope.chu_mode = false;
+                searchService.destroyTT("facilities");
                 $scope.isFocused = !$scope.isFocused;
-                _.debounce(searchService.typeaheadFacilities("facilities"),
-                300);
+                _.debounce(searchService.typeaheadFacilities("facilities"), 300);
             };
+
+            $scope.typeaheadCHUs = function () {
+                $scope.chu_mode = true;
+                searchService.destroyTT("facilities");
+                $scope.isFocused = !$scope.isFocused;
+                _.debounce(searchService.typeaheadCHUs("facilities"), 300);
+            };
+
             $scope.search = function (query) {
                 $scope.loader = true;
-                $state.go("facility_filter.results", {"search" : query});
+                if ($scope.chu_mode) {
+                    $state.go("chul_filter.results", {"search" : query});
+                } else {
+                    $state.go("facility_filter.results", {"search" : query});
+                }
             };
+
         }
     ]);
 

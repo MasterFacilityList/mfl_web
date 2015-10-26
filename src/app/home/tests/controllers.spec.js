@@ -48,7 +48,7 @@
             expect(scope.spinner).toBe(false);
         });
 
-        it("should search facilites on `mfl.home.controllers.home`", function(){
+        it("should launch facility search", function(){
             var scope = rootScope.$new();
             spyOn(state, "go");
             controller("mfl.home.controllers.home", {
@@ -57,15 +57,41 @@
             });
             scope.search("testing");
             expect(scope.loader).toBeTruthy();
+            expect(state.go.calls[0].args[0]).toEqual("facility_filter.results");
+            expect(state.go.calls[0].args[1]).toEqual({"search": "testing"});
         });
 
-        it("should test auto-complete on `mfl.home.controllers.home`", function(){
+        it("should launch CHU search", function(){
+            var scope = rootScope.$new();
+            spyOn(state, "go");
+            controller("mfl.home.controllers.home", {
+                "$scope": scope,
+                "$state": state
+            });
+            scope.chu_mode = true;
+            scope.search("testing");
+            expect(scope.loader).toBeTruthy();
+            expect(state.go.calls[0].args[0]).toEqual("chul_filter.results");
+            expect(state.go.calls[0].args[1]).toEqual({"search": "testing"});
+        });
+
+        it("should test facility typeahead", function(){
             var scope = rootScope.$new();
             spyOn(_, "debounce");
             controller("mfl.home.controllers.home", {
                 "$scope": scope
             });
             scope.typeaheadFacilities();
+            expect(_.debounce).toHaveBeenCalled();
+        });
+
+        it("should test chu typeahead", function(){
+            var scope = rootScope.$new();
+            spyOn(_, "debounce");
+            controller("mfl.home.controllers.home", {
+                "$scope": scope
+            });
+            scope.typeaheadCHUs();
             expect(_.debounce).toHaveBeenCalled();
         });
     });

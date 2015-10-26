@@ -1,30 +1,20 @@
 <div class="container-fluid landing-img main-view">
-    <div class="container-fluid bg-overlay">
+    <div class="container-fluid">
         <div class="row margin-h-5">
-            <div class="col-lg-12 margin-b-20">
-                <h2 class="welcome-text text-center hidden-sm hidden-xs">
-                    Welcome to the Kenya Health Master Facility List
-                </h2>
-                <h3 class="welcome-text text-center hidden-lg hidden-md" style="color: #fff;">
-                    Welcome to the Kenya Health Master Facility List
-                </h3>
-            </div>
             <div class="col-lg-8 col-lg-offset-2 search-card text-center margin-t-20" style="border: 1px solid #FFF;">
                 <form role="form" name="search-form" ng-submit="search(search.query)">
                     <div class="col-md-12 input-group">
                         <div class="search-addon-btn input-group-btn">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              Facilities <i class="fa fa-caret-down"></i>
-                            </button>
+                            <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              {{chu_mode ? 'Community Health Units': 'Facilities'}} <i class="fa fa-caret-down"></i>
+                            </a>
                             <div class="dropdown-menu">
-                              <a class="dropdown-item fw-500" href="#">Facilities</a>
+                              <a class="dropdown-item fw-500" ng-click="typeaheadFacilities()">Facilities</a>
                               <div role="separator" class="dropdown-divider"></div>
-                              <a class="dropdown-item fw-500" href="#">Community Units</a>
+                              <a class="dropdown-item fw-500" ng-click="typeaheadCHUs()">Community Units</a>
                             </div>
                         </div>
-                        <input type="search" class="facilities" ng-model="search.query" placeholder="Search facilities..." ng-focus="typeaheadFacilities()" sync-focus-with="isFocused" autofocus />
-                        <span class="highlight"></span>
-                        <span class="bar"></span>
+                        <input type="search" class="facilities" ng-model="search.query" placeholder="Search by name or code..." sync-focus-with="isFocused" autofocus />
                         <span class="search-addon-btn input-group-addon" id="sizing-addon1" ng-click="search(search.query)">
                             <button type="submit" class="search-btn">
                                 <i class="fa fa-search"></i>
@@ -42,9 +32,6 @@
         <h3 class="fw-500 text-black" >
             <span class="pull-left margin-t-10 col-md-6 col-xs-12">
                 About the Master Facility List (MFL)
-            </span>
-            <span class="content-right col-md-6 col-xs-12">
-                <img src="assets/img/ehealth_logo.gif" >
             </span>
         </h3>
         <br>
