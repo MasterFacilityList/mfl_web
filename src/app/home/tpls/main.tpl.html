@@ -11,7 +11,7 @@
                             <div class="dropdown-menu">
                               <a class="dropdown-item fw-500" ng-click="typeaheadFacilities()">Facilities</a>
                               <div role="separator" class="dropdown-divider"></div>
-                              <a class="dropdown-item fw-500" ng-click="typeaheadCHUs()">Community Units</a>
+                              <a class="dropdown-item fw-500" ng-click="typeaheadCHUs()">Community Health Units</a>
                             </div>
                         </div>
                         <input type="search" class="facilities" ng-model="search.query" placeholder="Search by name or code..." sync-focus-with="isFocused" autofocus />
@@ -154,7 +154,7 @@
                     <div class="loader"></div>
                 </div>
                 <p class="lead fs-18 text-black" ng-if="services.length === 0">
-                    <i class="fa fa-info-circle text-primary"></i> No Community Health Service Listed Currently.
+                    <i class="fa fa-info-circle text-primary"></i> No Community Health Unit Service Listed Currently.
                 </p>
             </div>
         </div>
