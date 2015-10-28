@@ -1,6 +1,14 @@
 (function (angular) {
     "use strict";
 
+    /**
+     * @ngdoc module
+     *
+     * @name mflwebApp
+     *
+     * @description
+     * The main application module.
+     */
     angular.module("mflwebApp", [
         "ngAnimate",
         "ngSanitize",
@@ -18,9 +26,6 @@
         "mfl.gis",
         "mfl.auth",
         "mfl.rating",
-        "mfl.downloads",
-        "mfl.about",
-        "angulartics",
-        "angulartics.google.analytics"
+        "mfl.downloads"
     ]);
 })(window.angular);
