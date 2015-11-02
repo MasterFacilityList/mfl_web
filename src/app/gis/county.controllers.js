@@ -1,7 +1,7 @@
 (function (angular, _){
     "use strict";
     angular
-    .module("mfl.gis_county.controllers", ["leaflet-directive",
+    .module("mfl.gis_county.controllers", ["leaflet-directive","nemLogging",
         "mfl.gis.wrapper"])
     .controller("mfl.gis.controllers.gis_county", ["$scope","leafletData",
         "$http","$state","$stateParams", "$timeout",
@@ -130,10 +130,10 @@
                 });
 
             });
-            $scope.$on("leafletDirectiveGeoJson.mouseover", function(ev, constituency) {
+            $scope.$on("leafletDirectiveGeoJson.countymap.mouseover", function(ev, constituency) {
                 $scope.hoveredConst = constituency.model;
             });
-            $scope.$on("leafletDirectiveGeoJson.click", function(ev, constituency) {
+            $scope.$on("leafletDirectiveGeoJson.countymap.click", function(ev, constituency) {
                 $scope.spinner = true;
                 var boundary_ids = constituency.model.properties.ward_boundary_ids.join(",");
                 $stateParams.ward_boundaries = boundary_ids;

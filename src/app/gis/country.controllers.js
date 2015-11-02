@@ -1,11 +1,11 @@
 (function (angular, _){
     "use strict";
     angular
-    .module("mfl.gis_country.controllers", ["leaflet-directive",
+    .module("mfl.gis_country.controllers", ["leaflet-directive","nemLogging",
         "mfl.gis.wrapper"])
     .controller("mfl.gis.controllers.gis", ["$scope","leafletData",
         "$http","$stateParams","$state","SERVER_URL",
-        "$timeout","leafletEvents","gisAdminUnitsApi",
+        "$timeout","leafletMapEvents","gisAdminUnitsApi",
         function ($scope,leafletData,$http, $stateParams,
                   $state, SERVER_URL, $timeout, leafletEvents,
                   gisAdminUnitsApi) {
@@ -34,9 +34,6 @@
                 map: {
                     enable: ["moveend", "popupopen"],
                     logic: "emit"
-                },
-                marker: {
-                    disable : leafletEvents.getAvailableMarkerEvents()
                 }
             }
         });
@@ -126,10 +123,10 @@
         function(err) {
             $scope.alert = err.error;
         });
-        $scope.$on("leafletDirectiveGeoJson.mouseover", function(ev, county) {
+        $scope.$on("leafletDirectiveGeoJson.countrymap.mouseover", function(ev, county) {
             $scope.hoveredCounty = county.model;
         });
-        $scope.$on("leafletDirectiveGeoJson.click", function(ev, county) {
+        $scope.$on("leafletDirectiveGeoJson.countrymap.click", function(ev, county) {
             $scope.spinner = true;
             var boundary_ids = county.model.properties.constituency_boundary_ids.join(",");
             $stateParams.const_boundaries = boundary_ids;

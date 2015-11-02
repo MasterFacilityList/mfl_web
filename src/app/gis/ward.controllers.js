@@ -3,6 +3,7 @@
 
     angular.module("mfl.gis_ward.controllers", [
         "leaflet-directive",
+        "nemLogging",
         "mfl.gis.wrapper"
     ])
 

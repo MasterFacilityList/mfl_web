@@ -3,6 +3,7 @@
 
     angular.module("mfl.gis_const.controllers", [
         "leaflet-directive",
+        "nemLogging",
         "mfl.gis.wrapper"
     ])
 
@@ -138,10 +139,11 @@
                     markers: markers
                 });
             });
-            $scope.$on("leafletDirectiveGeoJson.mouseover", function(ev, ward) {
+            $scope.$on("leafletDirectiveGeoJson.constmap.mouseover", function(ev, ward) {
                 $scope.hoveredWard= ward.model;
+                console.log(ward);
             });
-            $scope.$on("leafletDirectiveGeoJson.click", function(ev, ward) {
+            $scope.$on("leafletDirectiveGeoJson.constmap.click", function(ev, ward) {
                 $scope.spinner = true;
                 $state.go("gis.gis_county.gis_const.gis_ward",
                            {county_id:$stateParams.county_id,
