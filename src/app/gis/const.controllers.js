@@ -141,7 +141,6 @@
             });
             $scope.$on("leafletDirectiveGeoJson.constmap.mouseover", function(ev, ward) {
                 $scope.hoveredWard= ward.model;
-                console.log(ward);
             });
             $scope.$on("leafletDirectiveGeoJson.constmap.click", function(ev, ward) {
                 $scope.spinner = true;

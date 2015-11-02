@@ -224,7 +224,7 @@
                     properties : {}
                 }
             };
-            $rootScope.$broadcast("leafletDirectiveGeoJson.mouseover", ward);
+            $rootScope.$broadcast("leafletDirectiveGeoJson.constmap.mouseover", ward);
             scope.hoveredWard = {
                 type : "",
                 id: "",
@@ -339,7 +339,7 @@
                 }
             };
             var second_call = scope.$on.calls[1];
-            expect(second_call.args[0]).toEqual("leafletDirectiveGeoJson.click");
+            expect(second_call.args[0]).toEqual("leafletDirectiveGeoJson.constmap.click");
             expect(angular.isFunction(second_call.args[1])).toBe(true);
             var listener = second_call.args[1];
             listener(null, ward);

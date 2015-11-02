@@ -224,7 +224,7 @@
                 }
             };
             $httpBackend.flush();
-            $rootScope.$broadcast("leafletDirectiveGeoJson.mouseover",constituency);
+            $rootScope.$broadcast("leafletDirectiveGeoJson.countymap.mouseover",constituency);
             scope.hoveredConst = {
                 type : "",
                 id: "",
@@ -335,7 +335,7 @@
             };
             $httpBackend.flush();
             var second_call = scope.$on.calls[1];
-            expect(second_call.args[0]).toEqual("leafletDirectiveGeoJson.click");
+            expect(second_call.args[0]).toEqual("leafletDirectiveGeoJson.countymap.click");
             expect(angular.isFunction(second_call.args[1])).toBe(true);
             var listener = second_call.args[1];
             listener(null, constituency);

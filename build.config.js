@@ -89,6 +89,7 @@ module.exports = {
             "vendor/angular-ui-select/dist/select.js",
             "vendor/angular-sanitize/angular-sanitize.js",
             "vendor/angular-leaflet-directive/dist/angular-leaflet-directive.js",
+            "vendor/leaflet-plugins/layer/tile/Google.js",
             "vendor/angular-simple-logger/dist/angular-simple-logger.light.js",
             "vendor/modernizr/modernizr.js",
             "vendor/typeahead.js/dist/bloodhound.js",

@@ -134,7 +134,7 @@
             success_fxn2(data2);
         }]));
 
-        it("should expect broadcast of leafletDirectiveGeoJson.mouseover(Country)",
+        it("should expect broadcast of leafletDirectiveGeoJson.countrymap.mouseover(Country)",
             inject(["$rootScope", "$state", function ($rootScope, $state) {
                 var scope = $rootScope.$new();
                 controller("mfl.gis.controllers.gis", {
@@ -151,12 +151,12 @@
                         properties : {}
                     }
                 };
-                $rootScope.$broadcast("leafletDirectiveGeoJson.mouseover", county);
+                $rootScope.$broadcast("leafletDirectiveGeoJson.countrymap.mouseover", county);
                 expect(scope.hoveredCounty).toEqual(county.model);
             }])
         );
 
-        it("should expect broadcast of leafletDirectiveGeoJson.click(Country)",
+        it("should expect broadcast of leafletDirectiveGeoJson.countrymap.click(Country)",
            inject(["$state", "$rootScope", function ($state, $rootScope) {
             var scope = $rootScope.$new();
             spyOn(scope, "$on").andCallThrough();
@@ -187,7 +187,7 @@
                 }
             };
             var second_call = scope.$on.calls[1];
-            expect(second_call.args[0]).toEqual("leafletDirectiveGeoJson.click");
+            expect(second_call.args[0]).toEqual("leafletDirectiveGeoJson.countrymap.click");
             expect(angular.isFunction(second_call.args[1])).toBe(true);
             var listener = second_call.args[1];
             listener(null, county);
