@@ -1,8 +1,26 @@
 (function (angular, _){
     "use strict";
+
+    /**
+     * @ngdoc module
+     *
+     * @name mfl.gis_country.controllers
+     *
+     * @description
+     * Contains the controller used in the country view
+     */
     angular
     .module("mfl.gis_country.controllers", ["leaflet-directive","nemLogging",
         "mfl.gis.wrapper"])
+
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.gis.controllers.gis
+     *
+     * @description
+     * Controller for the country view
+     */
     .controller("mfl.gis.controllers.gis", ["$scope","leafletData",
         "$http","$stateParams","$state","SERVER_URL",
         "$timeout","leafletMapEvents","gisAdminUnitsApi",

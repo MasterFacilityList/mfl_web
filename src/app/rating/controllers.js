@@ -1,8 +1,24 @@
 (function (angular, _, toastr) {
     "use strict";
 
+    /**
+     * @ngdoc module
+     *
+     * @name mfl.rating.controllers
+     *
+     * @description
+     * Contains all the controllers used in the detail page of a facility
+     */
     angular.module("mfl.rating.controllers", [])
 
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.rating.controllers.rating
+     *
+     * @description
+     * Controller for facility details and rating of services
+     */
     .controller("mfl.rating.controllers.rating", ["$scope", "$stateParams",
         "facilitiesApi", "mfl.rating.services.rating","gisAdminUnitsApi", "api.auth",
         function ($scope, $stateParams,facilitiesApi, ratingService,gisAdminUnitsApi, auth) {
@@ -132,6 +148,15 @@
             $scope.printing();
         }
     ])
+
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.rating.controllers.rating.map
+     *
+     * @description
+     * Controller for the map of the facility
+     */
     .controller("mfl.rating.controllers.rating.map",["$scope","$log","gisAdminUnitsApi",
         "leafletData",
         function($scope,$log,gisAdminUnitsApi,leafletData){

@@ -1,12 +1,28 @@
 (function (angular, _){
     "use strict";
 
+    /**
+     * @ngdoc module
+     *
+     * @name mfl.gis_const.controllers
+     *
+     * @description
+     * Contains the controller used in the constituency view
+     */
     angular.module("mfl.gis_const.controllers", [
         "leaflet-directive",
         "nemLogging",
         "mfl.gis.wrapper"
     ])
 
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.gis.controllers.gis_const
+     *
+     * @description
+     * Controller for the constituency view
+     */
     .controller("mfl.gis.controllers.gis_const", ["$scope","leafletData",
         "$http","$state","$stateParams","SERVER_URL",
         "$timeout","gisAdminUnitsApi","$q",

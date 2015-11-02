@@ -1,8 +1,26 @@
 (function (angular, _){
     "use strict";
+
+    /**
+     * @ngdoc module
+     *
+     * @name mfl.gis_county.controllers
+     *
+     * @description
+     * Contains all controller used in the county view
+     */
     angular
     .module("mfl.gis_county.controllers", ["leaflet-directive","nemLogging",
         "mfl.gis.wrapper"])
+
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.gis.controllers.gis_county
+     *
+     * @description
+     * Controller for the county view
+     */
     .controller("mfl.gis.controllers.gis_county", ["$scope","leafletData",
         "$http","$state","$stateParams", "$timeout",
         "SERVER_URL","gisAdminUnitsApi","$q",
