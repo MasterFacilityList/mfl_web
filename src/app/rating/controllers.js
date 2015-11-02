@@ -1,8 +1,24 @@
 (function (angular, _, toastr) {
     "use strict";
 
+    /**
+     * @ngdoc module
+     *
+     * @name mfl.rating.controllers
+     *
+     * @description
+     * Contains all the controllers used in the detail page of a facility
+     */
     angular.module("mfl.rating.controllers", [])
 
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.rating.controllers.rating
+     *
+     * @description
+     * Controller for facility details and rating of services
+     */
     .controller("mfl.rating.controllers.rating", ["$scope", "$stateParams",
         "facilitiesApi", "mfl.rating.services.rating","gisAdminUnitsApi", "api.auth",
         function ($scope, $stateParams,facilitiesApi, ratingService,gisAdminUnitsApi, auth) {
@@ -132,6 +148,15 @@
             $scope.printing();
         }
     ])
+
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.rating.controllers.rating.map
+     *
+     * @description
+     * Controller for the map of the facility
+     */
     .controller("mfl.rating.controllers.rating.map",["$scope","$log","gisAdminUnitsApi",
         "leafletData",
         function($scope,$log,gisAdminUnitsApi,leafletData){
@@ -177,20 +202,20 @@
                     geojson: {
                         data: gis,
                         style: {
-                            fillColor: "rgb(255, 135, 32)",
+                            fillColor: "rgba(255, 135, 32, 0.25)",
                             weight: 2,
                             opacity: 1,
                             color: "rgba(0, 0, 0, 0.52)",
                             dashArray: "3",
-                            fillOpacity: 0.8
+                            fillOpacity: 0.6
                         }
                     },
                     layers:{
                         baselayers:{
-                            ward: {
-                                name: "Ward",
-                                url: "/assets/img/transparent.png",
-                                type:"group"
+                            googleRoadmap: {
+                                name: "Google Streets",
+                                layerType: "ROADMAP",
+                                type: "google"
                             }
                         },
                         overlays:{

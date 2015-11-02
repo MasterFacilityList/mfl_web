@@ -1,11 +1,28 @@
 (function (angular, _){
     "use strict";
 
+    /**
+     * @ngdoc module
+     *
+     * @name mfl.gis_const.controllers
+     *
+     * @description
+     * Contains the controller used in the constituency view
+     */
     angular.module("mfl.gis_const.controllers", [
         "leaflet-directive",
+        "nemLogging",
         "mfl.gis.wrapper"
     ])
 
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.gis.controllers.gis_const
+     *
+     * @description
+     * Controller for the constituency view
+     */
     .controller("mfl.gis.controllers.gis_const", ["$scope","leafletData",
         "$http","$state","$stateParams","SERVER_URL",
         "$timeout","gisAdminUnitsApi","$q",
@@ -138,10 +155,10 @@
                     markers: markers
                 });
             });
-            $scope.$on("leafletDirectiveGeoJson.mouseover", function(ev, ward) {
+            $scope.$on("leafletDirectiveGeoJson.constmap.mouseover", function(ev, ward) {
                 $scope.hoveredWard= ward.model;
             });
-            $scope.$on("leafletDirectiveGeoJson.click", function(ev, ward) {
+            $scope.$on("leafletDirectiveGeoJson.constmap.click", function(ev, ward) {
                 $scope.spinner = true;
                 $state.go("gis.gis_county.gis_const.gis_ward",
                            {county_id:$stateParams.county_id,
