@@ -19,11 +19,9 @@
                     Showing {{results.start_index}} - {{results.end_index}} of <span class="text-danger"><b>{{results.count}}</b></span> results.
                 </p>
             </div>
-            <div class="pull-right">
-                <button class="action-btn action-btn-primary action-btn-md" ng-click="excelExport()" ng-disabled="!results.count" tooltip="Export Excel">
-                    <i class="fa fa-file-excel-o"></i>
-                </button>
-                <button class="action-btn action-btn-default action-btn-md" ng-click="clearFilters()" tooltip="Reset Search"> <i class="fa fa-refresh text-danger"></i></button>
+            <div class="pull-right lato">
+                <button class="login-btn login-btn-primary pad-l-10" ng-click="excelExport()" ng-disabled="!results.count" tooltip="Export Excel"> Export Excel</button>
+                <button class="login-btn login-btn-primary pad-l-10" ng-click="clearFilters()" tooltip="Reset Search"> Reset</button>
             </div>
 
         </div>
