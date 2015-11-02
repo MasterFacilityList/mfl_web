@@ -7,7 +7,7 @@
      * @name mfl.gis_county.controllers
      *
      * @description
-     * Contains all controller used in the county view
+     * Contains controller used in the county view
      */
     angular
     .module("mfl.gis_county.controllers", ["leaflet-directive","nemLogging",
