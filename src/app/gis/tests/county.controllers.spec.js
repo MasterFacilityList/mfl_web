@@ -339,7 +339,7 @@
             expect(angular.isFunction(second_call.args[1])).toBe(true);
             var listener = second_call.args[1];
             listener(null, constituency);
-            expect($state.go).toHaveBeenCalledWith("gis.gis_county.gis_const",{county_id: 4,
+            expect($state.go).toHaveBeenCalledWith("gis_county.gis_const",{county_id: 4,
                 county_boundaries : 4, const_id : "", ward_boundaries : "a,b"});
         }]));
 
