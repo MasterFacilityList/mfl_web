@@ -28,6 +28,28 @@
                    $stateParams, $timeout,
                    SERVER_URL,gisAdminUnitsApi,$q) {
         $scope.county_id = $stateParams.county_id;
+        angular.extend($scope, {
+            defaults: {
+                scrollWheelZoom: false,
+                tileLayer: "",
+                dragging:true
+            },
+            events: {
+                map: {
+                    enable: ["moveend", "popupopen"],
+                    logic: "emit"
+                }
+            },
+            layers:{
+                overlays:{
+                    constituencies:{
+                        name:"Constituencies",
+                        type:"group",
+                        visible: true
+                    }
+                }
+            }
+        });
         gisAdminUnitsApi.counties.get($scope.county_id)
         .success(function (county_data){
             $scope.county = county_data;
@@ -41,16 +63,6 @@
             $scope.filters = {
                 id : $stateParams.county_id
             };
-            angular.extend($scope, {
-                defaults: {
-                    scrollWheelZoom: false,
-                    tileLayer: "",
-                    dragging:true
-                },
-                markers:{},
-                layers:{}
-            });
-
             leafletData.getMap("countymap")
                 .then(function (map) {
                     var coords = county_data.properties.bound.coordinates[0];
@@ -62,8 +74,6 @@
                         {lines: 13, length: 20,corners:1,radius:30,width:10});
                     $timeout(function() {map.spin(false);}, 500);
                 });
-
-
 
             $scope.filters_county = {
                 "fields":"geometry,county",
@@ -115,14 +125,6 @@
                         }
                     },
                     layers:{
-                        baselayers:{
-                            country: {
-                                name: "Country",
-                                url: "/assets/img/transparent.png",
-                                type:"xyz",
-                                data:[]
-                            }
-                        },
                         overlays:{
                             constituencies:{
                                 name:"Constituencies",
@@ -155,7 +157,7 @@
                 $scope.spinner = true;
                 var boundary_ids = constituency.model.properties.ward_boundary_ids.join(",");
                 $stateParams.ward_boundaries = boundary_ids;
-                $state.go("gis.gis_county.gis_const",{county_id:$stateParams.county_id,
+                $state.go("gis_county.gis_const",{county_id:$stateParams.county_id,
                                         county_boundaries:$stateParams.const_boundaries,
                                         const_id:constituency.model.id,
                                         ward_boundaries : boundary_ids});

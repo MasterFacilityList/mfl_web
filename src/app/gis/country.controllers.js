@@ -53,6 +53,22 @@
                     enable: ["moveend", "popupopen"],
                     logic: "emit"
                 }
+            },
+            layers:{
+                baselayers:{
+                    country: {
+                        name: "Country",
+                        url: "/assets/img/transparent.png",
+                        type:"xyz"
+                    }
+                },
+                overlays:{
+                    counties:{
+                        name:"Counties",
+                        type:"group",
+                        visible: true
+                    }
+                }
             }
         });
         gisAdminUnitsApi.getCounties().then(function (data) {
@@ -83,22 +99,6 @@
                         color: "rgba(0, 0, 0, 0.52)",
                         dashArray: "3",
                         fillOpacity: 0.7
-                    }
-                },
-                layers:{
-                    baselayers:{
-                        country: {
-                            name: "Country",
-                            url: "/assets/img/transparent.png",
-                            type:"xyz"
-                        }
-                    },
-                    overlays:{
-                        counties:{
-                            name:"Counties",
-                            type:"group",
-                            visible: true
-                        }
                     }
                 }
             });
@@ -148,7 +148,7 @@
             $scope.spinner = true;
             var boundary_ids = county.model.properties.constituency_boundary_ids.join(",");
             $stateParams.const_boundaries = boundary_ids;
-            $state.go("gis.gis_county",{county_id: county.model.id,
+            $state.go("gis_county",{county_id: county.model.id,
                                     const_boundaries : boundary_ids});
         });
     }]);
