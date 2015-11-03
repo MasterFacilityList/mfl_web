@@ -30,6 +30,28 @@
         function ($scope, leafletData,$http, $state, $stateParams,
                    SERVER_URL,$timeout,gisAdminUnitsApi) {
         $scope.county_id = $stateParams.county_id;
+        angular.extend($scope, {
+            defaults: {
+                scrollWheelZoom: false,
+                tileLayer: "",
+                dragging:true
+            },
+            events: {
+                map: {
+                    enable: ["moveend", "popupopen"],
+                    logic: "emit"
+                }
+            },
+            layers:{
+                overlays:{
+                    wards:{
+                        name:"Wards",
+                        type:"group",
+                        visible: true
+                    }
+                }
+            }
+        });
         gisAdminUnitsApi.counties.get($scope.county_id)
         .success(function (county_data) {
             $scope.county = county_data;
@@ -55,25 +77,6 @@
         gisAdminUnitsApi.wards.get($scope.ward_id)
         .success(function (ward_data) {
             $scope.ward = ward_data;
-            angular.extend($scope, {
-                defaults: {
-                    scrollWheelZoom: false,
-                    tileLayer: "",
-                    dragging:true
-                },
-                events: {
-                    map: {
-                        enable: ["moveend", "popupopen"],
-                        logic: "emit"
-                    },
-                    marker: {
-                        enable: [],
-                        logic: "emit"
-                    }
-                },
-                markers:{},
-                layers:{}
-            });
             leafletData.getMap("wardmap")
                 .then(function (map) {
                 var coords = ward_data.properties.bound.coordinates[0];

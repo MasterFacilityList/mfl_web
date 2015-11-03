@@ -30,6 +30,28 @@
                    $stateParams,SERVER_URL,
                   $timeout,gisAdminUnitsApi, $q) {
         $scope.county_id = $stateParams.county_id;
+        angular.extend($scope, {
+            defaults: {
+                scrollWheelZoom: false,
+                tileLayer: "",
+                dragging:true
+            },
+            events: {
+                map: {
+                    enable: ["moveend", "popupopen"],
+                    logic: "emit"
+                }
+            },
+            layers:{
+                overlays:{
+                    wards:{
+                        name:"Wards",
+                        type:"group",
+                        visible: true
+                    }
+                }
+            }
+        });
         gisAdminUnitsApi.counties.get($scope.county_id).success(function (data) {
             $scope.county = data;
         }).error(function (err) {
@@ -49,17 +71,6 @@
             $scope.filters = {
                 id : $stateParams.const_id
             };
-            angular.extend($scope, {
-                defaults: {
-                    scrollWheelZoom: false,
-                    tileLayer: "",
-                    dragging:true
-                },
-                markers:{},
-                layers:{
-                    overlays:{}
-                }
-            });
             leafletData.getMap("constmap")
                 .then(function (map) {
                     var coords = const_data.properties.bound.coordinates[0];
@@ -160,7 +171,7 @@
             });
             $scope.$on("leafletDirectiveGeoJson.constmap.click", function(ev, ward) {
                 $scope.spinner = true;
-                $state.go("gis.gis_county.gis_const.gis_ward",
+                $state.go("gis_county.gis_const.gis_ward",
                            {county_id:$stateParams.county_id,
                             county_boundaries:$stateParams.const_boundaries,
                             const_id:$stateParams.const_id,
