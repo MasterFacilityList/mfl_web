@@ -125,12 +125,12 @@
             </span> Location</h4>
             <br>
             <h4 class="fs-14 fw-500  hidden-sm hidden-xs">
-                <a ui-sref="gis.gis_county({county_id:oneFacility.boundaries.county_boundary,const_boundaries:const_boundaries})">
+                <a ui-sref="gis_county({county_id:oneFacility.boundaries.county_boundary,const_boundaries:const_boundaries})">
                 <span class="fs-14 fw-500 text-blue col-md-6 col-xs-12 margin-b-5">
                     {{oneFacility.county}} COUNTY
                 </span></a>
                 <span class="content-right col-md-6 col-xs-12 margin-b-5">
-                    <a ui-sref="gis.gis_county.gis_const({county_id:oneFacility.boundaries.county_boundary,const_boundaries:const_boundaries,const_id:oneFacility.boundaries.constituency_boundary,ward_boundaries:ward_boundaries})">
+                    <a ui-sref="gis_county.gis_const({county_id:oneFacility.boundaries.county_boundary,const_boundaries:const_boundaries,const_id:oneFacility.boundaries.constituency_boundary,ward_boundaries:ward_boundaries})">
                         <span class="fs-14 fw-500 text-blue">{{oneFacility.constituency}} SUB-COUNTY</span>
                     </a>
                 </span>
@@ -146,7 +146,7 @@
             <br>
             <h4 class="fs-16 fw-500  hidden-sm hidden-xs margin-t-15">
                 <span class="fs-14 fw-500 pull-left col-md-6 col-xs-12">
-                    <a ui-sref="gis.gis_county.gis_const.gis_ward({county_id:oneFacility.boundaries.county_boundary,const_boundaries:const_boundaries,const_id:oneFacility.boundaries.constituency_boundary,const_boundaries:const_boundaries,ward_id:oneFacility.boundaries.ward_boundary})">
+                    <a ui-sref="gis_county.gis_const.gis_ward({county_id:oneFacility.boundaries.county_boundary,const_boundaries:const_boundaries,const_id:oneFacility.boundaries.constituency_boundary,const_boundaries:const_boundaries,ward_id:oneFacility.boundaries.ward_boundary})">
                     <span class="text-blue">{{oneFacility.ward_name}} WARD</span>
                     </a>
                 </span>
