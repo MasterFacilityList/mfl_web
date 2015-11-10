@@ -558,6 +558,42 @@
                               "facility_subcounty,facility_ward&";
             });
 
+            it("should make a query DSL for search parameter when text", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "filterParams": {
+                        "search": "Mathare"
+                    }
+                };
+                httpBackend.expectGET(default_url+
+                    "search={\"query\":{\"query_string\":{\"default_field\":\"name\""+
+                    ",\"query\":\"Mathare\"}}}").respond(200,
+                    {results: []});
+                ctrl("search_results", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+            });
+
+            it("should make a query DSL for search parameter when code", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "filterParams": {
+                        "search": 76813
+                    }
+                };
+                httpBackend.expectGET(default_url+
+                    "search={\"query\":{\"term\":"+
+                    "{\"code\":76813}}}").respond(200, {results: []});
+
+                ctrl("search_results", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+            });
+
             it("should find CHUs using the filters", function () {
                 var data = {
                     "$scope": rootScope.$new(),
@@ -594,7 +630,7 @@
                 httpBackend.verifyNoOutstandingRequest();
             });
 
-            it("should export all filtered fCHUs to excel", function () {
+            it("should export all filtered CHUs to excel", function () {
                 inject(["api.auth", function (a) {
                     var data = {
                         "$scope": rootScope.$new(),

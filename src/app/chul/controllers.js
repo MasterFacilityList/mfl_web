@@ -300,6 +300,24 @@
                           "facility_county,facility_subcounty,facility_ward"
             });
 
+            // transform search param into a query DSL
+            if (params.search) {
+                var dsl = {
+                    "query": { }
+                };
+                if (_.isNaN(parseInt(params.search, 10))) {
+                    dsl.query.query_string = {
+                        "default_field": "name",
+                        "query": params.search
+                    };
+                } else {
+                    dsl.query.term = {
+                        "code": params.search
+                    };
+                }
+                params.search = JSON.stringify(dsl);
+            }
+
             $scope.spinner = true;
             $scope.filter_promise = wrappers.chul.filter(params)
             .success(function (data) {
