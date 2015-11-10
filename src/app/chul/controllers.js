@@ -1,12 +1,28 @@
 (function(angular, _ , toastr){
     "use strict";
 
+    /**
+     * @ngdoc module
+     *
+     * @name mfl.chul.controllers
+     *
+     * @description
+     * Contains the controller used in CHU views
+     */
     angular.module("mfl.chul.controllers", [
         "mfl.chul.services",
         "mfl.rating.services",
         "mfl.facility_filter.services"
     ])
 
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.chul.controllers.view
+     *
+     * @description
+     * Controller for the CHU detail view
+     */
     .controller("mfl.chul.controllers.view", ["$scope","mfl.chul.services.wrappers","$stateParams",
         "gisAdminUnitsApi","leafletData", "mfl.rating.services.rating", "$window", "$state",
         "api.auth",
@@ -174,6 +190,14 @@
         }
     ])
 
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.chul.controllers.search_form
+     *
+     * @description
+     * Controller for the search form in CHU advanced search
+     */
     .controller("mfl.chul.controllers.search_form",
         ["$stateParams", "$scope", "$state", "$location",
         "mfl.chul.services.wrappers", "CHU_SEARCH_PARAMS",
@@ -285,6 +309,14 @@
         }]
     )
 
+    /**
+     * @ngdoc controller
+     *
+     * @name mfl.chul.controllers.search_results
+     *
+     * @description
+     * Controller for the results part of CHU advanced search
+     */
     .controller("mfl.chul.controllers.search_results",
         ["$scope", "$state", "$window", "filterParams",
         "mfl.chul.services.wrappers", "api.auth",
