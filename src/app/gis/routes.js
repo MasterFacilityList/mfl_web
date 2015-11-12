@@ -28,9 +28,6 @@
                             return $q.when(current_token);
                         }
                         return auth.fetchToken();
-                    }],
-                    filterParams: ["auth", "$stateParams", function (auth, sp) {
-                        return sp;
                     }]
                 }
             })
