@@ -35,7 +35,7 @@
                 }
             })
             .state("gis_county", {
-                url: "/:county_id/:const_boundaries",
+                url: "/gis/:county_id/:const_boundaries",
                 views: {
                     "main": {
                         templateUrl: "gis/tpls/all-map.tpl.html"
