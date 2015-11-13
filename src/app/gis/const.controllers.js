@@ -38,7 +38,7 @@
             },
             events: {
                 map: {
-                    enable: ["moveend", "popupopen"],
+                    enable: ["click"],
                     logic: "emit"
                 }
             },
@@ -64,10 +64,6 @@
             $scope.const_boundaries = $stateParams.const_boundaries;
             $scope.ward_boundaries = $stateParams.ward_boundaries;
             $scope.spinner = false;
-            $scope.tooltip = {
-                "title": "",
-                "checked": false
-            };
             $scope.filters = {
                 id : $stateParams.const_id
             };
@@ -109,6 +105,7 @@
                 var markers = _.mapObject(county_marks, function(mark){
                     return {
                             layer:"wards",
+                            id:mark.id,
                             lat: mark.properties.center.coordinates[1],
                             lng: mark.properties.center.coordinates[0],
                             label: {
@@ -120,7 +117,6 @@
                             riseOnHover: true
                         };
                 });
-                $scope.marks = markers;
                 angular.extend($scope, {
                     geojson: {
                         data: payload[1].data.results,
@@ -166,10 +162,16 @@
                     markers: markers
                 });
             });
-            $scope.$on("leafletDirectiveGeoJson.constmap.mouseover", function(ev, ward) {
-                $scope.hoveredWard= ward.model;
-            });
             $scope.$on("leafletDirectiveGeoJson.constmap.click", function(ev, ward) {
+                $scope.spinner = true;
+                $state.go("gis_county.gis_const.gis_ward",
+                           {county_id:$stateParams.county_id,
+                            county_boundaries:$stateParams.const_boundaries,
+                            const_id:$stateParams.const_id,
+                            ward_boundaries : $stateParams.ward_boundaries,
+                            ward_id: ward.model.id});
+            });
+            $scope.$on("leafletDirectiveMarker.constmap.click", function(ev, ward) {
                 $scope.spinner = true;
                 $state.go("gis_county.gis_const.gis_ward",
                            {county_id:$stateParams.county_id,
