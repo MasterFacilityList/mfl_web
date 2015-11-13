@@ -34,7 +34,7 @@
                 spyOn($localForage, "key").andReturn(keyName);
                 spyOn(keyName, "then");
 
-                httpBackend.expectGET(SERVER_URL+"api/gis/county_boundaries/")
+                httpBackend.expectGET(SERVER_URL+"api/gis/drilldown/country/")
                     .respond(200,{"Accept":"application/json, */*"});
                 gisAdminUnitsApi.getCounties();
                 var then_fxn = keyName.then.calls[0].args[0];
@@ -55,7 +55,7 @@
                 spyOn($localForage, "key").andReturn(keyName);
                 spyOn(keyName, "then");
 
-                httpBackend.expectGET(SERVER_URL+"api/gis/county_boundaries/")
+                httpBackend.expectGET(SERVER_URL+"api/gis/drilldown/country/")
                     .respond(500,{"Accept":"application/json, */*"});
                 gisAdminUnitsApi.getCounties();
                 var then_fxn = keyName.then.calls[0].args[0];
@@ -104,7 +104,7 @@
                 spyOn($localForage, "key").andReturn(keyName);
                 spyOn(keyName, "then");
 
-                httpBackend.expectGET(SERVER_URL+"api/gis/coordinates/")
+                httpBackend.expectGET(SERVER_URL+"api/gis/drilldown/facility/")
                     .respond(200,{"Accept":"application/json, */*"});
                 gisAdminUnitsApi.getFacCoordinates();
                 var then_fxn = keyName.then.calls[0].args[0];
@@ -123,7 +123,7 @@
                 spyOn($localForage, "key").andReturn(keyName);
                 spyOn(keyName, "then");
 
-                httpBackend.expectGET(SERVER_URL+"api/gis/coordinates/")
+                httpBackend.expectGET(SERVER_URL+"api/gis/drilldown/facility/")
                     .respond(500,{"Accept":"application/json, */*"});
                 gisAdminUnitsApi.getFacCoordinates();
                 var then_fxn = keyName.then.calls[0].args[0];

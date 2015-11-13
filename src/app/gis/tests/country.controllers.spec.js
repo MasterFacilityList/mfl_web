@@ -103,7 +103,7 @@
             expect(scope.alert).toEqual("ADS");
 
             var payload = {
-                results:{
+                geojson:{
                     id :"4",
                     type:"",
                     geometry:{},

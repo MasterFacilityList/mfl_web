@@ -34,7 +34,7 @@
             inject(["$httpBackend","$state", "leafletData",
             function ($httpBackend, $state, leafletData) {
             var data1 = {
-                properties: {
+                meta: {
                     bound:{
                         type:"",
                         coordinates:[[3,4],[4,5]]
@@ -45,7 +45,7 @@
                         coordinates:[[3,4],[4,5]]
                     }
                 },
-                results:{
+                geojson:{
                     id :"4",
                     type:"",
                     geometry:{},
@@ -72,32 +72,8 @@
                     ]
                 }
             };
-            var data2 = [
-                {
-                    geometry:{
-                        type:"",
-                        coordinates:[]
-                    },
-                    properties:{
-                        bound:{
-                            type:"",
-                            coordinates:[[3,4],[4,5]]
-                        },
-                        center:{
-                            type:"",
-                            coordinates:[[3,4],[4,5]]
-                        }
-                    }
-                }
-            ];
             $httpBackend.expectGET(
-            SERVER_URL + "api/gis/county_boundaries/4/")
-                .respond(200, data1);
-            $httpBackend.expectGET(
-            SERVER_URL + "api/gis/coordinates/?fields=geometry,county&county=4")
-                .respond(200, data2);
-            $httpBackend.expectGET(
-            SERVER_URL + "api/gis/constituency_boundaries/?id=4")
+            SERVER_URL + "api/gis/drilldown/county/?id=4")
                 .respond(200, data1);
             controller("mfl.gis.controllers.gis_county", {
                 "$scope": scope,
@@ -389,33 +365,32 @@
                     ]
                 }
             };
-            var data2 = [
-                {
-                    geometry:{
-                        type:"",
-                        coordinates:[]
-                    },
-                    properties:{
-                        bound:{
+            var data2 = {
+                geojson: {
+                    features:[{
+                        geometry:{
                             type:"",
-                            coordinates:[[3,4],[4,5]]
+                            coordinates:[]
                         },
-                        center:{
-                            type:"",
-                            coordinates:[[3,4],[4,5]]
+                        properties:{
+                            bound:{
+                                type:"",
+                                coordinates:[[3,4],[4,5]]
+                            },
+                            center:{
+                                type:"",
+                                coordinates:[[3,4],[4,5]]
+                            }
                         }
-                    }
+                    }]
                 }
-            ];
+            };
             $httpBackend.expectGET(
-            SERVER_URL + "api/gis/county_boundaries/4/")
+            SERVER_URL + "api/gis/drilldown/county/4/")
                .respond(200, data1);
             $httpBackend.expectGET(
             SERVER_URL + "api/gis/coordinates/?fields=geometry,county&county=4")
                .respond(200, data2);
-            $httpBackend.expectGET(
-            SERVER_URL + "api/gis/constituency_boundaries/?id=4")
-               .respond(200, data1);
             spyOn(scope, "$on").andCallThrough();
             spyOn($state, "go");
             var obj = {

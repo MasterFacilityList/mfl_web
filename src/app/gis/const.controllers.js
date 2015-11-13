@@ -29,6 +29,7 @@
         function ($scope, leafletData, $http, $state,
                    $stateParams,SERVER_URL,
                   $timeout,gisAdminUnitsApi) {
+        $scope.county_code = $stateParams.county_code;
         $scope.constituency_code = $stateParams.constituency_code;
         angular.extend($scope, {
             defaults: {
@@ -140,14 +141,14 @@
             });
             $scope.$on("leafletDirectiveGeoJson.constmap.click", function(ev, ward) {
                 $scope.spinner = true;
-                $state.go("gis_constituency.gis_const.gis_ward",
+                $state.go("gis_county.gis_const.gis_ward",
                            {county_code:$stateParams.county_code,
                             constituency_code:$stateParams.constituency_code,
-                            ward_code :ward.model.id});
+                            ward_code:ward.model.id});
             });
             $scope.$on("leafletDirectiveMarker.constmap.click", function(ev, ward) {
                 $scope.spinner = true;
-                $state.go("gis_constituency.gis_const.gis_ward",
+                $state.go("gis_county.gis_const.gis_ward",
                            {county_code:$stateParams.county_code,
                             constituency_code:$stateParams.constituency_code,
                             ward_code: ward.model.id});

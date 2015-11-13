@@ -78,13 +78,7 @@
             spyOn(obj, "then");
             spyOn(timeout, "timeout");
             $httpBackend.expectGET(
-            SERVER_URL + "api/gis/county_boundaries/4/")
-                .respond(200, data1);
-            $httpBackend.expectGET(
-            SERVER_URL + "api/gis/constituency_boundaries/4/")
-                .respond(200, data1);
-            $httpBackend.expectGET(
-            SERVER_URL + "api/gis/ward_boundaries/4/")
+            SERVER_URL + "api/gis/drilldown/ward/4/")
                 .respond(200, data1);
             controller("mfl.gis.controllers.gis_ward", {
                 "$scope": scope,

@@ -24,7 +24,7 @@ describe("tests for GIS Routes:", function() {
             };
         }]);
     });
-    it("should respond to /gis", inject(["$state",function ($state) {
+    it("should respond to /gis/drilldown", inject(["$state",function ($state) {
         expect($state.href("gis", { id: 1 })).toEqual("#/gis");
     }]));
 
@@ -37,9 +37,9 @@ describe("tests for GIS Routes:", function() {
             properties:{}
         };
         $httpBackend.expectGET(
-        SERVER_URL + "api/gis/constituency_boundaries/34/")
+        SERVER_URL + "api/gis/drilldown/constituency/34/")
             .respond(200, data);
-        $state.go("gis_county.gis_const", {"const_id": "34"});
+        $state.go("gis_county.gis_const", {"const_code": "34"});
     }]));
 
     it("should resolve gisWard",
@@ -51,7 +51,7 @@ describe("tests for GIS Routes:", function() {
             properties:{}
         };
         $httpBackend.expectGET(
-        SERVER_URL + "api/gis/ward_boundaries/34/")
+        SERVER_URL + "api/gis/drilldown/ward/34/")
             .respond(200, data);
         $state.go("gis_county.gis_const.gis_ward", {"ward_id": "34"});
     }]));

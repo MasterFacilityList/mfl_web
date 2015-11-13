@@ -29,7 +29,9 @@
         "$timeout","gisAdminUnitsApi",
         function ($scope, leafletData,$http, $state, $stateParams,
                    SERVER_URL,$timeout,gisAdminUnitsApi) {
-        $scope.county_id = $stateParams.county_id;
+        $scope.county_code = $stateParams.county_code;
+        $scope.constituency_code = $stateParams.constituency_code;
+        $scope.ward_code = $stateParams.ward_code;
         angular.extend($scope, {
             defaults: {
                 scrollWheelZoom: false,
