@@ -138,101 +138,6 @@
                 .respond(500, data);
             $httpBackend.flush();
         }]));
-        it("should expect broadcast of leafletDirectiveGeoJson.mouseover(County Level)",
-            inject(["$rootScope","leafletData","$state","$httpBackend",
-             function ($rootScope, leafletData,$state,$httpBackend) {
-            var data1 = {
-                properties: {
-                    bound:{
-                        type:"",
-                        coordinates:[[3,4],[4,5]]
-                    },
-                    county_id:"4",
-                    center:{
-                        type:"",
-                        coordinates:[[3,4],[4,5]]
-                    }
-                },
-                results:{
-                    id :"4",
-                    type:"",
-                    geometry:{},
-                    properties: {},
-                    features: [
-                        {
-                            id:"",
-                            type:"",
-                            geometry:{
-                                type:"",
-                                coordinates:[]
-                            },
-                            properties:{
-                                bound:{
-                                    type:"",
-                                    coordinates:[[3,4],[4,5]]
-                                },
-                                center:{
-                                    type:"",
-                                    coordinates:[[3,4],[4,5]]
-                                }
-                            }
-                        }
-                    ]
-                }
-            };
-            var data2 = [
-                {
-                    geometry:{
-                        type:"",
-                        coordinates:[]
-                    },
-                    properties:{
-                        bound:{
-                            type:"",
-                            coordinates:[[3,4],[4,5]]
-                        },
-                        center:{
-                            type:"",
-                            coordinates:[[3,4],[4,5]]
-                        }
-                    }
-                }
-            ];
-            $httpBackend.expectGET(
-            SERVER_URL + "api/gis/county_boundaries/4/")
-                .respond(200, data1);
-            $httpBackend.expectGET(
-            SERVER_URL + "api/gis/coordinates/?fields=geometry,county&county=4")
-                .respond(200, data2);
-            $httpBackend.expectGET(
-            SERVER_URL + "api/gis/constituency_boundaries/?id=4")
-                .respond(200, data1);
-            controller("mfl.gis.controllers.gis_county", {
-                "$scope": scope,
-                "leafletData": leafletData,
-                "$http": {},
-                "$state": {},
-                "$stateParams": {county_id: 4, const_boundaries: 4},
-                "SERVER_URL": SERVER_URL
-            });
-            var constituency = {
-                model:{
-                    type : "",
-                    id: "",
-                    geometry : {},
-                    properties : {}
-                }
-            };
-            $httpBackend.flush();
-            $rootScope.$broadcast("leafletDirectiveGeoJson.countymap.mouseover",constituency);
-            scope.hoveredConst = {
-                type : "",
-                id: "",
-                geometry : {},
-                properties : {}
-            };
-            expect(scope.hoveredConst).toEqual(constituency.model);
-        }]));
 
         it("should expect broadcast of leafletDirectiveGeoJson.click(County Level)",
            inject(["$state","leafletData","$httpBackend",
@@ -334,8 +239,107 @@
                 }
             };
             $httpBackend.flush();
-            var second_call = scope.$on.calls[1];
+            var second_call = scope.$on.calls[0];
             expect(second_call.args[0]).toEqual("leafletDirectiveGeoJson.countymap.click");
+            expect(angular.isFunction(second_call.args[1])).toBe(true);
+            var listener = second_call.args[1];
+            listener(null, constituency);
+            expect($state.go).toHaveBeenCalledWith("gis_county.gis_const",{county_id: 4,
+                county_boundaries : 4, const_id : "", ward_boundaries : "a,b"});
+        }]));
+
+        it("should expect broadcast of leafletDirectiveMarker.click(County Level)",
+           inject(["$state","leafletData","$httpBackend",
+                   function ($state, leafletData, $httpBackend) {
+            var data1 = {
+                properties: {
+                    bound:{
+                        type:"",
+                        coordinates:[[3,4],[4,5]]
+                    },
+                    county_id:"4",
+                    center:{
+                        type:"",
+                        coordinates:[[3,4],[4,5]]
+                    }
+                },
+                results:{
+                    id :"4",
+                    type:"",
+                    geometry:{},
+                    properties: {},
+                    features: [
+                        {
+                            id:"",
+                            type:"",
+                            geometry:{
+                                type:"",
+                                coordinates:[]
+                            },
+                            properties:{
+                                bound:{
+                                    type:"",
+                                    coordinates:[[3,4],[4,5]]
+                                },
+                                center:{
+                                    type:"",
+                                    coordinates:[[3,4],[4,5]]
+                                }
+                            }
+                        }
+                    ]
+                }
+            };
+            var data2 = [
+                {
+                    geometry:{
+                        type:"",
+                        coordinates:[]
+                    },
+                    properties:{
+                        bound:{
+                            type:"",
+                            coordinates:[[3,4],[4,5]]
+                        },
+                        center:{
+                            type:"",
+                            coordinates:[[3,4],[4,5]]
+                        }
+                    }
+                }
+            ];
+            $httpBackend.expectGET(
+            SERVER_URL + "api/gis/county_boundaries/4/")
+                .respond(200, data1);
+            $httpBackend.expectGET(
+            SERVER_URL + "api/gis/coordinates/?fields=geometry,county&county=4")
+                .respond(200, data2);
+            $httpBackend.expectGET(
+            SERVER_URL + "api/gis/constituency_boundaries/?id=4")
+                .respond(200, data1);
+            spyOn(scope, "$on").andCallThrough();
+            spyOn($state, "go");
+            controller("mfl.gis.controllers.gis_county", {
+                "$scope": scope,
+                "leafletData": leafletData,
+                "$http": {},
+                "$state": $state,
+                "$stateParams": {county_id: 4, const_boundaries: 4},
+                "SERVER_URL": SERVER_URL
+            });
+
+            var constituency = {
+                model:{
+                    id: "",
+                    boundaries: [
+                            "a",
+                            "b"
+                        ]
+                    }
+                };
+            $httpBackend.flush();
+            var second_call = scope.$on.calls[1];
+            expect(second_call.args[0]).toEqual("leafletDirectiveMarker.countymap.click");
             expect(angular.isFunction(second_call.args[1])).toBe(true);
             var listener = second_call.args[1];
             listener(null, constituency);
