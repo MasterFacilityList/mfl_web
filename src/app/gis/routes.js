@@ -35,7 +35,7 @@
                 }
             })
             .state("gis_county", {
-                url: "/:county_id/:const_boundaries",
+                url: "/gis/{county_code:int}/",
                 views: {
                     "main": {
                         templateUrl: "gis/tpls/all-map.tpl.html"
@@ -53,7 +53,7 @@
                 }
             })
             .state("gis_county.gis_const", {
-                url: "/:const_id/:ward_boundaries",
+                url: "{constituency_code:int}/",
                 views: {
                     "back@gis_county":{
                         templateUrl:"gis/tpls/history_back.tpl.html"
@@ -67,7 +67,7 @@
                     pageTitle: "MFLv2 Constituency View Geolocation"
                 }
             }).state("gis_county.gis_const.gis_ward", {
-                url: "/ward/:ward_id",
+                url: "{ward_code:int}/",
                 views: {
                     "back@gis_county":{
                         templateUrl:"gis/tpls/history_back.tpl.html"

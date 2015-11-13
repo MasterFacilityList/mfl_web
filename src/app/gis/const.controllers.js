@@ -25,11 +25,11 @@
      */
     .controller("mfl.gis.controllers.gis_const", ["$scope","leafletData",
         "$http","$state","$stateParams","SERVER_URL",
-        "$timeout","gisAdminUnitsApi","$q",
+        "$timeout","gisAdminUnitsApi",
         function ($scope, leafletData, $http, $state,
                    $stateParams,SERVER_URL,
-                  $timeout,gisAdminUnitsApi, $q) {
-        $scope.county_id = $stateParams.county_id;
+                  $timeout,gisAdminUnitsApi) {
+        $scope.constituency_code = $stateParams.constituency_code;
         angular.extend($scope, {
             defaults: {
                 scrollWheelZoom: false,
@@ -52,24 +52,16 @@
                 }
             }
         });
-        gisAdminUnitsApi.counties.get($scope.county_id).success(function (data) {
-            $scope.county = data;
-        }).error(function (err) {
-            console.log(err);
-        });
-        $scope.const_id = $stateParams.const_id;
-        gisAdminUnitsApi.constituencies.get($scope.const_id)
-        .success(function (const_data) {
-            $scope.constituency = const_data;
-            $scope.const_boundaries = $stateParams.const_boundaries;
-            $scope.ward_boundaries = $stateParams.ward_boundaries;
+
+        $scope.county_code = $stateParams.county_code;
+        $scope.constituency_code = $stateParams.constituency_code;
+        gisAdminUnitsApi.constituency.get($scope.constituency_code)
+        .success(function (constituency_data) {
+            $scope.constituency = constituency_data;
             $scope.spinner = false;
-            $scope.filters = {
-                id : $stateParams.const_id
-            };
             leafletData.getMap("constmap")
                 .then(function (map) {
-                    var coords = const_data.properties.bound.coordinates[0];
+                    var coords = constituency_data.meta.bound.coordinates[0];
                     var bounds = _.map(coords, function(c) {
                         return [c[1], c[0]];
                     });
@@ -77,39 +69,29 @@
                     map.spin(true,  {lines: 13, length: 20,corners:1,
                         radius:30,width:10});
                     $timeout(function() {map.spin(false);}, 500);
-                });
-
-
-            $scope.filters_const = {
-                "fields":"geometry,constituency",
-                constituency : const_data.properties.constituency_id
-            };
-            var facilitiesPromise = gisAdminUnitsApi.facilities.filter($scope.filters_const);
-
-            $scope.filters = {
-                id : $stateParams.ward_boundaries
-            };
-            var wardBoundariesPromise = gisAdminUnitsApi.wards.filter($scope.filters);
-
-            $q.all([facilitiesPromise,wardBoundariesPromise])
-            .then(function(payload){
-                var fac_marks = payload[0].data;
-                var county_marks = payload[1].data.results.features;
-                $scope.facility_count = fac_marks.length;
-                var heatpoints = _.map(fac_marks, function(heat){
+                },function(err){
+                console.log(err);
+            });
+            //Get Facility Coordinates
+            gisAdminUnitsApi.getFacCoordinates()
+            .then(function (data){
+                var heats = _.filter(data,{4:$scope.constituency_code});
+                $scope.facility_count = heats.length;
+                var heatpoints = _.map(heats, function(heat){
                     return [
-                            heat.geometry.coordinates[1],
-                            heat.geometry.coordinates[0]
+                            heat[2],
+                            heat[1]
                         ];
                 });
-                var markers = _.mapObject(county_marks, function(mark){
+                var constituency_marks = constituency_data.geojson.features;
+                var markers = _.mapObject(constituency_marks, function(mark){
                     return {
-                            layer:"wards",
+                            layer:"constituencies",
                             id:mark.id,
                             lat: mark.properties.center.coordinates[1],
                             lng: mark.properties.center.coordinates[0],
                             label: {
-                                message: ""+mark.properties.name+"",
+                                message: mark.properties.name,
                                 options: {
                                     noHide: false
                                 }
@@ -119,7 +101,7 @@
                 });
                 angular.extend($scope, {
                     geojson: {
-                        data: payload[1].data.results,
+                        data: constituency_data.geojson,
                         style: {
                             fillColor: "rgba(255, 255, 255, 0.27)",
                             weight: 2,
@@ -130,17 +112,9 @@
                         }
                     },
                     layers:{
-                        baselayers:{
-                            Constituency: {
-                                name: "Constituency",
-                                url: "/assets/img/transparent.png",
-                                type:"xyz",
-                                data:[]
-                            }
-                        },
                         overlays:{
-                            wards:{
-                                name:"Wards",
+                            constituencies:{
+                                name:"Constituencies",
                                 type:"group",
                                 visible: true
                             },
@@ -157,28 +131,26 @@
                                 visible: true
                             }
                         },
-                        selectedWard: {}
+                        selectedConst: {}
                     },
                     markers: markers
                 });
+            },function(err) {
+                $scope.alert = err.error;
             });
             $scope.$on("leafletDirectiveGeoJson.constmap.click", function(ev, ward) {
                 $scope.spinner = true;
-                $state.go("gis_county.gis_const.gis_ward",
-                           {county_id:$stateParams.county_id,
-                            county_boundaries:$stateParams.const_boundaries,
-                            const_id:$stateParams.const_id,
-                            ward_boundaries : $stateParams.ward_boundaries,
-                            ward_id: ward.model.id});
+                $state.go("gis_constituency.gis_const.gis_ward",
+                           {county_code:$stateParams.county_code,
+                            constituency_code:$stateParams.constituency_code,
+                            ward_code :ward.model.id});
             });
             $scope.$on("leafletDirectiveMarker.constmap.click", function(ev, ward) {
                 $scope.spinner = true;
-                $state.go("gis_county.gis_const.gis_ward",
-                           {county_id:$stateParams.county_id,
-                            county_boundaries:$stateParams.const_boundaries,
-                            const_id:$stateParams.const_id,
-                            ward_boundaries : $stateParams.ward_boundaries,
-                            ward_id: ward.model.id});
+                $state.go("gis_constituency.gis_const.gis_ward",
+                           {county_code:$stateParams.county_code,
+                            constituency_code:$stateParams.constituency_code,
+                            ward_code: ward.model.id});
             });
         })
         .error(function (err) {
