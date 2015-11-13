@@ -39,9 +39,6 @@
             [4.622499,33.907219],
             [-4.669618,33.907219]
         ];
-        $scope.selectedConst = {};
-        $scope.markers = {};
-        $scope.layers = {};
         angular.extend($scope, {
             defaults: {
                 scrollWheelZoom: false,
@@ -50,7 +47,7 @@
             },
             events: {
                 map: {
-                    enable: ["moveend", "popupopen"],
+                    enable: ["click"],
                     logic: "emit"
                 }
             },
@@ -72,10 +69,11 @@
             }
         });
         gisAdminUnitsApi.getCounties().then(function (data) {
-            var marks = data.results.features;
-            var markers = _.mapObject(marks, function(mark){
+            $scope.markers = _.mapObject(data.results.features, function(mark){
                 return  {
                         layer: "counties",
+                        id:mark.id,
+                        boundaries:mark.properties.constituency_boundary_ids,
                         lat: mark.properties.center.coordinates[1],
                         lng: mark.properties.center.coordinates[0],
                         label: {
@@ -87,11 +85,9 @@
                         riseOnHover: true
                     };
             });
-            $scope.markers = markers;
-            $scope.geodata = data.results;
             angular.extend($scope, {
                 geojson: {
-                    data: $scope.geodata,
+                    data: data.results,
                     style: {
                         fillColor: "rgba(255, 255, 255, 0.01)",
                         weight: 2,
@@ -141,12 +137,16 @@
         function(err) {
             $scope.alert = err.error;
         });
-        $scope.$on("leafletDirectiveGeoJson.countrymap.mouseover", function(ev, county) {
-            $scope.hoveredCounty = county.model;
-        });
         $scope.$on("leafletDirectiveGeoJson.countrymap.click", function(ev, county) {
             $scope.spinner = true;
             var boundary_ids = county.model.properties.constituency_boundary_ids.join(",");
+            $stateParams.const_boundaries = boundary_ids;
+            $state.go("gis_county",{county_id: county.model.id,
+                                    const_boundaries : boundary_ids});
+        });
+        $scope.$on("leafletDirectiveMarker.countrymap.click", function(ev, county) {
+            $scope.spinner = true;
+            var boundary_ids = county.model.boundaries.join(",");
             $stateParams.const_boundaries = boundary_ids;
             $state.go("gis_county",{county_id: county.model.id,
                                     const_boundaries : boundary_ids});

@@ -132,107 +132,6 @@
             });
             $httpBackend.flush();
         }]));
-        it("should expect broadcast of leafletDirectiveGeoJson.mouseover(Constituency Level)",
-            inject(["$rootScope","leafletData","$httpBackend", function ($rootScope,
-            leafletData,$httpBackend) {
-            var data1 = {
-                properties: {
-                    bound:{
-                        type:"",
-                        coordinates:[[3,4],[4,5]]
-                    },
-                    constituency_id:"4",
-                    center:{
-                        type:"",
-                        coordinates:[[3,4],[4,5]]
-                    }
-                },
-                results:{
-                    id :"4",
-                    type:"",
-                    geometry:{},
-                    properties: {},
-                    features: [
-                        {
-                            id:"",
-                            type:"",
-                            geometry:{
-                                type:"",
-                                coordinates:[[3,4],[4,5]]
-                            },
-                            properties:{
-                                bound:{
-                                    type:"",
-                                    coordinates:[[3,4],[4,5]]
-                                },
-                                constituency_id:"4",
-                                center:{
-                                    type:"",
-                                    coordinates:[[3,4],[4,5]]
-                                }
-                            }
-                        }
-                    ]
-                }
-            };
-            var data2 = [
-                {
-                    geometry:{
-                        type:"",
-                        coordinates:[]
-                    },
-                    properties:{
-                        bound:{
-                            type:"",
-                            coordinates:[[3,4],[4,5]]
-                        },
-                        constituency_id:"4",
-                        center:{
-                            type:"",
-                            coordinates:[[3,4],[4,5]]
-                        }
-                    }
-                }
-            ];
-            $httpBackend.expectGET(
-            SERVER_URL + "api/gis/county_boundaries/4/")
-                .respond(200, data1);
-            $httpBackend.expectGET(
-            SERVER_URL + "api/gis/constituency_boundaries/4/")
-                .respond(200, data1);
-            $httpBackend.expectGET(
-            SERVER_URL + "api/gis/coordinates/?fields=geometry,constituency&constituency=4")
-                .respond(200, data2);
-            $httpBackend.expectGET(
-            SERVER_URL + "api/gis/ward_boundaries/?id=4")
-                .respond(200, data1);
-            var scope = $rootScope.$new();
-            controller("mfl.gis.controllers.gis_const", {
-                "$scope": scope,
-                "leafletData": leafletData,
-                "$http": {},
-                "$state": {},
-                "$stateParams": {county_id: 4, const_id: 4, ward_boundaries: 4},
-                "SERVER_URL": SERVER_URL
-            });
-            $httpBackend.flush();
-            var ward = {
-                model:{
-                    type : "",
-                    id: "",
-                    geometry : {},
-                    properties : {}
-                }
-            };
-            $rootScope.$broadcast("leafletDirectiveGeoJson.constmap.mouseover", ward);
-            scope.hoveredWard = {
-                type : "",
-                id: "",
-                geometry : {},
-                properties : {}
-            };
-            expect(scope.hoveredWard).toEqual(ward.model);
-        }]));
 
         it("should expect broadcast of leafletDirectiveGeoJson.click(Constituency Level)",
            inject(["$state","leafletData","$httpBackend",
@@ -338,13 +237,117 @@
                     }
                 }
             };
-            var second_call = scope.$on.calls[1];
+            var second_call = scope.$on.calls[0];
             expect(second_call.args[0]).toEqual("leafletDirectiveGeoJson.constmap.click");
             expect(angular.isFunction(second_call.args[1])).toBe(true);
             var listener = second_call.args[1];
             listener(null, ward);
             expect($state.go).toHaveBeenCalled();
         }]));
+
+        it("should expect broadcast of leafletDirectiveMarker.click(Constituency Level)",
+           inject(["$state","leafletData","$httpBackend",
+           function ($state, leafletData,$httpBackend) {
+            var data1 = {
+                properties: {
+                    bound:{
+                        type:"",
+                        coordinates:[[3,4],[4,5]]
+                    },
+                    constituency_id:"4",
+                    center:{
+                        type:"",
+                        coordinates:[[3,4],[4,5]]
+                    }
+                },
+                results:{
+                    id :"4",
+                    type:"",
+                    geometry:{},
+                    properties: {},
+                    features: [
+                        {
+                            id:"",
+                            type:"",
+                            geometry:{
+                                type:"",
+                                coordinates:[[3,4],[4,5]]
+                            },
+                            properties:{
+                                bound:{
+                                    type:"",
+                                    coordinates:[[3,4],[4,5]]
+                                },
+                                constituency_id:"4",
+                                center:{
+                                    type:"",
+                                    coordinates:[[3,4],[4,5]]
+                                }
+                            }
+                        }
+                    ]
+                }
+            };
+            var data2 = [
+                {
+                    geometry:{
+                        type:"",
+                        coordinates:[]
+                    },
+                    properties:{
+                        bound:{
+                            type:"",
+                            coordinates:[[3,4],[4,5]]
+                        },
+                        constituency_id:"4",
+                        center:{
+                            type:"",
+                            coordinates:[[3,4],[4,5]]
+                        }
+                    }
+                }
+            ];
+            $httpBackend.expectGET(
+            SERVER_URL + "api/gis/county_boundaries/4/")
+                .respond(200, data1);
+            $httpBackend.expectGET(
+            SERVER_URL + "api/gis/constituency_boundaries/4/")
+                .respond(200, data1);
+            $httpBackend.expectGET(
+            SERVER_URL + "api/gis/coordinates/?fields=geometry,constituency&constituency=4")
+                .respond(200, data2);
+            $httpBackend.expectGET(
+            SERVER_URL + "api/gis/ward_boundaries/?id=4")
+                .respond(200, data1);
+            spyOn(scope, "$on").andCallThrough();
+            spyOn($state, "go");
+            controller("mfl.gis.controllers.gis_const", {
+                "$scope": scope,
+                "leafletData": leafletData,
+                "$http": {},
+                "$state": $state,
+                "$stateParams": {county_id:4,const_id: 4,county_boundaries:4,ward_boundaries: 4},
+                "SERVER_URL": SERVER_URL
+            });
+            $httpBackend.flush();
+            var ward = {
+                model:{
+                    type : "",
+                    id: 1,
+                    boundaries: [
+                            "a",
+                            "b"
+                        ]
+                    }
+                };
+            var second_call = scope.$on.calls[1];
+            expect(second_call.args[0]).toEqual("leafletDirectiveMarker.constmap.click");
+            expect(angular.isFunction(second_call.args[1])).toBe(true);
+            var listener = second_call.args[1];
+            listener(null, ward);
+            expect($state.go).toHaveBeenCalled();
+        }]));
+
         it("should get leaflet data map(Constituency Level)",
         inject(["$state","leafletData","$httpBackend",
         function ($state, leafletData,$httpBackend) {
