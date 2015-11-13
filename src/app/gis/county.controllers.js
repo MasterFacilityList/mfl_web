@@ -36,7 +36,7 @@
             },
             events: {
                 map: {
-                    enable: ["moveend", "popupopen"],
+                    enable: ["click"],
                     logic: "emit"
                 }
             },
@@ -100,6 +100,8 @@
                 var markers = _.mapObject(county_marks, function(mark){
                     return {
                             layer:"constituencies",
+                            id:mark.id,
+                            boundaries:mark.properties.ward_boundary_ids,
                             lat: mark.properties.center.coordinates[1],
                             lng: mark.properties.center.coordinates[0],
                             label: {
@@ -150,13 +152,18 @@
                 });
 
             });
-            $scope.$on("leafletDirectiveGeoJson.countymap.mouseover", function(ev, constituency) {
-                $scope.hoveredConst = constituency.model;
-            });
             $scope.$on("leafletDirectiveGeoJson.countymap.click", function(ev, constituency) {
                 $scope.spinner = true;
                 var boundary_ids = constituency.model.properties.ward_boundary_ids.join(",");
                 $stateParams.ward_boundaries = boundary_ids;
+                $state.go("gis_county.gis_const",{county_id:$stateParams.county_id,
+                                        county_boundaries:$stateParams.const_boundaries,
+                                        const_id:constituency.model.id,
+                                        ward_boundaries : boundary_ids});
+            });
+            $scope.$on("leafletDirectiveMarker.countymap.click", function(ev, constituency) {
+                $scope.spinner = true;
+                var boundary_ids = constituency.model.boundaries.join(",");
                 $state.go("gis_county.gis_const",{county_id:$stateParams.county_id,
                                         county_boundaries:$stateParams.const_boundaries,
                                         const_id:constituency.model.id,

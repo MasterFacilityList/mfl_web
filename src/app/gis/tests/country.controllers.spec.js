@@ -134,28 +134,6 @@
             success_fxn2(data2);
         }]));
 
-        it("should expect broadcast of leafletDirectiveGeoJson.countrymap.mouseover(Country)",
-            inject(["$rootScope", "$state", function ($rootScope, $state) {
-                var scope = $rootScope.$new();
-                controller("mfl.gis.controllers.gis", {
-                    "$scope" : scope,
-                    "$state" : $state,
-                    "leafletData": leafletData,
-                    "SERVER_URL": SERVER_URL
-                });
-                var county = {
-                    model:{
-                        type : "",
-                        id: "",
-                        geometry : {},
-                        properties : {}
-                    }
-                };
-                $rootScope.$broadcast("leafletDirectiveGeoJson.countrymap.mouseover", county);
-                expect(scope.hoveredCounty).toEqual(county.model);
-            }])
-        );
-
         it("should expect broadcast of leafletDirectiveGeoJson.countrymap.click(Country)",
            inject(["$state", "$rootScope", function ($state, $rootScope) {
             var scope = $rootScope.$new();
@@ -186,10 +164,39 @@
                     }
                 }
             };
-            var second_call = scope.$on.calls[1];
-            expect(second_call.args[0]).toEqual("leafletDirectiveGeoJson.countrymap.click");
-            expect(angular.isFunction(second_call.args[1])).toBe(true);
-            var listener = second_call.args[1];
+            var first_call = scope.$on.calls[0];
+            expect(first_call.args[0]).toEqual("leafletDirectiveGeoJson.countrymap.click");
+            expect(angular.isFunction(first_call.args[1])).toBe(true);
+            var listener = first_call.args[1];
+            listener(null, county);
+            expect($state.go).toHaveBeenCalledWith("gis_county",{county_id: "",
+                                                   const_boundaries: "a,b"});
+        }]));
+
+        it("should expect broadcast of leafletDirectiveMarker.countrymap.click(Country)",
+           inject(["$state", "$rootScope", function ($state, $rootScope) {
+            var scope = $rootScope.$new();
+            spyOn(scope, "$on").andCallThrough();
+            spyOn($state, "go");
+            controller("mfl.gis.controllers.gis", {
+                "$scope" : scope,
+                "$state" : $state,
+                "leafletData": leafletData,
+                "SERVER_URL": SERVER_URL
+            });
+            var county = {
+                model: {
+                    id: "",
+                    boundaries: [
+                            "a",
+                            "b"
+                        ]
+                    }
+                };
+            var first_call = scope.$on.calls[1];
+            expect(first_call.args[0]).toEqual("leafletDirectiveMarker.countrymap.click");
+            expect(angular.isFunction(first_call.args[1])).toBe(true);
+            var listener = first_call.args[1];
             listener(null, county);
             expect($state.go).toHaveBeenCalledWith("gis_county",{county_id: "",
                                                    const_boundaries: "a,b"});
