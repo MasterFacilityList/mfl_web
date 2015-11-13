@@ -36,12 +36,6 @@
                 tileLayer: "",
                 dragging:true
             },
-            events: {
-                map: {
-                    enable: ["moveend", "popupopen"],
-                    logic: "emit"
-                }
-            },
             layers:{
                 overlays:{
                     wards:{
@@ -70,10 +64,6 @@
         $scope.const_boundaries = $stateParams.const_boundaries;
         $scope.ward_boundaries = $stateParams.ward_boundaries;
         $scope.ward_id = $stateParams.ward_id;
-        $scope.tooltip = {
-            "title": "",
-            "checked": false
-        };
         gisAdminUnitsApi.wards.get($scope.ward_id)
         .success(function (ward_data) {
             $scope.ward = ward_data;
@@ -91,10 +81,9 @@
             $scope.filters_ward = {
                 ward : ward_data.properties.ward_id
             };
-            $scope.ward = ward_data;
             angular.extend($scope, {
                     geojson: {
-                        data: angular.copy($scope.ward),
+                        data: ward_data,
                         style: {
                             fillColor: "rgba(236, 255, 183, 0.14)",
                             weight: 2,
