@@ -2,7 +2,7 @@
     "use strict";
 
     describe("Tests for mfl.gis.controllers.gis_const (Constituency Level):", function () {
-        var controller, scope, root, state, httpBackend, SERVER_URL;
+        var controller, scope, root, state, httpBackend, SERVER_URL,gisAdminUnitsApi;
 
         beforeEach(function () {
             module("mflwebApp");
@@ -11,17 +11,16 @@
             module("mfl.gis.routes");
 
             inject(["$rootScope", "$controller","$httpBackend","$state","$stateParams",
-                "SERVER_URL",
-                function ($rootScope, $controller, $httpBackend, $state,$stateParams, url) {
+                "SERVER_URL","gisAdminUnitsApi",
+                function ($rootScope, $controller, $httpBackend, $state,$stateParams, url,gis_api) {
                     root = $rootScope;
                     scope = root.$new();
                     state = $state;
                     httpBackend = $httpBackend;
+                    gisAdminUnitsApi = gis_api;
                     SERVER_URL = url;
-                    $stateParams.const_id = 4;
-                    $stateParams.const_boundaries = "4,2,41";
-                    $stateParams.ward_boundaries = "4,2,41";
-
+                    $stateParams.county_code = 4;
+                    $stateParams.constituency_code = 4;
                     controller = function (cntrl, data) {
                         return $controller(cntrl, data);
                     };
@@ -32,19 +31,19 @@
             "$state", "leafletData",
             function ($httpBackend, $state, leafletData) {
             var data1 = {
-                properties: {
+                meta: {
                     bound:{
                         type:"",
                         coordinates:[[3,4],[4,5]]
                     },
-                    constituency_id:"4",
+                    id:4,
                     center:{
                         type:"",
                         coordinates:[[3,4],[4,5]]
                     }
                 },
-                results:{
-                    id :"4",
+                geojson:{
+                    id :4,
                     type:"",
                     geometry:{},
                     properties: {},
@@ -71,63 +70,32 @@
                     ]
                 }
             };
-            var data2 = [
-                {
-                    geometry:{
-                        type:"",
-                        coordinates:[]
-                    },
-                    properties:{
-                        bound:{
-                            type:"",
-                            coordinates:[[3,4],[4,5]]
-                        },
-                        constituency_id:"4",
-                        center:{
-                            type:"",
-                            coordinates:[[3,4],[4,5]]
-                        }
-                    }
-                }
-            ];
             $httpBackend.expectGET(
-            SERVER_URL + "api/gis/county_boundaries/4/")
-                .respond(200, data1);
-            $httpBackend.expectGET(
-            SERVER_URL + "api/gis/constituency_boundaries/4/")
-                .respond(200, data1);
-            $httpBackend.expectGET(
-            SERVER_URL + "api/gis/coordinates/?fields=geometry,constituency&constituency=4")
-                .respond(200, data2);
-            $httpBackend.expectGET(
-            SERVER_URL + "api/gis/ward_boundaries/?id=4")
+            SERVER_URL + "api/gis/drilldown/constituency/4/")
                 .respond(200, data1);
             controller("mfl.gis.controllers.gis_const", {
                 "$scope": scope,
                 "leafletData": leafletData,
                 "$http": {},
                 "$state": {},
-                "$stateParams": {county_id: 4, const_id: 4, ward_boundaries: 4},
+                "$stateParams": {county_code: 4,constituency_code:4},
                 "SERVER_URL": SERVER_URL
             });
-            scope.const_id = 4;
-            scope.ward_boundaries = 4;
+            scope.county_code = 4;
+            scope.constituency_code = 4;
             $httpBackend.flush();
         }]));
         it("should fail to load data (Const Level)",
            inject(["$httpBackend",
             function ($httpBackend) {
             $httpBackend.expectGET(
-            SERVER_URL + "api/gis/county_boundaries/4/")
-                .respond(500, {});
-            $httpBackend.expectGET(
-            SERVER_URL + "api/gis/constituency_boundaries/4/")
+            SERVER_URL + "api/gis/drilldown/constituency/4/")
                 .respond(500, {});
             controller("mfl.gis.controllers.gis_const", {
                 "$scope": scope,
                 "$http": {},
                 "$state": {},
-                "$stateParams": {county_id: 4, const_id: 4, ward_boundaries: 4},
+                "$stateParams": {county_code: 4, constituency_code: 4, ward_boundaries: 4},
                 "SERVER_URL": SERVER_URL
             });
             $httpBackend.flush();
@@ -137,7 +105,7 @@
            inject(["$state","leafletData","$httpBackend",
            function ($state, leafletData,$httpBackend) {
             var data1 = {
-                properties: {
+                meta: {
                     bound:{
                         type:"",
                         coordinates:[[3,4],[4,5]]
@@ -148,7 +116,7 @@
                         coordinates:[[3,4],[4,5]]
                     }
                 },
-                results:{
+                geojson:{
                     id :"4",
                     type:"",
                     geometry:{},
@@ -176,36 +144,8 @@
                     ]
                 }
             };
-            var data2 = [
-                {
-                    geometry:{
-                        type:"",
-                        coordinates:[]
-                    },
-                    properties:{
-                        bound:{
-                            type:"",
-                            coordinates:[[3,4],[4,5]]
-                        },
-                        constituency_id:"4",
-                        center:{
-                            type:"",
-                            coordinates:[[3,4],[4,5]]
-                        }
-                    }
-                }
-            ];
             $httpBackend.expectGET(
-            SERVER_URL + "api/gis/county_boundaries/4/")
-                .respond(200, data1);
-            $httpBackend.expectGET(
-            SERVER_URL + "api/gis/constituency_boundaries/4/")
-                .respond(200, data1);
-            $httpBackend.expectGET(
-            SERVER_URL + "api/gis/coordinates/?fields=geometry,constituency&constituency=4")
-                .respond(200, data2);
-            $httpBackend.expectGET(
-            SERVER_URL + "api/gis/ward_boundaries/?id=4")
+            SERVER_URL + "api/gis/drilldown/constituency/4/")
                 .respond(200, data1);
             spyOn(scope, "$on").andCallThrough();
             spyOn($state, "go");
@@ -214,7 +154,7 @@
                 "leafletData": leafletData,
                 "$http": {},
                 "$state": $state,
-                "$stateParams": {county_id:4,const_id: 4,county_boundaries:4,ward_boundaries: 4},
+                "$stateParams": {county_code:4,constituency_code: 4,ward_code: 4},
                 "SERVER_URL": SERVER_URL
             });
             $httpBackend.flush();
@@ -249,19 +189,19 @@
            inject(["$state","leafletData","$httpBackend",
            function ($state, leafletData,$httpBackend) {
             var data1 = {
-                properties: {
+                meta: {
                     bound:{
                         type:"",
                         coordinates:[[3,4],[4,5]]
                     },
-                    constituency_id:"4",
+                    constituency_id:4,
                     center:{
                         type:"",
                         coordinates:[[3,4],[4,5]]
                     }
                 },
-                results:{
-                    id :"4",
+                geojson:{
+                    id :4,
                     type:"",
                     geometry:{},
                     properties: {},
@@ -278,7 +218,7 @@
                                     type:"",
                                     coordinates:[[3,4],[4,5]]
                                 },
-                                constituency_id:"4",
+                                constituency_id:4,
                                 center:{
                                     type:"",
                                     coordinates:[[3,4],[4,5]]
@@ -288,36 +228,8 @@
                     ]
                 }
             };
-            var data2 = [
-                {
-                    geometry:{
-                        type:"",
-                        coordinates:[]
-                    },
-                    properties:{
-                        bound:{
-                            type:"",
-                            coordinates:[[3,4],[4,5]]
-                        },
-                        constituency_id:"4",
-                        center:{
-                            type:"",
-                            coordinates:[[3,4],[4,5]]
-                        }
-                    }
-                }
-            ];
             $httpBackend.expectGET(
-            SERVER_URL + "api/gis/county_boundaries/4/")
-                .respond(200, data1);
-            $httpBackend.expectGET(
-            SERVER_URL + "api/gis/constituency_boundaries/4/")
-                .respond(200, data1);
-            $httpBackend.expectGET(
-            SERVER_URL + "api/gis/coordinates/?fields=geometry,constituency&constituency=4")
-                .respond(200, data2);
-            $httpBackend.expectGET(
-            SERVER_URL + "api/gis/ward_boundaries/?id=4")
+            SERVER_URL + "api/gis/drilldown/constituency/4/")
                 .respond(200, data1);
             spyOn(scope, "$on").andCallThrough();
             spyOn($state, "go");
@@ -326,7 +238,7 @@
                 "leafletData": leafletData,
                 "$http": {},
                 "$state": $state,
-                "$stateParams": {county_id:4,const_id: 4,county_boundaries:4,ward_boundaries: 4},
+                "$stateParams": {county_code:4,constituency_code: 4},
                 "SERVER_URL": SERVER_URL
             });
             $httpBackend.flush();
@@ -352,7 +264,7 @@
         inject(["$state","leafletData","$httpBackend",
         function ($state, leafletData,$httpBackend) {
             var data1 = {
-                properties: {
+                meta: {
                     bound:{
                         type:"",
                         coordinates:[[3,4],[4,5]]
@@ -363,7 +275,7 @@
                         coordinates:[[3,4],[4,5]]
                     }
                 },
-                results:{
+                geojson:{
                     id :"4",
                     type:"",
                     geometry:{},
@@ -391,36 +303,8 @@
                     ]
                 }
             };
-            var data2 = [
-                {
-                    geometry:{
-                        type:"",
-                        coordinates:[]
-                    },
-                    properties:{
-                        bound:{
-                            type:"",
-                            coordinates:[[3,4],[4,5]]
-                        },
-                        constituency_id:"4",
-                        center:{
-                            type:"",
-                            coordinates:[[3,4],[4,5]]
-                        }
-                    }
-                }
-            ];
             $httpBackend.expectGET(
-            SERVER_URL + "api/gis/county_boundaries/4/")
-                .respond(200, data1);
-            $httpBackend.expectGET(
-            SERVER_URL + "api/gis/constituency_boundaries/4/")
-                 .respond(200, data1);
-            $httpBackend.expectGET(
-            SERVER_URL + "api/gis/coordinates/?fields=geometry,constituency&constituency=4")
-                 .respond(200, data2);
-            $httpBackend.expectGET(
-            SERVER_URL + "api/gis/ward_boundaries/?id=4")
+            SERVER_URL + "api/gis/drilldown/constituency/4/")
                 .respond(200, data1);
             spyOn(scope, "$on").andCallThrough();
             spyOn($state, "go");
@@ -438,7 +322,7 @@
                 "leafletData": leafletData,
                 "$http": {},
                 "$state": $state,
-                "$stateParams": {county_id: 4, const_id: 4, ward_boundaries: 4},
+                "$stateParams": {county_code: 4, constituency_code: 4, ward_code: 4},
                 "$timeout": timeout.timeout,
                 "SERVER_URL": SERVER_URL
             });

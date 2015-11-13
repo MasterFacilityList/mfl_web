@@ -19,7 +19,7 @@
                     state = $state;
                     httpBackend = $httpBackend;
                     SERVER_URL = url;
-                    $stateParams.ward_id = 4;
+                    $stateParams.ward_code = 4;
                     controller = function (cntrl, data) {
                         return $controller(cntrl, data);
                     };
@@ -38,7 +38,7 @@
                 .respond(500, {});
             controller("mfl.gis.controllers.gis_ward", {
                 "$scope": scope,
-                "$stateParams": {ward_id: 4, county_id: 4, const_id: 4},
+                "$stateParams": {ward_code: 4, county_code: 4, const_code: 4},
                 "SERVER_URL": SERVER_URL
             });
             $httpBackend.flush();
@@ -84,11 +84,11 @@
                 "$scope": scope,
                 "leafletData": leafletData,
                 "$state": $state,
-                "$stateParams": {ward_id: 4, county_id: 4, const_id: 4},
+                "$stateParams": {ward_code: 4, county_code: 4, const_code: 4},
                 "$timeout": timeout.timeout,
                 "SERVER_URL": SERVER_URL
             });
-            scope.county_id = 4;
+            scope.county_code = 4;
             $httpBackend.flush();
             expect(leafletData.getMap).toHaveBeenCalled();
             expect(obj.then).toHaveBeenCalled();

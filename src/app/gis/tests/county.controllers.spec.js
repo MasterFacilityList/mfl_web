@@ -3,7 +3,7 @@
 
     describe("Tests for mfl.gis_county.controllers.gis (County Level):", function () {
 
-        var controller, scope, root, state, httpBackend, SERVER_URL;
+        var controller, scope, root, state, httpBackend, SERVER_URL,gisAdminUnitsApi;
 
         beforeEach(function () {
             module("mflwebApp");
@@ -12,18 +12,15 @@
             module("mfl.gis.routes");
 
             inject(["$rootScope", "$controller","$httpBackend","$state","$stateParams",
-                    "SERVER_URL",
-                function ($rootScope, $controller, $httpBackend, $state,$stateParams, url) {
+                    "SERVER_URL","gisAdminUnitsApi",
+                function ($rootScope, $controller, $httpBackend, $state,$stateParams, url,gis_api) {
                     root = $rootScope;
                     scope = root.$new();
                     state = $state;
+                    gisAdminUnitsApi = gis_api;
                     httpBackend = $httpBackend;
                     SERVER_URL = url;
-                    $stateParams.county_id = 4;
-                    $stateParams.const_boundaries = "4,2,41";
-                    $stateParams.ward_boundaries = "4,2,41";
-                    $stateParams.ward_id = "3";
-
+                    $stateParams.county_code = 4;
                     controller = function (cntrl, data) {
                         return $controller(cntrl, data);
                     };
@@ -39,7 +36,7 @@
                         type:"",
                         coordinates:[[3,4],[4,5]]
                     },
-                    county_id:"4",
+                    county_id:4,
                     center:{
                         type:"",
                         coordinates:[[3,4],[4,5]]
@@ -72,22 +69,65 @@
                     ]
                 }
             };
+            var data2 = {
+                geojson:{
+                    id :"4",
+                    type:"",
+                    geometry:{},
+                    properties: {},
+                    features: [
+                        {
+                            id:"",
+                            type:"",
+                            geometry:{
+                                type:"",
+                                coordinates:[]
+                            },
+                            properties:{
+                                bound:{
+                                    type:"",
+                                    coordinates:[[3,4],[4,5]]
+                                },
+                                center:{
+                                    type:"",
+                                    coordinates:[[3,4],[4,5]]
+                                }
+                            }
+                        }
+                    ]
+                }
+            };
             $httpBackend.expectGET(
-            SERVER_URL + "api/gis/drilldown/county/?id=4")
+            SERVER_URL + "api/gis/drilldown/county/4/")
                 .respond(200, data1);
+
+            var promise = {then: angular.noop};
+            spyOn(gisAdminUnitsApi, "getFacCoordinates").andReturn(promise);
+            spyOn(promise, "then");
+
             controller("mfl.gis.controllers.gis_county", {
                 "$scope": scope,
                 "leafletData": leafletData,
                 "$http": {},
                 "$state": {},
-                "$stateParams": {county_id: 4, const_boundaries: 4},
+                "$stateParams": {county_code: 4},
+                "gisAdminUnitsApi": gisAdminUnitsApi,
                 "SERVER_URL": SERVER_URL
             });
+            gisAdminUnitsApi.getFacCoordinates();
+            scope.layers.overlays ={};
             $httpBackend.flush();
-            scope.county_id = 4;
-            scope.layers.overlays = {
-                heat : {}
-            };
+            scope.county_code = 4;
+            
+            expect(gisAdminUnitsApi.getFacCoordinates).toHaveBeenCalled();
+            expect(promise.then).toHaveBeenCalled();
+            var success_fxn = promise.then.calls[0].args[0];
+            var error_fxn = promise.then.calls[0].args[1];
+
+            error_fxn({"error": "ADS"});
+
+            success_fxn(data2);
+            scope.layers.overlays = {};
         }]));
 
         it("should fail to load data (County Level)",
@@ -106,11 +146,11 @@
                 "$scope": scope,
                 "$http": {},
                 "$state": {},
-                "$stateParams": {county_id: 4, const_boundaries: 4},
+                "$stateParams": {county_code: 4},
                 "SERVER_URL": SERVER_URL
             });
             $httpBackend.expectGET(
-            SERVER_URL + "api/gis/county_boundaries/4/")
+            SERVER_URL + "api/gis/drilldown/county/4/")
                 .respond(500, data);
             $httpBackend.flush();
         }]));
@@ -124,7 +164,7 @@
                         type:"",
                         coordinates:[[3,4],[4,5]]
                     },
-                    county_id:"4",
+                    county_id:4,
                     center:{
                         type:"",
                         coordinates:[[3,4],[4,5]]
@@ -157,32 +197,8 @@
                     ]
                 }
             };
-            var data2 = [
-                {
-                    geometry:{
-                        type:"",
-                        coordinates:[]
-                    },
-                    properties:{
-                        bound:{
-                            type:"",
-                            coordinates:[[3,4],[4,5]]
-                        },
-                        center:{
-                            type:"",
-                            coordinates:[[3,4],[4,5]]
-                        }
-                    }
-                }
-            ];
             $httpBackend.expectGET(
-            SERVER_URL + "api/gis/county_boundaries/4/")
-                .respond(200, data1);
-            $httpBackend.expectGET(
-            SERVER_URL + "api/gis/coordinates/?fields=geometry,county&county=4")
-                .respond(200, data2);
-            $httpBackend.expectGET(
-            SERVER_URL + "api/gis/constituency_boundaries/?id=4")
+            SERVER_URL + "api/gis/drilldown/county/4/")
                 .respond(200, data1);
             spyOn(scope, "$on").andCallThrough();
             spyOn($state, "go");
@@ -191,7 +207,7 @@
                 "leafletData": leafletData,
                 "$http": {},
                 "$state": $state,
-                "$stateParams": {county_id: 4, const_boundaries: 4},
+                "$stateParams": {county_code: 4},
                 "SERVER_URL": SERVER_URL
             });
 
@@ -220,15 +236,15 @@
             expect(angular.isFunction(second_call.args[1])).toBe(true);
             var listener = second_call.args[1];
             listener(null, constituency);
-            expect($state.go).toHaveBeenCalledWith("gis_county.gis_const",{county_id: 4,
-                county_boundaries : 4, const_id : "", ward_boundaries : "a,b"});
+            expect($state.go).toHaveBeenCalledWith("gis_county.gis_const",{county_code: 4,
+                constituency_code : 4});
         }]));
 
         it("should expect broadcast of leafletDirectiveMarker.click(County Level)",
            inject(["$state","leafletData","$httpBackend",
                    function ($state, leafletData, $httpBackend) {
             var data1 = {
-                properties: {
+                meta: {
                     bound:{
                         type:"",
                         coordinates:[[3,4],[4,5]]
@@ -266,33 +282,9 @@
                     ]
                 }
             };
-            var data2 = [
-                {
-                    geometry:{
-                        type:"",
-                        coordinates:[]
-                    },
-                    properties:{
-                        bound:{
-                            type:"",
-                            coordinates:[[3,4],[4,5]]
-                        },
-                        center:{
-                            type:"",
-                            coordinates:[[3,4],[4,5]]
-                        }
-                    }
-                }
-            ];
             $httpBackend.expectGET(
-            SERVER_URL + "api/gis/county_boundaries/4/")
-                .respond(200, data1);
-            $httpBackend.expectGET(
-            SERVER_URL + "api/gis/coordinates/?fields=geometry,county&county=4")
-                .respond(200, data2);
-            $httpBackend.expectGET(
-            SERVER_URL + "api/gis/constituency_boundaries/?id=4")
-                .respond(200, data1);
+            SERVER_URL + "api/gis/drilldown/county/4/")
+               .respond(200, data1);
             spyOn(scope, "$on").andCallThrough();
             spyOn($state, "go");
             controller("mfl.gis.controllers.gis_county", {
@@ -300,7 +292,7 @@
                 "leafletData": leafletData,
                 "$http": {},
                 "$state": $state,
-                "$stateParams": {county_id: 4, const_boundaries: 4},
+                "$stateParams": {county_code: 4},
                 "SERVER_URL": SERVER_URL
             });
 
@@ -319,15 +311,15 @@
             expect(angular.isFunction(second_call.args[1])).toBe(true);
             var listener = second_call.args[1];
             listener(null, constituency);
-            expect($state.go).toHaveBeenCalledWith("gis_county.gis_const",{county_id: 4,
-                county_boundaries : 4, const_id : "", ward_boundaries : "a,b"});
+            expect($state.go).toHaveBeenCalledWith("gis_county.gis_const",{county_code: 4,
+                constituency_code : 4});
         }]));
 
         it("should get leaflet data map(County Level)",
            inject(["$state", "leafletData","$httpBackend",
                    function ($state, leafletData,$httpBackend) {
             var data1 = {
-                properties: {
+                meta: {
                     bound:{
                         type:"",
                         coordinates:[[3,4],[4,5]]
@@ -365,32 +357,9 @@
                     ]
                 }
             };
-            var data2 = {
-                geojson: {
-                    features:[{
-                        geometry:{
-                            type:"",
-                            coordinates:[]
-                        },
-                        properties:{
-                            bound:{
-                                type:"",
-                                coordinates:[[3,4],[4,5]]
-                            },
-                            center:{
-                                type:"",
-                                coordinates:[[3,4],[4,5]]
-                            }
-                        }
-                    }]
-                }
-            };
             $httpBackend.expectGET(
             SERVER_URL + "api/gis/drilldown/county/4/")
                .respond(200, data1);
-            $httpBackend.expectGET(
-            SERVER_URL + "api/gis/coordinates/?fields=geometry,county&county=4")
-               .respond(200, data2);
             spyOn(scope, "$on").andCallThrough();
             spyOn($state, "go");
             var obj = {
@@ -402,19 +371,22 @@
             spyOn(leafletData, "getMap").andReturn(obj);
             spyOn(obj, "then");
             spyOn(timeout, "timeout");
+
+            var promise = {then: angular.noop};
+            spyOn(gisAdminUnitsApi, "getFacCoordinates").andReturn(promise);
+            spyOn(promise, "then");
+
             controller("mfl.gis.controllers.gis_county", {
                 "$scope": scope,
                 "leafletData": leafletData,
                 "$http": {},
                 "$state": $state,
-                "$stateParams": {county_id: 4, const_boundaries: 4},
+                "$stateParams": {county_code: 4, constituency_code: 4},
                 "$timeout": timeout.timeout,
                 "SERVER_URL": SERVER_URL
             });
-
+            gisAdminUnitsApi.getFacCoordinates();
             $httpBackend.flush();
-            expect(leafletData.getMap).toHaveBeenCalled();
-            expect(obj.then).toHaveBeenCalled();
 
             var then_fxn = obj.then.calls[0].args[0];
             expect(angular.isFunction(then_fxn)).toBe(true);
@@ -437,6 +409,38 @@
             timeout_fxn();
             expect(map.spin.calls.length).toBe(2);
             expect(map.spin.calls[1].args[0]).toBe(false);
+
+            expect(gisAdminUnitsApi.getFacCoordinates).toHaveBeenCalled();
+            expect(promise.then).toHaveBeenCalled();
+            var success_fxn = promise.then.calls[0].args[0];
+            var error_fxn = promise.then.calls[0].args[1];
+
+            error_fxn({"error": "ADIS"});
+            expect(scope.alert).toEqual("ADIS");
+
+            expect(leafletData.getMap).toHaveBeenCalled();
+            expect(obj.then).toHaveBeenCalled();
+
+            var payload = [
+                {
+                    geometry:{
+                        type:"",
+                        coordinates:[]
+                    },
+                    properties:{
+                        bound:{
+                            type:"",
+                            coordinates:[[3,4],[4,5]]
+                        },
+                        center:{
+                            type:"",
+                            coordinates:[[3,4],[4,5]]
+                        }
+                    }
+                }
+            ];
+            success_fxn(payload);
+
         }]));
     });
 })(window.angular);

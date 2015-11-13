@@ -108,10 +108,7 @@
                 $timeout(function() {map.spin(false);}, 1000);
             });
         /*Gets Facilities for heatmap*/
-        $scope.filters = {
-            "fields" : "geometry"
-        };
-        gisAdminUnitsApi.getFacCoordinates($scope.filters)
+        gisAdminUnitsApi.getFacCoordinates()
         .then(function (data){
             var heats = data;
             var heatpoints = _.map(heats, function(heat){
