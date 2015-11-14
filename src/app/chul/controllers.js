@@ -128,7 +128,7 @@
                     }
                 ];
                 /*ward coordinates*/
-                gisAdminUnitsApi.wards.get(unit.boundaries.ward_boundary)
+                gisAdminUnitsApi.ward.get(unit.ward_code)
                 .success(function(data){
                     $scope.spinner = false;
                     $scope.ward_gis = data;

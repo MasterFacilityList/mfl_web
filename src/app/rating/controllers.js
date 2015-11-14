@@ -168,7 +168,7 @@
                 return;
             }
             /*ward coordinates*/
-            gisAdminUnitsApi.ward.get(f.boundaries.ward_boundary)
+            gisAdminUnitsApi.ward.get(f.ward_code)
             .success(function(data){
                 $scope.spinner = false;
                 $scope.ward_gis = data;
@@ -208,26 +208,18 @@
                                 visible: true
                             }
                         }
+                    },
+                    markers: {
+                        mainMarker: {
+                            layer:"facility",
+                            lat: f.lat_long[0],
+                            lng: f.lat_long[1],
+                            message: f.name
+                        }
                     }
                 });
 
-                /*facility's coordinates*/
-                gisAdminUnitsApi.facilities.get(f.coordinates)
-                .success(function(data){
-                    angular.extend($scope,{
-                        markers: {
-                            mainMarker: {
-                                layer:"facility",
-                                lat: data.properties.coordinates.coordinates[1],
-                                lng: data.properties.coordinates.coordinates[0],
-                                message: "Facility location"
-                            }
-                        }
-                    });
-                })
-                .error(function(error){
-                    $log.error(error);
-                });
+
             })
             .error(function(error){
                 $log.error(error);

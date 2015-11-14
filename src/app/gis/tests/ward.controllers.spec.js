@@ -84,7 +84,7 @@
                 "$scope": scope,
                 "leafletData": leafletData,
                 "$state": $state,
-                "$stateParams": {ward_code: 4, county_code: 4, const_code: 4},
+                "$stateParams": {ward_code: 4, county_code: 4, constituency_code: 4},
                 "$timeout": timeout.timeout,
                 "gisAdminUnitsApi": gisAdminUnitsApi,
                 "SERVER_URL": SERVER_URL
@@ -125,8 +125,8 @@
             var success_fxn = promise.then.calls[0].args[0];
             var error_fxn = promise.then.calls[0].args[1];
             var payload = [
-                ["A",1,2,3,4,5],
-                ["B",2,3,4,5,6]
+                ["A",4,4,4,4,4],
+                ["B",4,4,4,4,4]
             ];
             success_fxn(payload);
             error_fxn({"error": "ADIS"});
