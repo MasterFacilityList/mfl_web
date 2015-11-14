@@ -147,7 +147,7 @@
 
         })
         .error(function (err) {
-            console.log(err);
+            $scope.alert = err.error;
         });
     }]);
 })(window.angular, window._);

@@ -73,6 +73,11 @@
             $httpBackend.expectGET(
             SERVER_URL + "api/gis/drilldown/constituency/4/")
                 .respond(200, data1);
+
+            var promise = {then: angular.noop};
+            spyOn(gisAdminUnitsApi, "getFacCoordinates").andReturn(promise);
+            spyOn(promise, "then");
+
             controller("mfl.gis.controllers.gis_const", {
                 "$scope": scope,
                 "leafletData": leafletData,
@@ -81,9 +86,21 @@
                 "$stateParams": {county_code: 4,constituency_code:4},
                 "SERVER_URL": SERVER_URL
             });
+
+            gisAdminUnitsApi.getFacCoordinates();
+            scope.layers.overlays ={};
             scope.county_code = 4;
             scope.constituency_code = 4;
             $httpBackend.flush();
+
+            expect(gisAdminUnitsApi.getFacCoordinates).toHaveBeenCalled();
+            expect(promise.then).toHaveBeenCalled();
+            var success_fxn = promise.then.calls[0].args[0];
+            var error_fxn = promise.then.calls[0].args[1];
+ 
+            error_fxn({"error": "ADS"});
+ 
+            success_fxn(data1);
         }]));
         it("should fail to load data (Const Level)",
            inject(["$httpBackend",
@@ -317,15 +334,23 @@
             spyOn(leafletData, "getMap").andReturn(obj);
             spyOn(obj, "then");
             spyOn(timeout, "timeout");
+
+            var promise = {then: angular.noop};
+            spyOn(gisAdminUnitsApi, "getFacCoordinates").andReturn(promise);
+            spyOn(promise, "then");
+
             controller("mfl.gis.controllers.gis_const", {
                 "$scope": scope,
                 "leafletData": leafletData,
                 "$http": {},
                 "$state": $state,
+                "gisAdminUnitsApi": gisAdminUnitsApi,
                 "$stateParams": {county_code: 4, constituency_code: 4, ward_code: 4},
                 "$timeout": timeout.timeout,
                 "SERVER_URL": SERVER_URL
             });
+
+            gisAdminUnitsApi.getFacCoordinates();
             httpBackend.flush();
             expect(leafletData.getMap).toHaveBeenCalled();
             expect(obj.then).toHaveBeenCalled();
@@ -351,6 +376,20 @@
             timeout_fxn();
             expect(map.spin.calls.length).toBe(2);
             expect(map.spin.calls[1].args[0]).toBe(false);
+
+            expect(gisAdminUnitsApi.getFacCoordinates).toHaveBeenCalled();
+            expect(promise.then).toHaveBeenCalled();
+            var success_fxn = promise.then.calls[0].args[0];
+            var error_fxn = promise.then.calls[0].args[1];
+
+            error_fxn({"error": "ADIS"});
+            expect(scope.alert).toEqual("ADIS");
+
+            var payload = [
+                ["A",1,2,3,4,5],
+                ["B",2,3,4,5,6]
+            ];
+            success_fxn(payload);
         }]));
     });
 })(window.angular);

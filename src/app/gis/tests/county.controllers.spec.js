@@ -69,34 +69,7 @@
                     ]
                 }
             };
-            var data2 = {
-                geojson:{
-                    id :"4",
-                    type:"",
-                    geometry:{},
-                    properties: {},
-                    features: [
-                        {
-                            id:"",
-                            type:"",
-                            geometry:{
-                                type:"",
-                                coordinates:[]
-                            },
-                            properties:{
-                                bound:{
-                                    type:"",
-                                    coordinates:[[3,4],[4,5]]
-                                },
-                                center:{
-                                    type:"",
-                                    coordinates:[[3,4],[4,5]]
-                                }
-                            }
-                        }
-                    ]
-                }
-            };
+
             $httpBackend.expectGET(
             SERVER_URL + "api/gis/drilldown/county/4/")
                 .respond(200, data1);
@@ -123,9 +96,9 @@
             expect(promise.then).toHaveBeenCalled();
             var success_fxn = promise.then.calls[0].args[0];
             var error_fxn = promise.then.calls[0].args[1];
-
             error_fxn({"error": "ADS"});
 
+            var data2 = [["A",37,-1,15,72,356]];
             success_fxn(data2);
             scope.layers.overlays = {};
         }]));
@@ -214,7 +187,7 @@
             var constituency = {
                 model:{
                     type : "",
-                    id: "",
+                    id: 4,
                     geometry : {},
                     properties : {
                         ward_boundary_ids: [
@@ -249,7 +222,7 @@
                         type:"",
                         coordinates:[[3,4],[4,5]]
                     },
-                    county_id:"4",
+                    county_id:4,
                     center:{
                         type:"",
                         coordinates:[[3,4],[4,5]]
@@ -292,13 +265,13 @@
                 "leafletData": leafletData,
                 "$http": {},
                 "$state": $state,
-                "$stateParams": {county_code: 4},
+                "$stateParams": {county_code: 4,constituency_code:4},
                 "SERVER_URL": SERVER_URL
             });
 
             var constituency = {
                 model:{
-                    id: "",
+                    id: 4,
                     boundaries: [
                             "a",
                             "b"
@@ -330,7 +303,7 @@
                         coordinates:[[3,4],[4,5]]
                     }
                 },
-                results:{
+                geojson:{
                     id :"4",
                     type:"",
                     geometry:{},
@@ -381,6 +354,7 @@
                 "leafletData": leafletData,
                 "$http": {},
                 "$state": $state,
+                "gisAdminUnitsApi": gisAdminUnitsApi,
                 "$stateParams": {county_code: 4, constituency_code: 4},
                 "$timeout": timeout.timeout,
                 "SERVER_URL": SERVER_URL
@@ -422,22 +396,8 @@
             expect(obj.then).toHaveBeenCalled();
 
             var payload = [
-                {
-                    geometry:{
-                        type:"",
-                        coordinates:[]
-                    },
-                    properties:{
-                        bound:{
-                            type:"",
-                            coordinates:[[3,4],[4,5]]
-                        },
-                        center:{
-                            type:"",
-                            coordinates:[[3,4],[4,5]]
-                        }
-                    }
-                }
+                ["A",1,2,3,4,5],
+                ["B",2,3,4,5,6]
             ];
             success_fxn(payload);
 

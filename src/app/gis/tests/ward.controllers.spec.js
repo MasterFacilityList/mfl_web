@@ -28,13 +28,7 @@
         it("should expect fetch of data to fail",
         inject(["$httpBackend",function($httpBackend) {
             $httpBackend.expectGET(
-            SERVER_URL + "api/gis/county_boundaries/4/")
-                .respond(500, {});
-            $httpBackend.expectGET(
-            SERVER_URL + "api/gis/constituency_boundaries/4/")
-                .respond(500, {});
-            $httpBackend.expectGET(
-            SERVER_URL + "api/gis/ward_boundaries/4/")
+            SERVER_URL + "api/gis/drilldown/ward/4/")
                 .respond(500, {});
             controller("mfl.gis.controllers.gis_ward", {
                 "$scope": scope,
