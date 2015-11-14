@@ -143,3 +143,55 @@
     cursor: pointer;
     background-color: rgba(192, 192, 192, 0.8);
 }
+/*Responsiveness of landing page*/
+/* Bootstrap deprecated @screen-xs-min as of v3.2.0 so we will target everything below 767px for phones */
+@bs3-xs: ~"only screen and (max-width:767px)"; /*  For Phones*/
+@bs3-sm: ~"only screen and (min-width:@{screen-sm-min})"; /*  For Small devices Tablets*/
+@bs3-md: ~"only screen and (min-width:@{screen-md-min})"; /*  For Medium devices Desktops */
+@bs3-lg: ~"only screen and (min-width:@{screen-lg-min})"; /*  For Large devices Desktops */
+/*xs only*/
+@media(max-width: @screen-xs-max) {
+    .facilities-img {
+        height : 400px;
+    }
+    .img-word {
+        margin-top: 320px;
+        font-size: 22px;
+    }
+    .img-word > span {
+        font-size : 22px;
+    }
+    .card-words {
+        font-size : 15px;
+    }
+    .about-words {
+        font-size : 18px;
+    }
+    .about-title {
+        font-size: 16px;
+    }
+    .about-text {
+        font-size: 14px;
+    }
+    .defn-text {
+        font-size: 16px;
+    }
+    .facility-icon {
+        font-size : 130px;
+    }
+    .chu-image {
+        height: 390px;
+    }
+}
+/*sm only*/
+@media(min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+    .facilities-img {
+        height : 440px;
+    }
+    .img-word {
+        margin-top: 330px;
+    }
+    .chu-image {
+        height: 460px;
+    }
+}
