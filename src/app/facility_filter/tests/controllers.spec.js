@@ -291,7 +291,7 @@
 
             var default_url;
             beforeEach(function () {
-                default_url = server_url+"api/facilities/facilities/?" +
+                default_url = server_url+"api/facilities/material/?" +
                               "fields=id,code,name,regulatory_status_name," +
                               "facility_type_name,owner_name,county,"+
                               "constituency,ward_name,keph_level,operation_status_name&";
@@ -412,9 +412,9 @@
                     .respond(200, {
                         "count": 8361,
                         "current_page": 4,
-                        "next": "http://localhost:8061/api/facilities/facilities/?page=5",
+                        "next": "http://localhost:8061/api/facilities/material/?page=5",
                         "page_size": 25,
-                        "previous": "http://localhost:8061/api/facilities/facilities/?page=3",
+                        "previous": "http://localhost:8061/api/facilities/material/?page=3",
                         "results": [],
                         "total_pages": 335
                     });
@@ -452,9 +452,9 @@
                     .respond(200, {
                         "count": 8361,
                         "current_page": 4,
-                        "next": "http://localhost:8061/api/facilities/facilities/?page=5",
+                        "next": "http://localhost:8061/api/facilities/material/?page=5",
                         "page_size": 25,
-                        "previous": "http://localhost:8061/api/facilities/facilities/?page=3",
+                        "previous": "http://localhost:8061/api/facilities/material/?page=3",
                         "results": [],
                         "total_pages": 335
                     });
