@@ -70,9 +70,7 @@
                     map.spin(true,  {lines: 13, length: 20,corners:1,
                         radius:30,width:10});
                     $timeout(function() {map.spin(false);}, 500);
-                },function(err){
-                console.log(err);
-            });
+                });
             //Get Facility Coordinates
             gisAdminUnitsApi.getFacCoordinates()
             .then(function (data){

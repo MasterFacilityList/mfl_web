@@ -39,7 +39,7 @@ describe("tests for GIS Routes:", function() {
         $httpBackend.expectGET(
         SERVER_URL + "api/gis/drilldown/constituency/34/")
             .respond(200, data);
-        $state.go("gis_county.gis_const", {"const_code": "34"});
+        $state.go("gis_county.gis_const", {"constituency_code": "34"});
     }]));
 
     it("should resolve gisWard",
@@ -53,7 +53,7 @@ describe("tests for GIS Routes:", function() {
         $httpBackend.expectGET(
         SERVER_URL + "api/gis/drilldown/ward/34/")
             .respond(200, data);
-        $state.go("gis_county.gis_const.gis_ward", {"ward_id": "34"});
+        $state.go("gis_county.gis_const.gis_ward", {"ward_code": "34"});
     }]));
 
     describe("Test gis auth states", function () {
@@ -92,44 +92,40 @@ describe("tests for GIS Routes:", function() {
         });
 
         it("should load gis county state (authed)", function () {
-            testAuthed("gis_county", {"county_id": 3, "const_boundaries": 6});
+            testAuthed("gis_county", {"county_code": 3});
         });
 
         it("should load gis county state (unauthed)", function () {
-            testAuthed("gis_county", {"county_id": 3, "const_boundaries": 6});
+            testAuthed("gis_county", {"county_code": 3});
         });
 
         it("should load gis const state (authed)", function () {
             testAuthed("gis_county.gis_const", {
-                "county_id": 3,
-                "const_boundaries": 6,
-                "ward_boundaries": 4
+                "county_code": 3,
+                "constituency_code": 3
             });
         });
 
         it("should load gis const state (unauthed)", function () {
             testAuthed("gis_county.gis_const", {
-                "county_id": 3,
-                "const_boundaries": 6,
-                "ward_boundaries": 4
+                "county_code": 3,
+                "constituency_code": 6
             });
         });
 
         it("should load gis ward state (authed)", function () {
             testAuthed("gis_county.gis_const.gis_ward", {
-                "county_id": 3,
-                "const_boundaries": 6,
-                "ward_boundaries": 4,
-                "ward_id": 7
+                "county_code": 3,
+                "constituency_code":4,
+                "ward_code":4
             });
         });
 
         it("should load gis ward state (unauthed)", function () {
             testAuthed("gis_county.gis_const", {
-                "county_id": 3,
-                "const_boundaries": 6,
-                "ward_boundaries": 4,
-                "ward_id": 7
+                "county_code": 3,
+                "constituency_code":4,
+                "ward_code": 7
             });
         });
     });
