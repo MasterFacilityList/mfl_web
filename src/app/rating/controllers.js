@@ -50,23 +50,6 @@
                         }
                     ];
                     $scope.oneFacility = data;
-                    /*get link for gis to go to county*/
-                    gisAdminUnitsApi.counties.get(data.boundaries.county_boundary)
-                        .success(function (data) {
-                            $scope.const_boundaries =data.properties
-                                                            .constituency_boundary_ids.join(",");
-                        })
-                        .error(function (error) {
-                            $scope.error = error;
-                        });
-                    /*get link for gis to go to constituency*/
-                    gisAdminUnitsApi.constituencies.get(data.boundaries.constituency_boundary)
-                        .success(function (data) {
-                            $scope.ward_boundaries =data.properties.ward_boundary_ids.join(",");
-                        })
-                        .error(function (error) {
-                            $scope.error = error;
-                        });
                     _.each($scope.oneFacility.facility_services,
                         function (service) {
                             var current_rate = "";
@@ -185,7 +168,7 @@
                 return;
             }
             /*ward coordinates*/
-            gisAdminUnitsApi.wards.get(f.boundaries.ward_boundary)
+            gisAdminUnitsApi.ward.get(f.boundaries.ward_boundary)
             .success(function(data){
                 $scope.spinner = false;
                 $scope.ward_gis = data;

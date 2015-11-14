@@ -89,8 +89,11 @@
                 "gisAdminUnitsApi": gisAdminUnitsApi,
                 "SERVER_URL": SERVER_URL
             });
-            gisAdminUnitsApi.getFacCoordinates();
             scope.county_code = 4;
+            scope.constituency_code = 4;
+            scope.ward_code = 4;
+            gisAdminUnitsApi.getFacCoordinates();
+            scope.markers={};
             $httpBackend.flush();
             expect(leafletData.getMap).toHaveBeenCalled();
             expect(obj.then).toHaveBeenCalled();
@@ -122,7 +125,8 @@
             var success_fxn = promise.then.calls[0].args[0];
             var error_fxn = promise.then.calls[0].args[1];
             var payload = [
-                ["A",1,2,3,4,5]
+                ["A",1,2,3,4,5],
+                ["B",2,3,4,5,6]
             ];
             success_fxn(payload);
             error_fxn({"error": "ADIS"});
