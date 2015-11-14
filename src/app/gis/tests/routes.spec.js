@@ -24,8 +24,22 @@ describe("tests for GIS Routes:", function() {
             };
         }]);
     });
-    it("should respond to /gis/drilldown", inject(["$state",function ($state) {
+    it("should respond to api/gis/drilldown", inject(["$state",function ($state) {
         expect($state.href("gis", { id: 1 })).toEqual("#/gis");
+    }]));
+
+    it("should resolve gisCounty",
+            inject(["$httpBackend","$state",function ($httpBackend,$state) {
+        var data = {
+            id:"",
+            type:"",
+            geometry:{},
+            properties:{}
+        };
+        $httpBackend.expectGET(
+        SERVER_URL + "api/gis/drilldown/county/34/")
+            .respond(200, data);
+        $state.go("gis_county", {"county_code": 34});
     }]));
 
     it("should resolve gisConst",
@@ -39,7 +53,7 @@ describe("tests for GIS Routes:", function() {
         $httpBackend.expectGET(
         SERVER_URL + "api/gis/drilldown/constituency/34/")
             .respond(200, data);
-        $state.go("gis_county.gis_const", {"constituency_code": "34"});
+        $state.go("gis_county.gis_const", {"county_code": 34,"constituency_code": 34});
     }]));
 
     it("should resolve gisWard",
@@ -53,7 +67,8 @@ describe("tests for GIS Routes:", function() {
         $httpBackend.expectGET(
         SERVER_URL + "api/gis/drilldown/ward/34/")
             .respond(200, data);
-        $state.go("gis_county.gis_const.gis_ward", {"ward_code": "34"});
+        $state.go("gis_county.gis_const.gis_ward", {"county_code": 34,
+                                "constituency_code": 34,"ward_code": 34});
     }]));
 
     describe("Test gis auth states", function () {
@@ -92,7 +107,7 @@ describe("tests for GIS Routes:", function() {
         });
 
         it("should load gis county state (authed)", function () {
-            testAuthed("gis_county", {"county_code": 3});
+            testAuthed("gis_county");
         });
 
         it("should load gis county state (unauthed)", function () {
