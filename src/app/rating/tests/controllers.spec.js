@@ -139,10 +139,9 @@
                             name: "hostel"
                         }
                     ],
-                    boundaries: {
-                        county_boundary:"1",
-                        constituency_boundary:"1"
-                    }
+                    county_code:1,
+                    constituency_code:1,
+                    ward_code:1
                 };
 
                 $httpBackend
@@ -204,10 +203,9 @@
                             name: "hostel"
                         }
                     ],
-                    boundaries: {
-                        county_boundary:"1",
-                        constituency_boundary:"1"
-                    }
+                    county_code:1,
+                    constituency_code:1,
+                    ward_code:1
                 };
 
                 controller("mfl.rating.controllers.rating");
@@ -219,9 +217,6 @@
 
                 $httpBackend.expectGET(SERVER_URL +
                     "api/facilities/facilities/1/").respond(200, data);
-
-                $httpBackend.expectGET(SERVER_URL +
-                    "api/gis/drilldown/ward/1/").respond(500, {});
 
                 $httpBackend.flush();
             }]));

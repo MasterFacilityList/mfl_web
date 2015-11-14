@@ -70,7 +70,7 @@
                             fillColor: "rgba(236, 255, 183, 0.14)",
                             weight: 2,
                             opacity: 1,
-                            color: "white",
+                            color: "rgba(47, 47, 47, 0.7)",
                             dashArray: "3",
                             fillOpacity: 0.7
                         }
