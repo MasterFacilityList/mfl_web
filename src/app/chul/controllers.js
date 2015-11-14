@@ -145,8 +145,8 @@
                         markers: {
                             mainMarker: {
                                 layer:"facility",
-                                lat: unit.geo_features.geometry.coordinates[1],
-                                lng: unit.geo_features.geometry.coordinates[0],
+                                lat: unit.lat_long[0],
+                                lng: unit.lat_long[1],
                                 message: "Facility location"
                             }
                         },
