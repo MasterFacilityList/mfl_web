@@ -106,42 +106,5 @@ describe("tests for GIS Routes:", function() {
             testUnAuthed("gis");
         });
 
-        it("should load gis county state (authed)", function () {
-            testAuthed("gis_county");
-        });
-
-        it("should load gis county state (unauthed)", function () {
-            testAuthed("gis_county", {"county_code": 3});
-        });
-
-        it("should load gis const state (authed)", function () {
-            testAuthed("gis_county.gis_const", {
-                "county_code": 3,
-                "constituency_code": 3
-            });
-        });
-
-        it("should load gis const state (unauthed)", function () {
-            testAuthed("gis_county.gis_const", {
-                "county_code": 3,
-                "constituency_code": 6
-            });
-        });
-
-        it("should load gis ward state (authed)", function () {
-            testAuthed("gis_county.gis_const.gis_ward", {
-                "county_code": 3,
-                "constituency_code":4,
-                "ward_code":4
-            });
-        });
-
-        it("should load gis ward state (unauthed)", function () {
-            testAuthed("gis_county.gis_const", {
-                "county_code": 3,
-                "constituency_code":4,
-                "ward_code": 7
-            });
-        });
     });
 });

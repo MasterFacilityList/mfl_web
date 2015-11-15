@@ -35,15 +35,6 @@
                         controller:"mfl.gis.controllers.gis_county",
                         templateUrl: "gis/tpls/county-map-info.tpl.html"
                     }
-                },
-                resolve: {
-                    "auth": ["api.auth", "$q", function (auth, $q) {
-                        var current_token = auth.getToken();
-                        if (current_token) {
-                            return $q.when(current_token);
-                        }
-                        return auth.fetchToken();
-                    }]
                 }
             })
             .state("gis_county.gis_const", {
