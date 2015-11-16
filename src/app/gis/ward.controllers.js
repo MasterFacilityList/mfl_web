@@ -29,7 +29,9 @@
         "$timeout","gisAdminUnitsApi",
         function ($scope, leafletData,$http, $state, $stateParams,
                    SERVER_URL,$timeout,gisAdminUnitsApi) {
-        $scope.county_id = $stateParams.county_id;
+        $scope.county_code = $stateParams.county_code;
+        $scope.constituency_code = $stateParams.constituency_code;
+        $scope.ward_code = $stateParams.ward_code;
         angular.extend($scope, {
             defaults: {
                 scrollWheelZoom: false,
@@ -46,25 +48,8 @@
                 }
             }
         });
-        gisAdminUnitsApi.counties.get($scope.county_id)
-        .success(function (county_data) {
-            $scope.county = county_data;
-        })
-        .error(function (error) {
-            console.log(error);
-        });
-        $scope.const_id = $stateParams.const_id;
-        gisAdminUnitsApi.constituencies.get($scope.const_id)
-        .success(function (const_data) {
-            $scope.constituency = const_data;
-        })
-        .error(function (error) {
-            console.log(error);
-        });
-        $scope.const_boundaries = $stateParams.const_boundaries;
-        $scope.ward_boundaries = $stateParams.ward_boundaries;
-        $scope.ward_id = $stateParams.ward_id;
-        gisAdminUnitsApi.wards.get($scope.ward_id)
+        $scope.ward_code = $stateParams.ward_code;
+        gisAdminUnitsApi.ward.get($scope.ward_code)
         .success(function (ward_data) {
             $scope.ward = ward_data;
             leafletData.getMap("wardmap")
@@ -78,9 +63,6 @@
                 $timeout(function() {map.spin(false);}, 1000);
             });
 
-            $scope.filters_ward = {
-                ward : ward_data.properties.ward_id
-            };
             angular.extend($scope, {
                     geojson: {
                         data: ward_data,
@@ -88,17 +70,20 @@
                             fillColor: "rgba(236, 255, 183, 0.14)",
                             weight: 2,
                             opacity: 1,
-                            color: "white",
+                            color: "rgba(47, 47, 47, 0.7)",
                             dashArray: "3",
                             fillOpacity: 0.7
                         }
                     },
                     layers:{
                         baselayers:{
-                            country: {
-                                name: "Country",
-                                url: "/assets/img/transparent.png",
-                                type:"xyz"
+                            googleRoadmap: {
+                                name: "Google Streets",
+                                layerType: "ROADMAP",
+                                type: "google",
+                                layerOptions: {
+                                    opacity: 0.85
+                                }
                             }
                         },
                         overlays:{
@@ -111,23 +96,29 @@
                     },
                     selectedWard: {}
                 });
-            var marks = ward_data.properties.facility_coordinates;
-            $scope.facility_count = marks.length;
-            var markers = _.mapObject(marks, function(mark){
-                return  {
-                        layer: "facilities",
-                        lat: mark.geometry.coordinates[1],
-                        lng: mark.geometry.coordinates[0],
-                        label: {
-                            message: mark.name,
-                            options: {
-                                noHide: true
-                            }
-                        },
-                        riseOnHover: true
-                    };
+            gisAdminUnitsApi.getFacCoordinates()
+            .then(function (data){
+                var marks = _.filter(data,{5:$scope.ward_code});
+                $scope.facility_count = marks.length;
+                var markers = _.mapObject(marks, function(mark){
+                    return  {
+                            layer: "facilities",
+                            lat: mark[2],
+                            lng: mark[1],
+                            label: {
+                                message: mark[0],
+                                options: {
+                                    noHide: true
+                                }
+                            },
+                            iconAngle: 270,
+                            riseOnHover: true
+                        };
+                });
+                $scope.markers = markers;
+            },function(err) {
+                $scope.alert = err.error;
             });
-            $scope.markers = markers;
         })
         .error(function (error) {
             console.log(error);
