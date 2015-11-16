@@ -18,7 +18,7 @@
                         self.country.list()
                         .success(function (data) {
                             deferred.resolve(data);
-                            $localForage.setItem("mflApp.counties", data);
+                            $localForage.setItem("mflApp.country", data);
                         })
                         .error(function (error) {
                             deferred.reject(error);
@@ -27,7 +27,7 @@
                         var success_fn =  function(data){
                             deferred.resolve(data);
                         };
-                        $localForage.getItem("mflApp.counties").then(success_fn);
+                        $localForage.getItem("mflApp.country").then(success_fn);
                     }
                 };
                 $localForage.key(0).then(success_fxn);
@@ -40,7 +40,7 @@
                         self.facilities.list()
                         .success(function (data) {
                             deferred.resolve(data);
-                            $localForage.setItem("mflApp.gis_facilities", data);
+                            $localForage.setItem("mflApp.facilities", data);
                         })
                         .error(function (error) {
                             deferred.reject(error);
@@ -49,7 +49,7 @@
                         var success_fxn = function (data){
                             deferred.resolve(data);
                         };
-                        $localForage.getItem("mflApp.gis_facilities").then(success_fxn);
+                        $localForage.getItem("mflApp.facilities").then(success_fxn);
                     }
                 };
                 $localForage.key(1).then(success_fn);

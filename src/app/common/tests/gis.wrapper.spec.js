@@ -81,11 +81,11 @@
                 gisAdminUnitsApi.getCounties();
                 var then_fxn1 = promise.then.calls[0].args[0];
                 expect(angular.isFunction(then_fxn1)).toBe(true);
-                then_fxn1("mflApp.counties");
+                then_fxn1("mflApp.country");
                 $rootScope.$digest();
 
-                $localForage.getItem("mflApp.counties");
-                expect($localForage.getItem).toHaveBeenCalledWith("mflApp.counties");
+                $localForage.getItem("mflApp.country");
+                expect($localForage.getItem).toHaveBeenCalledWith("mflApp.country");
                 expect(promise.then).toHaveBeenCalled();
 
                 var then_fxn2 = promise.then.calls[1].args[0];
@@ -147,11 +147,11 @@
                 gisAdminUnitsApi.getFacCoordinates();
                 var then_fxn1 = promise.then.calls[0].args[0];
                 expect(angular.isFunction(then_fxn1)).toBe(true);
-                then_fxn1("mflApp.gis_facilities");
+                then_fxn1("mflApp.facilities");
                 $rootScope.$digest();
 
-                $localForage.getItem("mflApp.gis_facilities");
-                expect($localForage.getItem).toHaveBeenCalledWith("mflApp.gis_facilities");
+                $localForage.getItem("mflApp.facilities");
+                expect($localForage.getItem).toHaveBeenCalledWith("mflApp.facilities");
                 expect(promise.then).toHaveBeenCalled();
 
                 var then_fxn2 = promise.then.calls[1].args[0];
