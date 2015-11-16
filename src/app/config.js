@@ -13,7 +13,7 @@
 
     .constant("CREDZ", angular.copy(window.MFL_SETTINGS.CREDZ))
 
-    .constant("DB_NAME", "mflAppStore")
+    .constant("DB_NAME", "mflPublic")
 
     .config(["$urlRouterProvider", function ($urlRouterProvider) {
         $urlRouterProvider.otherwise("/home");
