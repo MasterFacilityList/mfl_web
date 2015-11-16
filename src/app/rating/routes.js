@@ -16,6 +16,9 @@
                         templateUrl: "rating/tpls/main.tpl.html"
                     }
                 },
+                data:{
+                    pageTitle: "MFLv2 Facility Detail"
+                },
                 resolve: {
                     "auth": ["api.auth", "$q", function (auth, $q) {
                         var current_token = auth.getToken();

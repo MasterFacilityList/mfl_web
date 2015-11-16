@@ -5,17 +5,17 @@
     .service("gisAdminUnitsApi", ["$localForage","$http","$q","SERVER_URL", "api",
         function ($localForage, $http, $q, server_url, api) {
             var self = this;
-            self.country = api.setBaseUrl("api/gis/drilldown/country/");
-            self.county = api.setBaseUrl("api/gis/drilldown/county/");
-            self.constituency = api.setBaseUrl("api/gis/drilldown/constituency/");
-            self.ward = api.setBaseUrl("api/gis/drilldown/ward/");
-            self.facilities = api.setBaseUrl("api/gis/drilldown/facility/");
+            self.country_border = api.setBaseUrl("api/gis/country_borders/");
+            self.counties = api.setBaseUrl("api/gis/county_boundaries/");
+            self.constituencies = api.setBaseUrl("api/gis/constituency_boundaries/");
+            self.wards = api.setBaseUrl("api/gis/ward_boundaries/");
+            self.facilities = api.setBaseUrl("api/gis/coordinates/");
             this.getCounties = function () {
                 var deferred = $q.defer();
 
                 var success_fxn = function (keyName) {
                     if(_.isNull(keyName)){
-                        self.country.list()
+                        self.counties.list()
                         .success(function (data) {
                             deferred.resolve(data);
                             $localForage.setItem("mflApp.counties", data);

@@ -51,19 +51,29 @@
                     }
                 };
                 var unit = {
-                    ward_code:1,
-                    lat_long:[1,0]
+                    boundaries:{
+                        ward_boundary: 1
+                    },
+                    geo_features:{
+                        geometry:{
+                            coordinates:[0,1]
+                        }
+                    }
                 };
                 var boundary = {
                         geometry:{
-                            coordinates:[
-                                [1,2],[3,4]
-                            ]
+                            coordinates: {
+                                coordinates:[
+                                    [1,2],[3,4]
+                                ]
+                            }
                         },
                         properties: {
-                            coordinates:[
-                                [1,2],[3,4]
-                            ],
+                            coordinates: {
+                                coordinates:[
+                                    [1,2],[3,4]
+                                ]
+                            },
                             bound: {
                                 coordinates:[
                                     [
@@ -90,7 +100,7 @@
                     .expectGET(server_url+"api/chul/units/1/")
                     .respond(200, unit);
                 httpBackend
-                    .expectGET(server_url+"api/gis/drilldown/ward/1/")
+                    .expectGET(server_url+"api/gis/ward_boundaries/1/")
                     .respond(200, boundary);
                 ctrl("view", data);
                 spyOn(data.$scope, "$on").andCallThrough();
@@ -129,19 +139,29 @@
                     }
                 };
                 var unit = {
-                    ward_code:1,
-                    lat_long:[1,0]
+                    boundaries:{
+                        ward_boundary: 1
+                    },
+                    geo_features:{
+                        geometry:{
+                            coordinates:[0,1]
+                        }
+                    }
                 };
                 var boundary = {
                         geometry:{
-                            coordinates:[
-                                [1,2],[3,4]
-                            ]
+                            coordinates: {
+                                coordinates:[
+                                    [1,2],[3,4]
+                                ]
+                            }
                         },
                         properties: {
-                            coordinates:[
-                                [1,2],[3,4]
-                            ],
+                            coordinates: {
+                                coordinates:[
+                                    [1,2],[3,4]
+                                ]
+                            },
                             bound: {
                                 coordinates:[
                                     [
@@ -168,7 +188,7 @@
                     .expectGET(server_url+"api/chul/units/1/")
                     .respond(200, unit);
                 httpBackend
-                    .expectGET(server_url+"api/gis/drilldown/ward/1/")
+                    .expectGET(server_url+"api/gis/ward_boundaries/1/")
                     .respond(200, boundary);
                 ctrl("view", data);
                 spyOn(data.$scope, "$on").andCallThrough();
@@ -344,8 +364,14 @@
                     }
                 };
                 var unit = {
-                    ward_code:1,
-                    lat_long:[1,0]
+                    boundaries:{
+                        ward_boundary: 1
+                    },
+                    geo_features:{
+                        geometry:{
+                            coordinates:[0,1]
+                        }
+                    }
                 };
 
                 ctrl("view", data);
@@ -353,7 +379,7 @@
                     .expectGET(server_url+"api/chul/units/1/")
                     .respond(200, unit);
                 httpBackend
-                    .expectGET(server_url+"api/gis/drilldown/ward/1/")
+                    .expectGET(server_url+"api/gis/ward_boundaries/1/")
                     .respond(500,{});
                 httpBackend.flush();
                 httpBackend.verifyNoOutstandingRequest();

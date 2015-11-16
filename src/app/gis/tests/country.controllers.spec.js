@@ -21,7 +21,9 @@
                     SERVER_URL = url;
                     leafletData = leaflet_data;
                     gisAdminUnitsApi = gis_api;
-                    $stateParams.county_code = 4;
+                    $stateParams.county_id = 4;
+                    $stateParams.const_boundaries = "4,2,41";
+                    $stateParams.ward_boundaries = "4,2,41";
                     $stateParams.ward_id = "3";
 
                     controller = function (cntrl, data) {
@@ -76,7 +78,7 @@
                 "leafletData": leafletData,
                 "$http": {},
                 "$state": $state,
-                "$stateParams": {county_code: 4},
+                "$stateParams": {county_id: 4},
                 "SERVER_URL": SERVER_URL,
                 "gisAdminUnitsApi": gisAdminUnitsApi,
                 "$timeout": timeout.timeout
@@ -101,7 +103,7 @@
             expect(scope.alert).toEqual("ADS");
 
             var payload = {
-                geojson:{
+                results:{
                     id :"4",
                     type:"",
                     geometry:{},
@@ -167,7 +169,8 @@
             expect(angular.isFunction(first_call.args[1])).toBe(true);
             var listener = first_call.args[1];
             listener(null, county);
-            expect($state.go).toHaveBeenCalledWith("gis_county",{county_code: ""});
+            expect($state.go).toHaveBeenCalledWith("gis_county",{county_id: "",
+                                                   const_boundaries: "a,b"});
         }]));
 
         it("should expect broadcast of leafletDirectiveMarker.countrymap.click(Country)",
@@ -195,7 +198,8 @@
             expect(angular.isFunction(first_call.args[1])).toBe(true);
             var listener = first_call.args[1];
             listener(null, county);
-            expect($state.go).toHaveBeenCalledWith("gis_county",{county_code: ""});
+            expect($state.go).toHaveBeenCalledWith("gis_county",{county_id: "",
+                                                   const_boundaries: "a,b"});
         }]));
 
         it("should get leaflet data map(Country Level)",
