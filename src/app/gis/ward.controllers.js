@@ -111,6 +111,7 @@
                                     noHide: true
                                 }
                             },
+                            iconAngle: 270,
                             riseOnHover: true
                         };
                 });
