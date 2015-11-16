@@ -13,9 +13,6 @@
                         templateUrl: "downloads/tpls/main.tpl.html"
                     }
                 },
-                data:{
-                    pageTitle: "MFLv2 Downloads"
-                },
                 resolve: {
                     "auth": ["api.auth", "$q", function (auth, $q) {
                         var current_token = auth.getToken();

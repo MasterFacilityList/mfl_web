@@ -24,52 +24,59 @@ describe("tests for GIS Routes:", function() {
             };
         }]);
     });
-    it("should respond to api/gis/drilldown", inject(["$state",function ($state) {
-        expect($state.href("gis", { id: 1 })).toEqual("#/gis");
-    }]));
+
+    it("should respond to api/gis/drilldown",
+        inject(["$state",function ($state) {
+            expect($state.href("gis", { id: 1 })).toEqual("#/gis");
+        }])
+    );
 
     it("should resolve gisCounty",
-            inject(["$httpBackend","$state",function ($httpBackend,$state) {
-        var data = {
-            id:"",
-            type:"",
-            geometry:{},
-            properties:{}
-        };
-        $httpBackend.expectGET(
-        SERVER_URL + "api/gis/drilldown/county/34/")
-            .respond(200, data);
-        $state.go("gis_county", {"county_code": 34});
-    }]));
+        inject(["$httpBackend","$state",function ($httpBackend,$state) {
+            var data = {
+                id:"",
+                type:"",
+                geometry:{},
+                properties:{}
+            };
+            $httpBackend.expectGET(
+            SERVER_URL + "api/gis/drilldown/county/34/")
+                .respond(200, data);
+            $state.go("gis_county", {"county_code": 34});
+        }])
+    );
 
     it("should resolve gisConst",
-            inject(["$httpBackend","$state",function ($httpBackend,$state) {
-        var data = {
-            id:"",
-            type:"",
-            geometry:{},
-            properties:{}
-        };
-        $httpBackend.expectGET(
-        SERVER_URL + "api/gis/drilldown/constituency/34/")
-            .respond(200, data);
-        $state.go("gis_county.gis_const", {"county_code": 34,"constituency_code": 34});
-    }]));
+        inject(["$httpBackend","$state",function ($httpBackend,$state) {
+            var data = {
+                id:"",
+                type:"",
+                geometry:{},
+                properties:{}
+            };
+            $httpBackend.expectGET(
+            SERVER_URL + "api/gis/drilldown/constituency/34/")
+                .respond(200, data);
+            $state.go("gis_county.gis_const", {"county_code": 34,"constituency_code": 34});
+        }])
+    );
 
     it("should resolve gisWard",
-            inject(["$httpBackend","$state",function ($httpBackend,$state) {
-        var data = {
-            id:"",
-            type:"",
-            geometry:{},
-            properties:{}
-        };
-        $httpBackend.expectGET(
-        SERVER_URL + "api/gis/drilldown/ward/34/")
-            .respond(200, data);
-        $state.go("gis_county.gis_const.gis_ward", {"county_code": 34,
-                                "constituency_code": 34,"ward_code": 34});
-    }]));
+        inject(["$httpBackend","$state",function ($httpBackend,$state) {
+            var data = {
+                id:"",
+                type:"",
+                geometry:{},
+                properties:{}
+            };
+            $httpBackend
+                .expectGET(SERVER_URL + "api/gis/drilldown/ward/34/")
+                .respond(200, data);
+            $state.go("gis_county.gis_const.gis_ward",
+                {"county_code": 34, "constituency_code": 34,"ward_code": 34}
+            );
+        }])
+    );
 
     describe("Test gis auth states", function () {
         var testAuthed, testUnAuthed;
@@ -78,18 +85,18 @@ describe("tests for GIS Routes:", function() {
 
             inject(["$rootScope", "$state", "api.auth",
                 function ($rootScope, $state, auth) {
-                    testAuthed = function (name) {
+                    testAuthed = function (name, params) {
                         spyOn(auth, "getToken").andReturn({access_token: "DSA"});
                         spyOn(auth, "fetchToken");
-                        $state.go(name);
+                        $state.go(name, params);
                         $rootScope.$digest();
                         expect($state.current.name).toEqual(name);
                         expect(auth.fetchToken).not.toHaveBeenCalled();
                     };
-                    testUnAuthed = function (name) {
+                    testUnAuthed = function (name, params) {
                         spyOn(auth, "getToken").andReturn(null);
                         spyOn(auth, "fetchToken");
-                        $state.go(name);
+                        $state.go(name, params);
                         $rootScope.$digest();
                         expect($state.current.name).toEqual(name);
                         expect(auth.fetchToken).toHaveBeenCalled();
@@ -106,5 +113,56 @@ describe("tests for GIS Routes:", function() {
             testUnAuthed("gis");
         });
 
+        it("should load gis county state (authed)", function () {
+            testAuthed("gis_county", {"county_code": 3});
+        });
+
+        it("should load gis county state (unauthed)", function () {
+            testUnAuthed("gis_county", {"county_code": 3});
+        });
+
+        it("should load gis constituency state (authed)", function () {
+            testAuthed("gis_county.gis_const", {
+                "county_code": 3,
+                "constituency_code": 4
+            });
+        });
+
+        it("should load gis county state (unauthed)", function () {
+            testUnAuthed("gis_county.gis_const", {
+                "county_code": 3,
+                "constituency_code": 4
+            });
+        });
+
+        it("should load gis constituency state (authed)", function () {
+            testAuthed("gis_county.gis_const", {
+                "county_code": 3,
+                "constituency_code": 4
+            });
+        });
+
+        it("should load gis constituency state (unauthed)", function () {
+            testUnAuthed("gis_county.gis_const", {
+                "county_code": 3,
+                "constituency_code": 4
+            });
+        });
+
+        it("should load gis ward state (authed)", function () {
+            testAuthed("gis_county.gis_const.gis_ward", {
+                "county_code": 3,
+                "constituency_code": 4,
+                "ward_code": 5
+            });
+        });
+
+        it("should load gis ward state (unauthed)", function () {
+            testUnAuthed("gis_county.gis_const.gis_ward", {
+                "county_code": 3,
+                "constituency_code": 4,
+                "ward_code": 5
+            });
+        });
     });
 });
