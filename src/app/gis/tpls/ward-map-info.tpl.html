@@ -1,10 +1,10 @@
-<div class="col-md-4 col-xs-12 margin-15 anim-slide-below-fade">
+<div class="col-md-4 col-xs-12 margin-t-15 anim-slide-below-fade">
     <div class="content-card">
         <h4>NAVIGATION</h4>
         <a ui-sref="gis" ui-sref-opts="{reload: true}">KENYA /</a><br>
-        &nbsp;&nbsp;<a ui-sref="gis_county({county_id:county_id,const_boundaries:const_boundaries})" ui-sref-opts="{reload: true}">{{county.properties.name}} /</a><br>
-        &nbsp;&nbsp;&nbsp;&nbsp;<a ui-sref="gis_county.gis_const({county_id:county_id,const_boundaries:const_boundaries,const_id:const_id,ward_boundaries:ward_boundaries})" ui-sref-opts="{reload: true}">{{constituency.properties.name}} /</a><br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a ui-sref="gis_county.gis_const.gis_ward({county_id:county_id,const_boundaries:const_boundaries,const_id:const_id,ward_boundaries:ward_boundaries,ward_id:ward_id})">{{ward.properties.name}}</a><br>
+        &nbsp;&nbsp;<a ui-sref="gis_county({county_code:county_code})" ui-sref-opts="{reload: true}">{{ward.properties.county_name}} COUNTY/</a><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<a ui-sref="gis_county.gis_const({county_code:county_code,constituency_code:constituency_code})" ui-sref-opts="{reload: true}">{{ward.properties.constituency_name}} SUB COUNTY/</a><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a ui-sref="gis_county.gis_const.gis_ward({county_code:county_code,constituency_code:constituency_code,ward_code:ward_code})">{{ward.properties.name}} WARD</a><br>
     </div>
     <div class="col-xs-12 content-card">
        <span class="margin-10">LEGEND</span>
@@ -16,12 +16,12 @@
     </div>
 
     <div ng-show="facility_count > 0 ? true:false">
-        <a ui-sref="facility_filter.results({ward:ward.properties.ward_id})" class="col-xs-12 login-btn login-btn-primary margin-t-20">
+        <a ui-sref="facility_filter.results({ward:ward.properties.area_id})" class="col-xs-12 login-btn login-btn-primary margin-t-20">
             <h4><i class="fa fa-eye"></i> VIEW THE {{facility_count}} FACILITIES</h4>
         </a>
     </div>
 </div>
-<div class="col-md-7 col-xs-12 margin-b-10 anim-fade">
+<div class="col-md-8 col-xs-12 margin-b-10 anim-fade">
     <div ng-if="!spinner" class="col-xs-12 content-card margin-t-15">
         <h4 class="fw-500">{{ward.properties.name}} WARD <span class="pull-right">{{facility_count}} facilities</span></h4>
     </div>

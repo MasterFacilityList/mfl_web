@@ -53,10 +53,13 @@
             },
             layers:{
                 baselayers:{
-                    country: {
-                        name: "Country",
-                        url: "/assets/img/transparent.png",
-                        type:"xyz"
+                    googleRoadmap: {
+                        name: "Google Streets",
+                        layerType: "ROADMAP",
+                        type: "google",
+                        layerOptions: {
+                            opacity: 0.35
+                        }
                     }
                 },
                 overlays:{
@@ -69,11 +72,10 @@
             }
         });
         gisAdminUnitsApi.getCounties().then(function (data) {
-            $scope.markers = _.mapObject(data.results.features, function(mark){
+            $scope.markers = _.mapObject(data.geojson.features, function(mark){
                 return  {
                         layer: "counties",
                         id:mark.id,
-                        boundaries:mark.properties.constituency_boundary_ids,
                         lat: mark.properties.center.coordinates[1],
                         lng: mark.properties.center.coordinates[0],
                         label: {
@@ -87,7 +89,7 @@
             });
             angular.extend($scope, {
                 geojson: {
-                    data: data.results,
+                    data: data.geojson,
                     style: {
                         fillColor: "rgba(255, 255, 255, 0.01)",
                         weight: 2,
@@ -109,16 +111,13 @@
                 $timeout(function() {map.spin(false);}, 1000);
             });
         /*Gets Facilities for heatmap*/
-        $scope.filters = {
-            "fields" : "geometry"
-        };
-        gisAdminUnitsApi.getFacCoordinates($scope.filters)
+        gisAdminUnitsApi.getFacCoordinates()
         .then(function (data){
             var heats = data;
             var heatpoints = _.map(heats, function(heat){
                 return [
-                        heat.geometry.coordinates[1],
-                        heat.geometry.coordinates[0]
+                        heat[2],
+                        heat[1]
                     ];
             });
             $scope.layers.overlays.heat = {
@@ -139,17 +138,11 @@
         });
         $scope.$on("leafletDirectiveGeoJson.countrymap.click", function(ev, county) {
             $scope.spinner = true;
-            var boundary_ids = county.model.properties.constituency_boundary_ids.join(",");
-            $stateParams.const_boundaries = boundary_ids;
-            $state.go("gis_county",{county_id: county.model.id,
-                                    const_boundaries : boundary_ids});
+            $state.go("gis_county",{county_code: county.model.id});
         });
         $scope.$on("leafletDirectiveMarker.countrymap.click", function(ev, county) {
             $scope.spinner = true;
-            var boundary_ids = county.model.boundaries.join(",");
-            $stateParams.const_boundaries = boundary_ids;
-            $state.go("gis_county",{county_id: county.model.id,
-                                    const_boundaries : boundary_ids});
+            $state.go("gis_county",{county_code: county.model.id});
         });
     }]);
 })(window.angular, window._);

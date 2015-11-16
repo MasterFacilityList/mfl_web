@@ -13,9 +13,6 @@
                         templateUrl: "home/tpls/main.tpl.html"
                     }
                 },
-                data:{
-                    pageTitle: "MFLv2 Home"
-                },
                 resolve: {
                     "auth": ["api.auth", "$q", function (auth, $q) {
                         var current_token = auth.getToken();

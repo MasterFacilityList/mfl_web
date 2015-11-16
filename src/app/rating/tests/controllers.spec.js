@@ -74,27 +74,11 @@
                             name: "hostel"
                         }
                     ],
-                    boundaries: {
-                        county_boundary:"1",
-                        constituency_boundary:"1"
-                    }
+                    county_code:1,
+                    constituency_code:1,
+                    ward_code:1
                 };
-                var payload1 = {
-                    properties: {
-                        constituency_boundary_ids: [
-                            "id_1",
-                            "id_2"
-                        ]
-                    }
-                };
-                var payload2 = {
-                    properties: {
-                        ward_boundary_ids: [
-                            "id_1",
-                            "id_2"
-                        ]
-                    }
-                };
+
                 $httpBackend
                 .expectGET(SERVER_URL +
                 "api/chul/units/?facility=1&fields=id,code,name,status_name,households_monitored")
@@ -103,12 +87,6 @@
                 $httpBackend.expectGET(SERVER_URL +
                     "api/facilities/facilities/1/").respond(200, data);
 
-                $httpBackend.expectGET(SERVER_URL +
-                    "api/gis/county_boundaries/1/").respond(200, payload1);
-
-                $httpBackend.expectGET(SERVER_URL +
-                    "api/gis/constituency_boundaries/1/").respond(200, payload2);
-
                 var rate = [
                     {
                         current : 3,
@@ -116,6 +94,10 @@
                     }
                 ];
                 $httpBackend.flush();
+                $httpBackend.verifyNoOutstandingExpectation();
+                $httpBackend.verifyNoOutstandingRequest();
+                $httpBackend.resetExpectations();
+
                 expect(
                     scope.oneFacility.facility_services[0].ratings).toEqual(rate);
                 scope.rateService(service_obj);
@@ -131,11 +113,11 @@
                 .respond(200, {name : "chu"});
                 $httpBackend.expectGET(SERVER_URL +
                     "api/facilities/facilities/1/").respond(200, data);
-                $httpBackend.expectGET(SERVER_URL +
-                    "api/gis/county_boundaries/1/").respond(200, payload1);
-                $httpBackend.expectGET(SERVER_URL +
-                    "api/gis/constituency_boundaries/1/").respond(200, payload2);
+
                 $httpBackend.flush();
+                $httpBackend.verifyNoOutstandingExpectation();
+                $httpBackend.verifyNoOutstandingRequest();
+
                 expect(service_obj.spinner).toBeFalsy();
             }
         ]));
@@ -157,39 +139,17 @@
                             name: "hostel"
                         }
                     ],
-                    boundaries: {
-                        county_boundary:"1",
-                        constituency_boundary:"1"
-                    }
+                    county_code:1,
+                    constituency_code:1,
+                    ward_code:1
                 };
-                var payload1 = {
-                    properties: {
-                        constituency_boundary_ids: [
-                            "id_1",
-                            "id_2"
-                        ]
-                    }
-                };
-                var payload2 = {
-                    properties: {
-                        ward_boundary_ids: [
-                            "id_1",
-                            "id_2"
-                        ]
-                    }
-                };
+
                 $httpBackend
                 .expectGET(SERVER_URL +
                 "api/chul/units/?facility=1&fields=id,code,name,status_name,households_monitored")
                 .respond(200, {name : "chu"});
                 $httpBackend.expectGET(SERVER_URL +
                     "api/facilities/facilities/1/").respond(200, data);
-
-                $httpBackend.expectGET(SERVER_URL +
-                    "api/gis/county_boundaries/1/").respond(200, payload1);
-
-                $httpBackend.expectGET(SERVER_URL +
-                    "api/gis/constituency_boundaries/1/").respond(200, payload2);
 
                 var rate = [
                     {
@@ -243,10 +203,9 @@
                             name: "hostel"
                         }
                     ],
-                    boundaries: {
-                        county_boundary:"1",
-                        constituency_boundary:"1"
-                    }
+                    county_code:1,
+                    constituency_code:1,
+                    ward_code:1
                 };
 
                 controller("mfl.rating.controllers.rating");
@@ -258,12 +217,6 @@
 
                 $httpBackend.expectGET(SERVER_URL +
                     "api/facilities/facilities/1/").respond(200, data);
-
-                $httpBackend.expectGET(SERVER_URL +
-                    "api/gis/county_boundaries/1/").respond(500, {});
-
-                $httpBackend.expectGET(SERVER_URL +
-                    "api/gis/constituency_boundaries/1/").respond(500, {});
 
                 $httpBackend.flush();
             }]));
@@ -341,9 +294,7 @@
                     then: angular.noop
                 };
                 $httpBackend.expectGET(SERVER_URL +
-                    "api/gis/ward_boundaries/1/").respond(200, data);
-                $httpBackend.expectGET(SERVER_URL +
-                    "api/gis/coordinates/1/").respond(200, data);
+                    "api/gis/drilldown/ward/1/").respond(200, data);
 
                 spyOn(scope, "$on").andCallThrough();
                 spyOn(leafletData, "getMap").andReturn(obj);
@@ -351,11 +302,9 @@
 
                 controller("mfl.rating.controllers.rating.map");
                 scope.oneFacility = {
-                    ward : "1",
-                    coordinates: "1",
-                    boundaries: {
-                        ward_boundary: "1"
-                    }
+                    ward : 1,
+                    lat_long: [1,1],
+                    ward_code:1
                 };
                 scope.$apply();
                 scope.$digest();
@@ -386,14 +335,12 @@
         inject(["$httpBackend",
             function ($httpBackend) {
                 $httpBackend.expectGET(SERVER_URL +
-                    "api/gis/ward_boundaries/1/").respond(500, {});
+                    "api/gis/drilldown/ward/1/").respond(500, {});
                 controller("mfl.rating.controllers.rating.map");
                 scope.oneFacility = {
-                    ward : "1",
-                    coordinates: "1",
-                    boundaries: {
-                        ward_boundary: "1"
-                    }
+                    ward : 1,
+                    lat_long: [1,1],
+                    ward_code:1
                 };
                 scope.$apply();
                 scope.$digest();
@@ -424,16 +371,13 @@
                     }
                 };
                 $httpBackend.expectGET(SERVER_URL +
-                    "api/gis/ward_boundaries/1/").respond(200, data);
-                $httpBackend.expectGET(SERVER_URL +
-                    "api/gis/coordinates/1/").respond(500, {});
+                    "api/gis/drilldown/ward/1/").respond(200, data);
+
                 controller("mfl.rating.controllers.rating.map");
                 scope.oneFacility = {
-                    ward : "1",
-                    coordinates: "1",
-                    boundaries: {
-                        ward_boundary: "1"
-                    }
+                    ward : 1,
+                    lat_long: [1,1],
+                    ward_code:1
                 };
                 scope.$apply();
                 scope.$digest();
