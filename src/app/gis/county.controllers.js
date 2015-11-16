@@ -23,11 +23,11 @@
      */
     .controller("mfl.gis.controllers.gis_county", ["$scope","leafletData",
         "$http","$state","$stateParams", "$timeout",
-        "SERVER_URL","gisAdminUnitsApi",
+        "SERVER_URL","gisAdminUnitsApi","$q",
         function ($scope, leafletData, $http, $state,
                    $stateParams, $timeout,
-                   SERVER_URL,gisAdminUnitsApi) {
-        $scope.county_code = $stateParams.county_code;
+                   SERVER_URL,gisAdminUnitsApi,$q) {
+        $scope.county_id = $stateParams.county_id;
         angular.extend($scope, {
             defaults: {
                 scrollWheelZoom: false,
@@ -50,14 +50,22 @@
                 }
             }
         });
-        //Get County Data
-        gisAdminUnitsApi.county.get($scope.county_code)
+        gisAdminUnitsApi.counties.get($scope.county_id)
         .success(function (county_data){
             $scope.county = county_data;
+            $scope.const_boundaries = $stateParams.const_boundaries;
             $scope.spinner = false;
+            $scope.tooltip = {
+                "title": "",
+                "checked": false
+            };
+
+            $scope.filters = {
+                id : $stateParams.county_id
+            };
             leafletData.getMap("countymap")
                 .then(function (map) {
-                    var coords = county_data.meta.bound.coordinates[0];
+                    var coords = county_data.properties.bound.coordinates[0];
                     var bounds = _.map(coords, function(c) {
                         return [c[1], c[0]];
                     });
@@ -67,22 +75,33 @@
                     $timeout(function() {map.spin(false);}, 500);
                 });
 
-            //Get Facility Coordinates
-            gisAdminUnitsApi.getFacCoordinates()
-            .then(function (data){
-                var heats = _.filter(data,{3:$scope.county_code});
-                $scope.facility_count = heats.length;
-                var heatpoints = _.map(heats, function(heat){
+            $scope.filters_county = {
+                "fields":"geometry,county",
+                county : county_data.properties.county_id
+            };
+            var facilitiesPromise = gisAdminUnitsApi.facilities.filter($scope.filters_county);
+
+            $scope.filters = {
+                id : $stateParams.const_boundaries
+            };
+            var constBoundariesPromise = gisAdminUnitsApi.constituencies.filter($scope.filters);
+
+            $q.all([facilitiesPromise, constBoundariesPromise])
+            .then(function(payload){
+                var fac_marks = payload[0].data;
+                var county_marks = payload[1].data.results.features;
+                $scope.facility_count = fac_marks.length;
+                var heatpoints = _.map(fac_marks, function(heat){
                     return [
-                            heat[2],
-                            heat[1]
+                            heat.geometry.coordinates[1],
+                            heat.geometry.coordinates[0]
                         ];
                 });
-                var county_marks = county_data.geojson.features;
                 var markers = _.mapObject(county_marks, function(mark){
                     return {
                             layer:"constituencies",
                             id:mark.id,
+                            boundaries:mark.properties.ward_boundary_ids,
                             lat: mark.properties.center.coordinates[1],
                             lng: mark.properties.center.coordinates[0],
                             label: {
@@ -94,9 +113,10 @@
                             riseOnHover: true
                         };
                 });
+                $scope.marks = markers;
                 angular.extend($scope, {
                     geojson: {
-                        data: county_data.geojson,
+                        data: payload[1].data.results,
                         style: {
                             fillColor: "rgba(255, 255, 255, 0.27)",
                             weight: 2,
@@ -107,16 +127,6 @@
                         }
                     },
                     layers:{
-                        baselayers:{
-                            googleRoadmap: {
-                                name: "Google Streets",
-                                layerType: "ROADMAP",
-                                type: "google",
-                                layerOptions: {
-                                    opacity: 0.35
-                                }
-                            }
-                        },
                         overlays:{
                             constituencies:{
                                 name:"Constituencies",
@@ -140,24 +150,29 @@
                     },
                     markers: markers
                 });
-            },function(err) {
-                $scope.alert = err.error;
-            });
 
+            });
             $scope.$on("leafletDirectiveGeoJson.countymap.click", function(ev, constituency) {
                 $scope.spinner = true;
-                $state.go("gis_county.gis_const",{county_code:$stateParams.county_code,
-                                        constituency_code: constituency.model.id});
+                var boundary_ids = constituency.model.properties.ward_boundary_ids.join(",");
+                $stateParams.ward_boundaries = boundary_ids;
+                $state.go("gis_county.gis_const",{county_id:$stateParams.county_id,
+                                        county_boundaries:$stateParams.const_boundaries,
+                                        const_id:constituency.model.id,
+                                        ward_boundaries : boundary_ids});
             });
             $scope.$on("leafletDirectiveMarker.countymap.click", function(ev, constituency) {
                 $scope.spinner = true;
-                $state.go("gis_county.gis_const",{county_code:$stateParams.county_code,
-                                        constituency_code: constituency.model.id});
+                var boundary_ids = constituency.model.boundaries.join(",");
+                $state.go("gis_county.gis_const",{county_id:$stateParams.county_id,
+                                        county_boundaries:$stateParams.const_boundaries,
+                                        const_id:constituency.model.id,
+                                        ward_boundaries : boundary_ids});
             });
 
         })
         .error(function (err) {
-            $scope.alert = err.error;
+            console.log(err);
         });
     }]);
 })(window.angular, window._);

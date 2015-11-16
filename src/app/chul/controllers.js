@@ -128,7 +128,7 @@
                     }
                 ];
                 /*ward coordinates*/
-                gisAdminUnitsApi.ward.get(unit.ward_code)
+                gisAdminUnitsApi.wards.get(unit.boundaries.ward_boundary)
                 .success(function(data){
                     $scope.spinner = false;
                     $scope.ward_gis = data;
@@ -145,15 +145,15 @@
                         markers: {
                             mainMarker: {
                                 layer:"facility",
-                                lat: unit.lat_long[0],
-                                lng: unit.lat_long[1],
+                                lat: unit.geo_features.geometry.coordinates[1],
+                                lng: unit.geo_features.geometry.coordinates[0],
                                 message: "Facility location"
                             }
                         },
                         geojson: {
                             data: gis,
                             style: {
-                                fillColor: "rgba(255, 246, 238, 0.38)",
+                                fillColor: "rgb(255, 135, 32)",
                                 weight: 2,
                                 opacity: 1,
                                 color: "rgba(0, 0, 0, 0.52)",
@@ -163,10 +163,10 @@
                         },
                         layers:{
                             baselayers:{
-                                googleRoadmap: {
-                                    name: "Google Streets",
-                                    layerType: "ROADMAP",
-                                    type: "google"
+                                ward: {
+                                    name: "Ward",
+                                    url: "/assets/img/transparent.png",
+                                    type:"group"
                                 }
                             },
                             overlays:{

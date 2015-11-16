@@ -50,6 +50,23 @@
                         }
                     ];
                     $scope.oneFacility = data;
+                    /*get link for gis to go to county*/
+                    gisAdminUnitsApi.counties.get(data.boundaries.county_boundary)
+                        .success(function (data) {
+                            $scope.const_boundaries =data.properties
+                                                            .constituency_boundary_ids.join(",");
+                        })
+                        .error(function (error) {
+                            $scope.error = error;
+                        });
+                    /*get link for gis to go to constituency*/
+                    gisAdminUnitsApi.constituencies.get(data.boundaries.constituency_boundary)
+                        .success(function (data) {
+                            $scope.ward_boundaries =data.properties.ward_boundary_ids.join(",");
+                        })
+                        .error(function (error) {
+                            $scope.error = error;
+                        });
                     _.each($scope.oneFacility.facility_services,
                         function (service) {
                             var current_rate = "";
@@ -168,7 +185,7 @@
                 return;
             }
             /*ward coordinates*/
-            gisAdminUnitsApi.ward.get(f.ward_code)
+            gisAdminUnitsApi.wards.get(f.boundaries.ward_boundary)
             .success(function(data){
                 $scope.spinner = false;
                 $scope.ward_gis = data;
@@ -208,18 +225,26 @@
                                 visible: true
                             }
                         }
-                    },
-                    markers: {
-                        mainMarker: {
-                            layer:"facility",
-                            lat: f.lat_long[0],
-                            lng: f.lat_long[1],
-                            message: f.name
-                        }
                     }
                 });
 
-
+                /*facility's coordinates*/
+                gisAdminUnitsApi.facilities.get(f.coordinates)
+                .success(function(data){
+                    angular.extend($scope,{
+                        markers: {
+                            mainMarker: {
+                                layer:"facility",
+                                lat: data.properties.coordinates.coordinates[1],
+                                lng: data.properties.coordinates.coordinates[0],
+                                message: "Facility location"
+                            }
+                        }
+                    });
+                })
+                .error(function(error){
+                    $log.error(error);
+                });
             })
             .error(function(error){
                 $log.error(error);
