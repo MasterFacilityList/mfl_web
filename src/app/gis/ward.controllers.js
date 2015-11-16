@@ -77,10 +77,13 @@
                     },
                     layers:{
                         baselayers:{
-                            country: {
-                                name: "Country",
-                                url: "/assets/img/transparent.png",
-                                type:"xyz"
+                            googleRoadmap: {
+                                name: "Google Streets",
+                                layerType: "ROADMAP",
+                                type: "google",
+                                layerOptions: {
+                                    opacity: 0.85
+                                }
                             }
                         },
                         overlays:{

@@ -107,6 +107,16 @@
                         }
                     },
                     layers:{
+                        baselayers:{
+                            googleRoadmap: {
+                                name: "Google Streets",
+                                layerType: "ROADMAP",
+                                type: "google",
+                                layerOptions: {
+                                    opacity: 0.35
+                                }
+                            }
+                        },
                         overlays:{
                             constituencies:{
                                 name:"Constituencies",

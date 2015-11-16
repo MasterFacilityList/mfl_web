@@ -153,7 +153,7 @@
                         geojson: {
                             data: gis,
                             style: {
-                                fillColor: "rgb(255, 135, 32)",
+                                fillColor: "rgba(255, 246, 238, 0.38)",
                                 weight: 2,
                                 opacity: 1,
                                 color: "rgba(0, 0, 0, 0.52)",
@@ -163,10 +163,10 @@
                         },
                         layers:{
                             baselayers:{
-                                ward: {
-                                    name: "Ward",
-                                    url: "/assets/img/transparent.png",
-                                    type:"group"
+                                googleRoadmap: {
+                                    name: "Google Streets",
+                                    layerType: "ROADMAP",
+                                    type: "google"
                                 }
                             },
                             overlays:{
