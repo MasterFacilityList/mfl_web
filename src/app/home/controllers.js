@@ -10,15 +10,7 @@
         "searchService", "$state", "facilitiesApi",
         function ($scope, searchService, $state, wrappers) {
             $scope.spinner = true;
-            wrappers.chul_services.filter({"fields":"name,description"})
-            .success(function (data) {
-                $scope.services = data.results;
-                $scope.spinner = false;
-            })
-            .error(function (data) {
-                $scope.errors = data;
-                $scope.spinner = false;
-            });
+
             $scope.isFocused = false;
             $scope.chu_mode = false;
 
