@@ -8,7 +8,7 @@
 
     .controller("mfl.home.controllers.home", ["$scope",
         "searchService", "$state", "facilitiesApi",
-        function ($scope, searchService, $state, wrappers) {
+        function ($scope, searchService, $state) {
             $scope.spinner = true;
 
             $scope.isFocused = false;

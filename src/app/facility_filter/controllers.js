@@ -105,6 +105,10 @@
                     var county_ids = _.pluck($scope.filters.multiple.county, "id");
                     return _.contains(county_ids, a.county);
                 },
+                subFilter: function (a) {
+                    var county_ids = _.pluck($scope.filters.multiple.county, "id");
+                    return _.contains(county_ids, a.county);
+                },
                 wardFilter: function (a) {
                     var const_ids = _.pluck($scope.filters.multiple.constituency, "id");
                     return _.contains(const_ids, a.constituency);
@@ -125,7 +129,7 @@
 
             wrappers.filters.filter({"fields": ["county", "facility_type",
                 "constituency", "ward", "operation_status", "service_category",
-                "owner_type", "owner", "service", "keph_level"
+                "owner_type", "owner", "service", "keph_level","sub_county"
             ]})
             .success(function (data) {
                 $scope.filter_summaries = data;

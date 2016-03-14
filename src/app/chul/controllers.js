@@ -265,10 +265,15 @@
                 wardFilter: function (a) {
                     var const_ids = _.pluck($scope.filters.multiple.constituency, "id");
                     return _.contains(const_ids, a.constituency);
+                },
+                subFilter: function (a) {
+                    var county_ids = _.pluck($scope.filters.multiple.county, "id");
+                    return _.contains(county_ids, a.county);
                 }
             };
 
-            wrappers.filters.filter({"fields": ["county", "constituency", "ward", "chu_status"]})
+            wrappers.filters.filter({"fields": ["county", "constituency", "ward", "chu_status",
+                "sub_county"]})
             .success(function (data) {
                 $scope.filter_summaries = data;
                 $scope.filter_summaries.status = $scope.filter_summaries.chu_status;
