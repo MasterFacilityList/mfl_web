@@ -211,6 +211,7 @@
                 multiple: {
                     county: [],
                     constituency: [],
+                    sub_county: [],
                     ward: [],
                     status: []
                 }

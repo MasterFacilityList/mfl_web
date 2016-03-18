@@ -9,7 +9,7 @@
     .constant("FACILITY_SEARCH_PARAMS", [
         "name", "code",
 
-        "search",
+        "search", "sub_county",
 
         "county", "constituency", "ward",
 

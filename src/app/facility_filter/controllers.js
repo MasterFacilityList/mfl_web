@@ -44,6 +44,7 @@
                     facility_type: [],
                     constituency: [],
                     ward: [],
+                    sub_county: [],
                     operation_status: [],
                     service_category: [],
                     owner_type: [],
