@@ -30,147 +30,211 @@
         </div>
     </div>
 </div>
-
+<div class="title-container row">
+    <div class="fw-500 fs-24 text-center pad-t-20 pad-b-20" style="font-family : 'Lato',sans-serif !important;">
+        KENYA MASTER HEALTH FACILITY LIST
+    </div>
+</div>
 <div class="detail-content container-fluid light-font">
     <div class="col-xs-12">
-        <div class="fw-500 fs-30em text-center margin-b-50" style="font-family : 'Lato Light',sans-serif !important;">
-            About the Kenya Master Health Facility List
-        </div>
-        <div class="col-xs-12">
-            <div class="col-md-5 col-xs-12 pad-0">
-                <div class="col-xs-12">
-                    <a href='#gis'>
-                        <div class="col-xs-12 facilities-img pad-0">
-                        <div class="col-xs-12 pad-0" style="background-color: rgba(0, 0, 0, 0);height : 100%;">
-                            <div class="img-word col-xs-12 margin-t-230">
-                                <span class="fs-26 fw-500" style="font-family : 'Lato Light',sans-serif !important; color: #fff;">
-                                Geolocate Facilities
-                                </span>
-                            </div>
+    <div class="col-xs-12 cards-title">
+        ABOUT THE KMHFL
+    </div>
+    <div class="col-xs-12 margin-t-10">
+        <p class="fs-16 roboto text-nicegrey">
+            Kenya Master Health Facility List (KMHFL) is an application with
+            all health facilities and community units in Kenya.
+            Each health facility and community unit is identified
+            with unique code and their details describing the geographical location,
+            administrative location, ownership, type and the services offered.
+        </p>
+    </div>
+    <div class="col-xs-12">
+        <div class="col-md-5 col-xs-12 content-card" style="padding: 0px">
+            <div class="col-xs-12 card-heading pad-t-10 pad-b-10">
+                GEOLOCATE FACILITIES
+            </div>
+            <a ui-sref="gis">
+                <div class="col-xs-12 facilities-img pad-0">
+                    <div class="col-xs-12 pad-0" style="background-color: rgba(0, 0, 0, 0.2);height : 100%;">
+                        <div class="img-word col-xs-12 margin-t-230">
                         </div>
                     </div>
-                </a>
-                    <div class="card-words text-black col-xs-12 card-container fw-500 fs-16" style="font-family : 'Lato Light',sans-serif !important;">
-                        The Facility Geolocator visualizes administrative units at national, county, constituency and ward levels, which shows facilities in that particular ward. Individual Community Health Units can be viewed on a map on the view showing their particular details.
+                </div>
+            </a>
+            <div class="col-xs-12 margin-t-5 margin-b-10">
+                <h4 class="cards-heading fs-16 text-black">Visualize Health Facilties</h4>
+                <p class="roboto fs-14">
+                    The Facility Geolocator visualizes administrative units (counties, constituencies, wards) and their hacilities and Community Health Units. Users can also rate Facilities and Community Health Units.
+                </p>
+                <p class="text-right">
+                    <a ui-sref="gis" class="btn btn-sm btn-info pull-right">
+                        VIEW MAP
+                    </a>
+                </p>
+            </div>
+        </div>
+        <div class="col-md-7 col-xs-12">
+            <div class="col-md-6 col-xs-12 margin-b-20">
+                <div class="content-card col-xs-12">
+                    <div class="col-xs-12 fs-17 roboto text-blue pad-t-0 margin-t-10 margin-b-5">
+                        Search Facilities
+                    </div>
+                    <div class="col-xs-12 pad-t-0">
+                        <p class="fs-13 roboto">
+                            Click “Find Facilities” link to search for health facilites.This provides a list of all health facilities and there is a provided advance search where you can refine your search.
+                        </p>
+                    </div>
+                    <div class="col-xs-12 text-right margin-t-10">
+                        <span class="fa-stack fa-lg fs-15">
+                          <i class="fa fa-circle-o fa-stack-2x text-blue"></i>
+                          <i class="fa fa-search fa-stack-1x fa-inverse text-blue"></i>
+                        </span>
                     </div>
                 </div>
             </div>
-
-            <div class="col-md-6 col-xs-12 pull-right">
-                <p class="about-words fs-20 text-muted" style="font-family : 'Roboto',sans-serif !important; font-weight : 100;">
-                  Kenya Master Health Facility List (KMHFL) is an application with
-                  all health facilities and community units in Kenya.
-                  Each health facility and community unit is identified
-                  with unique code and their details describing the geographical location,
-                  administrative location, ownership, type and the services offered.
-                </p>
-                 <p class="about-words fs-20 text-muted" style="font-family : 'Roboto',sans-serif !important; font-weight : 100;">
-                  KMHFL provides a platform for the public to rate health facilities
-                  and Community Health Unit services.
-                </p>
-                <p>
-                  Regulators have linked to KMHFL via the robust KMHFL API. For the
-                  KMHFL API documentation see the
-                  <a href="health.go.ke" target="_blank">(Ministry of health -resources page)</a>.
-
-                  and for the KMHFL Architecture documentation <a href="github.com/MasterFacilityList/"
-                  target="_blank"> click here</a>
-                </p>
-                <p class="about-title fs-18 margin-b-0">
-                    <b>Searching Facilities:</b>
-                </p>
-                <p class="about-text fs-16 text-muted">
-                    To search for a facility click “Find Facilities” -
-                    This provides a list of all health facilities and
-                    there is a provided advance search where you can
-                    filter facilities by administrative location,
-                    ownership, type and the services offered
-
-                </p>
-                <p class="about-title fs-18 margin-b-0">
-                    <b>Facility Geo-location:</b>
-                </p>
-                <p class="about-text fs-16 text-muted">
-                    To search for a facility geolocation click on “Facility Geo-locator” -
-                    This displays health facilities in a map
-                </p>
-                <p class="about-title fs-18 margin-b-0">
-                    <b>Community Health Units</b>
-                </p>
-                <p class="about-text fs-16 text-muted">
-                    To search for a community health unit click on “Find Community Health Unit” -
-                     This provides a list of all community health units and
-                     there is a provided advance search where you can
-                     filter community unit by administrative location
-                </p>
+            <div class="col-md-6 col-xs-12 margin-b-20">
+                <div class="content-card col-xs-12">
+                    <div class="col-xs-12 fs-17 roboto text-blue pad-t-0 margin-t-10 margin-b-5">
+                        Regulators Integration
+                    </div>
+                    <div class="col-xs-12 pad-t-0">
+                        <p class="fs-13 roboto">
+                            Regulators have linked to KMHFL via the robust KMHFL API. For the KMHFL API documentation see the <a href="health.go.ke" target="_blank">(Ministry of health -resources page)</a> and for the KMHFL Architecture documentation <a href="github.com/MasterFacilityList/" target="_blank"> click here</a>
+                        </p>
+                    </div>
+                    <div class="col-xs-12 text-right margin-t-15">
+                        <i class="fa fa-gavel text-blue fs-20"></i>
+                    </div>
+                </div>
+            </div>
+            <!-- Start of second rows -->
+            <div class="col-md-6 col-xs-12 margin-b-20 pull-right">
+                <div class="content-card col-xs-12">
+                    <div class="col-xs-12 fs-17 roboto text-blue pad-t-0 margin-t-10 margin-b-5">
+                        Community Health Units
+                    </div>
+                    <div class="col-xs-12 pad-t-0">
+                        <p class="fs-13 roboto">
+                            To search for a community health unit click on “Find Community Health Unit” .This provides a list of all community health units and the system provided advance search where you can refine your search by using administrative units.
+                        </p>
+                    </div>
+                    <div class="col-xs-12 text-right margin-t-20">
+                        <i class="fa fa-building text-blue fs-20"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-xs-12 margin-b-20 pull-left">
+                <div class="content-card col-xs-12">
+                    <div class="col-xs-12 fs-17 roboto text-blue pad-t-0 margin-t-10 margin-b-5">
+                        Facility Geo-location
+                    </div>
+                    <div class="col-xs-12 pad-t-0">
+                        <p class="fs-13 roboto">
+                            To search for a facility geolocation click on “Facility Geo-locator” - This will show a map with counties. Click counties to view constituencies. Click a constituency to view its wards and click ward to view a particular ward's facilities.
+                        </p>
+                    </div>
+                    <div class="col-xs-12 text-right margin-t-10">
+                        <span class="fa-stack fa-lg fs-15">
+                          <i class="fa fa-circle-o fa-stack-2x text-blue"></i>
+                          <i class="fa fa-map-marker fa-stack-1x fa-inverse text-blue"></i>
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
     </div>
 
 
     <!-- Facilities explanation -->
-    <hr class="col-xs-12 margin-t-30 style-eight">
-    <div class="col-xs-12">
-        <div class="col-md-12 col-xs-12">
-            <div class="col-xs-12 fw-500 fs-28em text-left margin-t-50 margin-b-30" style="font-family : 'Lato Light',sans-serif !important;">
-                What is a Facility?
-            </div>
-            <div class="col-xs-12">
-                <p class="defn-text fs-18 text-black fw-500">
-                    This is a defined health service delivery structure that
-                    provides services and has one or more departments
-                    operating within it e.g. Outpatient,  pharmacy, laboratory .
-                     In KMHFL, a facility is described by it’s
-                     unique code, ownership, type, administrative and
-                     geographical location, and services provided.
-
-
-                </p>
-            </div>
+    <!-- Start of reimplementation -->
+    <div class="col-xs-12 margin-t-30 margin-b-50">
+        <div class="cards-title col-xs-12 text-left margin-t-20 margin-b-0">
+            OUR FACILITIES
         </div>
-    </div>
-    <!-- End of explanation -->
-    <!-- Start of chus -->
-    <div class="col-xs-12 margin-t-70">
-         <div class="col-md-5 col-xs-12 text-left">
-            <div class="col-md-11 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 margin-t-30 margin-b-0 pad-0 chu-image">
-                <div class="col-xs-12 pad-0" style="background-color: rgba(0, 0, 0, 0.4);height : 100%;">
+        <div class="col-xs-12">
+            <p class="fs-14 text-nicegrey roboto">
+                There are two types Health Facilties and Community Health Units explained below in terms if KMHFL.
+            </p>
+        </div>
+        <div class="col-xs-12">
+            <div class="col-xs-12 content-card">
+
+                <div class="col-xs-12 margin-t-20 margin-b-20">
+                    <div class="col-md-4 col-xs-12 pad-0 chu-image pull-right">
+                        <div class="col-xs-12 pad-0" style="background-color: rgba(0, 0, 0, 0.2);height : 100%;">
+                        </div>
+                    </div>
+                    <div class="col-md-8 col-xs-12 pull-left">
+                    <!-- Header content -->
+                    <div class="col-xs-12 card-heading margin-t-10 pad-0">
+                        WHAT'S A HEALTH FACILITY?
+                    </div>
+                    <div class="col-xs-12 margin-t-5 pad-0">
+                        <p class="text-black fs-15 roboto">
+                            This is a defined health service delivery structure that
+                            provides services and has one or more departments
+                            operating within it e.g. Outpatient,  pharmacy, laboratory .
+                             In KMHFL, a facility is described by it’s
+                             unique code, ownership, type, administrative and
+                             geographical location, and services provided.
+                        </p>
+                    </div>
+                    <div class="col-xs-12 card-heading margin-t-20 pad-0">
+                        WHAT'S A COMMUNITY HEALTH UNIT?
+                    </div>
+                    <div class="col-xs-12 margin-t-5 pad-0">
+                        <p class="text-black fs-15 roboto">
+                            This is a health service delivery structure within a defined geographical area covering a population of approximately 5,000 people. Each unit is assigned 2 Community Health Extension Workers (CHEWs) and community health volunteers who offer promotive, preventative and basic curative health services.
+                        </p>
+                    </div>
+                    <!-- End of header content -->
+                    <div class="col-xs-12 pad-0">
+                        <blockquote class="fs-14" style="color: #666;">
+                            These are governed by a Community Health Committee (CHC) and each Community Health unit is linked to a specific Health facility.
+                        </blockquote>
+                        <p class="fs-15 text-black fw-500 margin-b-0">
+                            <span class="fa-stack fa-lg fs-13">
+                              <i class="fa fa-circle-o fa-stack-2x text-blue"></i>
+                              <i class="fa fa-search fa-stack-1x fa-inverse text-blue"></i>
+                            </span>&nbsp;&nbsp;Search for a Community Health Unit.
+                        </p>
+                        <p class="fs-15 text-black fw-500 margin-b-0">
+                            <span class="fa-stack fa-lg fs-13">
+                              <i class="fa fa-circle-o fa-stack-2x text-warning"></i>
+                              <i class="fa fa-star fa-stack-1x fa-inverse text-warning"></i>
+                            </span>&nbsp;&nbsp;Rate a Community Health Unit.
+                        </p>
+                        <p class="fs-15 text-black fw-500 margin-b-0">
+                            <span class="fa-stack fa-lg fs-13">
+                              <i class="fa fa-circle-o fa-stack-2x text-blue"></i>
+                              <i class="fa fa-eye fa-stack-1x fa-inverse text-blue"></i>
+                            </span>&nbsp;&nbsp;View Details of a Community Health Unit.
+                        </p>
+                        <p class="fs-15 text-black fw-500 margin-b-0">
+                            <span class="fa-stack fa-lg fs-13">
+                              <i class="fa fa-circle-o fa-stack-2x text-success"></i>
+                              <i class="fa fa-map-marker fa-stack-1x fa-inverse text-success"></i>
+                            </span>
+                            &nbsp;&nbsp;View a Community Health Unit on map.
+                        </p>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="text-black col-md-11 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 card-container fw-500 fs-15" style="font-family : 'Lato Light',sans-serif !important;">
-                These are governed by a Community Health Committee (CHC) and each Community Health unit is linked to a specific Health facility.
-            </div>
-        </div>
-        <div class="col-md-6 col-xs-12 text-left pull-right">
-            <div class="col-xs-12 fw-500 fs-25em text-left margin-t-50 margin-b-20" style="font-family : 'Lato Light',sans-serif !important;">
-                What is a Community Health Unit ?
-            </div>
-            <div class="col-xs-12">
-                <p class="defn-text fs-17 text-black fw-500">
-                    This is a health service delivery structure within a defined geographical area covering a population of approximately 5,000 people. Each unit is assigned 2 Community Health Extension Workers (CHEWs) and community health volunteers who offer promotive, preventative and basic curative health services.
-                </p>
-                <p class="defn-text fs-18 text-muted margin-b-0">
-                    A user can do the following with regards to Community Health Units:
-                </p>
-                <p class="fs-17">
-                    <ul class="defn-text fa-ul fs-17 fw-500">
-                      <li><i class="fa-li fa fa-arrow-circle-right text-blue"></i>Search for a Community Health Unit</li>
-                      <li><i class="fa-li fa fa-arrow-circle-right text-blue"></i>View Details of a Community Health Unit</li>
-                      <li><i class="fa-li fa fa-arrow-circle-right text-blue"></i>Rate a Community Health Unit</li>
-                      <li><i class="fa-li fa fa-arrow-circle-right text-blue"></i>View a Community Health Unit on map</li>
-                    </ul>
-                </p>
-            </div>
         </div>
     </div>
-    <hr class="col-xs-12 margin-t-30 style-eight">
+    <!-- End of reimplementation -->
+    <!-- End of explanation -->
+
     <div class="col-xs-12 pad-0">
         <div class="col-xs-12">
             <div class="cards-title col-xs-12 text-left margin-t-20 margin-b-0">
                 PARTNERS
             </div>
             <div class="col-xs-12">
-                <p class="fs-14 text-nicegrey">
+                <p class="fs-14 text-nicegrey roboto">
                     Below is a list of the various partners who have contributed to the Kenya Health Master Facility List:
                 </p>
             </div>
