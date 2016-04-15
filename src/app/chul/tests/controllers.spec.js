@@ -367,7 +367,7 @@
 
             beforeEach(function () {
                 default_url = server_url + "api/common/filtering_summaries/" +
-                               "?fields=county,constituency,ward,chu_status";
+                               "?fields=county,constituency,ward,chu_status,sub_county";
             });
 
             it("should load filter summaries", function () {
@@ -494,10 +494,16 @@
                     {"id": "1", "county": "1"}, {"id": "2", "county": "1"},
                     {"id": "3", "county": "2"}, {"id": "4", "county": "3"}
                 ];
+                data.$scope.filters.multiple.sub_county = [
+                    {"id": "1", "county": "1"}, {"id": "2", "county": "1"},
+                    {"id": "3", "county": "2"}, {"id": "4", "county": "3"}
+                ];
 
                 data.$scope.filters.multiple.ward = [
-                    {"id": "1", "constituency": "1"}, {"id": "2", "constituency": "1"},
-                    {"id": "3", "constituency": "2"}, {"id": "4", "constituency": "3"}
+                    {"id": "1", "constituency": "1", "sub_county": "1"},
+                    {"id": "2", "constituency": "1", "sub_county": "1"},
+                    {"id": "3", "constituency": "2", "sub_county": "2"},
+                    {"id": "4", "constituency": "3",  "sub_county": "3"}
                 ];
 
                 expect(
@@ -518,6 +524,15 @@
                 ).toBe(true);
                 expect(
                     data.$scope.filterFxns.wardFilter({"id": "4", "constituency": "5"})
+                ).toBe(false);
+                expect(
+                    data.$scope.filterFxns.subFilter({"id": "1", "county": "1"})
+                ).toBe(true);
+                expect(
+                    data.$scope.filterFxns.subFilter({"id": "3", "county": "2"})
+                ).toBe(true);
+                expect(
+                    data.$scope.filterFxns.subFilter({"id": "4", "county": "3"})
                 ).toBe(false);
             });
         });

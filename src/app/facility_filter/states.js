@@ -9,7 +9,7 @@
     .constant("FACILITY_SEARCH_PARAMS", [
         "name", "code",
 
-        "search",
+        "search", "sub_county",
 
         "county", "constituency", "ward",
 
@@ -17,7 +17,7 @@
 
         "owner_type", "owner",
 
-        "service_category", "service",
+        "service_category", "service", "service_name",
 
         "number_of_beds", "number_of_cots",
         "open_public_holidays", "open_weekends", "open_whole_day",

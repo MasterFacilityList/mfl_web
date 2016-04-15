@@ -3,7 +3,7 @@
         <h4>NAVIGATION</h4>
         <a ui-sref="gis" ui-sref-opts="{reload: true}">KENYA /</a><br>
          &nbsp;&nbsp;<a ui-sref="gis_county({county_code:county_code})" ui-sref-opts="{reload: true}">{{constituency.meta.county_name}} COUNTY/</a><br>
-         &nbsp;&nbsp;&nbsp;&nbsp; <a ui-sref="gis_county.gis_const({county_code:county_code,constituency_code:constituency_code})">{{constituency.meta.name}} SUB COUNTY</a><br>
+         &nbsp;&nbsp;&nbsp;&nbsp; <a ui-sref="gis_county.gis_const({county_code:county_code,constituency_code:constituency_code})">{{constituency.meta.name}} CONSTITUENCY</a><br>
     </div>
     <div class="col-xs-12 content-card">
        <strong class="margin-10">LEGEND</strong>
@@ -27,7 +27,7 @@
 </div>
 <div class="col-md-8 col-xs-12 margin-b-10 anim-fade">
         <div ng-if="!spinner" class="col-xs-12 content-card margin-t-15">
-            <h4 class="fw-400">{{constituency.meta.name}} SUB-COUNTY <span class="pull-right">{{facility_count}} facilities</span></h4>
+            <h4 class="fw-400">{{constituency.meta.name}} CONSTITUENCY <span class="pull-right">{{facility_count}} facilities</span></h4>
         </div>
         <div  class="col-xs-12 pad-r-0 pad-l-0" ng-if="!spinner">
             <div ng-if="alert" class="col-xs-12 alert alert-danger">

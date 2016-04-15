@@ -87,33 +87,7 @@
                 <span class="content-right col-md-6 col-xs-12" ng-if="oneFacility.open_public_holidays">Open on public holidays</span>
             </h4>
             <br>
-            <!-- Display location details  -->
-            <hr style="border: 1px solid #F0F0F0;" ng-if="oneFacility.officer_in_charge !== null">
-            <h4 class="fs-20 fw-600  col-xs-12" ng-if="oneFacility.officer_in_charge !== null">
-            <span class="fa-stack fa-lg fs-13">
-              <i class="fa fa-circle fa-stack-2x"></i>
-              <i class="fa fa-user-md fa-stack-1x fa-inverse"></i>
-            </span> Officer in charge</h4>
-            <br ng-if="oneFacility.officer_in_charge !== null">
-            <h4 class="fs-14 fw-500" ng-if="oneFacility.officer_in_charge.name !== null">
-                <span class="pull-left col-md-6 col-xs-12" ng-if="oneFacility.officer_in_charge !== null">
-                    <label>Name: </label>
-                    {{oneFacility.officer_in_charge.name}}
-                </span>
-                <span class="content-right fs-14 col-md-6 col-xs-12" ng-if="oneFacility.officer_in_charge !== null">
-                    <label>Registration/License #: </label>
-                    {{oneFacility.officer_in_charge.reg_no}}
-                </span>
-            </h4>
-            <br ng-if="oneFacility.officer_in_charge !== null">
-            <h4 class="fs-14 fw-500 margin-t-3" ng-if="oneFacility.officer_in_charge !== null">
-                <span class="pull-left col-xs-12">
-                    <label>Job Title: </label>
-                    {{oneFacility.officer_in_charge.title_name}}
-                </span>
-            </h4>
-            <br ng-if="oneFacility.officer_in_charge !== null">
-            <!-- Display location details  -->
+
             <hr style="border: 1px solid #F0F0F0;">
             <h4 class="fs-20 fw-600  col-xs-12">
             <span class="fa-stack fa-lg fs-13">
@@ -128,7 +102,7 @@
                 </span></a>
                 <span class="content-right col-md-6 col-xs-12 margin-b-5">
                     <a ui-sref="gis_county.gis_const({county_code:oneFacility.county_code,constituency_code:oneFacility.constituency_code})">
-                        <span class="fs-14 fw-500 text-blue">{{oneFacility.constituency}} SUB-COUNTY</span>
+                        <span class="fs-14 fw-500 text-blue">{{oneFacility.constituency}} Constituency</span>
                     </a>
                 </span>
             </h4>
