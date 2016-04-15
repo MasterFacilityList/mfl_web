@@ -80,6 +80,35 @@
                     </div>
                 </div>
 
+                    <div class="col-xs-12 results-card margin-b-10">
+                    <span class="text-muted fs-16">Services</span>
+
+                 <div class="form-group fs-14">
+                        <label  class="fw-500">Facility Service Category</label>
+                        <ui-select ng-model="filters.multiple.service_category" multiple id="service_category" name="service_category">
+                            <ui-select-match placeholder="Select a service category...">
+                                <span>{{$item.name}}</span>
+                            </ui-select-match>
+                            <ui-select-choices repeat="os in filter_summaries.service_category | filter:$select.search | orderBy:'name'">
+                                <span>{{os.name}}</span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+
+                    <div class="form-group fs-14">
+                        <label  class="fw-500">Service</label>
+                        <ui-select ng-model="filters.multiple.service" multiple id="service" name="service">
+                            <ui-select-match placeholder="Select a service...">
+                                <span>{{$item.name}}</span>
+                            </ui-select-match>
+                            <ui-select-choices repeat="serv in filter_summaries.service | filter:filterFxns.serviceFilter | filter:$select.search | orderBy:'name'">
+                                <span>{{serv.name}}</span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+
+
                 <div class="col-xs-12 results-card margin-b-10">
                     <div class="form-group">
                         <p class="text-muted fs-16">Facility Details</p>
@@ -144,29 +173,6 @@
                             </ui-select>
                         </div>
 
-                        <div class="form-group fs-14">
-                            <label  class="fw-500">Facility Service Category</label>
-                            <ui-select ng-model="filters.multiple.service_category" multiple id="service_category" name="service_category">
-                                <ui-select-match placeholder="Select a service category...">
-                                    <span>{{$item.name}}</span>
-                                </ui-select-match>
-                                <ui-select-choices repeat="os in filter_summaries.service_category | filter:$select.search | orderBy:'name'">
-                                    <span>{{os.name}}</span>
-                                </ui-select-choices>
-                            </ui-select>
-                        </div>
-
-                        <div class="form-group fs-14">
-                            <label  class="fw-500">Service</label>
-                            <ui-select ng-model="filters.multiple.service" multiple id="service" name="service">
-                                <ui-select-match placeholder="Select a service...">
-                                    <span>{{$item.name}}</span>
-                                </ui-select-match>
-                                <ui-select-choices repeat="serv in filter_summaries.service | filter:filterFxns.serviceFilter | filter:$select.search | orderBy:'name'">
-                                    <span>{{serv.name}}</span>
-                                </ui-select-choices>
-                            </ui-select>
-                        </div>
 
                         <div class="form-group fs-14">
                             <label  class="fw-500">Number of beds</label>

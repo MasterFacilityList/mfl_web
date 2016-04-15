@@ -37,7 +37,8 @@
                     number_of_cots: "",
                     open_public_holidays: "",
                     open_weekends: "",
-                    open_whole_day: ""
+                    open_whole_day: "",
+                    service_name: ""
                 },
                 multiple: {
                     county: [],
@@ -204,6 +205,16 @@
                     };
                 }
                 params.search = JSON.stringify(dsl);
+            }
+            if (params.service_name) {
+                var service_dsl = {
+                    "query": { }
+                };
+                service_dsl.query.query_string = {
+                    "default_field": "service_names",
+                    "query": params.service_name
+                };
+                params.service_name = JSON.stringify(service_dsl);
             }
 
             $scope.spinner = true;

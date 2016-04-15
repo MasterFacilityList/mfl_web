@@ -37,7 +37,7 @@
                     .expectGET(server_url+"api/common/filtering_summaries/" +
                                "?fields=county,facility_type,constituency," +
                                "ward,operation_status,service_category," +
-                               "owner_type,owner,service,keph_level")
+                               "owner_type,owner,service,keph_level,sub_county")
                     .respond(200, {});
 
                 ctrl("form", data);
@@ -69,7 +69,7 @@
                     .expectGET(server_url+"api/common/filtering_summaries/" +
                                "?fields=county,facility_type,constituency," +
                                "ward,operation_status,service_category," +
-                               "owner_type,owner,service,keph_level")
+                               "owner_type,owner,service,keph_level,sub_county")
                     .respond(200, {
                         county: [{"id": "1"}, {"id": "2"}, {"id": "3"}],
                         constituency: [
@@ -115,7 +115,7 @@
                     .expectGET(server_url+"api/common/filtering_summaries/" +
                                "?fields=county,facility_type,constituency," +
                                "ward,operation_status,service_category," +
-                               "owner_type,owner,service,keph_level")
+                               "owner_type,owner,service,keph_level,sub_county")
                     .respond(200, {});
 
                 spyOn(state, "go");
@@ -140,7 +140,7 @@
                     .expectGET(server_url+"api/common/filtering_summaries/" +
                                "?fields=county,facility_type,constituency," +
                                "ward,operation_status,service_category," +
-                               "owner_type,owner,service,keph_level")
+                               "owner_type,owner,service,keph_level,sub_county")
                     .respond(200, {});
 
                 spyOn(state, "go");
@@ -169,7 +169,7 @@
                     .expectGET(server_url+"api/common/filtering_summaries/" +
                                "?fields=county,facility_type,constituency," +
                                "ward,operation_status,service_category," +
-                               "owner_type,owner,service,keph_level")
+                               "owner_type,owner,service,keph_level,sub_county")
                     .respond(200, {});
 
                 spyOn(state, "go");
@@ -196,7 +196,7 @@
                     .expectGET(server_url+"api/common/filtering_summaries/" +
                                "?fields=county,facility_type,constituency," +
                                "ward,operation_status,service_category," +
-                               "owner_type,owner,service,keph_level")
+                               "owner_type,owner,service,keph_level,sub_county")
                     .respond(200, {});
 
                 spyOn(state, "go");
@@ -214,9 +214,16 @@
                     {"id": "3", "county": "2"}, {"id": "4", "county": "3"}
                 ];
 
+                data.$scope.filters.multiple.sub_county = [
+                    {"id": "1", "county": "1"}, {"id": "2", "county": "1"},
+                    {"id": "3", "county": "2"}, {"id": "4", "county": "3"}
+                ];
+
                 data.$scope.filters.multiple.ward = [
-                    {"id": "1", "constituency": "1"}, {"id": "2", "constituency": "1"},
-                    {"id": "3", "constituency": "2"}, {"id": "4", "constituency": "3"}
+                    {"id": "1", "constituency": "1", "sub_county": "1"},
+                    {"id": "2", "constituency": "1", "sub_county": "2"},
+                    {"id": "3", "constituency": "2", "sub_county": "3"},
+                    {"id": "4", "constituency": "3", "sub_county": "4"}
                 ];
 
                 expect(
@@ -227,6 +234,16 @@
                 ).toBe(true);
                 expect(
                     data.$scope.filterFxns.constFilter({"id": "4", "county": "3"})
+                ).toBe(false);
+
+                expect(
+                    data.$scope.filterFxns.subFilter({"id": "1", "county": "1"})
+                ).toBe(true);
+                expect(
+                    data.$scope.filterFxns.subFilter({"id": "3", "county": "2"})
+                ).toBe(true);
+                expect(
+                    data.$scope.filterFxns.subFilter({"id": "4", "county": "3"})
                 ).toBe(false);
 
                 expect(
@@ -310,6 +327,28 @@
                 httpBackend.expectGET(default_url+
                     "search={\"query\":{\"query_string\":{\"default_field\":\"name\""+
                     ",\"query\":\"Endebess\"}}}&county=12&page=3").respond(200,
+                    {results: []});
+                ctrl("results", data);
+
+                httpBackend.flush();
+                httpBackend.verifyNoOutstandingExpectation();
+                httpBackend.verifyNoOutstandingRequest();
+            });
+
+            it("should find facilities using service_name as one of the filters", function () {
+                var data = {
+                    "$scope": rootScope.$new(),
+                    "filterParams": {
+                        "service_name" : "Basic",
+                        "county": "12",
+                        "page": 3,
+                        "constituency": undefined
+                    }
+                };
+                httpBackend.expectGET(default_url+
+                    "service_name={\"query\":{\"query_string\":"+
+                    "{\"default_field\":\"service_names\""+
+                    ",\"query\":\"Basic\"}}}&county=12&page=3").respond(200,
                     {results: []});
                 ctrl("results", data);
 
