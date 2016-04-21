@@ -174,15 +174,29 @@
                         </div>
 
 
-                        <div class="form-group fs-14">
-                            <label  class="fw-500">Number of beds</label>
-                            <input placeholder="Number of beds" type="text" class="form-control" ng-model="filters.single.number_of_beds" id="number_of_beds" name="number_of_beds"/>
+                        <div class="form-group">
+                            <div class="col-xs-8 pad-l-5">
+                                <div class="checkbox">
+                                    <label class="fw-600 fs-14 text-black">
+                                        <input type="checkbox" id="number_of_beds" name="number_of_beds" ng-model="filters.single.number_of_beds"
+                                            ng-true-value="'true'" ng-false-value="'false'" indeterminate-value/>
+                                        Has Beds
+                                     </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-8 pad-l-5">
+                                <div class="checkbox">
+                                    <label class="fw-600 fs-14 text-black">
+                                        <input type="checkbox" id="number_of_cots" name="number_of_cots" ng-model="filters.single.number_of_cots"
+                                            ng-true-value="'true'" ng-false-value="'false'" indeterminate-value/>
+                                         Has Cots
+                                     </label>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="form-group fs-14">
-                            <label  class="fw-500">Number of cots</label>
-                            <input placeholder="Number of cots" type="text" class="form-control" ng-model="filters.single.number_of_cots" id="number_of_cots" name="number_of_cots"/>
-                        </div>
                     </div>
                 </div>
 
