@@ -5,7 +5,7 @@
 
     .constant("CHU_SEARCH_PARAMS", [
         "name", "code", "search", "county", "constituency", "ward", "status",
-
+        "sub_county",
         // pagination controls
         "page_size", "page"
     ])
