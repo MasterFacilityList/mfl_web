@@ -116,21 +116,21 @@
                         </span>
                     </div>
                     <div class="col-md-9 col-xs-10 pad-l-0 margin-t-3">
-                        <p ng-repeat="cont in unit.contacts" class="fw-500 margin-b-0">
-                            <span  class="fs-14">
-                                <label>
-                                    {{cont.contact_type_name}} :
-                                </label>
-                                {{cont.contact}}
-                            </span>
+                      <p class="lead fs-20 lato-light margin-b-5">Contacts</p>
+                        <p class="fw-500 margin-b-0">
+                            <label>
+                            Use the linked facility's contacts.
+                            </label>
                         </p>
                     </div>
                 </div>
+
 
                 <div ng-if="unit.contacts.length == 0">
                     <div class="col-md-6 col-xs-12 content-card fade-content">Address details missing</div>
                 </div>
             </div>
+
             <div class="col-xs-12 pad-0 margin-t-20">
                 <div class="col-md-7 col-xs-12  content-card fade-content">
                     <h4 class="fs-18 col-xs-12 pad-0 margin-b-5" tooltip="Community Health Unit Average Rating">
