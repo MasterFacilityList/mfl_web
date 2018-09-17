@@ -100,10 +100,14 @@
                 <span class="fs-14 fw-500 text-blue col-md-6 col-xs-12 margin-b-5">
                     {{oneFacility.county}} COUNTY
                 </span></a>
+
                 <span class="content-right col-md-6 col-xs-12 margin-b-5">
                     <a ui-sref="gis_county.gis_const({county_code:oneFacility.county_code,constituency_code:oneFacility.constituency_code})">
                         <span class="fs-14 fw-500 text-blue">{{oneFacility.constituency}} Constituency</span>
                     </a>
+                </span>
+                <span class="fs-14 fw-500 text-blue col-md-6 col-xs-12 margin-b-2">
+                        {{oneFacility.sub_county_name | uppercase}} SUB-COUNTY
                 </span>
             </h4>
             <h5 class="fs-14 fw-500  visible-sm visible-xs">
@@ -111,36 +115,29 @@
                     {{oneFacility.county}} COUNTY
                 </span>
                 <span class="content-right col-md-6 col-xs-12">
-                        {{oneFacility.constituency}} SUB-COUNTY
+                        {{oneFacility.sub_county_name | uppercase}} SUB-COUNTY
                 </span>
             </h5>
             <br>
             <h4 class="fs-16 fw-500  hidden-sm hidden-xs margin-t-15">
-                <span class="fs-14 fw-500 pull-left col-md-6 col-xs-12">
+                <span class="fs-14 fw-500 content-right  col-md-6 col-xs-12">
                     <a ui-sref="gis_county.gis_const.gis_ward({county_code:oneFacility.county_code,constituency_code:oneFacility.constituency_code,ward_code:oneFacility.ward_code})">
                     <span class="text-blue">{{oneFacility.ward_name}} WARD</span>
                     </a>
                 </span>
-                <span class="content-right col-md-6 col-xs-12 fs-14" ng-if="neFacility.facility_physical_address.town !== null">
+                <span ng-if='oneFacility.town_name' class="pull-left col-md-6 col-xs-12 fs-14">
                     {{oneFacility.town_name}} town
                 </span>
             </h4>
             <h5 class="fs-14 fw-500 visible-sm visible-xs margin-t-15">
-                <span class="pull-left col-md-6 col-xs-12">
+                <span class="pull-right col-md-6 col-xs-12">
                     {{oneFacility.ward_name}} WARD
                 </span>
-                <span class="content-right col-md-6 col-xs-12" ng-if="neFacility.town !== null">
+                <span  ng-if='oneFacility.town_name' class="pull-left col-md-6 col-xs-12">
                 {{oneFacility.town_name}} town
                 </span>
             </h5>
             <br>
-            <h5 class="fs-14 fw-500" ng-if="oneFacility.plot_number !== null">
-                <span class="pull-left col-xs-12" >
-                    <label>Plot number: </label>
-                    {{oneFacility.plot_number}}
-                </span>
-            </h5>
-            <br ng-if="oneFacility.plot_number !== null">
             <h4 class="fs-14 fw-500" ng-if="oneFacility.location_desc !== null">
                 <p class="lead fs-14 col-xs-12">
                     <label>Specific directions: </label>

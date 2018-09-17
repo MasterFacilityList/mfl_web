@@ -241,7 +241,8 @@
                 // update ui-select with relationships
                 var relationships = [
                     {child: "ward", parent: "constituency"},
-                    {child: "constituency", parent: "county"}
+                    {child: "constituency", parent: "county"},
+                    {child: "sub_county", parent: "county"}
                 ];
                 _.each(relationships, function (r) {
                     _.each($scope.filters.multiple[r.child], function (w) {
@@ -335,7 +336,7 @@
                 return memo;
             }, {
                 "fields": "id,code,name,status_name,date_established,facility,facility_name," +
-                          "facility_county,facility_subcounty,facility_ward"
+                          "facility_county,facility_subcounty,facility_ward,facility_constituency"
             });
 
             // transform search param into a query DSL

@@ -25,7 +25,6 @@
         "mfl.chul",
         "mfl.gis",
         "mfl.auth",
-        "mfl.rating",
-        "mfl.downloads"
+        "mfl.rating"
     ]);
 })(window.angular);
